@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>결제 등록 (하나씩 진행)</title>
+<title>결제 등록 · 정보 작성</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
 <style>
   :root{
@@ -14,8 +14,7 @@
     --btn-shadow:0 4px 12px color-mix(in srgb, var(--primary) 32%, transparent), inset 0 1px 0 rgba(255,255,255,.18);
   }
   *{box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent;}
-  body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;
-       color:var(--ink); background:var(--page-bg); display:flex; justify-content:center; align-items:flex-start; padding:24px 0; line-height:1.5; -webkit-font-smoothing:antialiased;}
+  body{font-family:'Pretendard',sans-serif; color:var(--ink); background:var(--page-bg); display:flex; justify-content:center; align-items:flex-start; padding:24px 0; line-height:1.5; -webkit-font-smoothing:antialiased;}
   .phone{width:390px; height:844px; max-width:100%; background:#fff; position:relative; display:flex; flex-direction:column; border-radius:46px; overflow:hidden; box-shadow:0 16px 50px rgba(0,0,0,.28);}
   iconify-icon{display:inline-block;}
   .statusbar{height:47px; display:flex; align-items:center; justify-content:space-between; padding:0 24px 0 30px; flex:0 0 auto;}
@@ -24,28 +23,11 @@
   .topbar{height:52px; display:flex; align-items:center; padding:0 10px; flex:0 0 auto;}
   .back{width:40px; height:40px; display:flex; align-items:center; justify-content:center; font-size:24px; color:var(--ink); cursor:pointer;}
   .topbar .ttl{flex:1; text-align:center; font-size:16px; font-weight:700; margin-right:40px;}
-
-  .body{flex:1; overflow-y:auto; padding:8px 24px 130px; scrollbar-width:none;}
+  .body{flex:1; overflow-y:auto; padding:8px 24px 120px; scrollbar-width:none;}
   .body::-webkit-scrollbar{display:none;}
 
-  .step{margin-bottom:26px; display:block;}
-  .step.on{display:block; animation:fadeup .32s ease;}
-  @keyframes fadeup{from{opacity:0; transform:translateY(12px);} to{opacity:1; transform:none;}}
-  .q{font-size:20px; font-weight:700; letter-spacing:-.3px; margin-bottom:14px; line-height:1.4;}
-
-  .catrow{display:flex; align-items:center; gap:14px; padding:14px 2px; border-bottom:1px solid var(--line); cursor:pointer;}
-  .catrow:last-child{border-bottom:none;}
-  .catrow .cic{width:40px; height:40px; border-radius:12px; background:var(--tile); display:flex; align-items:center; justify-content:center; flex:0 0 auto;}
-  .catrow .cic iconify-icon{font-size:22px; color:var(--primary);}
-  .catrow .ct{flex:1; min-width:0;}
-  .catrow .ct .cn{font-size:16px; font-weight:600; color:var(--ink);}
-  .catrow .ct .cd{font-size:12px; color:var(--placeholder); margin-top:2px;}
-  .catsel{display:none; align-items:center; gap:12px; background:var(--primary-50); border-radius:14px; padding:14px 16px;}
-  .catsel.on{display:flex;}
-  .catsel .cic{width:36px; height:36px; border-radius:10px; background:#fff; display:flex; align-items:center; justify-content:center; color:var(--primary); font-size:20px; flex:0 0 auto;}
-  .catsel .nm{flex:1; font-size:16px; font-weight:700; color:var(--ink);}
-  .catsel .chg{border:none; background:#fff; color:var(--primary-dark); font-family:inherit; font-size:13px; font-weight:700; padding:8px 13px; border-radius:9px; cursor:pointer;}
-
+  .fld{margin-bottom:24px;}
+  .q{font-size:18px; font-weight:700; letter-spacing:-.3px; margin-bottom:12px;}
   .inbox{position:relative;}
   .inbox input{width:100%; height:56px; border:1.5px solid var(--border); border-radius:14px; padding:0 16px; font-size:17px; font-weight:600; color:var(--ink); font-family:inherit; background:#fff;}
   .inbox input::placeholder{color:var(--placeholder); font-weight:400;}
@@ -56,15 +38,13 @@
   .stack{display:flex; flex-direction:column; gap:10px;}
   .hint{font-size:12px; color:var(--placeholder); margin-top:8px;}
 
-  .upload{display:flex; align-items:center; gap:12px; border:1.5px dashed var(--border); border-radius:14px; padding:16px; cursor:pointer;}
-  .upload .ic{width:36px; height:36px; border-radius:10px; background:var(--tile); display:flex; align-items:center; justify-content:center; color:var(--primary); font-size:20px; flex:0 0 auto;}
-  .upload .t{flex:1;} .upload .t .n{font-size:14px; font-weight:600;} .upload .t .s{font-size:12px; color:var(--placeholder); margin-top:1px;}
-  .upload .req{font-size:11px; font-weight:700; color:var(--danger, #DC2626);}
+  .catsel{display:flex; align-items:center; gap:12px; background:var(--primary-50); border-radius:14px; padding:14px 16px;}
+  .catsel .cic{width:36px; height:36px; border-radius:10px; background:#fff; display:flex; align-items:center; justify-content:center; color:var(--primary); font-size:20px; flex:0 0 auto;}
+  .catsel .nm{flex:1; font-size:16px; font-weight:700; color:var(--ink);}
+  .catsel .chg{border:none; background:#fff; color:var(--primary-dark); font-family:inherit; font-size:13px; font-weight:700; padding:8px 13px; border-radius:9px; cursor:pointer;}
 
   .footer{position:absolute; bottom:0; left:0; right:0; padding:14px 24px 30px; background:linear-gradient(180deg, rgba(255,255,255,0), #fff 28%);}
-  .btn-primary{width:100%; height:56px; border:none; border-radius:15px; font-size:16px; font-weight:700; color:#fff; cursor:pointer;
-    background:var(--primary); background:var(--primary-grad); box-shadow:var(--btn-shadow); display:block;}
-  .btn-primary.on{display:block; animation:fadeup .3s;}
+  .btn-primary{width:100%; height:56px; border:none; border-radius:15px; font-size:16px; font-weight:700; color:#fff; cursor:pointer; background:var(--primary); background:var(--primary-grad); box-shadow:var(--btn-shadow);}
 </style>
 <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 </head>
@@ -78,130 +58,45 @@
       <svg width="26" height="13" viewBox="0 0 26 13"><rect x=".5" y=".5" width="22" height="12" rx="3.5" fill="none" stroke="#191F28" stroke-opacity=".35"/><rect x="2.5" y="2.5" width="16" height="8" rx="1.8" fill="#191F28"/><rect x="24" y="4.5" width="1.6" height="4" rx=".8" fill="#191F28" fill-opacity=".35"/></svg>
     </span>
   </div>
-  <div class="topbar"><div class="back"><iconify-icon icon="mingcute:left-line"></iconify-icon></div><div class="ttl">결제 등록</div></div>
+  <div class="topbar"><div class="back">‹</div><div class="ttl">결제 등록</div></div>
 
-  <div class="body" id="body">
-
-    <!-- 1. 유형 (처음부터 보임) -->
-    <div class="step on" id="s1">
-      <div class="q">무엇을 결제할까요?</div>
-      <div id="catlist" style="display:none">
-        <div class="catrow" onclick="pickCat('mingcute:home-4-fill','부동산 임대차')"><div class="cic"><iconify-icon icon="mingcute:home-4-fill"></iconify-icon></div><div class="ct"><div class="cn">부동산 임대차</div><div class="cd">월세 · 관리비 · 계약금 · 보증금</div></div></div>
-        <div class="catrow" onclick="pickCat('mingcute:building-2-fill','별도 관리비')"><div class="cic"><iconify-icon icon="mingcute:building-2-fill"></iconify-icon></div><div class="ct"><div class="cn">별도 관리비</div><div class="cd">아파트 · 상가 관리비만 따로 낼 때</div></div></div>
-        <div class="catrow" onclick="pickCat('mingcute:paint-brush-fill','인테리어')"><div class="cic"><iconify-icon icon="mingcute:paint-brush-fill"></iconify-icon></div><div class="ct"><div class="cn">인테리어</div><div class="cd">공사 · 수리 · 시공 · 설치 · 철거비</div></div></div>
-        <div class="catrow" onclick="pickCat('mingcute:cash-fill','복비')"><div class="cic"><iconify-icon icon="mingcute:cash-fill"></iconify-icon></div><div class="ct"><div class="cn">복비</div><div class="cd">부동산 중개수수료</div></div></div>
-        <div class="catrow" onclick="pickCat('mingcute:truck-fill','이사비')"><div class="cic"><iconify-icon icon="mingcute:truck-fill"></iconify-icon></div><div class="ct"><div class="cn">이사비</div><div class="cd">용달 · 포장이사</div></div></div>
-        <div class="catrow" onclick="pickCat('mingcute:broom-fill','청소비')"><div class="cic"><iconify-icon icon="mingcute:broom-fill"></iconify-icon></div><div class="ct"><div class="cn">청소비</div><div class="cd">입주 · 정기 청소</div></div></div>
-        <div class="catrow" onclick="pickCat('mingcute:package-2-fill','B2B 매입대금')"><div class="cic"><iconify-icon icon="mingcute:package-2-fill"></iconify-icon></div><div class="ct"><div class="cn">B2B 매입대금</div><div class="cd">거래처 · 식자재 대금</div></div></div>
-        <div class="catrow" onclick="pickCat('mingcute:car-fill','렌트료 · 렌탈료')"><div class="cic"><iconify-icon icon="mingcute:car-fill"></iconify-icon></div><div class="ct"><div class="cn">렌트료 · 렌탈료</div><div class="cd">자동차 · 가전 · 생활용품</div></div></div>
-        <div class="catrow" onclick="pickCat('mingcute:shield-fill','보험료')"><div class="cic"><iconify-icon icon="mingcute:shield-fill"></iconify-icon></div><div class="ct"><div class="cn">보험료</div><div class="cd">건강 · 연금 · 화재</div></div></div>
-        <div class="catrow" onclick="pickCat('mingcute:group-3-fill','인건비 · 용역비')"><div class="cic"><iconify-icon icon="mingcute:group-3-fill"></iconify-icon></div><div class="ct"><div class="cn">인건비 · 용역비</div><div class="cd">급여 · 알바 · 프리랜서 · 외주</div></div></div>
-        <div class="catrow" onclick="pickCat('mingcute:mortarboard-fill','교육비')"><div class="cic"><iconify-icon icon="mingcute:mortarboard-fill"></iconify-icon></div><div class="ct"><div class="cn">교육비</div><div class="cd">학원 · 수강료 · 등록금 · 과외</div></div></div>
-        <div class="catrow" onclick="pickCat('mingcute:more-3-fill','기타')"><div class="cic"><iconify-icon icon="mingcute:more-3-fill"></iconify-icon></div><div class="ct"><div class="cn">기타</div><div class="cd">위 유형이 아닌 납부건</div></div></div>
-      </div>
-      <div class="catsel on" id="catsel">
-        <div class="cic"><iconify-icon id="selic" icon="mingcute:cash-fill"></iconify-icon></div>
-        <div class="nm" id="selnm">복비</div>
-        <button class="chg" onclick="changeCat()">변경</button>
+  <div class="body">
+    <!-- 유형 (선택됨) -->
+    <div class="fld">
+      <div class="q">결제 유형</div>
+      <div class="catsel">
+        <div class="cic"><iconify-icon icon="mingcute:cash-fill"></iconify-icon></div>
+        <div class="nm">복비</div>
+        <button class="chg" onclick="alert('유형 변경 (준비 중)')">변경</button>
       </div>
     </div>
 
-    <!-- 2. 금액 -->
-    <div class="step" id="s2">
+    <!-- 금액 -->
+    <div class="fld">
       <div class="q">얼마를 보낼까요?</div>
-      <div class="inbox amt">
-        <input type="text" inputmode="numeric" placeholder="0" value="680,000" oninput="onAmt(this)">
-        <span class="won">원</span>
-      </div>
+      <div class="inbox amt"><input type="text" inputmode="numeric" value="680,000"><span class="won">원</span></div>
     </div>
 
-    <!-- 3. 받는 계좌 -->
-    <div class="step" id="s3">
+    <!-- 받는 계좌 -->
+    <div class="fld">
       <div class="q">어디로 보낼까요?</div>
       <div class="stack">
-        <div class="inbox">
-          <input placeholder="받는 분 (예: 김대성)" oninput="onName(this,'r1')">
-        </div>
-        <div class="inbox">
-          <input id="acc" placeholder="은행 + 계좌번호" oninput="onAcc(this)">
-          <button class="side">계좌 인증</button>
-        </div>
+        <div class="inbox"><input value="대성부동산" placeholder="받는 분"></div>
+        <div class="inbox"><input value="국민 123456-78-901234" placeholder="은행 + 계좌번호"><button class="side">계좌 인증</button></div>
       </div>
       <p class="hint">상대방 동의 없이도 돼요. 인증하면 오타 걱정 없어요.</p>
     </div>
 
-    <!-- 4. 통장에 찍힐 이름 -->
-    <div class="step" id="s4">
+    <!-- 통장에 찍힐 이름 -->
+    <div class="fld">
       <div class="q">상대 통장에 찍힐 이름</div>
-      <div class="inbox">
-        <input placeholder="예: 홍길동" oninput="onName(this,'r2')">
-        <button class="side">나</button>
-      </div>
+      <div class="inbox"><input value="홍길동" placeholder="예: 홍길동"><button class="side">나</button></div>
     </div>
-
-    <!-- 5. 증빙 서류 -->
-    <div class="step" id="s5">
-      <div class="q">증빙 서류를 올려주세요</div>
-      <a onclick="openGuide()" style="display:inline-block;color:var(--primary-dark);font-size:13px;font-weight:700;margin-bottom:12px;cursor:pointer">이 유형에 필요한 서류 확인하기 ›</a>
-      <div class="upload" onclick="onUpload()">
-        <div class="ic"><iconify-icon icon="mingcute:file-fill"></iconify-icon></div>
-        <div class="t"><div class="n"><span class="req">[필수]</span> 계약서 · 영수증 · 명함</div><div class="s" id="upstat">사진 또는 파일 첨부</div></div>
-        <iconify-icon icon="mingcute:right-line" style="color:var(--icon-off)"></iconify-icon>
-      </div>
-      <p class="hint">결제 검토 후, 상대 계좌로 3초 안에 송금돼요.</p>
-    </div>
-
   </div>
 
   <div class="footer">
-    <button class="btn-primary" id="submit" onclick="toast('카드 선택 화면으로 (다음 단계)')">카드로 결제하기</button>
+    <button class="btn-primary" onclick="location.href='11_확인서류안내.html?t='+encodeURIComponent('복비')">서류 첨부하기</button>
   </div>
 </div>
-
-<script>
-function reveal(id){
-  const el=document.getElementById(id);
-  if(el.classList.contains('on')) return;
-  el.classList.add('on');
-  setTimeout(()=>{ document.getElementById('body').scrollTo({top:document.getElementById('body').scrollHeight, behavior:'smooth'}); }, 60);
-}
-function pickCat(icon,name){
-  document.getElementById('catlist').style.display='none';
-  document.getElementById('selic').setAttribute('icon',icon);
-  document.getElementById('selnm').textContent=name;
-  window.selType=name;
-  document.getElementById('catsel').classList.add('on');
-  reveal('s2');
-}
-function changeCat(){
-  document.getElementById('catsel').classList.remove('on');
-  document.getElementById('catlist').style.display='block';
-}
-function onAmt(inp){
-  let n=parseInt(inp.value.replace(/[^0-9]/g,''))||0;
-  inp.value = n ? n.toLocaleString() : '';
-  if(n>0) reveal('s3');
-}
-function onName(inp,tag){ /* 이름 입력만으론 다음 안 넘김(계좌가 핵심) */ }
-function onAcc(inp){ if(inp.value.trim().length>=4) reveal('s4'); }
-function done4(){ reveal('s5'); }
-function onUpload(){
-  document.getElementById('upstat').textContent = '계약서.jpg 첨부됨 ✓';
-  document.getElementById('upstat').style.color = 'var(--success, #059669)';
-  document.getElementById('submit').classList.add('on');
-  setTimeout(()=>{ document.getElementById('body').scrollTo({top:document.getElementById('body').scrollHeight, behavior:'smooth'}); },60);
-}
-/* 통장 이름 입력하면 증빙 단계로 */
-document.querySelector('#s4 input').addEventListener('input', function(){ if(this.value.trim()) reveal('s5'); });
-function openGuide(){ location.href='11_확인서류안내.html?t='+encodeURIComponent(window.selType||'부동산 임대차'); }
-function toast(msg){
-  let t=document.createElement('div');
-  t.textContent=msg;
-  t.style.cssText="position:fixed;bottom:110px;left:50%;transform:translateX(-50%);background:#191F28;color:#fff;padding:12px 18px;border-radius:24px;font-size:13px;font-weight:600;z-index:99;opacity:0;transition:.2s;white-space:nowrap;box-shadow:0 4px 16px rgba(0,0,0,.2)";
-  document.body.appendChild(t);
-  requestAnimationFrame(()=>t.style.opacity='1');
-  setTimeout(()=>{t.style.opacity='0';setTimeout(()=>t.remove(),200)},1500);
-}
-</script>
 </body>
 </html>

@@ -55,10 +55,20 @@
   </div>
   <div class="topbar"><div class="back" onclick="history.back()">‹</div><div class="ttl">확인서류 안내</div></div>
 
-  <div class="body" id="body"></div>
+  <div class="body">
+    <div id="guide"></div>
+    <div id="attach" style="margin-top:6px">
+      <div style="font-size:15px; font-weight:700; margin-bottom:12px">서류 첨부</div>
+      <div onclick="alert('파일·사진 첨부 (준비 중)')" style="display:flex; align-items:center; gap:12px; border:1.5px dashed var(--border); border-radius:14px; padding:16px; cursor:pointer; margin-bottom:10px">
+        <div style="width:38px; height:38px; border-radius:11px; background:var(--tile); display:flex; align-items:center; justify-content:center; color:var(--primary); font-size:26px; font-weight:400">+</div>
+        <div style="flex:1"><div style="font-size:14px; font-weight:600">파일 · 사진 첨부</div><div style="font-size:12px; color:var(--placeholder)">계약서 · 영수증 · 명함 등</div></div>
+      </div>
+      <a onclick="location.href='13_촬영.html'" style="display:inline-block; color:var(--primary-dark); font-size:13px; font-weight:700; cursor:pointer">고지서 · 서류를 촬영해서 첨부하기 ›</a>
+    </div>
+  </div>
 
   <div class="footer">
-    <button class="btn-primary" onclick="history.back()">확인했어요</button>
+    <button class="btn-primary" onclick="location.href='12_결제.html'">첨부하고 계속하기</button>
     <button class="inq" onclick="alert('고객센터 문의는 준비 중이에요')">필요한 서류가 없나요? 문의하기</button>
   </div>
 </div>
@@ -140,7 +150,7 @@ function render(){
   if(d.notes && d.notes.length){
     h += '<div class="notes">'+d.notes.map(n=>'<div class="note">'+n+'</div>').join('')+'</div>';
   }
-  document.getElementById('body').innerHTML = h;
+  document.getElementById('guide').innerHTML = h;
 }
 render();
 </script>
