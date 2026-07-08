@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>아이콘 세트 4종 비교</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<!-- 4개 아이콘 세트 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,1,0">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css">
+<style>
+  :root{--primary:#2563EB; --primary-50:#EFF4FF; --line:#ECEEF1; --sub:#464C53; --ink:#1E2124;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Pretendard',sans-serif;background:#F4F5F6;color:var(--ink);padding:20px 16px 40px;display:flex;flex-direction:column;align-items:center;}
+  .wrap{width:100%;max-width:420px;}
+  h1{font-size:22px;font-weight:700;margin-bottom:4px;}
+  .lead{font-size:13px;color:var(--sub);margin-bottom:20px;line-height:1.5;}
+  .set{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px;}
+  .set .head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:14px;}
+  .set .name{font-size:16px;font-weight:700;}
+  .set .lic{font-size:11px;color:var(--sub);}
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px 4px;text-align:center;}
+  .cell .box{width:48px;height:48px;margin:0 auto 6px;border-radius:14px;background:var(--primary-50);display:flex;align-items:center;justify-content:center;}
+  .cell .lb{font-size:10px;color:var(--sub);line-height:1.25;}
+  /* 각 세트 아이콘 크기·색 */
+  .box i{color:var(--primary);font-size:25px;line-height:1;}
+  .box .material-symbols-rounded{color:var(--primary);font-size:26px;font-variation-settings:'FILL' 1,'wght' 500;}
+  .box .bx{color:var(--primary);font-size:26px;}
+  .tip{font-size:12px;color:var(--sub);text-align:center;margin-top:8px;line-height:1.6;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>아이콘 세트 4종 비교</h1>
+  <p class="lead">같은 기능을 4가지 솔리드 스타일로 그렸어요. 어떤 느낌이 우리 앱에 맞는지 골라보세요. (전부 상업용 무료)</p>
+
+  <!-- 1. Remix -->
+  <div class="set">
+    <div class="head"><span class="name">① Remix Icon <span style="font-weight:400;color:var(--sub);font-size:12px">· 현재 적용중</span></span><span class="lic">Apache 2.0 · 무료</span></div>
+    <div class="grid">
+      <div class="cell"><div class="box"><i class="ri-bank-card-fill"></i></div><div class="lb">카드결제</div></div>
+      <div class="cell"><div class="box"><i class="ri-store-2-fill"></i></div><div class="lb">매장결제</div></div>
+      <div class="cell"><div class="box"><i class="ri-refund-2-fill"></i></div><div class="lb">월세환급</div></div>
+      <div class="cell"><div class="box"><i class="ri-file-list-3-fill"></i></div><div class="lb">계약내역</div></div>
+      <div class="cell"><div class="box"><i class="ri-calendar-check-fill"></i></div><div class="lb">출석체크</div></div>
+      <div class="cell"><div class="box"><i class="ri-truck-fill"></i></div><div class="lb">이사청소</div></div>
+      <div class="cell"><div class="box"><i class="ri-tools-fill"></i></div><div class="lb">집수리</div></div>
+      <div class="cell"><div class="box"><i class="ri-building-2-fill"></i></div><div class="lb">집내놓기</div></div>
+    </div>
+  </div>
+
+  <!-- 2. Material Symbols -->
+  <div class="set">
+    <div class="head"><span class="name">② Material Symbols</span><span class="lic">Apache 2.0 · 무료</span></div>
+    <div class="grid">
+      <div class="cell"><div class="box"><span class="material-symbols-rounded">credit_card</span></div><div class="lb">카드결제</div></div>
+      <div class="cell"><div class="box"><span class="material-symbols-rounded">storefront</span></div><div class="lb">매장결제</div></div>
+      <div class="cell"><div class="box"><span class="material-symbols-rounded">savings</span></div><div class="lb">월세환급</div></div>
+      <div class="cell"><div class="box"><span class="material-symbols-rounded">receipt_long</span></div><div class="lb">계약내역</div></div>
+      <div class="cell"><div class="box"><span class="material-symbols-rounded">event_available</span></div><div class="lb">출석체크</div></div>
+      <div class="cell"><div class="box"><span class="material-symbols-rounded">local_shipping</span></div><div class="lb">이사청소</div></div>
+      <div class="cell"><div class="box"><span class="material-symbols-rounded">handyman</span></div><div class="lb">집수리</div></div>
+      <div class="cell"><div class="box"><span class="material-symbols-rounded">apartment</span></div><div class="lb">집내놓기</div></div>
+    </div>
+  </div>
+
+  <!-- 3. Phosphor -->
+  <div class="set">
+    <div class="head"><span class="name">③ Phosphor (Fill)</span><span class="lic">MIT · 무료</span></div>
+    <div class="grid">
+      <div class="cell"><div class="box"><i class="ph-fill ph-credit-card"></i></div><div class="lb">카드결제</div></div>
+      <div class="cell"><div class="box"><i class="ph-fill ph-storefront"></i></div><div class="lb">매장결제</div></div>
+      <div class="cell"><div class="box"><i class="ph-fill ph-hand-coins"></i></div><div class="lb">월세환급</div></div>
+      <div class="cell"><div class="box"><i class="ph-fill ph-file-text"></i></div><div class="lb">계약내역</div></div>
+      <div class="cell"><div class="box"><i class="ph-fill ph-calendar-check"></i></div><div class="lb">출석체크</div></div>
+      <div class="cell"><div class="box"><i class="ph-fill ph-truck"></i></div><div class="lb">이사청소</div></div>
+      <div class="cell"><div class="box"><i class="ph-fill ph-wrench"></i></div><div class="lb">집수리</div></div>
+      <div class="cell"><div class="box"><i class="ph-fill ph-buildings"></i></div><div class="lb">집내놓기</div></div>
+    </div>
+  </div>
+
+  <!-- 4. Boxicons -->
+  <div class="set">
+    <div class="head"><span class="name">④ Boxicons (Solid)</span><span class="lic">MIT · 무료</span></div>
+    <div class="grid">
+      <div class="cell"><div class="box"><i class="bx bxs-credit-card"></i></div><div class="lb">카드결제</div></div>
+      <div class="cell"><div class="box"><i class="bx bxs-store"></i></div><div class="lb">매장결제</div></div>
+      <div class="cell"><div class="box"><i class="bx bxs-wallet"></i></div><div class="lb">월세환급</div></div>
+      <div class="cell"><div class="box"><i class="bx bxs-file"></i></div><div class="lb">계약내역</div></div>
+      <div class="cell"><div class="box"><i class="bx bxs-calendar-check"></i></div><div class="lb">출석체크</div></div>
+      <div class="cell"><div class="box"><i class="bx bxs-truck"></i></div><div class="lb">이사청소</div></div>
+      <div class="cell"><div class="box"><i class="bx bxs-wrench"></i></div><div class="lb">집수리</div></div>
+      <div class="cell"><div class="box"><i class="bx bxs-building-house"></i></div><div class="lb">집내놓기</div></div>
+    </div>
+  </div>
+
+  <p class="tip">💡 인터넷 연결 상태에서 열어야 아이콘이 보여요.<br>마음에 드는 번호를 알려주시면 앱 전체에 그 세트로 통일할게요.</p>
+</div>
+</body>
+</html>

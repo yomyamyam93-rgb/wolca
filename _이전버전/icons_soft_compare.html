@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>부드러운 솔리드 아이콘 비교</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+<style>
+  :root{--primary:#2563EB; --primary-50:#EFF4FF; --line:#ECEEF1; --sub:#464C53; --ink:#1E2124;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Pretendard',sans-serif;background:#F4F5F6;color:var(--ink);padding:20px 16px 40px;display:flex;flex-direction:column;align-items:center;}
+  .wrap{width:100%;max-width:420px;}
+  h1{font-size:22px;font-weight:700;margin-bottom:4px;}
+  .lead{font-size:13px;color:var(--sub);margin-bottom:20px;line-height:1.5;}
+  .set{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:14px;}
+  .set.pick{border:2px solid var(--primary);}
+  .head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:14px;}
+  .name{font-size:16px;font-weight:700;}
+  .name .rec{font-size:11px;color:#fff;background:var(--primary);padding:2px 8px;border-radius:6px;margin-left:6px;font-weight:700;}
+  .lic{font-size:11px;color:var(--sub);}
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px 4px;text-align:center;}
+  .cell .box{width:52px;height:52px;margin:0 auto 6px;border-radius:16px;background:var(--primary-50);display:flex;align-items:center;justify-content:center;}
+  .cell .lb{font-size:10px;color:var(--sub);}
+  iconify-icon{color:var(--primary);font-size:28px;}
+  .desc{font-size:11px;color:var(--sub);margin-top:12px;line-height:1.5;background:#F8F9FA;border-radius:8px;padding:8px 10px;}
+  .tip{font-size:12px;color:var(--sub);text-align:center;margin-top:8px;line-height:1.6;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>부드러운 솔리드 아이콘 5종</h1>
+  <p class="lead">둥글둥글하고 꽉 찬 스타일만 모았어요. 딱딱한 Boxicons 대신 이 중에서 골라보세요. (전부 상업용 무료)</p>
+
+  <!-- 1. Solar -->
+  <div class="set pick">
+    <div class="head"><span class="name">① Solar (Bold) <span class="rec">추천</span></span><span class="lic">CC BY 4.0 · 무료</span></div>
+    <div class="grid">
+      <div class="cell"><div class="box"><iconify-icon icon="solar:card-bold"></iconify-icon></div><div class="lb">결제</div></div>
+      <div class="cell"><div class="box"><iconify-icon icon="solar:home-2-bold"></iconify-icon></div><div class="lb">월세</div></div>
+      <div class="cell"><div class="box"><iconify-icon icon="solar:buildings-2-bold"></iconify-icon></div><div class="lb">관리비</div></div>
+      <div class="cell"><div class="box"><iconify-icon icon="solar:wallet-bold"></iconify-icon></div><div class="lb">환급</div></div>
+      <div class="cell"><div class="box"><iconify-icon icon="solar:box-bold"></iconify-icon></div><div class="lb">이사</div></div>
+      <div class="cell"><div class="box"><iconify-icon icon="solar:gift-bold"></iconify-icon></div><div class="lb">혜택</div></div>
+      <div class="cell"><div class="box"><iconify-icon icon="solar:bill-list-bold"></iconify-icon></div><div class="lb">내역</div></div>
+      <div class="cell"><div class="box"><iconify-icon icon="solar:shield-check-bold"></iconify-icon></div><div class="lb">보험</div></div>
+    </div>
+    <div class="desc">요즘 앱에서 가장 인기. 둥근 모서리 + 통통한 느낌으로 친근하고 세련됨.</div>
+  </div>
+
+  <!-- 2. Phosphor Fill -->
+  <div class="set">
+    <div class="head"><span class="name">② Phosphor (Fill)</span><span class="lic">MIT · 무료</span></div>
+    <div class="grid">
+      <div class="cell"><div class="box"><iconify-icon icon="ph:credit-card-fill"></iconify-icon></div><div class="lb">결제</div></div>
+      <div class="cell"><div class="box"><iconify-icon icon="ph:house-fill"></iconify-icon></div><div class="lb">월세</div></div>
+      <div class="cell"><div class="box"><iconify-icon icon="ph:buildings-fill"></iconify-icon></div><div class="lb">관리비</div></div>
+      <div class="cell"><div class="box"><iconify-icon icon="ph:wallet-fill"></iconify-icon></div><div class="lb">환급</div></div>
+      <div class="cell"><div class="box"><iconify-icon icon="ph:truck-fill"></iconify-icon></div><div class="lb">이사</div></div>
+      <div class="cell"><div class="box"><iconify-icon icon="ph:gift-fill"></iconify-icon></div><div class="lb">혜택</div></div>
+      <div class="cell"><div class="box"><iconify-icon icon="ph:receipt-fill"></iconify-icon></div><div class="lb">내역</div></div>
+      <div class="cell"><div class="box"><iconify-icon icon="ph:shield-check-fill"></iconify-icon></div><div class="lb">보험</div></div>
+    </div>
+    <div class="desc">부드러운 라운드. 살짝 미니멀하고 차분한 느낌.</div>
+  </div>
+
+  <!-- 3. Material Symbols Rounded -->
+  <div class="set">
+    <div class="head"><span class="name">③ Material Symbols (Rounded)</span><span class="lic">Apache 2.0 · 무료</span></div>
+    <div class="grid">
+      <div class="cell"><div class="box"><iconify-icon icon="material-symbols:credit-card-rounded"></iconify-icon></div><div class="lb">결제</div></div>
+      <div class="cell"><div class="box"><iconify-icon icon="material-symbols:home-rounded"></iconify-icon></div><div class="lb">월세</div></div>
+      <div class="cell"><div class="box"><iconify-icon icon="material-symbols:apartment-rounded"></iconify-icon></div><div class="lb">관리비</div></div>
+      <div class="cell"><div class="box"><iconify-icon icon="material-symbols:account-balance-wallet-rounded"></iconify-icon></div><div class="lb">환급</div></div>
+      <div class="cell"><div class="box"><iconify-icon icon="material-symbols:local-shipping-rounded"></iconify-icon></div><div class="lb">이사</div></div>
+      <div class="cell"><div class="box"><iconify-icon icon="material-symbols:redeem-rounded"></iconify-icon></div><div class="lb">혜택</div></div>
+      <div class="cell"><div class="box"><iconify-icon icon="material-symbols:receipt-long-rounded"></iconify-icon></div><div class="lb">내역</div></div>
+      <div class="cell"><div class="box"><iconify-icon icon="material-symbols:health-and-safety-rounded"></iconify-icon></div><div class="lb">보험</div></div>
+    </div>
+    <div class="desc">구글 스타일. 둥글게 다듬은 버전이라 안드로이드 느낌 + 부드러움.</div>
+  </div>
+
+  <!-- 4. MingCute Fill -->
+  <div class="set">
+    <div class="head"><span class="name">④ MingCute (Fill)</span><span class="lic">Apache 2.0 · 무료</span></div>
+    <div class="grid">
+      <div class="cell"><div class="box"><iconify-icon icon="mingcute:bank-card-fill"></iconify-icon></div><div class="lb">결제</div></div>
+      <div class="cell"><div class="box"><iconify-icon icon="mingcute:home-4-fill"></iconify-icon></div><div class="lb">월세</div></div>
+      <div class="cell"><div class="box"><iconify-icon icon="mingcute:building-2-fill"></iconify-icon></div><div class="lb">관리비</div></div>
+      <div class="cell"><div class="box"><iconify-icon icon="mingcute:wallet-4-fill"></iconify-icon></div><div class="lb">환급</div></div>
+      <div class="cell"><div class="box"><iconify-icon icon="mingcute:truck-fill"></iconify-icon></div><div class="lb">이사</div></div>
+      <div class="cell"><div class="box"><iconify-icon icon="mingcute:gift-fill"></iconify-icon></div><div class="lb">혜택</div></div>
+      <div class="cell"><div class="box"><iconify-icon icon="mingcute:bill-fill"></iconify-icon></div><div class="lb">내역</div></div>
+      <div class="cell"><div class="box"><iconify-icon icon="mingcute:shield-fill"></iconify-icon></div><div class="lb">보험</div></div>
+    </div>
+    <div class="desc">아주 둥글고 귀여운 편. 생활·금융앱에 친근하게 잘 어울림.</div>
+  </div>
+
+  <!-- 5. Fluent -->
+  <div class="set">
+    <div class="head"><span class="name">⑤ Fluent (Filled)</span><span class="lic">MIT · 무료</span></div>
+    <div class="grid">
+      <div class="cell"><div class="box"><iconify-icon icon="fluent:payment-24-filled"></iconify-icon></div><div class="lb">결제</div></div>
+      <div class="cell"><div class="box"><iconify-icon icon="fluent:home-24-filled"></iconify-icon></div><div class="lb">월세</div></div>
+      <div class="cell"><div class="box"><iconify-icon icon="fluent:building-24-filled"></iconify-icon></div><div class="lb">관리비</div></div>
+      <div class="cell"><div class="box"><iconify-icon icon="fluent:wallet-24-filled"></iconify-icon></div><div class="lb">환급</div></div>
+      <div class="cell"><div class="box"><iconify-icon icon="fluent:vehicle-truck-profile-24-filled"></iconify-icon></div><div class="lb">이사</div></div>
+      <div class="cell"><div class="box"><iconify-icon icon="fluent:gift-24-filled"></iconify-icon></div><div class="lb">혜택</div></div>
+      <div class="cell"><div class="box"><iconify-icon icon="fluent:receipt-24-filled"></iconify-icon></div><div class="lb">내역</div></div>
+      <div class="cell"><div class="box"><iconify-icon icon="fluent:shield-24-filled"></iconify-icon></div><div class="lb">보험</div></div>
+    </div>
+    <div class="desc">마이크로소프트 스타일. 부드럽고 균형 잡힌 느낌.</div>
+  </div>
+
+  <p class="tip">💡 인터넷 연결 상태에서 열어야 아이콘이 보여요.<br>마음에 드는 번호를 알려주시면 앱 전체에 그 세트로 통일할게요.</p>
+</div>
+</body>
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>랜선페이 — 온보딩</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+  :root{
+    --primary:#2563EB; --primary-dark:#1D4ED8; --primary-50:#EFF4FF; --primary-100:#DBE7FF;
+    --page-bg:#c9cdd4; --bg:#FFFFFF; --line:#ECEEF1; --border:#B1B8BE;
+    --tile:#EEF1F4; --icon-off:#B0B8C1; --sub:#4E5968; --ink:#191F28; --placeholder:#8B95A1;
+    --primary-grad:linear-gradient(180deg, color-mix(in srgb, var(--primary) 82%, #ffffff), var(--primary));
+    --btn-shadow:0 4px 12px color-mix(in srgb, var(--primary) 32%, transparent), inset 0 1px 0 rgba(255,255,255,.18);
+  }
+</style>
+<link rel="stylesheet" href="../theme.css">
+<script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+<style>
+  *{box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent;}
+  body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;
+       color:var(--ink); background:var(--page-bg); display:flex; justify-content:center; align-items:flex-start; padding:24px 0; line-height:1.5; -webkit-font-smoothing:antialiased;}
+  .phone{width:390px; height:844px; max-width:100%; position:relative; display:flex; flex-direction:column; border-radius:46px; overflow:hidden; box-shadow:0 16px 50px rgba(0,0,0,.28); background:#fff;}
+  iconify-icon{display:inline-block;}
+
+  .statusbar{height:47px; display:flex; align-items:center; justify-content:space-between; padding:0 24px 0 30px; flex:0 0 auto;}
+  .statusbar .time{font-size:15px; font-weight:700; letter-spacing:.3px;}
+  .statusbar .stat{display:flex; align-items:center; gap:7px;}
+  .topbar{height:50px; display:flex; align-items:center; padding:0 10px; flex:0 0 auto;}
+  .back{width:40px; height:40px; display:flex; align-items:center; justify-content:center; font-size:24px; color:var(--ink); cursor:pointer;}
+
+  .view{flex:1; display:flex; flex-direction:column; min-height:0;}
+  .hidden{display:none !important;}
+
+  /* ===== 슬라이드 ===== */
+  .carousel{flex:1; display:flex; overflow-x:auto; scroll-snap-type:x mandatory; scrollbar-width:none;}
+  .carousel::-webkit-scrollbar{display:none;}
+  .slide{flex:0 0 100%; scroll-snap-align:center; display:flex; flex-direction:column; align-items:center; justify-content:flex-start; text-align:center; padding:30px 34px 0;}
+  .himg{width:240px; height:240px; position:relative; margin-bottom:30px; display:flex; align-items:center; justify-content:center;}
+  .himg img{max-width:100%; max-height:100%; object-fit:contain;}
+  .himg .ph{position:absolute; inset:0; border:2px dashed #A9C0F0; border-radius:26px; background:rgba(255,255,255,.5);
+            display:flex; flex-direction:column; align-items:center; justify-content:center; gap:7px; color:var(--primary-dark); font-size:12px; font-weight:600; text-align:center; padding:20px; line-height:1.5;}
+  .himg .ph iconify-icon{font-size:36px; color:var(--primary); opacity:.7;}
+  .himg .ph small{color:var(--placeholder); font-weight:500; font-size:11px;}
+  .slide h1{font-size:24px; font-weight:700; line-height:1.4; letter-spacing:-.5px; color:var(--ink);}
+  .slide .sub{font-size:14px; color:var(--sub); margin-top:13px; line-height:1.6;}
+
+  /* ===== 계산기 ===== */
+  .calc-body{flex:1; overflow-y:auto; scrollbar-width:none; padding:12px 26px 20px; text-align:center;}
+  .calc-body::-webkit-scrollbar{display:none;}
+  .calc-body h1{font-size:23px; font-weight:700; letter-spacing:-.4px; line-height:1.4;}
+  .calc-body .lead{font-size:14px; color:var(--placeholder); margin:12px 0 22px;}
+  .field{text-align:left; margin-bottom:16px;}
+  .field label{display:block; font-size:13px; font-weight:700; color:var(--sub); margin-bottom:8px;}
+  .amtbox{display:flex; align-items:center; border:2px solid var(--primary); border-radius:14px; padding:0 16px; height:60px;}
+  .amtbox input{flex:1; border:none; outline:none; font-family:inherit; font-size:22px; font-weight:700; color:var(--ink); text-align:right; background:none; min-width:0;}
+  .amtbox .won{font-size:17px; font-weight:700; color:var(--sub); margin-left:8px;}
+  .result{background:var(--primary-50); border-radius:16px; padding:18px; text-align:left; margin-top:4px;}
+  .rrow{display:flex; align-items:flex-start; gap:10px; margin-bottom:12px;}
+  .rrow:last-of-type{margin-bottom:8px;}
+  .rrow .ri{width:34px; height:34px; border-radius:10px; background:#fff; display:flex; align-items:center; justify-content:center; flex:0 0 auto;}
+  .rrow .ri iconify-icon{font-size:18px; color:var(--primary);}
+  .rrow .rt .rl{font-size:12px; color:var(--primary-dark);}
+  .rrow .rt .rv{font-size:15px; font-weight:700; color:var(--ink); margin-top:1px;}
+  .rfee{font-size:12px; color:var(--sub); border-top:1px solid #DBE7FF; padding-top:10px;}
+
+  /* 공통 하단 */
+  .footer{padding:12px 24px 30px; flex:0 0 auto; background:#fff;}
+  .dots{display:flex; justify-content:center; gap:6px; margin-bottom:16px;}
+  .dot{width:6px; height:6px; border-radius:3px; background:#C8D3E6; transition:.2s;}
+  .dot.on{background:var(--primary); width:18px;}
+  .btn-primary{width:100%; height:56px; border:none; border-radius:15px; font-size:16px; font-weight:700; color:#fff; cursor:pointer;
+    background:var(--primary); background:var(--primary-grad); box-shadow:var(--btn-shadow); transition:transform .08s;}
+  .btn-primary:active{transform:scale(.99);}
+  .skip{display:block; text-align:center; width:100%; background:none; border:none; font-family:inherit; font-size:14px; color:var(--placeholder); margin-top:14px; cursor:pointer;}
+</style>
+</head>
+<body>
+<div class="phone">
+
+  <div class="statusbar">
+    <span class="time">9:41</span>
+    <span class="stat">
+      <svg width="18" height="12" viewBox="0 0 18 12"><rect y="8" width="3" height="4" rx="1" fill="#191F28"/><rect x="5" y="5" width="3" height="7" rx="1" fill="#191F28"/><rect x="10" y="2.5" width="3" height="9.5" rx="1" fill="#191F28"/><rect x="15" width="3" height="12" rx="1" fill="#191F28"/></svg>
+      <svg width="17" height="12" viewBox="0 0 17 12"><path d="M8.5 2C11 2 13.3 3 15 4.7l-1.3 1.4C12.3 4.7 10.5 4 8.5 4S4.7 4.7 3.3 6.1L2 4.7C3.7 3 6 2 8.5 2z" fill="#191F28"/><path d="M8.5 5.5c1.5 0 2.9.6 3.9 1.6l-1.4 1.4c-.6-.7-1.5-1-2.5-1s-1.9.4-2.5 1L4.6 7.1C5.6 6.1 7 5.5 8.5 5.5z" fill="#191F28"/><circle cx="8.5" cy="10" r="1.3" fill="#191F28"/></svg>
+      <svg width="26" height="13" viewBox="0 0 26 13"><rect x=".5" y=".5" width="22" height="12" rx="3.5" fill="none" stroke="#191F28" stroke-opacity=".35"/><rect x="2.5" y="2.5" width="16" height="8" rx="1.8" fill="#191F28"/><rect x="24" y="4.5" width="1.6" height="4" rx=".8" fill="#191F28" fill-opacity=".35"/></svg>
+    </span>
+  </div>
+
+  <div class="topbar">
+    <div class="back" onclick="back()"><iconify-icon icon="mingcute:left-line"></iconify-icon></div>
+  </div>
+
+  <!-- ===== 가치소개 슬라이드 ===== -->
+  <div id="view-intro" class="view">
+    <div class="carousel" id="carousel" onscroll="onScroll()">
+
+      <div class="slide">
+        <div class="himg">
+          <div class="ph"><iconify-icon icon="mingcute:pic-fill"></iconify-icon>1번 · 결제<small>img/1-card.png</small></div>
+          <img src="../img/1-card.png" alt="" onload="this.previousElementSibling.style.display='none'" onerror="this.remove()">
+        </div>
+        <h1>현금으로만 내던 돈<br>이제 카드로 내세요</h1>
+        <p class="sub">월세 · 임대료 · 보험 · 이사까지<br>카드로 결제할 수 있어요</p>
+      </div>
+
+      <div class="slide">
+        <div class="himg">
+          <div class="ph"><iconify-icon icon="mingcute:pic-fill"></iconify-icon>2번 · 송금<small>img/2-send.png</small></div>
+          <img src="../img/2-send.png" alt="" onload="this.previousElementSibling.style.display='none'" onerror="this.remove()">
+        </div>
+        <h1>돈은 다음 달에<br>상대방은 오늘 바로</h1>
+        <p class="sub">3초 즉시 송금 · 무이자 할부<br>상대방 동의도 필요 없어요</p>
+      </div>
+
+      <div class="slide">
+        <div class="himg">
+          <div class="ph"><iconify-icon icon="mingcute:pic-fill"></iconify-icon>3번 · 혜택<small>img/3-reward.png</small></div>
+          <img src="../img/3-reward.png" alt="" onload="this.previousElementSibling.style.display='none'" onerror="this.remove()">
+        </div>
+        <h1>낸 만큼 혜택도<br>꼬박꼬박 챙기세요</h1>
+        <p class="sub">카드 실적 · 포인트 적립<br>월세 환급까지 한 번에</p>
+      </div>
+
+    </div>
+    <div class="footer">
+      <div class="dots"><span class="dot on" id="dot0"></span><span class="dot" id="dot1"></span><span class="dot" id="dot2"></span></div>
+      <button class="btn-primary" id="introBtn" onclick="introNext()">다음</button>
+      <button class="skip" onclick="toast('바로 둘러보기 (건너뛰기)')">그냥 둘러볼게요</button>
+    </div>
+  </div>
+
+  <!-- ===== 미니 계산기 ===== -->
+  <div id="view-calc" class="view hidden">
+    <div class="calc-body">
+      <h1>얼마를 카드로<br>내볼까요?</h1>
+      <p class="lead">금액만 넣어보세요. 로그인 없이 바로 확인.</p>
+
+      <div class="field">
+        <label>결제할 금액</label>
+        <div class="amtbox">
+          <input type="text" inputmode="numeric" id="amt" value="600,000" oninput="calc()">
+          <span class="won">원</span>
+        </div>
+      </div>
+
+      <div class="result">
+        <div class="rrow">
+          <div class="ri"><iconify-icon icon="mingcute:flash-fill"></iconify-icon></div>
+          <div class="rt"><div class="rl">상대방에게는</div><div class="rv" id="rSend">오늘 600,000원 즉시 송금</div></div>
+        </div>
+        <div class="rrow">
+          <div class="ri"><iconify-icon icon="mingcute:bank-card-fill"></iconify-icon></div>
+          <div class="rt"><div class="rl">나는</div><div class="rv" id="rSplit">6개월 무이자, 월 100,000원</div></div>
+        </div>
+        <div class="rfee" id="rFee">수수료 24,000원 (4%)</div>
+      </div>
+    </div>
+    <div class="footer">
+      <button class="btn-primary" onclick="toast('PASS 인증 로그인 → 홈 (이어서 만들게요)')">로그인하고 혜택 받기</button>
+      <button class="skip" onclick="toast('나중에 할게요 (둘러보기)')">나중에 할게요</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+let idx=0;
+function onScroll(){
+  const c=document.getElementById('carousel');
+  idx=Math.round(c.scrollLeft/c.clientWidth);
+  for(let i=0;i<3;i++) document.getElementById('dot'+i).classList.toggle('on', i===idx);
+  document.getElementById('introBtn').textContent = idx===2 ? '혜택 계산해보기' : '다음';
+}
+function introNext(){
+  const c=document.getElementById('carousel');
+  if(idx<2){ c.scrollTo({left:(idx+1)*c.clientWidth, behavior:'smooth'}); }
+  else { document.getElementById('view-intro').classList.add('hidden'); document.getElementById('view-calc').classList.remove('hidden'); }
+}
+function back(){
+  const calc=document.getElementById('view-calc');
+  if(!calc.classList.contains('hidden')){ calc.classList.add('hidden'); document.getElementById('view-intro').classList.remove('hidden'); }
+  else { toast('이전 화면으로'); }
+}
+function calc(){
+  const el=document.getElementById('amt');
+  let n=parseInt(el.value.replace(/[^0-9]/g,''))||0;
+  el.value = n ? n.toLocaleString() : '';
+  const monthly=Math.round(n/6), fee=Math.round(n*0.04);
+  document.getElementById('rSend').textContent = '오늘 '+n.toLocaleString()+'원 즉시 송금';
+  document.getElementById('rSplit').textContent = '6개월 무이자, 월 '+monthly.toLocaleString()+'원';
+  document.getElementById('rFee').textContent = '수수료 '+fee.toLocaleString()+'원 (4%)';
+}
+function toast(msg){
+  let t=document.createElement('div');
+  t.textContent=msg;
+  t.style.cssText="position:fixed;bottom:110px;left:50%;transform:translateX(-50%);background:#191F28;color:#fff;padding:12px 18px;border-radius:24px;font-size:13px;font-weight:600;z-index:99;opacity:0;transition:.2s;white-space:nowrap;box-shadow:0 4px 16px rgba(0,0,0,.2)";
+  document.body.appendChild(t);
+  requestAnimationFrame(()=>t.style.opacity='1');
+  setTimeout(()=>{t.style.opacity='0';setTimeout(()=>t.remove(),200)},1500);
+}
+calc();
+</script>
+</body>
+</html>

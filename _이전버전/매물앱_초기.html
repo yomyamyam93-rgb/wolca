@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>우리집톡 (프로토타입 v2)</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="../theme.css">
+<script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+<style>
+  /* 디자인 토큰은 theme.css 에서 관리 (한 곳에서 전체 테마 변경) */
+  *{box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent;}
+  body{
+    font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;
+    color:var(--ink); background:#dfe2e8; display:flex; justify-content:center; line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  .phone{width:100%; max-width:420px; min-height:100vh; background:var(--bg); position:relative; display:flex; flex-direction:column;}
+
+  /* 상단바 (헤더 56) */
+  .topbar{height:56px; display:flex; align-items:center; justify-content:space-between; padding:0 var(--pad); background:#fff; border-bottom:1px solid var(--line);}
+  .logo{display:flex; align-items:center; gap:8px; font-size:19px; font-weight:700;}
+  .logo .mark{width:28px; height:28px; border-radius:9px; background:var(--primary); color:#fff; display:flex; align-items:center; justify-content:center; font-size:16px;}
+  .top-right{display:flex; align-items:center; gap:14px; color:var(--sub); font-size:21px;}
+  .point{font-size:12px; border:1px solid var(--line); border-radius:999px; padding:5px 11px; color:var(--sub);}
+
+  /* 스크롤 영역 */
+  .screen{flex:1; overflow-y:auto; padding-bottom:80px;}
+  .pad{padding:var(--pad);}
+  .page-title{font-size:22px; font-weight:700; padding:20px var(--pad) 8px;}
+
+  /* 텍스트 */
+  .muted{color:var(--sub); font-size:13px;}
+  .strike{text-decoration:line-through; color:var(--placeholder);}
+  .sec-title{font-size:18px; font-weight:700; margin:0 2px 12px;}
+
+  /* 카드 (테두리 위주, 그림자 최소) */
+  .card{background:var(--card); border:1px solid var(--line); border-radius:var(--r-card); padding:var(--pad); margin-bottom:12px;}
+  .row{display:flex; align-items:center; gap:12px;}
+
+  /* 버튼 (높이 52, radius 12) */
+  .btn{width:100%; height:52px; border:none; border-radius:var(--r-btn); font-size:16px; font-weight:700; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:6px; box-shadow:var(--btn-shadow-soft); transition:filter .12s, box-shadow .12s, transform .08s;}
+  .btn:active{transform:scale(.985);}
+  .btn-primary{background:var(--primary); background:var(--primary-grad); color:#fff; box-shadow:var(--btn-shadow);}
+  .btn-primary:active{filter:brightness(.93);}
+  .btn-secondary{background:var(--primary-50); color:var(--primary-dark);}
+  .btn-outline{background:transparent; color:var(--ink); border:1px solid var(--border);}
+  .btn-sm{height:44px; width:auto; padding:0 16px; font-size:14px;}
+
+  /* 칩/뱃지 */
+  .chip{display:inline-flex; align-items:center; gap:4px; background:var(--primary-50); color:var(--primary-dark); border-radius:var(--r-badge); padding:5px 10px; font-size:12px; font-weight:700;}
+  .info-box{background:var(--primary-50); color:var(--primary-dark); border-radius:10px; padding:12px 14px; font-size:13px; margin-top:12px; line-height:1.45;}
+
+  /* 이벤트 배너 */
+  .banner{background:var(--primary); color:#fff; border-radius:16px; padding:20px; margin-bottom:12px; position:relative;}
+  .banner h2{font-size:20px; line-height:1.35; font-weight:700;}
+  .banner .hl{color:#FFD83D;}
+  .banner .x{position:absolute; top:14px; right:14px; opacity:.75; font-size:18px;}
+  .banner .btn{margin-top:16px; background:var(--primary-dark); color:#fff;}
+
+  /* 아이콘 그리드 */
+  .grid4{display:grid; grid-template-columns:repeat(4,1fr); gap:18px 4px; text-align:center;}
+  .ic{cursor:pointer;}
+  .ic .box{width:50px; height:50px; margin:0 auto 7px; border-radius:15px; background:var(--primary-50); display:flex; align-items:center; justify-content:center; font-size:25px;}
+  .ic .box iconify-icon{color:var(--primary);}
+  .ic .lb{font-size:11px; color:var(--sub); line-height:1.25;}
+  .ic .dot{position:relative;}
+  .ic .dot:after{content:''; position:absolute; top:-1px; right:8px; width:7px; height:7px; background:var(--danger); border-radius:50%;}
+
+  /* 검색바 (알약) */
+  .searchbar{width:100%; background:#fff; border:1px solid var(--border); border-radius:999px; height:52px; padding:0 20px; font-size:15px; font-weight:600; color:var(--sub); display:flex; align-items:center; gap:8px; cursor:pointer;}
+  .searchbar .ph{color:var(--placeholder); font-weight:500;}
+
+  /* 카테고리 2열 */
+  .cat2{display:grid; grid-template-columns:1fr 1fr; gap:12px;}
+  .cat{background:#fff; border:1px solid var(--line); border-radius:var(--r-card); padding:16px; cursor:pointer;}
+  .cat h3{font-size:16px; font-weight:700; margin-bottom:6px;}
+  .cat p{font-size:12px; color:var(--sub); line-height:1.5;}
+
+  /* 프로모 */
+  .promo{border-radius:16px; padding:20px; margin-bottom:12px; text-align:center;}
+  .promo.blue{background:var(--primary-50);}
+  .promo.green{background:var(--success-bg);}
+  .promo .t1{font-size:13px; color:var(--sub);}
+  .promo .t2{font-size:18px; font-weight:700; margin:6px 0 16px; color:var(--ink);}
+  .promo.blue .btn{background:var(--primary); color:#fff;}
+  .promo.green .btn{background:var(--success); color:#fff;}
+
+  /* 필터 칩 줄 (집구하기) */
+  .filterbar{display:flex; gap:8px; overflow-x:auto; padding:12px var(--pad); background:#fff; border-bottom:1px solid var(--line); position:sticky; top:0; z-index:5;}
+  .filterbar::-webkit-scrollbar{display:none;}
+  .fchip{flex:0 0 auto; height:36px; padding:0 14px; border-radius:999px; border:1px solid var(--border); background:#fff; color:var(--sub); font-size:13px; font-weight:600; display:flex; align-items:center; gap:4px; cursor:pointer;}
+  .fchip.on{background:var(--primary-50); border-color:var(--primary); color:var(--primary-dark);}
+
+  /* 매물 카드 */
+  .prop{background:#fff; border:1px solid var(--line); border-radius:var(--r-card); overflow:hidden; margin-bottom:12px; cursor:pointer;}
+  .prop .thumb{aspect-ratio:4/3; background:linear-gradient(135deg,#cdd9ff,#eaf0ff); display:flex; align-items:center; justify-content:center; font-size:44px; position:relative; color:#6f9aec;}
+  .prop .heart{position:absolute; top:10px; right:10px; width:34px; height:34px; border-radius:50%; background:rgba(255,255,255,.9); display:flex; align-items:center; justify-content:center; font-size:17px;}
+  .prop .info{padding:12px 14px;}
+  .prop .price{font-size:20px; font-weight:700; color:var(--ink);}
+  .prop .sub{font-size:13px; color:var(--sub); margin-top:3px;}
+  .prop .tags{margin-top:9px; display:flex; gap:5px; flex-wrap:wrap;}
+  .tag{background:var(--primary-50); color:var(--primary-dark); font-size:11px; font-weight:700; padding:4px 8px; border-radius:6px;}
+
+  /* 커뮤니티 */
+  .post{background:#fff; border:1px solid var(--line); border-radius:var(--r-card); padding:16px; margin-bottom:10px; cursor:pointer;}
+  .post .cat-lb{font-size:11px; color:var(--primary); font-weight:700;}
+  .post h4{font-size:15px; font-weight:700; margin:6px 0 8px; line-height:1.4;}
+  .post .meta{font-size:12px; color:var(--sub);}
+
+  /* 폼 */
+  .field{margin-bottom:16px;}
+  .field label{display:block; font-size:14px; font-weight:700; margin-bottom:7px;}
+  .field input,.field select{width:100%; height:52px; border:1px solid var(--border); border-radius:var(--r-btn); padding:0 14px; font-size:16px; background:#fff; color:var(--ink); font-family:inherit;}
+  .field input::placeholder{color:var(--placeholder);}
+  .field input:focus,.field select:focus{outline:none; border:2px solid var(--primary); padding:0 13px;}
+  .result-box{background:var(--primary-50); border-radius:12px; padding:16px; text-align:center;}
+  .result-box .rl{font-size:13px; color:var(--sub);}
+  .result-box .rv{font-size:26px; font-weight:700; color:var(--primary-dark); margin-top:4px;}
+  .hint{font-size:12px; color:var(--sub); margin-top:6px; line-height:1.5;}
+
+  /* 빈 화면 (Empty State) */
+  .empty{text-align:center; padding:56px 24px;}
+  .empty .emoji{font-size:48px;}
+  .empty h3{font-size:17px; font-weight:700; margin:16px 0 6px;}
+  .empty p{font-size:14px; color:var(--sub); margin-bottom:20px; line-height:1.55;}
+  .empty .btn{max-width:220px; margin:0 auto;}
+
+  /* 하단 탭바 (엄지 영역) */
+  .tabbar{position:absolute; bottom:0; left:0; right:0; max-width:420px; margin:0 auto; background:#fff; border-top:1px solid var(--line); display:flex; padding:8px 4px 14px;}
+  .tab{flex:1; display:flex; flex-direction:column; align-items:center; gap:3px; color:#9AA1AC; font-size:10px; cursor:pointer;}
+  .tab .ti{font-size:23px;}
+  .tab.on{color:var(--primary); font-weight:700;}
+  .tab .badge{position:relative;}
+  .tab .badge:after{content:''; position:absolute; top:-2px; right:-6px; width:7px; height:7px; background:var(--danger); border-radius:50%;}
+
+  .divider{height:8px; background:var(--bg); margin:4px -16px 16px;}
+  .hidden{display:none;}
+</style>
+</head>
+<body>
+<div class="phone">
+
+  <!-- 상단바 -->
+  <div class="topbar">
+    <div class="logo"><span class="mark"><iconify-icon icon="mingcute:home-4-fill"></iconify-icon></span><span>우리집톡</span></div>
+    <div class="top-right">
+      <span class="point">P 0원 ›</span>
+      <iconify-icon icon="mingcute:notification-fill"></iconify-icon>
+      <iconify-icon icon="mingcute:menu-fill"></iconify-icon>
+    </div>
+  </div>
+
+  <!-- ===== 홈 ===== -->
+  <div class="screen" id="scr-home">
+    <div class="pad">
+      <div class="banner">
+        <span class="x">✕</span>
+        <h2>OX 퀴즈 풀고<br><span class="hl">3,000원</span> 받으세요</h2>
+        <button class="btn" onclick="toast('이벤트 화면은 준비 중이에요')">3,000원 받기</button>
+      </div>
+
+      <div class="card row">
+        <div class="ic"><div class="box" style="width:44px;height:44px;margin:0;border-radius:12px;font-size:24px;"><iconify-icon icon="mingcute:bank-card-fill"></iconify-icon></div></div>
+        <div style="flex:1">
+          <div class="muted">월세 카드결제 · 7개월 무이자</div>
+          <div style="font-weight:700;font-size:15px;margin-top:2px;">7월 월세 <span class="strike">60만원</span> → <span style="color:var(--primary)">5만원</span></div>
+        </div>
+        <span style="color:var(--placeholder);font-size:20px">›</span>
+      </div>
+
+      <div class="card">
+        <div class="row" style="justify-content:space-between">
+          <div>
+            <div class="muted">전월세 계약을 추가해 보세요</div>
+            <div style="font-weight:700;font-size:16px;margin-top:2px;">현재 계약 0건</div>
+          </div>
+          <button class="btn btn-primary btn-sm" onclick="toast('계약 추가 화면은 준비 중이에요')">+ 계약추가</button>
+        </div>
+        <div class="info-box">💡 월세를 카드로 내면 <b>카드실적 인정</b> · 월세환급까지 가능해요</div>
+      </div>
+
+      <div class="card">
+        <div class="grid4" id="homeGrid"></div>
+      </div>
+
+      <div class="searchbar" onclick="go('search')"><iconify-icon icon="mingcute:search-2-fill" style="font-size:18px"></iconify-icon> <span class="ph">살고 싶은 지역을 검색해 보세요</span></div>
+
+      <div class="divider"></div>
+      <div class="sec-title">어떤 집을 찾으세요?</div>
+      <div class="cat2">
+        <div class="cat" onclick="go('search')"><h3><iconify-icon icon="mingcute:home-4-fill" style="color:var(--primary);font-size:20px;vertical-align:-3px"></iconify-icon> 전세 / 월세</h3><p>원룸, 투룸, 빌라<br>오피스텔, 아파트</p></div>
+        <div class="cat" onclick="go('search')"><h3><iconify-icon icon="mingcute:bed-2-fill" style="color:var(--primary);font-size:20px;vertical-align:-3px"></iconify-icon> 단기임대</h3><p>1주 이상 단기임대<br>출장, 여행, 자취</p></div>
+        <div class="cat" onclick="go('search')"><h3><iconify-icon icon="mingcute:building-2-fill" style="color:var(--primary);font-size:20px;vertical-align:-3px"></iconify-icon> 아파트</h3><p>가장 빠른 실거래가<br>아파트 구하기</p></div>
+        <div class="cat" onclick="toast('실거주 리뷰는 준비 중이에요')"><h3><iconify-icon icon="mingcute:star-fill" style="color:var(--primary);font-size:20px;vertical-align:-3px"></iconify-icon> 실거주 리뷰</h3><p>실제 살아본 후기<br>건물, 교통, 환경</p></div>
+      </div>
+
+      <div class="divider"></div>
+      <div class="promo blue">
+        <div class="t1">지난 5년간 꼬박꼬박 낸 월세</div>
+        <div class="t2">최대 590만원까지 돌려받으세요</div>
+        <button class="btn" onclick="go('refund')">월세환급 계산하기</button>
+      </div>
+      <div class="promo green">
+        <div class="t1">보증금 못 받을까 걱정되시죠?</div>
+        <div class="t2">할인 받고 보증보험 가입</div>
+        <button class="btn" onclick="toast('보증보험은 준비 중이에요')">가입 신청하기</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 집구하기 ===== -->
+  <div class="screen hidden" id="scr-search">
+    <div class="filterbar" id="filterbar"></div>
+    <div class="pad">
+      <div class="searchbar" style="margin-bottom:16px" onclick="toast('지역 검색은 준비 중이에요')"><iconify-icon icon="mingcute:search-2-fill" style="font-size:18px"></iconify-icon> <span class="ph">지역 · 지하철역 · 단지명</span></div>
+      <div class="sec-title">추천 매물 <span class="muted" style="font-weight:400">· 24건</span></div>
+      <div id="propList"></div>
+    </div>
+  </div>
+
+  <!-- ===== 환급 ===== -->
+  <div class="screen hidden" id="scr-refund">
+    <div class="page-title">월세환급</div>
+    <div class="pad" style="padding-top:0">
+      <div class="promo blue" style="text-align:left;margin-top:8px">
+        <div class="t1">낸 월세, 세금으로 돌려받기</div>
+        <div class="t2" style="margin-bottom:8px">최대 590만원 환급 가능</div>
+        <p class="muted" style="line-height:1.6;color:var(--sub)">연말정산 때 놓친 월세 세액공제를 5년치까지 소급 신청할 수 있어요.</p>
+      </div>
+
+      <div class="card">
+        <div class="sec-title" style="margin-top:0">내 환급액 계산하기</div>
+        <div class="field"><label>월세 (원)</label><input type="number" inputmode="numeric" id="rent" placeholder="예: 500000" oninput="calcRefund()"></div>
+        <div class="field"><label>거주 개월 수</label><input type="number" inputmode="numeric" id="months" placeholder="예: 12" oninput="calcRefund()"></div>
+        <div class="result-box">
+          <div class="rl">예상 환급액 (참고용)</div>
+          <div class="rv" id="refundOut">0원</div>
+        </div>
+        <div class="hint">※ 실제 환급액은 소득·조건에 따라 달라져요. 정확한 금액은 신청 시 확인됩니다.</div>
+      </div>
+      <button class="btn btn-primary" onclick="toast('환급 신청은 준비 중이에요')">월세환급 신청하기</button>
+    </div>
+  </div>
+
+  <!-- ===== 사는이야기 ===== -->
+  <div class="screen hidden" id="scr-community">
+    <div class="page-title">사는이야기</div>
+    <div class="pad" style="padding-top:4px"><div id="postList"></div></div>
+  </div>
+
+  <!-- ===== 비교견적 ===== -->
+  <div class="screen hidden" id="scr-quote">
+    <div class="page-title">비교견적</div>
+    <div class="pad" style="padding-top:4px">
+      <p class="muted" style="margin-bottom:16px;line-height:1.55">한 번만 입력하면 여러 업체가 견적을 보내줘요. 비교하고 고르세요.</p>
+      <div class="card">
+        <div class="field"><label>어떤 서비스가 필요하세요?</label><select><option>포장이사</option><option>일반이사</option><option>입주청소</option></select></div>
+        <div class="field"><label>출발 주소</label><input placeholder="예: 서울 강남구 역삼동"></div>
+        <div class="field"><label>도착 주소</label><input placeholder="예: 경기 성남시 분당구"></div>
+        <div class="field" style="margin-bottom:0"><label>희망 날짜</label><input type="date"></div>
+      </div>
+      <button class="btn btn-primary" onclick="toast('여러 업체에 견적을 요청했어요! (준비 중)')">무료 견적 받기</button>
+    </div>
+  </div>
+
+  <div class="tabbar" id="tabbar"></div>
+</div>
+
+<script>
+/* ---------- 데이터 ---------- */
+const homeIcons = [
+  ["mingcute:bank-card-fill","월세 카드결제",true],["mingcute:store-fill","매장지출 결제",false],["mingcute:wallet-4-fill","월세환급",false],["mingcute:file-fill","계약/납부내역",false],
+  ["mingcute:calendar-2-fill","출석체크",false],["mingcute:truck-fill","이사/청소",false],["mingcute:tool-fill","집 수리",false],["mingcute:building-2-fill","집 내놓기",false]
+];
+const filters = ["전체","월세","전세","원룸","투룸","아파트","반려동물"];
+const props = [
+  ["mingcute:home-4-fill","월세 500 / 50","원룸 · 7평 · 강남구 역삼동",["역세권","즉시입주"]],
+  ["mingcute:building-2-fill","전세 2억 1,000","오피스텔 · 9평 · 마포구 합정동",["신축","주차가능"]],
+  ["mingcute:building-4-fill","월세 1,000 / 65","투룸 · 15평 · 성동구 성수동",["반려동물","복층"]],
+  ["mingcute:home-4-fill","월세 300 / 38","원룸 · 6평 · 관악구 신림동",["보증금↓","여성전용"]]
+];
+const posts = [
+  ["자취꿀팁","자취 3년차가 알려주는 원룸 계약 체크리스트","좋아요 128 · 댓글 24"],
+  ["질문","전세보증보험 꼭 들어야 하나요?","좋아요 56 · 댓글 41"],
+  ["동네이야기","성수동 살기 좋은 이유 5가지","좋아요 203 · 댓글 37"],
+  ["후기","월세환급 진짜 받았습니다 (인증)","좋아요 312 · 댓글 88"]
+];
+const tabs = [
+  ["mingcute:home-4-fill","홈","home",false],["mingcute:search-2-fill","집구하기","search",false],
+  ["mingcute:wallet-4-fill","환급","refund",true],["mingcute:chat-3-fill","사는이야기","community",false],["mingcute:bill-fill","비교견적","quote",false]
+];
+
+/* ---------- 렌더 ---------- */
+document.getElementById("homeGrid").innerHTML = homeIcons.map(([e,l,d])=>`
+  <div class="ic" onclick="handleIcon('${l}')"><div class="box ${d?'dot':''}"><iconify-icon icon="${e}"></iconify-icon></div><div class="lb">${l}</div></div>`).join("");
+
+document.getElementById("filterbar").innerHTML = filters.map((f,i)=>`
+  <div class="fchip ${i===0?'on':''}" onclick="toggleFilter(this)">${f}</div>`).join("");
+
+document.getElementById("propList").innerHTML = props.map(([e,p,s,tags])=>`
+  <div class="prop" onclick="toast('매물 상세는 준비 중이에요')">
+    <div class="thumb"><iconify-icon icon="${e}"></iconify-icon><div class="heart" onclick="event.stopPropagation();likeToggle(this)"><iconify-icon icon="mingcute:heart-line" style="color:#8A9099"></iconify-icon></div></div>
+    <div class="info"><div class="price">${p}</div><div class="sub">${s}</div>
+      <div class="tags">${tags.map(t=>`<span class="tag">${t}</span>`).join("")}</div></div>
+  </div>`).join("");
+
+document.getElementById("postList").innerHTML = posts.map(([c,t,m])=>`
+  <div class="post" onclick="toast('글 상세는 준비 중이에요')">
+    <div class="cat-lb">${c}</div><h4>${t}</h4><div class="meta">${m}</div></div>`).join("");
+
+document.getElementById("tabbar").innerHTML = tabs.map(([e,l,id,b])=>`
+  <div class="tab ${id==='home'?'on':''}" id="tab-${id}" onclick="go('${id}')">
+    <div class="ti ${b?'badge':''}"><iconify-icon icon="${e}"></iconify-icon></div><div>${l}</div></div>`).join("");
+
+/* ---------- 기능 ---------- */
+const screens=["home","search","refund","community","quote"];
+function go(id){
+  screens.forEach(s=>{
+    document.getElementById("scr-"+s).classList.toggle("hidden", s!==id);
+    document.getElementById("tab-"+s).classList.toggle("on", s===id);
+  });
+  document.getElementById("scr-"+id).scrollTop=0;
+}
+function handleIcon(name){
+  if(name==="월세환급") return go("refund");
+  if(name==="이사/청소") return go("quote");
+  toast(name+"은(는) 준비 중이에요");
+}
+function toggleFilter(el){
+  if(el.textContent==="전체"){document.querySelectorAll(".fchip").forEach(c=>c.classList.remove("on")); el.classList.add("on"); return;}
+  document.querySelector(".fchip").classList.remove("on");
+  el.classList.toggle("on");
+}
+function likeToggle(el){
+  const ic=el.querySelector('iconify-icon');
+  const liked=ic.getAttribute('icon')==='mingcute:heart-fill';
+  ic.setAttribute('icon', liked?'mingcute:heart-line':'mingcute:heart-fill');
+  ic.style.color = liked?'#8A9099':'#E24B4A';
+}
+function calcRefund(){
+  const r=+document.getElementById("rent").value||0;
+  const m=+document.getElementById("months").value||0;
+  const val=Math.round(r*m*0.10); // 참고용 간이 계산
+  document.getElementById("refundOut").textContent=val.toLocaleString()+"원";
+}
+function toast(msg){
+  let t=document.createElement("div");
+  t.textContent=msg;
+  t.style.cssText="position:fixed;bottom:96px;left:50%;transform:translateX(-50%);background:#1E2124;color:#fff;padding:12px 18px;border-radius:24px;font-size:13px;font-weight:600;z-index:99;opacity:0;transition:.2s;white-space:nowrap;box-shadow:0 4px 16px rgba(0,0,0,.2)";
+  document.body.appendChild(t);
+  requestAnimationFrame(()=>t.style.opacity="1");
+  setTimeout(()=>{t.style.opacity="0";setTimeout(()=>t.remove(),200)},1500);
+}
+</script>
+</body>
+</html>

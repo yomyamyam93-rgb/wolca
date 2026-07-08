@@ -1,0 +1,43 @@
+/* =========================================================
+   우리집톡 · 공용 디자인 토큰 (Design Tokens)
+   ★ 이 파일 값만 바꾸면 모든 화면의 테마가 한 번에 바뀝니다 ★
+   예) --primary 를 바꾸면 앱 전체 강조색이 교체됨 (리브랜딩)
+   나중에 다크모드도 여기서 한 벌 더 정의하면 됩니다.
+   ========================================================= */
+:root{
+  /* ── 브랜드 색 (리브랜딩 시 이 4줄만 바꾸면 끝) ── */
+  --primary:#2563EB;
+  --primary-dark:#1D4ED8;
+  --primary-50:#EFF4FF;
+  --primary-100:#DBE7FF;
+
+  /* ── 중립(회색) ── */
+  --page-bg:#c9cdd4;    /* 폰 바깥 배경 */
+  --bg:#F4F5F6;         /* 화면 배경 */
+  --card:#FFFFFF;       /* 카드 */
+  --line:#ECEEF1;       /* 구분선·카드 테두리 */
+  --border:#B1B8BE;     /* 입력창 테두리 */
+  --gray-60:#58616A;
+  --tile:#EEF1F4;       /* 무채색 아이콘 타일 */
+  --icon-off:#B0B8C1;   /* 부가·비활성 아이콘 (연회색, 검정 금지) */
+  --sub:#4E5968;        /* 보조 텍스트 (2순위) */
+  --ink:#191F28;        /* 본문 텍스트 (1순위·진한 검정) */
+  --placeholder:#8B95A1;/* 힌트 (3순위) */
+  --tab-off:#8B95A1;    /* 비활성 탭 */
+
+  /* ── 상태색 ── */
+  --success:#059669; --success-bg:#EAF7F0;
+  --warn:#B45309; --warning:#B45309; --warn-bg:#FFFAEB;
+  --danger:#DC2626;
+
+  /* ── 특수 ── */
+  --hero-dark:#1E2A4A;  /* 사업자 히어로 배경 */
+
+  /* ── 모양·간격 ── */
+  --r-btn:12px; --r-card:14px; --r-badge:8px; --pad:16px;
+
+  /* ── 버튼 입체감 (은은한 그라데이션·그림자) ── */
+  --primary-grad:linear-gradient(180deg, color-mix(in srgb, var(--primary) 82%, #ffffff), var(--primary));
+  --btn-shadow:0 4px 12px color-mix(in srgb, var(--primary) 32%, transparent), inset 0 1px 0 rgba(255,255,255,.18);
+  --btn-shadow-soft:0 2px 6px rgba(0,0,0,.08);
+}

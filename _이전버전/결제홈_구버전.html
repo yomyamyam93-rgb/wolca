@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>우리집톡 — 결제 홈 (참고: 숨통)</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="../theme.css">
+<script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+<style>
+  /* 디자인 토큰은 theme.css 에서 관리 (한 곳에서 전체 테마 변경) */
+  *{box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent;}
+  body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;
+       color:var(--ink); background:#dfe2e8; display:flex; justify-content:center; line-height:1.5; -webkit-font-smoothing:antialiased;}
+  .phone{width:100%; max-width:420px; min-height:100vh; background:var(--bg); position:relative; display:flex; flex-direction:column;}
+
+  /* 상단바 */
+  .topbar{height:56px; display:flex; align-items:center; justify-content:space-between; padding:0 var(--pad); background:#fff;}
+  .logo{display:flex; align-items:center; gap:7px; font-size:19px; font-weight:700;}
+  .logo .mark{width:28px; height:28px; border-radius:9px; background:var(--primary); color:#fff; display:flex; align-items:center; justify-content:center; font-size:18px;}
+  .seg{display:flex; background:var(--bg); border-radius:999px; padding:3px;}
+  .seg button{border:none; background:transparent; font-family:inherit; font-size:13px; font-weight:700; color:var(--sub); padding:6px 14px; border-radius:999px; cursor:pointer;}
+  .seg button.on{background:var(--primary); color:#fff;}
+  .bell{font-size:22px; color:var(--sub);}
+
+  .screen{flex:1; overflow-y:auto; padding-bottom:82px;}
+  .pad{padding:var(--pad);}
+  .greet{font-size:15px; color:var(--sub); padding:16px var(--pad) 4px;}
+  .greet b{color:var(--ink); font-weight:700;}
+  .sec{font-size:16px; font-weight:700; margin:0 2px 12px; display:flex; justify-content:space-between; align-items:center;}
+  .sec .more{font-size:13px; font-weight:400; color:var(--sub);}
+
+  /* 히어로 */
+  .hero{background:var(--primary); color:#fff; border-radius:16px; padding:20px; position:relative; margin-bottom:20px; cursor:pointer;}
+  .hero.dark{background:#1E2A4A;}
+  .hero .cap{font-size:12px; opacity:.9;}
+  .hero h2{font-size:22px; font-weight:700; margin:6px 0 12px; line-height:1.3;}
+  .hero .meta{font-size:12px; opacity:.9; display:flex; gap:14px;}
+  .hero .meta span{display:flex; align-items:center; gap:4px;}
+  .hero .go{position:absolute; right:18px; bottom:18px; width:34px; height:34px; border-radius:50%; background:rgba(255,255,255,.18); display:flex; align-items:center; justify-content:center; font-size:20px;}
+  .hero .tagbadge{display:inline-block; background:rgba(255,255,255,.2); font-size:11px; font-weight:700; padding:3px 9px; border-radius:6px; margin-bottom:8px;}
+
+  /* 빠른 결제 */
+  .quick{display:grid; grid-template-columns:repeat(4,1fr); gap:8px; text-align:center; margin-bottom:22px;}
+  .quick .q{cursor:pointer;}
+  .quick .box{width:56px; height:56px; margin:0 auto 7px; border-radius:16px; background:#fff; border:1px solid var(--line); display:flex; align-items:center; justify-content:center; font-size:26px; color:var(--primary);}
+  .quick .lb{font-size:12px; color:var(--ink); font-weight:500;}
+
+  .card{background:#fff; border:1px solid var(--line); border-radius:var(--r-card); padding:var(--pad); margin-bottom:12px;}
+  .btn{width:100%; height:52px; border:none; border-radius:var(--r-btn); font-size:16px; font-weight:700; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:6px; box-shadow:var(--btn-shadow-soft); transition:box-shadow .12s, transform .08s;}
+  .btn:active{transform:scale(.985);}
+  .btn-primary{background:var(--primary); background:var(--primary-grad); color:#fff; box-shadow:var(--btn-shadow);}
+  .linktext{display:block; text-align:center; font-size:13px; color:var(--sub); margin-top:12px;}
+  .linktext:hover{color:var(--primary);}
+
+  .start .top{display:flex; gap:12px; align-items:flex-start; margin-bottom:14px;}
+  .start .ic{width:40px; height:40px; border-radius:11px; background:var(--primary-50); display:flex; align-items:center; justify-content:center; font-size:22px; color:var(--primary); flex:0 0 auto;}
+  .start h3{font-size:15px; font-weight:700; line-height:1.4;}
+  .start p{font-size:13px; color:var(--sub); margin-top:3px;}
+
+  .grade{display:flex; align-items:center; gap:12px;}
+  .grade .ic{width:44px; height:44px; border-radius:12px; background:var(--primary-50); display:flex; align-items:center; justify-content:center; font-size:24px; color:var(--primary);}
+  .grade .bar{height:7px; background:var(--bg); border-radius:999px; margin-top:8px; overflow:hidden;}
+  .grade .bar i{display:block; height:100%; width:42%; background:var(--primary); border-radius:999px;}
+  .pill{font-size:11px; font-weight:700; background:var(--primary-50); color:var(--primary-dark); padding:3px 8px; border-radius:6px;}
+
+  .benefit .head{display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;}
+  .benefit .cardname{font-size:15px; font-weight:700;}
+  .benefit .num{font-size:12px; color:var(--sub);}
+  .benefit .cond{background:var(--bg); border-radius:10px; padding:12px; font-size:13px; color:var(--sub);}
+  .cashback{font-size:11px; font-weight:700; background:#EAF7F0; color:var(--success); padding:3px 8px; border-radius:6px;}
+
+  .rows{background:#fff; border:1px solid var(--line); border-radius:var(--r-card); overflow:hidden; margin-bottom:12px;}
+  .rw{display:flex; align-items:center; gap:12px; padding:14px 16px; border-bottom:1px solid var(--line); cursor:pointer;}
+  .rw:last-child{border-bottom:none;}
+  .rw .ic{width:38px; height:38px; border-radius:10px; background:var(--primary-50); display:flex; align-items:center; justify-content:center; font-size:20px; color:var(--primary); flex:0 0 auto;}
+  .rw .t{flex:1; min-width:0;}
+  .rw .t .n{font-size:14px; font-weight:700;}
+  .rw .t .s{font-size:12px; color:var(--sub); margin-top:2px;}
+  .rw .amt{text-align:right;}
+  .rw .amt .v{font-size:14px; font-weight:700;}
+  .rw .amt .d{font-size:11px; font-weight:700; color:var(--warn); background:var(--warn-bg); padding:2px 7px; border-radius:6px; margin-top:3px; display:inline-block;}
+
+  .note{display:flex; gap:12px; align-items:flex-start; background:#fff; border:1px solid var(--line); border-radius:var(--r-card); padding:16px; margin-bottom:12px; cursor:pointer;}
+  .note .ic{width:40px; height:40px; border-radius:11px; background:var(--primary-50); display:flex; align-items:center; justify-content:center; font-size:22px; color:var(--primary); flex:0 0 auto;}
+  .note h3{font-size:14px; font-weight:700; margin-bottom:4px;}
+  .note p{font-size:12px; color:var(--sub); line-height:1.5;}
+
+  .socialbar{text-align:center; background:#fff; border:1px solid var(--line); border-radius:12px; padding:12px; font-size:12px; color:var(--sub); margin-top:4px;}
+  .socialbar b{color:var(--ink);}
+
+  .tabbar{position:absolute; bottom:0; left:0; right:0; max-width:420px; margin:0 auto; background:#fff; border-top:1px solid var(--line); display:flex; padding:8px 4px 14px;}
+  .tab{flex:1; display:flex; flex-direction:column; align-items:center; gap:3px; color:#9AA1AC; font-size:10px; cursor:pointer;}
+  .tab iconify-icon{font-size:23px;}
+  .tab.on{color:var(--primary); font-weight:700;}
+  .hidden{display:none;}
+</style>
+</head>
+<body>
+<div class="phone">
+
+  <div class="topbar">
+    <div class="logo"><span class="mark"><iconify-icon icon="mingcute:home-4-fill"></iconify-icon></span><span>우리집톡</span></div>
+    <div class="seg">
+      <button id="seg-personal" class="on" onclick="switchView('personal')">개인</button>
+      <button id="seg-business" onclick="switchView('business')">사업자</button>
+    </div>
+    <iconify-icon icon="mingcute:notification-fill" class="bell"></iconify-icon>
+  </div>
+
+  <div class="screen" id="screen">
+
+    <!-- ============ 개인 ============ -->
+    <div id="view-personal">
+      <div class="greet"><b>회원님</b>, 안녕하세요</div>
+      <div class="pad" style="padding-top:8px">
+
+        <div class="hero" onclick="toast('결제 화면은 준비 중이에요')">
+          <div class="cap">카드 안 받는 곳도 카드로, 돈은 다음 달에</div>
+          <h2>지금 결제하기</h2>
+          <div class="meta"><span><iconify-icon icon="mingcute:bank-card-fill"></iconify-icon> 수수료 4%</span><span><iconify-icon icon="mingcute:flash-fill"></iconify-icon> 즉시 송금</span></div>
+          <div class="go"><iconify-icon icon="mingcute:right-line"></iconify-icon></div>
+        </div>
+
+        <div class="sec">빠른 결제 <span class="more">전체 ›</span></div>
+        <div class="quick">
+          <div class="q" onclick="toast('월세 결제는 준비 중이에요')"><div class="box"><iconify-icon icon="mingcute:home-4-fill"></iconify-icon></div><div class="lb">월세</div></div>
+          <div class="q" onclick="toast('관리비 결제는 준비 중이에요')"><div class="box"><iconify-icon icon="mingcute:building-2-fill"></iconify-icon></div><div class="lb">관리비</div></div>
+          <div class="q" onclick="toast('세금 결제는 준비 중이에요')"><div class="box"><iconify-icon icon="mingcute:bill-fill"></iconify-icon></div><div class="lb">세금</div></div>
+          <div class="q" onclick="toast('기타 결제는 준비 중이에요')"><div class="box"><iconify-icon icon="mingcute:grid-fill"></iconify-icon></div><div class="lb">기타</div></div>
+        </div>
+
+        <div class="sec">이렇게 시작해보세요</div>
+        <div class="card start">
+          <div class="top">
+            <div class="ic"><iconify-icon icon="mingcute:refresh-2-fill"></iconify-icon></div>
+            <div><h3>매달 나가는 월세·관리비,<br>한 번만 등록해두세요</h3><p>다음 결제일에 미리 알려드릴게요</p></div>
+          </div>
+          <button class="btn btn-primary" onclick="toast('반복 결제 등록은 준비 중이에요')">반복 결제 등록하기</button>
+          <a class="linktext" onclick="toast('바로 결제는 준비 중이에요')">처음이세요? 바로 결제해보기 ›</a>
+        </div>
+
+        <div class="card grade" onclick="toast('등급 안내는 준비 중이에요')">
+          <div class="ic"><iconify-icon icon="mingcute:leaf-fill"></iconify-icon></div>
+          <div style="flex:1">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <span style="font-weight:700">새싹 등급</span><span class="pill">수수료 4%</span>
+            </div>
+            <div class="bar"><i></i></div>
+            <div style="font-size:12px;color:var(--sub);margin-top:6px"><b style="color:var(--ink)">676만원</b> 더 결제하면 다음 등급 · 수수료 3.8%</div>
+          </div>
+        </div>
+
+        <div class="sec" style="margin-top:8px">카드 혜택 <span class="more">혜택 더보기 ›</span></div>
+        <div class="card benefit">
+          <div class="head">
+            <div><span class="cardname">신한카드 Deep Dream</span> <span class="num">···· 4821</span></div>
+            <span class="cashback">캐시백</span>
+          </div>
+          <div class="cond">전월 실적 100만원 이상 시 <b style="color:var(--ink)">1만원 캐시백</b></div>
+          <a class="linktext" style="text-align:right" onclick="toast('혜택 상세는 준비 중이에요')">혜택 자세히 보기 ›</a>
+        </div>
+
+        <div class="note" onclick="toast('월세환급은 준비 중이에요')">
+          <div class="ic"><iconify-icon icon="mingcute:wallet-4-fill"></iconify-icon></div>
+          <div><h3>낸 월세, 돌려받으세요</h3><p>월세 공제 신청자는 평균 <b style="color:var(--primary)">115만원</b> 돌려받았어요</p></div>
+        </div>
+
+        <div class="socialbar">이번 달 <b>12,000명</b>이 우리집톡으로 고정비를 냈어요</div>
+      </div>
+    </div>
+
+    <!-- ============ 사업자 ============ -->
+    <div id="view-business" class="hidden">
+      <div class="pad" style="padding-top:16px">
+
+        <div class="hero dark" onclick="toast('카드결제 송금은 준비 중이에요')">
+          <div class="tagbadge">내가 구매자</div>
+          <h2 style="font-size:20px">카드결제로 송금하기</h2>
+          <div class="cap" style="margin-bottom:12px">거래처에 카드로 돈을 보내요</div>
+          <div class="meta"><span><iconify-icon icon="mingcute:bank-card-fill"></iconify-icon> 수수료 3.8%</span><span><iconify-icon icon="mingcute:flash-fill"></iconify-icon> 즉시 송금</span></div>
+          <div class="go"><iconify-icon icon="mingcute:right-line"></iconify-icon></div>
+        </div>
+
+        <div class="note" style="border-radius:16px" onclick="toast('카드결제 요청은 준비 중이에요')">
+          <div class="ic" style="background:#EAF7F0;color:var(--success)"><iconify-icon icon="mingcute:link-2-fill"></iconify-icon></div>
+          <div style="flex:1"><h3>카드결제 요청하기</h3><p>거래처에 결제를 요청하고 입금 받아요<br>링크 공유 · 입금 현황 실시간 확인</p></div>
+          <iconify-icon icon="mingcute:right-line" style="color:var(--border)"></iconify-icon>
+        </div>
+
+        <div class="sec" style="margin-top:8px">다음 결제 예정 <span class="more">전체보기 ›</span></div>
+        <div class="rows">
+          <div class="rw" onclick="toast('결제 상세는 준비 중이에요')"><div class="ic"><iconify-icon icon="mingcute:store-fill"></iconify-icon></div><div class="t"><div class="n">명동상가 임대인</div><div class="s">임대료 · 6월 28일</div></div><div class="amt"><div class="v">₩3,300,000</div><div class="d">D-9</div></div></div>
+          <div class="rw" onclick="toast('결제 상세는 준비 중이에요')"><div class="ic"><iconify-icon icon="mingcute:package-2-fill"></iconify-icon></div><div class="t"><div class="n">한솔푸드 (식자재)</div><div class="s">식자재 대금 · 6월 24일</div></div><div class="amt"><div class="v">₩4,200,000</div><div class="d">D-5</div></div></div>
+          <div class="rw" onclick="toast('결제 상세는 준비 중이에요')"><div class="ic"><iconify-icon icon="mingcute:truck-fill"></iconify-icon></div><div class="t"><div class="n">대성유통</div><div class="s">거래 대금 · 6월 26일</div></div><div class="amt"><div class="v">₩2,800,000</div><div class="d">D-7</div></div></div>
+          <div class="rw" onclick="toast('결제 상세는 준비 중이에요')"><div class="ic"><iconify-icon icon="mingcute:group-3-fill"></iconify-icon></div><div class="t"><div class="n">직원 급여 (4명)</div><div class="s">인건비 · 7월 1일</div></div><div class="amt"><div class="v">₩7,600,000</div><div class="d">D-12</div></div></div>
+        </div>
+
+        <div class="sec" style="margin-top:8px">세금계산서 · 경비 자료</div>
+        <div class="note" onclick="toast('경비 자료는 준비 중이에요')">
+          <div class="ic"><iconify-icon icon="mingcute:file-fill"></iconify-icon></div>
+          <div><h3>결제 내역이 경비·매입자료로 자동 정리돼요</h3><p>6월 결제 <b style="color:var(--primary)">36건</b>이 증빙과 함께 정리됐어요. 세금계산서·경비 처리가 한결 쉬워져요.</p></div>
+        </div>
+
+        <div class="sec" style="margin-top:8px">한도가 더 필요하세요?</div>
+        <div class="note" onclick="toast('한도 상향은 준비 중이에요')">
+          <div class="ic"><iconify-icon icon="mingcute:chart-bar-fill"></iconify-icon></div>
+          <div><h3>법인·사업자 카드 한도 상향</h3><p>한도를 늘려 더 많은 매입·대금을 카드로 내세요.</p></div>
+        </div>
+        <div class="card">
+          <div class="top" style="display:flex;gap:12px;align-items:flex-start;margin-bottom:14px">
+            <div class="ic" style="width:40px;height:40px;border-radius:11px;background:var(--primary-50);display:flex;align-items:center;justify-content:center;color:var(--primary);font-size:22px;flex:0 0 auto"><iconify-icon icon="mingcute:card-pay-fill"></iconify-icon></div>
+            <div><h3 style="font-size:15px;font-weight:700">우리집톡 제휴 비즈카드 <span class="pill">추천</span></h3><p style="font-size:12px;color:var(--sub);margin-top:3px">고정비 결제 <b style="color:var(--ink)">1.5% 적립</b> · 최대 한도 ↑</p></div>
+          </div>
+          <div class="cond" style="display:flex;justify-content:space-between;margin-bottom:14px">
+            <span>연회비 30,000원 <span style="color:var(--placeholder)">(첫 해 면제)</span></span>
+            <span>예상 한도 <b style="color:var(--ink)">최대 5,000만원</b></span>
+          </div>
+          <button class="btn btn-primary" onclick="toast('카드 발급은 준비 중이에요')">카드 발급받기</button>
+        </div>
+
+        <div class="socialbar"><b>사장님</b>, 오늘도 우리집톡이 현금흐름을 지켜드릴게요</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="tabbar">
+    <div class="tab on"><iconify-icon icon="mingcute:home-4-fill"></iconify-icon><span>홈</span></div>
+    <div class="tab" onclick="toast('카드혜택은 준비 중이에요')"><iconify-icon icon="mingcute:gift-fill"></iconify-icon><span>카드혜택</span></div>
+    <div class="tab" onclick="toast('결제는 준비 중이에요')"><iconify-icon icon="mingcute:bank-card-fill"></iconify-icon><span>결제</span></div>
+    <div class="tab" onclick="toast('환급은 준비 중이에요')"><iconify-icon icon="mingcute:wallet-4-fill"></iconify-icon><span>환급</span></div>
+    <div class="tab" onclick="toast('내 정보는 준비 중이에요')"><iconify-icon icon="mingcute:user-3-fill"></iconify-icon><span>내 정보</span></div>
+  </div>
+</div>
+
+<script>
+function switchView(v){
+  const p=v==='personal';
+  document.getElementById('view-personal').classList.toggle('hidden',!p);
+  document.getElementById('view-business').classList.toggle('hidden',p);
+  document.getElementById('seg-personal').classList.toggle('on',p);
+  document.getElementById('seg-business').classList.toggle('on',!p);
+  document.getElementById('screen').scrollTop=0;
+}
+function toast(msg){
+  let t=document.createElement('div');
+  t.textContent=msg;
+  t.style.cssText="position:fixed;bottom:96px;left:50%;transform:translateX(-50%);background:#1E2124;color:#fff;padding:12px 18px;border-radius:24px;font-size:13px;font-weight:600;z-index:99;opacity:0;transition:.2s;white-space:nowrap;box-shadow:0 4px 16px rgba(0,0,0,.2)";
+  document.body.appendChild(t);
+  requestAnimationFrame(()=>t.style.opacity='1');
+  setTimeout(()=>{t.style.opacity='0';setTimeout(()=>t.remove(),200)},1500);
+}
+</script>
+</body>
+</html>
