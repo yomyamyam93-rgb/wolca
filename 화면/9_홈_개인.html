@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>랜선페이 — 홈(개인)</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+  :root{
+    --primary:#2563EB; --primary-dark:#1D4ED8; --primary-50:#EFF4FF; --primary-100:#DBE7FF;
+    --page-bg:#c9cdd4; --bg:#F4F5F6; --card:#FFFFFF; --line:#ECEEF1; --border:#B1B8BE;
+    --gray-60:#58616A; --tile:#EEF1F4; --icon-off:#B0B8C1;
+    --sub:#4E5968; --ink:#191F28; --placeholder:#8B95A1; --tab-off:#8B95A1;
+    --success:#059669; --success-bg:#EAF7F0; --warn:#B45309; --warn-bg:#FFFAEB; --danger:#DC2626;
+    --r-btn:12px; --r-card:14px; --pad:16px;
+    --primary-grad:linear-gradient(180deg, color-mix(in srgb, var(--primary) 82%, #ffffff), var(--primary));
+    --btn-shadow:0 4px 12px color-mix(in srgb, var(--primary) 32%, transparent), inset 0 1px 0 rgba(255,255,255,.18);
+  }
+</style>
+<link rel="stylesheet" href="../theme.css">
+<script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+<style>
+  *{box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent;}
+  body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;
+       color:var(--ink); background:var(--page-bg); display:flex; justify-content:center; align-items:flex-start; padding:24px 0; line-height:1.5; -webkit-font-smoothing:antialiased;}
+  .phone{width:390px; height:844px; max-width:100%; background:var(--bg); position:relative; display:flex; flex-direction:column; border-radius:46px; overflow:hidden; box-shadow:0 16px 50px rgba(0,0,0,.28);}
+  iconify-icon{display:inline-block;}
+  .statusbar{height:47px; display:flex; align-items:center; justify-content:space-between; padding:0 24px 0 30px; background:var(--bg); flex:0 0 auto;}
+  .statusbar .time{font-size:15px; font-weight:700; letter-spacing:.3px;}
+  .statusbar .stat{display:flex; align-items:center; gap:7px;}
+  .topbar{height:54px; display:flex; align-items:center; justify-content:space-between; padding:0 var(--pad); background:var(--bg); flex:0 0 auto;}
+  .logo{display:flex; align-items:center; gap:7px; font-size:18px; font-weight:700;}
+  .logo .mark{width:26px; height:26px; border-radius:8px; background:var(--primary); color:#fff; display:flex; align-items:center; justify-content:center; font-size:16px;}
+  .seg{display:flex; background:#E8EBEF; border-radius:999px; padding:3px;}
+  .seg button{border:none; background:transparent; font-family:inherit; font-size:13px; font-weight:700; color:var(--sub); padding:6px 15px; border-radius:999px; cursor:pointer;}
+  .seg button.on{background:#fff; color:var(--ink);}
+  .screen{flex:1; overflow-y:auto; padding-bottom:104px; scrollbar-width:none; -ms-overflow-style:none;}
+  .screen::-webkit-scrollbar{display:none;}
+  .greet{font-size:22px; font-weight:700; color:var(--ink); padding:16px var(--pad) 2px; line-height:1.3; letter-spacing:-.3px;}
+  .pad{padding:10px var(--pad) 16px;}
+  .card{background:#fff; border-radius:18px; padding:20px; margin-bottom:12px; box-shadow:0 1px 3px rgba(0,0,0,.04);}
+  .row-card{display:flex; align-items:center; gap:14px;}
+  .label{font-size:13px; color:var(--placeholder); font-weight:500;}
+  .value{font-size:18px; font-weight:700; color:var(--ink); letter-spacing:-.2px;}
+  .bigval{font-size:28px; font-weight:700; color:var(--ink); letter-spacing:-.5px; margin:2px 0 4px;}
+  .subline{font-size:13px; color:var(--sub);}
+  .ctitle{font-size:18px; font-weight:700; color:var(--ink); margin-bottom:16px; letter-spacing:-.3px;}
+  .btn-primary{width:100%; height:54px; border:none; border-radius:14px; font-size:16px; font-weight:700; color:#fff; cursor:pointer; background:var(--primary); background:var(--primary-grad); box-shadow:var(--btn-shadow); transition:transform .08s;}
+  .btn-primary:active{transform:scale(.99);}
+  .btn-secondary{width:100%; height:52px; border:none; border-radius:14px; font-size:16px; font-weight:700; color:var(--primary-dark); background:var(--primary-50); cursor:pointer; font-family:inherit; transition:transform .08s;}
+  .btn-secondary:active{transform:scale(.99);}
+  .pill{border:none; background:#EEF1F4; color:var(--ink); font-family:inherit; font-size:14px; font-weight:600; padding:10px 16px; border-radius:11px; cursor:pointer; flex:0 0 auto;}
+  .qpager{display:flex; overflow-x:auto; scroll-snap-type:x mandatory; margin:0 -2px; scrollbar-width:none;}
+  .qpager::-webkit-scrollbar{display:none;}
+  .qpage{flex:0 0 100%; scroll-snap-align:start; display:grid; grid-template-columns:repeat(4,1fr); grid-auto-rows:min-content; gap:16px 4px; text-align:center; padding:0 2px;}
+  .q{cursor:pointer;}
+  .q .qbox{width:52px; height:52px; margin:0 auto 7px; border-radius:16px; background:var(--tile); display:flex; align-items:center; justify-content:center;}
+  .q .qbox iconify-icon{font-size:25px; color:var(--primary);}
+  .q .qlb{font-size:12px; color:var(--ink); font-weight:500; line-height:1.25;}
+  .dots{display:flex; justify-content:center; gap:6px; margin-top:16px;}
+  .dot{width:6px; height:6px; border-radius:3px; background:var(--line); transition:.2s;}
+  .dot.on{background:var(--primary); width:16px;}
+  .ic{width:40px; height:40px; border-radius:12px; background:var(--tile); display:flex; align-items:center; justify-content:center; flex:0 0 auto;}
+  .ic iconify-icon{font-size:22px; color:var(--primary);}
+  .sec-h{font-size:14px; font-weight:700; color:var(--sub); margin:26px 6px 10px;}
+  .list-card{padding:4px 20px;}
+  .lrow{display:flex; align-items:center; gap:14px; padding:15px 0; border-top:1px solid var(--line); cursor:pointer;}
+  .lrow:first-child{border-top:none;}
+  .lrow .t{flex:1; min-width:0;}
+  .lrow .t .n{font-size:16px; font-weight:500; color:var(--ink);}
+  .lrow .t .s{font-size:12px; color:var(--placeholder); margin-top:2px;}
+  .chev{color:var(--icon-off); font-size:20px; flex:0 0 auto;}
+  .tabbar{position:absolute; bottom:0; left:0; right:0; background:#fff; border-top:1px solid var(--line); padding-top:12px;}
+  .tabs{display:flex; padding:0 6px;}
+  .tab{flex:1; display:flex; flex-direction:column; align-items:center; gap:5px; color:var(--tab-off); font-size:11px; font-weight:500; cursor:pointer;}
+  .tab iconify-icon{font-size:26px;}
+  .tab.on{color:var(--primary); font-weight:700;}
+  .home-indicator{width:140px; height:5px; border-radius:3px; background:var(--ink); margin:12px auto 9px;}
+</style>
+</head>
+<body>
+<div class="phone">
+  <div class="statusbar">
+    <span class="time">9:41</span>
+    <span class="stat">
+      <svg width="18" height="12" viewBox="0 0 18 12"><rect y="8" width="3" height="4" rx="1" fill="#191F28"/><rect x="5" y="5" width="3" height="7" rx="1" fill="#191F28"/><rect x="10" y="2.5" width="3" height="9.5" rx="1" fill="#191F28"/><rect x="15" width="3" height="12" rx="1" fill="#191F28"/></svg>
+      <svg width="17" height="12" viewBox="0 0 17 12"><path d="M8.5 2C11 2 13.3 3 15 4.7l-1.3 1.4C12.3 4.7 10.5 4 8.5 4S4.7 4.7 3.3 6.1L2 4.7C3.7 3 6 2 8.5 2z" fill="#191F28"/><path d="M8.5 5.5c1.5 0 2.9.6 3.9 1.6l-1.4 1.4c-.6-.7-1.5-1-2.5-1s-1.9.4-2.5 1L4.6 7.1C5.6 6.1 7 5.5 8.5 5.5z" fill="#191F28"/><circle cx="8.5" cy="10" r="1.3" fill="#191F28"/></svg>
+      <svg width="26" height="13" viewBox="0 0 26 13"><rect x=".5" y=".5" width="22" height="12" rx="3.5" fill="none" stroke="#191F28" stroke-opacity=".35"/><rect x="2.5" y="2.5" width="16" height="8" rx="1.8" fill="#191F28"/><rect x="24" y="4.5" width="1.6" height="4" rx=".8" fill="#191F28" fill-opacity=".35"/></svg>
+    </span>
+  </div>
+
+  <div class="topbar">
+    <div class="logo"><span class="mark"><iconify-icon icon="mingcute:home-4-fill"></iconify-icon></span><span>랜선페이</span></div>
+    <div class="seg">
+      <button class="on">개인</button>
+      <button onclick="location.href='9_홈_사업자.html'">사업자</button>
+    </div>
+  </div>
+
+  <div class="screen">
+    <div class="greet">OOO 회원님<br>안녕하세요</div>
+    <div class="pad">
+
+      <div class="card">
+        <div class="ctitle">내야 할 돈 카드로 내기</div>
+        <div class="qpager" id="qpager" onscroll="updateDots()">
+          <div class="qpage">
+            <div class="q" onclick="pay('부동산 임대차')"><div class="qbox"><iconify-icon icon="mingcute:home-4-fill"></iconify-icon></div><div class="qlb">임대차</div></div>
+            <div class="q" onclick="pay('별도 관리비')"><div class="qbox"><iconify-icon icon="mingcute:building-2-fill"></iconify-icon></div><div class="qlb">관리비</div></div>
+            <div class="q" onclick="pay('보험료')"><div class="qbox"><iconify-icon icon="mingcute:shield-fill"></iconify-icon></div><div class="qlb">보험료</div></div>
+            <div class="q" onclick="pay('이사비')"><div class="qbox"><iconify-icon icon="mingcute:truck-fill"></iconify-icon></div><div class="qlb">이사비</div></div>
+            <div class="q" onclick="pay('인테리어')"><div class="qbox"><iconify-icon icon="mingcute:paint-brush-fill"></iconify-icon></div><div class="qlb">인테리어</div></div>
+            <div class="q" onclick="pay('청소비')"><div class="qbox"><iconify-icon icon="mingcute:broom-fill"></iconify-icon></div><div class="qlb">청소비</div></div>
+            <div class="q" onclick="pay('렌트·렌탈료')"><div class="qbox"><iconify-icon icon="mingcute:car-fill"></iconify-icon></div><div class="qlb">렌트료</div></div>
+            <div class="q" onclick="pay('인건비·용역비')"><div class="qbox"><iconify-icon icon="mingcute:group-3-fill"></iconify-icon></div><div class="qlb">인건비</div></div>
+          </div>
+          <div class="qpage">
+            <div class="q" onclick="pay('복비')"><div class="qbox"><iconify-icon icon="mingcute:cash-fill"></iconify-icon></div><div class="qlb">복비</div></div>
+            <div class="q" onclick="pay('B2B 매입대금')"><div class="qbox"><iconify-icon icon="mingcute:package-2-fill"></iconify-icon></div><div class="qlb">매입대금</div></div>
+            <div class="q" onclick="pay('교육비')"><div class="qbox"><iconify-icon icon="mingcute:mortarboard-fill"></iconify-icon></div><div class="qlb">교육비</div></div>
+            <div class="q" onclick="pay('세금')"><div class="qbox"><iconify-icon icon="mingcute:bill-fill"></iconify-icon></div><div class="qlb">세금</div></div>
+            <div class="q" onclick="pay('기타')"><div class="qbox"><iconify-icon icon="mingcute:more-3-fill"></iconify-icon></div><div class="qlb">기타</div></div>
+          </div>
+        </div>
+        <div class="dots"><span class="dot on" id="dot0"></span><span class="dot" id="dot1"></span></div>
+        <button class="btn-primary" style="margin-top:18px" onclick="toast('결제 화면은 준비 중이에요')">지금 결제하기</button>
+      </div>
+
+      <div class="card">
+        <div class="label">이번 달 나갈 고정비</div>
+        <div class="bigval">65만원</div>
+        <div class="subline">월세 50만원 · 관리비 15만원</div>
+        <button class="btn-secondary" style="margin-top:16px" onclick="toast('반복 결제 등록은 준비 중이에요')">반복 결제로 자동 납부</button>
+      </div>
+
+      <div class="card row-card" onclick="toast('혜택은 준비 중이에요')">
+        <div class="ic"><iconify-icon icon="mingcute:gift-fill"></iconify-icon></div>
+        <div style="flex:1"><div class="label">오늘 받을 수 있는 혜택</div><div class="value">최소 0원</div></div>
+        <button class="pill">보기</button>
+      </div>
+
+      <div class="card row-card" onclick="toast('환급은 준비 중이에요')">
+        <div class="ic"><iconify-icon icon="mingcute:wallet-4-fill"></iconify-icon></div>
+        <div style="flex:1"><div class="label">돌려받을 수 있는 월세</div><div class="value">평균 115만원</div></div>
+        <button class="pill">확인</button>
+      </div>
+
+      <div class="sec-h">알아두면 좋아요</div>
+      <div class="card list-card">
+        <div class="lrow" onclick="toast('카드 할부 정보는 준비 중이에요')"><div class="ic"><iconify-icon icon="mingcute:calendar-2-fill"></iconify-icon></div><div class="t"><div class="n">카드 할부 정보</div><div class="s">무이자 · 부분 무이자 할부 안내</div></div><iconify-icon class="chev" icon="mingcute:right-line"></iconify-icon></div>
+        <div class="lrow" onclick="toast('카드 혜택 정보는 준비 중이에요')"><div class="ic"><iconify-icon icon="mingcute:gift-fill"></iconify-icon></div><div class="t"><div class="n">카드 혜택 정보</div><div class="s">실적 · 포인트 · 캐시백</div></div><iconify-icon class="chev" icon="mingcute:right-line"></iconify-icon></div>
+        <div class="lrow" onclick="toast('자주 묻는 질문은 준비 중이에요')"><div class="ic"><iconify-icon icon="mingcute:question-fill"></iconify-icon></div><div class="t"><div class="n">자주 묻는 질문</div><div class="s">수수료 · 정산 · 안전 관련</div></div><iconify-icon class="chev" icon="mingcute:right-line"></iconify-icon></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="tabbar">
+    <div class="tabs">
+      <div class="tab on"><iconify-icon icon="mingcute:home-4-fill"></iconify-icon><span>홈</span></div>
+      <div class="tab" onclick="toast('집구하기는 준비 중이에요')"><iconify-icon icon="mingcute:search-2-fill"></iconify-icon><span>집구하기</span></div>
+      <div class="tab" onclick="toast('결제는 준비 중이에요')"><iconify-icon icon="mingcute:bank-card-fill"></iconify-icon><span>결제</span></div>
+      <div class="tab" onclick="toast('환급은 준비 중이에요')"><iconify-icon icon="mingcute:wallet-4-fill"></iconify-icon><span>환급</span></div>
+      <div class="tab" onclick="toast('내 정보는 준비 중이에요')"><iconify-icon icon="mingcute:user-3-fill"></iconify-icon><span>내 정보</span></div>
+    </div>
+    <div class="home-indicator"></div>
+  </div>
+</div>
+<script>
+function pay(name){ toast(name+' 결제는 준비 중이에요'); }
+function updateDots(){
+  const p=document.getElementById('qpager'); if(!p) return;
+  const i=Math.round(p.scrollLeft/p.clientWidth);
+  const d0=document.getElementById('dot0'), d1=document.getElementById('dot1');
+  if(d0) d0.classList.toggle('on', i===0);
+  if(d1) d1.classList.toggle('on', i===1);
+}
+function toast(msg){
+  let t=document.createElement('div');
+  t.textContent=msg;
+  t.style.cssText="position:fixed;bottom:96px;left:50%;transform:translateX(-50%);background:#191F28;color:#fff;padding:12px 18px;border-radius:24px;font-size:13px;font-weight:600;z-index:99;opacity:0;transition:.2s;white-space:nowrap;box-shadow:0 4px 16px rgba(0,0,0,.2)";
+  document.body.appendChild(t);
+  requestAnimationFrame(()=>t.style.opacity='1');
+  setTimeout(()=>{t.style.opacity='0';setTimeout(()=>t.remove(),200)},1500);
+}
+</script>
+</body>
+</html>
