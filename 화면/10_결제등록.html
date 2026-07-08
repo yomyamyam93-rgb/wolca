@@ -142,6 +142,7 @@
     <!-- 5. 증빙 서류 -->
     <div class="step" id="s5">
       <div class="q">증빙 서류를 올려주세요</div>
+      <a onclick="openGuide()" style="display:inline-block;color:var(--primary-dark);font-size:13px;font-weight:700;margin-bottom:12px;cursor:pointer">이 유형에 필요한 서류 확인하기 ›</a>
       <div class="upload" onclick="onUpload()">
         <div class="ic"><iconify-icon icon="mingcute:file-fill"></iconify-icon></div>
         <div class="t"><div class="n"><span class="req">[필수]</span> 계약서 · 영수증 · 명함</div><div class="s" id="upstat">사진 또는 파일 첨부</div></div>
@@ -168,6 +169,7 @@ function pickCat(icon,name){
   document.getElementById('catlist').style.display='none';
   document.getElementById('selic').setAttribute('icon',icon);
   document.getElementById('selnm').textContent=name;
+  window.selType=name;
   document.getElementById('catsel').classList.add('on');
   reveal('s2');
 }
@@ -191,6 +193,7 @@ function onUpload(){
 }
 /* 통장 이름 입력하면 증빙 단계로 */
 document.querySelector('#s4 input').addEventListener('input', function(){ if(this.value.trim()) reveal('s5'); });
+function openGuide(){ location.href='11_확인서류안내.html?t='+encodeURIComponent(window.selType||'부동산 임대차'); }
 function toast(msg){
   let t=document.createElement('div');
   t.textContent=msg;
