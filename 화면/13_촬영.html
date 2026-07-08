@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>고지서 촬영 (스캔)</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+  :root{ --primary:#2563EB; --page-bg:#c9cdd4; }
+  *{box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent;}
+  body{font-family:'Pretendard',sans-serif; background:var(--page-bg); display:flex; justify-content:center; align-items:flex-start; padding:24px 0; -webkit-font-smoothing:antialiased;}
+  .phone{width:390px; height:844px; max-width:100%; background:#17181C; position:relative; display:flex; flex-direction:column; border-radius:46px; overflow:hidden; box-shadow:0 16px 50px rgba(0,0,0,.28); color:#fff;}
+  iconify-icon{display:inline-block;}
+  .statusbar{height:47px; display:flex; align-items:center; justify-content:space-between; padding:0 24px 0 30px; flex:0 0 auto;}
+  .statusbar .time{font-size:15px; font-weight:700; color:#fff;}
+  .statusbar .stat{display:flex; align-items:center; gap:6px; color:#fff; font-size:13px; font-weight:700;}
+
+  .top{display:flex; align-items:center; justify-content:space-between; padding:6px 20px 0; flex:0 0 auto;}
+  .top .ttl{font-size:15px; font-weight:700;}
+  .top .x{width:34px; height:34px; border-radius:50%; background:rgba(255,255,255,.15); display:flex; align-items:center; justify-content:center; font-size:18px; cursor:pointer;}
+
+  .guide{text-align:center; font-size:19px; font-weight:700; margin:24px 24px 20px; line-height:1.4; flex:0 0 auto;}
+
+  /* 뷰파인더 */
+  .view{flex:1; position:relative; margin:0 26px;}
+  .frame{position:absolute; inset:0;}
+  .frame .c{position:absolute; width:30px; height:30px; border:3px solid var(--primary);}
+  .frame .tl{top:0; left:0; border-right:none; border-bottom:none; border-radius:8px 0 0 0;}
+  .frame .tr{top:0; right:0; border-left:none; border-bottom:none; border-radius:0 8px 0 0;}
+  .frame .bl{bottom:0; left:0; border-right:none; border-top:none; border-radius:0 0 0 8px;}
+  .frame .br{bottom:0; right:0; border-left:none; border-top:none; border-radius:0 0 8px 0;}
+  /* 고지서 미리보기(예시) */
+  .bill{position:absolute; inset:22px; background:#fdfdf8; border-radius:6px; padding:16px; color:#333; overflow:hidden;}
+  .bill .h{font-size:15px; font-weight:800; color:#1f6feb;}
+  .bill .sub{font-size:10px; color:#888; margin:3px 0 12px;}
+  .bill .r{height:9px; background:#eee; border-radius:2px; margin-bottom:7px;}
+  .bill .r.s{width:60%;} .bill .r.m{width:80%;}
+  .bill .box{border:1.5px solid #e24b4a; border-radius:5px; padding:8px; margin-top:12px;}
+  .bill .box .bt{font-size:10px; color:#e24b4a; font-weight:700;}
+  .bill .box .bv{font-size:14px; font-weight:800; color:#333; margin-top:4px;}
+
+  .hint{margin:18px 24px 0; background:rgba(255,255,255,.12); border-radius:12px; padding:12px 15px; font-size:13px; color:#eee; display:flex; align-items:center; gap:8px; flex:0 0 auto;}
+  .hint iconify-icon{font-size:16px; color:#9db8f0;}
+
+  .controls{display:flex; align-items:center; justify-content:space-between; padding:22px 40px 34px; flex:0 0 auto;}
+  .controls .thumb{width:44px; height:44px; border-radius:10px; background:#3a3b40; border:1px solid rgba(255,255,255,.2);}
+  .controls .shot{width:72px; height:72px; border-radius:50%; background:#fff; border:5px solid rgba(255,255,255,.35); cursor:pointer;}
+  .controls .flash{width:44px; height:44px; border-radius:50%; background:rgba(255,255,255,.15); display:flex; align-items:center; justify-content:center; font-size:22px; cursor:pointer;}
+</style>
+<script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+</head>
+<body>
+<div class="phone">
+  <div class="statusbar">
+    <span class="time">9:41</span>
+    <span class="stat">•••• 5G ▮</span>
+  </div>
+
+  <div class="top">
+    <span class="ttl">고지서 스캔</span>
+    <span class="x">✕</span>
+  </div>
+
+  <div class="guide">카메라를 고지서에 맞춰주세요</div>
+
+  <div class="view">
+    <div class="bill">
+      <div class="h">2024년 8월 주민세 (개인분)</div>
+      <div class="sub">세종특별자치시 · 납부장소 전국 금융기관</div>
+      <div class="r m"></div><div class="r s"></div><div class="r"></div>
+      <div class="box"><div class="bt">납부 금액</div><div class="bv">142,211 원</div></div>
+      <div class="r" style="margin-top:12px"></div><div class="r s"></div>
+    </div>
+    <div class="frame"><span class="c tl"></span><span class="c tr"></span><span class="c bl"></span><span class="c br"></span></div>
+  </div>
+
+  <div class="hint"><iconify-icon icon="mingcute:information-fill"></iconify-icon> 고지서 전체가 프레임 안에 들어오게 맞춰주세요</div>
+
+  <div class="controls">
+    <div class="thumb"></div>
+    <div class="shot"></div>
+    <div class="flash">⚡</div>
+  </div>
+</div>
+</body>
+</html>
