@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>랜선페이 · 화면 목록</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+  :root{--primary:#2563EB; --ink:#191F28; --sub:#4E5968; --line:#ECEEF1; --bg:#F4F5F6;}
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:'Pretendard',sans-serif; background:var(--bg); color:var(--ink); padding:40px 20px; display:flex; justify-content:center;}
+  .wrap{width:100%; max-width:560px;}
+  .mark{width:44px; height:44px; border-radius:12px; background:var(--primary); color:#fff; display:flex; align-items:center; justify-content:center; font-size:24px; font-weight:800; margin-bottom:16px;}
+  h1{font-size:26px; font-weight:700; letter-spacing:-.4px;}
+  .lead{font-size:14px; color:var(--sub); margin:8px 0 24px; line-height:1.6;}
+  .list{background:#fff; border:1px solid var(--line); border-radius:16px; overflow:hidden;}
+  a.row{display:flex; align-items:center; gap:14px; padding:16px 18px; border-bottom:1px solid var(--line); text-decoration:none; color:var(--ink);}
+  a.row:last-child{border-bottom:none;}
+  a.row:hover{background:#F7F9FC;}
+  .no{width:30px; height:30px; border-radius:8px; background:#EFF4FF; color:var(--primary); display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:700; flex:0 0 auto;}
+  .row .t{flex:1; font-size:16px; font-weight:500;}
+  .row .g{color:#B0B8C1; font-size:20px;}
+  .foot{font-size:12px; color:var(--sub); margin-top:20px; line-height:1.7;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="mark">랜</div>
+  <h1>랜선페이 · 화면 목록</h1>
+  <p class="lead">아래 화면을 눌러 열 수 있어요. 피그마로 가져올 땐 각 화면의 주소(URL)를 html.to.design에 붙여넣으세요.</p>
+
+  <div class="list">
+    <a class="row" href="화면/1_온보딩_결제.html"><span class="no">1</span><span class="t">온보딩 · 결제 소개</span><span class="g">›</span></a>
+    <a class="row" href="화면/2_온보딩_송금.html"><span class="no">2</span><span class="t">온보딩 · 송금 소개</span><span class="g">›</span></a>
+    <a class="row" href="화면/3_온보딩_혜택.html"><span class="no">3</span><span class="t">온보딩 · 혜택 소개</span><span class="g">›</span></a>
+    <a class="row" href="화면/4_온보딩_계산기.html"><span class="no">4</span><span class="t">미니 계산기</span><span class="g">›</span></a>
+    <a class="row" href="화면/5_용도선택.html"><span class="no">5</span><span class="t">용도 선택 (누르기 전)</span><span class="g">›</span></a>
+    <a class="row" href="화면/6_약관동의.html"><span class="no">6</span><span class="t">약관 동의 (시트 올라온 장면)</span><span class="g">›</span></a>
+    <a class="row" href="화면/7_홈.html"><span class="no">7</span><span class="t">홈 (개인 · 사업자)</span><span class="g">›</span></a>
+  </div>
+
+  <p class="foot">랜선페이 프로토타입 · 디자인 가이드 준수<br>피그마 임포트: html.to.design → Web 탭 → 각 화면 URL 붙여넣기</p>
+</div>
+</body>
+</html>
