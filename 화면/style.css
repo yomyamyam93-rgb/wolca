@@ -119,3 +119,12 @@ iconify-icon{display:inline-block;}
 .srow .gv{font-size:17px; color:var(--icon-off); flex:0 0 auto;}
 .sheet .snote{margin:14px 0 16px; font-size:12px; color:var(--placeholder); line-height:1.6;}
 .sheet .close{display:block; text-align:center; width:100%; background:none; border:none; font-family:inherit; font-size:14px; color:var(--placeholder); margin-top:12px; cursor:pointer;}
+
+/* 간편비밀번호 (PIN) */
+.pin-dots{display:flex; justify-content:center; gap:18px; margin:30px 0 8px;}
+.pin-dots .d{width:14px; height:14px; border-radius:50%; background:var(--line);}
+.pin-dots .d.on{background:var(--primary);}
+.keypad{display:grid; grid-template-columns:repeat(3,1fr); gap:4px; margin-top:auto;}
+.keypad button{height:62px; border:none; background:none; font-family:inherit; font-size:26px; font-weight:600; color:var(--ink); cursor:pointer; border-radius:14px;}
+.keypad button:active{background:var(--bg);}
+.keypad .del{font-size:22px; color:var(--sub);}
