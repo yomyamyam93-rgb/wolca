@@ -23,7 +23,7 @@ iconify-icon{display:inline-block;}
 .himg{width:240px; height:240px; position:relative; margin-bottom:30px; display:flex; align-items:center; justify-content:center;}
 .himg img{max-width:100%; max-height:100%; object-fit:contain;}
 .himg .ph{position:absolute; inset:0; border:2px dashed #A9C0F0; border-radius:26px; background:rgba(255,255,255,.5);
-          display:flex; flex-direction:column; align-items:center; justify-content:center; gap:7px; color:var(--primary-dark); font-size:12px; font-weight:600; text-align:center; padding:20px; line-height:1.5;}
+          display:none; flex-direction:column; align-items:center; justify-content:center; gap:7px; color:var(--primary-dark); font-size:12px; font-weight:600; text-align:center; padding:20px; line-height:1.5;}
 .himg .ph iconify-icon{font-size:36px; color:var(--primary); opacity:.7;}
 .himg .ph small{color:var(--placeholder); font-weight:500; font-size:11px;}
 .slide h1{font-size:24px; font-weight:700; line-height:1.4; letter-spacing:-.5px; color:var(--ink);}
