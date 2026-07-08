@@ -43,6 +43,10 @@
   .label{font-size:13px; color:var(--placeholder); font-weight:500;}
   .value{font-size:18px; font-weight:700; color:var(--ink); letter-spacing:-.2px;}
   .ctitle{font-size:18px; font-weight:700; color:var(--ink); margin-bottom:16px; letter-spacing:-.3px;}
+  .bigval{font-size:28px; font-weight:700; color:var(--ink); letter-spacing:-.5px; margin:2px 0 4px;}
+  .subline{font-size:13px; color:var(--sub);}
+  .btn-secondary{width:100%; height:52px; border:none; border-radius:14px; font-size:16px; font-weight:700; color:var(--primary-dark); background:var(--primary-50); cursor:pointer; font-family:inherit; transition:transform .08s;}
+  .btn-secondary:active{transform:scale(.99);}
   .btn-primary{width:100%; height:54px; border:none; border-radius:14px; font-size:16px; font-weight:700; color:#fff; cursor:pointer; background:var(--primary); background:var(--primary-grad); box-shadow:var(--btn-shadow); transition:transform .08s;}
   .btn-primary:active{transform:scale(.99);}
   .pill{border:none; background:#EEF1F4; color:var(--ink); font-family:inherit; font-size:14px; font-weight:600; padding:10px 16px; border-radius:11px; cursor:pointer; flex:0 0 auto;}
@@ -101,7 +105,12 @@
         <button class="pill">요청</button>
       </div>
 
-      <div class="sec-h">다음 결제 예정 · 총 1,510만원</div>
+      <div class="sec-h">다음 결제 예정</div>
+      <div class="card">
+        <div class="label">이번 달 나갈 대금 · 3건</div>
+        <div class="bigval">1,510만원</div>
+        <button class="btn-secondary" style="margin-top:14px" onclick="toast('예약 결제는 준비 중이에요')">예약 결제로 자동 납부</button>
+      </div>
       <div class="card list-card">
         <div class="lrow" onclick="toast('결제 상세는 준비 중이에요')"><div class="ic"><iconify-icon icon="mingcute:store-fill"></iconify-icon></div><div class="t"><div class="n">명동상가 임대인</div><div class="s">임대료 · 6월 28일</div></div><div class="amt"><div class="v">330만원</div><div class="d">D-9</div></div></div>
         <div class="lrow" onclick="toast('결제 상세는 준비 중이에요')"><div class="ic"><iconify-icon icon="mingcute:package-2-fill"></iconify-icon></div><div class="t"><div class="n">한솔푸드</div><div class="s">식자재 대금 · 6월 24일</div></div><div class="amt"><div class="v">420만원</div><div class="d">D-5</div></div></div>
