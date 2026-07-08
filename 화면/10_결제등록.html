@@ -33,9 +33,18 @@
   @keyframes fadeup{from{opacity:0; transform:translateY(12px);} to{opacity:1; transform:none;}}
   .q{font-size:20px; font-weight:700; letter-spacing:-.3px; margin-bottom:14px; line-height:1.4;}
 
-  .chips{display:flex; flex-wrap:wrap; gap:8px;}
-  .chip{border:1.5px solid var(--line); background:#fff; color:var(--sub); font-family:inherit; font-size:15px; font-weight:600; padding:11px 16px; border-radius:12px; cursor:pointer;}
-  .chip.on{border-color:var(--primary); background:var(--primary-50); color:var(--primary-dark);}
+  .catrow{display:flex; align-items:center; gap:14px; padding:14px 2px; border-bottom:1px solid var(--line); cursor:pointer;}
+  .catrow:last-child{border-bottom:none;}
+  .catrow .cic{width:40px; height:40px; border-radius:12px; background:var(--tile); display:flex; align-items:center; justify-content:center; flex:0 0 auto;}
+  .catrow .cic iconify-icon{font-size:22px; color:var(--primary);}
+  .catrow .ct{flex:1; min-width:0;}
+  .catrow .ct .cn{font-size:16px; font-weight:600; color:var(--ink);}
+  .catrow .ct .cd{font-size:12px; color:var(--placeholder); margin-top:2px;}
+  .catsel{display:none; align-items:center; gap:12px; background:var(--primary-50); border-radius:14px; padding:14px 16px;}
+  .catsel.on{display:flex;}
+  .catsel .cic{width:36px; height:36px; border-radius:10px; background:#fff; display:flex; align-items:center; justify-content:center; color:var(--primary); font-size:20px; flex:0 0 auto;}
+  .catsel .nm{flex:1; font-size:16px; font-weight:700; color:var(--ink);}
+  .catsel .chg{border:none; background:#fff; color:var(--primary-dark); font-family:inherit; font-size:13px; font-weight:700; padding:8px 13px; border-radius:9px; cursor:pointer;}
 
   .inbox{position:relative;}
   .inbox input{width:100%; height:56px; border:1.5px solid var(--border); border-radius:14px; padding:0 16px; font-size:17px; font-weight:600; color:var(--ink); font-family:inherit; background:#fff;}
@@ -76,13 +85,24 @@
     <!-- 1. 유형 (처음부터 보임) -->
     <div class="step on" id="s1">
       <div class="q">무엇을 결제할까요?</div>
-      <div class="chips">
-        <button class="chip" onclick="pickType(this)">월세</button>
-        <button class="chip" onclick="pickType(this)">관리비</button>
-        <button class="chip" onclick="pickType(this)">임대료</button>
-        <button class="chip" onclick="pickType(this)">복비</button>
-        <button class="chip" onclick="pickType(this)">세금</button>
-        <button class="chip" onclick="pickType(this)">기타</button>
+      <div id="catlist">
+        <div class="catrow" onclick="pickCat('mingcute:home-4-fill','부동산 임대차')"><div class="cic"><iconify-icon icon="mingcute:home-4-fill"></iconify-icon></div><div class="ct"><div class="cn">부동산 임대차</div><div class="cd">월세 · 관리비 · 계약금 · 보증금</div></div></div>
+        <div class="catrow" onclick="pickCat('mingcute:building-2-fill','별도 관리비')"><div class="cic"><iconify-icon icon="mingcute:building-2-fill"></iconify-icon></div><div class="ct"><div class="cn">별도 관리비</div><div class="cd">아파트 · 상가 관리비만 따로 낼 때</div></div></div>
+        <div class="catrow" onclick="pickCat('mingcute:paint-brush-fill','인테리어')"><div class="cic"><iconify-icon icon="mingcute:paint-brush-fill"></iconify-icon></div><div class="ct"><div class="cn">인테리어</div><div class="cd">공사 · 수리 · 시공 · 설치 · 철거비</div></div></div>
+        <div class="catrow" onclick="pickCat('mingcute:cash-fill','복비')"><div class="cic"><iconify-icon icon="mingcute:cash-fill"></iconify-icon></div><div class="ct"><div class="cn">복비</div><div class="cd">부동산 중개수수료</div></div></div>
+        <div class="catrow" onclick="pickCat('mingcute:truck-fill','이사비')"><div class="cic"><iconify-icon icon="mingcute:truck-fill"></iconify-icon></div><div class="ct"><div class="cn">이사비</div><div class="cd">용달 · 포장이사</div></div></div>
+        <div class="catrow" onclick="pickCat('mingcute:broom-fill','청소비')"><div class="cic"><iconify-icon icon="mingcute:broom-fill"></iconify-icon></div><div class="ct"><div class="cn">청소비</div><div class="cd">입주 · 정기 청소</div></div></div>
+        <div class="catrow" onclick="pickCat('mingcute:package-2-fill','B2B 매입대금')"><div class="cic"><iconify-icon icon="mingcute:package-2-fill"></iconify-icon></div><div class="ct"><div class="cn">B2B 매입대금</div><div class="cd">거래처 · 식자재 대금</div></div></div>
+        <div class="catrow" onclick="pickCat('mingcute:car-fill','렌트료 · 렌탈료')"><div class="cic"><iconify-icon icon="mingcute:car-fill"></iconify-icon></div><div class="ct"><div class="cn">렌트료 · 렌탈료</div><div class="cd">자동차 · 가전 · 생활용품</div></div></div>
+        <div class="catrow" onclick="pickCat('mingcute:shield-fill','보험료')"><div class="cic"><iconify-icon icon="mingcute:shield-fill"></iconify-icon></div><div class="ct"><div class="cn">보험료</div><div class="cd">건강 · 연금 · 화재</div></div></div>
+        <div class="catrow" onclick="pickCat('mingcute:group-3-fill','인건비 · 용역비')"><div class="cic"><iconify-icon icon="mingcute:group-3-fill"></iconify-icon></div><div class="ct"><div class="cn">인건비 · 용역비</div><div class="cd">급여 · 알바 · 프리랜서 · 외주</div></div></div>
+        <div class="catrow" onclick="pickCat('mingcute:mortarboard-fill','교육비')"><div class="cic"><iconify-icon icon="mingcute:mortarboard-fill"></iconify-icon></div><div class="ct"><div class="cn">교육비</div><div class="cd">학원 · 수강료 · 등록금 · 과외</div></div></div>
+        <div class="catrow" onclick="pickCat('mingcute:more-3-fill','기타')"><div class="cic"><iconify-icon icon="mingcute:more-3-fill"></iconify-icon></div><div class="ct"><div class="cn">기타</div><div class="cd">위 유형이 아닌 납부건</div></div></div>
+      </div>
+      <div class="catsel" id="catsel">
+        <div class="cic"><iconify-icon id="selic" icon="mingcute:home-4-fill"></iconify-icon></div>
+        <div class="nm" id="selnm">부동산 임대차</div>
+        <button class="chg" onclick="changeCat()">변경</button>
       </div>
     </div>
 
@@ -144,10 +164,16 @@ function reveal(id){
   el.classList.add('on');
   setTimeout(()=>{ document.getElementById('body').scrollTo({top:document.getElementById('body').scrollHeight, behavior:'smooth'}); }, 60);
 }
-function pickType(btn){
-  document.querySelectorAll('.chip').forEach(c=>c.classList.remove('on'));
-  btn.classList.add('on');
+function pickCat(icon,name){
+  document.getElementById('catlist').style.display='none';
+  document.getElementById('selic').setAttribute('icon',icon);
+  document.getElementById('selnm').textContent=name;
+  document.getElementById('catsel').classList.add('on');
   reveal('s2');
+}
+function changeCat(){
+  document.getElementById('catsel').classList.remove('on');
+  document.getElementById('catlist').style.display='block';
 }
 function onAmt(inp){
   let n=parseInt(inp.value.replace(/[^0-9]/g,''))||0;
