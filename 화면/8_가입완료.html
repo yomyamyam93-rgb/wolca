@@ -7,6 +7,14 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
 <link rel="stylesheet" href="style.css">
 <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+<style>
+  .done{flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:20px 30px 0;}
+  .done-mark{width:88px; height:88px; border-radius:50%; background:var(--primary); display:flex; align-items:center; justify-content:center; margin-bottom:26px; box-shadow:0 10px 26px rgba(37,99,235,.3);}
+  .done-mark iconify-icon{font-size:48px; color:#fff;}
+  .done h1{font-size:26px; font-weight:700; letter-spacing:-.5px; line-height:1.35;}
+  .done p{font-size:15px; color:var(--sub); margin-top:14px; line-height:1.65;}
+  .biz-link{display:block; width:100%; text-align:center; background:none; border:none; font-family:inherit; font-size:15px; font-weight:700; color:var(--primary-dark); padding:14px; margin-bottom:4px; cursor:pointer;}
+</style>
 </head>
 <body>
 <div class="phone">
@@ -20,23 +28,15 @@
   </div>
   <div class="topbar"></div>
 
-  <div class="page" style="text-align:center;">
-    <div class="auth-ill" style="margin-top:24px;"><iconify-icon icon="mingcute:check-fill"></iconify-icon></div>
-    <h1 style="text-align:center;">가입이 끝났어요</h1>
-    <p class="lead" style="text-align:center;">이제 내야 할 돈을 카드로 내고<br>혜택을 받아보세요.</p>
-
-    <div class="opt" style="text-align:left; margin-top:30px;" onclick="location.href='8_2_사업자정보.html'">
-      <div class="oic"><iconify-icon icon="mingcute:building-2-fill"></iconify-icon></div>
-      <div class="ot">
-        <div class="tt">혹시 사업자세요?</div>
-        <div class="ss">세금계산서 · 경비 정리가 필요하면 사업자등록번호를 등록해주세요</div>
-      </div>
-      <span class="chk"><iconify-icon icon="mingcute:right-line"></iconify-icon></span>
-    </div>
+  <div class="done">
+    <div class="done-mark"><iconify-icon icon="mingcute:check-fill"></iconify-icon></div>
+    <h1>가입이 끝났어요</h1>
+    <p>이제 현금 없이 카드로 내고<br>혜택까지 받아보세요.</p>
   </div>
 
   <div class="footer">
-    <button class="btn-primary" onclick="location.href='9_홈_개인.html'">바로 시작하기</button>
+    <button class="biz-link" onclick="location.href='8_2_사업자정보.html'">사업자세요? 사업자 정보 등록하기 ›</button>
+    <button class="btn-primary" onclick="location.href='9_홈_개인.html'">시작하기</button>
   </div>
 </div>
 </body>
