@@ -76,6 +76,22 @@
   .tab iconify-icon{font-size:26px;}
   .tab.on{color:var(--primary); font-weight:700;}
   .home-indicator{width:140px; height:5px; border-radius:3px; background:var(--ink); margin:12px auto 9px;}
+  /* 다양한 구성 */
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px;}
+  .fcard{background:#fff; border-radius:18px; padding:18px 16px; box-shadow:0 1px 3px rgba(0,0,0,.04); cursor:pointer;}
+  .fcard .ficon{width:38px; height:38px; border-radius:11px; background:var(--tile); display:flex; align-items:center; justify-content:center; margin-bottom:12px;}
+  .fcard .ficon iconify-icon{font-size:20px; color:var(--primary);}
+  .fcard .flabel{font-size:12px; color:var(--placeholder);}
+  .fcard .fval{font-size:17px; font-weight:700; color:var(--ink); margin-top:3px;}
+  .badge{font-size:11px; font-weight:700; background:var(--primary-50); color:var(--primary-dark); padding:4px 9px; border-radius:7px;}
+  .grade .ghead{display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;}
+  .grade .gleft{display:flex; align-items:center; gap:8px; font-weight:700;}
+  .grade .gic{width:32px; height:32px; border-radius:9px; background:var(--tile); display:flex; align-items:center; justify-content:center; color:var(--primary); font-size:18px;}
+  .grade .bar{height:8px; background:var(--bg); border-radius:999px; overflow:hidden;}
+  .grade .bar i{display:block; height:100%; background:var(--primary); border-radius:999px;}
+  .grade .gtext{font-size:12px; color:var(--sub); margin-top:8px;}
+  .socialbar{text-align:center; background:#fff; border-radius:12px; padding:13px; font-size:12px; color:var(--sub); margin-top:12px; box-shadow:0 1px 3px rgba(0,0,0,.04);}
+  .socialbar b{color:var(--ink);}
 </style>
 </head>
 <body>
@@ -133,16 +149,28 @@
         <button class="btn-secondary" style="margin-top:16px" onclick="toast('반복 결제 등록은 준비 중이에요')">반복 결제로 자동 납부</button>
       </div>
 
-      <div class="card row-card" onclick="toast('혜택은 준비 중이에요')">
-        <div class="ic"><iconify-icon icon="mingcute:gift-fill"></iconify-icon></div>
-        <div style="flex:1"><div class="label">오늘 받을 수 있는 혜택</div><div class="value">최소 0원</div></div>
-        <button class="pill">보기</button>
+      <!-- 혜택 · 환급 (2열 카드) -->
+      <div class="grid2">
+        <div class="fcard" onclick="toast('혜택은 준비 중이에요')">
+          <div class="ficon"><iconify-icon icon="mingcute:gift-fill"></iconify-icon></div>
+          <div class="flabel">오늘 받을 혜택</div>
+          <div class="fval">최소 0원</div>
+        </div>
+        <div class="fcard" onclick="toast('환급은 준비 중이에요')">
+          <div class="ficon"><iconify-icon icon="mingcute:wallet-4-fill"></iconify-icon></div>
+          <div class="flabel">돌려받을 월세</div>
+          <div class="fval">평균 115만원</div>
+        </div>
       </div>
 
-      <div class="card row-card" onclick="toast('환급은 준비 중이에요')">
-        <div class="ic"><iconify-icon icon="mingcute:wallet-4-fill"></iconify-icon></div>
-        <div style="flex:1"><div class="label">돌려받을 수 있는 월세</div><div class="value">평균 115만원</div></div>
-        <button class="pill">확인</button>
+      <!-- 등급 (진행 막대 + 뱃지) -->
+      <div class="card grade" onclick="toast('등급 안내는 준비 중이에요')">
+        <div class="ghead">
+          <div class="gleft"><div class="gic"><iconify-icon icon="mingcute:leaf-fill"></iconify-icon></div><span>새싹 등급</span></div>
+          <span class="badge">수수료 4%</span>
+        </div>
+        <div class="bar"><i style="width:42%"></i></div>
+        <div class="gtext"><b>676만원</b> 더 쓰면 다음 등급 · 수수료 3.8%</div>
       </div>
 
       <div class="sec-h">알아두면 좋아요</div>
@@ -151,6 +179,8 @@
         <div class="lrow" onclick="toast('카드 혜택 정보는 준비 중이에요')"><div class="ic"><iconify-icon icon="mingcute:gift-fill"></iconify-icon></div><div class="t"><div class="n">카드 혜택 정보</div><div class="s">실적 · 포인트 · 캐시백</div></div><iconify-icon class="chev" icon="mingcute:right-line"></iconify-icon></div>
         <div class="lrow" onclick="toast('자주 묻는 질문은 준비 중이에요')"><div class="ic"><iconify-icon icon="mingcute:question-fill"></iconify-icon></div><div class="t"><div class="n">자주 묻는 질문</div><div class="s">수수료 · 정산 · 안전 관련</div></div><iconify-icon class="chev" icon="mingcute:right-line"></iconify-icon></div>
       </div>
+
+      <div class="socialbar">이번 달 <b>12,000명</b>이 카드로 냈어요</div>
 
     </div>
   </div>
