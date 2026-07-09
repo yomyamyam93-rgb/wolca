@@ -77,6 +77,12 @@
   .tab.on{color:var(--primary); font-weight:700;}
   .home-indicator{width:140px; height:5px; border-radius:3px; background:var(--ink); margin:12px auto 9px;}
   /* 다양한 구성 */
+  .ongoing{display:flex; align-items:center; gap:12px; background:var(--primary-50); border-radius:16px; padding:14px 16px; margin-bottom:14px; cursor:pointer;}
+  .ongoing .odot{width:8px; height:8px; border-radius:50%; background:var(--primary); flex:0 0 auto; box-shadow:0 0 0 4px color-mix(in srgb, var(--primary) 18%, transparent);}
+  .ongoing .ot{flex:1; min-width:0;}
+  .ongoing .on1{font-size:15px; font-weight:700; color:var(--ink);}
+  .ongoing .os{font-size:12px; color:var(--primary-dark); margin-top:2px;}
+  .ongoing .ochev{font-size:20px; color:var(--primary); flex:0 0 auto;}
   .grid2{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px;}
   .fcard{background:#fff; border-radius:18px; padding:18px 16px; box-shadow:0 1px 3px rgba(0,0,0,.04); cursor:pointer;}
   .fcard .ficon{width:38px; height:38px; border-radius:11px; background:var(--tile); display:flex; align-items:center; justify-content:center; margin-bottom:12px;}
@@ -118,6 +124,12 @@
     <div class="greet">OOO 회원님<br>안녕하세요</div>
     <div class="pad">
 
+      <div class="ongoing" onclick="location.href='15_내결제.html'">
+        <span class="odot"></span>
+        <div class="ot"><div class="on1">진행 중인 결제 2건</div><div class="os">검토 중 1건 · 작성 중 1건 이어하기</div></div>
+        <iconify-icon class="ochev" icon="mingcute:right-line"></iconify-icon>
+      </div>
+
       <div class="card">
         <div class="ctitle">내야 할 돈 카드로 내기</div>
         <div class="qpager" id="qpager" onscroll="updateDots()">
@@ -140,14 +152,14 @@
           </div>
         </div>
         <div class="dots"><span class="dot on" id="dot0"></span><span class="dot" id="dot1"></span></div>
-        <button class="btn-primary" style="margin-top:18px" onclick="toast('결제 화면은 준비 중이에요')">지금 결제하기</button>
+        <button class="btn-primary" style="margin-top:18px" onclick="location.href='10_1_유형선택.html'">지금 결제하기</button>
       </div>
 
-      <div class="card">
+      <div class="card" onclick="location.href='15_내결제.html'">
         <div class="label">이번 달 나갈 고정비</div>
         <div class="bigval">65만원</div>
         <div class="subline">월세 50만원 · 관리비 15만원</div>
-        <button class="btn-secondary" style="margin-top:16px" onclick="toast('예약 결제 등록은 준비 중이에요')">예약 결제로 자동 납부</button>
+        <button class="btn-secondary" style="margin-top:16px" onclick="event.stopPropagation(); toast('예약 결제 등록은 준비 중이에요')">예약 결제로 자동 납부</button>
       </div>
 
       <!-- 혜택 · 환급 (2열 카드) -->
@@ -189,8 +201,8 @@
   <div class="tabbar">
     <div class="tabs">
       <div class="tab on"><iconify-icon icon="mingcute:home-4-fill"></iconify-icon><span>홈</span></div>
-      <div class="tab" onclick="toast('집구하기는 준비 중이에요')"><iconify-icon icon="mingcute:search-2-fill"></iconify-icon><span>집구하기</span></div>
-      <div class="tab" onclick="toast('결제는 준비 중이에요')"><iconify-icon icon="mingcute:bank-card-fill"></iconify-icon><span>결제</span></div>
+      <div class="tab" onclick="location.href='15_내결제.html'"><iconify-icon icon="mingcute:bill-fill"></iconify-icon><span>내 결제</span></div>
+      <div class="tab" onclick="location.href='10_1_유형선택.html'"><iconify-icon icon="mingcute:bank-card-fill"></iconify-icon><span>결제</span></div>
       <div class="tab" onclick="toast('환급은 준비 중이에요')"><iconify-icon icon="mingcute:wallet-4-fill"></iconify-icon><span>환급</span></div>
       <div class="tab" onclick="toast('내 정보는 준비 중이에요')"><iconify-icon icon="mingcute:user-3-fill"></iconify-icon><span>내 정보</span></div>
     </div>
