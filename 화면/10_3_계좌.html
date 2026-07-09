@@ -51,8 +51,11 @@
   .sheet h3{font-size:18px; font-weight:700; letter-spacing:-.3px; margin:0 4px 14px;}
   .bankgrid{display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; overflow-y:auto; scrollbar-width:none;}
   .bankgrid::-webkit-scrollbar{display:none;}
-  .bankopt{height:60px; display:flex; align-items:center; justify-content:center; border:1.5px solid var(--line); border-radius:12px; font-size:14px; font-weight:600; color:var(--ink); cursor:pointer; text-align:center; padding:0 4px;}
-  .bankopt.on{border-color:var(--primary); background:var(--primary-50); color:var(--primary-dark);}
+  .bankopt{height:82px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; border:1.5px solid var(--line); border-radius:12px; cursor:pointer;}
+  .bankopt.on{border-color:var(--primary); background:var(--primary-50);}
+  .blogo{width:38px; height:38px; border-radius:11px; display:flex; align-items:center; justify-content:center; font-weight:800; color:#fff; line-height:1;}
+  .bnm{font-size:12px; font-weight:600; color:var(--ink);}
+  .selrow .blogo{width:26px; height:26px; border-radius:8px; margin-right:10px; font-size:11px;}
 </style>
 <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 </head>
@@ -71,7 +74,10 @@
 
     <div class="lbl">은행</div>
     <div class="selrow" onclick="openBank()">
-      <span class="bn ph" id="bankName">은행 선택</span>
+      <span style="display:flex; align-items:center; min-width:0;">
+        <span class="blogo" id="bankLogo" style="display:none"></span>
+        <span class="bn ph" id="bankName">은행 선택</span>
+      </span>
       <iconify-icon icon="mingcute:down-line"></iconify-icon>
     </div>
 
@@ -100,16 +106,40 @@
   </div>
 </div>
 <script>
-const BANKS=['국민','신한','우리','하나','농협','기업','카카오뱅크','토스뱅크','케이뱅크','SC제일','새마을금고','우체국','부산','대구','수협','신협'];
+const BANKS=[
+  {n:'국민', c:'#FFBC00', m:'KB', t:'#3B2B00'},
+  {n:'신한', c:'#1F4EEB', m:'신'},
+  {n:'우리', c:'#0067AC', m:'우'},
+  {n:'하나', c:'#00857F', m:'하나'},
+  {n:'농협', c:'#19A94C', m:'N'},
+  {n:'기업', c:'#00589F', m:'IBK'},
+  {n:'카카오뱅크', c:'#FFCD00', m:'k', t:'#3B1E1E'},
+  {n:'토스뱅크', c:'#0064FF', m:'toss'},
+  {n:'케이뱅크', c:'#3D2AFF', m:'K'},
+  {n:'SC제일', c:'#0E7C61', m:'SC'},
+  {n:'새마을금고', c:'#EC1C24', m:'MG'},
+  {n:'우체국', c:'#E5390E', m:'우'},
+  {n:'부산', c:'#E6002D', m:'부'},
+  {n:'대구', c:'#007DC5', m:'iM'},
+  {n:'수협', c:'#0079C1', m:'수'},
+  {n:'신협', c:'#003399', m:'신협'}
+];
+function markFs(m){ return m.length<=1?'16px':(m.length<=2?'13px':'10px'); }
 (function(){
-  document.getElementById('bankgrid').innerHTML = BANKS.map(b=>'<div class="bankopt" onclick="pickBank(this)">'+b+'</div>').join('');
+  document.getElementById('bankgrid').innerHTML = BANKS.map(function(b){
+    return '<div class="bankopt" data-n="'+b.n+'" data-c="'+b.c+'" data-m="'+b.m+'" data-t="'+(b.t||'#fff')+'" onclick="pickBank(this)">'
+      +'<span class="blogo" style="background:'+b.c+';color:'+(b.t||'#fff')+';font-size:'+markFs(b.m)+'">'+b.m+'</span>'
+      +'<span class="bnm">'+b.n+'</span></div>';
+  }).join('');
 })();
 function openBank(){ document.getElementById('dim').classList.add('on'); document.getElementById('sheet').classList.add('on'); }
 function closeBank(){ document.getElementById('dim').classList.remove('on'); document.getElementById('sheet').classList.remove('on'); }
 function pickBank(el){
   document.querySelectorAll('.bankopt').forEach(b=>b.classList.remove('on'));
   el.classList.add('on');
-  const n=document.getElementById('bankName'); n.textContent=el.textContent; n.classList.remove('ph');
+  const n=document.getElementById('bankName'); n.textContent=el.dataset.n; n.classList.remove('ph');
+  const lg=document.getElementById('bankLogo');
+  lg.textContent=el.dataset.m; lg.style.background=el.dataset.c; lg.style.color=el.dataset.t; lg.style.fontSize=markFs(el.dataset.m); lg.style.display='flex';
   document.getElementById('result').style.display='none'; // 은행 바꾸면 재인증
   setTimeout(closeBank,130);
 }
