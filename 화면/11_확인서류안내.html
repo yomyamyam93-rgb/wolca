@@ -9,7 +9,8 @@
   :root{
     --primary:#2563EB; --primary-dark:#1D4ED8; --primary-50:#EFF4FF;
     --page-bg:#c9cdd4; --bg:#FFFFFF; --line:#ECEEF1; --border:#B1B8BE;
-    --tile:#F2F4F6; --icon-off:#B0B8C1; --sub:#4E5968; --ink:#191F28; --placeholder:#8B95A1; --warn-bg:#FFF7ED; --warn:#B45309;
+    --tile:#F2F4F6; --icon-off:#B0B8C1; --sub:#4E5968; --ink:#191F28; --placeholder:#8B95A1;
+    --warn-bg:#FFF7ED; --warn:#B45309; --danger:#DC2626; --danger-bg:#FEECEC;
     --primary-grad:linear-gradient(180deg, color-mix(in srgb, var(--primary) 82%, #ffffff), var(--primary));
     --btn-shadow:0 4px 12px color-mix(in srgb, var(--primary) 32%, transparent), inset 0 1px 0 rgba(255,255,255,.18);
   }
@@ -17,6 +18,7 @@
   body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;
        color:var(--ink); background:var(--page-bg); display:flex; justify-content:center; align-items:flex-start; padding:24px 0; line-height:1.5; -webkit-font-smoothing:antialiased;}
   .phone{width:390px; height:844px; max-width:100%; background:#fff; position:relative; display:flex; flex-direction:column; border-radius:46px; overflow:hidden; box-shadow:0 16px 50px rgba(0,0,0,.28);}
+  iconify-icon{display:inline-block;}
   .statusbar{height:47px; display:flex; align-items:center; justify-content:space-between; padding:0 24px 0 30px; flex:0 0 auto;}
   .statusbar .time{font-size:15px; font-weight:700; letter-spacing:.3px;}
   .statusbar .stat{display:flex; align-items:center; gap:7px;}
@@ -24,21 +26,48 @@
   .back{width:40px; height:40px; display:flex; align-items:center; justify-content:center; font-size:22px; color:var(--ink); cursor:pointer;}
   .topbar .ttl{flex:1; text-align:center; font-size:16px; font-weight:700; margin-right:40px;}
 
-  .body{flex:1; overflow-y:auto; padding:6px 24px 120px; scrollbar-width:none;}
+  .body{flex:1; overflow-y:auto; padding:6px 20px 122px; scrollbar-width:none;}
   .body::-webkit-scrollbar{display:none;}
-  h1.dt{font-size:22px; font-weight:700; letter-spacing:-.3px; margin:6px 0 6px;}
-  .dintro{font-size:14px; color:var(--sub); margin-bottom:22px; line-height:1.6;}
-  .grp{margin-bottom:22px;}
-  .grp .gt{font-size:15px; font-weight:700; margin-bottom:10px; color:var(--ink);}
-  .grp ul{list-style:none;}
-  .grp li{position:relative; padding-left:16px; font-size:14px; color:var(--sub); margin-bottom:9px; line-height:1.55;}
-  .grp li:before{content:'•'; position:absolute; left:2px; top:-1px; color:var(--primary); font-weight:700;}
-  .notes{margin-top:6px;}
-  .note{background:var(--tile); border-radius:12px; padding:13px 15px; font-size:13px; color:var(--sub); line-height:1.6; margin-bottom:8px;}
-  .note.warn{background:var(--warn-bg); color:var(--warn);}
-  .note b{color:var(--ink); font-weight:700;}
+  h1.dt{font-size:23px; font-weight:700; letter-spacing:-.4px; margin:8px 0 6px;}
+  .dintro{font-size:15px; color:var(--sub); margin-bottom:20px; line-height:1.6;}
 
-  .footer{position:absolute; bottom:0; left:0; right:0; padding:14px 24px 26px; background:linear-gradient(180deg, rgba(255,255,255,0), #fff 30%);}
+  /* 준비 서류 카드 (체크리스트) */
+  .dcard{background:#fff; border:1px solid var(--line); border-radius:16px; padding:15px 16px; margin-bottom:12px;}
+  .dhead{display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:8px;}
+  .dcase{font-size:15px; font-weight:700; color:var(--ink); line-height:1.4;}
+  .dbadge{font-size:11px; font-weight:700; color:var(--primary-dark); background:var(--primary-50); padding:5px 10px; border-radius:8px; flex:0 0 auto; white-space:nowrap;}
+  .ditem{display:flex; align-items:flex-start; gap:10px; font-size:15px; color:var(--ink); padding:7px 0; line-height:1.5;}
+  .ditem iconify-icon{font-size:20px; color:var(--primary); flex:0 0 auto; margin-top:1px;}
+
+  /* 핵심 조건 콜아웃 */
+  .keybox{display:flex; gap:11px; align-items:flex-start; background:var(--primary-50); border-radius:14px; padding:15px; margin:16px 0 8px;}
+  .keybox iconify-icon{font-size:21px; color:var(--primary); flex:0 0 auto; margin-top:1px;}
+  .keybox .kt{font-size:14px; font-weight:600; color:var(--primary-dark); line-height:1.55;}
+
+  /* 임시안내 경고 */
+  .warnbox{display:flex; gap:10px; align-items:flex-start; background:var(--warn-bg); border-radius:14px; padding:14px; margin-bottom:18px;}
+  .warnbox iconify-icon{font-size:20px; color:var(--warn); flex:0 0 auto; margin-top:1px;}
+  .warnbox div{font-size:13px; color:var(--warn); line-height:1.55; font-weight:600;}
+
+  /* 부가 주의 */
+  .tips{margin-top:16px;}
+  .tips-h{font-size:13px; font-weight:700; color:var(--sub); margin-bottom:10px;}
+  .tip{display:flex; gap:9px; align-items:flex-start; font-size:13px; color:var(--sub); line-height:1.6; margin-bottom:8px;}
+  .tip .tdot{width:5px; height:5px; border-radius:50%; background:var(--icon-off); flex:0 0 auto; margin-top:8px;}
+
+  /* 서비스 불가 */
+  .blocked{border-color:#F6D6D6; background:#FFFBFB;}
+  .blocked .ditem iconify-icon{color:var(--danger);}
+
+  .attach-h{font-size:16px; font-weight:700; margin:26px 0 12px;}
+  .drop{display:flex; align-items:center; gap:12px; border:1.5px dashed var(--border); border-radius:14px; padding:16px; cursor:pointer; margin-bottom:10px;}
+  .drop .plus{width:40px; height:40px; border-radius:12px; background:var(--tile); display:flex; align-items:center; justify-content:center; color:var(--primary); font-size:26px; font-weight:400; flex:0 0 auto;}
+  .drop .dt2{font-size:14px; font-weight:600;}
+  .drop .ds2{font-size:12px; color:var(--placeholder); margin-top:2px;}
+  .camera{display:inline-flex; align-items:center; gap:6px; color:var(--primary-dark); font-size:13px; font-weight:700; cursor:pointer;}
+  .camera iconify-icon{font-size:17px;}
+
+  .footer{position:absolute; bottom:0; left:0; right:0; padding:14px 20px 26px; background:linear-gradient(180deg, rgba(255,255,255,0), #fff 28%);}
   .btn-primary{width:100%; height:54px; border:none; border-radius:14px; font-size:16px; font-weight:700; color:#fff; cursor:pointer; background:var(--primary); background:var(--primary-grad); box-shadow:var(--btn-shadow);}
   .inq{display:block; text-align:center; width:100%; background:none; border:none; font-family:inherit; font-size:14px; color:var(--placeholder); margin-top:12px; cursor:pointer;}
 </style>
@@ -53,102 +82,121 @@
       <svg width="26" height="13" viewBox="0 0 26 13"><rect x=".5" y=".5" width="22" height="12" rx="3.5" fill="none" stroke="#191F28" stroke-opacity=".35"/><rect x="2.5" y="2.5" width="16" height="8" rx="1.8" fill="#191F28"/><rect x="24" y="4.5" width="1.6" height="4" rx=".8" fill="#191F28" fill-opacity=".35"/></svg>
     </span>
   </div>
-  <div class="topbar"><div class="back" onclick="history.back()">‹</div><div class="ttl">확인서류 안내</div></div>
+  <div class="topbar"><div class="back" onclick="history.back()">‹</div><div class="ttl">필요한 서류</div></div>
 
   <div class="body">
     <div id="guide"></div>
-    <div id="attach" style="margin-top:6px">
-      <div style="font-size:15px; font-weight:700; margin-bottom:12px">서류 첨부</div>
-      <div onclick="alert('파일·사진 첨부 (준비 중)')" style="display:flex; align-items:center; gap:12px; border:1.5px dashed var(--border); border-radius:14px; padding:16px; cursor:pointer; margin-bottom:10px">
-        <div style="width:38px; height:38px; border-radius:11px; background:var(--tile); display:flex; align-items:center; justify-content:center; color:var(--primary); font-size:26px; font-weight:400">+</div>
-        <div style="flex:1"><div style="font-size:14px; font-weight:600">파일 · 사진 첨부</div><div style="font-size:12px; color:var(--placeholder)">계약서 · 영수증 · 명함 등</div></div>
-      </div>
-      <a onclick="location.href='13_촬영.html'" style="display:inline-block; color:var(--primary-dark); font-size:13px; font-weight:700; cursor:pointer">고지서 · 서류를 촬영해서 첨부하기 ›</a>
+
+    <div class="attach-h">서류 첨부하기</div>
+    <div class="drop" onclick="alert('파일·사진 첨부 (준비 중)')">
+      <div class="plus">+</div>
+      <div style="flex:1"><div class="dt2">파일 · 사진 올리기</div><div class="ds2">계약서 · 영수증 · 고지서 · 명함 등</div></div>
     </div>
+    <a class="camera" onclick="location.href='13_촬영.html'"><iconify-icon icon="mingcute:camera-2-fill"></iconify-icon>고지서 · 서류 촬영해서 올리기</a>
   </div>
 
   <div class="footer">
     <button class="btn-primary" onclick="location.href='12_결제.html'">첨부하고 계속하기</button>
-    <button class="inq" onclick="alert('고객센터 문의는 준비 중이에요')">필요한 서류가 없나요? 문의하기</button>
+    <button class="inq" onclick="alert('고객센터 문의는 준비 중이에요')">서류가 준비되지 않았나요?</button>
   </div>
 </div>
 
 <script>
 const DATA = {
-  '부동산 임대차': { intro:'계약 상황에 맞춰 아래 서류를 첨부해주세요.', groups:[
-    {t:'중개사 확인 또는 확정일자가 있는 계약', items:['정식 계약서만 첨부']},
-    {t:'중개사 확인·확정일자가 없는 계약', items:['계약서','최근 월세 입금내역 2~3회분']},
-    {t:'계약서를 분실한 경우', items:['건축물대장등본 (PC에서 무료 발급)','최근 월세 입금내역 2~3회분']},
-  ], notes:['★ 계좌의 <b>예금주와 임대인이 같아야</b> 이용할 수 있어요.','계약서에 소재지·보증금·월세·관리비·납입일·입금계좌가 보여야 해요.','임대인·임차인의 <b>주소·주민번호·휴대폰번호는 가리고(마스킹)</b> 올려주세요. 사업자번호는 가리지 않아도 돼요.']},
+  '부동산 임대차': { intro:'계약 상황에 맞는 서류를 준비해주세요.', cases:[
+    {t:'중개사 확인 또는 확정일자가 있는 계약', items:['정식 계약서']},
+    {t:'확인·확정일자가 없는 계약', all:true, items:['계약서','최근 월세 입금내역 2~3회분']},
+    {t:'계약서를 잃어버렸다면', all:true, items:['건축물대장등본 (PC에서 무료 발급)','최근 월세 입금내역 2~3회분']},
+  ], key:'계좌 예금주와 임대인이 같아야 이용할 수 있어요.', tips:[
+    '계약서에 소재지·보증금·월세·관리비·납입일·입금계좌가 보여야 해요.',
+    '주소·주민번호·휴대폰번호는 가리고 올려주세요. (사업자번호는 안 가려도 돼요)']},
 
-  '별도 관리비': { intro:'아래 중 하나를 첨부해주세요.', groups:[
-    {items:['관리비 고지서(청구서)','알림톡 캡처','관리비 영수증','세금계산서']},
-  ], notes:['★ 증빙에서 <b>관리비 금액과 납부계좌</b>가 확인돼야 해요.','알림톡은 자르지 말고 발신자·내용이 한 화면에 다 보이게 캡처해주세요.']},
+  '별도 관리비': { intro:'아래 중 하나만 준비하면 돼요.', cases:[
+    {items:['관리비 고지서(청구서)','관리비 알림톡 캡처','관리비 영수증','세금계산서']},
+  ], key:'증빙에서 관리비 금액과 납부계좌가 보여야 해요.', tips:[
+    '알림톡은 발신자·내용이 한 화면에 다 보이게 캡처해주세요.']},
 
-  '인테리어': { intro:'아래 중 하나를 첨부해주세요.', groups:[
+  '인테리어': { intro:'아래 중 하나만 준비하면 돼요.', warn:'인테리어는 기준 확정 전이라 임시 안내예요. 확정되면 업데이트할게요.', cases:[
     {items:['공사·시공 계약서','견적서','영수증 또는 세금계산서','문자·카톡 내역 (업체 정보 포함)']},
-  ], notes:['★ 증빙에서 <b>금액과 납부계좌</b>가 확인돼야 해요.'], warn:'⚠️ 인테리어는 별도 안내 자료가 없어 유사 유형 기준으로 임시 작성했어요. 실제 기준 확정되면 알려주세요.'},
+  ], key:'증빙에서 금액과 납부계좌가 보여야 해요.'},
 
-  '복비': { intro:'아래 중 하나를 첨부해주세요.', groups:[
-    {items:['중개보수가 포함된 계약서','중개보수 영수증']},
-  ], notes:['★ 증빙에서 <b>금액과 계좌</b>가 확인돼야 해요.','증빙에 납부계좌가 없으면 계좌가 나오는 부동산 명함 사진을 함께 올려주세요. (예금주가 중개사 사업자계좌면 생략 가능)']},
+  '복비': { intro:'아래 중 하나만 준비하면 돼요.', cases:[
+    {items:['중개보수가 적힌 계약서','중개보수 영수증']},
+  ], key:'증빙에서 금액과 계좌가 보여야 해요.', tips:[
+    '계좌가 안 보이면 부동산 명함 사진을 함께 올려주세요. (사업자계좌면 생략 가능)']},
 
-  '이사비': { intro:'아래 중 하나를 첨부해주세요.', groups:[
-    {items:['이사앱 등 주문내역 캡처','이사비 견적서','계약서','문자·카톡 내역 (업체 명함 포함 필수)']},
-  ], notes:['★ 증빙에서 <b>금액과 계좌</b>가 확인돼야 해요.','100만원 이상 거래는 업체 사업자등록증을 추가로 요청할 수 있어요. (납부계좌가 사업자계좌면 생략 가능)']},
+  '이사비': { intro:'아래 중 하나만 준비하면 돼요.', cases:[
+    {items:['이사앱 주문내역 캡처','이사비 견적서','계약서','문자·카톡 내역 (업체 명함 포함)']},
+  ], key:'증빙에서 금액과 계좌가 보여야 해요.', tips:[
+    '100만원 이상이면 업체 사업자등록증을 추가로 요청할 수 있어요. (사업자계좌면 생략)']},
 
-  '청소비': { intro:'아래 중 하나를 첨부해주세요.', groups:[
-    {items:['청소앱 등 주문내역 캡처','청소비 견적서','계약서','문자·카톡 내역 (업체 명함 포함 필수)']},
-  ], notes:['★ 증빙에서 <b>금액과 계좌</b>가 확인돼야 해요.','50만원 이상 거래는 업체 사업자등록증을 추가로 요청할 수 있어요. (납부계좌가 사업자계좌면 생략 가능)']},
+  '청소비': { intro:'아래 중 하나만 준비하면 돼요.', cases:[
+    {items:['청소앱 주문내역 캡처','청소비 견적서','계약서','문자·카톡 내역 (업체 명함 포함)']},
+  ], key:'증빙에서 금액과 계좌가 보여야 해요.', tips:[
+    '50만원 이상이면 업체 사업자등록증을 추가로 요청할 수 있어요. (사업자계좌면 생략)']},
 
-  'B2B 매입대금': { intro:'송금 계좌 유형에 맞춰 첨부해주세요.', groups:[
-    {t:'사업자계좌로 송금', items:['세금계산서·거래명세서·영수증·계약서 중 하나']},
-    {t:'대표 개인계좌로 송금', items:['위 서류 중 하나 + 거래처 사업자등록증 사본']},
-    {t:'전용 가상계좌로 송금', items:['주문·입금계좌가 확인되는 발주 전산 화면 캡처 + 거래처 사업자등록증 사본']},
-  ], notes:['사업자등록증 생략 가능: 승인번호가 있는 전자세금계산서, POS 전자영수증, 명판·인쇄된 영수증','간이영수증은 공급자·계좌정보가 명판/인쇄로 찍혀 있어야 해요.','★ <b>수기로만 작성된 증빙</b>은 이용할 수 없어요.']},
+  'B2B 매입대금': { intro:'송금할 계좌 유형에 맞춰 준비해주세요.', cases:[
+    {t:'거래처 사업자계좌로 송금', items:['세금계산서·거래명세서·영수증·계약서 중 하나']},
+    {t:'대표 개인계좌로 송금', all:true, items:['위 서류 중 하나','거래처 사업자등록증 사본']},
+    {t:'전용 가상계좌로 송금', all:true, items:['발주 전산 화면 캡처 (주문·입금계좌 확인)','거래처 사업자등록증 사본']},
+  ], key:'수기로만 작성한 증빙은 쓸 수 없어요.', tips:[
+    '전자세금계산서·POS 전자영수증·인쇄된 명판 영수증은 사업자등록증 생략 가능.',
+    '간이영수증은 공급자·계좌정보가 인쇄로 찍혀 있어야 해요.']},
 
-  '렌트료 · 렌탈료': { intro:'아래 중 하나를 첨부해주세요.', groups:[
-    {items:['계약서','계약내용 온라인 조회 화면 캡처','렌트료 납부안내 알림톡·문자 캡처']},
-  ], notes:['★ 증빙에서 <b>금액과 계좌</b>가 확인돼야 해요.','알림톡·문자는 발신자·내용이 한 화면에 다 보이게 캡처해주세요.','자동차는 차량번호 "호/하/허" <b>렌트계약만</b> 가능해요. 리스·리스보증금·할부는 안 돼요.']},
+  '렌트료 · 렌탈료': { intro:'아래 중 하나만 준비하면 돼요.', cases:[
+    {items:['계약서','계약내용 온라인 조회 화면 캡처','납부안내 알림톡·문자 캡처']},
+  ], key:'증빙에서 금액과 계좌가 보여야 해요.', tips:[
+    '알림톡·문자는 발신자·내용이 한 화면에 다 보이게 캡처해주세요.',
+    "자동차는 '호/하/허' 렌트계약만 가능해요. (리스·할부는 불가)"]},
 
-  '보험료': { intro:'아래 중 하나를 첨부해주세요.', groups:[
-    {items:['보험계약서(증권)','보험가입 온라인조회 화면 캡처','보험사 납부안내 알림톡 캡처']},
-  ], notes:['★ 증빙에서 <b>금액과 계좌</b>가 확인돼야 해요.','본인 계좌로는 입금이 안 돼요 — <b>보험사 납부용 가상계좌</b>로 인증해주세요.','가상계좌는 은행·계좌번호만으론 인증이 안 될 수 있어요. 그땐 납부금액까지 입력해 인증해주세요.']},
+  '보험료': { intro:'아래 중 하나만 준비하면 돼요.', cases:[
+    {items:['보험증권(계약서)','보험가입 온라인조회 캡처','보험사 납부안내 알림톡 캡처']},
+  ], key:'보험사 납부용 가상계좌로만 낼 수 있어요. (본인 계좌 불가)', tips:[
+    '가상계좌 인증이 안 되면 납부금액까지 입력해 인증해주세요.']},
 
-  '인건비 · 용역비': { intro:'고용 형태에 맞춰 아래 서류를 모두 첨부해주세요.', groups:[
-    {t:'정규직 급여', items:['근로계약서 날인본','4대보험 가입자 명부','급여이체 내역']},
-    {t:'알바 (일용직·단기)', items:['근로계약서 날인본','일용근로소득 지급명세서 (홈택스)']},
-    {t:'용역비 · 프리랜서(3.3%)', items:['용역계약서 날인본','원천징수영수증 (홈택스)']},
-    {t:'용역비 · 사업자', items:['전자세금계산서 (홈택스)']},
-  ], notes:['★ 반드시 <b>수급자 본인 명의 계좌</b>로만 송금할 수 있어요.','퇴직금은 이용할 수 없어요.']},
+  '인건비 · 용역비': { intro:'고용 형태에 맞는 서류를 모두 준비해주세요.', cases:[
+    {t:'정규직 급여', all:true, items:['근로계약서 날인본','4대보험 가입자 명부','급여이체 내역']},
+    {t:'알바 (일용직·단기)', all:true, items:['근로계약서 날인본','일용근로소득 지급명세서 (홈택스)']},
+    {t:'프리랜서 (3.3%)', all:true, items:['용역계약서 날인본','원천징수영수증 (홈택스)']},
+    {t:'용역 · 사업자', items:['전자세금계산서 (홈택스)']},
+  ], key:'받는 사람 본인 명의 계좌로만 보낼 수 있어요.', tips:[
+    '퇴직금은 이용할 수 없어요.']},
 
-  '교육비': { intro:'아래처럼 첨부해주세요.', groups:[
-    {t:'학원비 · 수강료 · 등록금', items:['고지서(청구서)','알림톡·납부안내 메일 캡처','온라인 공지문 캡처','교육기관 게시 수강비 안내']},
-    {t:'과외비 · 레슨비 ① 강사 자격증빙', items:['개인과외교습자신고필증·강사등록 확인서 중 하나','또는 학생증·자격증·플랫폼 강사 프로필 캡처']},
-    {t:'과외비 · 레슨비 ② 거래증빙', items:['과외 계약서·영수증·전문사이트 주문서·문자·카톡 내역 중 하나']},
-  ], notes:['★ 증빙에서 <b>금액과 계좌</b>가 확인돼야 해요.']},
+  '교육비': { intro:'상황에 맞는 서류를 준비해주세요.', cases:[
+    {t:'학원비 · 수강료 · 등록금', items:['고지서(청구서)','알림톡·납부안내 메일 캡처','온라인 공지문 캡처','기관 게시 수강비 안내']},
+    {t:'과외 · 레슨 — 강사 증빙', items:['개인과외교습자신고필증·강사등록 확인서','또는 학생증·자격증·플랫폼 강사 프로필 캡처']},
+    {t:'과외 · 레슨 — 거래 증빙', items:['계약서·영수증·주문서·문자·카톡 내역 중 하나']},
+  ], key:'증빙에서 금액과 계좌가 보여야 해요.'},
 
-  '기타': { intro:'[서비스 불가 거래]만 아니면 대부분의 상거래 결제·납부를 이용할 수 있어요.', groups:[
-    {items:['상품명·거래금액·납부계좌를 확인할 수 있는 객관적 증빙 첨부']},
-  ], notes:['개인 간 거래에서 수기로 쓴 약식 증빙은 이용이 어려워요.']},
+  '기타': { intro:'[서비스 불가 거래]만 아니면 대부분 이용할 수 있어요.', cases:[
+    {items:['상품명·거래금액·납부계좌가 확인되는 객관적인 증빙']},
+  ], tips:[
+    '개인 간 거래에서 수기로 쓴 약식 증빙은 이용이 어려워요.']},
 
-  '서비스 불가 거래': { intro:'아래 거래는 법적으로 결제가 금지돼 이용할 수 없어요.', groups:[
-    {items:['허위거래로 신용카드 결제를 현금화하는 행위','매출·소득 누락, 이중공제 등 조세포탈·탈세 거래','빚 상환·이자 납부·돈 굴리기 목적 결제 (카드대금·회생비용·곗돈 등)','캐피탈·파이낸셜 할부금융, 자동차 리스료·리스 보증금 납부']},
-  ], notes:['여신전문금융업법상 "금전채무 상환·이자납부·투자·수익 목적 금전거래"를 위한 신용카드 결제는 법으로 금지돼 있어요.']},
+  '서비스 불가 거래': { blocked:true, intro:'아래 거래는 법으로 금지돼 이용할 수 없어요.', cases:[
+    {t:'이런 거래는 안 돼요', items:['허위거래로 카드값을 현금화하는 행위','매출·소득 누락 등 조세포탈·탈세 거래','빚 상환·이자 납부·돈 굴리기 목적 결제','캐피탈 할부금융·자동차 리스료·리스보증금 납부']},
+  ], tips:[
+    '여신전문금융업법상 금전채무 상환·이자·투자 목적의 카드결제는 법으로 금지돼 있어요.']},
 };
 
 function render(){
   const t = new URLSearchParams(location.search).get('t') || '부동산 임대차';
   const d = DATA[t] || DATA['부동산 임대차'];
   let h = '<h1 class="dt">'+t+'</h1><p class="dintro">'+d.intro+'</p>';
-  if(d.warn) h += '<div class="note warn">'+d.warn+'</div>';
-  d.groups.forEach(g=>{
-    h += '<div class="grp">';
-    if(g.t) h += '<div class="gt">'+g.t+'</div>';
-    h += '<ul>'+g.items.map(i=>'<li>'+i+'</li>').join('')+'</ul></div>';
+  if(d.warn) h += '<div class="warnbox"><iconify-icon icon="mingcute:alert-fill"></iconify-icon><div>'+d.warn+'</div></div>';
+  (d.cases||[]).forEach(c=>{
+    let badge = '';
+    if(!d.blocked) badge = (c.items.length===1) ? '필수' : (c.all ? '모두 준비' : '이 중 하나');
+    const icon = d.blocked ? 'mingcute:close-circle-fill' : 'mingcute:check-circle-fill';
+    const head = c.t || (d.blocked ? '' : '준비 서류');
+    h += '<div class="dcard'+(d.blocked?' blocked':'')+'">';
+    if(head || badge) h += '<div class="dhead"><span class="dcase">'+head+'</span>'+(badge?'<span class="dbadge">'+badge+'</span>':'')+'</div>';
+    h += c.items.map(i=>'<div class="ditem"><iconify-icon icon="'+icon+'"></iconify-icon><span>'+i+'</span></div>').join('');
+    h += '</div>';
   });
-  if(d.notes && d.notes.length){
-    h += '<div class="notes">'+d.notes.map(n=>'<div class="note">'+n+'</div>').join('')+'</div>';
+  if(d.key) h += '<div class="keybox"><iconify-icon icon="mingcute:information-fill"></iconify-icon><div class="kt">'+d.key+'</div></div>';
+  if(d.tips && d.tips.length){
+    h += '<div class="tips"><div class="tips-h">이런 점도 확인하세요</div>'+d.tips.map(n=>'<div class="tip"><span class="tdot"></span><span>'+n+'</span></div>').join('')+'</div>';
   }
   document.getElementById('guide').innerHTML = h;
 }
