@@ -28,11 +28,13 @@
   .seg button{flex:1; border:none; background:transparent; font-family:inherit; font-size:15px; font-weight:700; color:var(--sub); padding:11px 0; border-radius:10px; cursor:pointer; transition:.12s;}
   .seg button.on{background:#fff; color:var(--ink); box-shadow:0 1px 3px rgba(0,0,0,.1);}
 
-  /* 카드 트랙 */
-  .cardscroll{display:flex; gap:14px; overflow-x:auto; scroll-snap-type:x mandatory; padding:2px 0; scrollbar-width:none; cursor:grab;}
+  /* 카드 트랙 (중앙 정렬 캐러셀) */
+  .cardscroll{display:flex; gap:14px; overflow-x:auto; scroll-snap-type:x mandatory; margin:0 -24px; padding:2px 0; scrollbar-width:none; cursor:grab;}
   .cardscroll:active{cursor:grabbing;}
   .cardscroll::-webkit-scrollbar{display:none;}
-  .slide{flex:0 0 84%; scroll-snap-align:start;}
+  .slide{flex:0 0 80%; scroll-snap-align:center;}
+  .slide:first-child{margin-left:10%;}
+  .slide:last-child{margin-right:10%;}
   .cardbox{height:168px; border-radius:18px; padding:20px; color:#fff; display:flex; flex-direction:column; justify-content:space-between;
     background:linear-gradient(135deg,#4B7BF5,#1E59DF); box-shadow:0 6px 16px -4px rgba(37,99,235,.35);}
   .cardbox.alt{background:linear-gradient(135deg,#454C59,#23272F); box-shadow:0 6px 16px -4px rgba(0,0,0,.3);}
@@ -45,16 +47,12 @@
   .cardadd .pill{display:flex; align-items:center; gap:6px; background:#fff; color:var(--primary-dark); font-size:14px; font-weight:700; padding:11px 18px; border-radius:999px; box-shadow:0 2px 6px rgba(37,99,235,.12);}
   .cardadd .pill iconify-icon{font-size:17px;}
 
-  .dots{display:flex; justify-content:center; gap:6px; margin:16px 0 4px;}
+  .dots{display:flex; justify-content:center; gap:6px; margin:16px 0 8px;}
   .dot{width:6px; height:6px; border-radius:3px; background:var(--line); transition:.2s;}
   .dot.on{background:var(--primary); width:16px;}
 
-  /* 자동 채움 안내 (등록카드) */
-  .savednote{display:flex; align-items:center; gap:9px; background:var(--primary-50); border-radius:12px; padding:13px 14px; font-size:13px; font-weight:600; color:var(--primary-dark); margin-top:16px;}
-  .savednote iconify-icon{font-size:18px; color:var(--primary);}
-
   /* 카드 입력 폼 (새 카드) */
-  .formsec{margin-top:18px;}
+  .formsec{margin-top:14px;}
   .field{margin-bottom:14px;}
   .field > label{display:block; font-size:13px; font-weight:700; color:var(--sub); margin-bottom:8px;}
   .tin{width:100%; height:50px; border:1.5px solid var(--border); border-radius:12px; padding:0 14px; font-family:inherit; font-size:15px; font-weight:600; color:var(--ink); background:#fff;}
@@ -65,12 +63,12 @@
   .cardno .dash{color:var(--icon-off); flex:0 0 auto;}
   .two{display:flex; gap:10px;} .two .field{flex:1; margin-bottom:14px;}
 
-  /* 할부 칩 */
-  .ilbl{font-size:13px; font-weight:700; color:var(--sub); margin:20px 0 10px;}
-  .chips{display:flex; gap:8px; flex-wrap:wrap;}
-  .chip{padding:11px 16px; border-radius:12px; background:var(--tile); font-size:15px; font-weight:600; color:var(--sub); cursor:pointer;}
-  .chip.on{background:var(--primary-50); color:var(--primary-dark); box-shadow:inset 0 0 0 1.5px var(--primary);}
-  .freen{font-size:12px; color:var(--success); font-weight:700; margin-top:9px;}
+  /* 할부 (선택 행 → 바텀시트) */
+  .ilbl{font-size:13px; font-weight:700; color:var(--sub); margin:18px 0 10px;}
+  .selrow{display:flex; align-items:center; justify-content:space-between; height:52px; border:1.5px solid var(--border); border-radius:12px; padding:0 16px; cursor:pointer;}
+  .selrow .selval{font-size:15px; font-weight:700; color:var(--ink);}
+  .selrow .selval .free{font-size:11px; font-weight:700; color:var(--primary-dark); background:var(--primary-50); padding:2px 7px; border-radius:6px; margin-left:6px;}
+  .selrow iconify-icon{color:var(--icon-off); font-size:20px;}
 
   /* 간편결제 목록 */
   .payrow{display:flex; align-items:center; gap:12px; border:1.5px solid var(--line); border-radius:14px; padding:17px 16px; margin-bottom:10px; cursor:pointer; background:#fff; transition:.12s;}
@@ -80,8 +78,25 @@
   .payrow .rd iconify-icon{font-size:23px; color:var(--border); display:block;}
   .payrow.on .rd iconify-icon{color:var(--primary);}
 
-  .footer{position:absolute; bottom:0; left:0; right:0; padding:14px 24px 28px; background:linear-gradient(180deg, rgba(255,255,255,0), #fff 30%);}
+  .footer{position:absolute; bottom:0; left:0; right:0; padding:14px 24px 28px; background:linear-gradient(180deg, rgba(255,255,255,0), #fff 30%); z-index:2;}
   .btn-primary{width:100%; height:56px; border:none; border-radius:15px; font-size:16px; font-weight:700; color:#fff; cursor:pointer; background:var(--primary); background:var(--primary-grad); box-shadow:var(--btn-shadow);}
+
+  /* 바텀시트 */
+  .dim{position:absolute; inset:0; background:rgba(15,20,30,.45); opacity:0; pointer-events:none; transition:.25s; z-index:5;}
+  .dim.on{opacity:1; pointer-events:auto;}
+  .sheet{position:absolute; left:0; right:0; bottom:0; background:#fff; border-radius:22px 22px 0 0; padding:10px 24px 26px; z-index:6; transform:translateY(100%); transition:transform .3s cubic-bezier(.2,.8,.2,1); box-shadow:0 -8px 30px rgba(0,0,0,.14); max-height:74%; display:flex; flex-direction:column;}
+  .sheet.on{transform:translateY(0);}
+  .sheet .handle{width:40px; height:5px; border-radius:3px; background:#E1E5EA; margin:2px auto 14px;}
+  .sheet h3{font-size:18px; font-weight:700; margin-bottom:6px; letter-spacing:-.3px;}
+  .ilist{overflow-y:auto; margin:6px -24px 0; padding:0 24px; scrollbar-width:none;}
+  .ilist::-webkit-scrollbar{display:none;}
+  .irow{display:flex; align-items:center; gap:8px; padding:15px 0; border-top:1px solid var(--line); cursor:pointer; font-size:16px; font-weight:600; color:var(--ink);}
+  .irow:first-child{border-top:none;}
+  .irow .free{font-size:11px; font-weight:700; color:var(--primary-dark); background:var(--primary-50); padding:3px 8px; border-radius:6px;}
+  .irow .sp{flex:1;}
+  .irow .ck{font-size:22px; color:var(--primary); opacity:0;}
+  .irow.on{color:var(--primary-dark);}
+  .irow.on .ck{opacity:1;}
 </style>
 <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 </head>
@@ -124,12 +139,6 @@
       </div>
       <div class="dots"><span class="dot on"></span><span class="dot"></span><span class="dot"></span></div>
 
-      <!-- 등록 카드: 자동 채움 -->
-      <div id="saved" class="savednote">
-        <iconify-icon icon="mingcute:check-circle-fill"></iconify-icon>
-        <span>등록된 카드라 결제 정보가 자동으로 채워졌어요</span>
-      </div>
-
       <!-- 새 카드: 입력 폼 -->
       <div id="newform" class="formsec" style="display:none">
         <div class="field">
@@ -148,15 +157,12 @@
         <div class="field"><label>카드 비밀번호 앞 2자리</label><input class="tin" inputmode="numeric" type="password" placeholder="●●" style="max-width:120px; letter-spacing:6px"></div>
       </div>
 
-      <!-- 할부 (칩) -->
-      <div class="ilbl">할부 개월</div>
-      <div class="chips">
-        <div class="chip" onclick="pick(this)">일시불</div>
-        <div class="chip" onclick="pick(this)">2개월</div>
-        <div class="chip on" onclick="pick(this)">3개월</div>
-        <div class="chip" onclick="pick(this)">6개월</div>
+      <!-- 할부 -->
+      <div class="ilbl">할부</div>
+      <div class="selrow" onclick="openSheet()">
+        <span class="selval" id="ilVal">3개월<span class="free">무이자</span></span>
+        <iconify-icon icon="mingcute:down-line"></iconify-icon>
       </div>
-      <div class="freen">3 · 6개월은 무이자 할부예요</div>
     </div>
 
     <!-- 간편결제 -->
@@ -171,6 +177,27 @@
   <div class="footer">
     <button class="btn-primary" id="payBtn" onclick="location.href='12_2_반복결제.html'">다음</button>
   </div>
+
+  <!-- 할부 바텀시트 -->
+  <div class="dim" id="dim" onclick="closeSheet()"></div>
+  <div class="sheet" id="sheet">
+    <div class="handle"></div>
+    <h3>할부 개월을 선택하세요</h3>
+    <div class="ilist" id="ilist">
+      <div class="irow" onclick="pickI(this)"><span class="sp">일시불</span><iconify-icon class="ck" icon="mingcute:check-fill"></iconify-icon></div>
+      <div class="irow" onclick="pickI(this)"><span>2개월</span><span class="free">무이자</span><span class="sp"></span><iconify-icon class="ck" icon="mingcute:check-fill"></iconify-icon></div>
+      <div class="irow on" onclick="pickI(this)"><span>3개월</span><span class="free">무이자</span><span class="sp"></span><iconify-icon class="ck" icon="mingcute:check-fill"></iconify-icon></div>
+      <div class="irow" onclick="pickI(this)"><span>4개월</span><span class="free">무이자</span><span class="sp"></span><iconify-icon class="ck" icon="mingcute:check-fill"></iconify-icon></div>
+      <div class="irow" onclick="pickI(this)"><span>5개월</span><span class="free">무이자</span><span class="sp"></span><iconify-icon class="ck" icon="mingcute:check-fill"></iconify-icon></div>
+      <div class="irow" onclick="pickI(this)"><span>6개월</span><span class="free">무이자</span><span class="sp"></span><iconify-icon class="ck" icon="mingcute:check-fill"></iconify-icon></div>
+      <div class="irow" onclick="pickI(this)"><span class="sp">7개월</span><iconify-icon class="ck" icon="mingcute:check-fill"></iconify-icon></div>
+      <div class="irow" onclick="pickI(this)"><span class="sp">8개월</span><iconify-icon class="ck" icon="mingcute:check-fill"></iconify-icon></div>
+      <div class="irow" onclick="pickI(this)"><span class="sp">9개월</span><iconify-icon class="ck" icon="mingcute:check-fill"></iconify-icon></div>
+      <div class="irow" onclick="pickI(this)"><span class="sp">10개월</span><iconify-icon class="ck" icon="mingcute:check-fill"></iconify-icon></div>
+      <div class="irow" onclick="pickI(this)"><span class="sp">11개월</span><iconify-icon class="ck" icon="mingcute:check-fill"></iconify-icon></div>
+      <div class="irow" onclick="pickI(this)"><span class="sp">12개월</span><iconify-icon class="ck" icon="mingcute:check-fill"></iconify-icon></div>
+    </div>
+  </div>
 </div>
 <script>
 function tab(which){
@@ -179,26 +206,36 @@ function tab(which){
   document.getElementById('tabEasy').style.display = isCard ? 'none' : '';
   document.getElementById('segCard').classList.toggle('on', isCard);
   document.getElementById('segEasy').classList.toggle('on', !isCard);
-  document.getElementById('payBtn').textContent = isCard ? '다음' : '다음';
 }
 function selpay(el){ document.querySelectorAll('.payrow').forEach(r=>r.classList.remove('on')); el.classList.add('on'); }
-function pick(el){ document.querySelectorAll('.chip').forEach(c=>c.classList.remove('on')); el.classList.add('on'); }
 
-const LAST=2; // '다른 카드 등록하기' 슬라이드 인덱스
+const LAST=2;
 function setMode(idx){
   const isNew = idx===LAST;
   document.getElementById('newform').style.display = isNew ? '' : 'none';
-  document.getElementById('saved').style.display = isNew ? 'none' : '';
   document.getElementById('payBtn').textContent = isNew ? '카드 등록하고 다음' : '다음';
 }
 function updateDots(){
   const s=document.getElementById('cs');
   const step=s.querySelector('.slide').offsetWidth+14;
-  const idx=Math.round(s.scrollLeft/step);
+  const idx=Math.max(0,Math.min(LAST,Math.round(s.scrollLeft/step)));
   document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('on', i===idx));
   setMode(idx);
 }
-/* 마우스 드래그로 가로 스와이프 */
+
+/* 할부 바텀시트 */
+function openSheet(){ document.getElementById('dim').classList.add('on'); document.getElementById('sheet').classList.add('on'); }
+function closeSheet(){ document.getElementById('dim').classList.remove('on'); document.getElementById('sheet').classList.remove('on'); }
+function pickI(el){
+  document.querySelectorAll('#ilist .irow').forEach(r=>r.classList.remove('on'));
+  el.classList.add('on');
+  const month=el.querySelector('span').textContent;
+  const free=el.querySelector('.free');
+  document.getElementById('ilVal').innerHTML = month + (free?'<span class="free">무이자</span>':'');
+  setTimeout(closeSheet,140);
+}
+
+/* 마우스 드래그 스와이프 */
 (function(){
   const s=document.getElementById('cs'); let down=false,startX=0,startLeft=0,moved=false;
   s.addEventListener('pointerdown', e=>{ if(e.target.closest('input')) return; down=true; moved=false; startX=e.clientX; startLeft=s.scrollLeft; s.style.scrollSnapType='none'; });
