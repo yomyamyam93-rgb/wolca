@@ -22,29 +22,44 @@
   .prog i{display:block; height:100%; width:25%; background:var(--primary); border-radius:2px;}
   .body{flex:1; overflow-y:auto; padding:14px 24px 110px; scrollbar-width:none;}
   .body::-webkit-scrollbar{display:none;}
-  .q{font-size:22px; font-weight:700; letter-spacing:-.3px; margin-bottom:20px;}
+  .q{font-size:22px; font-weight:700; letter-spacing:-.3px; margin-bottom:18px;}
+
+  /* 결제 방법 세그 */
+  .seg{display:flex; background:#E8EBEF; border-radius:13px; padding:4px; margin-bottom:20px;}
+  .seg button{flex:1; border:none; background:transparent; font-family:inherit; font-size:15px; font-weight:700; color:var(--sub); padding:11px 0; border-radius:10px; cursor:pointer; transition:.12s;}
+  .seg button.on{background:#fff; color:var(--ink); box-shadow:0 1px 3px rgba(0,0,0,.1);}
 
   /* 가로 스와이프 카드 트랙 */
-  .cardscroll{display:flex; gap:12px; overflow-x:auto; scroll-snap-type:x mandatory; margin:0 -24px; padding:2px 24px 0; scrollbar-width:none;}
+  .cardscroll{display:flex; gap:14px; overflow-x:auto; scroll-snap-type:x mandatory; margin:0 -24px; padding:6px 24px 4px; scrollbar-width:none;}
   .cardscroll::-webkit-scrollbar{display:none;}
   .slide{flex:0 0 84%; scroll-snap-align:start;}
-  .cardbox{height:174px; border-radius:18px; padding:20px; color:#fff; display:flex; flex-direction:column; justify-content:space-between;
-    background:linear-gradient(135deg,#4B7BF5,#1E59DF); box-shadow:0 5px 16px rgba(37,99,235,.28);}
-  .cardbox.alt{background:linear-gradient(135deg,#454C59,#23272F); box-shadow:0 5px 16px rgba(0,0,0,.2);}
+  .cardbox{position:relative; overflow:hidden; height:182px; border-radius:20px; padding:20px; color:#fff; display:flex; flex-direction:column; justify-content:space-between;
+    background:linear-gradient(140deg,#5A86F7 0%,#2560E8 55%,#1A4FCC 100%);
+    box-shadow:0 14px 28px -8px rgba(30,89,223,.6), 0 4px 10px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.25);}
+  .cardbox.alt{background:linear-gradient(140deg,#4A525F 0%,#2A2F38 60%,#191D24 100%); box-shadow:0 14px 28px -8px rgba(0,0,0,.55), 0 4px 10px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.16);}
+  .cardbox:after{content:''; position:absolute; inset:0; background:linear-gradient(118deg, rgba(255,255,255,.30) 0%, rgba(255,255,255,.05) 34%, rgba(255,255,255,0) 55%); pointer-events:none;}
+  .cardbox>*{position:relative; z-index:1;}
   .cardbox .tp{display:flex; justify-content:space-between; align-items:flex-start;}
   .cardbox .tag{font-size:11px; font-weight:700; background:rgba(255,255,255,.22); padding:4px 9px; border-radius:7px;}
-  .cardbox .brandtop{font-size:11px; opacity:.85; letter-spacing:.6px; font-weight:700;}
+  .cardbox .brandtop{font-size:11px; opacity:.9; letter-spacing:.7px; font-weight:700;}
+  .cardbox .chip{width:38px; height:28px; border-radius:7px; background:linear-gradient(135deg,#F7DE9E,#CBA043); box-shadow:inset 0 0 0 1px rgba(0,0,0,.06), inset 0 -2px 3px rgba(0,0,0,.15);}
   .cardbox .nm{font-size:18px; font-weight:700;}
   .cardbox .no{font-size:13px; opacity:.9; letter-spacing:1.5px; margin-top:5px;}
-  .cardadd{height:174px; border-radius:18px; border:1.5px dashed var(--border); background:#FAFBFC; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; cursor:pointer;}
-  .cardadd .pl{width:46px; height:46px; border-radius:50%; background:var(--tile); display:flex; align-items:center; justify-content:center; color:var(--primary); font-size:28px;}
+  .cardadd{height:182px; border-radius:20px; border:1.5px dashed var(--border); background:#FAFBFC; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; cursor:pointer;}
+  .cardadd .pl{width:48px; height:48px; border-radius:50%; background:var(--tile); display:flex; align-items:center; justify-content:center; color:var(--primary); font-size:28px;}
   .cardadd .at{font-size:14px; font-weight:600; color:var(--sub);}
 
   .dots{display:flex; justify-content:center; gap:6px; margin-top:16px;}
   .dot{width:6px; height:6px; border-radius:3px; background:var(--line); transition:.2s;}
   .dot.on{background:var(--primary); width:16px;}
 
-  .easy{display:block; text-align:center; width:100%; background:none; border:none; font-family:inherit; font-size:14px; color:var(--placeholder); margin-top:26px; cursor:pointer;}
+  /* 간편결제 목록 */
+  .payrow{display:flex; align-items:center; gap:12px; border:1.5px solid var(--line); border-radius:14px; padding:17px 16px; margin-bottom:10px; cursor:pointer; background:#fff; transition:.12s;}
+  .payrow.on{border-color:var(--primary); background:var(--primary-50);}
+  .payrow .plabel{flex:1; font-size:16px; font-weight:800; letter-spacing:-.2px;}
+  .payrow .dot2{width:16px; height:16px; border-radius:5px; background:#FFCD00; flex:0 0 auto;}
+  .payrow .rd iconify-icon{font-size:23px; color:var(--border); display:block;}
+  .payrow.on .rd iconify-icon{color:var(--primary);}
 
   .footer{position:absolute; bottom:0; left:0; right:0; padding:14px 24px 28px; background:linear-gradient(180deg, rgba(255,255,255,0), #fff 30%);}
   .btn-primary{width:100%; height:56px; border:none; border-radius:15px; font-size:16px; font-weight:700; color:#fff; cursor:pointer; background:var(--primary); background:var(--primary-grad); box-shadow:var(--btn-shadow);}
@@ -62,32 +77,56 @@
   <div class="prog"><i></i></div>
 
   <div class="body">
-    <div class="q">어떤 카드로 결제할까요?</div>
+    <div class="q">어떻게 결제할까요?</div>
 
-    <div class="cardscroll" id="cs" onscroll="updateDots()">
-      <div class="slide">
-        <div class="cardbox">
-          <div class="tp"><span class="tag">추천 카드</span><span class="brandtop">SAMSUNG</span></div>
-          <div><div class="nm">삼성 Deep Dream</div><div class="no">•••• •••• •••• 4821</div></div>
+    <div class="seg">
+      <button id="segCard" class="on" onclick="tab('card')">카드결제</button>
+      <button id="segEasy" onclick="tab('easy')">간편결제</button>
+    </div>
+
+    <!-- 카드결제 -->
+    <div id="tabCard">
+      <div class="cardscroll" id="cs" onscroll="updateDots()">
+        <div class="slide">
+          <div class="cardbox">
+            <div class="tp"><span class="tag">추천 카드</span><span class="brandtop">SAMSUNG</span></div>
+            <div class="chip"></div>
+            <div><div class="nm">삼성 Deep Dream</div><div class="no">•••• •••• •••• 4821</div></div>
+          </div>
+        </div>
+        <div class="slide">
+          <div class="cardbox alt">
+            <div class="tp"><span class="tag">보유 카드</span><span class="brandtop">SHINHAN</span></div>
+            <div class="chip"></div>
+            <div><div class="nm">신한 Deep On</div><div class="no">•••• •••• •••• 1177</div></div>
+          </div>
+        </div>
+        <div class="slide">
+          <div class="cardadd" onclick="toast('카드 등록은 준비 중이에요')">
+            <div class="pl">+</div>
+            <div class="at">카드 추가</div>
+          </div>
         </div>
       </div>
-      <div class="slide">
-        <div class="cardbox alt">
-          <div class="tp"><span class="tag">보유 카드</span><span class="brandtop">SHINHAN</span></div>
-          <div><div class="nm">신한 Deep On</div><div class="no">•••• •••• •••• 1177</div></div>
-        </div>
+      <div class="dots"><span class="dot on"></span><span class="dot"></span><span class="dot"></span></div>
+    </div>
+
+    <!-- 간편결제 -->
+    <div id="tabEasy" style="display:none">
+      <div class="payrow on" onclick="selpay(this)">
+        <span class="plabel" style="color:#E6392E">PAYCO</span>
+        <span class="rd"><iconify-icon icon="mingcute:check-circle-fill"></iconify-icon></span>
       </div>
-      <div class="slide">
-        <div class="cardadd" onclick="toast('카드 등록은 준비 중이에요')">
-          <div class="pl">+</div>
-          <div class="at">카드 추가</div>
-        </div>
+      <div class="payrow" onclick="selpay(this)">
+        <span class="plabel"><span style="color:#3182F6">toss</span><span style="color:#191F28">pay</span></span>
+        <span class="rd"><iconify-icon icon="mingcute:check-circle-fill"></iconify-icon></span>
+      </div>
+      <div class="payrow" onclick="selpay(this)">
+        <span class="dot2"></span><span class="plabel" style="color:#191F28">카카오페이</span>
+        <span class="rd"><iconify-icon icon="mingcute:check-circle-fill"></iconify-icon></span>
       </div>
     </div>
 
-    <div class="dots"><span class="dot on"></span><span class="dot"></span><span class="dot"></span></div>
-
-    <button class="easy" onclick="toast('간편결제는 준비 중이에요')">간편결제(페이코 · 토스페이 · 카카오페이)로 낼게요 ›</button>
   </div>
 
   <div class="footer">
@@ -95,10 +134,18 @@
   </div>
 </div>
 <script>
+function tab(which){
+  const isCard = which==='card';
+  document.getElementById('tabCard').style.display = isCard ? '' : 'none';
+  document.getElementById('tabEasy').style.display = isCard ? 'none' : '';
+  document.getElementById('segCard').classList.toggle('on', isCard);
+  document.getElementById('segEasy').classList.toggle('on', !isCard);
+}
+function selpay(el){ document.querySelectorAll('.payrow').forEach(r=>r.classList.remove('on')); el.classList.add('on'); }
 function updateDots(){
   const s=document.getElementById('cs');
   const first=s.querySelector('.slide');
-  const step=first.offsetWidth+12;
+  const step=first.offsetWidth+14;
   const idx=Math.round(s.scrollLeft/step);
   document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('on', i===idx));
 }
