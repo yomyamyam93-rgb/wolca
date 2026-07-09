@@ -69,6 +69,28 @@
   .tab iconify-icon{font-size:26px;}
   .tab.on{color:var(--primary); font-weight:700;}
   .home-indicator{width:140px; height:5px; border-radius:3px; background:var(--ink); margin:12px auto 9px;}
+  /* 다양한 구성 */
+  .actions{display:flex; gap:10px; margin-top:16px;}
+  .actions .btn-primary,.actions .btn-secondary{flex:1;}
+  .hscroll{display:flex; gap:12px; overflow-x:auto; margin:0 calc(-1*var(--pad)); padding:2px var(--pad); scroll-snap-type:x mandatory; scrollbar-width:none;}
+  .hscroll::-webkit-scrollbar{display:none;}
+  .hcard{flex:0 0 196px; scroll-snap-align:start; background:#fff; border-radius:16px; padding:16px; box-shadow:0 1px 3px rgba(0,0,0,.04); cursor:pointer;}
+  .hcard .hn{font-size:15px; font-weight:700; color:var(--ink); margin-top:12px; letter-spacing:-.2px;}
+  .hcard .hs{font-size:12px; color:var(--placeholder); margin-top:2px;}
+  .hcard .hbot{display:flex; align-items:center; justify-content:space-between; margin-top:14px;}
+  .hcard .hv{font-size:16px; font-weight:700; color:var(--ink);}
+  .dtag{font-size:11px; font-weight:700; color:var(--primary-dark); background:var(--primary-50); padding:3px 8px; border-radius:7px;}
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px;}
+  .fcard{background:#fff; border-radius:18px; padding:18px 16px; box-shadow:0 1px 3px rgba(0,0,0,.04); cursor:pointer;}
+  .fcard .flabel{font-size:13px; color:var(--placeholder); line-height:1.35;}
+  .fcard .fval{font-size:22px; font-weight:700; color:var(--ink); margin-top:6px; letter-spacing:-.4px;}
+  .fcard .fmore{font-size:12px; color:var(--primary-dark); font-weight:700; margin-top:12px;}
+  .badge{font-size:11px; font-weight:700; background:var(--primary-50); color:var(--primary-dark); padding:4px 9px; border-radius:7px;}
+  .prog{cursor:pointer;}
+  .prog .phead{display:flex; justify-content:space-between; align-items:center; font-size:15px; font-weight:700; color:var(--ink); margin-bottom:12px;}
+  .prog .bar{height:8px; background:var(--bg); border-radius:999px; overflow:hidden;}
+  .prog .fill{height:100%; background:var(--primary); border-radius:999px;}
+  .prog .ptext{font-size:12px; color:var(--sub); margin-top:10px;}
 </style>
 </head>
 <body>
@@ -94,33 +116,58 @@
     <div class="greet">OOO 사장님<br>안녕하세요</div>
     <div class="pad">
 
+      <!-- ① 히어로 · 이중 CTA -->
       <div class="card">
-        <div class="ctitle">거래처에 카드로 송금하기</div>
-        <button class="btn-primary" onclick="toast('송금은 준비 중이에요')">즉시 송금하기</button>
+        <div class="ctitle">거래처에 카드로 바로 보내기</div>
+        <div class="subline" style="margin-bottom:2px">카드로 결제하면 거래처엔 현금으로 입금돼요</div>
+        <div class="actions">
+          <button class="btn-primary" onclick="toast('송금은 준비 중이에요')">즉시 송금하기</button>
+          <button class="btn-secondary" onclick="toast('결제 요청은 준비 중이에요')">결제 요청</button>
+        </div>
       </div>
 
-      <div class="card row-card" onclick="toast('결제 요청은 준비 중이에요')">
-        <div class="ic"><iconify-icon icon="mingcute:link-2-fill"></iconify-icon></div>
-        <div style="flex:1"><div class="label">거래처에</div><div class="value">카드결제 요청</div></div>
-        <button class="pill">요청</button>
+      <!-- ② 다음 결제 예정 · 가로 스크롤 -->
+      <div class="sec-h" style="display:flex;justify-content:space-between;align-items:baseline">
+        <span>다음 결제 예정 · 3건</span><span style="color:var(--ink);font-size:15px">1,510만원</span>
+      </div>
+      <div class="hscroll">
+        <div class="hcard" onclick="toast('결제 상세는 준비 중이에요')">
+          <div class="ic"><iconify-icon icon="mingcute:store-fill"></iconify-icon></div>
+          <div class="hn">명동상가 임대인</div><div class="hs">임대료</div>
+          <div class="hbot"><span class="hv">330만원</span><span class="dtag">D-9</span></div>
+        </div>
+        <div class="hcard" onclick="toast('결제 상세는 준비 중이에요')">
+          <div class="ic"><iconify-icon icon="mingcute:package-2-fill"></iconify-icon></div>
+          <div class="hn">한솔푸드</div><div class="hs">식자재 대금</div>
+          <div class="hbot"><span class="hv">420만원</span><span class="dtag">D-5</span></div>
+        </div>
+        <div class="hcard" onclick="toast('결제 상세는 준비 중이에요')">
+          <div class="ic"><iconify-icon icon="mingcute:group-3-fill"></iconify-icon></div>
+          <div class="hn">직원 급여</div><div class="hs">인건비</div>
+          <div class="hbot"><span class="hv">760만원</span><span class="dtag">D-12</span></div>
+        </div>
+      </div>
+      <button class="btn-secondary" style="margin-top:14px" onclick="toast('예약 결제는 준비 중이에요')">예약 결제로 자동 납부</button>
+
+      <!-- ③ 2열 숫자 카드 -->
+      <div class="grid2" style="margin-top:26px">
+        <div class="fcard" onclick="toast('결제 내역은 준비 중이에요')">
+          <div class="flabel">이번 달 카드로<br>낸 대금</div>
+          <div class="fval">8,400만원</div>
+          <div class="fmore">내역 보기 ›</div>
+        </div>
+        <div class="fcard" onclick="toast('경비 자료는 준비 중이에요')">
+          <div class="flabel">자동 정리된<br>경비 자료</div>
+          <div class="fval">42건</div>
+          <div class="fmore">경비 보기 ›</div>
+        </div>
       </div>
 
-      <div class="sec-h">다음 결제 예정</div>
-      <div class="card">
-        <div class="label">이번 달 나갈 대금 · 3건</div>
-        <div class="bigval">1,510만원</div>
-        <button class="btn-secondary" style="margin-top:14px" onclick="toast('예약 결제는 준비 중이에요')">예약 결제로 자동 납부</button>
-      </div>
-      <div class="card list-card">
-        <div class="lrow" onclick="toast('결제 상세는 준비 중이에요')"><div class="ic"><iconify-icon icon="mingcute:store-fill"></iconify-icon></div><div class="t"><div class="n">명동상가 임대인</div><div class="s">임대료 · 6월 28일</div></div><div class="amt"><div class="v">330만원</div><div class="d">D-9</div></div></div>
-        <div class="lrow" onclick="toast('결제 상세는 준비 중이에요')"><div class="ic"><iconify-icon icon="mingcute:package-2-fill"></iconify-icon></div><div class="t"><div class="n">한솔푸드</div><div class="s">식자재 대금 · 6월 24일</div></div><div class="amt"><div class="v">420만원</div><div class="d">D-5</div></div></div>
-        <div class="lrow" onclick="toast('결제 상세는 준비 중이에요')"><div class="ic"><iconify-icon icon="mingcute:group-3-fill"></iconify-icon></div><div class="t"><div class="n">직원 급여</div><div class="s">인건비 · 7월 1일</div></div><div class="amt"><div class="v">760만원</div><div class="d">D-12</div></div></div>
-      </div>
-
-      <div class="sec-h">이런 것도 있어요</div>
-      <div class="card list-card">
-        <div class="lrow" onclick="toast('경비 자료는 준비 중이에요')"><div class="ic"><iconify-icon icon="mingcute:file-fill"></iconify-icon></div><div class="t"><div class="n">경비 자료 자동 정리</div><div class="s">세금계산서 · 매입자료</div></div><iconify-icon class="chev" icon="mingcute:right-line"></iconify-icon></div>
-        <div class="lrow" onclick="toast('한도 상향은 준비 중이에요')"><div class="ic"><iconify-icon icon="mingcute:chart-bar-fill"></iconify-icon></div><div class="t"><div class="n">카드 한도 늘리기</div><div class="s">더 많은 대금을 카드로</div></div><iconify-icon class="chev" icon="mingcute:right-line"></iconify-icon></div>
+      <!-- ④ 카드 한도 진행바 -->
+      <div class="card prog" onclick="toast('한도 상향은 준비 중이에요')">
+        <div class="phead"><span>이번 달 카드 한도</span><span class="badge">60% 사용</span></div>
+        <div class="bar"><div class="fill" style="width:60%"></div></div>
+        <div class="ptext">6,000만원 중 3,600만원 사용 · 한도 늘리기 ›</div>
       </div>
 
       <div class="sec-h">알아두면 좋아요</div>
