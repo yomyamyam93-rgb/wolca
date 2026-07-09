@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>결제 2 · 반복 결제</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+  :root{--primary:#2563EB; --primary-dark:#1D4ED8; --primary-50:#EFF4FF; --page-bg:#c9cdd4; --bg:#FFFFFF; --line:#ECEEF1; --border:#B1B8BE; --tile:#EEF1F4; --icon-off:#B0B8C1; --sub:#4E5968; --ink:#191F28; --placeholder:#8B95A1;
+    --primary-grad:linear-gradient(180deg, color-mix(in srgb, var(--primary) 82%, #ffffff), var(--primary)); --btn-shadow:0 4px 12px color-mix(in srgb, var(--primary) 32%, transparent), inset 0 1px 0 rgba(255,255,255,.18);}
+  *{box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent;}
+  body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Noto Sans KR',sans-serif; color:var(--ink); background:var(--page-bg); display:flex; justify-content:center; align-items:flex-start; padding:24px 0; line-height:1.5; -webkit-font-smoothing:antialiased;}
+  .phone{width:390px; height:844px; max-width:100%; background:#fff; position:relative; display:flex; flex-direction:column; border-radius:46px; overflow:hidden; box-shadow:0 16px 50px rgba(0,0,0,.28);}
+  iconify-icon{display:inline-block;}
+  .statusbar{height:47px; display:flex; align-items:center; justify-content:space-between; padding:0 24px 0 30px; flex:0 0 auto;}
+  .statusbar .time{font-size:15px; font-weight:700;}
+  .statusbar .stat{display:flex; align-items:center; gap:7px;}
+  .topbar{height:50px; display:flex; align-items:center; padding:0 10px; flex:0 0 auto;}
+  .back{width:40px; height:40px; display:flex; align-items:center; justify-content:center; font-size:24px; color:var(--ink); cursor:pointer;}
+  .topbar .ttl{flex:1; text-align:center; font-size:16px; font-weight:700; margin-right:40px;}
+  .prog{height:4px; background:var(--line); margin:0 24px 6px; border-radius:2px; overflow:hidden;}
+  .prog i{display:block; height:100%; width:50%; background:var(--primary); border-radius:2px;}
+  .body{flex:1; overflow-y:auto; padding:14px 24px 110px; scrollbar-width:none;}
+  .body::-webkit-scrollbar{display:none;}
+  .q{font-size:22px; font-weight:700; letter-spacing:-.3px; line-height:1.35;}
+  .qs{font-size:14px; color:var(--sub); margin:10px 0 24px; line-height:1.6;}
+
+  .opt{display:flex; align-items:flex-start; gap:14px; border:1.5px solid var(--line); border-radius:16px; padding:18px 16px; margin-bottom:12px; cursor:pointer; background:#fff; transition:.12s;}
+  .opt.on{border-color:var(--primary); background:var(--primary-50);}
+  .opt .oic{width:44px; height:44px; border-radius:12px; background:var(--tile); display:flex; align-items:center; justify-content:center; flex:0 0 auto;}
+  .opt .oic iconify-icon{font-size:24px; color:var(--sub);}
+  .opt.on .oic{background:#fff;} .opt.on .oic iconify-icon{color:var(--primary);}
+  .opt .ot{flex:1;}
+  .opt .ot .tt{font-size:16px; font-weight:700; color:var(--ink);}
+  .opt .ot .ss{font-size:13px; color:var(--sub); margin-top:4px; line-height:1.5;}
+  .opt .chk iconify-icon{font-size:24px; color:var(--border);}
+  .opt.on .chk iconify-icon{color:var(--primary);}
+  .fine{font-size:12px; color:var(--placeholder); text-align:center; margin-top:8px; line-height:1.6;}
+
+  .footer{position:absolute; bottom:0; left:0; right:0; padding:14px 24px 28px; background:linear-gradient(180deg, rgba(255,255,255,0), #fff 30%);}
+  .btn-primary{width:100%; height:56px; border:none; border-radius:15px; font-size:16px; font-weight:700; color:#fff; cursor:pointer; background:var(--primary); background:var(--primary-grad); box-shadow:var(--btn-shadow);}
+</style>
+<script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+</head>
+<body>
+<div class="phone">
+  <div class="statusbar"><span class="time">9:41</span><span class="stat">
+    <svg width="18" height="12" viewBox="0 0 18 12"><rect y="8" width="3" height="4" rx="1" fill="#191F28"/><rect x="5" y="5" width="3" height="7" rx="1" fill="#191F28"/><rect x="10" y="2.5" width="3" height="9.5" rx="1" fill="#191F28"/><rect x="15" width="3" height="12" rx="1" fill="#191F28"/></svg>
+    <svg width="17" height="12" viewBox="0 0 17 12"><path d="M8.5 2C11 2 13.3 3 15 4.7l-1.3 1.4C12.3 4.7 10.5 4 8.5 4S4.7 4.7 3.3 6.1L2 4.7C3.7 3 6 2 8.5 2z" fill="#191F28"/><circle cx="8.5" cy="10" r="1.3" fill="#191F28"/></svg>
+    <svg width="26" height="13" viewBox="0 0 26 13"><rect x=".5" y=".5" width="22" height="12" rx="3.5" fill="none" stroke="#191F28" stroke-opacity=".35"/><rect x="2.5" y="2.5" width="16" height="8" rx="1.8" fill="#191F28"/><rect x="24" y="4.5" width="1.6" height="4" rx=".8" fill="#191F28" fill-opacity=".35"/></svg>
+  </span></div>
+  <div class="topbar"><div class="back" onclick="history.back()">‹</div><div class="ttl">결제</div></div>
+  <div class="prog"><i></i></div>
+
+  <div class="body">
+    <div class="q">매달 자동으로 낼까요?</div>
+    <div class="qs">월세 · 관리비처럼 매달 내는 거라면 한 번만 등록해두세요. 매달 결제일에 알아서 결제돼요.</div>
+
+    <div class="opt" onclick="sel(this)">
+      <div class="oic"><iconify-icon icon="mingcute:refresh-2-fill"></iconify-icon></div>
+      <div class="ot"><div class="tt">매달 자동으로 낼게요</div><div class="ss">매달 결제일에 자동 결제 · 깜빡해도 안심</div></div>
+      <span class="chk"><iconify-icon icon="mingcute:check-circle-fill"></iconify-icon></span>
+    </div>
+
+    <div class="opt on" onclick="sel(this)">
+      <div class="oic"><iconify-icon icon="mingcute:calendar-fill"></iconify-icon></div>
+      <div class="ot"><div class="tt">이번만 낼게요</div><div class="ss">이번 한 번만 결제하고 끝낼게요</div></div>
+      <span class="chk"><iconify-icon icon="mingcute:check-circle-fill"></iconify-icon></span>
+    </div>
+
+    <p class="fine">자동 결제는 나중에 언제든 끌 수 있어요</p>
+  </div>
+
+  <div class="footer">
+    <button class="btn-primary" onclick="location.href='12_3_혜택.html'">다음</button>
+  </div>
+</div>
+<script>
+function sel(el){ document.querySelectorAll('.opt').forEach(o=>o.classList.remove('on')); el.classList.add('on'); }
+</script>
+</body>
+</html>

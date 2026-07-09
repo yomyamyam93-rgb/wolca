@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>결제 1 · 결제수단</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+  :root{--primary:#2563EB; --primary-dark:#1D4ED8; --primary-50:#EFF4FF; --page-bg:#c9cdd4; --bg:#FFFFFF; --line:#ECEEF1; --border:#B1B8BE; --tile:#EEF1F4; --icon-off:#B0B8C1; --sub:#4E5968; --ink:#191F28; --placeholder:#8B95A1;
+    --primary-grad:linear-gradient(180deg, color-mix(in srgb, var(--primary) 82%, #ffffff), var(--primary)); --btn-shadow:0 4px 12px color-mix(in srgb, var(--primary) 32%, transparent), inset 0 1px 0 rgba(255,255,255,.18);}
+  *{box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent;}
+  body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Noto Sans KR',sans-serif; color:var(--ink); background:var(--page-bg); display:flex; justify-content:center; align-items:flex-start; padding:24px 0; line-height:1.5; -webkit-font-smoothing:antialiased;}
+  .phone{width:390px; height:844px; max-width:100%; background:#fff; position:relative; display:flex; flex-direction:column; border-radius:46px; overflow:hidden; box-shadow:0 16px 50px rgba(0,0,0,.28);}
+  iconify-icon{display:inline-block;}
+  .statusbar{height:47px; display:flex; align-items:center; justify-content:space-between; padding:0 24px 0 30px; flex:0 0 auto;}
+  .statusbar .time{font-size:15px; font-weight:700;}
+  .statusbar .stat{display:flex; align-items:center; gap:7px;}
+  .topbar{height:50px; display:flex; align-items:center; padding:0 10px; flex:0 0 auto;}
+  .back{width:40px; height:40px; display:flex; align-items:center; justify-content:center; font-size:24px; color:var(--ink); cursor:pointer;}
+  .topbar .ttl{flex:1; text-align:center; font-size:16px; font-weight:700; margin-right:40px;}
+  .prog{height:4px; background:var(--line); margin:0 24px 6px; border-radius:2px; overflow:hidden;}
+  .prog i{display:block; height:100%; width:25%; background:var(--primary); border-radius:2px;}
+  .body{flex:1; overflow-y:auto; padding:14px 24px 110px; scrollbar-width:none;}
+  .body::-webkit-scrollbar{display:none;}
+  .q{font-size:22px; font-weight:700; letter-spacing:-.3px; margin-bottom:20px;}
+
+  .cardbox{border-radius:18px; padding:18px 20px; color:#fff; background:linear-gradient(135deg,#4B7BF5,#1E59DF); position:relative; cursor:pointer; margin-bottom:12px; box-shadow:0 4px 14px rgba(37,99,235,.25);}
+  .cardbox.alt{background:linear-gradient(135deg,#454C59,#23272F); box-shadow:0 4px 14px rgba(0,0,0,.18);}
+  .cardbox.on{box-shadow:0 0 0 3px var(--primary), 0 6px 18px rgba(37,99,235,.32);}
+  .cardbox .tp{display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:24px;}
+  .cardbox .tag{font-size:11px; font-weight:700; background:rgba(255,255,255,.22); padding:4px 9px; border-radius:7px;}
+  .cardbox .chk{font-size:22px; opacity:0;}
+  .cardbox.on .chk{opacity:1;}
+  .cardbox .nm{font-size:18px; font-weight:700;}
+  .cardbox .no{font-size:13px; opacity:.88; letter-spacing:1.5px; margin-top:5px;}
+  .cardbox .brand{font-size:11px; opacity:.85; letter-spacing:.5px; margin-top:14px;}
+
+  .addrow{display:flex; align-items:center; gap:12px; border:1.5px dashed var(--border); border-radius:14px; padding:15px 16px; cursor:pointer; margin-top:2px;}
+  .addrow .pl{width:34px; height:34px; border-radius:10px; background:var(--tile); display:flex; align-items:center; justify-content:center; color:var(--primary); font-size:24px; flex:0 0 auto;}
+  .addrow .at{font-size:15px; font-weight:600; color:var(--sub);}
+  .easy{display:block; text-align:center; width:100%; background:none; border:none; font-family:inherit; font-size:14px; color:var(--placeholder); margin-top:22px; cursor:pointer;}
+
+  .footer{position:absolute; bottom:0; left:0; right:0; padding:14px 24px 28px; background:linear-gradient(180deg, rgba(255,255,255,0), #fff 30%);}
+  .btn-primary{width:100%; height:56px; border:none; border-radius:15px; font-size:16px; font-weight:700; color:#fff; cursor:pointer; background:var(--primary); background:var(--primary-grad); box-shadow:var(--btn-shadow);}
+</style>
+<script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+</head>
+<body>
+<div class="phone">
+  <div class="statusbar"><span class="time">9:41</span><span class="stat">
+    <svg width="18" height="12" viewBox="0 0 18 12"><rect y="8" width="3" height="4" rx="1" fill="#191F28"/><rect x="5" y="5" width="3" height="7" rx="1" fill="#191F28"/><rect x="10" y="2.5" width="3" height="9.5" rx="1" fill="#191F28"/><rect x="15" width="3" height="12" rx="1" fill="#191F28"/></svg>
+    <svg width="17" height="12" viewBox="0 0 17 12"><path d="M8.5 2C11 2 13.3 3 15 4.7l-1.3 1.4C12.3 4.7 10.5 4 8.5 4S4.7 4.7 3.3 6.1L2 4.7C3.7 3 6 2 8.5 2z" fill="#191F28"/><circle cx="8.5" cy="10" r="1.3" fill="#191F28"/></svg>
+    <svg width="26" height="13" viewBox="0 0 26 13"><rect x=".5" y=".5" width="22" height="12" rx="3.5" fill="none" stroke="#191F28" stroke-opacity=".35"/><rect x="2.5" y="2.5" width="16" height="8" rx="1.8" fill="#191F28"/><rect x="24" y="4.5" width="1.6" height="4" rx=".8" fill="#191F28" fill-opacity=".35"/></svg>
+  </span></div>
+  <div class="topbar"><div class="back" onclick="history.back()">‹</div><div class="ttl">결제</div></div>
+  <div class="prog"><i></i></div>
+
+  <div class="body">
+    <div class="q">어떤 카드로 결제할까요?</div>
+
+    <div class="cardbox on" onclick="selcard(this)">
+      <div class="tp"><span class="tag">추천 카드</span><span class="chk"><iconify-icon icon="mingcute:check-circle-fill"></iconify-icon></span></div>
+      <div class="nm">삼성 Deep Dream</div>
+      <div class="no">•••• •••• •••• 4821</div>
+      <div class="brand">SAMSUNG CARD</div>
+    </div>
+
+    <div class="cardbox alt" onclick="selcard(this)">
+      <div class="tp"><span class="tag">보유 카드</span><span class="chk"><iconify-icon icon="mingcute:check-circle-fill"></iconify-icon></span></div>
+      <div class="nm">신한 Deep On</div>
+      <div class="no">•••• •••• •••• 1177</div>
+      <div class="brand">SHINHAN CARD</div>
+    </div>
+
+    <div class="addrow" onclick="toast('카드 등록은 준비 중이에요')">
+      <div class="pl">+</div>
+      <div class="at">새 카드 등록하기</div>
+    </div>
+
+    <button class="easy" onclick="toast('간편결제는 준비 중이에요')">간편결제(페이코 · 토스페이 · 카카오페이)로 낼게요 ›</button>
+  </div>
+
+  <div class="footer">
+    <button class="btn-primary" onclick="location.href='12_2_반복결제.html'">다음</button>
+  </div>
+</div>
+<script>
+function selcard(el){ document.querySelectorAll('.cardbox').forEach(c=>c.classList.remove('on')); el.classList.add('on'); }
+function toast(msg){let t=document.createElement('div');t.textContent=msg;t.style.cssText="position:fixed;bottom:104px;left:50%;transform:translateX(-50%);background:#191F28;color:#fff;padding:12px 18px;border-radius:24px;font-size:13px;font-weight:600;z-index:99;opacity:0;transition:.2s;white-space:nowrap";document.body.appendChild(t);requestAnimationFrame(()=>t.style.opacity='1');setTimeout(()=>{t.style.opacity='0';setTimeout(()=>t.remove(),200)},1500);}
+</script>
+</body>
+</html>
