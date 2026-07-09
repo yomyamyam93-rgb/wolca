@@ -30,23 +30,20 @@
   .seg button.on{background:#fff; color:var(--ink); box-shadow:0 1px 3px rgba(0,0,0,.1);}
 
   /* 가로 스와이프 카드 트랙 */
-  .cardscroll{display:flex; gap:14px; overflow-x:auto; scroll-snap-type:x mandatory; margin:0 -24px; padding:6px 24px 4px; scrollbar-width:none;}
+  .cardscroll{display:flex; gap:14px; overflow-x:auto; scroll-snap-type:x mandatory; margin:0 -24px; padding:2px 24px 0; scrollbar-width:none; cursor:grab;}
+  .cardscroll:active{cursor:grabbing;}
   .cardscroll::-webkit-scrollbar{display:none;}
   .slide{flex:0 0 84%; scroll-snap-align:start;}
-  .cardbox{position:relative; overflow:hidden; height:182px; border-radius:20px; padding:20px; color:#fff; display:flex; flex-direction:column; justify-content:space-between;
-    background:linear-gradient(140deg,#5A86F7 0%,#2560E8 55%,#1A4FCC 100%);
-    box-shadow:0 14px 28px -8px rgba(30,89,223,.6), 0 4px 10px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.25);}
-  .cardbox.alt{background:linear-gradient(140deg,#4A525F 0%,#2A2F38 60%,#191D24 100%); box-shadow:0 14px 28px -8px rgba(0,0,0,.55), 0 4px 10px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.16);}
-  .cardbox:after{content:''; position:absolute; inset:0; background:linear-gradient(118deg, rgba(255,255,255,.30) 0%, rgba(255,255,255,.05) 34%, rgba(255,255,255,0) 55%); pointer-events:none;}
-  .cardbox>*{position:relative; z-index:1;}
+  .cardbox{height:170px; border-radius:18px; padding:20px; color:#fff; display:flex; flex-direction:column; justify-content:space-between;
+    background:linear-gradient(135deg,#4B7BF5,#1E59DF); box-shadow:0 6px 16px -4px rgba(37,99,235,.35);}
+  .cardbox.alt{background:linear-gradient(135deg,#454C59,#23272F); box-shadow:0 6px 16px -4px rgba(0,0,0,.3);}
   .cardbox .tp{display:flex; justify-content:space-between; align-items:flex-start;}
-  .cardbox .tag{font-size:11px; font-weight:700; background:rgba(255,255,255,.22); padding:4px 9px; border-radius:7px;}
-  .cardbox .brandtop{font-size:11px; opacity:.9; letter-spacing:.7px; font-weight:700;}
-  .cardbox .chip{width:38px; height:28px; border-radius:7px; background:linear-gradient(135deg,#F7DE9E,#CBA043); box-shadow:inset 0 0 0 1px rgba(0,0,0,.06), inset 0 -2px 3px rgba(0,0,0,.15);}
+  .cardbox .tag{font-size:11px; font-weight:700; background:rgba(255,255,255,.2); padding:4px 9px; border-radius:7px;}
+  .cardbox .brandtop{font-size:11px; opacity:.88; letter-spacing:.6px; font-weight:700;}
   .cardbox .nm{font-size:18px; font-weight:700;}
-  .cardbox .no{font-size:13px; opacity:.9; letter-spacing:1.5px; margin-top:5px;}
-  .cardadd{height:182px; border-radius:20px; border:1.5px dashed var(--border); background:#FAFBFC; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; cursor:pointer;}
-  .cardadd .pl{width:48px; height:48px; border-radius:50%; background:var(--tile); display:flex; align-items:center; justify-content:center; color:var(--primary); font-size:28px;}
+  .cardbox .no{font-size:13px; opacity:.88; letter-spacing:1.5px; margin-top:5px;}
+  .cardadd{height:170px; border-radius:18px; border:1.5px dashed var(--border); background:#FAFBFC; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; cursor:pointer;}
+  .cardadd .pl{width:46px; height:46px; border-radius:50%; background:var(--tile); display:flex; align-items:center; justify-content:center; color:var(--primary); font-size:28px;}
   .cardadd .at{font-size:14px; font-weight:600; color:var(--sub);}
 
   .dots{display:flex; justify-content:center; gap:6px; margin-top:16px;}
@@ -90,14 +87,12 @@
         <div class="slide">
           <div class="cardbox">
             <div class="tp"><span class="tag">추천 카드</span><span class="brandtop">SAMSUNG</span></div>
-            <div class="chip"></div>
             <div><div class="nm">삼성 Deep Dream</div><div class="no">•••• •••• •••• 4821</div></div>
           </div>
         </div>
         <div class="slide">
           <div class="cardbox alt">
             <div class="tp"><span class="tag">보유 카드</span><span class="brandtop">SHINHAN</span></div>
-            <div class="chip"></div>
             <div><div class="nm">신한 Deep On</div><div class="no">•••• •••• •••• 1177</div></div>
           </div>
         </div>
@@ -149,6 +144,18 @@ function updateDots(){
   const idx=Math.round(s.scrollLeft/step);
   document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('on', i===idx));
 }
+/* 마우스 드래그로 가로 스와이프 (PC에서도 밀리게) */
+(function(){
+  const s=document.getElementById('cs');
+  let down=false, startX=0, startLeft=0, moved=false;
+  s.addEventListener('pointerdown', e=>{ down=true; moved=false; startX=e.clientX; startLeft=s.scrollLeft; s.style.scrollSnapType='none'; });
+  s.addEventListener('pointermove', e=>{ if(!down) return; const dx=e.clientX-startX; if(Math.abs(dx)>4) moved=true; s.scrollLeft=startLeft-dx; });
+  function end(){ if(!down) return; down=false; s.style.scrollSnapType='x mandatory'; }
+  s.addEventListener('pointerup', end);
+  s.addEventListener('pointerleave', end);
+  /* 드래그 후 카드 안 클릭(추가 등) 오작동 방지 */
+  s.addEventListener('click', e=>{ if(moved){ e.stopPropagation(); e.preventDefault(); } }, true);
+})();
 function toast(msg){let t=document.createElement('div');t.textContent=msg;t.style.cssText="position:fixed;bottom:104px;left:50%;transform:translateX(-50%);background:#191F28;color:#fff;padding:12px 18px;border-radius:24px;font-size:13px;font-weight:600;z-index:99;opacity:0;transition:.2s;white-space:nowrap";document.body.appendChild(t);requestAnimationFrame(()=>t.style.opacity='1');setTimeout(()=>{t.style.opacity='0';setTimeout(()=>t.remove(),200)},1500);}
 </script>
 </body>
