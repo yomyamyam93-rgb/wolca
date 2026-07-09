@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>온보딩 4 · 계산기</title>
+<title>가입 8-2 · 사업자 정보 입력</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
 <link rel="stylesheet" href="style.css">
 <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
@@ -18,33 +18,27 @@
       <svg width="26" height="13" viewBox="0 0 26 13"><rect x=".5" y=".5" width="22" height="12" rx="3.5" fill="none" stroke="#191F28" stroke-opacity=".35"/><rect x="2.5" y="2.5" width="16" height="8" rx="1.8" fill="#191F28"/><rect x="24" y="4.5" width="1.6" height="4" rx=".8" fill="#191F28" fill-opacity=".35"/></svg>
     </span>
   </div>
-  <div class="topbar"><div class="back"><iconify-icon icon="mingcute:left-line"></iconify-icon></div></div>
+  <div class="topbar"><div class="back" onclick="location.href='8_1_사업자확인.html'"><iconify-icon icon="mingcute:left-line"></iconify-icon></div></div>
 
-  <div class="calc-body">
-    <h1>얼마를 카드로<br>내볼까요?</h1>
-    <p class="lead">금액만 넣어보세요. 로그인 없이 바로 확인.</p>
+  <div class="page">
+    <h1>사업자 정보를<br>입력해주세요</h1>
+    <p class="lead">세금계산서 발행에 사용돼요.</p>
 
     <div class="field">
-      <label>결제할 금액</label>
-      <div class="amtbox"><span class="val">600,000</span><span class="won">원</span></div>
+      <label>사업자등록번호</label>
+      <input class="tinput" inputmode="numeric" placeholder="000-00-00000">
+    </div>
+    <div class="field">
+      <label>상호명</label>
+      <input class="tinput" placeholder="예) 랜선상회">
     </div>
 
-    <div class="result">
-      <div class="rrow">
-        <div class="ri"><iconify-icon icon="mingcute:flash-fill"></iconify-icon></div>
-        <div class="rt"><div class="rl">상대방에게는</div><div class="rv">오늘 600,000원 즉시 송금</div></div>
-      </div>
-      <div class="rrow">
-        <div class="ri"><iconify-icon icon="mingcute:bank-card-fill"></iconify-icon></div>
-        <div class="rt"><div class="rl">나는</div><div class="rv">6개월 무이자 · 월 100,000원</div></div>
-      </div>
-      <div class="rfee">수수료 24,000원 (4%)</div>
-    </div>
+    <div class="hint-bar">입력한 정보는 세금계산서 발행에만 사용돼요</div>
   </div>
 
   <div class="footer">
-    <button class="btn-primary" onclick="location.href='6_약관동의.html'">로그인하고 혜택 받기</button>
-    <button class="skip" onclick="location.href='9_홈_개인.html'">나중에 할게요</button>
+    <button class="btn-primary" onclick="location.href='9_홈_사업자.html'">입력 완료</button>
+    <button class="skip" onclick="location.href='9_홈_개인.html'">나중에 등록할게요</button>
   </div>
 </div>
 </body>
