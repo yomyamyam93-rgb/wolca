@@ -126,28 +126,18 @@
         </div>
       </div>
 
-      <!-- ② 다음 결제 예정 · 가로 스크롤 -->
-      <div class="sec-h" style="display:flex;justify-content:space-between;align-items:baseline">
-        <span>다음 결제 예정 · 3건</span><span style="color:var(--ink);font-size:15px">1,510만원</span>
+      <!-- ② 다음 결제 예정 · 큰 숫자 + 리스트 -->
+      <div class="sec-h">다음 결제 예정</div>
+      <div class="card">
+        <div class="label">이번 달 나갈 대금 · 3건</div>
+        <div class="bigval">1,510만원</div>
+        <button class="btn-secondary" style="margin-top:14px" onclick="toast('예약 결제는 준비 중이에요')">예약 결제로 자동 납부</button>
       </div>
-      <div class="hscroll">
-        <div class="hcard" onclick="toast('결제 상세는 준비 중이에요')">
-          <div class="ic"><iconify-icon icon="mingcute:store-fill"></iconify-icon></div>
-          <div class="hn">명동상가 임대인</div><div class="hs">임대료</div>
-          <div class="hbot"><span class="hv">330만원</span><span class="dtag">D-9</span></div>
-        </div>
-        <div class="hcard" onclick="toast('결제 상세는 준비 중이에요')">
-          <div class="ic"><iconify-icon icon="mingcute:package-2-fill"></iconify-icon></div>
-          <div class="hn">한솔푸드</div><div class="hs">식자재 대금</div>
-          <div class="hbot"><span class="hv">420만원</span><span class="dtag">D-5</span></div>
-        </div>
-        <div class="hcard" onclick="toast('결제 상세는 준비 중이에요')">
-          <div class="ic"><iconify-icon icon="mingcute:group-3-fill"></iconify-icon></div>
-          <div class="hn">직원 급여</div><div class="hs">인건비</div>
-          <div class="hbot"><span class="hv">760만원</span><span class="dtag">D-12</span></div>
-        </div>
+      <div class="card list-card">
+        <div class="lrow" onclick="toast('결제 상세는 준비 중이에요')"><div class="ic"><iconify-icon icon="mingcute:store-fill"></iconify-icon></div><div class="t"><div class="n">명동상가 임대인</div><div class="s">임대료 · 6월 28일</div></div><div class="amt"><div class="v">330만원</div><div class="d">D-9</div></div></div>
+        <div class="lrow" onclick="toast('결제 상세는 준비 중이에요')"><div class="ic"><iconify-icon icon="mingcute:package-2-fill"></iconify-icon></div><div class="t"><div class="n">한솔푸드</div><div class="s">식자재 대금 · 6월 24일</div></div><div class="amt"><div class="v">420만원</div><div class="d">D-5</div></div></div>
+        <div class="lrow" onclick="toast('결제 상세는 준비 중이에요')"><div class="ic"><iconify-icon icon="mingcute:group-3-fill"></iconify-icon></div><div class="t"><div class="n">직원 급여</div><div class="s">인건비 · 7월 1일</div></div><div class="amt"><div class="v">760만원</div><div class="d">D-12</div></div></div>
       </div>
-      <button class="btn-secondary" style="margin-top:14px" onclick="toast('예약 결제는 준비 중이에요')">예약 결제로 자동 납부</button>
 
       <!-- ③ 2열 숫자 카드 -->
       <div class="grid2" style="margin-top:26px">
