@@ -81,8 +81,9 @@
   .fcard{background:#fff; border-radius:18px; padding:18px 16px; box-shadow:0 1px 3px rgba(0,0,0,.04); cursor:pointer;}
   .fcard .ficon{width:38px; height:38px; border-radius:11px; background:var(--tile); display:flex; align-items:center; justify-content:center; margin-bottom:12px;}
   .fcard .ficon iconify-icon{font-size:20px; color:var(--primary);}
-  .fcard .flabel{font-size:12px; color:var(--placeholder);}
-  .fcard .fval{font-size:17px; font-weight:700; color:var(--ink); margin-top:3px;}
+  .fcard .flabel{font-size:13px; color:var(--placeholder);}
+  .fcard .fval{font-size:20px; font-weight:700; color:var(--ink); margin-top:4px; letter-spacing:-.3px;}
+  .fcard .fmore{font-size:12px; color:var(--primary-dark); font-weight:700; margin-top:12px;}
   .badge{font-size:11px; font-weight:700; background:var(--primary-50); color:var(--primary-dark); padding:4px 9px; border-radius:7px;}
   .grade .ghead{display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;}
   .grade .gleft{display:flex; align-items:center; gap:8px; font-weight:700;}
@@ -152,14 +153,14 @@
       <!-- 혜택 · 환급 (2열 카드) -->
       <div class="grid2">
         <div class="fcard" onclick="toast('혜택은 준비 중이에요')">
-          <div class="ficon"><iconify-icon icon="mingcute:gift-fill"></iconify-icon></div>
           <div class="flabel">오늘 받을 혜택</div>
           <div class="fval">최소 0원</div>
+          <div class="fmore">혜택 보기 ›</div>
         </div>
         <div class="fcard" onclick="toast('환급은 준비 중이에요')">
-          <div class="ficon"><iconify-icon icon="mingcute:wallet-4-fill"></iconify-icon></div>
           <div class="flabel">돌려받을 월세</div>
           <div class="fval">평균 115만원</div>
+          <div class="fmore">환급 확인 ›</div>
         </div>
       </div>
 
