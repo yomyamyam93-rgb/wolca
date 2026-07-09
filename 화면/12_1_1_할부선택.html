@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>결제 1 · 할부 선택(시트)</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+  :root{--primary:#2563EB; --primary-dark:#1D4ED8; --primary-50:#EFF4FF; --page-bg:#c9cdd4; --bg:#FFFFFF; --line:#ECEEF1; --border:#B1B8BE; --tile:#EEF1F4; --icon-off:#B0B8C1; --sub:#4E5968; --ink:#191F28; --placeholder:#8B95A1; --success:#059669;
+    --primary-grad:linear-gradient(180deg, color-mix(in srgb, var(--primary) 82%, #ffffff), var(--primary)); --btn-shadow:0 4px 12px color-mix(in srgb, var(--primary) 32%, transparent), inset 0 1px 0 rgba(255,255,255,.18);}
+  *{box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent;}
+  body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Noto Sans KR',sans-serif; color:var(--ink); background:var(--page-bg); display:flex; justify-content:center; align-items:flex-start; padding:24px 0; line-height:1.5; -webkit-font-smoothing:antialiased;}
+  .phone{width:390px; height:844px; max-width:100%; background:#fff; position:relative; display:flex; flex-direction:column; border-radius:46px; overflow:hidden; box-shadow:0 16px 50px rgba(0,0,0,.28);}
+  iconify-icon{display:inline-block;}
+  .statusbar{height:47px; display:flex; align-items:center; justify-content:space-between; padding:0 24px 0 30px; flex:0 0 auto;}
+  .statusbar .time{font-size:15px; font-weight:700;}
+  .statusbar .stat{display:flex; align-items:center; gap:7px;}
+  .topbar{height:50px; display:flex; align-items:center; padding:0 10px; flex:0 0 auto;}
+  .back{width:40px; height:40px; display:flex; align-items:center; justify-content:center; font-size:24px; color:var(--ink); cursor:pointer;}
+  .topbar .ttl{flex:1; text-align:center; font-size:16px; font-weight:700; margin-right:40px;}
+  .prog{height:4px; background:var(--line); margin:0 24px 6px; border-radius:2px; overflow:hidden;}
+  .prog i{display:block; height:100%; width:25%; background:var(--primary); border-radius:2px;}
+  .body{flex:1; overflow-y:auto; padding:14px 24px 104px; scrollbar-width:none;}
+  .body::-webkit-scrollbar{display:none;}
+  .q{font-size:22px; font-weight:700; letter-spacing:-.3px; margin-bottom:18px;}
+
+  .seg{display:flex; background:#E8EBEF; border-radius:13px; padding:4px; margin-bottom:20px;}
+  .seg button{flex:1; border:none; background:transparent; font-family:inherit; font-size:15px; font-weight:700; color:var(--sub); padding:11px 0; border-radius:10px; cursor:pointer; transition:.12s;}
+  .seg button.on{background:#fff; color:var(--ink); box-shadow:0 1px 3px rgba(0,0,0,.1);}
+
+  /* 카드 트랙 (중앙 정렬 캐러셀) */
+  .cardscroll{display:flex; gap:14px; overflow-x:auto; scroll-snap-type:x mandatory; margin:0 -24px; padding:2px 0; scrollbar-width:none; cursor:grab;}
+  .cardscroll:active{cursor:grabbing;}
+  .cardscroll::-webkit-scrollbar{display:none;}
+  .slide{flex:0 0 80%; scroll-snap-align:center;}
+  .slide:first-child{margin-left:10%;}
+  .slide:last-child{margin-right:10%;}
+  .cardface{height:172px; border-radius:16px; padding:20px; color:#fff; position:relative; display:flex; flex-direction:column; overflow:hidden; box-shadow:0 6px 16px -4px rgba(0,0,0,.3);}
+  .cardface:after{content:''; position:absolute; inset:0; background:linear-gradient(120deg, rgba(255,255,255,.14), rgba(255,255,255,0) 42%); pointer-events:none;}
+  .cardface>*{position:relative; z-index:1;}
+  .cardface .cf-brand{font-size:15px; font-weight:800; letter-spacing:.2px;}
+  .cardface .cf-chip{width:38px; height:28px; border-radius:6px; background:linear-gradient(135deg,#ecd699,#b8933f); box-shadow:inset 0 0 0 1px rgba(0,0,0,.12); margin:13px 0 auto;}
+  .cardface .cf-no{font-size:14px; font-weight:600; letter-spacing:2px; opacity:.95;}
+  .cardface .cf-bottom{display:flex; justify-content:space-between; align-items:flex-end; margin-top:9px;}
+  .cardface .cf-nick{font-size:12px; opacity:.85; font-weight:600;}
+  .cardface .cf-visa{font-size:15px; font-weight:800; font-style:italic; letter-spacing:.5px;}
+  .cardface .cf-mc{display:flex; align-items:center;}
+  .cardface .cf-mc i{width:17px; height:17px; border-radius:50%; display:block;}
+  .cardface .cf-mc i:first-child{background:#EB001B;}
+  .cardface .cf-mc i:last-child{background:#F79E1B; margin-left:-7px; mix-blend-mode:screen;}
+  .cardface.samsung{background:linear-gradient(135deg,#22375f,#0e1a30);}
+  .cardface.hyundai{background:linear-gradient(160deg,#2b2e34,#0b0c0f);}
+  .cardface.shinhan{background:linear-gradient(135deg,#1596a6,#0a3f70);}
+  .cardadd{height:168px; border-radius:18px; border:1.5px dashed color-mix(in srgb,var(--primary) 45%,#fff); background:var(--primary-50); display:flex; align-items:center; justify-content:center; cursor:pointer;}
+  .cardadd .pill{display:flex; align-items:center; gap:6px; background:#fff; color:var(--primary-dark); font-size:14px; font-weight:700; padding:11px 18px; border-radius:999px; box-shadow:0 2px 6px rgba(37,99,235,.12);}
+  .cardadd .pill iconify-icon{font-size:17px;}
+
+  .dots{display:flex; justify-content:center; gap:6px; margin:16px 0 8px;}
+  .dot{width:6px; height:6px; border-radius:3px; background:var(--line); transition:.2s;}
+  .dot.on{background:var(--primary); width:16px;}
+
+  /* 카드 입력 폼 (새 카드) */
+  .formsec{margin-top:14px;}
+  .field{margin-bottom:14px;}
+  .field > label{display:block; font-size:13px; font-weight:700; color:var(--sub); margin-bottom:8px;}
+  .tin{width:100%; height:50px; border:1.5px solid var(--border); border-radius:12px; padding:0 14px; font-family:inherit; font-size:15px; font-weight:600; color:var(--ink); background:#fff;}
+  .tin::placeholder{color:var(--placeholder); font-weight:500;}
+  .tin:focus{outline:none; border-color:var(--primary);}
+  .cardno{display:flex; align-items:center; gap:6px;}
+  .cardno .tin{text-align:center; padding:0 2px; letter-spacing:2px;}
+  .cardno .dash{color:var(--icon-off); flex:0 0 auto;}
+  .two{display:flex; gap:10px;} .two .field{flex:1; margin-bottom:14px;}
+
+  /* 할부 (선택 행 → 바텀시트) */
+  .ilbl{font-size:13px; font-weight:700; color:var(--sub); margin:18px 0 10px;}
+  .selrow{display:flex; align-items:center; justify-content:space-between; height:52px; border:1.5px solid var(--border); border-radius:12px; padding:0 16px; cursor:pointer;}
+  .selrow .selval{font-size:15px; font-weight:700; color:var(--ink);}
+  .selrow .selval .free{font-size:11px; font-weight:700; color:var(--primary-dark); background:var(--primary-50); padding:2px 7px; border-radius:6px; margin-left:6px;}
+  .selrow iconify-icon{color:var(--icon-off); font-size:20px;}
+
+  /* 간편결제 목록 */
+  .payrow{display:flex; align-items:center; gap:12px; border:1.5px solid var(--line); border-radius:14px; padding:17px 16px; margin-bottom:10px; cursor:pointer; background:#fff; transition:.12s;}
+  .payrow.on{border-color:var(--primary); background:var(--primary-50);}
+  .payrow .plabel{flex:1; font-size:16px; font-weight:800; letter-spacing:-.2px;}
+  .payrow .dot2{width:16px; height:16px; border-radius:5px; background:#FFCD00; flex:0 0 auto;}
+  .payrow .rd iconify-icon{font-size:23px; color:var(--border); display:block;}
+  .payrow.on .rd iconify-icon{color:var(--primary);}
+
+  .footer{position:absolute; bottom:0; left:0; right:0; padding:14px 24px 28px; background:linear-gradient(180deg, rgba(255,255,255,0), #fff 30%); z-index:2;}
+  .btn-primary{width:100%; height:56px; border:none; border-radius:15px; font-size:16px; font-weight:700; color:#fff; cursor:pointer; background:var(--primary); background:var(--primary-grad); box-shadow:var(--btn-shadow);}
+
+  /* 바텀시트 */
+  .dim{position:absolute; inset:0; background:rgba(15,20,30,.45); opacity:0; pointer-events:none; transition:.25s; z-index:5;}
+  .dim.on{opacity:1; pointer-events:auto;}
+  .sheet{position:absolute; left:0; right:0; bottom:0; background:#fff; border-radius:22px 22px 0 0; padding:10px 24px 26px; z-index:6; transform:translateY(100%); transition:transform .3s cubic-bezier(.2,.8,.2,1); box-shadow:0 -8px 30px rgba(0,0,0,.14); max-height:74%; display:flex; flex-direction:column;}
+  .sheet.on{transform:translateY(0);}
+  .sheet .handle{width:40px; height:5px; border-radius:3px; background:#E1E5EA; margin:2px auto 14px;}
+  .sheet h3{font-size:18px; font-weight:700; margin-bottom:6px; letter-spacing:-.3px;}
+  .ilist{overflow-y:auto; margin:6px -24px 0; padding:0 24px; scrollbar-width:none;}
+  .ilist::-webkit-scrollbar{display:none;}
+  .irow{display:flex; align-items:center; gap:8px; padding:15px 0; border-top:1px solid var(--line); cursor:pointer; font-size:16px; font-weight:600; color:var(--ink);}
+  .irow:first-child{border-top:none;}
+  .irow .free{font-size:11px; font-weight:700; color:var(--primary-dark); background:var(--primary-50); padding:3px 8px; border-radius:6px;}
+  .irow .sp{flex:1;}
+  .irow .ck{font-size:22px; color:var(--primary); opacity:0;}
+  .irow.on{color:var(--primary-dark);}
+  .irow.on .ck{opacity:1;}
+</style>
+<script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+</head>
+<body>
+<div class="phone">
+  <div class="statusbar"><span class="time">9:41</span><span class="stat">
+    <svg width="18" height="12" viewBox="0 0 18 12"><rect y="8" width="3" height="4" rx="1" fill="#191F28"/><rect x="5" y="5" width="3" height="7" rx="1" fill="#191F28"/><rect x="10" y="2.5" width="3" height="9.5" rx="1" fill="#191F28"/><rect x="15" width="3" height="12" rx="1" fill="#191F28"/></svg>
+    <svg width="17" height="12" viewBox="0 0 17 12"><path d="M8.5 2C11 2 13.3 3 15 4.7l-1.3 1.4C12.3 4.7 10.5 4 8.5 4S4.7 4.7 3.3 6.1L2 4.7C3.7 3 6 2 8.5 2z" fill="#191F28"/><circle cx="8.5" cy="10" r="1.3" fill="#191F28"/></svg>
+    <svg width="26" height="13" viewBox="0 0 26 13"><rect x=".5" y=".5" width="22" height="12" rx="3.5" fill="none" stroke="#191F28" stroke-opacity=".35"/><rect x="2.5" y="2.5" width="16" height="8" rx="1.8" fill="#191F28"/><rect x="24" y="4.5" width="1.6" height="4" rx=".8" fill="#191F28" fill-opacity=".35"/></svg>
+  </span></div>
+  <div class="topbar"><div class="back" onclick="history.back()">‹</div><div class="ttl">결제</div></div>
+  <div class="prog"><i></i></div>
+
+  <div class="body">
+    <div class="q">어떻게 결제할까요?</div>
+
+    <div class="seg">
+      <button id="segCard" class="on" onclick="tab('card')">카드결제</button>
+      <button id="segEasy" onclick="tab('easy')">간편결제</button>
+    </div>
+
+    <!-- 카드결제 -->
+    <div id="tabCard">
+      <div class="cardscroll" id="cs" onscroll="updateDots()">
+        <div class="slide">
+          <div class="cardface samsung">
+            <div class="cf-brand">삼성카드</div>
+            <div class="cf-chip"></div>
+            <div class="cf-no">•••• •••• •••• 4821</div>
+            <div class="cf-bottom"><span class="cf-nick">taptap O</span><span class="cf-visa">VISA</span></div>
+          </div>
+        </div>
+        <div class="slide">
+          <div class="cardface hyundai">
+            <div class="cf-brand">현대카드</div>
+            <div class="cf-chip"></div>
+            <div class="cf-no">•••• •••• •••• 3092</div>
+            <div class="cf-bottom"><span class="cf-nick">the Green</span><span class="cf-mc"><i></i><i></i></span></div>
+          </div>
+        </div>
+        <div class="slide">
+          <div class="cardface shinhan">
+            <div class="cf-brand">신한카드</div>
+            <div class="cf-chip"></div>
+            <div class="cf-no">•••• •••• •••• 1177</div>
+            <div class="cf-bottom"><span class="cf-nick">Deep Dream</span><span class="cf-visa">VISA</span></div>
+          </div>
+        </div>
+        <div class="slide">
+          <div class="cardadd"><span class="pill"><iconify-icon icon="mingcute:add-line"></iconify-icon>다른 카드 등록하기</span></div>
+        </div>
+      </div>
+      <div class="dots"><span class="dot on"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+
+      <!-- 새 카드: 입력 폼 -->
+      <div id="newform" class="formsec" style="display:none">
+        <div class="field">
+          <label>카드 번호</label>
+          <div class="cardno">
+            <input class="tin" inputmode="numeric" placeholder="0000"><span class="dash">-</span>
+            <input class="tin" inputmode="numeric" placeholder="0000"><span class="dash">-</span>
+            <input class="tin" inputmode="numeric" placeholder="0000"><span class="dash">-</span>
+            <input class="tin" inputmode="numeric" placeholder="0000">
+          </div>
+        </div>
+        <div class="two">
+          <div class="field"><label>유효기간</label><input class="tin" placeholder="MM / YY"></div>
+          <div class="field"><label>CVC</label><input class="tin" inputmode="numeric" placeholder="뒷면 3자리"></div>
+        </div>
+        <div class="field"><label>카드 비밀번호 앞 2자리</label><input class="tin" inputmode="numeric" type="password" placeholder="●●" style="max-width:120px; letter-spacing:6px"></div>
+      </div>
+
+      <!-- 할부 -->
+      <div class="ilbl">할부</div>
+      <div class="selrow" onclick="openSheet()">
+        <span class="selval" id="ilVal">3개월<span class="free">무이자</span></span>
+        <iconify-icon icon="mingcute:down-line"></iconify-icon>
+      </div>
+    </div>
+
+    <!-- 간편결제 -->
+    <div id="tabEasy" style="display:none">
+      <div class="payrow on" onclick="selpay(this)"><span class="plabel" style="color:#E6392E">PAYCO</span><span class="rd"><iconify-icon icon="mingcute:check-circle-fill"></iconify-icon></span></div>
+      <div class="payrow" onclick="selpay(this)"><span class="plabel"><span style="color:#3182F6">toss</span><span style="color:#191F28">pay</span></span><span class="rd"><iconify-icon icon="mingcute:check-circle-fill"></iconify-icon></span></div>
+      <div class="payrow" onclick="selpay(this)"><span class="dot2"></span><span class="plabel" style="color:#191F28">카카오페이</span><span class="rd"><iconify-icon icon="mingcute:check-circle-fill"></iconify-icon></span></div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <button class="btn-primary" id="payBtn" onclick="location.href='12_2_반복결제.html'">다음</button>
+  </div>
+
+  <!-- 할부 바텀시트 -->
+  <div class="dim on" id="dim" onclick="closeSheet()"></div>
+  <div class="sheet on" id="sheet">
+    <div class="handle"></div>
+    <h3>할부 개월을 선택하세요</h3>
+    <div class="ilist" id="ilist">
+      <div class="irow" onclick="pickI(this)"><span class="sp">일시불</span><iconify-icon class="ck" icon="mingcute:check-fill"></iconify-icon></div>
+      <div class="irow" onclick="pickI(this)"><span>2개월</span><span class="free">무이자</span><span class="sp"></span><iconify-icon class="ck" icon="mingcute:check-fill"></iconify-icon></div>
+      <div class="irow on" onclick="pickI(this)"><span>3개월</span><span class="free">무이자</span><span class="sp"></span><iconify-icon class="ck" icon="mingcute:check-fill"></iconify-icon></div>
+      <div class="irow" onclick="pickI(this)"><span>4개월</span><span class="free">무이자</span><span class="sp"></span><iconify-icon class="ck" icon="mingcute:check-fill"></iconify-icon></div>
+      <div class="irow" onclick="pickI(this)"><span>5개월</span><span class="free">무이자</span><span class="sp"></span><iconify-icon class="ck" icon="mingcute:check-fill"></iconify-icon></div>
+      <div class="irow" onclick="pickI(this)"><span>6개월</span><span class="free">무이자</span><span class="sp"></span><iconify-icon class="ck" icon="mingcute:check-fill"></iconify-icon></div>
+      <div class="irow" onclick="pickI(this)"><span class="sp">7개월</span><iconify-icon class="ck" icon="mingcute:check-fill"></iconify-icon></div>
+      <div class="irow" onclick="pickI(this)"><span class="sp">8개월</span><iconify-icon class="ck" icon="mingcute:check-fill"></iconify-icon></div>
+      <div class="irow" onclick="pickI(this)"><span class="sp">9개월</span><iconify-icon class="ck" icon="mingcute:check-fill"></iconify-icon></div>
+      <div class="irow" onclick="pickI(this)"><span class="sp">10개월</span><iconify-icon class="ck" icon="mingcute:check-fill"></iconify-icon></div>
+      <div class="irow" onclick="pickI(this)"><span class="sp">11개월</span><iconify-icon class="ck" icon="mingcute:check-fill"></iconify-icon></div>
+      <div class="irow" onclick="pickI(this)"><span class="sp">12개월</span><iconify-icon class="ck" icon="mingcute:check-fill"></iconify-icon></div>
+    </div>
+  </div>
+</div>
+<script>
+function tab(which){
+  const isCard = which==='card';
+  document.getElementById('tabCard').style.display = isCard ? '' : 'none';
+  document.getElementById('tabEasy').style.display = isCard ? 'none' : '';
+  document.getElementById('segCard').classList.toggle('on', isCard);
+  document.getElementById('segEasy').classList.toggle('on', !isCard);
+}
+function selpay(el){ document.querySelectorAll('.payrow').forEach(r=>r.classList.remove('on')); el.classList.add('on'); }
+
+const LAST=3;
+function setMode(idx){
+  const isNew = idx===LAST;
+  document.getElementById('newform').style.display = isNew ? '' : 'none';
+  document.getElementById('payBtn').textContent = isNew ? '카드 등록하고 다음' : '다음';
+}
+function updateDots(){
+  const s=document.getElementById('cs');
+  const step=s.querySelector('.slide').offsetWidth+14;
+  const idx=Math.max(0,Math.min(LAST,Math.round(s.scrollLeft/step)));
+  document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('on', i===idx));
+  setMode(idx);
+}
+
+/* 할부 바텀시트 */
+function openSheet(){ document.getElementById('dim').classList.add('on'); document.getElementById('sheet').classList.add('on'); }
+function closeSheet(){ document.getElementById('dim').classList.remove('on'); document.getElementById('sheet').classList.remove('on'); }
+function pickI(el){
+  document.querySelectorAll('#ilist .irow').forEach(r=>r.classList.remove('on'));
+  el.classList.add('on');
+  const month=el.querySelector('span').textContent;
+  const free=el.querySelector('.free');
+  document.getElementById('ilVal').innerHTML = month + (free?'<span class="free">무이자</span>':'');
+  setTimeout(closeSheet,140);
+}
+
+/* 마우스 드래그 스와이프 */
+(function(){
+  const s=document.getElementById('cs'); let down=false,startX=0,startLeft=0,moved=false;
+  s.addEventListener('pointerdown', e=>{ if(e.target.closest('input')) return; down=true; moved=false; startX=e.clientX; startLeft=s.scrollLeft; s.style.scrollSnapType='none'; });
+  s.addEventListener('pointermove', e=>{ if(!down) return; const dx=e.clientX-startX; if(Math.abs(dx)>4) moved=true; s.scrollLeft=startLeft-dx; });
+  function end(){ if(!down) return; down=false; s.style.scrollSnapType='x mandatory'; }
+  s.addEventListener('pointerup', end); s.addEventListener('pointerleave', end);
+  s.addEventListener('click', e=>{ if(moved){ e.stopPropagation(); e.preventDefault(); } }, true);
+})();
+</script>
+</body>
+</html>
