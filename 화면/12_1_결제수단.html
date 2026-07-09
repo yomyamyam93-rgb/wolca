@@ -35,14 +35,22 @@
   .slide{flex:0 0 80%; scroll-snap-align:center;}
   .slide:first-child{margin-left:10%;}
   .slide:last-child{margin-right:10%;}
-  .cardbox{height:168px; border-radius:18px; padding:20px; color:#fff; display:flex; flex-direction:column; justify-content:space-between;
-    background:linear-gradient(135deg,#4B7BF5,#1E59DF); box-shadow:0 6px 16px -4px rgba(37,99,235,.35);}
-  .cardbox.alt{background:linear-gradient(135deg,#454C59,#23272F); box-shadow:0 6px 16px -4px rgba(0,0,0,.3);}
-  .cardbox .tp{display:flex; justify-content:space-between; align-items:flex-start;}
-  .cardbox .tag{font-size:11px; font-weight:700; background:rgba(255,255,255,.2); padding:4px 9px; border-radius:7px;}
-  .cardbox .brandtop{font-size:11px; opacity:.88; letter-spacing:.6px; font-weight:700;}
-  .cardbox .nm{font-size:18px; font-weight:700;}
-  .cardbox .no{font-size:13px; opacity:.88; letter-spacing:1.5px; margin-top:5px;}
+  .cardface{height:172px; border-radius:16px; padding:20px; color:#fff; position:relative; display:flex; flex-direction:column; overflow:hidden; box-shadow:0 6px 16px -4px rgba(0,0,0,.3);}
+  .cardface:after{content:''; position:absolute; inset:0; background:linear-gradient(120deg, rgba(255,255,255,.14), rgba(255,255,255,0) 42%); pointer-events:none;}
+  .cardface>*{position:relative; z-index:1;}
+  .cardface .cf-brand{font-size:15px; font-weight:800; letter-spacing:.2px;}
+  .cardface .cf-chip{width:38px; height:28px; border-radius:6px; background:linear-gradient(135deg,#ecd699,#b8933f); box-shadow:inset 0 0 0 1px rgba(0,0,0,.12); margin:13px 0 auto;}
+  .cardface .cf-no{font-size:14px; font-weight:600; letter-spacing:2px; opacity:.95;}
+  .cardface .cf-bottom{display:flex; justify-content:space-between; align-items:flex-end; margin-top:9px;}
+  .cardface .cf-nick{font-size:12px; opacity:.85; font-weight:600;}
+  .cardface .cf-visa{font-size:15px; font-weight:800; font-style:italic; letter-spacing:.5px;}
+  .cardface .cf-mc{display:flex; align-items:center;}
+  .cardface .cf-mc i{width:17px; height:17px; border-radius:50%; display:block;}
+  .cardface .cf-mc i:first-child{background:#EB001B;}
+  .cardface .cf-mc i:last-child{background:#F79E1B; margin-left:-7px; mix-blend-mode:screen;}
+  .cardface.samsung{background:linear-gradient(135deg,#22375f,#0e1a30);}
+  .cardface.hyundai{background:linear-gradient(160deg,#2b2e34,#0b0c0f);}
+  .cardface.shinhan{background:linear-gradient(135deg,#1596a6,#0a3f70);}
   .cardadd{height:168px; border-radius:18px; border:1.5px dashed color-mix(in srgb,var(--primary) 45%,#fff); background:var(--primary-50); display:flex; align-items:center; justify-content:center; cursor:pointer;}
   .cardadd .pill{display:flex; align-items:center; gap:6px; background:#fff; color:var(--primary-dark); font-size:14px; font-weight:700; padding:11px 18px; border-radius:999px; box-shadow:0 2px 6px rgba(37,99,235,.12);}
   .cardadd .pill iconify-icon{font-size:17px;}
@@ -122,22 +130,34 @@
     <div id="tabCard">
       <div class="cardscroll" id="cs" onscroll="updateDots()">
         <div class="slide">
-          <div class="cardbox">
-            <div class="tp"><span class="tag">추천 카드</span><span class="brandtop">SAMSUNG</span></div>
-            <div><div class="nm">삼성 Deep Dream</div><div class="no">•••• •••• •••• 4821</div></div>
+          <div class="cardface samsung">
+            <div class="cf-brand">삼성카드</div>
+            <div class="cf-chip"></div>
+            <div class="cf-no">•••• •••• •••• 4821</div>
+            <div class="cf-bottom"><span class="cf-nick">taptap O</span><span class="cf-visa">VISA</span></div>
           </div>
         </div>
         <div class="slide">
-          <div class="cardbox alt">
-            <div class="tp"><span class="tag">보유 카드</span><span class="brandtop">SHINHAN</span></div>
-            <div><div class="nm">신한 Deep On</div><div class="no">•••• •••• •••• 1177</div></div>
+          <div class="cardface hyundai">
+            <div class="cf-brand">현대카드</div>
+            <div class="cf-chip"></div>
+            <div class="cf-no">•••• •••• •••• 3092</div>
+            <div class="cf-bottom"><span class="cf-nick">the Green</span><span class="cf-mc"><i></i><i></i></span></div>
+          </div>
+        </div>
+        <div class="slide">
+          <div class="cardface shinhan">
+            <div class="cf-brand">신한카드</div>
+            <div class="cf-chip"></div>
+            <div class="cf-no">•••• •••• •••• 1177</div>
+            <div class="cf-bottom"><span class="cf-nick">Deep Dream</span><span class="cf-visa">VISA</span></div>
           </div>
         </div>
         <div class="slide">
           <div class="cardadd"><span class="pill"><iconify-icon icon="mingcute:add-line"></iconify-icon>다른 카드 등록하기</span></div>
         </div>
       </div>
-      <div class="dots"><span class="dot on"></span><span class="dot"></span><span class="dot"></span></div>
+      <div class="dots"><span class="dot on"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
 
       <!-- 새 카드: 입력 폼 -->
       <div id="newform" class="formsec" style="display:none">
@@ -209,7 +229,7 @@ function tab(which){
 }
 function selpay(el){ document.querySelectorAll('.payrow').forEach(r=>r.classList.remove('on')); el.classList.add('on'); }
 
-const LAST=2;
+const LAST=3;
 function setMode(idx){
   const isNew = idx===LAST;
   document.getElementById('newform').style.display = isNew ? '' : 'none';
