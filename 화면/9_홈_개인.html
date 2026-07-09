@@ -83,6 +83,12 @@
   .ongoing .on1{font-size:15px; font-weight:700; color:var(--ink);}
   .ongoing .os{font-size:12px; color:var(--primary-dark); margin-top:2px;}
   .ongoing .ochev{font-size:20px; color:var(--primary); flex:0 0 auto;}
+  .hero .htitle{font-size:21px; font-weight:700; color:var(--ink); line-height:1.35; letter-spacing:-.3px;}
+  .hero .hsub{font-size:13px; color:var(--sub); margin-top:10px; line-height:1.6;}
+  .hchips{display:flex; gap:6px; flex-wrap:wrap; margin-top:14px;}
+  .hchip{font-size:12px; font-weight:700; color:var(--primary-dark); background:var(--primary-50); padding:6px 11px; border-radius:8px;}
+  .lrow .amt{text-align:right; flex:0 0 auto;}
+  .lrow .amt .v{font-size:15px; font-weight:700; color:var(--ink);}
   .grid2{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px;}
   .fcard{background:#fff; border-radius:18px; padding:18px 16px; box-shadow:0 1px 3px rgba(0,0,0,.04); cursor:pointer;}
   .fcard .ficon{width:38px; height:38px; border-radius:11px; background:var(--tile); display:flex; align-items:center; justify-content:center; margin-bottom:12px;}
@@ -130,37 +136,26 @@
         <iconify-icon class="ochev" icon="mingcute:right-line"></iconify-icon>
       </div>
 
-      <div class="card">
-        <div class="ctitle">내야 할 돈 카드로 내기</div>
-        <div class="qpager" id="qpager" onscroll="updateDots()">
-          <div class="qpage">
-            <div class="q" onclick="pay('부동산 임대차')"><div class="qbox"><iconify-icon icon="mingcute:home-4-fill"></iconify-icon></div><div class="qlb">임대차</div></div>
-            <div class="q" onclick="pay('별도 관리비')"><div class="qbox"><iconify-icon icon="mingcute:building-2-fill"></iconify-icon></div><div class="qlb">관리비</div></div>
-            <div class="q" onclick="pay('보험료')"><div class="qbox"><iconify-icon icon="mingcute:shield-fill"></iconify-icon></div><div class="qlb">보험료</div></div>
-            <div class="q" onclick="pay('이사비')"><div class="qbox"><iconify-icon icon="mingcute:truck-fill"></iconify-icon></div><div class="qlb">이사비</div></div>
-            <div class="q" onclick="pay('인테리어')"><div class="qbox"><iconify-icon icon="mingcute:paint-brush-fill"></iconify-icon></div><div class="qlb">인테리어</div></div>
-            <div class="q" onclick="pay('청소비')"><div class="qbox"><iconify-icon icon="mingcute:broom-fill"></iconify-icon></div><div class="qlb">청소비</div></div>
-            <div class="q" onclick="pay('렌트·렌탈료')"><div class="qbox"><iconify-icon icon="mingcute:car-fill"></iconify-icon></div><div class="qlb">렌트료</div></div>
-            <div class="q" onclick="pay('인건비·용역비')"><div class="qbox"><iconify-icon icon="mingcute:group-3-fill"></iconify-icon></div><div class="qlb">인건비</div></div>
-          </div>
-          <div class="qpage">
-            <div class="q" onclick="pay('복비')"><div class="qbox"><iconify-icon icon="mingcute:cash-fill"></iconify-icon></div><div class="qlb">복비</div></div>
-            <div class="q" onclick="pay('B2B 매입대금')"><div class="qbox"><iconify-icon icon="mingcute:package-2-fill"></iconify-icon></div><div class="qlb">매입대금</div></div>
-            <div class="q" onclick="pay('교육비')"><div class="qbox"><iconify-icon icon="mingcute:mortarboard-fill"></iconify-icon></div><div class="qlb">교육비</div></div>
-            <div class="q" onclick="pay('세금')"><div class="qbox"><iconify-icon icon="mingcute:bill-fill"></iconify-icon></div><div class="qlb">세금</div></div>
-            <div class="q" onclick="pay('기타')"><div class="qbox"><iconify-icon icon="mingcute:more-3-fill"></iconify-icon></div><div class="qlb">기타</div></div>
-          </div>
+      <div class="card hero">
+        <div class="htitle">현금으로 내던 돈<br>카드로 내세요</div>
+        <div class="hsub">월세 · 관리비 · 보험까지 카드로 결제하고<br>무이자 할부 · 포인트 · 연말정산 혜택까지 받아요.</div>
+        <div class="hchips">
+          <span class="hchip">무이자 할부</span>
+          <span class="hchip">포인트 적립</span>
+          <span class="hchip">연말정산 공제</span>
         </div>
-        <div class="dots"><span class="dot on" id="dot0"></span><span class="dot" id="dot1"></span></div>
         <button class="btn-primary" style="margin-top:18px" onclick="location.href='10_1_유형선택.html'">지금 결제하기</button>
       </div>
 
-      <div class="card" onclick="location.href='15_내결제.html'">
-        <div class="label">이번 달 나갈 고정비</div>
-        <div class="bigval">65만원</div>
-        <div class="subline">월세 50만원 · 관리비 15만원</div>
-        <button class="btn-secondary" style="margin-top:16px" onclick="event.stopPropagation(); location.href='16_예약결제일.html'">예약 결제로 자동 납부</button>
+      <div class="sec-h" style="display:flex; justify-content:space-between; align-items:baseline;">
+        <span>이번 달 내고 있어요</span><span style="color:var(--ink); font-size:15px;">77만원</span>
       </div>
+      <div class="card list-card">
+        <div class="lrow" onclick="location.href='15_내결제.html'"><div class="ic"><iconify-icon icon="mingcute:home-4-fill"></iconify-icon></div><div class="t"><div class="n">월세</div><div class="s">명동 원룸 · 매월 25일</div></div><div class="amt"><div class="v">500,000원</div></div></div>
+        <div class="lrow" onclick="location.href='15_내결제.html'"><div class="ic"><iconify-icon icon="mingcute:building-2-fill"></iconify-icon></div><div class="t"><div class="n">관리비</div><div class="s">매월 1일</div></div><div class="amt"><div class="v">150,000원</div></div></div>
+        <div class="lrow" onclick="location.href='15_내결제.html'"><div class="ic"><iconify-icon icon="mingcute:shield-fill"></iconify-icon></div><div class="t"><div class="n">건강보험</div><div class="s">매월 10일</div></div><div class="amt"><div class="v">120,000원</div></div></div>
+      </div>
+      <button class="btn-secondary" style="margin-top:2px" onclick="location.href='16_예약결제일.html'">예약 결제로 자동 납부</button>
 
       <!-- 혜택 · 환급 (2열 카드) -->
       <div class="grid2">
