@@ -31,6 +31,14 @@
   .row .r{font-size:15px; font-weight:600; color:var(--ink); text-align:right;}
   .row .r .sub2{font-size:12px; color:var(--placeholder); font-weight:500; margin-top:2px;}
 
+  /* 받는 혜택 (강조 카드) */
+  .bencard{background:var(--primary-50); border-radius:16px; padding:16px; margin-bottom:12px;}
+  .bencard .bh{font-size:14px; font-weight:700; color:var(--primary-dark); margin-bottom:12px;}
+  .ben{display:flex; align-items:center; gap:10px; padding:9px 0;}
+  .ben iconify-icon{font-size:20px; color:var(--primary); flex:0 0 auto;}
+  .ben .bl{flex:1; font-size:14px; color:var(--sub); font-weight:500;}
+  .ben .bv{font-size:15px; font-weight:700; color:var(--primary-dark);}
+
   .amtcard{padding:18px 16px;}
   .arow{display:flex; justify-content:space-between; align-items:center; margin-bottom:11px;}
   .arow .l{font-size:14px; color:var(--sub);} .arow .v{font-size:15px; font-weight:600; color:var(--ink);}
@@ -66,14 +74,19 @@
       <div class="row"><span class="l">반복 결제</span><span class="r">이번만 결제</span></div>
     </div>
 
+    <!-- 받는 혜택 (강조) -->
+    <div class="bencard">
+      <div class="bh">이번 결제로 받는 혜택</div>
+      <div class="ben"><iconify-icon icon="mingcute:gift-fill"></iconify-icon><span class="bl">카드 포인트 적립</span><span class="bv">+6,660원</span></div>
+      <div class="ben"><iconify-icon icon="mingcute:bank-card-fill"></iconify-icon><span class="bl">3개월 무이자 할부</span><span class="bv">이자 0원</span></div>
+      <div class="ben"><iconify-icon icon="mingcute:bill-fill"></iconify-icon><span class="bl">연말정산 소득공제</span><span class="bv">대상</span></div>
+    </div>
+
     <div class="card amtcard">
       <div class="arow"><span class="l">신청 금액</span><span class="v">680,000원</span></div>
       <div class="arow"><span class="l">수수료 4%</span><span class="v">27,200원</span></div>
       <div class="divline"></div>
       <div class="arow total"><span class="l">총 결제금액</span><span class="v">707,200원</span></div>
-      <div class="divline" style="margin:14px 0"></div>
-      <div class="arow"><span class="l">카드 적립 예정</span><span class="v" style="color:var(--primary-dark)">+6,660원</span></div>
-      <div class="arow" style="margin-bottom:0"><span class="l">연말정산 소득공제</span><span class="v">대상</span></div>
       <div class="flow">
         <iconify-icon icon="mingcute:shield-fill"></iconify-icon>
         <div>서류 승인 후 결제·입금돼요. 미승인 시 자동 취소.</div>
