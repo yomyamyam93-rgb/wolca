@@ -99,6 +99,12 @@
   .evcard .evs{font-size:12px; margin-top:5px; opacity:.85;}
   .evcard.tint .evt{color:var(--ink);}
   .evcard.tint .evs{color:var(--sub);}
+  /* 카드 혜택 행 */
+  .cchip{width:42px; height:29px; border-radius:8px; flex:0 0 auto;}
+  .cchip.samsung{background:linear-gradient(135deg,#22375f,#0e1a30);}
+  .cchip.hyundai{background:linear-gradient(160deg,#2b2e34,#0b0c0f);}
+  .cchip.shinhan{background:linear-gradient(135deg,#1596a6,#0a3f70);}
+  .sec-h .more{font-size:13px; color:var(--placeholder); font-weight:500; cursor:pointer;}
   .lrow .amt{text-align:right; flex:0 0 auto;}
   .lrow .amt .v{font-size:15px; font-weight:700; color:var(--ink);}
   .grid2{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px;}
@@ -159,8 +165,8 @@
         <button class="btn-primary" style="margin-top:18px" onclick="location.href='10_1_유형선택.html'">지금 결제하기</button>
       </div>
 
-      <!-- 혜택 · 이벤트 (공통) -->
-      <div class="sec-h">혜택 · 이벤트</div>
+      <!-- 이벤트 -->
+      <div class="sec-h">이벤트</div>
       <div class="evscroll">
         <div class="evcard blue" onclick="toast('이벤트는 준비 중이에요')">
           <span class="evtag">이벤트</span>
@@ -170,10 +176,20 @@
           <span class="evtag">캐시백</span>
           <div><div class="evt">첫 결제 3만원 캐시백</div><div class="evs">신규 가입 시</div></div>
         </div>
-        <div class="evcard tint" onclick="location.href='18_카드혜택.html'">
-          <span class="evtag">카드정보</span>
-          <div><div class="evt">내 카드 실적 · 적립 보기</div><div class="evs">카드사별 혜택 한눈에</div></div>
+        <div class="evcard tint" onclick="toast('이벤트는 준비 중이에요')">
+          <span class="evtag">친구초대</span>
+          <div><div class="evt">초대할 때마다 1만원</div><div class="evs">친구도 나도 함께 받아요</div></div>
         </div>
+      </div>
+
+      <!-- 카드 혜택 -->
+      <div class="sec-h" style="display:flex; justify-content:space-between; align-items:baseline;">
+        <span>카드 혜택</span><span class="more" onclick="location.href='18_카드혜택.html'">전체 보기 ›</span>
+      </div>
+      <div class="card list-card">
+        <div class="lrow" onclick="location.href='18_카드혜택.html'"><span class="cchip samsung"></span><div class="t"><div class="n">삼성 taptap O</div><div class="s">무이자 6개월 · 포인트 1% 적립</div></div><iconify-icon class="chev" icon="mingcute:right-line"></iconify-icon></div>
+        <div class="lrow" onclick="location.href='18_카드혜택.html'"><span class="cchip hyundai"></span><div class="t"><div class="n">현대 the Green</div><div class="s">무이자 3개월 · M포인트 1.5% 적립</div></div><iconify-icon class="chev" icon="mingcute:right-line"></iconify-icon></div>
+        <div class="lrow" onclick="location.href='18_카드혜택.html'"><span class="cchip shinhan"></span><div class="t"><div class="n">신한 Deep Dream</div><div class="s">무이자 3개월 · 캐시백 0.8%</div></div><iconify-icon class="chev" icon="mingcute:right-line"></iconify-icon></div>
       </div>
 
       <div class="sec-h">알아두면 좋아요</div>
