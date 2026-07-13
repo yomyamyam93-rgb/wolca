@@ -69,8 +69,12 @@
   .tab.on{color:var(--primary); font-weight:700;}
   .home-indicator{width:140px; height:5px; border-radius:3px; background:var(--ink); margin:12px auto 9px;}
   /* 다양한 구성 */
+  .hero .htitle{font-size:21px; font-weight:700; color:var(--ink); line-height:1.35; letter-spacing:-.3px;}
+  .hero .hsub{font-size:13px; color:var(--sub); margin-top:10px; line-height:1.6;}
+  .hchips{display:flex; gap:6px; flex-wrap:wrap; margin-top:14px;}
+  .hchip{font-size:12px; font-weight:700; color:var(--primary-dark); background:var(--primary-50); padding:6px 11px; border-radius:8px;}
   .actions{display:flex; gap:10px; margin-top:16px;}
-  .actions .btn-primary,.actions .btn-secondary{flex:1;}
+  .actions .btn-primary,.actions .btn-secondary{flex:1; height:54px;}
   .hscroll{display:flex; gap:12px; overflow-x:auto; margin:0 calc(-1*var(--pad)); padding:2px var(--pad); scroll-snap-type:x mandatory; scrollbar-width:none;}
   .hscroll::-webkit-scrollbar{display:none;}
   .hcard{flex:0 0 196px; scroll-snap-align:start; background:#fff; border-radius:16px; padding:16px; box-shadow:0 1px 3px rgba(0,0,0,.04); cursor:pointer;}
@@ -140,11 +144,16 @@
         <iconify-icon class="ochev" icon="mingcute:right-line"></iconify-icon>
       </div>
 
-      <!-- ① 히어로 · 이중 CTA -->
-      <div class="card">
-        <div class="ctitle">거래처에 카드로 바로 보내기</div>
-        <div class="subline" style="margin-bottom:2px">카드로 결제하면 거래처엔 현금으로 입금돼요</div>
-        <div class="actions">
+      <!-- 즉시결제 히어로 (메인) -->
+      <div class="card hero">
+        <div class="htitle">거래처에 보낼 돈<br>카드로 보내세요</div>
+        <div class="hsub">임대료 · 매입대금 · 급여까지 카드로 결제하면<br>거래처에는 현금으로 바로 입금돼요.</div>
+        <div class="hchips">
+          <span class="hchip">즉시 입금</span>
+          <span class="hchip">무이자 할부</span>
+          <span class="hchip">경비 자동 정리</span>
+        </div>
+        <div class="actions" style="margin-top:18px">
           <button class="btn-primary" onclick="toast('송금은 준비 중이에요')">즉시 송금하기</button>
           <button class="btn-secondary" onclick="toast('결제 요청은 준비 중이에요')">결제 요청</button>
         </div>
