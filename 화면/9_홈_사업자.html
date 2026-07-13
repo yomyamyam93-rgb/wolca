@@ -86,9 +86,10 @@
   /* 혜택 · 이벤트 */
   .evscroll{display:flex; gap:12px; overflow-x:auto; padding:2px 0; scroll-snap-type:x mandatory; scrollbar-width:none;}
   .evscroll::-webkit-scrollbar{display:none;}
-  .evcard{flex:0 0 76%; scroll-snap-align:center; border-radius:16px; padding:18px; cursor:pointer; min-height:114px; display:flex; flex-direction:column; justify-content:space-between; box-shadow:0 1px 3px rgba(0,0,0,.04);}
-  .evcard:first-child{margin-left:12%;}
-  .evcard:last-child{margin-right:12%;}
+  .evcard{flex:0 0 100%; scroll-snap-align:start; border-radius:16px; padding:18px; cursor:pointer; min-height:114px; display:flex; flex-direction:column; justify-content:space-between; box-shadow:0 1px 3px rgba(0,0,0,.04);}
+  .dots{display:flex; justify-content:center; gap:6px; margin-top:12px;}
+  .dot{width:6px; height:6px; border-radius:3px; background:var(--line); transition:.2s;}
+  .dot.on{background:var(--primary); width:16px;}
   .evcard.blue{background:var(--primary); background:var(--primary-grad); color:#fff; box-shadow:0 6px 16px -4px rgba(37,99,235,.35);}
   .evcard.tint{background:#fff;}
   .evcard .evtag{font-size:11px; font-weight:700; padding:4px 9px; border-radius:7px; align-self:flex-start; background:var(--primary-50); color:var(--primary-dark);}
@@ -167,7 +168,7 @@
 
       <!-- 이벤트 -->
       <div class="sec-h">이벤트</div>
-      <div class="evscroll">
+      <div class="evscroll" id="ev" onscroll="evDots()">
         <div class="evcard blue" onclick="toast('이벤트는 준비 중이에요')">
           <span class="evtag">이벤트</span>
           <div><div class="evt">최대 6개월 무이자 할부</div><div class="evs">이번 달 카드 결제 전체 대상</div></div>
@@ -181,6 +182,7 @@
           <div><div class="evt">초대할 때마다 1만원</div><div class="evs">사장님 동료에게 알려주세요</div></div>
         </div>
       </div>
+      <div class="dots"><span class="dot on" id="evd0"></span><span class="dot" id="evd1"></span><span class="dot" id="evd2"></span></div>
 
       <!-- 카드 혜택 -->
       <div class="sec-h" style="display:flex; justify-content:space-between; align-items:baseline;">
@@ -214,6 +216,21 @@
   </div>
 </div>
 <script>
+function evDots(){
+  const s=document.getElementById('ev');
+  const step=s.querySelector('.evcard').offsetWidth+12;
+  const idx=Math.round(s.scrollLeft/step);
+  [0,1,2].forEach(i=>document.getElementById('evd'+i).classList.toggle('on', i===idx));
+}
+/* 마우스 드래그 스와이프 */
+(function(){
+  const s=document.getElementById('ev'); let down=false,startX=0,startLeft=0,moved=false;
+  s.addEventListener('pointerdown', e=>{ down=true; moved=false; startX=e.clientX; startLeft=s.scrollLeft; s.style.scrollSnapType='none'; });
+  s.addEventListener('pointermove', e=>{ if(!down) return; const dx=e.clientX-startX; if(Math.abs(dx)>4) moved=true; s.scrollLeft=startLeft-dx; });
+  function end(){ if(!down) return; down=false; s.style.scrollSnapType='x mandatory'; }
+  s.addEventListener('pointerup', end); s.addEventListener('pointerleave', end);
+  s.addEventListener('click', e=>{ if(moved){ e.stopPropagation(); e.preventDefault(); } }, true);
+})();
 function toast(msg){
   let t=document.createElement('div');
   t.textContent=msg;
