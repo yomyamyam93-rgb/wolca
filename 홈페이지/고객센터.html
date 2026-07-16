@@ -8,8 +8,15 @@
 <link rel="stylesheet" href="web.css">
 <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 <style>
-  .page-hero{background:linear-gradient(180deg, var(--primary-50), #fff); padding:80px 24px 70px; text-align:center;}
+  .page-hero{background:linear-gradient(180deg, var(--primary-50), #fff); padding:80px 24px 54px; text-align:center;}
   .page-hero .p-lg{margin-top:18px;}
+
+  /* 상단 탭 */
+  .cs-tabs{display:flex; justify-content:center; gap:8px; background:#fff; border-bottom:1px solid var(--line); position:sticky; top:64px; z-index:40; padding:0 24px;}
+  .cs-tab{border:none; background:none; font-family:inherit; font-size:16px; font-weight:600; color:var(--placeholder); padding:16px 18px; cursor:pointer; border-bottom:2.5px solid transparent; margin-bottom:-1px;}
+  .cs-tab.on{color:var(--ink); font-weight:700; border-bottom-color:var(--ink);}
+  .panel{display:none;}
+  .panel.on{display:block;}
 
   /* 공지사항 (게시판) */
   .board{border-top:2px solid var(--ink); margin-top:40px;}
@@ -66,10 +73,16 @@
   <p class="p-lg">공지 · 이벤트 · 자주 묻는 질문을 한곳에 모았어요.</p>
 </header>
 
+<!-- 탭 -->
+<div class="cs-tabs">
+  <button class="cs-tab on" onclick="csTab(0)">공지사항</button>
+  <button class="cs-tab" onclick="csTab(1)">이벤트</button>
+  <button class="cs-tab" onclick="csTab(2)">자주 묻는 질문</button>
+</div>
+
 <!-- 공지사항 -->
-<section class="sec" style="padding-top:40px">
+<section class="sec panel on" id="panel0" style="padding-top:40px">
   <div class="wrap">
-    <h2 class="h-md">공지사항</h2>
     <div class="board">
       <a href="#"><span class="b-tag">공지</span><span class="b-t">7월 무이자 할부 카드사 안내 (삼성 · 신한 · 현대 최대 6개월)</span><span class="b-d">2026.07.14</span></a>
       <a href="#"><span class="b-tag">점검</span><span class="b-t">7월 20일(월) 새벽 2~4시 시스템 점검 안내</span><span class="b-d">2026.07.12</span></a>
@@ -80,10 +93,9 @@
 </section>
 
 <!-- 이벤트 -->
-<section class="sec tint" style="padding:80px 0">
+<section class="sec panel" id="panel1" style="padding-top:40px">
   <div class="wrap">
-    <h2 class="h-md">진행 중인 이벤트</h2>
-    <div class="events">
+    <div class="events" style="margin-top:0">
       <div class="ev" onclick="alert('이벤트 상세는 준비 중이에요')">
         <div class="ev-vis"><iconify-icon icon="mingcute:bank-card-fill"></iconify-icon></div>
         <div class="ev-body"><div class="ev-tag">이벤트</div><div class="ev-t">최대 6개월 무이자 할부</div><div class="ev-s">7월 한 달 · 카드 결제 전체 대상</div></div>
@@ -101,10 +113,9 @@
 </section>
 
 <!-- FAQ -->
-<section class="sec" id="faq" style="padding:80px 0 60px">
+<section class="sec panel" id="panel2" style="padding-top:40px">
   <div class="wrap">
-    <h2 class="h-md">자주 묻는 질문</h2>
-    <div class="faq">
+    <div class="faq" style="margin-top:0">
       <details open>
         <summary><span class="q-mark">Q</span>수수료는 얼마인가요?<iconify-icon class="arw" icon="mingcute:down-line"></iconify-icon></summary>
         <div class="a">결제 금액의 4%예요. 숨은 비용 없이 수수료는 이것 하나예요. 대신 카드 포인트 적립 · 무이자 할부 · 연말정산 공제 등 받는 혜택이 더 커요.</div>
@@ -168,6 +179,11 @@ function drawer(on){
   document.getElementById('drawer').classList.toggle('on', on);
   document.getElementById('ddim').classList.toggle('on', on);
 }
+function csTab(i){
+  document.querySelectorAll('.cs-tab').forEach((t,idx)=>t.classList.toggle('on', idx===i));
+  document.querySelectorAll('.panel').forEach((p,idx)=>p.classList.toggle('on', idx===i));
+}
+if(location.hash==='#faq') csTab(2);
 </script>
 </body>
 </html>

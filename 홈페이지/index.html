@@ -24,10 +24,17 @@
   .usp.rev{flex-direction:row-reverse;}
   @media(max-width:820px){ .usp,.usp.rev{flex-direction:column; gap:40px; align-items:flex-start;} }
 
-  /* 미니 목업 카드 */
-  .mock{width:340px; max-width:100%; background:var(--gray-bg); border-radius:28px; padding:22px; box-shadow:0 18px 50px rgba(25,31,40,.12);}
+  /* 휴대폰 목업 (앱 화면을 폰 안에) */
+  .mock{width:300px; max-width:100%; background:var(--gray-bg); border-radius:42px; padding:14px 14px 20px;
+    box-shadow:0 30px 70px -18px rgba(25,31,40,.35), 0 0 0 10px #191F28, 0 0 0 12px #3A414B;}
+  .mock .p-status{display:flex; align-items:center; justify-content:space-between; padding:8px 12px 12px; font-size:12px; font-weight:700; color:var(--ink);}
+  .mock .p-status .cam{width:64px; height:18px; background:#191F28; border-radius:10px; margin:0 auto; position:absolute; left:50%; transform:translateX(-50%);}
+  .mock .p-status{position:relative;}
+  .mock .p-status .sig{font-size:11px; color:var(--ink); letter-spacing:1px;}
+  .mock .p-home{width:110px; height:4px; border-radius:3px; background:var(--icon-off); margin:16px auto 0;}
   .mock .m-card{background:#fff; border-radius:16px; padding:18px; margin-bottom:12px; box-shadow:0 1px 3px rgba(0,0,0,.05);}
   .mock .m-card:last-child{margin-bottom:0;}
+  .mock .m-title{font-size:17px; font-weight:700; letter-spacing:-.3px; padding:2px 4px 12px;}
   .mock .m-label{font-size:13px; color:var(--placeholder);}
   .mock .m-big{font-size:26px; font-weight:800; letter-spacing:-.5px; margin-top:3px;}
   .mock .m-row{display:flex; align-items:center; gap:11px;}
@@ -112,10 +119,13 @@
     </div>
     <div class="vis">
       <div class="mock">
+        <div class="p-status"><span>9:41</span><span class="cam"></span><span class="sig">▮▮▮</span></div>
+        <div class="m-title">어디로 보낼까요?</div>
         <div class="m-card">
           <div class="m-row"><div class="m-ic"><iconify-icon icon="mingcute:home-4-fill"></iconify-icon></div><div><div class="m-t">상가 임대료</div><div class="m-s">받는 분 · 명동상가 임대인</div></div><span class="m-v">680,000원</span></div>
         </div>
         <div class="m-card"><button class="m-btn">즉시 송금하기</button></div>
+        <div class="p-home"></div>
       </div>
     </div>
   </div>
@@ -130,12 +140,16 @@
       <p class="p-lg">무이자 할부로 나눠 내고 포인트와 실적은 쌓고<br>월세는 연말정산 공제까지 챙겨요.</p>
     </div>
     <div class="vis">
-      <div class="mock" style="background:#fff">
+      <div class="mock">
+        <div class="p-status"><span>9:41</span><span class="cam"></span><span class="sig">▮▮▮</span></div>
+        <div class="m-title">이번 결제로 받는 혜택</div>
         <div class="m-card" style="background:var(--primary-50); box-shadow:none">
           <div class="m-row"><div class="m-ic" style="background:#fff"><iconify-icon icon="mingcute:gift-fill"></iconify-icon></div><span class="m-t">카드 포인트 적립</span><span class="m-v blue">+6,660원</span></div>
           <div class="m-row" style="margin-top:12px"><div class="m-ic" style="background:#fff"><iconify-icon icon="mingcute:bank-card-fill"></iconify-icon></div><span class="m-t">3개월 무이자 할부</span><span class="m-v blue">이자 0원</span></div>
           <div class="m-row" style="margin-top:12px"><div class="m-ic" style="background:#fff"><iconify-icon icon="mingcute:bill-fill"></iconify-icon></div><span class="m-t">연말정산 소득공제</span><span class="m-v blue">대상</span></div>
         </div>
+        <div class="m-card"><div class="m-label">총 결제금액</div><div class="m-big">707,200원</div></div>
+        <div class="p-home"></div>
       </div>
     </div>
   </div>
@@ -151,6 +165,8 @@
     </div>
     <div class="vis">
       <div class="mock">
+        <div class="p-status"><span>9:41</span><span class="cam"></span><span class="sig">▮▮▮</span></div>
+        <div class="m-title">내 결제</div>
         <div class="m-card">
           <div class="m-row"><span class="m-badge">검토 중</span><span class="m-t" style="margin-left:2px">7월 월세 · 500,000원</span></div>
           <div class="m-s" style="margin-top:8px">담당자가 서류 확인 중 · 보통 30분 이내</div>
@@ -158,6 +174,7 @@
         <div class="m-card">
           <div class="m-row"><span class="m-badge" style="background:#EAF7F0; color:var(--success)">입금 완료</span><span class="m-t" style="margin-left:2px">6월 월세 · 500,000원</span></div>
         </div>
+        <div class="p-home"></div>
       </div>
     </div>
   </div>
