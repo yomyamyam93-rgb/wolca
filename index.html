@@ -59,14 +59,15 @@
       <span class="et"><span class="n">휴대폰 앱 실행해보기</span><br><span class="s">온보딩부터 버튼 눌러가며 실제 흐름대로 체험</span></span>
       <span class="g">›</span>
     </a>
-    <a class="entry" href="#ui">
+    <a class="entry" href="#" id="uibtn" onclick="showUI(); return false;">
       <span class="eic"><iconify-icon icon="mingcute:layout-grid-fill"></iconify-icon></span>
       <span class="et"><span class="n">UI 정리</span><br><span class="s">화면별 링크 모음 · 피그마 임포트(html.to.design)용</span></span>
-      <span class="g">↓</span>
+      <span class="g" id="uiarrow">›</span>
     </a>
   </div>
 
-  <!-- UI 정리 -->
+  <!-- UI 정리 (기본 접힘) -->
+  <div id="uisec" style="display:none">
   <h1 id="ui" style="font-size:20px">UI 정리 · 화면 링크</h1>
   <p class="lead" style="margin-bottom:4px">제목을 누르면 열리고 <iconify-icon icon="mingcute:copy-2-line" style="vertical-align:-2px"></iconify-icon> 버튼으로 링크를 복사할 수 있어요.</p>
 
@@ -122,11 +123,21 @@
     <div class="row"><span class="no">14</span><a class="t" href="화면/14_완료.html">결제 완료</a><button class="cp" onclick="cp('화면/14_완료.html')"><iconify-icon icon="mingcute:copy-2-line"></iconify-icon></button></div>
   </div>
 
-  <p class="foot">랜선페이 프로토타입 · 디자인 가이드 준수<br>피그마 임포트: html.to.design → Web 탭 → 복사한 URL 붙여넣기</p>
+  <p class="foot">피그마 임포트: html.to.design → Web 탭 → 복사한 URL 붙여넣기</p>
+  </div><!-- /uisec -->
+
+  <p class="foot">랜선페이 프로토타입 · 디자인 가이드 준수</p>
 </div>
 
 <div id="toast">링크를 복사했어요</div>
 <script>
+function showUI(){
+  const s=document.getElementById('uisec');
+  const open=s.style.display==='none';
+  s.style.display=open?'':'none';
+  document.getElementById('uiarrow').textContent=open?'∨':'›';
+  if(open) s.scrollIntoView({behavior:'smooth'});
+}
 function cp(path){
   const url=new URL(path, location.href).href;
   (navigator.clipboard ? navigator.clipboard.writeText(url) : Promise.reject()).then(()=>{
