@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>랜선페이 — 송금하기</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="web.css">
+<script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+<style>
+  .send{min-height:calc(100vh - 64px); background:linear-gradient(180deg, var(--primary-50), #fff 70%);}
+  .send-in{max-width:1040px; margin:0 auto; padding:80px 24px 100px; display:flex; gap:80px; align-items:flex-start;}
+  .send .txt{flex:1; padding-top:30px;}
+  .send .txt .p-lg{margin-top:22px;}
+  .send .txt .points{margin-top:34px;}
+  .send .txt .pt{display:flex; align-items:center; gap:11px; font-size:15px; font-weight:600; color:var(--sub); padding:9px 0;}
+  .send .txt .pt iconify-icon{font-size:20px; color:var(--primary);}
+  @media(max-width:860px){ .send-in{flex-direction:column; gap:44px;} .send .txt{padding-top:0;} }
+
+  /* 인증 폼 카드 */
+  .authcard{flex:0 0 420px; max-width:100%; background:#fff; border-radius:24px; padding:34px 30px; box-shadow:0 18px 50px rgba(25,31,40,.12);}
+  @media(max-width:860px){ .authcard{flex:1; width:100%;} }
+  .authcard h2{font-size:21px; font-weight:700; letter-spacing:-.4px;}
+  .authcard .sub{font-size:14px; color:var(--sub); margin:8px 0 24px;}
+  .field{margin-bottom:16px;}
+  .field label{display:block; font-size:13px; font-weight:700; color:var(--sub); margin-bottom:8px;}
+  .tin{width:100%; height:54px; border:1.5px solid var(--border); border-radius:13px; padding:0 16px; font-family:inherit; font-size:16px; font-weight:600; color:var(--ink); background:#fff;}
+  .tin::placeholder{color:var(--placeholder); font-weight:500;}
+  .tin:focus{outline:none; border-color:var(--primary);}
+  .telcos{display:grid; grid-template-columns:repeat(3,1fr); gap:8px;}
+  .telco{height:48px; border:1.5px solid var(--line); border-radius:12px; background:#fff; font-family:inherit; font-size:14px; font-weight:600; color:var(--sub); cursor:pointer;}
+  .telco.on{border-color:var(--primary); background:var(--primary-50); color:var(--primary-dark); font-weight:700;}
+  .phone-row{display:flex; gap:8px;}
+  .phone-row .tin{flex:1;}
+  .phone-row .req{flex:0 0 auto; height:54px; padding:0 16px; border:none; border-radius:13px; background:var(--primary-50); color:var(--primary-dark); font-family:inherit; font-size:14px; font-weight:700; cursor:pointer;}
+  .codebox{display:none;}
+  .codebox.on{display:block;}
+  .codebox .code-row{position:relative;}
+  .codebox .timer{position:absolute; right:16px; top:16px; font-size:14px; font-weight:700; color:var(--primary-dark);}
+  .auth-btn{width:100%; height:56px; border:none; border-radius:15px; margin-top:10px; background:var(--primary); background:var(--primary-grad); box-shadow:var(--btn-shadow); color:#fff; font-family:inherit; font-size:16px; font-weight:700; cursor:pointer;}
+  .auth-fine{font-size:12px; color:var(--placeholder); text-align:center; margin-top:14px; line-height:1.6;}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-in">
+    <a class="logo" href="index.html"><span class="mark"><iconify-icon icon="mingcute:home-4-fill"></iconify-icon></span>랜선페이</a>
+    <div class="nav-menu">
+      <a href="이용가이드.html">이용가이드</a>
+      <a href="고객센터.html">고객센터</a>
+      <a href="송금하기.html" class="on">송금하기</a>
+    </div>
+    <button class="nav-cta" onclick="alert('로그인은 준비 중이에요')">로그인</button>
+    <button class="nav-burger" onclick="drawer(true)" aria-label="전체메뉴"><iconify-icon icon="mingcute:menu-fill"></iconify-icon></button>
+  </div>
+</nav>
+
+<section class="send">
+  <div class="send-in">
+    <div class="txt">
+      <div class="eyebrow">웹에서 바로 송금</div>
+      <h1 class="h-lg">앱 설치 없이<br>휴대폰 인증으로 시작해요</h1>
+      <p class="p-lg">한 번만 인증하면 앱과 똑같이<br>카드 결제부터 입금까지 진행할 수 있어요.</p>
+      <div class="points">
+        <div class="pt"><iconify-icon icon="mingcute:flash-fill"></iconify-icon>상대방 동의 없이 계좌만 알면 돼요</div>
+        <div class="pt"><iconify-icon icon="mingcute:bank-card-fill"></iconify-icon>무이자 할부 · 포인트 적립 그대로</div>
+        <div class="pt"><iconify-icon icon="mingcute:shield-fill"></iconify-icon>담당자 확인 후 입금 · 미승인 시 자동 취소</div>
+      </div>
+    </div>
+
+    <div class="authcard">
+      <h2>휴대폰 인증</h2>
+      <div class="sub">본인 명의 휴대폰으로 간편하게 시작해요.</div>
+
+      <div class="field">
+        <label>통신사</label>
+        <div class="telcos">
+          <button class="telco on" onclick="telco(this)">SKT</button>
+          <button class="telco" onclick="telco(this)">KT</button>
+          <button class="telco" onclick="telco(this)">LG U+</button>
+          <button class="telco" onclick="telco(this)">SKT 알뜰폰</button>
+          <button class="telco" onclick="telco(this)">KT 알뜰폰</button>
+          <button class="telco" onclick="telco(this)">LG 알뜰폰</button>
+        </div>
+      </div>
+
+      <div class="field"><label>이름</label><input class="tin" placeholder="이름 입력"></div>
+
+      <div class="field">
+        <label>휴대폰 번호</label>
+        <div class="phone-row">
+          <input class="tin" inputmode="numeric" placeholder="숫자만 입력">
+          <button class="req" onclick="reqCode()">인증번호 받기</button>
+        </div>
+      </div>
+
+      <div class="field codebox" id="codebox">
+        <label>인증번호</label>
+        <div class="code-row">
+          <input class="tin" inputmode="numeric" placeholder="6자리 입력" style="padding-right:70px">
+          <span class="timer">2:59</span>
+        </div>
+      </div>
+
+      <button class="auth-btn" onclick="alert('인증 후 결제 흐름은 앱 화면과 동일하게 이어져요 (웹 버전 준비 중)')">인증하고 송금 시작하기</button>
+      <div class="auth-fine">인증 시 이용약관 · 개인정보 처리방침에 동의한 것으로 봐요.<br>본인인증은 통신사를 통해 안전하게 처리돼요.</div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="f-in">
+    <div class="f-menu">
+      <a href="이용가이드.html">이용가이드</a>
+      <a href="고객센터.html">고객센터</a>
+      <a href="고객센터.html#faq">자주 묻는 질문</a>
+      <a href="송금하기.html">송금하기</a>
+    </div>
+    <p>랜선페이 (주)랜선페이컴퍼니 · 대표 OOO · 사업자등록번호 000-00-00000<br>
+    서울특별시 OO구 OO로 000 · 고객센터 1600-0000 (평일 9:00~18:00)</p>
+  </div>
+</footer>
+
+<div class="drawer-dim" id="ddim" onclick="drawer(false)"></div>
+<aside class="drawer" id="drawer">
+  <div class="d-top"><span class="d-title">전체 메뉴</span><button class="d-x" onclick="drawer(false)">✕</button></div>
+  <a href="고객센터.html#faq"><iconify-icon icon="mingcute:question-fill"></iconify-icon>자주 묻는 질문<span class="gv">›</span></a>
+  <a href="고객센터.html"><iconify-icon icon="mingcute:headphone-fill"></iconify-icon>고객센터<span class="gv">›</span></a>
+  <a href="이용가이드.html"><iconify-icon icon="mingcute:book-2-fill"></iconify-icon>이용가이드<span class="gv">›</span></a>
+  <a href="index.html#reviews"><iconify-icon icon="mingcute:chat-2-fill"></iconify-icon>이용후기<span class="gv">›</span></a>
+  <a href="송금하기.html"><iconify-icon icon="mingcute:flash-fill"></iconify-icon>송금하기<span class="gv">›</span></a>
+  <a href="#" onclick="alert('세금계산서 · 부가세 신고는 준비 중이에요'); return false;"><iconify-icon icon="mingcute:file-certificate-fill"></iconify-icon>세금계산서 · 부가세 신고<span class="gv">›</span></a>
+  <button class="d-login" onclick="alert('로그인은 준비 중이에요')">로그인</button>
+</aside>
+
+<script>
+function drawer(on){
+  document.getElementById('drawer').classList.toggle('on', on);
+  document.getElementById('ddim').classList.toggle('on', on);
+}
+function telco(el){ document.querySelectorAll('.telco').forEach(t=>t.classList.remove('on')); el.classList.add('on'); }
+function reqCode(){ document.getElementById('codebox').classList.add('on'); }
+</script>
+</body>
+</html>

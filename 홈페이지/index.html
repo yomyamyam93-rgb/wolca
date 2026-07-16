@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>랜선페이 — 현금으로 내던 돈 카드로</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="web.css">
+<script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+<style>
+  /* 히어로 */
+  .hero{background:linear-gradient(180deg, var(--primary-50), #fff 86%); text-align:center; padding:120px 24px 130px;}
+  .hero .roll{color:var(--primary-dark); display:inline-block; min-width:150px;}
+  .hero .p-lg{margin:26px auto 40px; max-width:560px;}
+  .hero-btns{display:flex; gap:12px; justify-content:center; flex-wrap:wrap;}
+  .hero .web-cta{margin-top:22px;}
+  .hero .web-cta a{font-size:16px; font-weight:700; color:var(--primary-dark); text-decoration:none;}
+
+  /* USP */
+  .usp{display:flex; align-items:center; gap:70px;}
+  .usp .txt{flex:1; min-width:0;}
+  .usp .txt .p-lg{margin-top:22px;}
+  .usp .vis{flex:1; display:flex; justify-content:center;}
+  .usp.rev{flex-direction:row-reverse;}
+  @media(max-width:820px){ .usp,.usp.rev{flex-direction:column; gap:40px; align-items:flex-start;} }
+
+  /* 미니 목업 카드 */
+  .mock{width:340px; max-width:100%; background:var(--gray-bg); border-radius:28px; padding:22px; box-shadow:0 18px 50px rgba(25,31,40,.12);}
+  .mock .m-card{background:#fff; border-radius:16px; padding:18px; margin-bottom:12px; box-shadow:0 1px 3px rgba(0,0,0,.05);}
+  .mock .m-card:last-child{margin-bottom:0;}
+  .mock .m-label{font-size:13px; color:var(--placeholder);}
+  .mock .m-big{font-size:26px; font-weight:800; letter-spacing:-.5px; margin-top:3px;}
+  .mock .m-row{display:flex; align-items:center; gap:11px;}
+  .mock .m-ic{width:38px; height:38px; border-radius:11px; background:var(--tile); display:flex; align-items:center; justify-content:center; flex:0 0 auto;}
+  .mock .m-ic iconify-icon{font-size:20px; color:var(--primary);}
+  .mock .m-t{flex:1; font-size:15px; font-weight:600;}
+  .mock .m-s{font-size:12px; color:var(--placeholder); margin-top:1px;}
+  .mock .m-v{font-size:15px; font-weight:700;}
+  .mock .m-v.blue{color:var(--primary-dark);}
+  .mock .m-btn{height:46px; border:none; border-radius:12px; width:100%; background:var(--primary); background:var(--primary-grad); color:#fff; font-family:inherit; font-size:15px; font-weight:700;}
+  .mock .m-badge{font-size:11px; font-weight:700; background:var(--primary-50); color:var(--primary-dark); padding:4px 9px; border-radius:7px;}
+
+  /* 진행과정 */
+  .steps4{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:54px;}
+  .stp{background:#fff; border:1px solid var(--line); border-radius:18px; padding:26px 22px;}
+  .stp .no{width:32px; height:32px; border-radius:50%; background:var(--primary-50); color:var(--primary-dark); font-weight:800; font-size:15px; display:flex; align-items:center; justify-content:center; margin-bottom:16px;}
+  .stp .t{font-size:17px; font-weight:700;}
+  .stp .s{font-size:14px; color:var(--sub); margin-top:8px; line-height:1.6;}
+  @media(max-width:820px){ .steps4{grid-template-columns:1fr 1fr;} }
+  @media(max-width:520px){ .steps4{grid-template-columns:1fr;} }
+
+  /* 후기 */
+  .reviews{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:54px;}
+  .rv{background:#fff; border-radius:18px; padding:26px 24px; box-shadow:0 1px 3px rgba(0,0,0,.05);}
+  .rv .stars{color:var(--primary); font-size:15px; letter-spacing:2px; margin-bottom:14px;}
+  .rv .q{font-size:16px; font-weight:600; line-height:1.65; letter-spacing:-.2px;}
+  .rv .who{font-size:13px; color:var(--placeholder); margin-top:16px;}
+  @media(max-width:820px){ .reviews{grid-template-columns:1fr;} }
+
+  /* 수수료 vs 혜택 */
+  .fee{display:flex; gap:70px; align-items:center;}
+  .fee .txt{flex:1;} .fee .cmp{flex:1;}
+  .cmp .c-box{background:#fff; border:1px solid var(--line); border-radius:18px; padding:8px 24px;}
+  .cmp .c-row{display:flex; align-items:center; gap:12px; padding:16px 0; border-top:1px solid var(--line);}
+  .cmp .c-row:first-child{border-top:none;}
+  .cmp .c-row iconify-icon{font-size:20px; color:var(--primary); flex:0 0 auto;}
+  .cmp .c-l{flex:1; font-size:15px; color:var(--sub); font-weight:500;}
+  .cmp .c-v{font-size:16px; font-weight:700; color:var(--primary-dark);}
+  .cmp .c-row.minus iconify-icon{color:var(--icon-off);}
+  .cmp .c-row.minus .c-v{color:var(--ink);}
+  @media(max-width:820px){ .fee{flex-direction:column; gap:40px; align-items:flex-start;} }
+
+  /* 마지막 CTA */
+  .last{background:var(--gray-bg); text-align:center; padding:120px 24px;}
+  .last .hero-btns{margin-top:40px;}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-in">
+    <a class="logo" href="index.html"><span class="mark"><iconify-icon icon="mingcute:home-4-fill"></iconify-icon></span>랜선페이</a>
+    <div class="nav-menu">
+      <a href="이용가이드.html">이용가이드</a>
+      <a href="고객센터.html">고객센터</a>
+      <a href="송금하기.html">송금하기</a>
+    </div>
+    <button class="nav-cta" onclick="location.href='송금하기.html'">웹에서 송금하기</button>
+    <button class="nav-burger" onclick="drawer(true)" aria-label="전체메뉴"><iconify-icon icon="mingcute:menu-fill"></iconify-icon></button>
+  </div>
+</nav>
+
+<!-- 히어로: 혜택 롤링 + 앱 설치 -->
+<header class="hero">
+  <div class="eyebrow">현금 결제를 카드로</div>
+  <h1 class="h-xl"><span class="roll" id="roll">월세</span>도<br>카드로 내세요</h1>
+  <p class="p-lg">현금으로만 내던 돈을 카드로 결제하면<br>상대방에게는 현금으로 바로 입금돼요.</p>
+  <div class="hero-btns">
+    <a class="btn dark" href="#"><iconify-icon icon="mingcute:apple-fill"></iconify-icon>App Store</a>
+    <a class="btn dark" href="#"><iconify-icon icon="mingcute:google-play-fill"></iconify-icon>Google Play</a>
+  </div>
+  <div class="web-cta"><a href="송금하기.html">앱 설치 없이 웹에서 바로 송금하기 ›</a></div>
+</header>
+
+<!-- USP 1 · 즉시 송금 -->
+<section class="sec">
+  <div class="wrap usp">
+    <div class="txt">
+      <div class="eyebrow">즉시 송금</div>
+      <h2 class="h-lg">카드로 결제하면<br>상대방에게 바로 입금</h2>
+      <p class="p-lg">상대방 동의 없이도 돼요. 은행·계좌번호만 알면<br>받는 분 확인까지 자동으로 끝나요.</p>
+    </div>
+    <div class="vis">
+      <div class="mock">
+        <div class="m-card">
+          <div class="m-row"><div class="m-ic"><iconify-icon icon="mingcute:home-4-fill"></iconify-icon></div><div><div class="m-t">상가 임대료</div><div class="m-s">받는 분 · 명동상가 임대인</div></div><span class="m-v">680,000원</span></div>
+        </div>
+        <div class="m-card"><button class="m-btn">즉시 송금하기</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- USP 2 · 혜택 -->
+<section class="sec tint">
+  <div class="wrap usp rev">
+    <div class="txt">
+      <div class="eyebrow">카드 혜택</div>
+      <h2 class="h-lg">내기만 해도<br>혜택이 쌓여요</h2>
+      <p class="p-lg">무이자 할부로 나눠 내고 포인트와 실적은 쌓고<br>월세는 연말정산 공제까지 챙겨요.</p>
+    </div>
+    <div class="vis">
+      <div class="mock" style="background:#fff">
+        <div class="m-card" style="background:var(--primary-50); box-shadow:none">
+          <div class="m-row"><div class="m-ic" style="background:#fff"><iconify-icon icon="mingcute:gift-fill"></iconify-icon></div><span class="m-t">카드 포인트 적립</span><span class="m-v blue">+6,660원</span></div>
+          <div class="m-row" style="margin-top:12px"><div class="m-ic" style="background:#fff"><iconify-icon icon="mingcute:bank-card-fill"></iconify-icon></div><span class="m-t">3개월 무이자 할부</span><span class="m-v blue">이자 0원</span></div>
+          <div class="m-row" style="margin-top:12px"><div class="m-ic" style="background:#fff"><iconify-icon icon="mingcute:bill-fill"></iconify-icon></div><span class="m-t">연말정산 소득공제</span><span class="m-v blue">대상</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- USP 3 · 안전 -->
+<section class="sec">
+  <div class="wrap usp">
+    <div class="txt">
+      <div class="eyebrow">안전한 입금</div>
+      <h2 class="h-lg">담당자가 확인한 뒤<br>입금해드려요</h2>
+      <p class="p-lg">결제하면 담당자가 서류를 검토하고 입금해요.<br>승인되지 않으면 결제는 자동으로 취소돼요.</p>
+    </div>
+    <div class="vis">
+      <div class="mock">
+        <div class="m-card">
+          <div class="m-row"><span class="m-badge">검토 중</span><span class="m-t" style="margin-left:2px">7월 월세 · 500,000원</span></div>
+          <div class="m-s" style="margin-top:8px">담당자가 서류 확인 중 · 보통 30분 이내</div>
+        </div>
+        <div class="m-card">
+          <div class="m-row"><span class="m-badge" style="background:#EAF7F0; color:var(--success)">입금 완료</span><span class="m-t" style="margin-left:2px">6월 월세 · 500,000원</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 진행 과정 -->
+<section class="sec tint" id="process">
+  <div class="wrap" style="text-align:center">
+    <div class="eyebrow">진행 과정</div>
+    <h2 class="h-lg">네 단계면 끝나요</h2>
+    <div class="steps4" style="text-align:left">
+      <div class="stp"><div class="no">1</div><div class="t">결제 정보 입력</div><div class="s">무엇을 · 얼마를 · 어디로 보낼지 하나씩 입력해요.</div></div>
+      <div class="stp"><div class="no">2</div><div class="t">서류 촬영 · 첨부</div><div class="s">계약서나 고지서를 찍어서 올려요.</div></div>
+      <div class="stp"><div class="no">3</div><div class="t">카드로 결제</div><div class="s">카드 고르고 할부까지 정하면 끝이에요.</div></div>
+      <div class="stp"><div class="no">4</div><div class="t">확인 후 입금</div><div class="s">담당자 확인 후 받는 분에게 입금돼요.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 후기 -->
+<section class="sec" id="reviews">
+  <div class="wrap" style="text-align:center">
+    <div class="eyebrow">이용 후기</div>
+    <h2 class="h-lg">먼저 써본 분들의 이야기</h2>
+    <div class="reviews" style="text-align:left">
+      <div class="rv"><div class="stars">★★★★★</div><div class="q">"월세 낼 때마다 현금이 부족했는데 이제 카드로 내고 월급날에 갚아요. 숨통이 트여요."</div><div class="who">30대 직장인 · 월세 결제</div></div>
+      <div class="rv"><div class="stars">★★★★★</div><div class="q">"식자재 대금을 카드로 돌리니 현금 흐름이 한 달 여유가 생겼어요. 경비 정리도 알아서 해주고요."</div><div class="who">음식점 운영 · 매입대금</div></div>
+      <div class="rv"><div class="stars">★★★★☆</div><div class="q">"이사비 갑자기 나갈 때 무이자 할부로 나눠 냈어요. 상대방은 그날 바로 현금으로 받았대요."</div><div class="who">20대 · 이사비 결제</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 수수료 vs 혜택 -->
+<section class="sec tint" id="fee">
+  <div class="wrap fee">
+    <div class="txt">
+      <div class="eyebrow">수수료</div>
+      <h2 class="h-lg">수수료 4%<br>그 이상을 돌려받아요</h2>
+      <p class="p-lg" style="margin-top:22px">숨는 비용 없이 수수료는 딱 하나예요.<br>대신 받는 혜택은 그보다 커요.</p>
+    </div>
+    <div class="cmp">
+      <div class="c-box">
+        <div class="c-row minus"><iconify-icon icon="mingcute:minus-circle-fill"></iconify-icon><span class="c-l">수수료</span><span class="c-v">결제액의 4%</span></div>
+        <div class="c-row"><iconify-icon icon="mingcute:gift-fill"></iconify-icon><span class="c-l">카드 포인트 · 캐시백</span><span class="c-v">최대 1.5%</span></div>
+        <div class="c-row"><iconify-icon icon="mingcute:bank-card-fill"></iconify-icon><span class="c-l">무이자 할부 이자 절약</span><span class="c-v">최대 6개월</span></div>
+        <div class="c-row"><iconify-icon icon="mingcute:bill-fill"></iconify-icon><span class="c-l">월세 연말정산 세액공제</span><span class="c-v">최대 17%</span></div>
+        <div class="c-row"><iconify-icon icon="mingcute:medal-fill"></iconify-icon><span class="c-l">카드 실적 인정</span><span class="c-v">결제액 전액</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 마지막 CTA -->
+<section class="last">
+  <h2 class="h-lg">현금으로 내던 돈<br>오늘부터 카드로 내세요</h2>
+  <div class="hero-btns">
+    <a class="btn dark" href="#"><iconify-icon icon="mingcute:apple-fill"></iconify-icon>App Store</a>
+    <a class="btn dark" href="#"><iconify-icon icon="mingcute:google-play-fill"></iconify-icon>Google Play</a>
+    <a class="btn blue" href="송금하기.html">웹에서 바로 송금하기</a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="f-in">
+    <div class="f-menu">
+      <a href="이용가이드.html">이용가이드</a>
+      <a href="고객센터.html">고객센터</a>
+      <a href="고객센터.html#faq">자주 묻는 질문</a>
+      <a href="송금하기.html">송금하기</a>
+    </div>
+    <p>랜선페이 (주)랜선페이컴퍼니 · 대표 OOO · 사업자등록번호 000-00-00000<br>
+    서울특별시 OO구 OO로 000 · 고객센터 1600-0000 (평일 9:00~18:00)<br>
+    랜선페이는 전자금융거래법에 따라 등록된 전자지급결제대행(PG) 서비스입니다.</p>
+  </div>
+</footer>
+
+<!-- 전체메뉴 드로어 -->
+<div class="drawer-dim" id="ddim" onclick="drawer(false)"></div>
+<aside class="drawer" id="drawer">
+  <div class="d-top"><span class="d-title">전체 메뉴</span><button class="d-x" onclick="drawer(false)">✕</button></div>
+  <a href="고객센터.html#faq"><iconify-icon icon="mingcute:question-fill"></iconify-icon>자주 묻는 질문<span class="gv">›</span></a>
+  <a href="고객센터.html"><iconify-icon icon="mingcute:headphone-fill"></iconify-icon>고객센터<span class="gv">›</span></a>
+  <a href="이용가이드.html"><iconify-icon icon="mingcute:book-2-fill"></iconify-icon>이용가이드<span class="gv">›</span></a>
+  <a href="index.html#reviews"><iconify-icon icon="mingcute:chat-2-fill"></iconify-icon>이용후기<span class="gv">›</span></a>
+  <a href="송금하기.html"><iconify-icon icon="mingcute:flash-fill"></iconify-icon>송금하기<span class="gv">›</span></a>
+  <a href="#" onclick="alert('세금계산서 · 부가세 신고는 준비 중이에요'); return false;"><iconify-icon icon="mingcute:file-certificate-fill"></iconify-icon>세금계산서 · 부가세 신고<span class="gv">›</span></a>
+  <button class="d-login" onclick="alert('로그인은 준비 중이에요')">로그인</button>
+</aside>
+
+<script>
+function drawer(on){
+  document.getElementById('drawer').classList.toggle('on', on);
+  document.getElementById('ddim').classList.toggle('on', on);
+}
+/* 히어로 혜택 롤링 */
+const WORDS=['월세','관리비','보험료','이사비','매입대금','학원비'];
+let wi=0;
+setInterval(()=>{
+  const el=document.getElementById('roll');
+  el.style.opacity='0'; el.style.transition='opacity .25s';
+  setTimeout(()=>{ wi=(wi+1)%WORDS.length; el.textContent=WORDS[wi]; el.style.opacity='1'; }, 260);
+}, 2200);
+</script>
+</body>
+</html>

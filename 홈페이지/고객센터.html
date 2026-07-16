@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>랜선페이 — 고객센터</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="web.css">
+<script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+<style>
+  .page-hero{background:linear-gradient(180deg, var(--primary-50), #fff); padding:80px 24px 70px; text-align:center;}
+  .page-hero .p-lg{margin-top:18px;}
+
+  /* 공지사항 (게시판) */
+  .board{border-top:2px solid var(--ink); margin-top:40px;}
+  .board a{display:flex; align-items:center; gap:16px; padding:20px 8px; border-bottom:1px solid var(--line); text-decoration:none; color:var(--ink);}
+  .board a:hover{background:#FAFBFC;}
+  .board .b-tag{font-size:12px; font-weight:700; color:var(--primary-dark); background:var(--primary-50); padding:5px 10px; border-radius:8px; flex:0 0 auto;}
+  .board .b-t{flex:1; font-size:16px; font-weight:600; min-width:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+  .board .b-d{font-size:14px; color:var(--placeholder); flex:0 0 auto;}
+
+  /* 이벤트 카드 */
+  .events{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:40px;}
+  .ev{background:#fff; border:1px solid var(--line); border-radius:18px; overflow:hidden; cursor:pointer; text-align:left;}
+  .ev .ev-vis{height:130px; background:var(--primary-50); display:flex; align-items:center; justify-content:center;}
+  .ev .ev-vis iconify-icon{font-size:52px; color:var(--primary);}
+  .ev .ev-body{padding:20px;}
+  .ev .ev-tag{font-size:11px; font-weight:700; color:var(--primary-dark);}
+  .ev .ev-t{font-size:17px; font-weight:700; margin-top:6px; letter-spacing:-.3px;}
+  .ev .ev-s{font-size:13px; color:var(--placeholder); margin-top:6px;}
+  @media(max-width:820px){ .events{grid-template-columns:1fr;} }
+
+  /* FAQ 아코디언 */
+  .faq{border-top:2px solid var(--ink); margin-top:40px;}
+  .faq details{border-bottom:1px solid var(--line);}
+  .faq summary{display:flex; align-items:center; gap:14px; padding:20px 8px; font-size:16px; font-weight:600; cursor:pointer; list-style:none;}
+  .faq summary::-webkit-details-marker{display:none;}
+  .faq summary .q-mark{color:var(--primary-dark); font-weight:800; flex:0 0 auto;}
+  .faq summary .arw{margin-left:auto; color:var(--icon-off); font-size:20px; transition:.2s;}
+  .faq details[open] summary .arw{transform:rotate(180deg);}
+  .faq .a{padding:2px 8px 22px 34px; font-size:15px; color:var(--sub); line-height:1.75;}
+
+  .cs-call{margin-top:60px; background:var(--gray-bg); border-radius:20px; padding:34px; display:flex; align-items:center; gap:20px; flex-wrap:wrap;}
+  .cs-call .t{flex:1; min-width:220px;}
+  .cs-call .t b{font-size:19px;}
+  .cs-call .t p{font-size:14px; color:var(--sub); margin-top:6px;}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-in">
+    <a class="logo" href="index.html"><span class="mark"><iconify-icon icon="mingcute:home-4-fill"></iconify-icon></span>랜선페이</a>
+    <div class="nav-menu">
+      <a href="이용가이드.html">이용가이드</a>
+      <a href="고객센터.html" class="on">고객센터</a>
+      <a href="송금하기.html">송금하기</a>
+    </div>
+    <button class="nav-cta" onclick="location.href='송금하기.html'">웹에서 송금하기</button>
+    <button class="nav-burger" onclick="drawer(true)" aria-label="전체메뉴"><iconify-icon icon="mingcute:menu-fill"></iconify-icon></button>
+  </div>
+</nav>
+
+<header class="page-hero">
+  <h1 class="h-lg">무엇을 도와드릴까요?</h1>
+  <p class="p-lg">공지 · 이벤트 · 자주 묻는 질문을 한곳에 모았어요.</p>
+</header>
+
+<!-- 공지사항 -->
+<section class="sec" style="padding-top:40px">
+  <div class="wrap">
+    <h2 class="h-md">공지사항</h2>
+    <div class="board">
+      <a href="#"><span class="b-tag">공지</span><span class="b-t">7월 무이자 할부 카드사 안내 (삼성 · 신한 · 현대 최대 6개월)</span><span class="b-d">2026.07.14</span></a>
+      <a href="#"><span class="b-tag">점검</span><span class="b-t">7월 20일(월) 새벽 2~4시 시스템 점검 안내</span><span class="b-d">2026.07.12</span></a>
+      <a href="#"><span class="b-tag">공지</span><span class="b-t">개인정보 처리방침 개정 안내 (8월 1일 시행)</span><span class="b-d">2026.07.08</span></a>
+      <a href="#"><span class="b-tag">안내</span><span class="b-t">여신전문금융업법에 따른 서비스 불가 거래 안내</span><span class="b-d">2026.07.01</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- 이벤트 -->
+<section class="sec tint" style="padding:80px 0">
+  <div class="wrap">
+    <h2 class="h-md">진행 중인 이벤트</h2>
+    <div class="events">
+      <div class="ev" onclick="alert('이벤트 상세는 준비 중이에요')">
+        <div class="ev-vis"><iconify-icon icon="mingcute:bank-card-fill"></iconify-icon></div>
+        <div class="ev-body"><div class="ev-tag">이벤트</div><div class="ev-t">최대 6개월 무이자 할부</div><div class="ev-s">7월 한 달 · 카드 결제 전체 대상</div></div>
+      </div>
+      <div class="ev" onclick="alert('이벤트 상세는 준비 중이에요')">
+        <div class="ev-vis"><iconify-icon icon="mingcute:gift-fill"></iconify-icon></div>
+        <div class="ev-body"><div class="ev-tag">캐시백</div><div class="ev-t">첫 결제 3만원 캐시백</div><div class="ev-s">신규 가입 후 첫 결제 시</div></div>
+      </div>
+      <div class="ev" onclick="alert('이벤트 상세는 준비 중이에요')">
+        <div class="ev-vis"><iconify-icon icon="mingcute:group-3-fill"></iconify-icon></div>
+        <div class="ev-body"><div class="ev-tag">친구초대</div><div class="ev-t">초대할 때마다 1만원</div><div class="ev-s">친구도 나도 함께 받아요</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec" id="faq" style="padding:80px 0 60px">
+  <div class="wrap">
+    <h2 class="h-md">자주 묻는 질문</h2>
+    <div class="faq">
+      <details open>
+        <summary><span class="q-mark">Q</span>수수료는 얼마인가요?<iconify-icon class="arw" icon="mingcute:down-line"></iconify-icon></summary>
+        <div class="a">결제 금액의 4%예요. 숨은 비용 없이 수수료는 이것 하나예요. 대신 카드 포인트 적립 · 무이자 할부 · 연말정산 공제 등 받는 혜택이 더 커요.</div>
+      </details>
+      <details>
+        <summary><span class="q-mark">Q</span>상대방 동의가 필요한가요?<iconify-icon class="arw" icon="mingcute:down-line"></iconify-icon></summary>
+        <div class="a">아니요. 받는 분의 은행과 계좌번호만 알면 돼요. 계좌 인증을 하면 예금주가 자동으로 확인돼서 잘못 보낼 걱정도 없어요.</div>
+      </details>
+      <details>
+        <summary><span class="q-mark">Q</span>입금은 언제 되나요?<iconify-icon class="arw" icon="mingcute:down-line"></iconify-icon></summary>
+        <div class="a">결제 후 담당자가 서류를 확인하고 입금해드려요. 보통 영업일 기준 30분 이내에 처리돼요. 승인되지 않으면 결제는 자동으로 취소되고 카드값도 청구되지 않아요.</div>
+      </details>
+      <details>
+        <summary><span class="q-mark">Q</span>어떤 서류가 필요한가요?<iconify-icon class="arw" icon="mingcute:down-line"></iconify-icon></summary>
+        <div class="a">결제 유형마다 달라요. 월세는 계약서, 관리비는 고지서처럼 금액과 계좌가 보이는 증빙 하나면 대부분 충분해요. 자세한 내용은 <a href="이용가이드.html" style="color:var(--primary-dark); font-weight:700">이용가이드</a>에서 확인하세요.</div>
+      </details>
+      <details>
+        <summary><span class="q-mark">Q</span>이용할 수 없는 결제도 있나요?<iconify-icon class="arw" icon="mingcute:down-line"></iconify-icon></summary>
+        <div class="a">허위 거래로 카드값을 현금화하는 행위, 빚 상환 · 이자 납부 목적 결제, 자동차 리스료 등은 여신전문금융업법에 따라 이용할 수 없어요.</div>
+      </details>
+      <details>
+        <summary><span class="q-mark">Q</span>세금계산서 · 현금영수증은 어떻게 받나요?<iconify-icon class="arw" icon="mingcute:down-line"></iconify-icon></summary>
+        <div class="a">개인은 현금영수증, 사업자는 세금계산서로 발급돼요. 사업자는 사업자등록번호만 등록하면 경비 자료까지 자동으로 정리해드려요.</div>
+      </details>
+    </div>
+
+    <div class="cs-call">
+      <div class="t"><b>더 궁금한 게 있나요?</b><p>고객센터 1600-0000 · 평일 9:00~18:00 (주말 · 공휴일 휴무)</p></div>
+      <a class="btn ghost" href="#" onclick="alert('1:1 문의는 준비 중이에요'); return false;">1:1 문의하기</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="f-in">
+    <div class="f-menu">
+      <a href="이용가이드.html">이용가이드</a>
+      <a href="고객센터.html">고객센터</a>
+      <a href="고객센터.html#faq">자주 묻는 질문</a>
+      <a href="송금하기.html">송금하기</a>
+    </div>
+    <p>랜선페이 (주)랜선페이컴퍼니 · 대표 OOO · 사업자등록번호 000-00-00000<br>
+    서울특별시 OO구 OO로 000 · 고객센터 1600-0000 (평일 9:00~18:00)</p>
+  </div>
+</footer>
+
+<div class="drawer-dim" id="ddim" onclick="drawer(false)"></div>
+<aside class="drawer" id="drawer">
+  <div class="d-top"><span class="d-title">전체 메뉴</span><button class="d-x" onclick="drawer(false)">✕</button></div>
+  <a href="고객센터.html#faq"><iconify-icon icon="mingcute:question-fill"></iconify-icon>자주 묻는 질문<span class="gv">›</span></a>
+  <a href="고객센터.html"><iconify-icon icon="mingcute:headphone-fill"></iconify-icon>고객센터<span class="gv">›</span></a>
+  <a href="이용가이드.html"><iconify-icon icon="mingcute:book-2-fill"></iconify-icon>이용가이드<span class="gv">›</span></a>
+  <a href="index.html#reviews"><iconify-icon icon="mingcute:chat-2-fill"></iconify-icon>이용후기<span class="gv">›</span></a>
+  <a href="송금하기.html"><iconify-icon icon="mingcute:flash-fill"></iconify-icon>송금하기<span class="gv">›</span></a>
+  <a href="#" onclick="alert('세금계산서 · 부가세 신고는 준비 중이에요'); return false;"><iconify-icon icon="mingcute:file-certificate-fill"></iconify-icon>세금계산서 · 부가세 신고<span class="gv">›</span></a>
+  <button class="d-login" onclick="alert('로그인은 준비 중이에요')">로그인</button>
+</aside>
+
+<script>
+function drawer(on){
+  document.getElementById('drawer').classList.toggle('on', on);
+  document.getElementById('ddim').classList.toggle('on', on);
+}
+</script>
+</body>
+</html>
