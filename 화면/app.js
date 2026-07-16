@@ -6,7 +6,9 @@
     '.phone{animation:appIn .3s cubic-bezier(.2,.8,.2,1);}'+
     '@keyframes appIn{from{opacity:.35; transform:translateY(12px) scale(.992);} to{opacity:1; transform:none;}}'+
     '@media (prefers-reduced-motion: reduce){.phone{animation:none;}}'+
-    'button:active{transform:scale(.97); transition:transform .06s;}';
+    'button:active{transform:scale(.97); transition:transform .06s;}'+
+    '.phone{-webkit-user-select:none; user-select:none;}'+
+    '.phone input,.phone textarea{-webkit-user-select:text; user-select:text;}';
   document.head.appendChild(st);
 
   /* 드래그 스크롤 (세로) + 관성 */
