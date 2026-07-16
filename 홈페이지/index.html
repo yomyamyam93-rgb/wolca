@@ -8,49 +8,70 @@
 <link rel="stylesheet" href="web.css">
 <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 <style>
-  /* 은은한 등장 (걸리적거리지 않게: 짧고 한 번만) */
   .reveal{opacity:0; transform:translateY(22px); transition:opacity .55s ease, transform .55s ease;}
   .reveal.in{opacity:1; transform:none;}
   @media (prefers-reduced-motion: reduce){ .reveal{opacity:1; transform:none; transition:none;} }
 
   /* 히어로 */
-  .hero{background:linear-gradient(180deg, var(--primary-50), #fff 86%); text-align:center; padding:110px 24px 110px;}
+  .hero{background:linear-gradient(180deg, var(--primary-50), #fff 86%); text-align:center; padding:110px 24px 96px;}
   .hero .roll{color:var(--primary-dark); display:inline-block; min-width:150px;}
   .hero .p-lg{margin:26px auto 38px; max-width:560px;}
   .hero-btns{display:flex; gap:12px; justify-content:center; flex-wrap:wrap;}
-  .storebtns{display:flex; gap:10px; justify-content:center; margin-top:20px;}
-  .storebtn{display:inline-flex; align-items:center; gap:7px; height:44px; padding:0 18px; border-radius:12px; background:#fff; border:1px solid var(--line); color:var(--ink); font-size:14px; font-weight:700; text-decoration:none;}
+  .storebtns{display:flex; gap:10px; justify-content:center; margin-top:18px;}
+  .storebtn{display:inline-flex; align-items:center; justify-content:center; gap:7px; width:160px; height:50px; border-radius:13px; background:#fff; border:1px solid var(--line); color:var(--ink); font-size:14px; font-weight:700; text-decoration:none; white-space:nowrap;}
   .storebtn iconify-icon{font-size:17px;}
 
-  /* 포인트 칩 띠 */
-  .points-band{border-top:1px solid var(--line); border-bottom:1px solid var(--line); background:#fff; padding:26px 24px;}
-  .points-in{max-width:1040px; margin:0 auto; display:flex; gap:10px; flex-wrap:wrap; justify-content:center;}
-  .pt-chip{display:inline-flex; align-items:center; gap:7px; background:var(--gray-bg); border-radius:999px; padding:11px 18px; font-size:14px; font-weight:600; color:var(--ink);}
-  .pt-chip iconify-icon{font-size:17px; color:var(--primary);}
+  /* 포인트 타일 (크고 직관적으로) */
+  .pts{max-width:1040px; margin:0 auto; padding:64px 24px 0; display:grid; grid-template-columns:repeat(3,1fr); gap:14px;}
+  .pt{background:#fff; border:1px solid var(--line); border-radius:20px; padding:28px 14px; display:flex; flex-direction:column; align-items:center; gap:12px; text-align:center;}
+  .pt iconify-icon{font-size:30px; color:var(--primary);}
+  .pt .t{font-size:17px; font-weight:700; letter-spacing:-.3px; white-space:nowrap;}
+  @media(max-width:760px){ .pts{grid-template-columns:1fr 1fr;} .pt .t{font-size:15px;} }
 
-  /* 미니 계산기 */
-  .calcsec{background:var(--gray-bg);}
-  .calcbox{max-width:860px; margin:54px auto 0; background:#fff; border-radius:24px; box-shadow:0 14px 44px rgba(25,31,40,.08); display:flex; overflow:hidden;}
-  .calc-l{flex:1; padding:38px 34px; border-right:1px solid var(--line);}
-  .calc-r{flex:1; padding:38px 34px; background:#FAFBFC;}
-  .calc-l label{display:block; font-size:14px; font-weight:700; color:var(--sub); margin-bottom:10px;}
-  .amt-in{display:flex; align-items:center; border-bottom:2.5px solid var(--primary); padding-bottom:8px;}
-  .amt-in input{flex:1; border:none; outline:none; font-family:inherit; font-size:34px; font-weight:800; color:var(--ink); text-align:right; min-width:0; background:none; letter-spacing:-.5px;}
-  .amt-in .won{font-size:22px; font-weight:800; color:var(--sub); margin-left:8px;}
-  .quick{display:flex; gap:8px; margin-top:16px;}
-  .quick button{flex:1; height:42px; border:1px solid var(--line); background:#fff; border-radius:11px; font-family:inherit; font-size:13px; font-weight:600; color:var(--sub); cursor:pointer;}
-  .quick button:hover{border-color:var(--primary); color:var(--primary-dark);}
-  .calc-note{font-size:12px; color:var(--placeholder); margin-top:18px; line-height:1.6;}
-  .cr-row{display:flex; justify-content:space-between; align-items:center; padding:11px 0; font-size:15px;}
-  .cr-row .l{color:var(--sub);} .cr-row .v{font-weight:700; color:var(--ink);}
-  .cr-row.hl{border-top:1px solid var(--line); margin-top:8px; padding-top:16px;}
-  .cr-row.hl .l{font-weight:700; color:var(--ink);}
-  .cr-row.hl .v{font-size:22px; letter-spacing:-.4px;}
-  .cr-row.ben .l, .cr-row.ben .v{color:var(--primary-dark);}
-  .calc-r .btn{width:100%; margin-top:18px;}
-  @media(max-width:760px){ .calcbox{flex-direction:column;} .calc-l{border-right:none; border-bottom:1px solid var(--line);} }
+  /* 계산기 (폰 안에) */
+  .usp{display:flex; align-items:center; gap:70px;}
+  .usp .txt{flex:1; min-width:0;}
+  .usp .txt .p-lg{margin-top:22px;}
+  .usp .vis{flex:1; display:flex; justify-content:center;}
+  .usp.rev{flex-direction:row-reverse;}
+  @media(max-width:820px){ .usp,.usp.rev{flex-direction:column; gap:44px; align-items:flex-start;} }
 
-  /* 걱정 해소 문답 */
+  /* 휴대폰 프레임 */
+  .mock{width:300px; height:632px; max-width:100%; background:var(--gray-bg); border-radius:40px; padding:12px 14px 0;
+    display:flex; flex-direction:column; overflow:hidden;
+    box-shadow:0 0 0 9px #fff, 0 0 0 10.5px #DDE2E8, 0 34px 70px -18px rgba(25,31,40,.3);}
+  .mock .p-status{position:relative; display:flex; align-items:center; justify-content:space-between; padding:8px 12px 14px; font-size:12px; font-weight:700; color:var(--ink);}
+  .mock .p-status .cam{width:62px; height:17px; background:#191F28; border-radius:10px; position:absolute; left:50%; transform:translateX(-50%);}
+  .mock .p-status .sig{font-size:11px; letter-spacing:1px;}
+  .mock .m-title{font-size:18px; font-weight:700; letter-spacing:-.3px; padding:2px 4px 14px;}
+  .mock .m-card{background:#fff; border-radius:16px; padding:16px; margin-bottom:12px; box-shadow:0 1px 3px rgba(0,0,0,.05);}
+  .mock .m-label{font-size:12px; color:var(--placeholder);}
+  .mock .m-val{font-size:16px; font-weight:700; margin-top:3px; white-space:nowrap;}
+  .mock .m-hr{border-top:1px solid var(--line); margin:12px 0;}
+  .mock .m-arow{display:flex; justify-content:space-between; align-items:center; padding:5px 0; font-size:13px; white-space:nowrap;}
+  .mock .m-arow .l{color:var(--sub);} .mock .m-arow .v{font-weight:700; color:var(--ink);}
+  .mock .m-arow.blue .l,.mock .m-arow.blue .v{color:var(--primary-dark);}
+  .mock .m-total{display:flex; justify-content:space-between; align-items:baseline; white-space:nowrap;}
+  .mock .m-total .l{font-size:13px; font-weight:700;}
+  .mock .m-total .v{font-size:22px; font-weight:800; letter-spacing:-.4px;}
+  .mock .m-btn{height:48px; border:none; border-radius:13px; width:100%; background:var(--primary); background:var(--primary-grad); box-shadow:var(--btn-shadow); color:#fff; font-family:inherit; font-size:15px; font-weight:700; cursor:pointer; white-space:nowrap;}
+  .mock .m-ben{background:var(--primary-50); border-radius:14px; padding:6px 14px; margin-bottom:12px;}
+  .mock .m-ben .m-arow{padding:8px 0;}
+  .mock .m-ben .m-arow+.m-arow{border-top:1px solid #DBE7FF;}
+  .mock .bk{display:inline-flex; align-items:center; justify-content:center; width:26px; height:26px; border-radius:8px; background:#FFBC00; color:#3B2B00; font-size:10px; font-weight:800; margin-right:8px;}
+  .mock .vrow{display:flex; align-items:center; gap:10px;}
+  .mock .vrow iconify-icon{font-size:22px; color:var(--primary); flex:0 0 auto;}
+  .mock .p-homein{margin:auto -14px 0; background:transparent; padding:12px 0 8px; display:flex; justify-content:center;}
+  .mock .p-homein.white{background:#fff;}
+  .mock .p-homein:after{content:''; width:100px; height:4px; border-radius:3px; background:var(--ink);}
+  /* 계산기 폰 전용 */
+  .calcphone .amt-in{display:flex; align-items:center; border-bottom:2px solid var(--primary); padding-bottom:6px; margin-top:4px;}
+  .calcphone .amt-in input{flex:1; border:none; outline:none; font-family:inherit; font-size:24px; font-weight:800; color:var(--ink); text-align:right; min-width:0; background:none;}
+  .calcphone .amt-in .won{font-size:15px; font-weight:800; color:var(--sub); margin-left:6px;}
+  .calcphone .quick{display:flex; gap:6px; margin-top:12px;}
+  .calcphone .quick button{flex:1; height:34px; border:1px solid var(--line); background:#fff; border-radius:9px; font-family:inherit; font-size:11px; font-weight:600; color:var(--sub); cursor:pointer; white-space:nowrap;}
+
+  /* 걱정 해소 */
   .worries{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:54px;}
   .wr{background:#fff; border:1px solid var(--line); border-radius:20px; padding:28px 26px;}
   .wr .wq{display:flex; gap:10px; align-items:flex-start; font-size:18px; font-weight:700; letter-spacing:-.3px; line-height:1.45;}
@@ -59,80 +80,45 @@
   .wr .wa b{color:var(--ink);}
   @media(max-width:820px){ .worries{grid-template-columns:1fr;} }
 
-  /* USP */
-  .usp{display:flex; align-items:center; gap:70px;}
-  .usp .txt{flex:1; min-width:0;}
-  .usp .txt .p-lg{margin-top:22px;}
-  .usp .vis{flex:1; display:flex; justify-content:center;}
-  .usp.rev{flex-direction:row-reverse;}
-  @media(max-width:820px){ .usp,.usp.rev{flex-direction:column; gap:40px; align-items:flex-start;} }
-
-  /* 휴대폰 목업 */
-  .mock{width:300px; height:632px; max-width:100%; background:var(--gray-bg); border-radius:40px; padding:12px 14px 0;
-    display:flex; flex-direction:column; overflow:hidden;
-    box-shadow:0 0 0 9px #fff, 0 0 0 10.5px #DDE2E8, 0 34px 70px -18px rgba(25,31,40,.3);}
-  .mock .p-status{position:relative; display:flex; align-items:center; justify-content:space-between; padding:8px 12px 14px; font-size:12px; font-weight:700; color:var(--ink);}
-  .mock .p-status .cam{width:62px; height:17px; background:#191F28; border-radius:10px; position:absolute; left:50%; transform:translateX(-50%);}
-  .mock .p-status .sig{font-size:11px; color:var(--ink); letter-spacing:1px;}
-  .mock .m-card{background:#fff; border-radius:16px; padding:18px; margin-bottom:12px; box-shadow:0 1px 3px rgba(0,0,0,.05);}
-  .mock .m-title{font-size:17px; font-weight:700; letter-spacing:-.3px; padding:2px 4px 12px;}
-  .mock .m-label{font-size:13px; color:var(--placeholder);}
-  .mock .m-big{font-size:26px; font-weight:800; letter-spacing:-.5px; margin-top:3px;}
-  .mock .m-row{display:flex; align-items:center; gap:11px;}
-  .mock .m-ic{width:38px; height:38px; border-radius:11px; background:var(--tile); display:flex; align-items:center; justify-content:center; flex:0 0 auto;}
-  .mock .m-ic iconify-icon{font-size:20px; color:var(--primary);}
-  .mock .m-t{flex:1; font-size:15px; font-weight:600;}
-  .mock .m-s{font-size:12px; color:var(--placeholder); margin-top:1px;}
-  .mock .m-v{font-size:15px; font-weight:700;}
-  .mock .m-v.blue{color:var(--primary-dark);}
-  .mock .m-btn{height:46px; border:none; border-radius:12px; width:100%; background:var(--primary); background:var(--primary-grad); color:#fff; font-family:inherit; font-size:15px; font-weight:700;}
-  .mock .m-badge{font-size:11px; font-weight:700; background:var(--primary-50); color:var(--primary-dark); padding:4px 9px; border-radius:7px;}
-  .mock .p-tabbar{margin:auto -14px 0; background:#fff; border-top:1px solid var(--line); display:flex; padding:9px 10px 0;}
-  .mock .p-tab{flex:1; display:flex; flex-direction:column; align-items:center; gap:3px; font-size:9px; font-weight:500; color:var(--icon-off);}
-  .mock .p-tab iconify-icon{font-size:19px;}
-  .mock .p-tab.on{color:var(--primary); font-weight:700;}
-  .mock .p-homein{margin:0 -14px; background:#fff; padding:10px 0 8px; display:flex; justify-content:center;}
-  .mock .p-homein:after{content:''; width:100px; height:4px; border-radius:3px; background:var(--ink);}
-
-  /* 진행과정 */
+  /* 진행과정 (아이콘) */
   .steps4{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:54px;}
-  .stp{background:#fff; border:1px solid var(--line); border-radius:18px; padding:26px 22px;}
-  .stp .no{width:32px; height:32px; border-radius:50%; background:var(--primary-50); color:var(--primary-dark); font-weight:800; font-size:15px; display:flex; align-items:center; justify-content:center; margin-bottom:16px;}
-  .stp .t{font-size:17px; font-weight:700;}
+  .stp{background:#fff; border:1px solid var(--line); border-radius:20px; padding:28px 22px; text-align:center;}
+  .stp .sic{width:56px; height:56px; border-radius:18px; background:var(--primary-50); display:flex; align-items:center; justify-content:center; margin:0 auto 16px;}
+  .stp .sic iconify-icon{font-size:28px; color:var(--primary);}
+  .stp .no{font-size:12px; font-weight:800; color:var(--primary-dark); margin-bottom:6px;}
+  .stp .t{font-size:17px; font-weight:700; white-space:nowrap;}
   .stp .s{font-size:14px; color:var(--sub); margin-top:8px; line-height:1.6;}
   @media(max-width:820px){ .steps4{grid-template-columns:1fr 1fr;} }
   @media(max-width:520px){ .steps4{grid-template-columns:1fr;} }
 
-  /* 후기 */
-  .reviews{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:54px;}
-  .rv{background:#fff; border-radius:18px; padding:26px 24px; box-shadow:0 1px 3px rgba(0,0,0,.05);}
-  .rv .stars{color:var(--primary); font-size:15px; letter-spacing:2px; margin-bottom:14px;}
-  .rv .q{font-size:16px; font-weight:600; line-height:1.65; letter-spacing:-.2px;}
-  .rv .who{font-size:13px; color:var(--placeholder); margin-top:16px;}
-  @media(max-width:820px){ .reviews{grid-template-columns:1fr;} }
+  /* 후기 롤링 */
+  .rv-wrap{overflow-x:auto; scrollbar-width:none; margin-top:54px; cursor:grab;}
+  .rv-wrap::-webkit-scrollbar{display:none;}
+  .rv-wrap:active{cursor:grabbing;}
+  .rv-track{display:flex; gap:14px; width:max-content; padding:4px 2px;}
+  .rv{width:300px; flex:0 0 auto; background:#fff; border-radius:18px; padding:24px 22px; box-shadow:0 1px 3px rgba(0,0,0,.05); text-align:left;}
+  .rv .stars{color:var(--primary); font-size:14px; letter-spacing:2px; margin-bottom:12px;}
+  .rv .q{font-size:15px; font-weight:600; line-height:1.6; letter-spacing:-.2px;}
+  .rv .who{font-size:12px; color:var(--placeholder); margin-top:14px;}
 
-  /* 수수료 + 신뢰 */
-  .fee{display:flex; gap:70px; align-items:center;}
-  .fee .txt{flex:1;} .fee .cmp{flex:1;}
-  .cmp .c-box{background:#fff; border:1px solid var(--line); border-radius:18px; padding:8px 24px;}
-  .cmp .c-row{display:flex; align-items:center; gap:12px; padding:16px 0; border-top:1px solid var(--line);}
-  .cmp .c-row:first-child{border-top:none;}
-  .cmp .c-row iconify-icon{font-size:20px; color:var(--primary); flex:0 0 auto;}
-  .cmp .c-l{flex:1; font-size:15px; color:var(--sub); font-weight:500;}
-  .cmp .c-v{font-size:16px; font-weight:700; color:var(--primary-dark);}
-  .cmp .c-row.minus iconify-icon{color:var(--icon-off);}
-  .cmp .c-row.minus .c-v{color:var(--ink);}
-  @media(max-width:820px){ .fee{flex-direction:column; gap:40px; align-items:flex-start;} }
-  .trust{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:70px;}
-  .tr{background:#fff; border-radius:18px; padding:28px 26px; border:1px solid var(--line);}
-  .tr iconify-icon{font-size:28px; color:var(--primary);}
-  .tr .t{font-size:17px; font-weight:700; margin-top:14px;}
-  .tr .s{font-size:14px; color:var(--sub); margin-top:8px; line-height:1.65;}
-  @media(max-width:820px){ .trust{grid-template-columns:1fr;} }
+  /* 수수료 · 안전 (심플) */
+  .stats{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:54px;}
+  .stat{background:#fff; border:1px solid var(--line); border-radius:20px; padding:30px 14px; text-align:center;}
+  .stat .sl{font-size:13px; font-weight:700; color:var(--placeholder); margin-bottom:10px;}
+  .stat .sv{font-size:30px; font-weight:800; letter-spacing:-.6px; color:var(--primary-dark); white-space:nowrap;}
+  .stat .ss{font-size:13px; color:var(--sub); margin-top:8px; white-space:nowrap;}
+  .stat.pay .sv{color:var(--ink);}
+  @media(max-width:820px){ .stats{grid-template-columns:1fr 1fr;} }
+  .trustband{display:flex; justify-content:center; gap:36px; margin-top:44px; flex-wrap:wrap;}
+  .tb{display:inline-flex; align-items:center; gap:9px; font-size:15px; font-weight:700; color:var(--sub); white-space:nowrap;}
+  .tb iconify-icon{font-size:20px; color:var(--primary);}
 
   /* 마지막 CTA */
   .last{background:var(--gray-bg); text-align:center; padding:120px 24px;}
-  .last .hero-btns{margin-top:40px;}
+  .last .p-lg{margin-top:18px;}
+  .cta-col{display:flex; flex-direction:column; align-items:center; gap:14px; margin-top:40px;}
+  .cta-col .btn{width:332px; max-width:100%;}
+  .cta-col .storebtns{margin-top:0;}
 </style>
 </head>
 <body>
@@ -150,14 +136,13 @@
   </div>
 </nav>
 
-<!-- ① 히어로 : 웹 송금이 주, 앱은 보조 -->
+<!-- ① 히어로 -->
 <header class="hero">
   <div class="eyebrow">현금 결제를 카드로</div>
   <h1 class="h-xl"><span class="roll" id="roll">월세</span>도<br>카드로 내세요</h1>
   <p class="p-lg">현금으로만 내던 돈을 카드로 결제하면<br>상대방에게는 현금으로 바로 입금돼요.</p>
   <div class="hero-btns">
     <a class="btn blue" href="송금하기.html"><iconify-icon icon="mingcute:flash-fill"></iconify-icon>웹에서 바로 송금하기</a>
-    <a class="btn ghost" href="#calc">수수료 계산해보기</a>
   </div>
   <div class="storebtns">
     <a class="storebtn" href="#"><iconify-icon icon="mingcute:apple-fill"></iconify-icon>App Store</a>
@@ -165,49 +150,56 @@
   </div>
 </header>
 
-<!-- ② 포인트 칩 띠 -->
-<div class="points-band">
-  <div class="points-in">
-    <span class="pt-chip"><iconify-icon icon="mingcute:user-x-fill"></iconify-icon>상대방 동의 불필요</span>
-    <span class="pt-chip"><iconify-icon icon="mingcute:flash-fill"></iconify-icon>확인 후 바로 입금</span>
-    <span class="pt-chip"><iconify-icon icon="mingcute:bank-card-fill"></iconify-icon>최대 6개월 무이자</span>
-    <span class="pt-chip"><iconify-icon icon="mingcute:coin-fill"></iconify-icon>수수료 4% 하나</span>
-    <span class="pt-chip"><iconify-icon icon="mingcute:shield-fill"></iconify-icon>미승인 시 자동 취소</span>
-    <span class="pt-chip"><iconify-icon icon="mingcute:bill-fill"></iconify-icon>소득공제 · 경비처리</span>
-  </div>
+<!-- ② 포인트 타일 -->
+<div class="pts reveal">
+  <div class="pt"><iconify-icon icon="mingcute:user-x-fill"></iconify-icon><span class="t">상대방 동의 불필요</span></div>
+  <div class="pt"><iconify-icon icon="mingcute:flash-fill"></iconify-icon><span class="t">확인 후 바로 입금</span></div>
+  <div class="pt"><iconify-icon icon="mingcute:bank-card-fill"></iconify-icon><span class="t">최대 6개월 무이자</span></div>
+  <div class="pt"><iconify-icon icon="mingcute:coin-fill"></iconify-icon><span class="t">수수료 4% 하나</span></div>
+  <div class="pt"><iconify-icon icon="mingcute:shield-fill"></iconify-icon><span class="t">미승인 시 자동 취소</span></div>
+  <div class="pt"><iconify-icon icon="mingcute:bill-fill"></iconify-icon><span class="t">소득공제 · 경비처리</span></div>
 </div>
 
-<!-- ③ 미니 계산기 -->
-<section class="sec calcsec" id="calc">
-  <div class="wrap reveal" style="text-align:center">
-    <div class="eyebrow">미리 계산해보세요</div>
-    <h2 class="h-lg">얼마를 보내야 하나요?</h2>
-    <div class="calcbox" style="text-align:left">
-      <div class="calc-l">
-        <label>보낼 금액</label>
-        <div class="amt-in"><input id="amt" inputmode="numeric" value="1,000,000"><span class="won">원</span></div>
-        <div class="quick">
-          <button onclick="addAmt(100000)">+10만</button>
-          <button onclick="addAmt(500000)">+50만</button>
-          <button onclick="addAmt(1000000)">+100만</button>
-          <button onclick="setAmt(0)">지우기</button>
+<!-- ③ 계산기 (폰 안에) -->
+<section class="sec" id="calc">
+  <div class="wrap usp reveal">
+    <div class="txt">
+      <div class="eyebrow">미리 계산해보세요</div>
+      <h2 class="h-lg">금액만 넣으면<br>비용과 혜택이 바로</h2>
+      <p class="p-lg">수수료가 얼마인지 상대방이 얼마를 받는지<br>가입 없이 바로 확인해보세요.</p>
+    </div>
+    <div class="vis">
+      <div class="mock calcphone">
+        <div class="p-status"><span>9:41</span><span class="cam"></span><span class="sig">▮▮▮</span></div>
+        <div class="m-title">얼마를 카드로 내볼까요?</div>
+        <div class="m-card">
+          <div class="m-label">보낼 금액</div>
+          <div class="amt-in"><input id="amt" inputmode="numeric" value="1,000,000"><span class="won">원</span></div>
+          <div class="quick">
+            <button onclick="addAmt(100000)">+10만</button>
+            <button onclick="addAmt(500000)">+50만</button>
+            <button onclick="addAmt(1000000)">+100만</button>
+            <button onclick="setAmt(0)">C</button>
+          </div>
         </div>
-        <p class="calc-note">월세 · 관리비 · 매입대금 등 현금으로 내던 금액을 입력해보세요.</p>
-      </div>
-      <div class="calc-r">
-        <div class="cr-row"><span class="l">상대방이 받는 돈</span><span class="v" id="rGet">1,000,000원</span></div>
-        <div class="cr-row"><span class="l">수수료 4%</span><span class="v" id="rFee">40,000원</span></div>
-        <div class="cr-row ben"><span class="l">6개월 무이자 시 월</span><span class="v" id="rMon">173,400원</span></div>
-        <div class="cr-row ben"><span class="l">카드 적립 예상 (1%)</span><span class="v" id="rPt">+10,000원</span></div>
-        <div class="cr-row hl"><span class="l">내 카드 결제액</span><span class="v" id="rTotal">1,040,000원</span></div>
-        <a class="btn blue" href="송금하기.html">이 금액으로 바로 송금하기</a>
+        <div class="m-ben">
+          <div class="m-arow"><span class="l">상대방이 받는 돈</span><span class="v" id="rGet">1,000,000원</span></div>
+          <div class="m-arow"><span class="l">수수료 4%</span><span class="v" id="rFee">40,000원</span></div>
+          <div class="m-arow blue"><span class="l">6개월 무이자 시 월</span><span class="v" id="rMon">173,400원</span></div>
+          <div class="m-arow blue"><span class="l">카드 적립 예상</span><span class="v" id="rPt">+10,000원</span></div>
+        </div>
+        <div class="m-card">
+          <div class="m-total"><span class="l">내 카드 결제액</span><span class="v" id="rTotal">1,040,000원</span></div>
+        </div>
+        <button class="m-btn" onclick="location.href='송금하기.html'">이 금액으로 바로 송금하기</button>
+        <div class="p-homein"></div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ④ 걱정 해소 -->
-<section class="sec">
+<section class="sec tint">
   <div class="wrap reveal" style="text-align:center">
     <div class="eyebrow">이런 걱정 되시죠?</div>
     <h2 class="h-lg">괜찮아요 이렇게 지켜드려요</h2>
@@ -228,36 +220,35 @@
   </div>
 </section>
 
-<!-- ⑤ USP 폰 목업 ×2 -->
-<section class="sec tint">
+<!-- ⑤ USP 폰 목업 (실제 앱 화면 복제) -->
+<section class="sec">
   <div class="wrap usp reveal">
     <div class="txt">
       <div class="eyebrow">즉시 송금</div>
-      <h2 class="h-lg">카드로 결제하면<br>상대방에게 바로 입금</h2>
-      <p class="p-lg">상대방 동의 없이도 돼요. 은행·계좌번호만 알면<br>받는 분 확인까지 자동으로 끝나요.</p>
+      <h2 class="h-lg">계좌만 알면<br>받는 분 확인까지 자동</h2>
+      <p class="p-lg">상대방 동의 없이도 돼요.<br>은행과 계좌번호만 넣으면 예금주가 바로 확인돼요.</p>
     </div>
     <div class="vis">
       <div class="mock">
         <div class="p-status"><span>9:41</span><span class="cam"></span><span class="sig">▮▮▮</span></div>
         <div class="m-title">어디로 보낼까요?</div>
         <div class="m-card">
-          <div class="m-row"><div class="m-ic"><iconify-icon icon="mingcute:home-4-fill"></iconify-icon></div><div><div class="m-t">상가 임대료</div><div class="m-s">받는 분 · 명동상가 임대인</div></div><span class="m-v">680,000원</span></div>
+          <div class="m-label">은행</div>
+          <div class="m-val" style="display:flex; align-items:center; margin-top:6px"><span class="bk">KB</span>국민</div>
+          <div class="m-label" style="margin-top:14px">계좌번호</div>
+          <div class="m-val">123456-78-901234</div>
         </div>
-        <div class="m-card"><button class="m-btn">즉시 송금하기</button></div>
-        <div class="p-tabbar">
-          <span class="p-tab"><iconify-icon icon="mingcute:home-4-fill"></iconify-icon>홈</span>
-          <span class="p-tab"><iconify-icon icon="mingcute:bill-fill"></iconify-icon>내 결제</span>
-          <span class="p-tab on"><iconify-icon icon="mingcute:bank-card-fill"></iconify-icon>결제</span>
-          <span class="p-tab"><iconify-icon icon="mingcute:wallet-4-fill"></iconify-icon>환급</span>
-          <span class="p-tab"><iconify-icon icon="mingcute:user-3-fill"></iconify-icon>내 정보</span>
+        <div class="m-card" style="background:var(--primary-50); box-shadow:none">
+          <div class="vrow"><iconify-icon icon="mingcute:check-circle-fill"></iconify-icon><div><div class="m-label" style="color:var(--sub)">받는 분 (예금주)</div><div class="m-val">대성부동산</div></div></div>
         </div>
+        <button class="m-btn">다음</button>
         <div class="p-homein"></div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="sec">
+<section class="sec tint">
   <div class="wrap usp rev reveal">
     <div class="txt">
       <div class="eyebrow">카드 혜택</div>
@@ -267,76 +258,65 @@
     <div class="vis">
       <div class="mock">
         <div class="p-status"><span>9:41</span><span class="cam"></span><span class="sig">▮▮▮</span></div>
-        <div class="m-title">이번 결제로 받는 혜택</div>
-        <div class="m-card" style="background:var(--primary-50); box-shadow:none">
-          <div class="m-row"><div class="m-ic" style="background:#fff"><iconify-icon icon="mingcute:gift-fill"></iconify-icon></div><span class="m-t">카드 포인트 적립</span><span class="m-v blue">+6,660원</span></div>
-          <div class="m-row" style="margin-top:12px"><div class="m-ic" style="background:#fff"><iconify-icon icon="mingcute:bank-card-fill"></iconify-icon></div><span class="m-t">3개월 무이자 할부</span><span class="m-v blue">이자 0원</span></div>
-          <div class="m-row" style="margin-top:12px"><div class="m-ic" style="background:#fff"><iconify-icon icon="mingcute:bill-fill"></iconify-icon></div><span class="m-t">연말정산 소득공제</span><span class="m-v blue">대상</span></div>
+        <div class="m-title">이대로 결제할까요?</div>
+        <div class="m-card">
+          <div class="m-arow"><span class="l">신청 금액</span><span class="v">680,000원</span></div>
+          <div class="m-arow"><span class="l">수수료 4%</span><span class="v">27,200원</span></div>
+          <div class="m-hr"></div>
+          <div class="m-total"><span class="l">총 결제금액</span><span class="v">707,200원</span></div>
         </div>
-        <div class="m-card"><div class="m-label">총 결제금액</div><div class="m-big">707,200원</div></div>
-        <div class="p-tabbar">
-          <span class="p-tab"><iconify-icon icon="mingcute:home-4-fill"></iconify-icon>홈</span>
-          <span class="p-tab"><iconify-icon icon="mingcute:bill-fill"></iconify-icon>내 결제</span>
-          <span class="p-tab on"><iconify-icon icon="mingcute:bank-card-fill"></iconify-icon>결제</span>
-          <span class="p-tab"><iconify-icon icon="mingcute:wallet-4-fill"></iconify-icon>환급</span>
-          <span class="p-tab"><iconify-icon icon="mingcute:user-3-fill"></iconify-icon>내 정보</span>
+        <div class="m-ben">
+          <div class="m-arow blue"><span class="l">카드 포인트 적립</span><span class="v">+6,660원</span></div>
+          <div class="m-arow blue"><span class="l">3개월 무이자 할부</span><span class="v">이자 0원</span></div>
+          <div class="m-arow blue"><span class="l">연말정산 소득공제</span><span class="v">대상</span></div>
         </div>
+        <button class="m-btn">707,200원 결제하기</button>
         <div class="p-homein"></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ⑥ 진행 과정 -->
-<section class="sec tint" id="process">
+<!-- ⑥ 진행 과정 (아이콘) -->
+<section class="sec" id="process">
   <div class="wrap reveal" style="text-align:center">
     <div class="eyebrow">진행 과정</div>
     <h2 class="h-lg">네 단계면 끝나요</h2>
-    <div class="steps4" style="text-align:left">
-      <div class="stp"><div class="no">1</div><div class="t">결제 정보 입력</div><div class="s">무엇을 · 얼마를 · 어디로 보낼지 하나씩 입력해요.</div></div>
-      <div class="stp"><div class="no">2</div><div class="t">서류 촬영 · 첨부</div><div class="s">계약서나 고지서를 찍어서 올려요.</div></div>
-      <div class="stp"><div class="no">3</div><div class="t">카드로 결제</div><div class="s">카드 고르고 할부까지 정하면 끝이에요.</div></div>
-      <div class="stp"><div class="no">4</div><div class="t">확인 후 입금</div><div class="s">담당자 확인 후 받는 분에게 입금돼요.</div></div>
+    <div class="steps4">
+      <div class="stp"><div class="sic"><iconify-icon icon="mingcute:edit-2-fill"></iconify-icon></div><div class="no">STEP 1</div><div class="t">결제 정보 입력</div><div class="s">무엇을 얼마를 어디로<br>보낼지 입력해요</div></div>
+      <div class="stp"><div class="sic"><iconify-icon icon="mingcute:camera-2-fill"></iconify-icon></div><div class="no">STEP 2</div><div class="t">서류 촬영 · 첨부</div><div class="s">계약서나 고지서를<br>찍어서 올려요</div></div>
+      <div class="stp"><div class="sic"><iconify-icon icon="mingcute:bank-card-fill"></iconify-icon></div><div class="no">STEP 3</div><div class="t">카드로 결제</div><div class="s">카드 고르고 할부까지<br>정하면 끝이에요</div></div>
+      <div class="stp"><div class="sic"><iconify-icon icon="mingcute:check-circle-fill"></iconify-icon></div><div class="no">STEP 4</div><div class="t">확인 후 입금</div><div class="s">담당자 확인 후<br>받는 분에게 입금돼요</div></div>
     </div>
   </div>
 </section>
 
-<!-- ⑦ 후기 -->
-<section class="sec" id="reviews">
+<!-- ⑦ 후기 (30개 롤링) -->
+<section class="sec tint" id="reviews">
   <div class="wrap reveal" style="text-align:center">
     <div class="eyebrow">이용 후기</div>
     <h2 class="h-lg">먼저 써본 분들의 이야기</h2>
-    <div class="reviews" style="text-align:left">
-      <div class="rv"><div class="stars">★★★★★</div><div class="q">"월세 낼 때마다 현금이 부족했는데 이제 카드로 내고 월급날에 갚아요. 숨통이 트여요."</div><div class="who">30대 직장인 · 월세 결제</div></div>
-      <div class="rv"><div class="stars">★★★★★</div><div class="q">"식자재 대금을 카드로 돌리니 현금 흐름이 한 달 여유가 생겼어요. 경비 정리도 알아서 해주고요."</div><div class="who">음식점 운영 · 매입대금</div></div>
-      <div class="rv"><div class="stars">★★★★☆</div><div class="q">"이사비 갑자기 나갈 때 무이자 할부로 나눠 냈어요. 상대방은 그날 바로 현금으로 받았대요."</div><div class="who">20대 · 이사비 결제</div></div>
-    </div>
+  </div>
+  <div class="rv-wrap reveal" id="rvWrap">
+    <div class="rv-track" id="rvTrack"></div>
   </div>
 </section>
 
-<!-- ⑧ 수수료 + 신뢰 -->
-<section class="sec tint" id="fee">
-  <div class="wrap reveal">
-    <div class="fee">
-      <div class="txt">
-        <div class="eyebrow">수수료</div>
-        <h2 class="h-lg">수수료 4%<br>그 이상을 돌려받아요</h2>
-        <p class="p-lg" style="margin-top:22px">숨는 비용 없이 수수료는 딱 하나예요.<br>대신 받는 혜택은 그보다 커요.</p>
-      </div>
-      <div class="cmp">
-        <div class="c-box">
-          <div class="c-row minus"><iconify-icon icon="mingcute:minus-circle-fill"></iconify-icon><span class="c-l">수수료</span><span class="c-v">결제액의 4%</span></div>
-          <div class="c-row"><iconify-icon icon="mingcute:gift-fill"></iconify-icon><span class="c-l">카드 포인트 · 캐시백</span><span class="c-v">최대 1.5%</span></div>
-          <div class="c-row"><iconify-icon icon="mingcute:bank-card-fill"></iconify-icon><span class="c-l">무이자 할부 이자 절약</span><span class="c-v">최대 6개월</span></div>
-          <div class="c-row"><iconify-icon icon="mingcute:bill-fill"></iconify-icon><span class="c-l">월세 연말정산 세액공제</span><span class="c-v">최대 17%</span></div>
-          <div class="c-row"><iconify-icon icon="mingcute:medal-fill"></iconify-icon><span class="c-l">카드 실적 인정</span><span class="c-v">결제액 전액</span></div>
-        </div>
-      </div>
+<!-- ⑧ 수수료 · 안전 (심플) -->
+<section class="sec" id="fee">
+  <div class="wrap reveal" style="text-align:center">
+    <div class="eyebrow">수수료</div>
+    <h2 class="h-lg">내는 건 4% 하나<br>받는 건 더 많아요</h2>
+    <div class="stats">
+      <div class="stat pay"><div class="sl">내는 것</div><div class="sv">수수료 4%</div><div class="ss">숨은 비용 없음</div></div>
+      <div class="stat"><div class="sl">받는 것</div><div class="sv">최대 1.5%</div><div class="ss">포인트 · 캐시백</div></div>
+      <div class="stat"><div class="sl">받는 것</div><div class="sv">6개월</div><div class="ss">무이자 할부</div></div>
+      <div class="stat"><div class="sl">받는 것</div><div class="sv">최대 17%</div><div class="ss">월세 세액공제</div></div>
     </div>
-    <div class="trust">
-      <div class="tr"><iconify-icon icon="mingcute:safe-lock-fill"></iconify-icon><div class="t">결제대행(PG) 정식 등록</div><div class="s">전자금융거래법에 따라 등록된 결제대행 서비스로 결제와 정산을 처리해요.</div></div>
-      <div class="tr"><iconify-icon icon="mingcute:shield-shape-fill"></iconify-icon><div class="t">승인 후에만 입금</div><div class="s">거래 상대방 계좌로만 보낼 수 있고 담당자 검토 · 승인 후에만 입금돼요.</div></div>
-      <div class="tr"><iconify-icon icon="mingcute:scale-fill"></iconify-icon><div class="t">여신전문금융업법 준수</div><div class="s">법으로 금지된 거래(현금화 · 빚 상환 목적 등)는 이용할 수 없도록 걸러요.</div></div>
+    <div class="trustband">
+      <span class="tb"><iconify-icon icon="mingcute:safe-lock-fill"></iconify-icon>결제대행(PG) 정식 등록</span>
+      <span class="tb"><iconify-icon icon="mingcute:shield-shape-fill"></iconify-icon>승인 후에만 입금</span>
+      <span class="tb"><iconify-icon icon="mingcute:scale-fill"></iconify-icon>여신전문금융업법 준수</span>
     </div>
   </div>
 </section>
@@ -345,12 +325,13 @@
 <section class="last">
   <div class="reveal">
     <h2 class="h-lg">현금으로 내던 돈<br>오늘부터 카드로 내세요</h2>
-    <div class="hero-btns">
+    <p class="p-lg">웹에서 바로 시작하거나 앱을 설치하세요.</p>
+    <div class="cta-col">
       <a class="btn blue" href="송금하기.html"><iconify-icon icon="mingcute:flash-fill"></iconify-icon>웹에서 바로 송금하기</a>
-    </div>
-    <div class="storebtns">
-      <a class="storebtn" href="#"><iconify-icon icon="mingcute:apple-fill"></iconify-icon>App Store</a>
-      <a class="storebtn" href="#"><iconify-icon icon="mingcute:google-play-fill"></iconify-icon>Google Play</a>
+      <div class="storebtns">
+        <a class="storebtn" href="#"><iconify-icon icon="mingcute:apple-fill"></iconify-icon>App Store</a>
+        <a class="storebtn" href="#"><iconify-icon icon="mingcute:google-play-fill"></iconify-icon>Google Play</a>
+      </div>
     </div>
   </div>
 </section>
@@ -396,7 +377,7 @@ setInterval(()=>{
   setTimeout(()=>{ wi=(wi+1)%WORDS.length; el.textContent=WORDS[wi]; el.style.opacity='1'; }, 260);
 }, 2200);
 
-/* 미니 계산기 */
+/* 계산기 */
 const fmt=n=>n.toLocaleString('ko-KR');
 function calc(){
   const raw=document.getElementById('amt').value.replace(/[^0-9]/g,'');
@@ -417,7 +398,53 @@ function setAmt(n){ document.getElementById('amt').value=n?fmt(n):''; calc(); }
 document.getElementById('amt').addEventListener('input', calc);
 calc();
 
-/* 은은한 등장 (실패해도 콘텐츠는 반드시 보이게 안전장치 포함) */
+/* 후기 30개 + 좌측 자동 롤링 (호버·터치 시 멈춤, 직접 스크롤 가능) */
+const RV=[
+  [5,'월세 낼 때마다 현금이 부족했는데 이제 카드로 내고 월급날에 갚아요. 숨통이 트여요.','30대 직장인 · 월세'],
+  [5,'식자재 대금을 카드로 돌리니 현금 흐름이 한 달 여유가 생겼어요.','음식점 운영 · 매입대금'],
+  [4,'이사비 갑자기 나갈 때 무이자 할부로 나눠 냈어요. 상대방은 그날 바로 받았대요.','20대 · 이사비'],
+  [5,'관리비 고지서 찍어서 올리니 5분 만에 끝났어요. 생각보다 훨씬 간단해요.','40대 · 관리비'],
+  [5,'직원 급여를 카드로 처리하고 실적 채워서 연회비 면제 받았어요.','카페 운영 · 인건비'],
+  [5,'보증금 잔금이 모자랐는데 카드 할부로 해결했어요. 진짜 급할 때 최고.','신혼부부 · 임대차'],
+  [4,'수수료 4%가 아깝다 생각했는데 세액공제 받으니 오히려 남더라고요.','직장인 · 월세'],
+  [5,'학원비 두 달치를 무이자로 나눠 내니 부담이 확 줄었어요.','학부모 · 교육비'],
+  [5,'거래처 대금 결제하고 세금계산서까지 알아서 정리해줘서 편해요.','도소매업 · B2B'],
+  [4,'처음엔 카드깡인가 걱정했는데 서류 검토하고 승인돼야 입금되더라고요. 안심.','30대 · 월세'],
+  [5,'보험료 몰아서 내야 할 때 카드로 내고 포인트도 챙겼어요.','50대 · 보험료'],
+  [5,'인테리어 견적 1,500만원을 6개월 무이자로. 현금 안 깨서 너무 좋아요.','자영업 · 인테리어'],
+  [5,'복비 아까웠는데 카드 실적으로 인정되니 그나마 위안이 돼요.','20대 · 복비'],
+  [4,'예약 결제 걸어두니 매달 알아서 나가요. 월세 깜빡할 일이 없어요.','직장인 · 월세'],
+  [5,'상대방한테 말 안 해도 되는 게 제일 좋아요. 임대인은 그냥 현금 받는 거니까.','30대 · 월세'],
+  [5,'청소비 급하게 보낼 때 계좌 인증하니 예금주가 바로 떠서 오타 걱정 없었어요.','40대 · 청소비'],
+  [5,'사업자 등록하니 경비 자료를 자동으로 모아줘요. 부가세 신고가 편해졌어요.','법인 · 경비'],
+  [4,'렌트비를 카드로 내니 항공 마일리지가 쌓여요. 여행 경비 버는 중.','30대 · 렌트료'],
+  [5,'미승인되면 자동 취소라길래 반신반의했는데 진짜 카드값도 안 나갔어요.','20대 · 기타'],
+  [5,'급여일에 현금이 부족했는데 카드로 급여 이체하고 위기를 넘겼어요.','스타트업 · 인건비'],
+  [5,'월세 세액공제 대상인지 몰랐는데 안내해줘서 17% 돌려받았어요.','사회초년생 · 월세'],
+  [4,'등록한 계약은 다음 달부터 서류 없이 바로 결제돼서 두 번째부터는 1분.','직장인 · 월세'],
+  [5,'어머니 병원비 보증금을 할부로 해결했어요. 이런 서비스가 있는 줄 몰랐네요.','40대 · 기타'],
+  [5,'웹에서 바로 되니까 앱 설치 안 하고도 급한 송금을 처리했어요.','50대 · 관리비'],
+  [4,'문의 남겼더니 담당자가 바로 전화 줘서 서류 문제를 해결해줬어요.','자영업 · B2B'],
+  [5,'카드 3장으로 나눠 결제해서 실적을 골고루 채웠어요. 꿀팁.','30대 · 임대차'],
+  [5,'검토가 30분도 안 걸렸어요. 오후에 신청했는데 저녁 전에 입금 완료.','20대 · 이사비'],
+  [5,'상가 임대료 밀릴 뻔했는데 카드로 막고 다음 달에 정리했어요.','소상공인 · 임대료'],
+  [4,'수수료가 없진 않지만 무이자 6개월이면 사실상 이득이라 계속 써요.','직장인 · 관리비'],
+  [5,'가입부터 첫 송금까지 10분. 요즘 서비스답게 진짜 간편해요.','30대 · 월세'],
+];
+const track=document.getElementById('rvTrack');
+track.innerHTML=[...RV,...RV].map(r=>'<div class="rv"><div class="stars">'+'★'.repeat(r[0])+'☆'.repeat(5-r[0])+'</div><div class="q">"'+r[1]+'"</div><div class="who">'+r[2]+'</div></div>').join('');
+const wrapEl=document.getElementById('rvWrap');
+let rvPause=false;
+['pointerenter','pointerdown','touchstart'].forEach(ev=>wrapEl.addEventListener(ev,()=>rvPause=true));
+['pointerleave','pointerup','touchend'].forEach(ev=>wrapEl.addEventListener(ev,()=>rvPause=false));
+setInterval(()=>{
+  if(!rvPause){
+    wrapEl.scrollLeft+=1;
+    if(wrapEl.scrollLeft>=track.scrollWidth/2) wrapEl.scrollLeft-=track.scrollWidth/2;
+  }
+}, 24);
+
+/* 은은한 등장 (안전장치 포함) */
 const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }),{threshold:.08});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 setTimeout(()=>document.querySelectorAll('.reveal:not(.in)').forEach(el=>el.classList.add('in')), 2500);

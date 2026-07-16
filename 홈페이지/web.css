@@ -9,7 +9,8 @@
 *{box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent;}
 html{scroll-behavior:smooth;}
 body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;
-     color:var(--ink); background:var(--bg); line-height:1.5; -webkit-font-smoothing:antialiased;}
+     color:var(--ink); background:var(--bg); line-height:1.5; -webkit-font-smoothing:antialiased;
+     word-break:keep-all; overflow-wrap:break-word;}
 iconify-icon{display:inline-block;}
 .wrap{max-width:1040px; margin:0 auto; padding:0 24px;}
 
@@ -53,7 +54,7 @@ iconify-icon{display:inline-block;}
 @media(max-width:760px){ .h-xl{font-size:34px;} .h-lg{font-size:27px;} .sec{padding:70px 0;} }
 
 /* 버튼 */
-.btn{display:inline-flex; align-items:center; justify-content:center; gap:8px; height:56px; padding:0 26px; border:none; border-radius:15px; font-family:inherit; font-size:16px; font-weight:700; cursor:pointer; text-decoration:none;}
+.btn{display:inline-flex; align-items:center; justify-content:center; gap:8px; height:56px; padding:0 26px; border:none; border-radius:15px; font-family:inherit; font-size:16px; font-weight:700; cursor:pointer; text-decoration:none; white-space:nowrap;}
 .btn.blue{background:var(--primary); background:var(--primary-grad); box-shadow:var(--btn-shadow); color:#fff;}
 .btn.dark{background:var(--ink); color:#fff;}
 .btn.ghost{background:var(--primary-50); color:var(--primary-dark);}
