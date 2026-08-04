@@ -99,6 +99,24 @@
   .fld.lock{justify-content:space-between; background:var(--gray-bg); color:var(--ink);}
   .fld.lock .lk{display:inline-flex; align-items:center; gap:4px; font-size:11.5px; font-weight:700; color:var(--placeholder);}
   .fld.lock .lk iconify-icon{font-size:13px;}
+
+  /* 필수 동의 (요청받은 결제) */
+  .agl{margin:0 0 4px;}
+  .agl .ag{display:flex; gap:9px; padding:13px 0; border-bottom:1px solid var(--line); font-size:13.5px; line-height:1.7; color:var(--sub);}
+  .agl .ag:last-child{border-bottom:none;}
+  .agl .ag iconify-icon{font-size:17px; color:var(--primary); flex:0 0 auto; margin-top:3px;}
+  .agl .ag b{color:var(--ink);}
+  .agl .ag .hi{background:linear-gradient(transparent 55%, #DDE9FF 55%); font-weight:700; color:var(--ink);}
+  .agq{margin-top:16px; padding:15px 16px; border-radius:14px; background:var(--gray-bg);
+    font-size:13.5px; font-weight:700; text-align:center; line-height:1.7;}
+  .agchk{display:flex; align-items:center; gap:10px; margin-top:14px; padding:14px 15px; border:1.5px solid var(--border);
+    border-radius:13px; cursor:pointer; transition:.18s; font-size:14px; font-weight:700;}
+  .agchk.on{border-color:var(--primary); background:var(--primary-50); color:var(--primary-dark);}
+  .agchk .bx{width:22px; height:22px; flex:0 0 auto; border-radius:50%; border:1.5px solid var(--icon-off);
+    background:#fff; display:flex; align-items:center; justify-content:center;}
+  .agchk .bx iconify-icon{font-size:14px; color:#fff;}
+  .agchk.on .bx{background:var(--primary); border-color:var(--primary);}
+  .auth-btn:disabled{background:var(--tile); box-shadow:none; color:var(--placeholder); cursor:default;}
   /* 요청받은 결제 안내 */
   .rq-note{margin:0 0 18px; padding:16px 17px; border-radius:15px; background:var(--primary-50); border:1.5px solid var(--primary-100);}
   .rq-note .n1{font-size:14px; font-weight:700; color:var(--primary-dark);}
@@ -553,10 +571,28 @@ document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeD
   if (p.get('payee')) document.getElementById('s2payee').textContent = p.get('payee');
   if (p.get('item')) document.getElementById('s2type').textContent = p.get('item');
 
+  useAgreeStep();
+
   var h = document.querySelector('.page-hero h1'); if (h) h.innerHTML = '요청받은 결제를<br>휴대폰 인증으로 진행해요';
   var eb = document.querySelector('.page-hero .eyebrow'); if (eb) eb.textContent = '가입 없이 바로';
   var pp = document.querySelector('.page-hero .p-lg'); if (pp) pp.innerHTML = '앱을 깔거나 가입하지 않아도 돼요.<br>본인 카드로 결제하면 요청한 분이 송금해요.';
 })();
+
+/* 요청받은 결제 — 서류 첨부 대신 필수 동의 */
+function agToggle(){
+  var b = document.getElementById('agBox');
+  b.classList.toggle('on');
+  document.getElementById('agBtn').disabled = !b.classList.contains('on');
+}
+function useAgreeStep(){
+  var cards = document.querySelectorAll('.wz-card');
+  if (cards.length < 3) return;
+  cards[2].querySelector('.authcard').innerHTML = AGREE_HTML;
+  WZ[2] = '필수 동의';
+  var st = document.getElementById('wzName');
+  if (st) st.textContent = WZ[wzAt];
+}
+var AGREE_HTML = "\n      <button class=\"wz-back\" onclick=\"wzGo(1)\"><iconify-icon icon=\"mingcute:left-line\"></iconify-icon>이전</button>\n      <h2>필수 동의사항</h2>\n      <div class=\"sub\">결제 전에 아래 내용을 꼭 확인해주세요.</div>\n\n      <div class=\"agl\">\n        <div class=\"ag\"><iconify-icon icon=\"mingcute:check-circle-fill\"></iconify-icon>\n          <div>랜선페이는 <b>물건이나 서비스를 파는 곳이 아니며</b>, 거래의 중개자도 아닙니다.\n            <b>결제와 송금만 대행</b>하므로 거래 내용에 대한 책임은 지지 않습니다.</div></div>\n        <div class=\"ag\"><iconify-icon icon=\"mingcute:check-circle-fill\"></iconify-icon>\n          <div>지금 결제하시는 금액은 <b>요청한 분이 지정한 계좌</b>로 현금 송금됩니다.\n            어떤 거래인지 <b>정확히 알고 계신 경우에만</b> 결제해주세요.</div></div>\n        <div class=\"ag\"><iconify-icon icon=\"mingcute:check-circle-fill\"></iconify-icon>\n          <div><span class=\"hi\">송금이 완료된 뒤에는 결제를 취소할 수 없습니다.</span>\n            송금 전까지는 취소할 수 있어요.</div></div>\n        <div class=\"ag\"><iconify-icon icon=\"mingcute:check-circle-fill\"></iconify-icon>\n          <div>무통장 입금과 같은 성격이라 <span class=\"hi\">할부 철회권·항변권이 적용되지 않습니다.</span></div></div>\n        <div class=\"ag\"><iconify-icon icon=\"mingcute:check-circle-fill\"></iconify-icon>\n          <div>물건 미배송·환불·품질 등 <b>거래에서 생기는 분쟁은 상대방과 직접 해결</b>하셔야 하며,\n            이를 이유로 카드사·PG사에 민원을 넣을 수 없습니다.</div></div>\n        <div class=\"ag\"><iconify-icon icon=\"mingcute:close-circle-fill\" style=\"color:#DC2626\"></iconify-icon>\n          <div><b>불법 현금화·조세포탈 목적의 거래는 법으로 금지</b>돼 있으며,\n            확인될 경우 모든 책임은 이용자 본인에게 있습니다.</div></div>\n      </div>\n\n      <div class=\"agq\">위 내용을 이해하고 결제에 동의하시나요?</div>\n\n      <div class=\"agchk\" id=\"agBox\" onclick=\"agToggle()\">\n        <span class=\"bx\"><iconify-icon icon=\"mingcute:check-fill\"></iconify-icon></span>\n        <span>네, 모두 확인했고 동의합니다</span>\n      </div>\n\n      <button class=\"auth-btn\" id=\"agBtn\" onclick=\"wzGo(3)\" disabled>동의하고 결제로</button>\n";
 </script>
 </body>
 </html>
