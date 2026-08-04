@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>랜선페이 — 대신 결제 요청</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="screen.css">
+<style>
+  .how{display:flex; gap:9px; margin-bottom:18px;}
+  .how div{flex:1; background:#fff; border-radius:14px; padding:14px 10px; text-align:center; box-shadow:0 1px 3px rgba(0,0,0,.04);}
+  .how .n{width:22px; height:22px; margin:0 auto 8px; border-radius:50%; background:var(--primary-50);
+    color:var(--primary-dark); font-size:11px; font-weight:800; display:flex; align-items:center; justify-content:center;}
+  .how .t{font-size:12px; font-weight:700; line-height:1.4;}
+
+  .sumcard{background:var(--card); border-radius:18px; padding:18px; box-shadow:0 1px 3px rgba(0,0,0,.05);}
+  .sumcard .ttl{font-size:16px; font-weight:800; letter-spacing:-.3px;}
+  .sumcard .to{font-size:12.5px; color:var(--placeholder); margin-top:5px;}
+  .srow{display:flex; justify-content:space-between; font-size:13.5px; padding:5px 0;}
+  .srow .v{font-weight:700;}
+  .sdiv{border-top:1px solid var(--line); margin:11px 0 9px;}
+  .stot{display:flex; justify-content:space-between; align-items:baseline;}
+  .stot .l{font-size:13.5px; font-weight:700;}
+  .stot .v{font-size:20px; font-weight:800; color:var(--primary-dark); letter-spacing:-.4px;}
+  .docchip{display:flex; align-items:center; gap:8px; margin-top:14px; padding:11px 13px; border-radius:12px;
+    background:var(--primary-50); font-size:12.5px; font-weight:700; color:var(--primary-dark);}
+  .docchip iconify-icon{font-size:16px;}
+
+  .smsprev{margin-top:12px; padding:15px 16px; border-radius:14px; background:var(--tile);
+    font-size:12.5px; color:var(--sub); line-height:1.85; white-space:pre-line;}
+  .smsprev b{color:var(--ink);}
+
+  /* 발송 완료 */
+  .doneview{display:none; text-align:center; padding-top:20px;}
+  .doneview.on{display:block;}
+  .doneview .ck{width:74px; height:74px; margin:0 auto 18px; border-radius:50%; background:linear-gradient(180deg,#EAF1FF,#DCE8FF);
+    display:flex; align-items:center; justify-content:center; box-shadow:0 12px 26px -10px rgba(37,99,235,.6);}
+  .doneview .ck iconify-icon{font-size:40px; color:var(--primary);}
+  .doneview h2{font-size:21px; font-weight:800; letter-spacing:-.4px;}
+  .doneview p{font-size:14px; color:var(--sub); margin-top:11px; line-height:1.7;}
+  .stepbox{margin-top:22px; padding:16px 18px; border-radius:16px; background:var(--card); text-align:left;
+    box-shadow:0 1px 3px rgba(0,0,0,.05);}
+  .stepbox .sp{display:flex; gap:11px; padding:9px 0;}
+  .stepbox .sp .no{width:22px; height:22px; flex:0 0 auto; border-radius:50%; background:var(--tile);
+    color:var(--placeholder); font-size:11.5px; font-weight:800; display:flex; align-items:center; justify-content:center;}
+  .stepbox .sp.on .no{background:var(--primary); color:#fff;}
+  .stepbox .sp .tx{font-size:13px; color:var(--placeholder); line-height:1.6;}
+  .stepbox .sp.on .tx{color:var(--ink); font-weight:700;}
+  .linkbox{display:flex; align-items:center; gap:9px; margin-top:14px; padding:14px 15px; border-radius:13px;
+    background:#fff; box-shadow:0 1px 3px rgba(0,0,0,.05); text-align:left;}
+  .linkbox .u{flex:1; min-width:0; font-size:12.5px; color:var(--sub); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  .linkbox button{flex:0 0 auto; height:36px; padding:0 13px; border:none; border-radius:10px; background:var(--primary-50);
+    color:var(--primary-dark); font-family:inherit; font-size:12.5px; font-weight:700; cursor:pointer;}
+  .linkbox.off{opacity:.5;}
+</style>
+<script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+</head>
+<body>
+<div class="phone">
+  <div class="statusbar"><span class="time">9:41</span><span class="stat">
+    <svg width="18" height="12" viewBox="0 0 18 12"><rect y="8" width="3" height="4" rx="1" fill="#191F28"/><rect x="5" y="5" width="3" height="7" rx="1" fill="#191F28"/><rect x="10" y="2.5" width="3" height="9.5" rx="1" fill="#191F28"/><rect x="15" width="3" height="12" rx="1" fill="#191F28"/></svg>
+    <svg width="26" height="13" viewBox="0 0 26 13"><rect x=".5" y=".5" width="22" height="12" rx="3.5" fill="none" stroke="#191F28" stroke-opacity=".35"/><rect x="2.5" y="2.5" width="16" height="8" rx="1.8" fill="#191F28"/><rect x="24" y="4.5" width="1.6" height="4" rx=".8" fill="#191F28" fill-opacity=".35"/></svg>
+  </span></div>
+
+  <div class="topbar"><div class="back" onclick="lpBack('12_1_결제수단.html')">‹</div><div class="ttl">대신 결제 요청</div></div>
+
+  <div class="body hasfoot" id="formView">
+    <div class="sec-s">내가 낼 돈을 <b>다른 분 카드로</b> 결제해달라고 요청해요.<br>서류 심사가 끝나면 그분에게 결제 링크가 발송됩니다.</div>
+
+    <div class="how">
+      <div><div class="n">1</div><div class="t">서류 심사</div></div>
+      <div><div class="n">2</div><div class="t">링크 발송</div></div>
+      <div><div class="n">3</div><div class="t">대신 결제</div></div>
+    </div>
+
+    <div class="sec-t">이 결제를 요청해요</div>
+    <div class="sumcard">
+      <div class="ttl">월세 · 대성부동산</div>
+      <div class="to">KB국민 123456-78-901234</div>
+      <div class="sdiv"></div>
+      <div class="srow"><span>보낼 금액</span><span class="v">680,000원</span></div>
+      <div class="srow"><span>수수료 4%</span><span class="v">27,200원</span></div>
+      <div class="sdiv"></div>
+      <div class="stot"><span class="l">그분 카드에서 결제될 금액</span><span class="v">707,200원</span></div>
+      <div class="docchip"><iconify-icon icon="mingcute:document-fill"></iconify-icon>임대차계약서 1장 첨부됨 · 심사는 저희가 해요</div>
+    </div>
+
+    <div class="sec-t">누구에게 요청할까요?</div>
+    <div class="pad">
+      <div class="field"><label>받는 분 이름</label><input class="tin" id="rName" value="김부모" oninput="draw()"></div>
+      <div class="field" style="margin-bottom:0">
+        <label>휴대폰 번호 <span style="font-weight:500;color:var(--placeholder)">(문자로 링크 발송)</span></label>
+        <input class="tin" id="rPh" inputmode="numeric" maxlength="13" placeholder="010-0000-0000" value="010-2345-6789" oninput="fmtPh(this)">
+      </div>
+      <div class="smsprev" id="prev"></div>
+    </div>
+
+    <div class="note" style="text-align:left">
+      <iconify-icon icon="mingcute:alert-fill"></iconify-icon>
+      <div>카드 주인 <b>본인이 직접</b> 결제해야 해요. 카드 정보를 대신 받아 입력하는 건 법으로 금지돼 있어요.</div>
+    </div>
+  </div>
+
+  <!-- 발송 완료 -->
+  <div class="body doneview" id="doneView">
+    <div class="ck"><iconify-icon icon="mingcute:search-2-fill"></iconify-icon></div>
+    <h2>서류 심사를 시작했어요</h2>
+    <p>보통 <b>30분 이내</b>에 끝나요.<br>승인되면 <b id="dName">김부모</b> 님에게 결제 링크가 문자로 발송됩니다.</p>
+
+    <div class="stepbox">
+      <div class="sp on"><span class="no">1</span><span class="tx">서류 심사 중 · 결과는 알림으로 알려드려요</span></div>
+      <div class="sp"><span class="no">2</span><span class="tx">승인되면 문자로 결제 링크 발송</span></div>
+      <div class="sp"><span class="no">3</span><span class="tx">그분이 결제하면 대성부동산에게 바로 입금</span></div>
+    </div>
+
+    <div class="linkbox off">
+      <span class="u" id="reqUrl">승인 후 링크가 만들어져요</span>
+      <button onclick="copyReq()">복사</button>
+    </div>
+
+    <div class="note" style="text-align:left; margin-top:14px">
+      <iconify-icon icon="mingcute:information-fill"></iconify-icon>
+      <div>심사가 반려되면 링크가 발송되지 않고, <b>아무 금액도 결제되지 않아요.</b></div>
+    </div>
+  </div>
+
+  <div class="footer" id="foot">
+    <button class="btn" onclick="send()"><iconify-icon icon="mingcute:send-plane-fill"></iconify-icon>심사 요청하고 링크 보내기</button>
+  </div>
+  <div class="footer" id="foot2" style="display:none">
+    <div class="two">
+      <button class="btn ghost" onclick="location.href='15_내결제.html'">내 결제로</button>
+      <button class="btn" onclick="location.href='9_홈_개인.html'">홈으로</button>
+    </div>
+  </div>
+</div>
+<script src="app.js"></script>
+<script>
+function fmtPh(el){
+  var v = el.value.replace(/[^0-9]/g, '').slice(0, 11);
+  if (v.length > 7)      v = v.slice(0,3) + '-' + v.slice(3,7) + '-' + v.slice(7);
+  else if (v.length > 3) v = v.slice(0,3) + '-' + v.slice(3);
+  el.value = v;
+  draw();
+}
+function draw(){
+  var n = document.getElementById('rName').value.trim() || '받는 분';
+  document.getElementById('prev').innerHTML =
+    '[랜선페이] <b>홍길동</b> 님이 ' + n + ' 님께\n월세 결제를 부탁했어요.\n\n' +
+    '· 결제 금액 : <b>707,200원</b>\n' +
+    '· 결제 링크 : lanseonpay.kr/r/8KD2M9\n\n' +
+    '링크를 눌러 휴대폰 인증만 하면 바로 결제할 수 있어요.';
+}
+draw();
+
+function send(){
+  var ph = document.getElementById('rPh').value.replace(/[^0-9]/g, '');
+  if (ph.length < 10) { toast('휴대폰 번호를 정확히 넣어주세요'); return; }
+  document.getElementById('dName').textContent = document.getElementById('rName').value.trim() || '받는 분';
+  document.getElementById('formView').style.display = 'none';
+  document.getElementById('foot').style.display = 'none';
+  document.getElementById('doneView').classList.add('on');
+  document.getElementById('foot2').style.display = 'block';
+}
+function reqLink(){
+  var q = '?r=8KD2M9&from=' + encodeURIComponent('홍길동') +
+          '&item=' + encodeURIComponent('월세') +
+          '&amt=680000' +
+          '&acct=' + encodeURIComponent('KB국민 123456-78-901234') +
+          '&payee=' + encodeURIComponent('대성부동산');
+  return new URL('../홈페이지/송금하기.html' + q, location.href).href;
+}
+function copyReq(){
+  if (navigator.clipboard) navigator.clipboard.writeText(reqLink());
+  toast('심사가 끝나면 이 링크가 발송돼요');
+}
+function toast(m){
+  var t = document.createElement('div');
+  t.textContent = m;
+  t.style.cssText = "position:absolute;bottom:110px;left:50%;transform:translateX(-50%);background:#191F28;color:#fff;padding:12px 18px;border-radius:24px;font-size:13px;font-weight:600;z-index:30;opacity:0;transition:.2s;white-space:nowrap";
+  document.querySelector('.phone').appendChild(t);
+  requestAnimationFrame(function(){ t.style.opacity = '1'; });
+  setTimeout(function(){ t.style.opacity = '0'; setTimeout(function(){ t.remove(); }, 200); }, 1700);
+}
+</script>
+</body>
+</html>
