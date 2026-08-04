@@ -7,11 +7,15 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
 <link rel="stylesheet" href="screen.css">
 <style>
-  .how{display:flex; gap:9px; margin-bottom:18px;}
-  .how div{flex:1; background:#fff; border-radius:14px; padding:14px 10px; text-align:center; box-shadow:0 1px 3px rgba(0,0,0,.04);}
-  .how .n{width:22px; height:22px; margin:0 auto 8px; border-radius:50%; background:var(--primary-50);
-    color:var(--primary-dark); font-size:11px; font-weight:800; display:flex; align-items:center; justify-content:center;}
-  .how .t{font-size:12px; font-weight:700; line-height:1.4;}
+  /* 진행 순서 — 한 줄로 이어지는 형태 */
+  .how{display:flex; align-items:flex-start; margin-bottom:20px; padding:0 4px;}
+  .how .st{flex:1; text-align:center; position:relative;}
+  .how .st:not(:last-child):after{content:''; position:absolute; top:13px; left:calc(50% + 16px); right:calc(-50% + 16px);
+    height:2px; background:var(--line);}
+  .how .n{width:26px; height:26px; margin:0 auto 8px; border-radius:50%; background:var(--primary-50);
+    color:var(--primary-dark); font-size:12px; font-weight:800; display:flex; align-items:center; justify-content:center;
+    position:relative; z-index:1;}
+  .how .t{font-size:12px; font-weight:600; color:var(--sub); line-height:1.4;}
 
   .sumcard{background:var(--card); border-radius:18px; padding:18px; box-shadow:0 1px 3px rgba(0,0,0,.05);}
   .sumcard .ttl{font-size:16px; font-weight:800; letter-spacing:-.3px;}
@@ -68,9 +72,9 @@
     <div class="sec-s">내가 낼 돈을 <b>다른 분 카드로</b> 결제해달라고 요청해요.<br>서류 심사가 끝나면 그분에게 결제 링크가 발송됩니다.</div>
 
     <div class="how">
-      <div><div class="n">1</div><div class="t">서류 심사</div></div>
-      <div><div class="n">2</div><div class="t">링크 발송</div></div>
-      <div><div class="n">3</div><div class="t">대신 결제</div></div>
+      <div class="st"><div class="n">1</div><div class="t">서류 심사</div></div>
+      <div class="st"><div class="n">2</div><div class="t">링크 발송</div></div>
+      <div class="st"><div class="n">3</div><div class="t">대신 결제</div></div>
     </div>
 
     <div class="sec-t">이 결제를 요청해요</div>
