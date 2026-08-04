@@ -47,6 +47,10 @@
     border-radius:14px; background:#FAFBFD; font-size:14px; font-weight:700; color:var(--sub); cursor:pointer;}
   .addcard iconify-icon{font-size:17px; color:var(--primary);}
 
+
+  /* 비회원 카드 입력 */
+  .guest .plabel{margin-bottom:8px;}
+  .guest .cardno .min{text-align:center; padding:0 4px;}
   /* 간편결제 */
   .easylist{display:flex; flex-direction:column; gap:10px;}
   .easy{display:flex; align-items:center; gap:12px; height:58px; padding:0 16px; border:1.5px solid var(--line);
@@ -207,6 +211,42 @@
           </div>
         </div>
 
+
+        <!-- 링크로 들어온 분 — 저장된 카드가 없으니 직접 입력 -->
+        <div class="guest" id="guestCard" style="display:none">
+          <div class="plabel">카드 번호</div>
+          <div class="cardno">
+            <input class="min" id="g1" maxlength="4" inputmode="numeric" placeholder="0000" oninput="ghop(this,'g2')">
+            <span>-</span>
+            <input class="min" id="g2" maxlength="4" inputmode="numeric" placeholder="0000" oninput="ghop(this,'g3')">
+            <span>-</span>
+            <input class="min" id="g3" maxlength="4" inputmode="numeric" placeholder="0000" oninput="ghop(this,'g4')">
+            <span>-</span>
+            <input class="min" id="g4" maxlength="4" inputmode="numeric" placeholder="0000" oninput="ghop(this,'gm')">
+          </div>
+          <div class="m2" style="margin-top:14px">
+            <div>
+              <div class="plabel">유효기간</div>
+              <input class="min" id="gm" maxlength="5" inputmode="numeric" placeholder="MM/YY">
+            </div>
+            <div>
+              <div class="plabel">생년월일 6자리</div>
+              <input class="min" id="gb" maxlength="6" inputmode="numeric" placeholder="900101">
+            </div>
+          </div>
+          <div class="m2" style="margin-top:14px">
+            <div>
+              <div class="plabel">카드 비밀번호 앞 2자리</div>
+              <input class="min" id="gp" maxlength="2" inputmode="numeric" type="password" placeholder="••">
+            </div>
+            <div>
+              <div class="plabel">CVC</div>
+              <input class="min" id="gc" maxlength="3" inputmode="numeric" placeholder="뒷면 3자리">
+            </div>
+          </div>
+          <div class="mhint">카드 정보는 저장되지 않고, 이번 결제에만 사용돼요.</div>
+        </div>
+
         <div class="plabel">할부 개월</div>
         <div class="inst">
           <span onclick="pickInst(this,0)">일시불</span>
@@ -236,7 +276,7 @@
         </div>
       </div>
 
-      <button class="paybtn" onclick="payNow()">707,200원 결제 신청하기</button>
+      <button class="paybtn" id="payBtnMain" onclick="payNow()">707,200원 결제 신청하기</button>
       <div class="fine">서류 승인 후 결제 · 입금돼요. 미승인 시 전액 자동 취소됩니다.<br>결제는 금융위 등록 PG사를 통해 안전하게 처리돼요.</div>
     </div>
 
@@ -495,6 +535,40 @@ function closeRc(){
 document.addEventListener('keydown', function(e){
   if (e.key === 'Escape') { closeCard(); closeRc(); }
 });
+
+/* 결제 요청 링크로 들어온 분 — 저장된 카드가 없음 */
+function ghop(el, next){
+  el.value = el.value.replace(/[^0-9]/g, '');
+  if (el.value.length >= 4 && next) { var n = document.getElementById(next); if (n) n.focus(); }
+}
+(function(){
+  var p = new URLSearchParams(location.search);
+  if (!p.get('r')) return;
+
+  document.querySelector('.cardlist').style.display = 'none';
+  document.getElementById('guestCard').style.display = 'block';
+
+  var won = Number(p.get('amt') || 680000);
+  var fee = Math.round(won * 0.04);
+  var payee = p.get('payee') || '받는 분';
+  var sub = document.querySelector('.paycard .sub');
+  if (sub) sub.innerHTML = '<b>' + payee + '</b>에게 <b>' + won.toLocaleString() + '원</b>을 보냅니다.';
+
+  var rows = document.querySelectorAll('.amt .arow .v');
+  if (rows[0]) rows[0].textContent = payee;
+  if (rows[1]) rows[1].textContent = won.toLocaleString() + '원';
+  if (rows[2]) rows[2].textContent = fee.toLocaleString() + '원';
+  var tot = document.querySelector('.amt .atot .v');
+  if (tot) tot.textContent = (won + fee).toLocaleString() + '원';
+
+  var btn = document.getElementById('payBtnMain');
+  if (btn) btn.textContent = (won + fee).toLocaleString() + '원 결제하기';
+  var fine = document.querySelector('.fine');
+  if (fine) fine.innerHTML = '심사가 끝난 요청이라 <b>결제 즉시 ' + payee + '에게 송금</b>돼요.<br>카드 정보는 저장되지 않아요.';
+
+  var done = document.querySelector('.done h2');
+  if (done) done.textContent = '결제가 완료됐어요';
+})();
 </script>
 </body>
 </html>
