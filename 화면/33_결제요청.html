@@ -40,6 +40,7 @@
   .shares button{flex:1; height:50px; border:1.5px solid var(--line); border-radius:13px; background:#fff;
     font-family:inherit; font-size:14px; font-weight:700; color:var(--sub); cursor:pointer; display:flex; align-items:center; justify-content:center; gap:6px;}
   .shares iconify-icon{font-size:17px; color:var(--primary);}
+  .shares img{width:17px; height:17px; object-fit:contain;}
 </style>
 <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 </head>
@@ -112,7 +113,7 @@
       <button onclick="toast('링크를 복사했어요')">복사</button>
     </div>
     <div class="shares">
-      <button onclick="toast('카카오톡 공유는 준비 중이에요')"><iconify-icon icon="mingcute:chat-1-fill"></iconify-icon>카카오톡</button>
+      <button onclick="toast('카카오톡 공유는 준비 중이에요')"><img src="../img/카카오아이콘.png" alt="">카카오톡</button>
       <button onclick="toast('문자 다시 보내기는 준비 중이에요')"><iconify-icon icon="mingcute:message-3-fill"></iconify-icon>문자 재발송</button>
     </div>
 
