@@ -251,7 +251,9 @@ function demoUrl(){
   var item = document.getElementById('item').value.trim() || '성수동 오피스텔 8월 월세';
   var amt  = document.getElementById('amt').value.replace(/,/g, '') || '680000';
   return '송금하기.html?r=8KD2M9&from=' + encodeURIComponent('홍길동') +
-         '&item=' + encodeURIComponent(item) + '&amt=' + amt;
+         '&item=' + encodeURIComponent(item) + '&amt=' + amt +
+         '&acct=' + encodeURIComponent('KB국민 123456-78-901234') +
+         '&payee=' + encodeURIComponent('대성부동산');
 }
 function draw(){
   var item = document.getElementById('item').value.trim() || '(결제 항목)';
