@@ -318,17 +318,17 @@
       <div class="authcard">
         <button class="wz-back" onclick="wzGo(2)"><iconify-icon icon="mingcute:left-line"></iconify-icon>이전</button>
         <h2>결제 확인</h2>
-        <div class="sub">지금은 신청만 돼요. 서류가 승인되면 결제·입금됩니다.</div>
+        <div class="sub" id="s4sub">지금은 신청만 돼요. 서류가 승인되면 결제·입금됩니다.</div>
 
         <div class="field"><label>결제 카드</label><div class="fld">삼성 Deep Dream · 3개월 할부</div></div>
 
-        <div class="sumrow"><span class="l">받는 분</span><span class="v">대성부동산</span></div>
-        <div class="sumrow"><span class="l">신청 금액</span><span class="v">680,000원</span></div>
-        <div class="sumrow"><span class="l">수수료 4%</span><span class="v">27,200원</span></div>
-        <div class="sumtot"><span class="l">총 결제금액</span><span class="v">707,200원</span></div>
+        <div class="sumrow"><span class="l">받는 분</span><span class="v" id="s4payee">대성부동산</span></div>
+        <div class="sumrow"><span class="l">신청 금액</span><span class="v" id="s4amt">680,000원</span></div>
+        <div class="sumrow"><span class="l">수수료 4%</span><span class="v" id="s4fee">27,200원</span></div>
+        <div class="sumtot"><span class="l">총 결제금액</span><span class="v" id="s4tot">707,200원</span></div>
 
-        <button class="auth-btn" onclick="location.href='결제.html'">707,200원 결제 신청하기</button>
-        <div class="auth-fine">서류 승인 후 결제 · 입금돼요. 미승인 시 전액 자동 취소.</div>
+        <button class="auth-btn" id="s4btn" onclick="location.href='결제.html'">707,200원 결제 신청하기</button>
+        <div class="auth-fine" id="s4fine">서류 승인 후 결제 · 입금돼요. 미승인 시 전액 자동 취소.</div>
       </div>
       </div>
 
@@ -573,6 +573,17 @@ document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeD
 
   useAgreeStep();
 
+  /* 요청은 이미 심사가 끝난 상태 — 결제하면 바로 송금 */
+  var won = Number(p.get('amt') || 680000);
+  var fee = Math.round(won * 0.04);
+  document.getElementById('s4sub').textContent = '심사가 끝난 요청이에요. 결제하면 바로 송금됩니다.';
+  document.getElementById('s4amt').textContent = won.toLocaleString() + '원';
+  document.getElementById('s4fee').textContent = fee.toLocaleString() + '원';
+  document.getElementById('s4tot').textContent = (won + fee).toLocaleString() + '원';
+  document.getElementById('s4btn').textContent = (won + fee).toLocaleString() + '원 결제하기';
+  document.getElementById('s4fine').textContent = '결제 즉시 요청한 계좌로 송금돼요.';
+  if (p.get('payee')) document.getElementById('s4payee').textContent = p.get('payee');
+
   var h = document.querySelector('.page-hero h1'); if (h) h.innerHTML = '요청받은 결제를<br>휴대폰 인증으로 진행해요';
   var eb = document.querySelector('.page-hero .eyebrow'); if (eb) eb.textContent = '가입 없이 바로';
   var pp = document.querySelector('.page-hero .p-lg'); if (pp) pp.innerHTML = '앱을 깔거나 가입하지 않아도 돼요.<br>본인 카드로 결제하면 요청한 분이 송금해요.';
@@ -587,12 +598,12 @@ function agToggle(){
 function useAgreeStep(){
   var cards = document.querySelectorAll('.wz-card');
   if (cards.length < 3) return;
-  cards[2].querySelector('.authcard').innerHTML = AGREE_HTML;
+  cards[2].querySelector('.authcard').innerHTML = agreeHtml();
   WZ[2] = '필수 동의';
   var st = document.getElementById('wzName');
   if (st) st.textContent = WZ[wzAt];
 }
-var AGREE_HTML = "\n      <button class=\"wz-back\" onclick=\"wzGo(1)\"><iconify-icon icon=\"mingcute:left-line\"></iconify-icon>이전</button>\n      <h2>필수 동의사항</h2>\n      <div class=\"sub\">결제 전에 아래 내용을 꼭 확인해주세요.</div>\n\n      <div class=\"agl\">\n        <div class=\"ag\"><iconify-icon icon=\"mingcute:check-circle-fill\"></iconify-icon>\n          <div>랜선페이는 <b>물건이나 서비스를 파는 곳이 아니며</b>, 거래의 중개자도 아닙니다.\n            <b>결제와 송금만 대행</b>하므로 거래 내용에 대한 책임은 지지 않습니다.</div></div>\n        <div class=\"ag\"><iconify-icon icon=\"mingcute:check-circle-fill\"></iconify-icon>\n          <div>지금 결제하시는 금액은 <b>요청한 분이 지정한 계좌</b>로 현금 송금됩니다.\n            어떤 거래인지 <b>정확히 알고 계신 경우에만</b> 결제해주세요.</div></div>\n        <div class=\"ag\"><iconify-icon icon=\"mingcute:check-circle-fill\"></iconify-icon>\n          <div><span class=\"hi\">송금이 완료된 뒤에는 결제를 취소할 수 없습니다.</span>\n            송금 전까지는 취소할 수 있어요.</div></div>\n        <div class=\"ag\"><iconify-icon icon=\"mingcute:check-circle-fill\"></iconify-icon>\n          <div>무통장 입금과 같은 성격이라 <span class=\"hi\">할부 철회권·항변권이 적용되지 않습니다.</span></div></div>\n        <div class=\"ag\"><iconify-icon icon=\"mingcute:check-circle-fill\"></iconify-icon>\n          <div>물건 미배송·환불·품질 등 <b>거래에서 생기는 분쟁은 상대방과 직접 해결</b>하셔야 하며,\n            이를 이유로 카드사·PG사에 민원을 넣을 수 없습니다.</div></div>\n        <div class=\"ag\"><iconify-icon icon=\"mingcute:close-circle-fill\" style=\"color:#DC2626\"></iconify-icon>\n          <div><b>불법 현금화·조세포탈 목적의 거래는 법으로 금지</b>돼 있으며,\n            확인될 경우 모든 책임은 이용자 본인에게 있습니다.</div></div>\n      </div>\n\n      <div class=\"agq\">위 내용을 이해하고 결제에 동의하시나요?</div>\n\n      <div class=\"agchk\" id=\"agBox\" onclick=\"agToggle()\">\n        <span class=\"bx\"><iconify-icon icon=\"mingcute:check-fill\"></iconify-icon></span>\n        <span>네, 모두 확인했고 동의합니다</span>\n      </div>\n\n      <button class=\"auth-btn\" id=\"agBtn\" onclick=\"wzGo(3)\" disabled>동의하고 결제로</button>\n";
+function agreeHtml(){ return "\n      <button class=\"wz-back\" onclick=\"wzGo(1)\"><iconify-icon icon=\"mingcute:left-line\"></iconify-icon>이전</button>\n      <h2>필수 동의사항</h2>\n      <div class=\"sub\">결제 전에 아래 내용을 꼭 확인해주세요.</div>\n\n      <div class=\"agl\">\n        <div class=\"ag\"><iconify-icon icon=\"mingcute:check-circle-fill\"></iconify-icon>\n          <div>랜선페이는 <b>물건이나 서비스를 파는 곳이 아니며</b>, 거래의 중개자도 아닙니다.\n            <b>결제와 송금만 대행</b>하므로 거래 내용에 대한 책임은 지지 않습니다.</div></div>\n        <div class=\"ag\"><iconify-icon icon=\"mingcute:check-circle-fill\"></iconify-icon>\n          <div>지금 결제하시는 금액은 <b>요청한 분이 지정한 계좌</b>로 현금 송금됩니다.\n            어떤 거래인지 <b>정확히 알고 계신 경우에만</b> 결제해주세요.</div></div>\n        <div class=\"ag\"><iconify-icon icon=\"mingcute:check-circle-fill\"></iconify-icon>\n          <div><span class=\"hi\">송금이 완료된 뒤에는 결제를 취소할 수 없습니다.</span>\n            송금 전까지는 취소할 수 있어요.</div></div>\n        <div class=\"ag\"><iconify-icon icon=\"mingcute:check-circle-fill\"></iconify-icon>\n          <div>무통장 입금과 같은 성격이라 <span class=\"hi\">할부 철회권·항변권이 적용되지 않습니다.</span></div></div>\n        <div class=\"ag\"><iconify-icon icon=\"mingcute:check-circle-fill\"></iconify-icon>\n          <div>물건 미배송·환불·품질 등 <b>거래에서 생기는 분쟁은 상대방과 직접 해결</b>하셔야 하며,\n            이를 이유로 카드사·PG사에 민원을 넣을 수 없습니다.</div></div>\n        <div class=\"ag\"><iconify-icon icon=\"mingcute:close-circle-fill\" style=\"color:#DC2626\"></iconify-icon>\n          <div><b>불법 현금화·조세포탈 목적의 거래는 법으로 금지</b>돼 있으며,\n            확인될 경우 모든 책임은 이용자 본인에게 있습니다.</div></div>\n      </div>\n\n      <div class=\"agq\">위 내용을 이해하고 결제에 동의하시나요?</div>\n\n      <div class=\"agchk\" id=\"agBox\" onclick=\"agToggle()\">\n        <span class=\"bx\"><iconify-icon icon=\"mingcute:check-fill\"></iconify-icon></span>\n        <span>네, 모두 확인했고 동의합니다</span>\n      </div>\n\n      <button class=\"auth-btn\" id=\"agBtn\" onclick=\"wzGo(3)\" disabled>동의하고 결제로</button>\n"; }
 </script>
 </body>
 </html>
