@@ -90,6 +90,59 @@
   .fbtns .main{border:none; background:var(--primary-grad); box-shadow:var(--btn-shadow); color:#fff;}
   .cancelbtn{width:100%; height:46px; margin-top:9px; border:none; background:none; font-family:inherit;
     font-size:13.5px; font-weight:600; color:var(--placeholder); cursor:pointer;}
+
+  /* 서류 바텀시트 */
+  .dim{position:absolute; inset:0; background:rgba(15,20,30,.5); opacity:0; pointer-events:none; transition:opacity .3s; z-index:20;}
+  .dim.on{opacity:1; pointer-events:auto;}
+  .sheet{position:absolute; left:0; right:0; bottom:0; z-index:21; background:#fff; border-radius:24px 24px 0 0;
+    max-height:88%; display:flex; flex-direction:column; transform:translateY(100%);
+    transition:transform .4s cubic-bezier(.2,.7,.2,1);}
+  .sheet.on{transform:translateY(0);}
+  .sheet .handle{width:44px; height:4px; border-radius:3px; background:#DDE2E8; margin:10px auto 4px; flex:0 0 auto;}
+  .sheet .s-top{display:flex; align-items:center; justify-content:space-between; padding:8px 20px 14px; flex:0 0 auto;}
+  .sheet .s-top h2{font-size:19px; font-weight:700; letter-spacing:-.3px;}
+  .sheet .s-x{width:34px; height:34px; border:none; background:none; font-size:19px; color:var(--sub); cursor:pointer;}
+  .sheet .s-body{flex:1; overflow-y:auto; padding:0 20px 20px; scrollbar-width:none;}
+  .sheet .s-body::-webkit-scrollbar{display:none;}
+  .s-btns{display:flex; gap:9px; margin-top:16px;}
+  .s-btns button{flex:1; height:50px; border-radius:13px; font-family:inherit; font-size:15px; font-weight:700; cursor:pointer;}
+  .s-btns .save{border:none; background:var(--primary-grad); box-shadow:var(--btn-shadow); color:#fff;}
+  .s-btns .close{border:1.5px solid var(--border); background:#fff; color:var(--sub);}
+
+  /* 서류(영수증·이체증) 공용 서식 */
+  .rcdoc{border:1px solid var(--line); border-radius:14px; overflow:hidden; background:#fff;}
+  .rcdoc .dh{background:#F7F8FA; padding:10px 14px; font-size:12px; font-weight:800; color:var(--sub); text-align:center;
+    border-bottom:1px solid var(--line); border-top:1px solid var(--line);}
+  .rcdoc .dh:first-child{border-top:none;}
+  .dgrid{display:flex; flex-wrap:wrap;}
+  .dcell{flex:1 1 50%; min-width:0; padding:9px 13px; border-bottom:1px solid var(--line); border-right:1px solid var(--line);}
+  .dcell.full{flex:1 1 100%; border-right:none;}
+  .dcell:nth-child(2n){border-right:none;}
+  .dcell .k{font-size:10.5px; color:var(--placeholder);}
+  .dcell .v{font-size:13px; font-weight:700; margin-top:3px; word-break:break-all;}
+  .dcell .v.blue{color:var(--primary-dark);}
+  .dtot{display:flex; justify-content:space-between; align-items:center; padding:13px 14px; background:#FFF7F7;
+    border-bottom:1px solid var(--line);}
+  .dtot .k{font-size:13px; font-weight:800; color:#D14343;}
+  .dtot .v{font-size:17px; font-weight:800; color:#D14343; letter-spacing:-.3px;}
+  .dsplit{display:flex; flex-wrap:wrap; background:#FAFBFC;}
+  .dsplit div{flex:1 1 50%; padding:8px 13px; font-size:11.5px; color:var(--sub); border-bottom:1px solid var(--line);}
+  .dsplit div:nth-child(2n){text-align:right;}
+  .dnote{padding:13px 14px; font-size:11px; color:var(--placeholder); line-height:1.75;}
+  .dnote b{color:var(--sub);}
+  .dnote li{margin-left:14px; margin-top:6px;}
+  /* 이체증 — 은행 명세 형태 */
+  .bank{border:1px solid var(--line); border-radius:14px; overflow:hidden; background:#fff;}
+  .bank .bh{padding:18px; text-align:center; background:#F7F8FA; border-bottom:1px solid var(--line);}
+  .bank .bh .who{font-size:15px; font-weight:800; letter-spacing:-.3px;}
+  .bank .bh .sm{font-size:11.5px; color:var(--placeholder); margin-top:5px;}
+  .bank .bname{display:flex; justify-content:space-between; padding:11px 14px; background:var(--primary); color:#fff;
+    font-size:12.5px; font-weight:800;}
+  .brow{display:flex; justify-content:space-between; gap:12px; padding:11px 14px; border-bottom:1px solid var(--line); font-size:12.5px;}
+  .brow .k{color:var(--sub); flex:0 0 auto;}
+  .brow .v{font-weight:700; text-align:right; word-break:break-all;}
+  .brow .v.big{font-size:15px; color:var(--primary-dark);}
+  .bfoot{padding:14px; text-align:center; font-size:11px; color:var(--placeholder); line-height:1.75;}
 </style>
 <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 </head>
@@ -163,10 +216,98 @@
 
   <div class="footer">
     <div class="fbtns">
-      <button class="ghost" onclick="location.href='30_채팅상담.html'">문의하기</button>
-      <button class="main" id="mainBtn" onclick="location.href='14_완료.html'">영수증 보기</button>
+      <button class="ghost" id="trBtn" onclick="openTr()">이체 확인증</button>
+      <button class="main" id="mainBtn" onclick="openRc()">영수증 보기</button>
     </div>
     <button class="cancelbtn" id="cancelBtn" onclick="askCancel()">결제 취소하기</button>
+  </div>
+
+  <!-- 결제 영수증 -->
+  <div class="dim" id="rcDim" onclick="closeRc()"></div>
+  <div class="sheet" id="rcSheet">
+    <div class="handle"></div>
+    <div class="s-top"><h2>결제 영수증</h2><button class="s-x" onclick="closeRc()">✕</button></div>
+    <div class="s-body">
+      <div class="rcdoc">
+        <div class="dh">결제 정보</div>
+        <div class="dgrid">
+          <div class="dcell"><div class="k">카드 종류</div><div class="v">삼성카드</div></div>
+          <div class="dcell"><div class="k">카드 번호</div><div class="v">51236500****4821</div></div>
+          <div class="dcell"><div class="k">할부 여부</div><div class="v">3개월 무이자</div></div>
+          <div class="dcell"><div class="k">승인 번호</div><div class="v">30274418</div></div>
+          <div class="dcell"><div class="k">거래 유형</div><div class="v blue">승인</div></div>
+          <div class="dcell"><div class="k">승인 일시</div><div class="v blue" id="rcDate">2026-07-25 09:38:22</div></div>
+          <div class="dcell full"><div class="k">상품명</div><div class="v">대성부동산 월세</div></div>
+        </div>
+        <div class="dtot"><span class="k">총 결제금액</span><span class="v">520,000원</span></div>
+        <div class="dsplit">
+          <div>송금액 <b>500,000원</b></div><div>서비스 이용료 <b>20,000원</b></div>
+          <div>이용료 공급가액 18,182원</div><div>이용료 부가세 1,818원</div>
+        </div>
+
+        <div class="dh">이용 서비스 정보</div>
+        <div class="dgrid">
+          <div class="dcell"><div class="k">서비스명 / 상호</div><div class="v">랜선페이 / (주)미라클컴퍼니</div></div>
+          <div class="dcell"><div class="k">사업자번호</div><div class="v">437-88-03148</div></div>
+          <div class="dcell"><div class="k">대표자명</div><div class="v">김남기</div></div>
+          <div class="dcell"><div class="k">고객센터</div><div class="v">1577-6369</div></div>
+          <div class="dcell full"><div class="k">주소</div><div class="v">충청남도 천안시 서북구 쌍용대로 234, 3층</div></div>
+        </div>
+
+        <div class="dh">받는 곳 정보</div>
+        <div class="dgrid">
+          <div class="dcell"><div class="k">받는 분</div><div class="v">대성부동산</div></div>
+          <div class="dcell"><div class="k">결제 유형</div><div class="v">부동산 임대차 · 월세</div></div>
+          <div class="dcell full"><div class="k">입금 계좌</div><div class="v">KB국민 123456-78-901234</div></div>
+        </div>
+
+        <div class="dnote">
+          <b>카드 청구서 표기</b> · 신용카드 청구서에는 <b>결제대행사명</b>으로 표기됩니다.<br>
+          <li><b>기본 고지</b> : 랜선페이는 회원의 거래대금 납부를 대행하는 결제·송금 서비스이며, 통신판매의 당사자가 아닙니다.</li>
+          <li><b>상품명 안내</b> : 위 상품명은 회원이 입력한 거래명을 조합해 표시되며, 실제는 "거래대금의 납부"입니다.</li>
+          <li><b>부가세 처리</b> : 매입세액 공제·비용 처리가 가능한 금액은 <b>서비스 이용료</b>에 해당하는 금액뿐입니다. 송금액은 실제 공급자에게 받은 증빙으로 처리하세요.</li>
+          <li><b>할부 안내</b> : 무이자 할부 조건과 철회·항변권은 카드사 약관을 따릅니다.</li>
+          <li><b>조세포탈 금지</b> : 매출신고·매입공제·연말정산 공제는 반드시 세법에 맞게 처리해야 합니다.</li>
+        </div>
+      </div>
+
+      <div class="s-btns">
+        <button class="close" onclick="closeRc()">닫기</button>
+        <button class="save" onclick="toast('이미지로 저장했어요 (준비 중)')">이미지로 저장</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 이체 확인증 -->
+  <div class="dim" id="trDim" onclick="closeTr()"></div>
+  <div class="sheet" id="trSheet">
+    <div class="handle"></div>
+    <div class="s-top"><h2>이체 확인증</h2><button class="s-x" onclick="closeTr()">✕</button></div>
+    <div class="s-body">
+      <div class="bank">
+        <div class="bh">
+          <div class="who">이체 확인증</div>
+          <div class="sm">아래 거래가 정상적으로 입금되었음을 확인합니다</div>
+        </div>
+        <div class="bname"><span>고객명</span><span>홍길동</span></div>
+        <div class="brow"><span class="k">거래 일시</span><span class="v" id="trDate">2026-07-25 09:47:03</span></div>
+        <div class="brow"><span class="k">입금 계좌</span><span class="v">123456-78-901234</span></div>
+        <div class="brow"><span class="k">입금 은행</span><span class="v">KB국민은행</span></div>
+        <div class="brow"><span class="k">수취인 성명</span><span class="v">대성부동산</span></div>
+        <div class="brow"><span class="k">입금 금액</span><span class="v big">500,000원</span></div>
+        <div class="brow"><span class="k">입금 통장 표시내용</span><span class="v">홍길동</span></div>
+        <div class="brow"><span class="k">거래 고유번호</span><span class="v">TR-20260725-0071388</span></div>
+        <div class="bfoot">
+          본 명세서는 랜선페이가 대행한 거래를 출력한 것으로<br>
+          거래의 참고용으로만 사용하시기 바랍니다.
+        </div>
+      </div>
+
+      <div class="s-btns">
+        <button class="close" onclick="closeTr()">닫기</button>
+        <button class="save" onclick="toast('이미지로 저장했어요 (준비 중)')">이미지로 저장</button>
+      </div>
+    </div>
   </div>
 </div>
 <script src="app.js"></script>
@@ -183,6 +324,12 @@
     document.getElementById(id + 's').textContent = txt;
   }
 
+  if (st === 'wait') {
+    /* 아직 승인·이체 전이라 서류가 없음 */
+    document.getElementById('mainBtn').setAttribute('onclick', "toast('결제가 끝나면 영수증이 발급돼요')");
+    document.getElementById('trBtn').setAttribute('onclick', "toast('입금이 끝나면 확인증이 발급돼요')");
+  }
+
   if (st === 'done') {
     document.getElementById('hSt').style.cssText = 'color:#059669;background:#EAF7F0';
     document.getElementById('hIc').setAttribute('icon', 'mingcute:check-circle-fill');
@@ -193,7 +340,7 @@
     fin('s4', '삼성 Deep Dream · 3개월 무이자');
     fin('s5', '7월 25일 오전 9:47 입금 완료');
     document.getElementById('cancelBtn').style.display = 'none';
-    document.getElementById('addDoc').style.visibility = 'hidden';   /* 끝난 건은 서류 추가 불필요 */
+    document.getElementById('addDoc').style.display = 'none';   /* 끝난 건은 서류 추가 불필요 */
   }
 
   if (st === 'cancel') {
@@ -208,21 +355,36 @@
     document.getElementById('s4s').textContent = '결제가 진행되지 않았어요';
     document.getElementById('s5s').textContent = '입금이 진행되지 않았어요';
     document.getElementById('cancelBtn').style.display = 'none';
-    document.getElementById('addDoc').style.visibility = 'hidden';
+    document.getElementById('addDoc').style.display = 'none';
     /* 취소 건은 영수증 대신 다시 신청 */
     document.getElementById('mainBtn').textContent = '다시 신청하기';
     document.getElementById('mainBtn').setAttribute('onclick', "location.href='10_1_유형선택.html'");
+    /* 취소 건은 이체가 없었으므로 확인증도 없음 */
+    document.getElementById('trBtn').textContent = '문의하기';
+    document.getElementById('trBtn').setAttribute('onclick', "location.href='30_채팅상담.html'");
   }
 })();
 
-function goBack(){ lpBack('15_내결제.html'); }catch(e){}
-  location.href = (from === 'pay') ? '15_내결제.html' : '24_결제내역.html';
-}
+function goBack(){ lpBack('15_내결제.html'); }
 function askCancel(){
   if (confirm('결제를 취소할까요?\n서류 확인 중에는 수수료 없이 취소돼요.')) {
     toast('취소 요청을 보냈어요 (준비 중)');
   }
 }
+
+function openRc(){ show('rc'); }
+function closeRc(){ hide('rc'); }
+function openTr(){ show('tr'); }
+function closeTr(){ hide('tr'); }
+function show(k){
+  document.getElementById(k+'Dim').classList.add('on');
+  document.getElementById(k+'Sheet').classList.add('on');
+}
+function hide(k){
+  document.getElementById(k+'Dim').classList.remove('on');
+  document.getElementById(k+'Sheet').classList.remove('on');
+}
+
 function toast(msg){
   var t = document.createElement('div');
   t.textContent = msg;
