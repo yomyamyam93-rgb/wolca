@@ -137,6 +137,14 @@
     var prev = a.pop();
     set(a);
     goingBack = true;
+    /* 쌓인 게 없으면(직접 열었거나 저장소가 비었을 때) 직전 화면을 주소에서 찾아봄 */
+    if (!prev && document.referrer) {
+      var r = document.referrer.split('#')[0];
+      var here = location.href.split('/').slice(0, -1).join('/') + '/';
+      if (r.indexOf(here) === 0 && r !== location.href.split('#')[0]) {
+        prev = r.slice(here.length);
+      }
+    }
     location.href = prev || fallback || '9_홈_개인.html';
   };
 })();

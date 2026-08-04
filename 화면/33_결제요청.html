@@ -115,11 +115,11 @@
 
     <div class="sec-t">받는 사람</div>
     <div class="pad">
-      <div class="field"><label>거래처 이름</label><input class="tin" value="한빛식자재"></div>
+      <div class="field"><label>거래처 이름</label><input class="tin" id="pName" value="한빛식자재"></div>
       <div class="field"><label>휴대폰 번호 <span style="font-weight:500;color:var(--placeholder)">(문자로 링크 발송)</span></label>
         <input class="tin" inputmode="numeric" placeholder="010-0000-0000" value="010-2345-6789"></div>
       <div class="field" style="margin-bottom:0"><label>메모 <span style="font-weight:500;color:var(--placeholder)">(선택)</span></label>
-        <input class="tin" placeholder="예) 8월 식자재 대금"></div>
+        <input class="tin" id="pMemo" placeholder="예) 8월 식자재 대금"></div>
     </div>
 
     <div class="sec-t">입금받을 계좌</div>
@@ -144,12 +144,11 @@
     <p><b>한빛식자재</b>에게 문자로 링크를 보냈어요.<br>결제가 완료되면 알려드릴게요.</p>
 
     <div class="linkbox">
-      <span class="u">https://lanseonpay.kr/r/8KD2M9</span>
-      <button onclick="toast('링크를 복사했어요')">복사</button>
+      <span class="u" id="reqUrl">https://lanseonpay.kr/r/8KD2M9</span>
+      <button onclick="copyReq()">복사</button>
     </div>
     <div class="shares">
-      <button onclick="toast('카카오톡 공유는 준비 중이에요')"><img src="../img/카카오아이콘.png" alt="">카카오톡</button>
-      <button onclick="toast('문자 다시 보내기는 준비 중이에요')"><iconify-icon icon="mingcute:message-3-fill"></iconify-icon>문자 재발송</button>
+      <button onclick="toast('문자를 다시 보냈어요')"><iconify-icon icon="mingcute:message-3-fill"></iconify-icon>문자 재발송</button>
     </div>
 
     <div class="note" style="text-align:left">
@@ -276,6 +275,24 @@ function addAcct(){
   document.getElementById('acNo').value = '';
   acChk();
   pickAcct(el);
+}
+
+
+/* 복사되는 링크는 홈페이지 결제 화면으로 실제 연결됨 */
+function reqLink(){
+  var amt  = (document.getElementById('amt').value || '0').replace(/[^0-9]/g, '');
+  var name = document.getElementById('pName').value.trim() || '거래처';
+  var memo = document.getElementById('pMemo').value.trim() || '결제 요청';
+  var q = '?r=8KD2M9&from=' + encodeURIComponent('미라클상사') +
+          '&item=' + encodeURIComponent(memo) +
+          '&amt=' + amt +
+          '&acct=' + encodeURIComponent(document.getElementById('acctNo').textContent) +
+          '&payee=' + encodeURIComponent(name);
+  return new URL('../홈페이지/송금하기.html' + q, location.href).href;
+}
+function copyReq(){
+  if (navigator.clipboard) navigator.clipboard.writeText(reqLink());
+  toast('링크를 복사했어요 · 붙여넣어 열어볼 수 있어요');
 }
 
 function toast(m){
