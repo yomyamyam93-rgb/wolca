@@ -152,7 +152,7 @@
 function goBack(){ lpBack('15_내결제.html'); }
 function openDetail(st){
   try{ sessionStorage.setItem('lp_pay', st); sessionStorage.setItem('lp_from','list'); }catch(e){}
-  location.href = '23_결제상세.html';
+  location.href = '23_결제상세.html#' + st;
 }
 function setF(el, key){
   document.querySelectorAll('.fchip').forEach(function(c){ c.classList.remove('on'); });
