@@ -51,16 +51,12 @@
   /* 비회원 카드 입력 */
   .guest .plabel{margin-bottom:8px;}
   .guest .cardno .min{text-align:center; padding:0 4px;}
+  .easy img{height:26px; width:auto; display:block; -webkit-user-drag:none;}
   /* 간편결제 */
   .easylist{display:flex; flex-direction:column; gap:10px;}
   .easy{display:flex; align-items:center; gap:12px; height:58px; padding:0 16px; border:1.5px solid var(--line);
     border-radius:15px; background:#fff; font-size:15px; font-weight:700; cursor:pointer; transition:border-color .2s, background .2s;}
   .easy.on{border-color:var(--primary); background:var(--primary-50);}
-  .easy .ic{width:30px; height:30px; border-radius:9px; display:flex; align-items:center; justify-content:center; font-size:15px; font-weight:800;}
-  .easy.kakao .ic{background:#FEE500; color:#191600;}
-  .easy.naver .ic{background:#03C75A; color:#fff;}
-  .easy.toss .ic{background:#0064FF; color:#fff;}
-
   /* 할부 */
   .inst{display:flex; gap:8px; flex-wrap:wrap;}
   .inst span{padding:11px 15px; border:1.5px solid var(--line); border-radius:12px; background:#fff; font-size:14px;
@@ -258,9 +254,9 @@
       <!-- 간편결제 -->
       <div class="ptab" id="pt-easy">
         <div class="easylist">
-          <div class="easy kakao on" data-name="카카오페이" onclick="pickEasy(this)"><span class="ic">k</span>카카오페이</div>
-          <div class="easy naver" data-name="네이버페이" onclick="pickEasy(this)"><span class="ic">N</span>네이버페이</div>
-          <div class="easy toss" data-name="토스페이" onclick="pickEasy(this)"><span class="ic">t</span>토스페이</div>
+          <div class="easy on" data-name="카카오페이" onclick="pickEasy(this)"><img src="../img/카카오페이.png" alt="카카오페이"></div>
+          <div class="easy" data-name="네이버페이" onclick="pickEasy(this)"><img src="../img/네이버페이.png" alt="네이버페이"></div>
+          <div class="easy" data-name="토스페이" onclick="pickEasy(this)"><img src="../img/토스페이.png" alt="토스페이"></div>
         </div>
       </div>
 
