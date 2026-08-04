@@ -11,7 +11,7 @@
 <script src="web.js"></script>
 <style>
   .rq{padding:0 20px 110px; background:var(--gray-bg);}
-  .rq-in{max-width:1000px; margin:-56px auto 0; display:flex; gap:26px; align-items:flex-start; flex-wrap:wrap;}
+  .rq-in{max-width:1000px; margin:-36px auto 0; display:flex; gap:26px; align-items:flex-start; flex-wrap:wrap;}
 
   .rqcard{flex:1 1 440px; min-width:0; background:#fff; border-radius:24px; padding:34px 30px;
     box-shadow:0 18px 50px rgba(25,31,40,.12);}
@@ -42,9 +42,9 @@
   .rqbtn.ghost:hover{filter:none; background:var(--gray-bg);}
 
   /* 오른쪽 — 문자 미리보기 */
-  .rqside{flex:1 1 340px; min-width:0; position:sticky; top:96px;}
-  .smsttl{font-size:13px; font-weight:800; color:var(--sub); margin:0 4px 10px;}
-  .sms{background:#fff; border-radius:22px; padding:20px 18px; box-shadow:0 10px 30px rgba(25,31,40,.09);}
+  .rqside{flex:1 1 340px; min-width:0; position:sticky; top:100px;}
+  .sms{background:#fff; border-radius:22px; padding:22px 20px; box-shadow:0 10px 30px rgba(25,31,40,.09);}
+  .sms .smsh{font-size:15px; font-weight:800; letter-spacing:-.3px; margin-bottom:16px;}
   .sms .from{display:flex; align-items:center; gap:9px; padding-bottom:13px; border-bottom:1px solid var(--line);}
   .sms .from .ic{width:34px; height:34px; border-radius:11px; background:var(--primary-50);
     display:flex; align-items:center; justify-content:center;}
@@ -87,7 +87,7 @@
   .steps2 .st .tx b{color:var(--ink);}
 
   @media(max-width:860px){
-    .rq-in{margin-top:-40px;}
+    .rq-in{margin-top:-24px;}
     .rqside{position:static;}
   }
 </style>
@@ -179,8 +179,8 @@
 
     <!-- 오른쪽 : 문자 미리보기 -->
     <div class="rqside">
-      <div class="smsttl">상대가 받을 문자</div>
       <div class="sms">
+        <div class="smsh">이렇게 문자가 발송돼요</div>
         <div class="from">
           <span class="ic"><iconify-icon icon="mingcute:message-3-fill"></iconify-icon></span>
           <span>
