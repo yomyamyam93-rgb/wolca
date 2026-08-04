@@ -70,7 +70,9 @@
   .sentsub{font-size:14px; color:var(--sub); text-align:center; margin-top:10px; line-height:1.65;}
   .linkbox{display:flex; align-items:center; gap:10px; margin-top:22px; padding:14px 15px;
     border:1.5px solid var(--line); border-radius:13px; background:var(--gray-bg);}
-  .linkbox .u{flex:1; color:var(--primary); text-decoration:none; cursor:pointer; min-width:0; font-size:13.5px; font-weight:700; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  .linkbox{align-items:flex-start;}
+  .linkbox .u{flex:1; color:var(--primary); text-decoration:none; cursor:pointer; min-width:0;
+    font-size:12.5px; font-weight:700; line-height:1.6; word-break:break-all;}
   .linkbox button{flex:0 0 auto; height:36px; padding:0 14px; border:none; border-radius:10px;
     background:var(--primary); color:#fff; font-family:inherit; font-size:13px; font-weight:700; cursor:pointer;}
   .steps2{margin-top:22px; padding:18px 20px; border:1px solid var(--line); border-radius:16px;}
@@ -153,7 +155,7 @@
         <div class="sentsub"><b id="sentPh">010-0000-0000</b> 님에게<br>결제 링크가 발송됐어요.</div>
 
         <div class="linkbox">
-          <a class="u" id="sentUrl" href="javascript:void(0);" onclick="location.href=demoUrl()">https://lanseonpay.kr/r/8KD2M9</a>
+          <a class="u" id="sentUrl" href="javascript:void(0);" onclick="location.href=demoUrl()">링크 만드는 중…</a>
           <button onclick="copyLink()">복사</button>
         </div>
         <div class="hint" style="margin-top:9px">문자가 안 갔다면 링크를 직접 보내주셔도 돼요.</div>
@@ -246,7 +248,8 @@ function fmtAmt(el){
 }
 
 /* 상대가 받을 문자 미리보기 */
-var LINK = 'https://lanseonpay.kr/r/8KD2M9';
+/* 실제로 열리는 주소 — 지금 보고 있는 사이트 기준으로 만들어요 */
+function fullUrl(){ return new URL(demoUrl(), location.href).href; }
 function demoUrl(){
   var item = document.getElementById('item').value.trim() || '성수동 오피스텔 8월 월세';
   var amt  = document.getElementById('amt').value.replace(/,/g, '') || '680000';
@@ -265,7 +268,7 @@ function draw(){
     '[랜선페이] <b>홍길동</b> 님이 결제를 요청하셨어요.\n\n' +
     '· 결제 항목 : ' + item + '\n' +
     '· 결제 금액 : <b>' + tot + '</b>\n' +
-    '· 결제 링크 : <span class="lnk">' + LINK + '</span>\n\n' +
+    '· 결제 링크 : <span class="lnk" onclick="location.href=demoUrl()" style="cursor:pointer;text-decoration:underline">' + fullUrl() + '</span>\n\n' +
     '링크를 눌러 휴대폰 인증만 하면 바로 결제할 수 있어요. (가입 안 해도 돼요)\n\n' +
     '★ 결제하신 뒤, 요청한 분이 [송금하기]를 누를 때 상대방 계좌로 입금돼요.\n\n' +
     '※ 링크는 오늘까지만 열려 있어요.\n' +
@@ -282,7 +285,7 @@ function send(){
   if (amt < 50000)    { alert('최소 결제 금액은 50,000원이에요.'); return; }
 
   document.getElementById('sentPh').textContent = document.getElementById('ph').value;
-  document.getElementById('sentUrl').textContent = LINK;
+  document.getElementById('sentUrl').textContent = fullUrl();
   document.getElementById('form').classList.add('off');
   document.getElementById('sent').classList.add('on');
   window.scrollTo({ top: 0, behavior: 'smooth' });
