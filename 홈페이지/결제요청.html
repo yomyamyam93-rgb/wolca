@@ -29,6 +29,9 @@
   .amtwrap{position:relative;}
   .amtwrap .won{position:absolute; right:15px; top:0; height:52px; display:flex; align-items:center;
     font-size:16px; font-weight:800; color:var(--sub); pointer-events:none;}
+  .amtwrap .kor{position:absolute; left:15px; top:0; height:52px; display:flex; align-items:center;
+    font-size:13px; font-weight:700; color:var(--primary); pointer-events:none; max-width:52%;
+    overflow:hidden; white-space:nowrap;}
   .hint{font-size:12.5px; color:var(--placeholder); margin-top:7px; line-height:1.6;}
 
   .rqbtn{width:100%; height:56px; border:none; border-radius:15px; margin-top:12px; cursor:pointer;
@@ -133,6 +136,7 @@
           <label>결제 금액</label>
           <div class="amtwrap">
             <input class="tin amt" id="amt" type="tel" inputmode="numeric" placeholder="0" oninput="fmtAmt(this)">
+            <span class="kor" id="korAmt"></span>
             <span class="won">원</span>
           </div>
           <div class="hint" id="feeline">수수료 4%를 더한 금액이 카드에서 결제돼요.</div>
@@ -235,11 +239,24 @@ function fmtPh(el){
   el.value = v;
   draw();
 }
+/* 12,315,125 → 1,231만 5,125 */
+function korMoney(n){
+  if (!n) return '';
+  var eok = Math.floor(n / 100000000);
+  var man = Math.floor((n % 100000000) / 10000);
+  var rest = n % 10000;
+  var out = [];
+  if (eok)  out.push(eok.toLocaleString() + '억');
+  if (man)  out.push(man.toLocaleString() + '만');
+  if (rest) out.push(rest.toLocaleString());
+  return out.join(' ') + '원';
+}
 function fmtAmt(el){
   var n = el.value.replace(/[^0-9]/g, '').slice(0, 9);
   el.value = n ? Number(n).toLocaleString() : '';
   var won = Number(n || 0);
   var fee = Math.round(won * 0.04);
+  document.getElementById('korAmt').textContent = korMoney(won);
   document.getElementById('feeline').innerHTML = won
     ? '수수료 4% <b>' + fee.toLocaleString() + '원</b>을 더한 <b>' + (won + fee).toLocaleString() + '원</b>이 카드에서 결제돼요.'
     : '수수료 4%를 더한 금액이 카드에서 결제돼요.';
