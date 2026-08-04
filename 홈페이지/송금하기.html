@@ -365,8 +365,6 @@
         <h2>결제 확인</h2>
         <div class="sub" id="s4sub">지금은 신청만 돼요. 서류가 승인되면 결제·입금됩니다.</div>
 
-        <div class="field" id="s4card"><label>결제 카드</label><div class="fld">삼성 Deep Dream · 3개월 할부</div></div>
-
         <div class="sumrow"><span class="l">받는 분</span><span class="v" id="s4payee">대성부동산</span></div>
         <div class="sumrow"><span class="l">신청 금액</span><span class="v" id="s4amt">680,000원</span></div>
         <div class="sumrow"><span class="l">수수료 4%</span><span class="v" id="s4fee">27,200원</span></div>
@@ -628,7 +626,6 @@ document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeD
   document.getElementById('s4btn').textContent = (won + fee).toLocaleString() + '원 결제하기';
   document.getElementById('s4fine').textContent = '결제 즉시 요청한 계좌로 송금돼요.';
   /* 링크로 온 분은 아직 카드를 고르지 않았음 — 다음 결제창에서 선택 */
-  document.getElementById('s4card').style.display = 'none';
   document.getElementById('askBtn').style.display = 'none';
   document.getElementById('s4btn').setAttribute('onclick', "location.href='결제.html' + location.search");
   if (p.get('payee')) document.getElementById('s4payee').textContent = p.get('payee');
