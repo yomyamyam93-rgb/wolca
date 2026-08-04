@@ -583,8 +583,7 @@ document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeD
   document.getElementById('s4btn').textContent = (won + fee).toLocaleString() + '원 결제하기';
   document.getElementById('s4fine').textContent = '결제 즉시 요청한 계좌로 송금돼요.';
   /* 링크로 온 분은 아직 카드를 고르지 않았음 — 다음 결제창에서 선택 */
-  document.getElementById('s4card').innerHTML =
-    '<label>결제 수단</label><div class="fld ph">다음 화면에서 카드 정보를 넣고 결제해요</div>';
+  document.getElementById('s4card').style.display = 'none';
   document.getElementById('s4btn').setAttribute('onclick', "location.href='결제.html' + location.search");
   if (p.get('payee')) document.getElementById('s4payee').textContent = p.get('payee');
 
