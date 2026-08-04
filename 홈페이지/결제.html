@@ -566,6 +566,10 @@ function ghop(el, next){
   var fine = document.querySelector('.fine');
   if (fine) fine.innerHTML = '심사가 끝난 요청이라 <b>결제 즉시 ' + payee + '에게 송금</b>돼요.<br>카드 정보는 저장되지 않아요.';
 
+  /* 1회성 결제라 적립·공제 안내는 맞지 않음 */
+  var ben = document.querySelector('.ben');
+  if (ben) ben.style.display = 'none';
+
   var done = document.querySelector('.done h2');
   if (done) done.textContent = '결제가 완료됐어요';
 })();
