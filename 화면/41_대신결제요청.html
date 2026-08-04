@@ -8,14 +8,17 @@
 <link rel="stylesheet" href="screen.css">
 <style>
   /* 진행 순서 — 한 줄로 이어지는 형태 */
-  .how{display:flex; align-items:flex-start; margin-bottom:20px; padding:0 4px;}
+  .how{display:flex; align-items:flex-start; margin:2px 0 22px; padding:16px 6px 14px;
+    background:var(--primary-50); border-radius:16px;}
   .how .st{flex:1; text-align:center; position:relative;}
-  .how .st:not(:last-child):after{content:''; position:absolute; top:13px; left:calc(50% + 16px); right:calc(-50% + 16px);
-    height:2px; background:var(--line);}
-  .how .n{width:26px; height:26px; margin:0 auto 8px; border-radius:50%; background:var(--primary-50);
-    color:var(--primary-dark); font-size:12px; font-weight:800; display:flex; align-items:center; justify-content:center;
+  .how .st:not(:last-child):after{content:''; position:absolute; top:15px; left:calc(50% + 19px); right:calc(-50% + 19px);
+    height:2px; background:var(--primary-100);}
+  .how .n{width:30px; height:30px; margin:0 auto 9px; border-radius:50%;
+    background:var(--primary); background:var(--primary-grad);
+    box-shadow:0 4px 10px -3px color-mix(in srgb, var(--primary) 55%, transparent);
+    color:#fff; font-size:13px; font-weight:800; display:flex; align-items:center; justify-content:center;
     position:relative; z-index:1;}
-  .how .t{font-size:12px; font-weight:600; color:var(--sub); line-height:1.4;}
+  .how .t{font-size:12.5px; font-weight:700; color:var(--primary-dark); line-height:1.4;}
 
   .sumcard{background:var(--card); border-radius:18px; padding:18px; box-shadow:0 1px 3px rgba(0,0,0,.05);}
   .sumcard .ttl{font-size:16px; font-weight:800; letter-spacing:-.3px;}
