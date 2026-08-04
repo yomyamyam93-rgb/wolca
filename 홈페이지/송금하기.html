@@ -117,6 +117,51 @@
   .agchk .bx iconify-icon{font-size:14px; color:#fff;}
   .agchk.on .bx{background:var(--primary); border-color:var(--primary);}
   .auth-btn:disabled{background:var(--tile); box-shadow:none; color:var(--placeholder); cursor:default;}
+
+  /* 다른 사람에게 요청 */
+  .askbtn{display:flex; align-items:center; justify-content:center; gap:7px; width:100%; height:50px; margin-top:10px;
+    border:1.5px solid var(--line); border-radius:14px; background:#fff; font-family:inherit; font-size:14.5px;
+    font-weight:700; color:var(--sub); cursor:pointer; transition:.16s;}
+  .askbtn:hover{border-color:var(--primary-100); background:var(--primary-50); color:var(--primary-dark);}
+  .askbtn iconify-icon{font-size:18px; color:var(--primary);}
+  .mdim{position:fixed; inset:0; background:rgba(15,20,30,.5); z-index:98; opacity:0; pointer-events:none; transition:opacity .3s;}
+  .mdim.on{opacity:1; pointer-events:auto;}
+  .askbox{position:fixed; left:50%; top:50%; z-index:99; width:460px; max-width:calc(100vw - 28px); max-height:88vh; overflow-y:auto;
+    background:#fff; border-radius:24px; padding:28px 26px 26px; box-shadow:0 30px 70px rgba(15,20,30,.4);
+    transform:translate(-50%,-46%) scale(.96); opacity:0; pointer-events:none;
+    transition:transform .35s cubic-bezier(.2,.7,.2,1), opacity .3s;}
+  .askbox.on{transform:translate(-50%,-50%) scale(1); opacity:1; pointer-events:auto;}
+  .askbox .atop{display:flex; align-items:center; justify-content:between; justify-content:space-between; margin-bottom:6px;}
+  .askbox h3{font-size:20px; font-weight:800; letter-spacing:-.4px;}
+  .askbox .ax{width:36px; height:36px; border:none; background:none; font-size:20px; color:var(--sub); cursor:pointer; border-radius:9px;}
+  .askbox .asub{font-size:13.5px; color:var(--sub); margin-bottom:20px; line-height:1.6;}
+  .asum{padding:16px 18px; border-radius:15px; background:var(--gray-bg);}
+  .asum .t1{font-size:15.5px; font-weight:800; letter-spacing:-.3px;}
+  .asum .t2{font-size:12.5px; color:var(--placeholder); margin-top:4px;}
+  .asum .ar{display:flex; justify-content:space-between; font-size:13.5px; padding:4px 0; margin-top:10px;}
+  .asum .ar b{font-weight:700;}
+  .asum .adiv{border-top:1px solid var(--border); margin:9px 0;}
+  .asum .atot{display:flex; justify-content:space-between; align-items:baseline;}
+  .asum .atot .v{font-size:19px; font-weight:800; color:var(--primary-dark);}
+  .adoc{display:flex; align-items:center; gap:7px; margin-top:12px; padding:11px 13px; border-radius:11px;
+    background:var(--primary-50); font-size:12.5px; font-weight:700; color:var(--primary-dark);}
+  .adoc iconify-icon{font-size:16px;}
+  .aprev{margin-top:12px; padding:14px 15px; border-radius:13px; background:var(--gray-bg);
+    font-size:12.5px; color:var(--sub); line-height:1.85; white-space:pre-line;}
+  .aprev b{color:var(--ink);}
+  .asteps{margin-top:18px; padding:16px 18px; border:1px solid var(--line); border-radius:15px;}
+  .asteps .sp{display:flex; gap:11px; padding:8px 0;}
+  .asteps .sp .no{width:22px; height:22px; flex:0 0 auto; border-radius:50%; background:var(--gray-bg);
+    color:var(--placeholder); font-size:11.5px; font-weight:800; display:flex; align-items:center; justify-content:center;}
+  .asteps .sp.on .no{background:var(--primary); color:#fff;}
+  .asteps .sp .tx{font-size:13px; color:var(--placeholder); line-height:1.6;}
+  .asteps .sp.on .tx{color:var(--ink); font-weight:700;}
+  .askdone{display:none; text-align:center;}
+  .askdone.on{display:block;}
+  .askform.off{display:none;}
+  .askck{width:62px; height:62px; margin:6px auto 16px; border-radius:50%; background:var(--primary-50);
+    display:flex; align-items:center; justify-content:center;}
+  .askck iconify-icon{font-size:34px; color:var(--primary);}
   /* 요청받은 결제 안내 */
   .rq-note{margin:0 0 18px; padding:16px 17px; border-radius:15px; background:var(--primary-50); border:1.5px solid var(--primary-100);}
   .rq-note .n1{font-size:14px; font-weight:700; color:var(--primary-dark);}
@@ -328,6 +373,7 @@
         <div class="sumtot"><span class="l">총 결제금액</span><span class="v" id="s4tot">707,200원</span></div>
 
         <button class="auth-btn" id="s4btn" onclick="location.href='결제.html'">707,200원 결제 신청하기</button>
+        <button class="askbtn" id="askBtn" onclick="openAsk()"><iconify-icon icon="mingcute:user-add-2-fill"></iconify-icon>다른 사람에게 결제 요청 보내기</button>
         <div class="auth-fine" id="s4fine">서류 승인 후 결제 · 입금돼요. 미승인 시 전액 자동 취소.</div>
       </div>
       </div>
@@ -367,7 +413,6 @@
   <a href="이용가이드.html"><iconify-icon icon="mingcute:book-2-fill"></iconify-icon>이용가이드<span class="gv">›</span></a>
   <a href="index.html#reviews"><iconify-icon icon="mingcute:chat-2-fill"></iconify-icon>이용후기<span class="gv">›</span></a>
   <a href="송금하기.html"><iconify-icon icon="mingcute:flash-fill"></iconify-icon>송금하기<span class="gv">›</span></a>
-  <a href="결제요청.html"><iconify-icon icon="mingcute:user-add-2-fill"></iconify-icon>결제 요청<span class="gv">›</span></a>
   <a href="javascript:void(0);" onclick="alert('세금계산서 · 부가세 신고는 준비 중이에요'); return false;"><iconify-icon icon="mingcute:file-certificate-fill"></iconify-icon>세금계산서 · 부가세 신고<span class="gv">›</span></a>
   <button class="d-login" onclick="location.href='로그인.html'">로그인</button>
 </aside>
@@ -584,6 +629,7 @@ document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeD
   document.getElementById('s4fine').textContent = '결제 즉시 요청한 계좌로 송금돼요.';
   /* 링크로 온 분은 아직 카드를 고르지 않았음 — 다음 결제창에서 선택 */
   document.getElementById('s4card').style.display = 'none';
+  document.getElementById('askBtn').style.display = 'none';
   document.getElementById('s4btn').setAttribute('onclick', "location.href='결제.html' + location.search");
   if (p.get('payee')) document.getElementById('s4payee').textContent = p.get('payee');
 
@@ -607,6 +653,86 @@ function useAgreeStep(){
   if (st) st.textContent = WZ[wzAt];
 }
 function agreeHtml(){ return "\n      <button class=\"wz-back\" onclick=\"wzGo(1)\"><iconify-icon icon=\"mingcute:left-line\"></iconify-icon>이전</button>\n      <h2>필수 동의사항</h2>\n      <div class=\"sub\">결제 전에 아래 내용을 꼭 확인해주세요.</div>\n\n      <div class=\"agl\">\n        <div class=\"ag\"><iconify-icon icon=\"mingcute:check-circle-fill\"></iconify-icon>\n          <div>랜선페이는 <b>물건이나 서비스를 파는 곳이 아니며</b>, 거래의 중개자도 아닙니다.\n            <b>결제와 송금만 대행</b>하므로 거래 내용에 대한 책임은 지지 않습니다.</div></div>\n        <div class=\"ag\"><iconify-icon icon=\"mingcute:check-circle-fill\"></iconify-icon>\n          <div>지금 결제하시는 금액은 <b>요청한 분이 지정한 계좌</b>로 현금 송금됩니다.\n            어떤 거래인지 <b>정확히 알고 계신 경우에만</b> 결제해주세요.</div></div>\n        <div class=\"ag\"><iconify-icon icon=\"mingcute:check-circle-fill\"></iconify-icon>\n          <div><span class=\"hi\">송금이 완료된 뒤에는 결제를 취소할 수 없습니다.</span>\n            송금 전까지는 취소할 수 있어요.</div></div>\n        <div class=\"ag\"><iconify-icon icon=\"mingcute:check-circle-fill\"></iconify-icon>\n          <div>무통장 입금과 같은 성격이라 <span class=\"hi\">할부 철회권·항변권이 적용되지 않습니다.</span></div></div>\n        <div class=\"ag\"><iconify-icon icon=\"mingcute:check-circle-fill\"></iconify-icon>\n          <div>물건 미배송·환불·품질 등 <b>거래에서 생기는 분쟁은 상대방과 직접 해결</b>하셔야 하며,\n            이를 이유로 카드사·PG사에 민원을 넣을 수 없습니다.</div></div>\n        <div class=\"ag\"><iconify-icon icon=\"mingcute:close-circle-fill\" style=\"color:#DC2626\"></iconify-icon>\n          <div><b>불법 현금화·조세포탈 목적의 거래는 법으로 금지</b>돼 있으며,\n            확인될 경우 모든 책임은 이용자 본인에게 있습니다.</div></div>\n      </div>\n\n      <div class=\"agq\">위 내용을 이해하고 결제에 동의하시나요?</div>\n\n      <div class=\"agchk\" id=\"agBox\" onclick=\"agToggle()\">\n        <span class=\"bx\"><iconify-icon icon=\"mingcute:check-fill\"></iconify-icon></span>\n        <span>네, 모두 확인했고 동의합니다</span>\n      </div>\n\n      <button class=\"auth-btn\" id=\"agBtn\" onclick=\"wzGo(3)\" disabled>동의하고 결제로</button>\n"; }
+</script>
+
+<!-- 다른 사람에게 결제 요청 -->
+<div class="mdim" id="askDim" onclick="closeAsk()"></div>
+<div class="askbox" id="askBox" role="dialog" aria-label="다른 사람에게 결제 요청">
+  <div class="askform" id="askForm">
+    <div class="atop"><h3>다른 사람에게 결제 요청</h3><button class="ax" onclick="closeAsk()">✕</button></div>
+    <div class="asub">내가 낼 돈을 <b>다른 분 카드로</b> 결제해달라고 부탁해요.<br>서류 심사가 끝나면 그분에게 결제 링크가 발송됩니다.</div>
+
+    <div class="asum">
+      <div class="t1">월세 · 대성부동산</div>
+      <div class="t2">KB국민 123456-78-901234</div>
+      <div class="ar"><span>보낼 금액</span><b>680,000원</b></div>
+      <div class="ar"><span>수수료 4%</span><b>27,200원</b></div>
+      <div class="adiv"></div>
+      <div class="atot"><span>그분 카드에서 결제될 금액</span><span class="v">707,200원</span></div>
+    </div>
+    <div class="adoc"><iconify-icon icon="mingcute:document-fill"></iconify-icon>임대차계약서 1장 첨부됨 · 심사는 저희가 해요</div>
+
+    <div class="field" style="margin-top:18px"><label>받는 분 이름</label>
+      <input class="tin" id="askName" value="김부모" oninput="askDraw()"></div>
+    <div class="field"><label>휴대폰 번호 <span style="font-weight:500;color:var(--placeholder)">(문자로 링크 발송)</span></label>
+      <input class="tin" id="askPh" inputmode="numeric" maxlength="13" placeholder="010-0000-0000" oninput="askFmt(this)"></div>
+
+    <div class="aprev" id="askPrev"></div>
+
+    <button class="auth-btn" onclick="askSend()">심사 요청하고 링크 보내기</button>
+    <div class="auth-fine">카드 주인 <b>본인이 직접</b> 결제해야 해요.</div>
+  </div>
+
+  <div class="askdone" id="askDone">
+    <div class="atop" style="justify-content:flex-end"><button class="ax" onclick="closeAsk()">✕</button></div>
+    <div class="askck"><iconify-icon icon="mingcute:search-2-fill"></iconify-icon></div>
+    <h3>서류 심사를 시작했어요</h3>
+    <div class="asub" style="margin-top:10px">보통 <b>30분 이내</b>에 끝나요.<br><b id="askWho">김부모</b> 님에게 승인 후 결제 링크가 발송됩니다.</div>
+
+    <div class="asteps" style="text-align:left">
+      <div class="sp on"><span class="no">1</span><span class="tx">서류 심사 중 · 결과는 문자로 알려드려요</span></div>
+      <div class="sp"><span class="no">2</span><span class="tx">승인되면 그분에게 결제 링크 발송</span></div>
+      <div class="sp"><span class="no">3</span><span class="tx">그분이 결제하면 대성부동산에게 바로 입금</span></div>
+    </div>
+
+    <div class="auth-fine" style="margin-top:16px">심사가 반려되면 링크가 발송되지 않고, 아무 금액도 결제되지 않아요.</div>
+    <button class="auth-btn" onclick="location.href='index.html'">홈으로</button>
+  </div>
+</div>
+
+<script>
+/* 결제 단계에서 다른 사람에게 요청 */
+function openAsk(){
+  askDraw();
+  document.getElementById('askDim').classList.add('on');
+  document.getElementById('askBox').classList.add('on');
+}
+function closeAsk(){
+  document.getElementById('askDim').classList.remove('on');
+  document.getElementById('askBox').classList.remove('on');
+}
+function askFmt(el){
+  var v = el.value.replace(/[^0-9]/g, '').slice(0, 11);
+  if (v.length > 7)      v = v.slice(0,3) + '-' + v.slice(3,7) + '-' + v.slice(7);
+  else if (v.length > 3) v = v.slice(0,3) + '-' + v.slice(3);
+  el.value = v;
+}
+function askDraw(){
+  var n = document.getElementById('askName').value.trim() || '받는 분';
+  document.getElementById('askPrev').innerHTML =
+    '[랜선페이] <b>홍길동</b> 님이 ' + n + ' 님께\n월세 결제를 부탁했어요.\n\n' +
+    '· 결제 금액 : <b>707,200원</b>\n' +
+    '· 결제 링크 : lanseonpay.kr/r/8KD2M9\n\n' +
+    '링크를 눌러 휴대폰 인증만 하면 바로 결제할 수 있어요.';
+}
+function askSend(){
+  var ph = document.getElementById('askPh').value.replace(/[^0-9]/g, '');
+  if (ph.length < 10) { alert('휴대폰 번호를 정확히 넣어주세요.'); return; }
+  document.getElementById('askWho').textContent = document.getElementById('askName').value.trim() || '받는 분';
+  document.getElementById('askForm').classList.add('off');
+  document.getElementById('askDone').classList.add('on');
+}
+document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeAsk(); });
 </script>
 </body>
 </html>
