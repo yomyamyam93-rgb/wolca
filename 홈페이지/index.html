@@ -567,6 +567,7 @@
 </footer>
 
 <!-- 전체메뉴 드로어 -->
+<div class="drawer-layer">
 <div class="drawer-dim" id="ddim" onclick="drawer(false)"></div>
 <aside class="drawer" id="drawer">
   <div class="d-top"><span class="d-title">전체 메뉴</span><button class="d-x" onclick="drawer(false)">✕</button></div>
@@ -578,6 +579,7 @@
   <a href="javascript:void(0);" onclick="alert('세금계산서 · 부가세 신고는 준비 중이에요'); return false;"><iconify-icon icon="mingcute:file-certificate-fill"></iconify-icon>세금계산서 · 부가세 신고<span class="gv">›</span></a>
   <button class="d-login" onclick="location.href='로그인.html'">로그인</button>
 </aside>
+</div>
 
 <script>
 function drawer(on){

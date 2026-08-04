@@ -29,10 +29,11 @@ iconify-icon{display:inline-block;}
 @media(max-width:760px){ .nav-menu{display:none;} }
 
 /* 전체메뉴 드로어 */
-.drawer-dim{position:fixed; inset:0; background:rgba(15,20,30,.45); z-index:98; opacity:0; pointer-events:none; transition:.25s;}
-.drawer-dim.on{opacity:1; pointer-events:auto;}
-.drawer{position:fixed; top:0; right:0; bottom:0; width:320px; max-width:86vw; background:#fff; z-index:99; transform:translateX(100%); transition:transform .3s cubic-bezier(.2,.8,.2,1); padding:20px 22px; overflow-y:auto;}
-.drawer.on{transform:translateX(0);}
+.drawer-layer{position:fixed; inset:0; z-index:98; overflow:hidden; pointer-events:none;}
+.drawer-dim{position:absolute; inset:0; background:rgba(15,20,30,.45); opacity:0; pointer-events:none; transition:.25s;}
+.drawer-dim.on{pointer-events:auto; opacity:1; pointer-events:auto;}
+.drawer{position:absolute; top:0; right:0; bottom:0; width:320px; max-width:86vw; background:#fff; z-index:99; transform:translateX(100%); transition:transform .3s cubic-bezier(.2,.8,.2,1); padding:20px 22px; overflow-y:auto;}
+.drawer.on{pointer-events:auto; transform:translateX(0);}
 .drawer .d-top{display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;}
 .drawer .d-title{font-size:17px; font-weight:700;}
 .drawer .d-x{width:38px; height:38px; border:none; background:none; font-size:22px; color:var(--sub); cursor:pointer; border-radius:9px;}
@@ -116,9 +117,6 @@ html{scroll-behavior:smooth;}
   .btn:hover,.storebtn:hover,.nav-cta:hover{transform:none;}
 }
 
-/* 가로 스크롤 방지 — 닫힌 드로어 등 화면 밖 요소가 스크롤을 만들지 않게
-   (overflow:hidden 대신 clip을 써야 상단 고정(sticky)이 안 깨짐) */
-html,body{overflow-x:clip;}
 
 /* #앵커로 이동할 때 상단 고정 메뉴에 가려지지 않게 */
 section[id], header[id], div[id]{scroll-margin-top:88px;}
