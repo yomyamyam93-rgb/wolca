@@ -180,7 +180,7 @@
       <!-- 할부 -->
       <div class="ilbl">할부</div>
       <div class="selrow" onclick="openSheet()">
-        <span class="selval" id="ilVal">3개월<span class="free">무이자</span></span>
+        <span class="selval" id="ilVal">3개월</span>
         <iconify-icon icon="mingcute:down-line"></iconify-icon>
       </div>
     </div>
@@ -205,11 +205,11 @@
     <h3>할부 개월을 선택하세요</h3>
     <div class="ilist" id="ilist">
       <div class="irow" onclick="pickI(this)"><span class="sp">일시불</span><iconify-icon class="ck" icon="mingcute:check-fill"></iconify-icon></div>
-      <div class="irow" onclick="pickI(this)"><span>2개월</span><span class="free">무이자</span><span class="sp"></span><iconify-icon class="ck" icon="mingcute:check-fill"></iconify-icon></div>
-      <div class="irow on" onclick="pickI(this)"><span>3개월</span><span class="free">무이자</span><span class="sp"></span><iconify-icon class="ck" icon="mingcute:check-fill"></iconify-icon></div>
-      <div class="irow" onclick="pickI(this)"><span>4개월</span><span class="free">무이자</span><span class="sp"></span><iconify-icon class="ck" icon="mingcute:check-fill"></iconify-icon></div>
-      <div class="irow" onclick="pickI(this)"><span>5개월</span><span class="free">무이자</span><span class="sp"></span><iconify-icon class="ck" icon="mingcute:check-fill"></iconify-icon></div>
-      <div class="irow" onclick="pickI(this)"><span>6개월</span><span class="free">무이자</span><span class="sp"></span><iconify-icon class="ck" icon="mingcute:check-fill"></iconify-icon></div>
+      <div class="irow" onclick="pickI(this)"><span>2개월</span><span class="sp"></span><iconify-icon class="ck" icon="mingcute:check-fill"></iconify-icon></div>
+      <div class="irow on" onclick="pickI(this)"><span>3개월</span><span class="sp"></span><iconify-icon class="ck" icon="mingcute:check-fill"></iconify-icon></div>
+      <div class="irow" onclick="pickI(this)"><span>4개월</span><span class="sp"></span><iconify-icon class="ck" icon="mingcute:check-fill"></iconify-icon></div>
+      <div class="irow" onclick="pickI(this)"><span>5개월</span><span class="sp"></span><iconify-icon class="ck" icon="mingcute:check-fill"></iconify-icon></div>
+      <div class="irow" onclick="pickI(this)"><span>6개월</span><span class="sp"></span><iconify-icon class="ck" icon="mingcute:check-fill"></iconify-icon></div>
       <div class="irow" onclick="pickI(this)"><span class="sp">7개월</span><iconify-icon class="ck" icon="mingcute:check-fill"></iconify-icon></div>
       <div class="irow" onclick="pickI(this)"><span class="sp">8개월</span><iconify-icon class="ck" icon="mingcute:check-fill"></iconify-icon></div>
       <div class="irow" onclick="pickI(this)"><span class="sp">9개월</span><iconify-icon class="ck" icon="mingcute:check-fill"></iconify-icon></div>
@@ -251,7 +251,7 @@ function pickI(el){
   el.classList.add('on');
   const month=el.querySelector('span').textContent;
   const free=el.querySelector('.free');
-  document.getElementById('ilVal').innerHTML = month + (free?'<span class="free">무이자</span>':'');
+  document.getElementById('ilVal').innerHTML = month + (free?'':'');
   setTimeout(closeSheet,140);
 }
 

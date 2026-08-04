@@ -210,8 +210,8 @@
         <div class="plabel">할부 개월</div>
         <div class="inst">
           <span onclick="pickInst(this,0)">일시불</span>
-          <span class="on" onclick="pickInst(this,3)">3개월 무이자</span>
-          <span onclick="pickInst(this,6)">6개월 무이자</span>
+          <span class="on" onclick="pickInst(this,3)">3개월</span>
+          <span onclick="pickInst(this,6)">6개월</span>
         </div>
       </div>
 
@@ -232,7 +232,6 @@
 
         <div class="ben">
           <div class="b"><iconify-icon icon="mingcute:gift-fill"></iconify-icon>카드 포인트 적립<span class="v">결제액의 0.5 ~ 1%</span></div>
-          <div class="b"><iconify-icon icon="mingcute:bank-card-fill"></iconify-icon><span id="benInst">3개월 무이자 할부</span><span class="v">이자 0원</span></div>
           <div class="b"><iconify-icon icon="mingcute:bill-fill"></iconify-icon>연말정산 세액공제<span class="v">대상</span></div>
         </div>
       </div>
@@ -338,7 +337,7 @@
         <div class="h">결제 정보</div>
         <div class="rcrow"><span class="l">승인번호</span><span class="v" id="rcNo">30281947</span></div>
         <div class="rcrow"><span class="l">결제 수단</span><span class="v" id="rcMethod">삼성 Deep Dream</span></div>
-        <div class="rcrow"><span class="l">할부</span><span class="v" id="rcInst">3개월 무이자</span></div>
+        <div class="rcrow"><span class="l">할부</span><span class="v" id="rcInst">3개월 할부</span></div>
       </div>
 
       <div class="rc-sec">
@@ -422,7 +421,7 @@ function ptab(name, btn){
     payInst = '일시불';
   } else {
     payMethod = document.querySelector('.crd.on .cn').textContent;
-    payInst = document.querySelector('.inst span.on').textContent.replace(' 무이자', '');
+    payInst = document.querySelector('.inst span.on').textContent;
   }
 }
 function pickCard(el){
@@ -439,7 +438,6 @@ function pickInst(el, m){
   document.querySelectorAll('.inst span').forEach(function(s){ s.classList.remove('on'); });
   el.classList.add('on');
   payInst = m === 0 ? '일시불' : m + '개월';
-  document.getElementById('benInst').textContent = m === 0 ? '일시불 결제' : m + '개월 무이자 할부';
 }
 function payNow(){
   document.getElementById('doneMethod').textContent = payMethod + ' · ' + payInst;
@@ -479,7 +477,7 @@ function addCard(){
 /* 영수증 팝업 */
 function openRc(){
   document.getElementById('rcMethod').textContent = payMethod;
-  document.getElementById('rcInst').textContent = payInst === '일시불' ? '일시불' : payInst + ' 무이자';
+  document.getElementById('rcInst').textContent = payInst === '일시불' ? '일시불' : payInst + ' 할부';
   var d = new Date();
   var p = function(n){ return String(n).padStart(2, '0'); };
   document.getElementById('rcDate').textContent =
