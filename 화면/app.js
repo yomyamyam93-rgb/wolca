@@ -8,8 +8,18 @@
     '@media (prefers-reduced-motion: reduce){.phone{animation:none;}}'+
     'button:active{transform:scale(.97); transition:transform .06s;}'+
     '.phone{-webkit-user-select:none; user-select:none;}'+
-    '.phone input,.phone textarea{-webkit-user-select:text; user-select:text;}';
+    '.phone input,.phone textarea{-webkit-user-select:text; user-select:text;}'+
+    /* 이미지가 손가락/마우스에 끌려 나오지 않게 */
+    '.phone img{-webkit-user-drag:none; user-drag:none; -webkit-touch-callout:none; pointer-events:none;}';
   document.head.appendChild(st);
+
+  /* 드래그 자체를 막기 (모바일 길게 눌러 이미지 저장/끌기 방지) */
+  document.addEventListener('dragstart', function(e){
+    if (e.target && e.target.tagName === 'IMG') e.preventDefault();
+  });
+  document.addEventListener('DOMContentLoaded', function(){
+    document.querySelectorAll('.phone img').forEach(function(im){ im.setAttribute('draggable', 'false'); });
+  });
 
   /* 드래그 스크롤 (세로) + 관성 */
   var sc=null, startY=0, startTop=0, lastY=0, lastT=0, vel=0, moved=false, raf=null;
@@ -65,4 +75,68 @@
   document.addEventListener('click', function(e){
     if(moved){ e.stopPropagation(); e.preventDefault(); moved=false; }
   }, true);
+})();
+
+/* 뒤로 갔을 때 보던 위치로 되돌리기 (모든 화면 공용) */
+(function(){
+  var KEY = 'sc_' + decodeURIComponent(location.pathname.split('/').pop());
+
+  function box(){
+    return document.querySelector('.screen, .body, .chat') || null;
+  }
+  function save(){
+    var b = box();
+    if (b) { try{ sessionStorage.setItem(KEY, String(b.scrollTop)); }catch(e){} }
+  }
+  function restore(){
+    var b = box();
+    if (!b) return;
+    var v = 0;
+    try{ v = parseInt(sessionStorage.getItem(KEY) || '0', 10); }catch(e){}
+    if (v > 0) {
+      b.scrollTop = v;                       /* 바로 한 번 */
+      requestAnimationFrame(function(){ b.scrollTop = v; });   /* 그림 그려진 뒤 한 번 더 */
+      setTimeout(function(){ b.scrollTop = v; }, 60);          /* 아이콘 로딩 후 한 번 더 */
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', function(){
+    restore();
+    var b = box();
+    if (b) b.addEventListener('scroll', function(){
+      clearTimeout(b._st);
+      b._st = setTimeout(save, 120);
+    }, { passive:true });
+  });
+  window.addEventListener('load', restore);
+  window.addEventListener('pagehide', save);
+  window.addEventListener('beforeunload', save);
+})();
+
+/* 뒤로가기 — 어느 화면에서 들어왔는지 기억해서 정확히 되돌아가기 */
+(function(){
+  var KEY = 'lp_stack';
+  var goingBack = false;
+
+  function me(){ return decodeURIComponent(location.pathname.split('/').pop()) + location.search; }
+  function get(){ try{ return JSON.parse(sessionStorage.getItem(KEY) || '[]'); }catch(e){ return []; } }
+  function set(a){ try{ sessionStorage.setItem(KEY, JSON.stringify(a)); }catch(e){} }
+
+  /* 화면을 떠날 때 '내가 있던 곳'을 쌓아둠 (뒤로 가는 중이면 쌓지 않음) */
+  window.addEventListener('pagehide', function(){
+    if (goingBack) return;
+    var a = get(), cur = me();
+    if (a[a.length - 1] !== cur) a.push(cur);
+    if (a.length > 25) a.shift();
+    set(a);
+  });
+
+  /* 모든 화면의 뒤로가기가 이 함수를 씀 */
+  window.lpBack = function(fallback){
+    var a = get();
+    var prev = a.pop();
+    set(a);
+    goingBack = true;
+    location.href = prev || fallback || '9_홈_개인.html';
+  };
 })();

@@ -6,11 +6,10 @@
 <title>랜선페이 — 고객센터</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
 <link rel="stylesheet" href="web.css">
-<link rel="icon" type="image/png" href="../img/logo.png">
+<link rel="icon" type="image/png" href="../img/logo-mark.png">
 <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+<script src="web.js"></script>
 <style>
-  .page-hero{background:linear-gradient(180deg, var(--primary-50), #fff); padding:80px 24px 54px; text-align:center;}
-  .page-hero .p-lg{margin-top:18px;}
 
   /* 상단 탭 */
   .cs-tabs{display:flex; justify-content:center; gap:8px; background:#fff; border-bottom:1px solid var(--line); position:sticky; top:64px; z-index:40; padding:0 24px;}
@@ -58,18 +57,19 @@
 
 <nav class="nav">
   <div class="nav-in">
-    <a class="logo" href="index.html"><img src="../img/logo.png" alt="" style="height:22px">랜선페이</a>
+    <a class="logo" href="index.html"><img src="../img/logo-mark.png" alt="" style="height:30px"><img src="../img/logo-text.png" alt="랜선페이" style="height:19px"></a>
     <div class="nav-menu">
       <a href="이용가이드.html">이용가이드</a>
       <a href="고객센터.html" class="on">고객센터</a>
       <a href="송금하기.html">송금하기</a>
     </div>
-    <button class="nav-cta" onclick="location.href='송금하기.html'">웹에서 송금하기</button>
+    <button class="nav-cta" onclick="location.href='로그인.html'">로그인</button>
     <button class="nav-burger" onclick="drawer(true)" aria-label="전체메뉴"><iconify-icon icon="mingcute:menu-fill"></iconify-icon></button>
   </div>
 </nav>
 
 <header class="page-hero">
+  <div class="eyebrow">고객센터</div>
   <h1 class="h-lg">무엇을 도와드릴까요?</h1>
   <p class="p-lg">공지 · 이벤트 · 자주 묻는 질문을 한곳에 모았어요.</p>
 </header>
@@ -85,10 +85,10 @@
 <section class="sec panel on" id="panel0" style="padding-top:40px">
   <div class="wrap">
     <div class="board">
-      <a href="#"><span class="b-tag">공지</span><span class="b-t">7월 무이자 할부 카드사 안내 (삼성 · 신한 · 현대 최대 6개월)</span><span class="b-d">2026.07.14</span></a>
-      <a href="#"><span class="b-tag">점검</span><span class="b-t">7월 20일(월) 새벽 2~4시 시스템 점검 안내</span><span class="b-d">2026.07.12</span></a>
-      <a href="#"><span class="b-tag">공지</span><span class="b-t">개인정보 처리방침 개정 안내 (8월 1일 시행)</span><span class="b-d">2026.07.08</span></a>
-      <a href="#"><span class="b-tag">안내</span><span class="b-t">여신전문금융업법에 따른 서비스 불가 거래 안내</span><span class="b-d">2026.07.01</span></a>
+      <a href="javascript:void(0);"><span class="b-tag">공지</span><span class="b-t">7월 무이자 할부 카드사 안내 (삼성 · 신한 · 현대 최대 6개월)</span><span class="b-d">2026.07.14</span></a>
+      <a href="javascript:void(0);"><span class="b-tag">점검</span><span class="b-t">7월 20일(월) 새벽 2~4시 시스템 점검 안내</span><span class="b-d">2026.07.12</span></a>
+      <a href="javascript:void(0);"><span class="b-tag">공지</span><span class="b-t">개인정보 처리방침 개정 안내 (8월 1일 시행)</span><span class="b-d">2026.07.08</span></a>
+      <a href="javascript:void(0);"><span class="b-tag">안내</span><span class="b-t">여신전문금융업법에 따른 서비스 불가 거래 안내</span><span class="b-d">2026.07.01</span></a>
     </div>
   </div>
 </section>
@@ -144,8 +144,8 @@
     </div>
 
     <div class="cs-call">
-      <div class="t"><b>더 궁금한 게 있나요?</b><p>고객센터 1600-0000 · 평일 9:00~18:00 (주말 · 공휴일 휴무)</p></div>
-      <a class="btn ghost" href="#" onclick="alert('1:1 문의는 준비 중이에요'); return false;">1:1 문의하기</a>
+      <div class="t"><b>더 궁금한 게 있나요?</b><p>대표번호 1577-6369 · 평일 9:00~18:00 (주말 · 공휴일 휴무)</p></div>
+      <a class="btn ghost" href="javascript:void(0);" onclick="alert('1:1 문의는 준비 중이에요'); return false;">1:1 문의하기</a>
     </div>
   </div>
 </section>
@@ -158,8 +158,10 @@
       <a href="고객센터.html#faq">자주 묻는 질문</a>
       <a href="송금하기.html">송금하기</a>
     </div>
-    <p>랜선페이 (주)랜선페이컴퍼니 · 대표 OOO · 사업자등록번호 000-00-00000<br>
-    서울특별시 OO구 OO로 000 · 고객센터 1600-0000 (평일 9:00~18:00)</p>
+    <p>랜선페이 · (주)미라클컴퍼니 · 대표 김남기 · 서버책임 · 개인정보관리자 민기범<br>
+    사업자등록번호 437-88-03148<br>
+    충청남도 천안시 서북구 쌍용대로 234, 방영학생활건강빌딩 3층 (성정동)<br>
+    대표번호 1577-6369 (평일 9:00~18:00)</p>
   </div>
 </footer>
 
@@ -171,8 +173,8 @@
   <a href="이용가이드.html"><iconify-icon icon="mingcute:book-2-fill"></iconify-icon>이용가이드<span class="gv">›</span></a>
   <a href="index.html#reviews"><iconify-icon icon="mingcute:chat-2-fill"></iconify-icon>이용후기<span class="gv">›</span></a>
   <a href="송금하기.html"><iconify-icon icon="mingcute:flash-fill"></iconify-icon>송금하기<span class="gv">›</span></a>
-  <a href="#" onclick="alert('세금계산서 · 부가세 신고는 준비 중이에요'); return false;"><iconify-icon icon="mingcute:file-certificate-fill"></iconify-icon>세금계산서 · 부가세 신고<span class="gv">›</span></a>
-  <button class="d-login" onclick="alert('로그인은 준비 중이에요')">로그인</button>
+  <a href="javascript:void(0);" onclick="alert('세금계산서 · 부가세 신고는 준비 중이에요'); return false;"><iconify-icon icon="mingcute:file-certificate-fill"></iconify-icon>세금계산서 · 부가세 신고<span class="gv">›</span></a>
+  <button class="d-login" onclick="location.href='로그인.html'">로그인</button>
 </aside>
 
 <script>

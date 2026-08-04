@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>랜선페이 — 쿠폰함</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+  :root{
+    --primary:#2563EB; --primary-dark:#1D4ED8; --primary-50:#EFF4FF; --primary-100:#DBE7FF;
+    --page-bg:#c9cdd4; --bg:#F4F5F6; --card:#FFFFFF; --line:#ECEEF1; --border:#B1B8BE;
+    --tile:#EEF1F4; --icon-off:#B0B8C1; --sub:#4E5968; --ink:#191F28; --placeholder:#8B95A1;
+    --success:#059669; --success-bg:#EAF7F0; --warn:#B45309; --warn-bg:#FFF7ED;
+    --primary-grad:linear-gradient(180deg, color-mix(in srgb, var(--primary) 82%, #ffffff), var(--primary));
+    --btn-shadow:0 4px 12px color-mix(in srgb, var(--primary) 32%, transparent), inset 0 1px 0 rgba(255,255,255,.18);
+  }
+  *{box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent;}
+  body{font-family:'Pretendard',-apple-system,sans-serif; color:var(--ink); background:var(--page-bg);
+       display:flex; justify-content:center; align-items:flex-start; padding:24px 0; line-height:1.5; -webkit-font-smoothing:antialiased;}
+  .phone{width:390px; height:844px; max-width:100%; background:var(--bg); position:relative; display:flex; flex-direction:column;
+         border-radius:46px; overflow:hidden; box-shadow:0 16px 50px rgba(0,0,0,.28);}
+  iconify-icon{display:inline-block;}
+  .statusbar{height:47px; display:flex; align-items:center; justify-content:space-between; padding:0 24px 0 30px; background:var(--bg); flex:0 0 auto;}
+  .statusbar .time{font-size:15px; font-weight:700;}
+  .statusbar .stat{display:flex; align-items:center; gap:7px;}
+  .topbar{height:54px; display:flex; align-items:center; padding:0 10px; background:var(--bg); flex:0 0 auto;}
+  .topbar .back{width:44px; height:44px; display:flex; align-items:center; justify-content:center; font-size:24px; color:var(--ink); cursor:pointer;}
+  .topbar .ttl{flex:1; text-align:center; font-size:17px; font-weight:700; margin-right:44px;}
+
+  .tabs{display:flex; gap:5px; margin:2px 20px 14px; padding:5px; border-radius:14px; background:var(--tile); flex:0 0 auto;}
+  .tabs span{flex:1; text-align:center; padding:10px 0; border-radius:10px; font-size:13.5px; font-weight:700;
+    color:var(--placeholder); cursor:pointer; transition:.25s;}
+  .tabs span.on{background:#fff; color:var(--ink); box-shadow:0 1px 3px rgba(25,31,40,.14);}
+
+  .body{flex:1; overflow-y:auto; padding:0 20px 110px; scrollbar-width:none;}
+  .body::-webkit-scrollbar{display:none;}
+
+  /* 쿠폰 티켓 */
+  .cp{display:flex; background:var(--card); border-radius:16px; overflow:hidden; margin-bottom:11px;
+    box-shadow:0 1px 3px rgba(0,0,0,.05); position:relative;}
+  .cp .left{width:104px; flex:0 0 auto; background:linear-gradient(160deg,#3B82F6,#1D4ED8); color:#fff;
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px; padding:16px 8px; position:relative;}
+  .cp .left .big{font-size:24px; font-weight:800; letter-spacing:-.8px;}
+  .cp .left .unit{font-size:12px; font-weight:700; opacity:.9;}
+  .cp .left:after{content:''; position:absolute; right:-1px; top:0; bottom:0; width:2px;
+    background:repeating-linear-gradient(180deg,#fff 0 5px,transparent 5px 10px);}
+  .cp .right{flex:1; min-width:0; padding:15px 16px;}
+  .cp .nm{font-size:15px; font-weight:700; letter-spacing:-.2px;}
+  .cp .cond{font-size:12.5px; color:var(--sub); margin-top:6px; line-height:1.5;}
+  .cp .bot{display:flex; align-items:center; gap:8px; margin-top:11px;}
+  .cp .exp{font-size:11.5px; color:var(--placeholder);}
+  .cp .dday{font-size:11px; font-weight:800; color:var(--warn); background:var(--warn-bg); padding:3px 7px; border-radius:6px;}
+  .cp.used, .cp.expired{opacity:.55;}
+  .cp.used .left, .cp.expired .left{background:linear-gradient(160deg,#B0B8C1,#8B95A1);}
+  .cp .stamp{position:absolute; right:16px; top:50%; transform:translateY(-50%) rotate(-12deg);
+    font-size:13px; font-weight:800; color:var(--placeholder); border:2px solid var(--icon-off);
+    border-radius:8px; padding:4px 9px;}
+
+  .empty{text-align:center; padding:70px 20px; color:var(--placeholder);}
+  .empty iconify-icon{font-size:46px; color:var(--icon-off);}
+  .empty .t{font-size:14.5px; font-weight:600; margin-top:14px;}
+  .empty .s{font-size:12.5px; margin-top:7px; line-height:1.6;}
+
+  .note{display:flex; gap:8px; margin-top:16px; padding:14px 15px; border-radius:13px; background:#fff;
+    font-size:12.5px; color:var(--sub); line-height:1.65; box-shadow:0 1px 3px rgba(0,0,0,.04);}
+  .note iconify-icon{font-size:17px; flex:0 0 auto; color:var(--primary); margin-top:1px;}
+
+  .footer{position:absolute; bottom:0; left:0; right:0; padding:14px 20px 28px; background:#fff; border-top:1px solid var(--line);}
+  .footer button{width:100%; height:54px; border:none; border-radius:15px; background:var(--primary-grad);
+    box-shadow:var(--btn-shadow); color:#fff; font-family:inherit; font-size:16px; font-weight:700; cursor:pointer;
+    display:flex; align-items:center; justify-content:center; gap:7px;}
+  .footer button iconify-icon{font-size:19px;}
+
+  /* 등록 시트 */
+  .dim{position:absolute; inset:0; background:rgba(15,20,30,.5); opacity:0; pointer-events:none; transition:opacity .3s; z-index:20;}
+  .dim.on{opacity:1; pointer-events:auto;}
+  .sheet{position:absolute; left:0; right:0; bottom:0; z-index:21; background:#fff; border-radius:24px 24px 0 0;
+    padding:10px 20px 26px; transform:translateY(100%); transition:transform .4s cubic-bezier(.2,.7,.2,1);}
+  .sheet.on{transform:translateY(0);}
+  .sheet .handle{width:44px; height:4px; border-radius:3px; background:#DDE2E8; margin:0 auto 14px;}
+  .sheet h3{font-size:18px; font-weight:800; letter-spacing:-.3px;}
+  .sheet .sub{font-size:13px; color:var(--placeholder); margin:6px 0 18px; line-height:1.6;}
+  .codein{display:flex; align-items:center; gap:6px;}
+  .codein input{flex:1; min-width:0; height:52px; border:1.5px solid var(--border); border-radius:12px; text-align:center;
+    font-family:inherit; font-size:17px; font-weight:700; letter-spacing:1px; text-transform:uppercase; background:#fff;}
+  .codein input:focus{outline:none; border-color:var(--primary); box-shadow:0 0 0 4px rgba(37,99,235,.12);}
+  .codein span{color:var(--icon-off); font-weight:800;}
+  .msg{font-size:12.5px; margin-top:11px; min-height:18px; font-weight:600;}
+  .msg.ok{color:var(--success);} .msg.no{color:#DC2626;}
+  .sbtn{width:100%; height:54px; margin-top:16px; border:none; border-radius:14px; background:var(--primary-grad);
+    box-shadow:var(--btn-shadow); color:#fff; font-family:inherit; font-size:16px; font-weight:700; cursor:pointer;}
+  .hintbox{margin-top:14px; padding:13px 15px; border-radius:12px; background:var(--primary-50);
+    font-size:12px; color:var(--primary-dark); line-height:1.65;}
+</style>
+<script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+</head>
+<body>
+<div class="phone">
+  <div class="statusbar"><span class="time">9:41</span><span class="stat">
+    <svg width="18" height="12" viewBox="0 0 18 12"><rect y="8" width="3" height="4" rx="1" fill="#191F28"/><rect x="5" y="5" width="3" height="7" rx="1" fill="#191F28"/><rect x="10" y="2.5" width="3" height="9.5" rx="1" fill="#191F28"/><rect x="15" width="3" height="12" rx="1" fill="#191F28"/></svg>
+    <svg width="17" height="12" viewBox="0 0 17 12"><path d="M8.5 2C11 2 13.3 3 15 4.7l-1.3 1.4C12.3 4.7 10.5 4 8.5 4S4.7 4.7 3.3 6.1L2 4.7C3.7 3 6 2 8.5 2z" fill="#191F28"/><circle cx="8.5" cy="10" r="1.3" fill="#191F28"/></svg>
+    <svg width="26" height="13" viewBox="0 0 26 13"><rect x=".5" y=".5" width="22" height="12" rx="3.5" fill="none" stroke="#191F28" stroke-opacity=".35"/><rect x="2.5" y="2.5" width="16" height="8" rx="1.8" fill="#191F28"/><rect x="24" y="4.5" width="1.6" height="4" rx=".8" fill="#191F28" fill-opacity=".35"/></svg>
+  </span></div>
+
+  <div class="topbar"><div class="back" onclick="goBack()">‹</div><div class="ttl">쿠폰함</div></div>
+
+  <div class="tabs">
+    <span class="on" onclick="setT(this,'able')">사용 가능 <b id="cntAble">2</b></span>
+    <span onclick="setT(this,'done')">사용 완료 · 만료</span>
+  </div>
+
+  <div class="body" id="body">
+
+    <!-- 사용 가능 -->
+    <div class="grp able" id="gAble">
+      <div class="cp" onclick="use('수수료 100% 할인')">
+        <div class="left"><span class="big">100</span><span class="unit">% 할인</span></div>
+        <div class="right">
+          <div class="nm">첫 결제 수수료 무료</div>
+          <div class="cond">30만원 이하 결제 1건 · 수수료 전액 할인</div>
+          <div class="bot"><span class="exp">2026.09.30까지</span><span class="dday">D-57</span></div>
+        </div>
+      </div>
+
+      <div class="cp" onclick="use('수수료 1% 할인')">
+        <div class="left"><span class="big">1</span><span class="unit">% 할인</span></div>
+        <div class="right">
+          <div class="nm">추천인 쿠폰</div>
+          <div class="cond">수수료 4% → <b>3%</b> · 금액 제한 없음</div>
+          <div class="bot"><span class="exp">2026.08.14까지</span><span class="dday">D-10</span></div>
+        </div>
+      </div>
+
+      <div class="note">
+        <iconify-icon icon="mingcute:information-fill"></iconify-icon>
+        <div>쿠폰은 <b>결제 확인 화면</b>에서 고를 수 있어요. 한 번의 결제에 <b>쿠폰 1장</b>만 쓸 수 있습니다.</div>
+      </div>
+    </div>
+
+    <!-- 사용 완료 · 만료 -->
+    <div class="grp done" id="gDone" style="display:none">
+      <div class="cp used">
+        <div class="left"><span class="big">3</span><span class="unit">만원</span></div>
+        <div class="right">
+          <div class="nm">신규 가입 축하 쿠폰</div>
+          <div class="cond">6월 25일 · 7월 월세 결제에 사용</div>
+          <div class="bot"><span class="exp">2026.06.25 사용</span></div>
+        </div>
+        <span class="stamp">사용함</span>
+      </div>
+
+      <div class="cp expired">
+        <div class="left"><span class="big">2</span><span class="unit">% 할인</span></div>
+        <div class="right">
+          <div class="nm">7월 여름 이벤트 쿠폰</div>
+          <div class="cond">수수료 4% → 2% · 100만원 이상</div>
+          <div class="bot"><span class="exp">2026.07.31 만료</span></div>
+        </div>
+        <span class="stamp">기간만료</span>
+      </div>
+    </div>
+
+    <div class="empty" id="empty" style="display:none">
+      <iconify-icon icon="mingcute:coupon-line"></iconify-icon>
+      <div class="t">쿠폰이 없어요</div>
+      <div class="s">이벤트에 참여하거나<br>쿠폰 번호를 등록해보세요</div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <button onclick="openSheet()"><iconify-icon icon="mingcute:add-fill"></iconify-icon>쿠폰 번호 등록</button>
+  </div>
+
+  <!-- 쿠폰 등록 시트 -->
+  <div class="dim" id="dim" onclick="closeSheet()"></div>
+  <div class="sheet" id="sheet">
+    <div class="handle"></div>
+    <h3>쿠폰 번호 등록</h3>
+    <div class="sub">받으신 쿠폰 번호 12자리를 입력해주세요.</div>
+
+    <div class="codein">
+      <input id="c1" maxlength="4" placeholder="XXXX" oninput="hop(this,'c2')">
+      <span>-</span>
+      <input id="c2" maxlength="4" placeholder="XXXX" oninput="hop(this,'c3')">
+      <span>-</span>
+      <input id="c3" maxlength="4" placeholder="XXXX" oninput="hop(this,null)">
+    </div>
+    <div class="msg" id="msg"></div>
+
+    <div class="hintbox">
+      쿠폰 번호는 <b>이벤트 안내 문자 · 알림톡</b>에서 확인할 수 있어요.<br>
+      영문은 대소문자를 구분하지 않습니다.
+    </div>
+
+    <button class="sbtn" onclick="reg()">등록하기</button>
+  </div>
+</div>
+<script src="app.js"></script>
+<script>
+function goBack(){ lpBack('19_혜택.html'); }
+
+function setT(el, k){
+  document.querySelectorAll('.tabs span').forEach(function(s){ s.classList.remove('on'); });
+  el.classList.add('on');
+  document.getElementById('gAble').style.display = (k === 'able') ? 'block' : 'none';
+  document.getElementById('gDone').style.display = (k === 'done') ? 'block' : 'none';
+  var n = document.querySelectorAll('#g' + (k === 'able' ? 'Able' : 'Done') + ' .cp').length;
+  document.getElementById('empty').style.display = n ? 'none' : 'block';
+}
+
+function use(name){ toast(name + ' 쿠폰은 결제할 때 골라주세요'); }
+
+function openSheet(){
+  document.getElementById('dim').classList.add('on');
+  document.getElementById('sheet').classList.add('on');
+  document.getElementById('msg').textContent = '';
+  setTimeout(function(){ document.getElementById('c1').focus(); }, 350);
+}
+function closeSheet(){
+  document.getElementById('dim').classList.remove('on');
+  document.getElementById('sheet').classList.remove('on');
+}
+function hop(el, next){
+  el.value = el.value.toUpperCase();
+  if (el.value.length >= 4 && next) document.getElementById(next).focus();
+}
+function reg(){
+  var code = ['c1','c2','c3'].map(function(id){ return document.getElementById(id).value.trim(); });
+  var msg = document.getElementById('msg');
+  if (code.join('').length < 12) {
+    msg.className = 'msg no';
+    msg.textContent = '쿠폰 번호 12자리를 모두 입력해주세요.';
+    return;
+  }
+  /* 시연용: LANS 로 시작하면 성공 */
+  if (code[0] !== 'LANS') {
+    msg.className = 'msg no';
+    msg.textContent = '등록할 수 없는 번호예요. 다시 확인해주세요.';
+    return;
+  }
+  msg.className = 'msg ok';
+  msg.textContent = '쿠폰이 등록됐어요!';
+
+  var el = document.createElement('div');
+  el.className = 'cp';
+  el.setAttribute('onclick', "use('수수료 2% 할인')");
+  el.innerHTML = '<div class="left"><span class="big">2</span><span class="unit">% 할인</span></div>' +
+    '<div class="right"><div class="nm">등록한 쿠폰</div>' +
+    '<div class="cond">수수료 4% → <b>2%</b> · 금액 제한 없음</div>' +
+    '<div class="bot"><span class="exp">2026.09.30까지</span><span class="dday">D-57</span></div></div>';
+  var g = document.getElementById('gAble');
+  g.insertBefore(el, g.querySelector('.note'));
+  document.getElementById('cntAble').textContent = g.querySelectorAll('.cp').length;
+  try{
+    var a = JSON.parse(sessionStorage.getItem('lp_coupons') || '[]');
+    a.push({ big:'2', unit:'% 할인', nm:'등록한 쿠폰',
+             cond:'수수료 4% → <b>2%</b> · 금액 제한 없음',
+             exp:'2026.09.30까지', dd:'D-57' });
+    sessionStorage.setItem('lp_coupons', JSON.stringify(a));
+  }catch(e){}
+
+  ['c1','c2','c3'].forEach(function(id){ document.getElementById(id).value = ''; });
+  setTimeout(function(){ closeSheet(); toast('쿠폰이 쿠폰함에 담겼어요'); }, 700);
+}
+function toast(m){
+  closeSheet();
+  var t = document.createElement('div');
+  t.textContent = m;
+  t.style.cssText = "position:absolute;bottom:110px;left:50%;transform:translateX(-50%);background:#191F28;color:#fff;padding:12px 18px;border-radius:24px;font-size:13px;font-weight:600;z-index:30;opacity:0;transition:.2s;white-space:nowrap";
+  document.querySelector('.phone').appendChild(t);
+  requestAnimationFrame(function(){ t.style.opacity = '1'; });
+  setTimeout(function(){ t.style.opacity = '0'; setTimeout(function(){ t.remove(); }, 200); }, 1700);
+}
+
+/* 다른 화면에서 등록한 쿠폰도 여기에 담겨 있음 */
+(function(){
+  var a = [];
+  try{ a = JSON.parse(sessionStorage.getItem('lp_coupons') || '[]'); }catch(e){}
+  if (!a.length) return;
+  var g = document.getElementById('gAble'), note = g.querySelector('.note');
+  a.forEach(function(c){
+    var el = document.createElement('div');
+    el.className = 'cp';
+    el.setAttribute('onclick', "use('수수료 " + c.big + c.unit + "')");
+    el.innerHTML = '<div class="left"><span class="big">' + c.big + '</span><span class="unit">' + c.unit + '</span></div>' +
+      '<div class="right"><div class="nm">' + c.nm + '</div>' +
+      '<div class="cond">' + c.cond + '</div>' +
+      '<div class="bot"><span class="exp">' + c.exp + '</span><span class="dday">' + c.dd + '</span></div></div>';
+    g.insertBefore(el, note);
+  });
+  document.getElementById('cntAble').textContent = g.querySelectorAll('.cp').length;
+})();
+
+/* 주소에 #reg 가 붙어 들어오면 등록 시트를 바로 열어줌 */
+if (location.hash === '#reg') setTimeout(openSheet, 300);
+</script>
+</body>
+</html>

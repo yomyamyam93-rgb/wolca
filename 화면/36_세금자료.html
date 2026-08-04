@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>랜선페이 — 세금 자료</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="screen.css">
+<style>
+  .pane{display:none;} .pane.on{display:block;}
+  .big{background:var(--card); border-radius:20px; padding:22px; box-shadow:0 1px 3px rgba(0,0,0,.05);}
+  .big .l{font-size:13px; color:var(--placeholder);}
+  .big .v{font-size:28px; font-weight:800; letter-spacing:-.8px; margin-top:5px;}
+  .big .v.blue{color:var(--primary-dark);}
+  .big .s{font-size:12.5px; color:var(--sub); margin-top:8px; line-height:1.6;}
+  .mrow{display:flex; align-items:center; gap:12px; padding:15px 0; cursor:pointer;}
+  .mrow + .mrow{border-top:1px solid var(--line);}
+  .mrow .mo{font-size:14.5px; font-weight:700; flex:1;}
+  .mrow .am{font-size:13.5px; font-weight:700; color:var(--sub);}
+  .file{display:flex; align-items:center; gap:12px; padding:14px 0; cursor:pointer;}
+  .file + .file{border-top:1px solid var(--line);}
+  .file .ic{width:38px; height:38px; flex:0 0 auto; border-radius:11px; background:var(--tile);
+    display:flex; align-items:center; justify-content:center;}
+  .file .ic iconify-icon{font-size:19px; color:var(--sub);}
+  .file .tx{flex:1; min-width:0;}
+  .file .n{font-size:14px; font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+  .file .s{font-size:11.5px; color:var(--placeholder); margin-top:3px;}
+  .file .dl{flex:0 0 auto; font-size:12px; font-weight:700; color:var(--primary-dark); background:var(--primary-50);
+    padding:6px 11px; border-radius:8px;}
+  .thumbs{display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-top:4px;}
+  .thumb{aspect-ratio:3/4; border-radius:12px; background:var(--card); border:1px solid var(--line);
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; cursor:pointer;
+    box-shadow:0 1px 3px rgba(0,0,0,.04);}
+  .thumb iconify-icon{font-size:24px; color:var(--primary);}
+  .thumb .n{font-size:10.5px; color:var(--sub); font-weight:600; text-align:center; padding:0 6px; line-height:1.35;}
+</style>
+<script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+</head>
+<body>
+<div class="phone">
+  <div class="statusbar"><span class="time">9:41</span><span class="stat">
+    <svg width="18" height="12" viewBox="0 0 18 12"><rect y="8" width="3" height="4" rx="1" fill="#191F28"/><rect x="5" y="5" width="3" height="7" rx="1" fill="#191F28"/><rect x="10" y="2.5" width="3" height="9.5" rx="1" fill="#191F28"/><rect x="15" width="3" height="12" rx="1" fill="#191F28"/></svg>
+    <svg width="26" height="13" viewBox="0 0 26 13"><rect x=".5" y=".5" width="22" height="12" rx="3.5" fill="none" stroke="#191F28" stroke-opacity=".35"/><rect x="2.5" y="2.5" width="16" height="8" rx="1.8" fill="#191F28"/><rect x="24" y="4.5" width="1.6" height="4" rx=".8" fill="#191F28" fill-opacity=".35"/></svg>
+  </span></div>
+
+  <div class="topbar"><div class="back" onclick="lpBack('20_정산.html')">‹</div><div class="ttl">세금 자료</div></div>
+
+  <div class="body">
+    <div class="segs">
+      <span class="on" onclick="setP(this,'tax')">세금계산서</span>
+      <span onclick="setP(this,'vat')">부가세</span>
+      <span onclick="setP(this,'doc')">증빙</span>
+    </div>
+
+    <!-- 세금계산서 -->
+    <div class="pane on" id="p-tax">
+      <div class="big">
+        <div class="l">2026년 누적 발행액</div>
+        <div class="v">4,821,000원</div>
+        <div class="s">수수료에 대해 매달 <b>자동으로 세금계산서가 발행</b>돼요.<br>발행 이메일: tax@miracle.co.kr</div>
+      </div>
+
+      <div class="sec-t">월별 발행 내역</div>
+      <div class="box">
+        <div class="mrow" onclick="toast('8월분은 9월 10일에 발행돼요')">
+          <span class="mo">2026년 8월</span><span class="am">736,800원</span><span class="st wait">발행 예정</span>
+        </div>
+        <div class="mrow" onclick="toast('세금계산서를 내려받았어요 (준비 중)')">
+          <span class="mo">2026년 7월</span><span class="am">692,400원</span><span class="st ok">발행 완료</span>
+        </div>
+        <div class="mrow" onclick="toast('세금계산서를 내려받았어요 (준비 중)')">
+          <span class="mo">2026년 6월</span><span class="am">588,000원</span><span class="st ok">발행 완료</span>
+        </div>
+      </div>
+
+      <div class="sec-t">발행 정보</div>
+      <div class="box">
+        <div class="row" onclick="location.href='26_내정보.html'">
+          <span class="tx" style="margin-left:2px"><div class="t">상호 · 사업자등록번호</div><div class="s">미라클상사 · 437-88-03148</div></span>
+          <iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon>
+        </div>
+        <div class="row" onclick="location.href='26_내정보.html'">
+          <span class="tx" style="margin-left:2px"><div class="t">받는 이메일</div><div class="s">tax@miracle.co.kr</div></span>
+          <iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon>
+        </div>
+      </div>
+
+      <div class="note">
+        <iconify-icon icon="mingcute:information-fill"></iconify-icon>
+        <div>세금계산서는 <b>수수료에 대해서만</b> 발행돼요. 송금 원금은 거래처와의 거래이므로 랜선페이가 발행하지 않습니다.</div>
+      </div>
+    </div>
+
+    <!-- 부가세 -->
+    <div class="pane" id="p-vat">
+      <div class="big">
+        <div class="l">이번 분기 매입세액공제 대상</div>
+        <div class="v blue">438,000원</div>
+        <div class="s">2026년 3분기 (7~9월) · 수수료에 포함된 부가세예요.<br>신고 때 <b>매입세액</b>으로 공제받을 수 있어요.</div>
+      </div>
+
+      <div class="sec-t">분기별 내역</div>
+      <div class="box">
+        <div class="mrow" onclick="toast('상세 내역은 준비 중이에요')">
+          <span class="mo">2026년 3분기</span><span class="am">438,000원</span><iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon>
+        </div>
+        <div class="mrow" onclick="toast('상세 내역은 준비 중이에요')">
+          <span class="mo">2026년 2분기</span><span class="am">512,400원</span><iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon>
+        </div>
+        <div class="mrow" onclick="toast('상세 내역은 준비 중이에요')">
+          <span class="mo">2026년 1분기</span><span class="am">387,200원</span><iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon>
+        </div>
+      </div>
+
+      <div class="sec-t">자료 내려받기</div>
+      <div class="box">
+        <div class="file" onclick="toast('엑셀 파일을 내려받았어요 (준비 중)')">
+          <span class="ic"><iconify-icon icon="mingcute:table-2-fill"></iconify-icon></span>
+          <span class="tx"><div class="n">3분기 매입 내역.xlsx</div><div class="s">거래처 · 금액 · 부가세 정리</div></span>
+          <span class="dl">받기</span>
+        </div>
+        <div class="file" onclick="toast('PDF를 내려받았어요 (준비 중)')">
+          <span class="ic"><iconify-icon icon="mingcute:document-2-fill"></iconify-icon></span>
+          <span class="tx"><div class="n">3분기 세금계산서 합계표.pdf</div><div class="s">신고용 요약본</div></span>
+          <span class="dl">받기</span>
+        </div>
+      </div>
+
+      <div class="note">
+        <iconify-icon icon="mingcute:alert-fill"></iconify-icon>
+        <div>신고는 <b>홈택스에서 직접</b> 하셔야 해요. 랜선페이는 신고에 필요한 자료만 정리해드립니다.</div>
+      </div>
+    </div>
+
+    <!-- 증빙 -->
+    <div class="pane" id="p-doc">
+      <div class="big">
+        <div class="l">올린 증빙 서류</div>
+        <div class="v">14건</div>
+        <div class="s">2026년 8월 기준 · 승인된 결제에 첨부한 서류예요.</div>
+      </div>
+
+      <div class="sec-t">2026년 8월</div>
+      <div class="thumbs">
+        <div class="thumb" onclick="toast('서류 크게 보기는 준비 중이에요')"><iconify-icon icon="mingcute:document-fill"></iconify-icon><span class="n">거래명세서<br>한빛식자재</span></div>
+        <div class="thumb" onclick="toast('서류 크게 보기는 준비 중이에요')"><iconify-icon icon="mingcute:document-fill"></iconify-icon><span class="n">임대차계약서<br>대성부동산</span></div>
+        <div class="thumb" onclick="toast('서류 크게 보기는 준비 중이에요')"><iconify-icon icon="mingcute:document-fill"></iconify-icon><span class="n">근로계약서<br>김직원</span></div>
+      </div>
+
+      <div class="sec-t">2026년 7월</div>
+      <div class="thumbs">
+        <div class="thumb" onclick="toast('서류 크게 보기는 준비 중이에요')"><iconify-icon icon="mingcute:document-fill"></iconify-icon><span class="n">세금계산서<br>한빛식자재</span></div>
+        <div class="thumb" onclick="toast('서류 크게 보기는 준비 중이에요')"><iconify-icon icon="mingcute:document-fill"></iconify-icon><span class="n">임대차계약서<br>대성부동산</span></div>
+        <div class="thumb" onclick="toast('서류 크게 보기는 준비 중이에요')"><iconify-icon icon="mingcute:document-fill"></iconify-icon><span class="n">지급명세서<br>이알바</span></div>
+      </div>
+
+      <div class="sec-t">한 번에 내려받기</div>
+      <div class="box">
+        <div class="file" onclick="toast('압축 파일을 내려받았어요 (준비 중)')">
+          <span class="ic"><iconify-icon icon="mingcute:folder-zip-fill"></iconify-icon></span>
+          <span class="tx"><div class="n">2026년 증빙 전체.zip</div><div class="s">14개 파일 · 약 28MB</div></span>
+          <span class="dl">받기</span>
+        </div>
+        <div class="file" onclick="toast('엑셀 파일을 내려받았어요 (준비 중)')">
+          <span class="ic"><iconify-icon icon="mingcute:table-2-fill"></iconify-icon></span>
+          <span class="tx"><div class="n">결제 내역 정리.xlsx</div><div class="s">날짜 · 거래처 · 금액 · 유형</div></span>
+          <span class="dl">받기</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="app.js"></script>
+<script>
+function setP(el, k){
+  document.querySelectorAll('.segs span').forEach(function(s){ s.classList.remove('on'); });
+  el.classList.add('on');
+  document.querySelectorAll('.pane').forEach(function(p){ p.classList.remove('on'); });
+  document.getElementById('p-' + k).classList.add('on');
+  document.querySelector('.body').scrollTop = 0;
+}
+function toast(m){
+  var t = document.createElement('div');
+  t.textContent = m;
+  t.style.cssText = "position:absolute;bottom:60px;left:50%;transform:translateX(-50%);background:#191F28;color:#fff;padding:12px 18px;border-radius:24px;font-size:13px;font-weight:600;z-index:30;opacity:0;transition:.2s;white-space:nowrap";
+  document.querySelector('.phone').appendChild(t);
+  requestAnimationFrame(function(){ t.style.opacity = '1'; });
+  setTimeout(function(){ t.style.opacity = '0'; setTimeout(function(){ t.remove(); }, 200); }, 1700);
+}
+(function(){
+  var h = location.hash.replace('#', '');
+  var i = { tax:0, vat:1, doc:2 }[h];
+  if (i !== undefined) setP(document.querySelectorAll('.segs span')[i], h);
+})();
+</script>
+</body>
+</html>

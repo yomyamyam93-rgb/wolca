@@ -66,3 +66,59 @@ iconify-icon{display:inline-block;}
 .footer .f-menu{display:flex; gap:22px; flex-wrap:wrap; margin-bottom:20px;}
 .footer .f-menu a{font-size:14px; font-weight:600; color:var(--sub); text-decoration:none;}
 .footer p{font-size:13px; color:var(--placeholder); line-height:1.8;}
+
+/* CTA 버튼 묶음 (메인 · 이용가이드 공용) */
+.hero-btns{display:flex; gap:12px; justify-content:center; flex-wrap:wrap;}
+.cta-col{display:flex; flex-direction:column; align-items:center; gap:14px; margin-top:40px;}
+.cta-col .btn{width:332px; max-width:100%;}
+.cta-col .storebtns{margin-top:0;}
+.storebtns{display:flex; gap:10px; justify-content:center; margin-top:18px;}
+.storebtn{display:inline-flex; align-items:center; justify-content:center; gap:7px; width:160px; height:50px; border-radius:13px; background:#fff; border:1px solid var(--line); color:var(--ink); font-size:14px; font-weight:700; text-decoration:none; white-space:nowrap;}
+.storebtn iconify-icon{font-size:17px;}
+
+/* 하위 페이지 공용 헤더 (세로 크기 고정) */
+.page-hero{height:400px; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:0 24px;
+  background:linear-gradient(180deg, #E4EDFF 0%, var(--primary-50) 58%, #F7FAFF 100%);}
+.page-hero .p-lg{margin-top:18px;}
+@media(max-width:760px){ .page-hero{height:320px;} }
+
+/* ===== 모션 ===== */
+/* 폰트 로딩 중 글자 튐 방지 + 페이지 진입 */
+html.fonts-loading body{opacity:0;}
+html.fonts-ready body{animation:pageIn .5s cubic-bezier(.2,.7,.2,1) both;}
+@keyframes pageIn{ from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:none;} }
+
+/* 스크롤 등장 */
+.reveal{opacity:0; transform:translateY(24px); transition:opacity .6s ease, transform .6s cubic-bezier(.2,.7,.2,1);}
+.reveal.in{opacity:1; transform:none;}
+
+/* 상호작용 */
+html{scroll-behavior:smooth;}
+.nav-menu a{transition:color .2s;}
+.nav-cta{transition:transform .16s, box-shadow .16s, filter .2s;}
+.nav-cta:hover{transform:translateY(-1px); filter:brightness(1.05);}
+.nav-cta:active{transform:translateY(1px);}
+.logo{transition:opacity .2s;}
+.logo:hover{opacity:.72;}
+.btn{transition:transform .18s cubic-bezier(.2,.7,.2,1), box-shadow .18s, filter .2s;}
+.btn:hover{transform:translateY(-2px); filter:brightness(1.04);}
+.btn:active{transform:translateY(1px);}
+.storebtn{transition:transform .18s cubic-bezier(.2,.7,.2,1), border-color .2s, box-shadow .18s;}
+.storebtn:hover{transform:translateY(-2px); border-color:var(--border); box-shadow:0 8px 18px -10px rgba(25,31,40,.5);}
+.footer .f-menu a{transition:color .2s;}
+.footer .f-menu a:hover{color:var(--ink);}
+.drawer a{transition:background .2s;}
+
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto;}
+  html.fonts-ready body{animation:none;}
+  .reveal{opacity:1; transform:none; transition:none;}
+  .btn:hover,.storebtn:hover,.nav-cta:hover{transform:none;}
+}
+
+/* 가로 스크롤 방지 — 닫힌 드로어 등 화면 밖 요소가 스크롤을 만들지 않게
+   (overflow:hidden 대신 clip을 써야 상단 고정(sticky)이 안 깨짐) */
+html,body{overflow-x:clip;}
+
+/* #앵커로 이동할 때 상단 고정 메뉴에 가려지지 않게 */
+section[id], header[id], div[id]{scroll-margin-top:88px;}

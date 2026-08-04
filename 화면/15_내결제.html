@@ -15,6 +15,33 @@
     --primary-grad:linear-gradient(180deg, color-mix(in srgb, var(--primary) 82%, #ffffff), var(--primary));
     --btn-shadow:0 4px 12px color-mix(in srgb, var(--primary) 32%, transparent), inset 0 1px 0 rgba(255,255,255,.18);
   }
+
+  /* 진행 중 묶음 — 아래 섹션과 붙지 않게 */
+  #ongoingGroup + .sec-h{margin-top:26px;}
+
+  /* 다가오는 결제 */
+  .upnext{background:#fff; border-radius:18px; padding:18px; margin-bottom:10px; box-shadow:0 1px 3px rgba(0,0,0,.05); cursor:pointer;}
+  .upnext .hd{display:flex; align-items:center; gap:7px; font-size:12.5px; font-weight:700; color:var(--primary-dark);}
+  .upnext .hd iconify-icon{font-size:16px;}
+  .upnext .hd .dday{margin-left:auto; font-size:11.5px; font-weight:800; color:#fff; background:var(--primary); padding:4px 9px; border-radius:7px;}
+  .upnext .nm{font-size:17px; font-weight:800; letter-spacing:-.3px; margin-top:11px;}
+  .upnext .amt{font-size:24px; font-weight:800; letter-spacing:-.7px; margin-top:5px;}
+  .upnext .sub{font-size:12.5px; color:var(--placeholder); margin-top:7px;}
+  .upnext .bar{height:6px; border-radius:3px; background:var(--tile); overflow:hidden; margin-top:14px;}
+  .upnext .bar i{display:block; height:100%; border-radius:3px; background:var(--primary-grad);}
+
+  /* 이번 달 요약 */
+  .mosum{background:#fff; border-radius:18px; padding:18px; margin-bottom:10px; box-shadow:0 1px 3px rgba(0,0,0,.05); cursor:pointer;}
+  .mosum .hd{display:flex; align-items:baseline; justify-content:space-between;}
+  .mosum .hd .t{font-size:13px; color:var(--placeholder);}
+  .mosum .hd .more{font-size:12.5px; font-weight:600; color:var(--placeholder);}
+  .mosum .v{font-size:27px; font-weight:800; letter-spacing:-.8px; margin-top:5px;}
+  .mosum .g{display:flex; margin-top:15px; padding-top:14px; border-top:1px solid var(--line);}
+  .mosum .g > div{flex:1; text-align:center;}
+  .mosum .g > div + div{border-left:1px solid var(--line);}
+  .mosum .gl{font-size:11.5px; color:var(--placeholder);}
+  .mosum .gv{font-size:15px; font-weight:800; margin-top:5px;}
+  .mosum .gv.blue{color:var(--primary-dark);}
 </style>
 <link rel="stylesheet" href="../theme.css">
 <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
@@ -58,9 +85,21 @@
   .lrow .amt{text-align:right; flex:0 0 auto;}
   .lrow .amt .v{font-size:15px; font-weight:700; color:var(--ink);}
   .lrow .amt .d{font-size:11px; font-weight:700; color:var(--success); margin-top:2px;}
+  .lrow .amt .v.off{color:var(--placeholder); text-decoration:line-through;}
+  .lrow.total .t .n{font-size:13px; color:var(--sub); font-weight:600;}
+  .lrow.total .amt .v{color:var(--primary-dark);}
   .tabbar{position:absolute; bottom:0; left:0; right:0; background:#fff; border-top:1px solid var(--line); padding-top:12px;}
   .tabs{display:flex; padding:0 6px;}
   .tab{flex:1; display:flex; flex-direction:column; align-items:center; gap:5px; color:var(--tab-off); font-size:11px; font-weight:500; cursor:pointer;}
+  /* 가운데 결제 버튼 — 큰 원, 글자 없음 */
+  .tab.center{justify-content:center; gap:0;}
+  .fab{width:56px; height:56px; margin-top:-24px; border:none; padding:0; border-radius:50%; pointer-events:none;
+    display:flex; align-items:center; justify-content:center;
+    background:var(--primary); background:var(--primary-grad);
+    box-shadow:0 6px 16px color-mix(in srgb, var(--primary) 45%, transparent), 0 0 0 5px #fff, inset 0 1px 0 rgba(255,255,255,.28);
+    transition:transform .18s;}
+  .tab.center:active .fab{transform:scale(.92);}
+  .fab img{width:29px;}
   .tab iconify-icon{font-size:26px;}
   .tab.on{color:var(--primary); font-weight:700;}
   .home-indicator{width:140px; height:5px; border-radius:3px; background:var(--ink); margin:12px auto 9px;}
@@ -81,6 +120,7 @@
 
   <div class="screen">
 
+    <div id="ongoingGroup">
     <div class="sec-h"><span>진행 중</span><span class="more">2건</span></div>
 
     <div class="card trow" onclick="location.href='11_확인서류안내.html?t=인테리어'">
@@ -91,7 +131,7 @@
       <span class="chip draft">이어하기 ›</span>
     </div>
 
-    <div class="card trow" onclick="toast('결제 상태 상세는 준비 중이에요')">
+    <div class="card trow" onclick="try{sessionStorage.setItem('lp_pay','wait');sessionStorage.setItem('lp_from','pay')}catch(e){}; location.href='23_결제상세.html'">
       <div class="tmain">
         <div class="tt">7월 월세 · 500,000원</div>
         <div class="ts">담당자가 서류 확인 중 · 보통 30분 이내</div>
@@ -101,32 +141,53 @@
 
     <button class="btn-primary" onclick="location.href='10_1_유형선택.html'"><iconify-icon icon="mingcute:add-fill"></iconify-icon>새 결제 등록하기</button>
 
-    <div class="sec-h"><span>매달 고정으로 나가요</span><span class="more">65만원 / 월</span></div>
-    <div class="card fixed" onclick="toast('예약 결제 관리는 준비 중이에요')">
-      <div class="label">이번 달 예정 금액</div>
-      <div class="bigval">65만원</div>
-    </div>
-    <div class="card list-card" onclick="toast('예약 결제 관리는 준비 중이에요')">
-      <div class="lrow"><div class="t"><div class="n">월세</div><div class="s">매월 25일 자동 결제</div></div><div class="amt"><div class="v">500,000원</div></div></div>
-      <div class="lrow"><div class="t"><div class="n">관리비</div><div class="s">매월 1일 자동 결제</div></div><div class="amt"><div class="v">150,000원</div></div></div>
     </div>
 
-    <div class="sec-h"><span>지난 결제 내역</span><span class="more">전체보기</span></div>
-    <div class="card list-card" onclick="toast('결제 내역은 준비 중이에요')">
-      <div class="lrow"><div class="t"><div class="n">6월 월세</div><div class="s">6월 25일 · 삼성카드</div></div><div class="amt"><div class="v">500,000원</div><div class="d">입금 완료</div></div></div>
-      <div class="lrow"><div class="t"><div class="n">복비</div><div class="s">6월 12일 · 삼성카드</div></div><div class="amt"><div class="v">300,000원</div><div class="d">입금 완료</div></div></div>
-      <div class="lrow"><div class="t"><div class="n">5월 월세</div><div class="s">5월 25일 · 삼성카드</div></div><div class="amt"><div class="v">500,000원</div><div class="d">입금 완료</div></div></div>
+    <div class="sec-h"><span>예약 결제</span><span class="more" onclick="location.href='22_예약결제.html'">예약 관리 ›</span></div>
+
+    <div class="upnext" onclick="location.href='22_예약결제.html'">
+      <div class="hd"><iconify-icon icon="mingcute:alarm-2-fill"></iconify-icon>다가오는 결제<span class="dday" id="ddDay">D-21</span></div>
+      <div class="nm" id="ddNm">월세 · 대성부동산</div>
+      <div class="amt" id="ddAmt">500,000원</div>
+      <div class="sub" id="ddSub">8월 25일 · 삼성카드 3개월 무이자로 자동 결제</div>
+      <div class="bar"><i id="ddBar" style="width:30%"></i></div>
+    </div>
+
+    <div class="card list-card" id="rsvList" onclick="location.href='22_예약결제.html'">
+      <div class="lrow"><div class="t"><div class="n">월세</div><div class="s">매월 25일 자동 결제 · 21일 뒤</div></div><div class="amt"><div class="v">500,000원</div></div></div>
+      <div class="lrow"><div class="t"><div class="n">관리비</div><div class="s">매월 1일 자동 결제 · 28일 뒤</div></div><div class="amt"><div class="v">150,000원</div></div></div>
+      <div class="lrow"><div class="t"><div class="n">학원비</div><div class="s">말일 자동 결제 · 일시정지</div></div><div class="amt"><div class="v off">380,000원</div></div></div>
+      <div class="lrow total"><div class="t"><div class="n">이번 달 예정 합계</div><div class="s">일시정지 1건 제외</div></div><div class="amt"><div class="v" id="rsvTot">650,000원</div></div></div>
+    </div>
+
+    <div class="sec-h"><span>결제 내역</span><span class="more" onclick="location.href='24_결제내역.html'">전체보기 ›</span></div>
+
+    <div class="mosum" onclick="location.href='24_결제내역.html'">
+      <div class="hd"><span class="t" id="msT">8월에 카드로 낸 돈</span></div>
+      <div class="v" id="msV">650,000원</div>
+      <div class="g">
+        <div><div class="gl">결제 건수</div><div class="gv" id="msG1">2건</div></div>
+        <div><div class="gl" id="msL2">쌓인 마일리지</div><div class="gv blue" id="msG2">+2,600M</div></div>
+        <div><div class="gl" id="msL3">공제 대상</div><div class="gv" id="msG3">65만원</div></div>
+      </div>
+    </div>
+
+
+    <div class="card list-card" id="histList" onclick="location.href='24_결제내역.html'">
+      <div class="lrow"><div class="t"><div class="n">6월 월세</div><div class="s">6월 25일 · 삼성카드</div></div><div class="amt"><div class="v">500,000원</div><div class="d">처리 완료</div></div></div>
+      <div class="lrow"><div class="t"><div class="n">복비</div><div class="s">6월 12일 · 삼성카드</div></div><div class="amt"><div class="v">300,000원</div><div class="d">처리 완료</div></div></div>
+      <div class="lrow"><div class="t"><div class="n">5월 월세</div><div class="s">5월 25일 · 삼성카드</div></div><div class="amt"><div class="v">500,000원</div><div class="d">처리 완료</div></div></div>
     </div>
 
   </div>
 
   <div class="tabbar">
     <div class="tabs">
-      <div class="tab" onclick="location.href='9_홈_개인.html'"><iconify-icon icon="mingcute:home-4-fill"></iconify-icon><span>홈</span></div>
-      <div class="tab on"><iconify-icon icon="mingcute:bill-fill"></iconify-icon><span>내 결제</span></div>
-      <div class="tab" onclick="location.href='10_1_유형선택.html'"><iconify-icon icon="mingcute:bank-card-fill"></iconify-icon><span>결제</span></div>
-      <div class="tab" onclick="toast('환급은 준비 중이에요')"><iconify-icon icon="mingcute:wallet-4-fill"></iconify-icon><span>환급</span></div>
-      <div class="tab" onclick="toast('내 정보는 준비 중이에요')"><iconify-icon icon="mingcute:user-3-fill"></iconify-icon><span>내 정보</span></div>
+      <div class="tab" id="homeTab" onclick="location.href='9_홈_개인.html'"><iconify-icon icon="mingcute:home-4-fill"></iconify-icon><span>홈</span></div>
+      <div class="tab on" onclick="location.href='15_내결제.html'"><iconify-icon icon="mingcute:bill-fill"></iconify-icon><span>내 결제</span></div>
+      <div class="tab center" onclick="location.href='10_1_유형선택.html'" aria-label="결제하기"><button class="fab"><img src="../img/logo-mark-white.png" alt="결제하기"></button></div>
+      <div class="tab" id="benTab" onclick="location.href='19_혜택.html'"><iconify-icon icon="mingcute:gift-fill"></iconify-icon><span>혜택</span></div>
+      <div class="tab" id="moreTab" onclick="location.href='21_더보기.html'"><iconify-icon icon="mingcute:menu-fill"></iconify-icon><span>더보기</span></div>
     </div>
     <div class="home-indicator"></div>
   </div>
@@ -142,5 +203,60 @@ function toast(msg){
 }
 </script>
 <script src="app.js"></script>
+<script>
+/* 로그인 유형 유지 */
+(function(){
+  var biz = (function(){try{if(sessionStorage.getItem('lp_type')==='biz')return true;}catch(e){} return new URLSearchParams(location.search).get('type')==='biz';})();
+  if(!biz) return;
+  document.getElementById('homeTab').setAttribute('onclick', "location.href='9_홈_사업자.html'");
+  document.getElementById('benTab').setAttribute('onclick', "location.href='19_혜택.html?type=biz'");
+  document.getElementById('moreTab').setAttribute('onclick', "location.href='21_더보기.html?type=biz'");
+  var back = document.querySelector('.topbar .back');
+  if(back) back.setAttribute('onclick', "location.href='9_홈_사업자.html'");
+})();
+</script>
+
+<script>
+/* 사업자로 로그인했으면 숫자를 사업자 기준으로 */
+(function(){
+  var biz = (function(){try{if(sessionStorage.getItem('lp_type')==='biz')return true;}catch(e){} return new URLSearchParams(location.search).get('type')==='biz';})();
+  if (!biz) return;
+  document.getElementById('ddDay').textContent = 'D-6';
+  document.getElementById('ddNm').textContent = '직원 급여 · 김직원';
+  document.getElementById('ddAmt').textContent = '1,200,000원';
+  document.getElementById('ddSub').textContent = '8월 10일 · 현대카드 3개월 무이자로 자동 결제';
+  document.getElementById('ddBar').style.width = '80%';
+  document.getElementById('msT').textContent = '8월 결제액';
+  document.getElementById('msV').textContent = '18,420,000원';
+  document.getElementById('msG1').textContent = '14건';
+  document.getElementById('msL2').textContent = '수수료';
+  document.getElementById('msG2').textContent = '736,800원';
+  document.getElementById('msL3').textContent = '매입세액공제';
+  document.getElementById('msG3').textContent = '67,000원';
+
+  /* 예약 결제 목록 — 사업자 */
+  document.getElementById('rsvList').innerHTML =
+    row('직원 급여 · 3명', '매월 10일 자동 결제 · 6일 뒤', '3,600,000원') +
+    row('사무실 임대료', '매월 25일 자동 결제 · 21일 뒤', '1,800,000원') +
+    row('원자재 매입대금', '매월 말일 자동 결제 · 일시정지', '4,200,000원', true) +
+    '<div class="lrow total"><div class="t"><div class="n">이번 달 예정 합계</div><div class="s">일시정지 1건 제외</div></div>' +
+    '<div class="amt"><div class="v">5,400,000원</div></div></div>';
+
+  /* 결제 내역 — 사업자 */
+  document.getElementById('histList').innerHTML =
+    hrow('7월 직원 급여', '7월 10일 · 현대카드', '3,600,000원') +
+    hrow('7월 사무실 임대료', '7월 25일 · 현대카드', '1,800,000원') +
+    hrow('원자재 매입대금', '7월 31일 · 삼성카드', '4,200,000원');
+
+  function row(n, s, v, off){
+    return '<div class="lrow"><div class="t"><div class="n">'+n+'</div><div class="s">'+s+'</div></div>' +
+      '<div class="amt"><div class="v'+(off?' off':'')+'">'+v+'</div></div></div>';
+  }
+  function hrow(n, s, v){
+    return '<div class="lrow"><div class="t"><div class="n">'+n+'</div><div class="s">'+s+'</div></div>' +
+      '<div class="amt"><div class="v">'+v+'</div><div class="d">처리 완료</div></div></div>';
+  }
+})();
+</script>
 </body>
 </html>

@@ -1,0 +1,8 @@
+# 디자인 원본 (사이트에서 쓰지 않음, 용량 큼)
+*.psd
+
+# 이벤트 이미지 원본 (실제로 쓰는 건 ev-*.jpg)
+img/이벤트/GettyImages-*.jpg
+img/이벤트/ChatGPT Image *.png
+img/이벤트/이벤트종료.jpg
+img/이벤트/이벤트포인트.jpg

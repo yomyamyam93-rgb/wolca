@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>랜선페이 — 일괄 송금</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="screen.css">
+<style>
+  .pick{display:flex; align-items:center; gap:12px; background:var(--card); border-radius:16px; padding:14px 15px; margin-bottom:9px;
+    box-shadow:0 1px 3px rgba(0,0,0,.05); cursor:pointer; border:1.5px solid transparent; transition:.2s;}
+  .pick.on{border-color:var(--primary); background:var(--primary-50);}
+  .pick .chk{width:23px; height:23px; flex:0 0 auto; border-radius:50%; border:1.5px solid var(--icon-off); background:#fff;
+    display:flex; align-items:center; justify-content:center; transition:.2s;}
+  .pick .chk iconify-icon{font-size:14px; color:#fff;}
+  .pick.on .chk{background:var(--primary); border-color:var(--primary);}
+  .pick .tx{flex:1; min-width:0;}
+  .pick .nm{font-size:14.5px; font-weight:700;}
+  .pick .ac{font-size:12px; color:var(--placeholder); margin-top:3px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+  .pick .amt{flex:0 0 108px;}
+  .pick .amt input{width:100%; height:40px; border:1.5px solid var(--line); border-radius:10px; padding:0 10px;
+    font-family:inherit; font-size:13.5px; font-weight:700; text-align:right; background:#fff;}
+  .pick .amt input:focus{outline:none; border-color:var(--primary);}
+  .allrow{display:flex; align-items:center; gap:10px; padding:6px 4px 14px; font-size:13.5px; font-weight:700; color:var(--sub); cursor:pointer;}
+  .allrow .chk{width:22px; height:22px; border-radius:50%; border:1.5px solid var(--icon-off); background:#fff;
+    display:flex; align-items:center; justify-content:center;}
+  .allrow .chk iconify-icon{font-size:13px; color:#fff;}
+  .allrow.on .chk{background:var(--primary); border-color:var(--primary);}
+  .sumbar{position:absolute; left:0; right:0; bottom:96px; padding:12px 20px; background:rgba(255,255,255,.96);
+    backdrop-filter:blur(8px); border-top:1px solid var(--line); display:flex; align-items:baseline; justify-content:space-between;}
+  .sumbar .l{font-size:13px; color:var(--sub);}
+  .sumbar .v{font-size:19px; font-weight:800; letter-spacing:-.4px;}
+</style>
+<script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+</head>
+<body>
+<div class="phone">
+  <div class="statusbar"><span class="time">9:41</span><span class="stat">
+    <svg width="18" height="12" viewBox="0 0 18 12"><rect y="8" width="3" height="4" rx="1" fill="#191F28"/><rect x="5" y="5" width="3" height="7" rx="1" fill="#191F28"/><rect x="10" y="2.5" width="3" height="9.5" rx="1" fill="#191F28"/><rect x="15" width="3" height="12" rx="1" fill="#191F28"/></svg>
+    <svg width="26" height="13" viewBox="0 0 26 13"><rect x=".5" y=".5" width="22" height="12" rx="3.5" fill="none" stroke="#191F28" stroke-opacity=".35"/><rect x="2.5" y="2.5" width="16" height="8" rx="1.8" fill="#191F28"/><rect x="24" y="4.5" width="1.6" height="4" rx=".8" fill="#191F28" fill-opacity=".35"/></svg>
+  </span></div>
+
+  <div class="topbar"><div class="back" onclick="lpBack('20_정산.html')">‹</div><div class="ttl">일괄 송금</div></div>
+
+  <div class="body" style="padding-bottom:170px">
+    <div class="sec-s">여러 곳에 <b>한 번에</b> 보낼 수 있어요. 급여일처럼 같은 날 나가는 돈에 편해요.</div>
+
+    <div class="allrow on" id="allRow" onclick="toggleAll()">
+      <span class="chk"><iconify-icon icon="mingcute:check-fill"></iconify-icon></span>
+      전체 선택 <span style="color:var(--placeholder); font-weight:600" id="pickCnt">(3 / 3)</span>
+    </div>
+
+    <div id="list">
+      <div class="pick on" onclick="tg(this, event)">
+        <span class="chk"><iconify-icon icon="mingcute:check-fill"></iconify-icon></span>
+        <span class="tx"><div class="nm">김직원</div><div class="ac">신한 110-234-567890</div></span>
+        <span class="amt"><input inputmode="numeric" value="2,400,000" oninput="sum()"></span>
+      </div>
+      <div class="pick on" onclick="tg(this, event)">
+        <span class="chk"><iconify-icon icon="mingcute:check-fill"></iconify-icon></span>
+        <span class="tx"><div class="nm">이알바</div><div class="ac">국민 123-45-678901</div></span>
+        <span class="amt"><input inputmode="numeric" value="860,000" oninput="sum()"></span>
+      </div>
+      <div class="pick on" onclick="tg(this, event)">
+        <span class="chk"><iconify-icon icon="mingcute:check-fill"></iconify-icon></span>
+        <span class="tx"><div class="nm">박프리랜서</div><div class="ac">토스 1000-1234-5678</div></span>
+        <span class="amt"><input inputmode="numeric" value="1,500,000" oninput="sum()"></span>
+      </div>
+    </div>
+
+    <div class="addline" onclick="location.href='34_거래처.html'">
+      <iconify-icon icon="mingcute:add-fill"></iconify-icon>거래처에서 불러오기
+    </div>
+
+    <div class="sec-t">결제 카드</div>
+    <div class="box">
+      <div class="row" onclick="location.href='25_카드관리.html'">
+        <span class="ic"><iconify-icon icon="mingcute:bank-card-fill"></iconify-icon></span>
+        <span class="tx"><div class="t">현대 the Green</div><div class="s">•••• 3092 · 3개월 무이자</div></span>
+        <iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon>
+      </div>
+    </div>
+
+    <div class="note">
+      <iconify-icon icon="mingcute:information-fill"></iconify-icon>
+      <div>사람마다 <b>증빙 서류</b>가 따로 필요해요. 다음 단계에서 한 번에 올릴 수 있습니다.<br>인건비는 받는 사람 <b>본인 명의 계좌</b>로만 보낼 수 있어요.</div>
+    </div>
+  </div>
+
+  <div class="sumbar">
+    <span class="l">선택 <b id="cnt">3</b>건 · 수수료 <span id="fee">190,400원</span></span>
+    <span class="v" id="tot">4,950,400원</span>
+  </div>
+
+  <div class="footer">
+    <button class="btn" onclick="next()"><iconify-icon icon="mingcute:send-plane-fill"></iconify-icon>서류 첨부하고 결제하기</button>
+  </div>
+</div>
+<script src="app.js"></script>
+<script>
+function tg(el, e){
+  if (e && e.target.tagName === 'INPUT') return;   /* 금액 입력은 선택 토글 제외 */
+  el.classList.toggle('on');
+  sum();
+}
+function toggleAll(){
+  var row = document.getElementById('allRow');
+  var to = !row.classList.contains('on');
+  row.classList.toggle('on', to);
+  document.querySelectorAll('.pick').forEach(function(p){ p.classList.toggle('on', to); });
+  sum();
+}
+function sum(){
+  var picks = [].slice.call(document.querySelectorAll('.pick'));
+  var on = picks.filter(function(p){ return p.classList.contains('on'); });
+  var total = 0;
+  on.forEach(function(p){
+    var v = parseInt(p.querySelector('input').value.replace(/[^0-9]/g, '') || '0', 10);
+    total += v;
+  });
+  var fee = Math.round(total * 0.04);
+  document.getElementById('cnt').textContent = on.length;
+  document.getElementById('fee').textContent = fee.toLocaleString('ko-KR') + '원';
+  document.getElementById('tot').textContent = (total + fee).toLocaleString('ko-KR') + '원';
+  document.getElementById('pickCnt').textContent = '(' + on.length + ' / ' + picks.length + ')';
+  document.getElementById('allRow').classList.toggle('on', on.length === picks.length);
+}
+function next(){
+  var on = document.querySelectorAll('.pick.on').length;
+  if (!on) { alert('보낼 곳을 하나 이상 선택해주세요.'); return; }
+  location.href = '11_확인서류안내.html';
+}
+sum();
+</script>
+</body>
+</html>

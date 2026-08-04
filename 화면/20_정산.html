@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>랜선페이 — 정산</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+  :root{
+    --primary:#2563EB; --primary-dark:#1D4ED8; --primary-50:#EFF4FF; --primary-100:#DBE7FF;
+    --page-bg:#c9cdd4; --bg:#F4F5F6; --card:#FFFFFF; --line:#ECEEF1; --border:#B1B8BE;
+    --tile:#EEF1F4; --icon-off:#B0B8C1;
+    --sub:#4E5968; --ink:#191F28; --placeholder:#8B95A1; --tab-off:#8B95A1;
+    --success:#059669; --success-bg:#EAF7F0;
+    --primary-grad:linear-gradient(180deg, color-mix(in srgb, var(--primary) 82%, #ffffff), var(--primary));
+    --btn-shadow:0 4px 12px color-mix(in srgb, var(--primary) 32%, transparent), inset 0 1px 0 rgba(255,255,255,.18);
+  }
+  *{box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent;}
+  body{font-family:'Pretendard',-apple-system,sans-serif; color:var(--ink); background:var(--page-bg);
+       display:flex; justify-content:center; align-items:flex-start; padding:24px 0; line-height:1.5; -webkit-font-smoothing:antialiased;}
+  .phone{width:390px; height:844px; max-width:100%; background:var(--bg); position:relative; display:flex; flex-direction:column;
+         border-radius:46px; overflow:hidden; box-shadow:0 16px 50px rgba(0,0,0,.28);}
+  iconify-icon{display:inline-block;}
+  .statusbar{height:47px; display:flex; align-items:center; justify-content:space-between; padding:0 24px 0 30px; background:var(--bg); flex:0 0 auto;}
+  .statusbar .time{font-size:15px; font-weight:700;}
+  .statusbar .stat{display:flex; align-items:center; gap:7px;}
+  .topbar{height:54px; display:flex; align-items:center; padding:0 10px; background:var(--bg); flex:0 0 auto;}
+  .topbar .back{width:44px; height:44px; display:flex; align-items:center; justify-content:center; font-size:24px; color:var(--ink); cursor:pointer;}
+  .topbar .ttl2{flex:1; text-align:center; font-size:17px; font-weight:700; margin-right:44px;}
+
+  .body{flex:1; overflow-y:auto; padding:6px 20px 120px; scrollbar-width:none;}
+  .body::-webkit-scrollbar{display:none;}
+  .sec-t{font-size:15px; font-weight:700; margin:26px 2px 12px; display:flex; align-items:center; justify-content:space-between;}
+  .sec-t .more{font-size:13px; font-weight:600; color:var(--placeholder);}
+
+  /* 이번 달 요약 */
+  .sum{background:var(--card); border-radius:20px; padding:22px; box-shadow:0 1px 3px rgba(0,0,0,.04);}
+  .sum .mo{font-size:13px; color:var(--placeholder);}
+  .sum .v{font-size:31px; font-weight:800; letter-spacing:-.9px; margin-top:5px;}
+  .sum .sub2{font-size:12.5px; color:var(--sub); margin-top:7px;}
+  .sum .grid{display:flex; margin-top:18px; padding-top:16px; border-top:1px solid var(--line);}
+  .sum .g{flex:1; text-align:center;}
+  .sum .g+.g{border-left:1px solid var(--line);}
+  .sum .g .gl{font-size:11.5px; color:var(--placeholder);}
+  .sum .g .gv{font-size:16px; font-weight:800; margin-top:5px;}
+  .sum .g .gv.blue{color:var(--primary-dark);}
+
+  /* 세금 */
+  .taxbox{background:var(--card); border-radius:18px; padding:6px 16px; box-shadow:0 1px 3px rgba(0,0,0,.04);}
+  .trow{display:flex; align-items:center; gap:12px; padding:15px 0; cursor:pointer;}
+  .trow+.trow{border-top:1px solid var(--line);}
+  .trow .ic{width:38px; height:38px; flex:0 0 auto; border-radius:12px; background:var(--primary-50); display:flex; align-items:center; justify-content:center;}
+  .trow .ic iconify-icon{font-size:20px; color:var(--primary);}
+  .trow .tx{flex:1; min-width:0;}
+  .trow .t{font-size:14.5px; font-weight:700;}
+  .trow .s{font-size:12px; color:var(--placeholder); margin-top:3px;}
+  .trow .gv{color:var(--icon-off); font-size:18px;}
+  .trow .st{font-size:11px; font-weight:800; color:var(--success); background:var(--success-bg); padding:4px 8px; border-radius:7px;}
+
+  /* 거래처 */
+  .biz{display:flex; align-items:center; gap:12px; background:var(--card); border-radius:16px; padding:15px; margin-bottom:9px;
+       box-shadow:0 1px 3px rgba(0,0,0,.04); cursor:pointer;}
+  .biz .av{width:42px; height:42px; flex:0 0 auto; border-radius:14px; background:var(--primary-50); color:var(--primary-dark);
+       display:flex; align-items:center; justify-content:center; font-size:15px; font-weight:800;}
+  .biz .tx{flex:1; min-width:0;}
+  .biz .nm{font-size:14.5px; font-weight:700;}
+  .biz .ac{font-size:12px; color:var(--placeholder); margin-top:3px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+  .biz .amt{font-size:13.5px; font-weight:700; text-align:right; white-space:nowrap;}
+  .biz .amt small{display:block; font-size:11px; color:var(--placeholder); font-weight:500; margin-top:3px;}
+  .addbiz{display:flex; align-items:center; justify-content:center; gap:7px; height:50px; border:1.5px dashed #C9D3E0;
+       border-radius:15px; background:#FAFBFD; font-size:14px; font-weight:700; color:var(--sub); cursor:pointer;}
+  .addbiz iconify-icon{font-size:17px; color:var(--primary);}
+
+  /* 빠른 기능 2열 */
+  .quick{display:grid; grid-template-columns:1fr 1fr; gap:9px;}
+  .q{background:var(--card); border-radius:16px; padding:17px 15px; box-shadow:0 1px 3px rgba(0,0,0,.04); cursor:pointer;}
+  .q iconify-icon{font-size:23px; color:var(--primary);}
+  .q .t{font-size:14px; font-weight:700; margin-top:10px;}
+  .q .s{font-size:11.5px; color:var(--placeholder); margin-top:4px; line-height:1.5;}
+
+  /* 지출 리포트 */
+  .rep{background:var(--card); border-radius:18px; padding:20px; box-shadow:0 1px 3px rgba(0,0,0,.04);}
+  .bar{display:flex; align-items:center; gap:10px; margin-bottom:13px;}
+  .bar .bl{font-size:12.5px; color:var(--sub); width:70px; flex:0 0 auto;}
+  .bar .bg{flex:1; height:9px; border-radius:5px; background:var(--tile); overflow:hidden;}
+  .bar .bg i{display:block; height:100%; border-radius:5px; background:var(--primary-grad);}
+  .bar .bv{font-size:12.5px; font-weight:700; width:78px; text-align:right; flex:0 0 auto;}
+  .rep button{width:100%; height:46px; margin-top:8px; border:1.5px solid var(--border); border-radius:13px; background:#fff;
+       font-family:inherit; font-size:14px; font-weight:700; color:var(--sub); cursor:pointer;}
+
+  /* 탭바 */
+  .tabbar{position:absolute; bottom:0; left:0; right:0; background:#fff; border-top:1px solid var(--line); padding-top:12px;}
+  .tabs{display:flex; padding:0 6px;}
+  .tab{flex:1; display:flex; flex-direction:column; align-items:center; gap:5px; color:var(--tab-off); font-size:11px; font-weight:500; cursor:pointer;}
+  .tab iconify-icon{font-size:23px;}
+  .tab.on{color:var(--primary); font-weight:700;}
+  /* 가운데 결제 버튼 — 큰 원, 글자 없음 */
+  .tab.center{justify-content:center; gap:0;}
+  .fab{width:56px; height:56px; margin-top:-24px; border:none; padding:0; border-radius:50%; pointer-events:none;
+    display:flex; align-items:center; justify-content:center;
+    background:var(--primary); background:var(--primary-grad);
+    box-shadow:0 6px 16px color-mix(in srgb, var(--primary) 45%, transparent), 0 0 0 5px #fff, inset 0 1px 0 rgba(255,255,255,.28);
+    transition:transform .18s;}
+  .tab.center:active .fab{transform:scale(.92);}
+  .fab img{width:29px;}
+  .home-indicator{margin:10px auto 8px; width:134px; height:5px; border-radius:3px; background:var(--ink);}
+</style>
+<script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+</head>
+<body>
+<div class="phone">
+  <div class="statusbar"><span class="time">9:41</span><span class="stat">
+    <svg width="18" height="12" viewBox="0 0 18 12"><rect y="8" width="3" height="4" rx="1" fill="#191F28"/><rect x="5" y="5" width="3" height="7" rx="1" fill="#191F28"/><rect x="10" y="2.5" width="3" height="9.5" rx="1" fill="#191F28"/><rect x="15" width="3" height="12" rx="1" fill="#191F28"/></svg>
+    <svg width="17" height="12" viewBox="0 0 17 12"><path d="M8.5 2C11 2 13.3 3 15 4.7l-1.3 1.4C12.3 4.7 10.5 4 8.5 4S4.7 4.7 3.3 6.1L2 4.7C3.7 3 6 2 8.5 2z" fill="#191F28"/><circle cx="8.5" cy="10" r="1.3" fill="#191F28"/></svg>
+    <svg width="26" height="13" viewBox="0 0 26 13"><rect x=".5" y=".5" width="22" height="12" rx="3.5" fill="none" stroke="#191F28" stroke-opacity=".35"/><rect x="2.5" y="2.5" width="16" height="8" rx="1.8" fill="#191F28"/><rect x="24" y="4.5" width="1.6" height="4" rx=".8" fill="#191F28" fill-opacity=".35"/></svg>
+  </span></div>
+  <div class="topbar"><div class="back" onclick="lpBack('21_더보기.html')">‹</div><div class="ttl2">정산</div></div>
+
+  <div class="body">
+
+    <!-- 이번 달 요약 -->
+    <div class="sum">
+      <div class="mo">2026년 8월 결제액</div>
+      <div class="v">18,420,000원</div>
+      <div class="sub2">지난달보다 2,150,000원 늘었어요</div>
+      <div class="grid">
+        <div class="g"><div class="gl">건수</div><div class="gv">14건</div></div>
+        <div class="g"><div class="gl">수수료</div><div class="gv">736,800원</div></div>
+        <div class="g"><div class="gl">매입세액공제</div><div class="gv blue">67,000원</div></div>
+      </div>
+    </div>
+
+    <!-- 세금 -->
+    <div class="sec-t">세금 자료</div>
+    <div class="taxbox">
+      <div class="trow" onclick="location.href='36_세금자료.html'">
+        <span class="ic"><iconify-icon icon="mingcute:file-certificate-fill"></iconify-icon></span>
+        <span class="tx"><div class="t">세금계산서</div><div class="s">8월분 수수료 736,800원</div></span>
+        <span class="st">발행 완료</span>
+      </div>
+      <div class="trow" onclick="location.href='36_세금자료.html#vat'">
+        <span class="ic"><iconify-icon icon="mingcute:receive-money-fill"></iconify-icon></span>
+        <span class="tx"><div class="t">부가세 신고 자료</div><div class="s">매입세액공제 대상 내역 정리</div></span>
+        <iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon>
+      </div>
+      <div class="trow" onclick="location.href='36_세금자료.html#doc'">
+        <span class="ic"><iconify-icon icon="mingcute:folder-fill"></iconify-icon></span>
+        <span class="tx"><div class="t">제출 증빙 모아보기</div><div class="s">올린 계약서 · 거래명세서 14건</div></span>
+        <iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon>
+      </div>
+    </div>
+
+    <!-- 빠른 기능 -->
+    <div class="sec-t">자주 쓰는 기능</div>
+    <div class="quick">
+      <div class="q" onclick="location.href='33_결제요청.html'">
+        <iconify-icon icon="mingcute:send-plane-fill"></iconify-icon>
+        <div class="t">결제 요청</div><div class="s">거래처에 링크를 보내<br>대신 결제받기</div>
+      </div>
+      <div class="q" onclick="location.href='35_일괄송금.html'">
+        <iconify-icon icon="mingcute:layer-fill"></iconify-icon>
+        <div class="t">일괄 송금</div><div class="s">급여일에 여러 명<br>한 번에 보내기</div>
+      </div>
+      <div class="q" onclick="location.href='22_예약결제.html'">
+        <iconify-icon icon="mingcute:calendar-month-fill"></iconify-icon>
+        <div class="t">예약 결제</div><div class="s">매달 같은 날<br>자동으로 결제</div>
+      </div>
+      <div class="q" onclick="location.href='37_한도.html'">
+        <iconify-icon icon="mingcute:chart-bar-fill"></iconify-icon>
+        <div class="t">이용 한도</div><div class="s">이번 달 남은 한도<br>3,580만원</div>
+      </div>
+    </div>
+
+    <!-- 거래처 -->
+    <div class="sec-t">자주 보내는 곳 <span class="more" onclick="location.href='34_거래처.html'">전체 보기 ›</span></div>
+    <div class="biz" onclick="location.href='34_거래처.html'">
+      <span class="av">대성</span>
+      <span class="tx"><div class="nm">대성부동산</div><div class="ac">KB국민 123456-78-901234</div></span>
+      <span class="amt">1,200,000원<small>매달 25일</small></span>
+    </div>
+    <div class="biz" onclick="location.href='34_거래처.html'">
+      <span class="av">한빛</span>
+      <span class="tx"><div class="nm">한빛식자재</div><div class="ac">기업 302-1122-3344</div></span>
+      <span class="amt">4,350,000원<small>지난주</small></span>
+    </div>
+    <div class="biz" onclick="location.href='34_거래처.html'">
+      <span class="av">김직</span>
+      <span class="tx"><div class="nm">김직원 (급여)</div><div class="ac">신한 110-234-567890</div></span>
+      <span class="amt">2,400,000원<small>매달 10일</small></span>
+    </div>
+    <div class="addbiz" onclick="location.href='34_거래처.html'">
+      <iconify-icon icon="mingcute:add-fill"></iconify-icon>거래처 등록하기
+    </div>
+
+    <!-- 지출 리포트 -->
+    <div class="sec-t">이번 달 지출</div>
+    <div class="rep">
+      <div class="bar"><span class="bl">매입대금</span><span class="bg"><i style="width:72%"></i></span><span class="bv">9,800,000</span></div>
+      <div class="bar"><span class="bl">인건비</span><span class="bg"><i style="width:44%"></i></span><span class="bv">4,800,000</span></div>
+      <div class="bar"><span class="bl">임대료</span><span class="bg"><i style="width:22%"></i></span><span class="bv">2,400,000</span></div>
+      <div class="bar"><span class="bl">기타</span><span class="bg"><i style="width:13%"></i></span><span class="bv">1,420,000</span></div>
+      <button onclick="location.href='36_세금자료.html#doc'">엑셀로 내려받기</button>
+    </div>
+
+  </div>
+
+  <div class="tabbar">
+    <div class="tabs">
+      <div class="tab" onclick="location.href='9_홈_사업자.html'"><iconify-icon icon="mingcute:home-4-fill"></iconify-icon><span>홈</span></div>
+      <div class="tab" onclick="location.href='15_내결제.html'"><iconify-icon icon="mingcute:bill-fill"></iconify-icon><span>내 결제</span></div>
+      <div class="tab center" onclick="location.href='10_1_유형선택.html'" aria-label="결제하기"><button class="fab"><img src="../img/logo-mark-white.png" alt="결제하기"></button></div>
+      <div class="tab" onclick="location.href='19_혜택.html'"><iconify-icon icon="mingcute:gift-fill"></iconify-icon><span>혜택</span></div>
+      <div class="tab on" onclick="location.href='21_더보기.html'"><iconify-icon icon="mingcute:menu-fill"></iconify-icon><span>더보기</span></div>
+    </div>
+    <div class="home-indicator"></div>
+  </div>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

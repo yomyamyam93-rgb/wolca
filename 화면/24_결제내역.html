@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>랜선페이 — 결제 내역</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+  :root{
+    --primary:#2563EB; --primary-dark:#1D4ED8; --primary-50:#EFF4FF; --primary-100:#DBE7FF;
+    --page-bg:#c9cdd4; --bg:#F4F5F6; --card:#FFFFFF; --line:#ECEEF1; --border:#B1B8BE;
+    --tile:#EEF1F4; --icon-off:#B0B8C1;
+    --sub:#4E5968; --ink:#191F28; --placeholder:#8B95A1;
+    --success:#059669; --success-bg:#EAF7F0; --warn:#B45309; --warn-bg:#FFF7ED; --danger:#DC2626; --danger-bg:#FEECEC;
+    --primary-grad:linear-gradient(180deg, color-mix(in srgb, var(--primary) 82%, #ffffff), var(--primary));
+  }
+  *{box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent;}
+  body{font-family:'Pretendard',-apple-system,sans-serif; color:var(--ink); background:var(--page-bg);
+       display:flex; justify-content:center; align-items:flex-start; padding:24px 0; line-height:1.5; -webkit-font-smoothing:antialiased;}
+  .phone{width:390px; height:844px; max-width:100%; background:var(--bg); position:relative; display:flex; flex-direction:column;
+         border-radius:46px; overflow:hidden; box-shadow:0 16px 50px rgba(0,0,0,.28);}
+  iconify-icon{display:inline-block;}
+  .statusbar{height:47px; display:flex; align-items:center; justify-content:space-between; padding:0 24px 0 30px; background:var(--bg); flex:0 0 auto;}
+  .statusbar .time{font-size:15px; font-weight:700;}
+  .statusbar .stat{display:flex; align-items:center; gap:7px;}
+  .topbar{height:54px; display:flex; align-items:center; padding:0 10px; background:var(--bg); flex:0 0 auto;}
+  .topbar .back{width:44px; height:44px; display:flex; align-items:center; justify-content:center; font-size:24px; color:var(--ink); cursor:pointer;}
+  .topbar .ttl{flex:1; text-align:center; font-size:17px; font-weight:700;}
+  .topbar .act{width:44px; height:44px; display:flex; align-items:center; justify-content:center; font-size:21px; color:var(--sub); cursor:pointer;}
+
+  /* 필터 */
+  .filters{display:flex; gap:7px; padding:4px 20px 14px; background:var(--bg); flex:0 0 auto; overflow-x:auto; scrollbar-width:none;}
+  .filters::-webkit-scrollbar{display:none;}
+  .fchip{flex:0 0 auto; padding:9px 15px; border-radius:999px; border:1px solid var(--line); background:#fff;
+    font-size:13px; font-weight:700; color:var(--sub); cursor:pointer; white-space:nowrap; transition:.2s;}
+  .fchip.on{background:var(--ink); border-color:var(--ink); color:#fff;}
+
+  .body{flex:1; overflow-y:auto; padding:0 20px 40px; scrollbar-width:none;}
+  .body::-webkit-scrollbar{display:none;}
+
+  /* 월 요약 */
+  .mo{display:flex; align-items:baseline; justify-content:space-between; margin:16px 2px 10px;}
+  .mo .m{font-size:15px; font-weight:700;}
+  .mo .s{font-size:13px; color:var(--placeholder); font-weight:600;}
+
+  .list{background:var(--card); border-radius:18px; padding:2px 16px; box-shadow:0 1px 3px rgba(0,0,0,.04);}
+  .it{display:flex; align-items:center; gap:12px; padding:15px 0; cursor:pointer;}
+  .it+.it{border-top:1px solid var(--line);}
+  .it .ic{width:40px; height:40px; flex:0 0 auto; border-radius:13px; background:var(--primary-50); display:flex; align-items:center; justify-content:center;}
+  .it .ic iconify-icon{font-size:20px; color:var(--primary);}
+  .it.cancel .ic{background:var(--tile);} .it.cancel .ic iconify-icon{color:var(--icon-off);}
+  .it .tx{flex:1; min-width:0;}
+  .it .n{font-size:14.5px; font-weight:700;}
+  .it .s{font-size:12px; color:var(--placeholder); margin-top:3px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+  .it .rt{text-align:right; flex:0 0 auto;}
+  .it .v{font-size:14.5px; font-weight:800; white-space:nowrap;}
+  .it.cancel .v{color:var(--placeholder); text-decoration:line-through;}
+  .it .st{font-size:11px; font-weight:800; padding:3px 7px; border-radius:6px; margin-top:5px; display:inline-block;}
+  .st.ok{color:var(--success); background:var(--success-bg);}
+  .st.wait{color:var(--warn); background:var(--warn-bg);}
+  .st.no{color:var(--placeholder); background:var(--tile);}
+  .st.draft{color:var(--primary-dark); background:var(--primary-50);}
+
+  .empty{text-align:center; padding:60px 20px; color:var(--placeholder);}
+  .empty iconify-icon{font-size:44px; color:var(--icon-off);}
+  .empty .t{font-size:14.5px; font-weight:600; margin-top:14px;}
+
+  .end{text-align:center; font-size:12.5px; color:var(--placeholder); padding:26px 0 10px;}
+</style>
+<script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+</head>
+<body>
+<div class="phone">
+  <div class="statusbar"><span class="time">9:41</span><span class="stat">
+    <svg width="18" height="12" viewBox="0 0 18 12"><rect y="8" width="3" height="4" rx="1" fill="#191F28"/><rect x="5" y="5" width="3" height="7" rx="1" fill="#191F28"/><rect x="10" y="2.5" width="3" height="9.5" rx="1" fill="#191F28"/><rect x="15" width="3" height="12" rx="1" fill="#191F28"/></svg>
+    <svg width="17" height="12" viewBox="0 0 17 12"><path d="M8.5 2C11 2 13.3 3 15 4.7l-1.3 1.4C12.3 4.7 10.5 4 8.5 4S4.7 4.7 3.3 6.1L2 4.7C3.7 3 6 2 8.5 2z" fill="#191F28"/><circle cx="8.5" cy="10" r="1.3" fill="#191F28"/></svg>
+    <svg width="26" height="13" viewBox="0 0 26 13"><rect x=".5" y=".5" width="22" height="12" rx="3.5" fill="none" stroke="#191F28" stroke-opacity=".35"/><rect x="2.5" y="2.5" width="16" height="8" rx="1.8" fill="#191F28"/><rect x="24" y="4.5" width="1.6" height="4" rx=".8" fill="#191F28" fill-opacity=".35"/></svg>
+  </span></div>
+
+  <div class="topbar">
+    <div class="back" onclick="goBack()">‹</div>
+    <div class="ttl">결제 내역</div>
+    <div class="act" onclick="toast('검색은 준비 중이에요')"><iconify-icon icon="mingcute:search-2-line"></iconify-icon></div>
+  </div>
+
+  <div class="filters">
+    <span class="fchip on" onclick="setF(this,'all')">전체</span>
+    <span class="fchip" onclick="setF(this,'wait')">진행 중</span>
+    <span class="fchip" onclick="setF(this,'ok')">처리 완료</span>
+    <span class="fchip" onclick="setF(this,'no')">취소</span>
+  </div>
+
+  <div class="body" id="list">
+
+    <div class="mo grp" data-any="1"><span class="m">2026년 8월</span><span class="s">2건 · 1,020,000원</span></div>
+    <div class="list grp">
+      <div class="it" data-st="wait" onclick="openDetail('wait')">
+        <span class="ic"><iconify-icon icon="mingcute:home-4-fill"></iconify-icon></span>
+        <span class="tx"><div class="n">8월 월세</div><div class="s">8월 4일 · 대성부동산 · 삼성카드</div></span>
+        <span class="rt"><div class="v">520,000원</div><span class="st wait">서류 확인 중</span></span>
+      </div>
+      <div class="it" data-st="draft" onclick="location.href='11_확인서류안내.html'">
+        <span class="ic"><iconify-icon icon="mingcute:paint-brush-fill"></iconify-icon></span>
+        <span class="tx"><div class="n">인테리어</div><div class="s">8월 2일 · 서류를 아직 안 냈어요</div></span>
+        <span class="rt"><div class="v">1,248,000원</div><span class="st draft">작성 중</span></span>
+      </div>
+    </div>
+
+    <div class="mo grp"><span class="m">2026년 7월</span><span class="s">3건 · 1,352,000원</span></div>
+    <div class="list grp">
+      <div class="it" data-st="ok" onclick="openDetail('done')">
+        <span class="ic"><iconify-icon icon="mingcute:home-4-fill"></iconify-icon></span>
+        <span class="tx"><div class="n">7월 월세</div><div class="s">7월 25일 · 대성부동산 · 삼성카드</div></span>
+        <span class="rt"><div class="v">520,000원</div><span class="st ok">처리 완료</span></span>
+      </div>
+      <div class="it" data-st="ok" onclick="openDetail('done')">
+        <span class="ic"><iconify-icon icon="mingcute:building-2-fill"></iconify-icon></span>
+        <span class="tx"><div class="n">7월 관리비</div><div class="s">7월 1일 · 관리사무소 · 삼성카드</div></span>
+        <span class="rt"><div class="v">156,000원</div><span class="st ok">처리 완료</span></span>
+      </div>
+      <div class="it cancel" data-st="no" onclick="openDetail('cancel')">
+        <span class="ic"><iconify-icon icon="mingcute:truck-fill"></iconify-icon></span>
+        <span class="tx"><div class="n">이사비</div><div class="s">7월 12일 · 서류 미승인으로 자동 취소</div></span>
+        <span class="rt"><div class="v">676,000원</div><span class="st no">취소됨</span></span>
+      </div>
+    </div>
+
+    <div class="mo grp"><span class="m">2026년 6월</span><span class="s">2건 · 832,000원</span></div>
+    <div class="list grp">
+      <div class="it" data-st="ok" onclick="openDetail('done')">
+        <span class="ic"><iconify-icon icon="mingcute:home-4-fill"></iconify-icon></span>
+        <span class="tx"><div class="n">6월 월세</div><div class="s">6월 25일 · 대성부동산 · 삼성카드</div></span>
+        <span class="rt"><div class="v">520,000원</div><span class="st ok">처리 완료</span></span>
+      </div>
+      <div class="it" data-st="ok" onclick="openDetail('done')">
+        <span class="ic"><iconify-icon icon="mingcute:cash-fill"></iconify-icon></span>
+        <span class="tx"><div class="n">복비</div><div class="s">6월 12일 · 한빛부동산 · 삼성카드</div></span>
+        <span class="rt"><div class="v">312,000원</div><span class="st ok">처리 완료</span></span>
+      </div>
+    </div>
+
+    <div class="empty" id="empty" style="display:none">
+      <iconify-icon icon="mingcute:inbox-2-line"></iconify-icon>
+      <div class="t">해당하는 결제가 없어요</div>
+    </div>
+
+    <div class="end" id="end">최근 6개월 내역만 보여드려요</div>
+  </div>
+</div>
+<script src="app.js"></script>
+<script>
+function goBack(){ lpBack('15_내결제.html'); }
+function openDetail(st){
+  try{ sessionStorage.setItem('lp_pay', st); sessionStorage.setItem('lp_from','list'); }catch(e){}
+  location.href = '23_결제상세.html';
+}
+function setF(el, key){
+  document.querySelectorAll('.fchip').forEach(function(c){ c.classList.remove('on'); });
+  el.classList.add('on');
+  var any = 0;
+  document.querySelectorAll('.it').forEach(function(it){
+    var show = (key === 'all') || (it.dataset.st === key) || (key === 'wait' && it.dataset.st === 'draft');
+    it.style.display = show ? 'flex' : 'none';
+    if (show) any++;
+  });
+  /* 항목이 하나도 없는 달은 제목까지 숨김 */
+  document.querySelectorAll('.list').forEach(function(l){
+    var on = [].slice.call(l.querySelectorAll('.it')).some(function(i){ return i.style.display !== 'none'; });
+    l.style.display = on ? 'block' : 'none';
+    if (l.previousElementSibling && l.previousElementSibling.classList.contains('mo'))
+      l.previousElementSibling.style.display = on ? 'flex' : 'none';
+  });
+  document.getElementById('empty').style.display = any ? 'none' : 'block';
+  document.getElementById('end').style.display = any ? 'block' : 'none';
+}
+function toast(msg){
+  var t = document.createElement('div');
+  t.textContent = msg;
+  t.style.cssText = "position:absolute;bottom:60px;left:50%;transform:translateX(-50%);background:#191F28;color:#fff;padding:12px 18px;border-radius:24px;font-size:13px;font-weight:600;z-index:30;opacity:0;transition:.2s;white-space:nowrap";
+  document.querySelector('.phone').appendChild(t);
+  requestAnimationFrame(function(){ t.style.opacity = '1'; });
+  setTimeout(function(){ t.style.opacity = '0'; setTimeout(function(){ t.remove(); }, 200); }, 1500);
+}
+</script>
+</body>
+</html>

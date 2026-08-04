@@ -6,17 +6,69 @@
 <title>랜선페이 — 송금하기</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
 <link rel="stylesheet" href="web.css">
-<link rel="icon" type="image/png" href="../img/logo.png">
+<link rel="icon" type="image/png" href="../img/logo-mark.png">
 <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+<script src="web.js"></script>
 <style>
-  .send{min-height:calc(100vh - 64px); background:linear-gradient(180deg, var(--primary-50), #fff 70%);}
-  .send-in{max-width:1040px; margin:0 auto; padding:80px 24px 100px; display:flex; gap:80px; align-items:flex-start;}
-  .send .txt{flex:1; padding-top:30px;}
-  .send .txt .p-lg{margin-top:22px;}
-  .send .txt .points{margin-top:34px;}
-  .send .txt .pt{display:flex; align-items:center; gap:11px; font-size:15px; font-weight:600; color:var(--sub); padding:9px 0;}
-  .send .txt .pt iconify-icon{font-size:20px; color:var(--primary);}
-  @media(max-width:860px){ .send-in{flex-direction:column; gap:44px;} .send .txt{padding-top:0;} }
+  .send{background:#fff; overflow-x:hidden;}   /* 100vw 캐러셀이 가로 스크롤을 만들지 않게 */
+  .send-in{max-width:1040px; margin:0 auto; padding:60px 24px 100px; display:flex; flex-direction:column; align-items:center;}
+  /* 단계 진행 (카드가 옆으로 밀림) */
+  .wizard{width:100%;}
+  .wz-top{max-width:460px; margin:0 auto 22px;}
+  .wz-head{display:flex; align-items:baseline; justify-content:space-between; margin-bottom:10px;}
+  .wz-name{font-size:15px; font-weight:700;}
+  .wz-count{font-size:13px; font-weight:700; color:var(--placeholder);}
+  .wz-bar{height:5px; border-radius:3px; background:var(--line); overflow:hidden;}
+  .wz-bar i{display:block; height:100%; width:25%; border-radius:3px; background:var(--primary-grad); transition:width .55s cubic-bezier(.2,.7,.2,1);}
+  /* 좌우로 이전 · 다음 카드가 살짝 보이는 캐러셀 */
+  /* 화면 전체 폭을 써야 좌우 카드가 안 잘림 */
+  /* 높이는 자동 — 카드가 길어져도 아래가 절대 안 잘림.
+     좌우만 잘라내려고 overflow 대신 clip-path 사용 (위아래로는 여유를 둠) */
+  .wz-view{width:100vw; margin-left:calc(50% - 50vw); padding:10px 0 34px;
+    clip-path:inset(-40px 0px -40px 0px);}
+  .wz-track{display:flex; align-items:flex-start; gap:24px; transition:transform .55s cubic-bezier(.2,.7,.2,1);}
+  .wz-card{flex:0 0 460px; max-width:86vw; min-width:0;
+    opacity:.3; transform:scale(.94); pointer-events:none;
+    transition:opacity .5s ease, transform .55s cubic-bezier(.2,.7,.2,1);}
+  .wz-card.on{opacity:1; transform:none; pointer-events:auto;}
+  .wz-card:not(.on) .authcard{box-shadow:0 10px 30px rgba(25,31,40,.08);}
+  /* 카드 안 '이전' 버튼 — 눈에 띄게 */
+  .wz-back{display:inline-flex; align-items:center; gap:5px; margin-bottom:18px; padding:9px 14px 9px 11px;
+    border:1.5px solid var(--line); border-radius:11px; background:#fff;
+    font-family:inherit; font-size:13.5px; font-weight:700; color:var(--sub); cursor:pointer;
+    transition:border-color .2s, color .2s, transform .15s;}
+  .wz-back:hover{border-color:var(--primary); color:var(--primary-dark); transform:translateX(-2px);}
+  .wz-back iconify-icon{font-size:16px;}
+
+  /* 진행바 옆 '이전' 버튼 — 항상 같은 자리 */
+  .wz-prev{display:none; align-items:center; gap:4px; margin-right:10px; padding:6px 11px 6px 8px;
+    border:1.5px solid var(--line); border-radius:9px; background:#fff;
+    font-family:inherit; font-size:13px; font-weight:700; color:var(--sub); cursor:pointer;
+    transition:border-color .2s, color .2s;}
+  .wz-prev.on{display:inline-flex;}
+  .wz-prev:hover{border-color:var(--primary); color:var(--primary-dark);}
+  .wz-prev iconify-icon{font-size:15px;}
+  .fld{height:52px; border:1.5px solid var(--line); border-radius:13px; background:#fff; display:flex; align-items:center; padding:0 15px; font-size:15px; font-weight:600;}
+  .fld.ph{color:var(--placeholder); font-weight:500;}
+  .row2{display:flex; gap:9px;} .row2>*{flex:1; min-width:0;}
+  .okbox{display:flex; align-items:center; gap:11px; margin-top:14px; padding:15px; border-radius:14px; background:var(--primary-50);}
+  .okbox iconify-icon{font-size:22px; color:var(--primary); flex:0 0 auto;}
+  .okbox .l{font-size:12px; color:var(--sub);} .okbox .v{font-size:17px; font-weight:800; margin-top:2px;}
+  .updrop{border:2px dashed #C9D3E0; border-radius:16px; background:#FAFBFD; padding:34px 16px; text-align:center;}
+  .updrop iconify-icon{font-size:34px; color:var(--primary);}
+  .updrop .t{font-size:14.5px; font-weight:700; margin-top:10px;}
+  .updrop .s{font-size:12.5px; color:var(--placeholder); margin-top:5px;}
+  .filerow{display:flex; align-items:center; gap:10px; margin-top:12px; padding:13px 14px; border-radius:12px; background:var(--primary-50);}
+  .filerow iconify-icon{font-size:19px; color:var(--primary);}
+  .filerow .fn{flex:1; min-width:0; font-size:13.5px; font-weight:700; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  .filerow .fx{font-size:12px; color:var(--placeholder);}
+  .sumrow{display:flex; justify-content:space-between; font-size:14px; padding:9px 0;}
+  .sumrow .l{color:var(--sub);} .sumrow .v{font-weight:700;}
+  .sumtot{display:flex; justify-content:space-between; align-items:baseline; margin-top:8px; padding-top:13px; border-top:1px solid var(--line);}
+  .sumtot .l{font-size:14px; font-weight:700;} .sumtot .v{font-size:23px; font-weight:800; letter-spacing:-.5px;}
+  .points{display:flex; gap:30px; flex-wrap:wrap; justify-content:center; margin-top:38px;}
+  .points .pt{display:flex; align-items:center; gap:10px; font-size:14.5px; font-weight:600; color:var(--sub); white-space:nowrap;}
+  .points .pt iconify-icon{font-size:19px; color:var(--primary);}
 
   /* 인증 폼 카드 */
   .authcard{flex:0 0 420px; max-width:100%; background:#fff; border-radius:24px; padding:34px 30px; box-shadow:0 18px 50px rgba(25,31,40,.12);}
@@ -34,8 +86,10 @@
   .phone-row{display:flex; gap:8px;}
   .phone-row .tin{flex:1;}
   .phone-row .req{flex:0 0 auto; height:54px; padding:0 16px; border:none; border-radius:13px; background:var(--primary-50); color:var(--primary-dark); font-family:inherit; font-size:14px; font-weight:700; cursor:pointer;}
-  .codebox{display:none;}
-  .codebox.on{display:block;}
+  /* 인증번호 칸 — 스르륵 펼쳐지게 */
+  .codebox{max-height:0; opacity:0; overflow:hidden; margin-bottom:0;
+    transition:max-height .45s cubic-bezier(.2,.7,.2,1), opacity .35s ease, margin-bottom .45s ease;}
+  .codebox.on{max-height:120px; opacity:1; margin-bottom:16px;}
   .codebox .code-row{position:relative;}
   .codebox .timer{position:absolute; right:16px; top:16px; font-size:14px; font-weight:700; color:var(--primary-dark);}
   .auth-btn{width:100%; height:56px; border:none; border-radius:15px; margin-top:10px; background:var(--primary); background:var(--primary-grad); box-shadow:var(--btn-shadow); color:#fff; font-family:inherit; font-size:16px; font-weight:700; cursor:pointer;}
@@ -46,31 +100,43 @@
 
 <nav class="nav">
   <div class="nav-in">
-    <a class="logo" href="index.html"><img src="../img/logo.png" alt="" style="height:22px">랜선페이</a>
+    <a class="logo" href="index.html"><img src="../img/logo-mark.png" alt="" style="height:30px"><img src="../img/logo-text.png" alt="랜선페이" style="height:19px"></a>
     <div class="nav-menu">
       <a href="이용가이드.html">이용가이드</a>
       <a href="고객센터.html">고객센터</a>
       <a href="송금하기.html" class="on">송금하기</a>
     </div>
-    <button class="nav-cta" onclick="alert('로그인은 준비 중이에요')">로그인</button>
+    <button class="nav-cta" onclick="location.href='로그인.html'">로그인</button>
     <button class="nav-burger" onclick="drawer(true)" aria-label="전체메뉴"><iconify-icon icon="mingcute:menu-fill"></iconify-icon></button>
   </div>
 </nav>
 
+<header class="page-hero">
+  <div class="eyebrow">웹에서 바로 송금</div>
+  <h1 class="h-lg">앱 설치 없이 휴대폰 인증으로 시작해요</h1>
+  <p class="p-lg">한 번만 인증하면 앱과 똑같이<br>카드 결제부터 입금까지 진행할 수 있어요.</p>
+</header>
+
 <section class="send">
   <div class="send-in">
-    <div class="txt">
-      <div class="eyebrow">웹에서 바로 송금</div>
-      <h1 class="h-lg">앱 설치 없이<br>휴대폰 인증으로 시작해요</h1>
-      <p class="p-lg">한 번만 인증하면 앱과 똑같이<br>카드 결제부터 입금까지 진행할 수 있어요.</p>
-      <div class="points">
-        <div class="pt"><iconify-icon icon="mingcute:flash-fill"></iconify-icon>상대방 동의 없이 계좌만 알면 돼요</div>
-        <div class="pt"><iconify-icon icon="mingcute:bank-card-fill"></iconify-icon>무이자 할부 · 포인트 적립 그대로</div>
-        <div class="pt"><iconify-icon icon="mingcute:shield-fill"></iconify-icon>담당자 확인 후 입금 · 미승인 시 자동 취소</div>
+    <div class="wizard">
+      <div class="wz-top">
+        <div class="wz-head">
+          <span style="display:flex; align-items:center">
+            <button class="wz-prev" id="wzPrev" onclick="wzGo(wzAt-1)"><iconify-icon icon="mingcute:left-line"></iconify-icon>이전</button>
+            <span class="wz-name" id="wzName">휴대폰 인증</span>
+          </span>
+          <span class="wz-count"><b id="wzNo">1</b> / 4</span>
+        </div>
+        <div class="wz-bar"><i id="wzBar" style="width:25%"></i></div>
       </div>
-    </div>
 
-    <div class="authcard">
+      <div class="wz-view" id="wzView">
+      <div class="wz-track" id="wzTrack">
+
+      <!-- 1. 휴대폰 인증 -->
+      <div class="wz-card">
+      <div class="authcard">
       <h2>휴대폰 인증</h2>
       <div class="sub">본인 명의 휴대폰으로 간편하게 시작해요.</div>
 
@@ -104,8 +170,76 @@
         </div>
       </div>
 
-      <button class="auth-btn" onclick="alert('인증 후 결제 흐름은 앱 화면과 동일하게 이어져요 (웹 버전 준비 중)')">인증하고 송금 시작하기</button>
+      <button class="auth-btn" onclick="wzGo(1)">인증하고 송금 시작하기</button>
       <div class="auth-fine">인증 시 이용약관 · 개인정보 처리방침에 동의한 것으로 봐요.<br>본인인증은 통신사를 통해 안전하게 처리돼요.</div>
+      </div>
+      </div>
+
+      <!-- 2. 결제 정보 입력 -->
+      <div class="wz-card">
+      <div class="authcard">
+        <button class="wz-back" onclick="wzGo(0)"><iconify-icon icon="mingcute:left-line"></iconify-icon>이전</button>
+        <h2>결제 정보 입력</h2>
+        <div class="sub">받는 분 계좌와 보낼 금액을 넣어주세요.</div>
+
+        <div class="field"><label>결제 유형</label><div class="fld">부동산 임대차 · 월세</div></div>
+        <div class="field"><label>보낼 금액</label><input class="tin" inputmode="numeric" placeholder="상대방이 받을 금액"></div>
+        <div class="field">
+          <label>받는 분 계좌</label>
+          <div class="row2"><div class="fld" style="flex:0 0 130px">KB국민</div><input class="tin" inputmode="numeric" placeholder="계좌번호 입력"></div>
+        </div>
+        <div class="okbox"><iconify-icon icon="mingcute:check-circle-fill"></iconify-icon><div><div class="l">받는 분 (예금주)</div><div class="v">대성부동산</div></div></div>
+
+        <button class="auth-btn" onclick="wzGo(2)">다음</button>
+      </div>
+      </div>
+
+      <!-- 3. 서류 첨부 -->
+      <div class="wz-card">
+      <div class="authcard">
+        <button class="wz-back" onclick="wzGo(1)"><iconify-icon icon="mingcute:left-line"></iconify-icon>이전</button>
+        <h2>증빙 서류 첨부</h2>
+        <div class="sub">실제 거래를 증명하는 서류를 올려주세요.</div>
+
+        <div class="updrop">
+          <iconify-icon icon="mingcute:upload-3-fill"></iconify-icon>
+          <div class="t">여기로 파일을 끌어다 놓으세요</div>
+          <div class="s">JPG · PNG · PDF · 20MB 이하</div>
+        </div>
+        <div class="filerow"><iconify-icon icon="mingcute:document-fill"></iconify-icon><span class="fn">임대차계약서.pdf</span><span class="fx">1.2MB</span></div>
+        <div class="auth-fine" style="text-align:left; margin-top:14px">서류에 금액과 계좌번호가 보여야 해요.<br>주민등록번호 · 연락처는 가리고 올려주세요.</div>
+
+        <button class="auth-btn" onclick="wzGo(3)">다음</button>
+      </div>
+      </div>
+
+      <!-- 4. 결제 확인 -->
+      <div class="wz-card">
+      <div class="authcard">
+        <button class="wz-back" onclick="wzGo(2)"><iconify-icon icon="mingcute:left-line"></iconify-icon>이전</button>
+        <h2>결제 확인</h2>
+        <div class="sub">이대로 결제하면 승인 후 바로 입금돼요.</div>
+
+        <div class="field"><label>결제 카드</label><div class="fld">삼성 Deep Dream · 3개월 무이자</div></div>
+
+        <div class="sumrow"><span class="l">받는 분</span><span class="v">대성부동산</span></div>
+        <div class="sumrow"><span class="l">신청 금액</span><span class="v">680,000원</span></div>
+        <div class="sumrow"><span class="l">수수료 4%</span><span class="v">27,200원</span></div>
+        <div class="sumtot"><span class="l">총 결제금액</span><span class="v">707,200원</span></div>
+
+        <button class="auth-btn" onclick="location.href='결제.html'">707,200원 결제하기</button>
+        <div class="auth-fine">서류 승인 후 결제 · 입금돼요. 미승인 시 전액 자동 취소.</div>
+      </div>
+      </div>
+
+      </div><!-- /wz-track -->
+      </div><!-- /wz-view -->
+    </div><!-- /wizard -->
+
+    <div class="points">
+      <div class="pt"><iconify-icon icon="mingcute:flash-fill"></iconify-icon>상대방 동의 없이 계좌만 알면 돼요</div>
+      <div class="pt"><iconify-icon icon="mingcute:bank-card-fill"></iconify-icon>무이자 할부 · 포인트 적립 그대로</div>
+      <div class="pt"><iconify-icon icon="mingcute:shield-fill"></iconify-icon>담당자 확인 후 입금 · 미승인 시 자동 취소</div>
     </div>
   </div>
 </section>
@@ -118,8 +252,10 @@
       <a href="고객센터.html#faq">자주 묻는 질문</a>
       <a href="송금하기.html">송금하기</a>
     </div>
-    <p>랜선페이 (주)랜선페이컴퍼니 · 대표 OOO · 사업자등록번호 000-00-00000<br>
-    서울특별시 OO구 OO로 000 · 고객센터 1600-0000 (평일 9:00~18:00)</p>
+    <p>랜선페이 · (주)미라클컴퍼니 · 대표 김남기 · 서버책임 · 개인정보관리자 민기범<br>
+    사업자등록번호 437-88-03148<br>
+    충청남도 천안시 서북구 쌍용대로 234, 방영학생활건강빌딩 3층 (성정동)<br>
+    대표번호 1577-6369 (평일 9:00~18:00)</p>
   </div>
 </footer>
 
@@ -131,8 +267,8 @@
   <a href="이용가이드.html"><iconify-icon icon="mingcute:book-2-fill"></iconify-icon>이용가이드<span class="gv">›</span></a>
   <a href="index.html#reviews"><iconify-icon icon="mingcute:chat-2-fill"></iconify-icon>이용후기<span class="gv">›</span></a>
   <a href="송금하기.html"><iconify-icon icon="mingcute:flash-fill"></iconify-icon>송금하기<span class="gv">›</span></a>
-  <a href="#" onclick="alert('세금계산서 · 부가세 신고는 준비 중이에요'); return false;"><iconify-icon icon="mingcute:file-certificate-fill"></iconify-icon>세금계산서 · 부가세 신고<span class="gv">›</span></a>
-  <button class="d-login" onclick="alert('로그인은 준비 중이에요')">로그인</button>
+  <a href="javascript:void(0);" onclick="alert('세금계산서 · 부가세 신고는 준비 중이에요'); return false;"><iconify-icon icon="mingcute:file-certificate-fill"></iconify-icon>세금계산서 · 부가세 신고<span class="gv">›</span></a>
+  <button class="d-login" onclick="location.href='로그인.html'">로그인</button>
 </aside>
 
 <script>
@@ -141,7 +277,55 @@ function drawer(on){
   document.getElementById('ddim').classList.toggle('on', on);
 }
 function telco(el){ document.querySelectorAll('.telco').forEach(t=>t.classList.remove('on')); el.classList.add('on'); }
-function reqCode(){ document.getElementById('codebox').classList.add('on'); }
+function reqCode(){ document.getElementById('codebox').classList.add('on'); wzFit(); }
+
+/* 단계 진행 — 카드가 옆으로 밀리고 진행률이 차오름 */
+var WZ = ['휴대폰 인증','결제 정보 입력','증빙 서류 첨부','결제 확인'];
+var WZ_GAP = 24;
+var wzAt = 0;
+function wzFit(){
+  var view = document.getElementById('wzView');
+  var track = document.getElementById('wzTrack');
+  var cards = document.querySelectorAll('.wz-card');
+  /* 스크롤바 폭까지 감안해 화면 전체 폭에 정확히 맞춤 (가로 스크롤 방지) */
+  view.style.width = '';
+  view.style.marginLeft = '';
+  var vw = document.documentElement.clientWidth;
+  var left = view.parentElement.getBoundingClientRect().left;
+  view.style.width = vw + 'px';
+  view.style.marginLeft = (-left) + 'px';
+  var w = cards[0].offsetWidth;
+  /* 활성 카드가 항상 한가운데 오도록 좌우 여백을 잡아줌 */
+  var pad = Math.max(0, (view.clientWidth - w) / 2);
+  track.style.paddingLeft = pad + 'px';
+  track.style.paddingRight = pad + 'px';
+  track.style.transform = 'translateX(-' + (wzAt * (w + WZ_GAP)) + 'px)';
+  /* 높이는 CSS가 알아서 (가장 긴 카드에 맞춰짐) — 따로 지정하지 않음 */
+}
+function wzGo(n){
+  wzAt = n;
+  var cards = document.querySelectorAll('.wz-card');
+  for (var i = 0; i < cards.length; i++) cards[i].classList.toggle('on', i === n);
+  document.getElementById('wzBar').style.width = ((n + 1) * 25) + '%';
+  document.getElementById('wzNo').textContent = n + 1;
+  document.getElementById('wzName').textContent = WZ[n];
+  document.getElementById('wzPrev').classList.toggle('on', n > 0);
+  wzFit();
+}
+/* 옆 카드를 눌러도 그 단계로 이동 */
+document.addEventListener('DOMContentLoaded', function(){
+  var cards = document.querySelectorAll('.wz-card');
+  cards[0].classList.add('on');
+  /* 캡처 단계에서 처리해야 카드 안의 버튼 클릭과 충돌하지 않음 */
+  for (var i = 0; i < cards.length; i++) (function(i){
+    cards[i].addEventListener('click', function(e){
+      if (i !== wzAt) { e.stopPropagation(); e.preventDefault(); wzGo(i); }
+    }, true);
+  })(i);
+  wzFit();
+});
+window.addEventListener('load', wzFit);
+window.addEventListener('resize', wzFit);
 </script>
 </body>
 </html>

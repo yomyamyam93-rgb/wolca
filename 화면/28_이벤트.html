@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>랜선페이 — 이벤트</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+  :root{
+    --primary:#2563EB; --primary-dark:#1D4ED8; --primary-50:#EFF4FF; --primary-100:#DBE7FF;
+    --page-bg:#c9cdd4; --bg:#F4F5F6; --card:#FFFFFF; --line:#ECEEF1; --border:#B1B8BE;
+    --tile:#EEF1F4; --icon-off:#B0B8C1; --sub:#4E5968; --ink:#191F28; --placeholder:#8B95A1;
+    --success:#059669; --success-bg:#EAF7F0;
+    --primary-grad:linear-gradient(180deg, color-mix(in srgb, var(--primary) 82%, #ffffff), var(--primary));
+    --btn-shadow:0 4px 12px color-mix(in srgb, var(--primary) 32%, transparent), inset 0 1px 0 rgba(255,255,255,.18);
+  }
+  *{box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent;}
+  body{font-family:'Pretendard',-apple-system,sans-serif; color:var(--ink); background:var(--page-bg);
+       display:flex; justify-content:center; align-items:flex-start; padding:24px 0; line-height:1.5; -webkit-font-smoothing:antialiased;}
+  .phone{width:390px; height:844px; max-width:100%; background:var(--bg); position:relative; display:flex; flex-direction:column;
+         border-radius:46px; overflow:hidden; box-shadow:0 16px 50px rgba(0,0,0,.28);}
+  iconify-icon{display:inline-block;}
+  .statusbar{height:47px; display:flex; align-items:center; justify-content:space-between; padding:0 24px 0 30px; background:var(--bg); flex:0 0 auto;}
+  .statusbar .time{font-size:15px; font-weight:700;}
+  .statusbar .stat{display:flex; align-items:center; gap:7px;}
+  .topbar{height:54px; display:flex; align-items:center; padding:0 10px; background:var(--bg); flex:0 0 auto;}
+  .topbar .back{width:44px; height:44px; display:flex; align-items:center; justify-content:center; font-size:24px; color:var(--ink); cursor:pointer;}
+  .topbar .ttl{flex:1; text-align:center; font-size:17px; font-weight:700; margin-right:44px;}
+
+  .tabs{display:flex; gap:7px; padding:2px 20px 14px; background:var(--bg); flex:0 0 auto;}
+  .tabs span{padding:9px 16px; border-radius:999px; border:1px solid var(--line); background:#fff;
+    font-size:13px; font-weight:700; color:var(--sub); cursor:pointer;}
+  .tabs span.on{background:var(--ink); border-color:var(--ink); color:#fff;}
+
+  .body{flex:1; overflow-y:auto; padding:0 20px 40px; scrollbar-width:none;}
+  .body::-webkit-scrollbar{display:none;}
+
+  .ev{background:var(--card); border-radius:20px; overflow:hidden; margin-bottom:12px; box-shadow:0 1px 3px rgba(0,0,0,.04); cursor:pointer;}
+  .ev .vis{height:150px; overflow:hidden; position:relative;}
+  .ev .vis img{width:100%; height:100%; object-fit:cover; display:block;}
+  .ev .in{padding:17px;}
+  .ev .tg{display:inline-block; font-size:11px; font-weight:800; color:var(--primary-dark); background:var(--primary-50); padding:4px 9px; border-radius:7px;}
+  .ev .t{font-size:16.5px; font-weight:700; letter-spacing:-.3px; margin-top:9px;}
+  .ev .s{font-size:13px; color:var(--sub); margin-top:6px; line-height:1.55;}
+  .ev .d{display:flex; align-items:center; gap:6px; font-size:12px; color:var(--placeholder); margin-top:11px;}
+  .ev .d iconify-icon{font-size:14px;}
+  .ev.end{opacity:.55;}
+  .ev.end .st{font-size:11px; font-weight:800; color:var(--placeholder); background:var(--tile); padding:4px 9px; border-radius:7px;}
+
+  /* 상세 */
+  .detail{display:none; padding:0 20px 120px;}
+  .detail.on{display:block;}
+  .dvis{height:200px; border-radius:20px; overflow:hidden;}
+  .dvis img{width:100%; height:100%; object-fit:cover; display:block;}
+  .dbox{background:var(--card); border-radius:18px; padding:20px; margin-top:12px; box-shadow:0 1px 3px rgba(0,0,0,.04);}
+  .dbox .t{font-size:18px; font-weight:800; letter-spacing:-.4px;}
+  .dbox .d{font-size:12.5px; color:var(--placeholder); margin-top:8px;}
+  .dbox .c{font-size:14px; color:var(--sub); line-height:1.8; margin-top:16px; padding-top:16px; border-top:1px solid var(--line);}
+  .dbox .c b{color:var(--ink);}
+  .dbox ul{margin-top:10px; list-style:none;}
+  .dbox li{position:relative; padding-left:16px; margin-bottom:7px;}
+  .dbox li:before{content:''; position:absolute; left:2px; top:9px; width:5px; height:5px; border-radius:50%; background:var(--primary);}
+  .footer{position:absolute; bottom:0; left:0; right:0; padding:14px 20px 28px; background:#fff; border-top:1px solid var(--line); display:none;}
+  .footer.on{display:block;}
+  .footer button{width:100%; height:54px; border:none; border-radius:15px; background:var(--primary-grad); box-shadow:var(--btn-shadow);
+    color:#fff; font-family:inherit; font-size:16px; font-weight:700; cursor:pointer;}
+</style>
+<script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+</head>
+<body>
+<div class="phone">
+  <div class="statusbar"><span class="time">9:41</span><span class="stat">
+    <svg width="18" height="12" viewBox="0 0 18 12"><rect y="8" width="3" height="4" rx="1" fill="#191F28"/><rect x="5" y="5" width="3" height="7" rx="1" fill="#191F28"/><rect x="10" y="2.5" width="3" height="9.5" rx="1" fill="#191F28"/><rect x="15" width="3" height="12" rx="1" fill="#191F28"/></svg>
+    <svg width="17" height="12" viewBox="0 0 17 12"><path d="M8.5 2C11 2 13.3 3 15 4.7l-1.3 1.4C12.3 4.7 10.5 4 8.5 4S4.7 4.7 3.3 6.1L2 4.7C3.7 3 6 2 8.5 2z" fill="#191F28"/><circle cx="8.5" cy="10" r="1.3" fill="#191F28"/></svg>
+    <svg width="26" height="13" viewBox="0 0 26 13"><rect x=".5" y=".5" width="22" height="12" rx="3.5" fill="none" stroke="#191F28" stroke-opacity=".35"/><rect x="2.5" y="2.5" width="16" height="8" rx="1.8" fill="#191F28"/><rect x="24" y="4.5" width="1.6" height="4" rx=".8" fill="#191F28" fill-opacity=".35"/></svg>
+  </span></div>
+
+  <div class="topbar"><div class="back" onclick="back()">‹</div><div class="ttl">이벤트</div></div>
+
+  <div class="tabs" id="tabs">
+    <span class="on" onclick="setT(this,'on')">진행 중</span>
+    <span onclick="setT(this,'end')">종료</span>
+  </div>
+
+  <div class="body" id="listView">
+
+    <div class="ev" data-k="on" onclick="openEv('halbu')">
+      <div class="vis"><img src="../img/이벤트/ev-halbu.jpg" alt=""></div>
+      <div class="in">
+        <span class="tg">할부</span>
+        <div class="t">8월 무이자 할부 이벤트</div>
+        <div class="s">삼성 · 신한 · 현대카드로 결제하면 이자 없이 나눠 낼 수 있어요.</div>
+        <div class="d"><iconify-icon icon="mingcute:calendar-fill"></iconify-icon>2026.08.01 ~ 08.31</div>
+      </div>
+    </div>
+
+    <div class="ev" data-k="on" onclick="openEv('cashback')">
+      <div class="vis"><img src="../img/이벤트/ev-cashback.jpg" alt=""></div>
+      <div class="in">
+        <span class="tg">캐시백</span>
+        <div class="t">첫 결제 3만원 캐시백</div>
+        <div class="s">가입하고 첫 결제를 하면 수수료를 돌려드려요.</div>
+        <div class="d"><iconify-icon icon="mingcute:calendar-fill"></iconify-icon>상시 진행</div>
+      </div>
+    </div>
+
+    <div class="ev" data-k="on" onclick="openEv('invite')">
+      <div class="vis"><img src="../img/이벤트/ev-invite.jpg" alt=""></div>
+      <div class="in">
+        <span class="tg">추천</span>
+        <div class="t">초대할 때마다 1만원</div>
+        <div class="s">내 초대 코드로 가입하면 친구도 나도 마일리지를 받아요.</div>
+        <div class="d"><iconify-icon icon="mingcute:calendar-fill"></iconify-icon>상시 진행</div>
+      </div>
+    </div>
+
+    <div class="ev end" data-k="end" onclick="openEv('point')">
+      <div class="vis"><img src="../img/이벤트/ev-point.jpg" alt=""></div>
+      <div class="in">
+        <span class="st">종료됨</span>
+        <div class="t">7월 마일리지 2배 적립</div>
+        <div class="s">기간 중 결제한 모든 건에 마일리지를 2배로 드렸어요.</div>
+        <div class="d"><iconify-icon icon="mingcute:calendar-fill"></iconify-icon>2026.07.01 ~ 07.31</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 상세 -->
+  <div class="detail" id="detailView">
+    <div class="dvis"><img id="dImg" src="" alt=""></div>
+    <div class="dbox">
+      <div class="t" id="dTitle"></div>
+      <div class="d" id="dDate"></div>
+      <div class="c" id="dBody"></div>
+    </div>
+  </div>
+
+  <div class="footer" id="footer">
+    <button id="dBtn" onclick="location.href='10_1_유형선택.html'">지금 결제하고 혜택 받기</button>
+  </div>
+</div>
+<script src="app.js"></script>
+<script>
+var EV = {
+  halbu: {
+    img: '../img/이벤트/ev-halbu.jpg',
+    title: '8월 무이자 할부 이벤트',
+    date: '2026.08.01 ~ 08.31',
+    btn: '무이자로 결제하러 가기',
+    body: '8월 한 달간 아래 카드사에서 <b>무이자 할부</b>를 제공해요.' +
+      '<ul><li><b>삼성카드</b> — 2~6개월 무이자</li>' +
+      '<li><b>신한카드</b> — 2~5개월 무이자</li>' +
+      '<li><b>현대카드</b> — 2~3개월 무이자</li></ul><br>' +
+      '결제 화면에서 카드를 고르면 <b>적용 가능한 개월 수</b>가 자동으로 표시돼요.<br><br>' +
+      '· 5만원 이상 결제 건에만 적용돼요.<br>' +
+      '· 카드사 사정에 따라 조기 종료될 수 있어요.'
+  },
+  cashback: {
+    img: '../img/이벤트/ev-cashback.jpg',
+    title: '첫 결제 3만원 캐시백',
+    date: '2026.01.01 ~ 상시 진행',
+    btn: '지금 결제하고 3만원 받기',
+    body: '랜선페이가 처음이신가요? <b>첫 결제 수수료를 최대 3만원까지</b> 마일리지로 돌려드려요.' +
+      '<ul><li>대상: 가입 후 <b>첫 결제 1건</b></li>' +
+      '<li>지급: 처리 완료 다음 날 자동 적립</li>' +
+      '<li>한도: 최대 30,000M (수수료 초과분은 미지급)</li>' +
+      '<li>마일리지는 기프티콘 교환에 쓸 수 있어요</li></ul><br>' +
+      '· 결제가 취소되면 지급된 마일리지도 회수돼요.<br>' +
+      '· 부정 이용이 확인되면 지급이 취소될 수 있어요.'
+  },
+  invite: {
+    img: '../img/이벤트/ev-invite.jpg',
+    title: '친구 초대하고 1만원 받기',
+    date: '2026.01.01 ~ 상시 진행',
+    btn: '내 초대 코드 공유하기',
+    body: '내 초대 코드로 친구가 가입하면 <b>친구도 나도 10,000M</b>을 받아요.' +
+      '<ul><li>친구: 가입 즉시 10,000M 적립</li>' +
+      '<li>나: 친구의 <b>첫 결제가 완료되면</b> 10,000M 적립</li>' +
+      '<li>초대 인원 제한 없음 (월 최대 30만M)</li></ul><br>' +
+      '· 같은 명의로 중복 가입한 경우는 제외돼요.<br>' +
+      '· 내 초대 코드는 더보기 화면에서 확인할 수 있어요.'
+  },
+  point: {
+    img: '../img/이벤트/ev-point.jpg',
+    title: '7월 마일리지 2배 적립',
+    date: '2026.07.01 ~ 07.31 (종료)',
+    btn: '지난 적립 내역 보기',
+    body: '기간 중 결제한 모든 건에 마일리지를 <b>2배로</b> 드렸어요.' +
+      '<ul><li>기본 적립: 수수료의 2%</li>' +
+      '<li>이벤트 적립: 수수료의 <b>4%</b></li>' +
+      '<li>적립 마일리지는 자동으로 지급됐어요</li></ul><br>' +
+      '이 이벤트는 <b>종료</b>됐어요. 다음 이벤트를 기다려주세요!'
+  }
+};
+
+function setT(el, k){
+  document.querySelectorAll('.tabs span').forEach(function(s){ s.classList.remove('on'); });
+  el.classList.add('on');
+  document.querySelectorAll('.ev').forEach(function(e){ e.style.display = (e.dataset.k === k) ? 'block' : 'none'; });
+}
+function openEv(id){
+  var d = EV[id] || EV.cashback;
+  document.getElementById('dImg').src = d.img;
+  document.getElementById('dTitle').textContent = d.title;
+  document.getElementById('dDate').textContent = d.date;
+  document.getElementById('dBody').innerHTML = d.body;
+  document.getElementById('dBtn').textContent = d.btn;
+  if (id === 'point') document.getElementById('dBtn').setAttribute('onclick', "location.href='19_혜택.html'");
+  else if (id === 'invite') document.getElementById('dBtn').setAttribute('onclick', "alert('초대 코드 공유는 준비 중이에요')");
+  else document.getElementById('dBtn').setAttribute('onclick', "location.href='10_1_유형선택.html'");
+
+  document.getElementById('listView').style.display = 'none';
+  document.getElementById('tabs').style.display = 'none';
+  document.getElementById('detailView').classList.add('on');
+  document.getElementById('footer').classList.add('on');
+}
+function back(){
+  if (document.getElementById('detailView').classList.contains('on')) {
+    document.getElementById('detailView').classList.remove('on');
+    document.getElementById('footer').classList.remove('on');
+    document.getElementById('listView').style.display = 'block';
+    document.getElementById('tabs').style.display = 'flex';
+    return;
+  }
+  lpBack('21_더보기.html');
+}
+/* 주소 뒤 #cashback 처럼 오면 해당 이벤트를 바로 열어줌 */
+(function(){
+  var h = location.hash.replace('#','');
+  if (h && EV[h]) openEv(h);
+})();
+</script>
+</body>
+</html>

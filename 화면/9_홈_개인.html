@@ -16,6 +16,14 @@
     --primary-grad:linear-gradient(180deg, color-mix(in srgb, var(--primary) 82%, #ffffff), var(--primary));
     --btn-shadow:0 4px 12px color-mix(in srgb, var(--primary) 32%, transparent), inset 0 1px 0 rgba(255,255,255,.18);
   }
+
+  /* 홈 요약 칩 (자세한 건 내 결제에서) */
+  .quickst{display:flex; gap:9px; margin:10px 0 2px;}
+  .qs{flex:1; background:#fff; border-radius:14px; padding:13px 14px; box-shadow:0 1px 3px rgba(0,0,0,.05); cursor:pointer;}
+  .qs .l{display:flex; align-items:center; gap:5px; font-size:11.5px; color:var(--placeholder);}
+  .qs .l iconify-icon{font-size:14px; color:var(--primary);}
+  .qs .v{font-size:16px; font-weight:800; letter-spacing:-.3px; margin-top:6px; white-space:nowrap;}
+  .qs .s{font-size:11px; color:var(--placeholder); margin-top:3px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
 </style>
 <link rel="stylesheet" href="../theme.css">
 <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
@@ -72,6 +80,15 @@
   .tabbar{position:absolute; bottom:0; left:0; right:0; background:#fff; border-top:1px solid var(--line); padding-top:12px;}
   .tabs{display:flex; padding:0 6px;}
   .tab{flex:1; display:flex; flex-direction:column; align-items:center; gap:5px; color:var(--tab-off); font-size:11px; font-weight:500; cursor:pointer;}
+  /* 가운데 결제 버튼 — 큰 원, 글자 없음 */
+  .tab.center{justify-content:center; gap:0;}
+  .fab{width:56px; height:56px; margin-top:-24px; border:none; padding:0; border-radius:50%; pointer-events:none;
+    display:flex; align-items:center; justify-content:center;
+    background:var(--primary); background:var(--primary-grad);
+    box-shadow:0 6px 16px color-mix(in srgb, var(--primary) 45%, transparent), 0 0 0 5px #fff, inset 0 1px 0 rgba(255,255,255,.28);
+    transition:transform .18s;}
+  .tab.center:active .fab{transform:scale(.92);}
+  .fab img{width:29px;}
   .tab iconify-icon{font-size:26px;}
   .tab.on{color:var(--primary); font-weight:700;}
   .home-indicator{width:140px; height:5px; border-radius:3px; background:var(--ink); margin:12px auto 9px;}
@@ -86,17 +103,6 @@
   .hero .hsub{font-size:13px; color:var(--sub); margin-top:10px; line-height:1.6;}
   .hchips{display:flex; gap:6px; flex-wrap:wrap; margin-top:14px;}
   .hchip{font-size:12px; font-weight:700; color:var(--primary-dark); background:var(--primary-50); padding:6px 11px; border-radius:8px;}
-  .evscroll{display:flex; gap:12px; overflow-x:auto; padding:2px 0; scroll-snap-type:x mandatory; scrollbar-width:none;}
-  .evscroll::-webkit-scrollbar{display:none;}
-  .evcard{flex:0 0 100%; scroll-snap-align:start; border-radius:16px; padding:18px; cursor:pointer; min-height:114px; display:flex; flex-direction:column; justify-content:space-between; box-shadow:0 1px 3px rgba(0,0,0,.04);}
-  .evcard.blue{background:var(--primary); background:var(--primary-grad); color:#fff; box-shadow:0 6px 16px -4px rgba(37,99,235,.35);}
-  .evcard.tint{background:#fff;}
-  .evcard .evtag{font-size:11px; font-weight:700; padding:4px 9px; border-radius:7px; align-self:flex-start; background:var(--primary-50); color:var(--primary-dark);}
-  .evcard.blue .evtag{background:rgba(255,255,255,.22); color:#fff;}
-  .evcard .evt{font-size:17px; font-weight:700; margin-top:12px; letter-spacing:-.3px; line-height:1.3;}
-  .evcard .evs{font-size:12px; margin-top:5px; opacity:.85;}
-  .evcard.tint .evt{color:var(--ink);}
-  .evcard.tint .evs{color:var(--sub);}
   /* 카드 혜택 행 */
   .cchip{width:42px; height:29px; border-radius:8px; flex:0 0 auto;}
   .cchip.samsung{background:linear-gradient(135deg,#22375f,#0e1a30);}
@@ -121,6 +127,66 @@
   .grade .gtext{font-size:12px; color:var(--sub); margin-top:8px;}
   .socialbar{text-align:center; background:#fff; border-radius:12px; padding:13px; font-size:12px; color:var(--sub); margin-top:12px; box-shadow:0 1px 3px rgba(0,0,0,.04);}
   .socialbar b{color:var(--ink);}
+
+  /* 다가오는 결제 */
+  .upnext{background:#fff; border-radius:18px; padding:18px; margin:4px 0 12px; box-shadow:0 1px 3px rgba(0,0,0,.05); cursor:pointer;}
+  .upnext .hd{display:flex; align-items:center; gap:7px; font-size:12.5px; font-weight:700; color:var(--primary-dark);}
+  .upnext .hd iconify-icon{font-size:16px;}
+  .upnext .hd .dday{margin-left:auto; font-size:11.5px; font-weight:800; color:#fff; background:var(--primary); padding:4px 9px; border-radius:7px;}
+  .upnext .nm{font-size:17px; font-weight:800; letter-spacing:-.3px; margin-top:11px;}
+  .upnext .amt{font-size:24px; font-weight:800; letter-spacing:-.7px; margin-top:5px;}
+  .upnext .sub{font-size:12.5px; color:var(--placeholder); margin-top:7px;}
+  .upnext .bar{height:6px; border-radius:3px; background:var(--tile); overflow:hidden; margin-top:14px;}
+  .upnext .bar i{display:block; height:100%; border-radius:3px; background:var(--primary-grad);}
+
+  /* 이번 달 요약 */
+  .mosum{background:#fff; border-radius:18px; padding:18px; margin-bottom:12px; box-shadow:0 1px 3px rgba(0,0,0,.05); cursor:pointer;}
+  .mosum .hd{display:flex; align-items:baseline; justify-content:space-between;}
+  .mosum .hd .t{font-size:13px; color:var(--placeholder);}
+  .mosum .hd .more{font-size:12.5px; font-weight:600; color:var(--placeholder);}
+  .mosum .v{font-size:27px; font-weight:800; letter-spacing:-.8px; margin-top:5px;}
+  .mosum .g{display:flex; margin-top:15px; padding-top:14px; border-top:1px solid var(--line);}
+  .mosum .g > div{flex:1; text-align:center;}
+  .mosum .g > div + div{border-left:1px solid var(--line);}
+  .mosum .gl{font-size:11.5px; color:var(--placeholder);}
+  .mosum .gv{font-size:15px; font-weight:800; margin-top:5px;}
+  .mosum .gv.blue{color:var(--primary-dark);}
+
+
+  /* 섹션 제목 + 오른쪽 링크 */
+  .sec-h.sec-row{display:flex; justify-content:space-between; align-items:baseline;}
+  .sec-h .more{font-size:13px; font-weight:500; color:var(--placeholder); cursor:pointer;}
+  /* 이벤트 — 좌우 스와이프 카드 */
+  .evscroll{display:flex; gap:12px; overflow-x:auto; scroll-snap-type:x mandatory; scrollbar-width:none;
+    margin:0 calc(var(--pad) * -1); padding:2px var(--pad) 4px; scroll-padding-left:var(--pad); cursor:grab;}
+  .evscroll::-webkit-scrollbar{display:none;}
+  .evscroll:active{cursor:grabbing;}
+  .evcard{flex:0 0 84%; scroll-snap-align:start; background:var(--card); border-radius:18px; overflow:hidden; cursor:pointer;
+    box-shadow:0 1px 3px rgba(0,0,0,.05), 0 10px 24px -14px rgba(25,31,40,.4);}
+  .evscroll:after{content:''; flex:0 0 4px;}
+  .evcard .vis{height:112px; overflow:hidden;}
+  .evcard .vis img{width:100%; height:100%; object-fit:cover; display:block;}
+  .evcard .in{padding:13px 15px 15px;}
+  .evcard .tg{display:inline-block; font-size:10.5px; font-weight:800; color:var(--primary-dark);
+    background:var(--primary-50); padding:4px 8px; border-radius:6px;}
+  .evcard .t{font-size:15px; font-weight:700; letter-spacing:-.2px; margin-top:8px;}
+  .evcard .s{font-size:12.5px; color:var(--placeholder); margin-top:4px;}
+  .evdots{display:flex; gap:5px; justify-content:center; margin-top:12px;}
+  .evdots i{width:6px; height:6px; border-radius:50%; background:var(--line); transition:.25s;}
+  .evdots i.on{width:18px; border-radius:3px; background:var(--primary);}
+  /* 내 카드 혜택 */
+  .cben{background:var(--card); border-radius:16px; padding:16px; box-shadow:0 1px 3px rgba(0,0,0,.04); cursor:pointer;}
+  .cben .top{display:flex; align-items:center; gap:11px;}
+  .cben .face{width:44px; height:29px; flex:0 0 auto; border-radius:6px; background:linear-gradient(135deg,#3A4A63,#1B2432); position:relative;}
+  .cben .face:after{content:''; position:absolute; left:6px; top:9px; width:10px; height:8px; border-radius:2px; background:linear-gradient(135deg,#F1D48A,#C9A24B);}
+  .cben.samsung .face{background:linear-gradient(135deg,#2E6BD8,#1B3E82);}
+  .cben .nm{font-size:14.5px; font-weight:700;}
+  .cben .no{font-size:11.5px; color:var(--placeholder); margin-top:2px;}
+  .cben .list{display:flex; gap:6px; margin-top:12px; flex-wrap:wrap;}
+  .cben .chip{font-size:11.5px; font-weight:700; color:var(--primary-dark); background:var(--primary-50); padding:6px 10px; border-radius:8px;}
+  .cben .mile{display:flex; justify-content:space-between; align-items:center; margin-top:12px; padding-top:12px;
+    border-top:1px solid var(--line); font-size:12.5px; color:var(--placeholder);}
+  .cben .mile b{font-size:14px; font-weight:800; color:var(--primary-dark);}
 </style>
 </head>
 <body>
@@ -135,7 +201,7 @@
   </div>
 
   <div class="topbar">
-    <div class="logo"><img src="../img/logo.png" alt="" style="height:20px"><span>랜선페이</span></div>
+    <div class="logo"><img src="../img/logo-mark.png" alt="" style="height:26px"><img src="../img/logo-text.png" alt="랜선페이" style="height:16px"></div>
     <div class="seg">
       <button class="on">개인</button>
       <button onclick="location.href='9_홈_사업자.html'">사업자</button>
@@ -163,38 +229,55 @@
         <button class="btn-primary" style="margin-top:18px" onclick="location.href='10_1_유형선택.html'">지금 결제하기</button>
       </div>
 
-      <!-- 이벤트 -->
-      <div class="sec-h">이벤트</div>
-      <div class="evscroll" id="ev" onscroll="evDots()">
-        <div class="evcard tint" onclick="toast('이벤트는 준비 중이에요')">
-          <span class="evtag">이벤트</span>
-          <div><div class="evt">최대 6개월 무이자 할부</div><div class="evs">이번 달 카드 결제 전체 대상</div></div>
-        </div>
-        <div class="evcard tint" onclick="toast('이벤트는 준비 중이에요')">
-          <span class="evtag">캐시백</span>
-          <div><div class="evt">첫 결제 3만원 캐시백</div><div class="evs">신규 가입 시</div></div>
-        </div>
-        <div class="evcard tint" onclick="toast('이벤트는 준비 중이에요')">
-          <span class="evtag">친구초대</span>
-          <div><div class="evt">초대할 때마다 1만원</div><div class="evs">친구도 나도 함께 받아요</div></div>
-        </div>
-      </div>
-      <div class="dots"><span class="dot on" id="evd0"></span><span class="dot" id="evd1"></span><span class="dot" id="evd2"></span></div>
 
-      <!-- 카드 혜택 -->
-      <div class="sec-h" style="display:flex; justify-content:space-between; align-items:baseline;">
-        <span>카드 혜택</span><span class="more" onclick="location.href='18_카드혜택.html'">전체 보기 ›</span>
+      <div class="sec-h sec-row">내 결제 요약<span class="more" onclick="location.href='15_내결제.html'">내 결제 ›</span></div>
+      <div class="quickst">
+        <div class="qs" onclick="location.href='22_예약결제.html'">
+          <div class="l"><iconify-icon icon="mingcute:alarm-2-fill"></iconify-icon>다음 결제</div>
+          <div class="v">D-21</div>
+          <div class="s">월세 500,000원</div>
+        </div>
+        <div class="qs" onclick="location.href='15_내결제.html'">
+          <div class="l"><iconify-icon icon="mingcute:bank-card-fill"></iconify-icon>이번 달</div>
+          <div class="v">650,000원</div>
+          <div class="s">결제 2건</div>
+        </div>
       </div>
-      <div class="card list-card">
-        <div class="lrow" onclick="location.href='18_카드혜택.html'"><span class="cchip samsung"></span><div class="t"><div class="n">삼성 taptap O</div><div class="s">무이자 6개월 · 포인트 1% 적립</div></div><iconify-icon class="chev" icon="mingcute:right-line"></iconify-icon></div>
-        <div class="lrow" onclick="location.href='18_카드혜택.html'"><span class="cchip hyundai"></span><div class="t"><div class="n">현대 the Green</div><div class="s">무이자 3개월 · M포인트 1.5% 적립</div></div><iconify-icon class="chev" icon="mingcute:right-line"></iconify-icon></div>
-        <div class="lrow" onclick="location.href='18_카드혜택.html'"><span class="cchip shinhan"></span><div class="t"><div class="n">신한 Deep Dream</div><div class="s">무이자 3개월 · 캐시백 0.8%</div></div><iconify-icon class="chev" icon="mingcute:right-line"></iconify-icon></div>
+
+
+      <div class="sec-h sec-row">진행 중 이벤트<span class="more" onclick="location.href='28_이벤트.html'">전체 보기 ›</span></div>
+      <div class="evscroll" id="evScroll" onscroll="evDots()">
+        <div class="evcard" onclick="goEv('halbu')">
+          <div class="vis"><img src="../img/이벤트/ev-halbu.jpg" alt=""></div>
+          <div class="in"><span class="tg">할부</span><div class="t">8월 무이자 할부</div><div class="s">최대 6개월 · 이자 0원</div></div>
+        </div>
+        <div class="evcard" onclick="goEv('cashback')">
+          <div class="vis"><img src="../img/이벤트/ev-cashback.jpg" alt=""></div>
+          <div class="in"><span class="tg">캐시백</span><div class="t">첫 결제 3만원 캐시백</div><div class="s">신규 가입 후 첫 결제 시</div></div>
+        </div>
+        <div class="evcard" onclick="goEv('invite')">
+          <div class="vis"><img src="../img/이벤트/ev-invite.jpg" alt=""></div>
+          <div class="in"><span class="tg">친구초대</span><div class="t">초대할 때마다 1만원</div><div class="s">친구도 나도 함께 받아요</div></div>
+        </div>
+      </div>
+      <div class="evdots"><i class="on" id="ed0"></i><i id="ed1"></i><i id="ed2"></i></div>
+
+      <div class="sec-h sec-row">내 카드 혜택<span class="more" onclick="location.href='18_카드혜택.html'">전체 보기 ›</span></div>
+      <div class="cben samsung" onclick="location.href='18_카드혜택.html'">
+        <div class="top">
+          <span class="face"></span>
+          <span><div class="nm">삼성 taptap O</div><div class="no">•••• 4821</div></span>
+        </div>
+        <div class="list"><span class="chip">6개월 무이자</span><span class="chip">0.7% 적립</span><span class="chip">실적 100% 인정</span></div>
+        <div class="mile" onclick="event.stopPropagation(); location.href='19_혜택.html'">
+          <span>이 카드로 쌓인 마일리지</span><b>12,400M</b>
+        </div>
       </div>
 
       <div class="sec-h">알아두면 좋아요</div>
       <div class="card list-card">
         <div class="lrow" onclick="location.href='17_사용방법.html'"><div class="ic"><iconify-icon icon="mingcute:book-2-fill"></iconify-icon></div><div class="t"><div class="n">랜선페이 사용방법</div><div class="s">이용 순서 · 유형별 필요 서류</div></div><iconify-icon class="chev" icon="mingcute:right-line"></iconify-icon></div>
-        <div class="lrow" onclick="toast('카드 할부 정보는 준비 중이에요')"><div class="ic"><iconify-icon icon="mingcute:calendar-2-fill"></iconify-icon></div><div class="t"><div class="n">카드 할부 정보</div><div class="s">무이자 · 부분 무이자 할부 안내</div></div><iconify-icon class="chev" icon="mingcute:right-line"></iconify-icon></div>
+        <div class="lrow" onclick="location.href='40_할부정보.html'"><div class="ic"><iconify-icon icon="mingcute:calendar-2-fill"></iconify-icon></div><div class="t"><div class="n">카드 할부 정보</div><div class="s">무이자 · 부분 무이자 할부 안내</div></div><iconify-icon class="chev" icon="mingcute:right-line"></iconify-icon></div>
         <div class="lrow" onclick="toast('자주 묻는 질문은 준비 중이에요')"><div class="ic"><iconify-icon icon="mingcute:question-fill"></iconify-icon></div><div class="t"><div class="n">자주 묻는 질문</div><div class="s">수수료 · 정산 · 안전 관련</div></div><iconify-icon class="chev" icon="mingcute:right-line"></iconify-icon></div>
       </div>
 
@@ -205,32 +288,17 @@
 
   <div class="tabbar">
     <div class="tabs">
-      <div class="tab on"><iconify-icon icon="mingcute:home-4-fill"></iconify-icon><span>홈</span></div>
+      <div class="tab on" onclick="location.href='9_홈_개인.html'"><iconify-icon icon="mingcute:home-4-fill"></iconify-icon><span>홈</span></div>
       <div class="tab" onclick="location.href='15_내결제.html'"><iconify-icon icon="mingcute:bill-fill"></iconify-icon><span>내 결제</span></div>
-      <div class="tab" onclick="location.href='10_1_유형선택.html'"><iconify-icon icon="mingcute:bank-card-fill"></iconify-icon><span>결제</span></div>
-      <div class="tab" onclick="toast('환급은 준비 중이에요')"><iconify-icon icon="mingcute:wallet-4-fill"></iconify-icon><span>환급</span></div>
-      <div class="tab" onclick="toast('내 정보는 준비 중이에요')"><iconify-icon icon="mingcute:user-3-fill"></iconify-icon><span>내 정보</span></div>
+      <div class="tab center" onclick="location.href='10_1_유형선택.html'" aria-label="결제하기"><button class="fab"><img src="../img/logo-mark-white.png" alt="결제하기"></button></div>
+      <div class="tab" onclick="location.href='19_혜택.html'"><iconify-icon icon="mingcute:gift-fill"></iconify-icon><span>혜택</span></div>
+      <div class="tab" onclick="location.href='21_더보기.html'"><iconify-icon icon="mingcute:menu-fill"></iconify-icon><span>더보기</span></div>
     </div>
     <div class="home-indicator"></div>
   </div>
 </div>
 <script>
 function pay(name){ toast(name+' 결제는 준비 중이에요'); }
-function evDots(){
-  const s=document.getElementById('ev');
-  const step=s.querySelector('.evcard').offsetWidth+12;
-  const idx=Math.round(s.scrollLeft/step);
-  [0,1,2].forEach(i=>document.getElementById('evd'+i).classList.toggle('on', i===idx));
-}
-/* 마우스 드래그 스와이프 */
-(function(){
-  const s=document.getElementById('ev'); let down=false,startX=0,startLeft=0,moved=false;
-  s.addEventListener('pointerdown', e=>{ down=true; moved=false; startX=e.clientX; startLeft=s.scrollLeft; s.style.scrollSnapType='none'; });
-  s.addEventListener('pointermove', e=>{ if(!down) return; const dx=e.clientX-startX; if(Math.abs(dx)>4) moved=true; s.scrollLeft=startLeft-dx; });
-  function end(){ if(!down) return; down=false; s.style.scrollSnapType='x mandatory'; }
-  s.addEventListener('pointerup', end); s.addEventListener('pointerleave', end);
-  s.addEventListener('click', e=>{ if(moved){ e.stopPropagation(); e.preventDefault(); } }, true);
-})();
 function updateDots(){
   const p=document.getElementById('qpager'); if(!p) return;
   const i=Math.round(p.scrollLeft/p.clientWidth);
@@ -248,5 +316,78 @@ function toast(msg){
 }
 </script>
 <script src="app.js"></script>
+<script>try{sessionStorage.setItem('lp_type','me');}catch(e){}</script>
+
+<script>
+/* 이벤트 카드 — 좌우 스와이프 + 점 표시 */
+function evDots(){
+  var s = document.getElementById('evScroll');
+  if (!s) return;
+  var step = s.querySelector('.evcard').offsetWidth + 12;
+  var i = Math.round(s.scrollLeft / step);
+  ['ed0','ed1','ed2'].forEach(function(id, n){
+    var d = document.getElementById(id);
+    if (d) d.classList.toggle('on', n === i);
+  });
+}
+function goEv(id){ location.href = '28_이벤트.html#' + id; }
+/* 마우스로도 끌어서 넘기기 — 손을 떼면 부드럽게 제자리 */
+(function(){
+  var s = document.getElementById('evScroll');
+  if (!s) return;
+  var down = false, sx = 0, sl = 0, moved = false, lx = 0, vx = 0, lt = 0, timer = 0;
+
+  function step(){ var c = s.querySelector('.evcard'); return c ? c.offsetWidth + 12 : 1; }
+
+  /* 가장 가까운 카드로 부드럽게 이동 (튕긴 방향이 있으면 그쪽 한 장) */
+  function settle(dir){
+    var w = step(), cur = s.scrollLeft / w;
+    var i = dir > 0 ? Math.ceil(cur) : dir < 0 ? Math.floor(cur) : Math.round(cur);
+    var max = s.querySelectorAll('.evcard').length - 1;
+    i = Math.max(0, Math.min(max, i));
+    s.style.scrollSnapType = 'none';
+    s.scrollTo({ left: i * w, behavior: 'smooth' });
+    clearTimeout(timer);
+    timer = setTimeout(function(){ s.style.scrollSnapType = 'x mandatory'; }, 450);
+  }
+
+  s.addEventListener('pointerdown', function(e){
+    if (e.pointerType === 'touch') return;      /* 손가락은 브라우저 기본 동작이 더 자연스러움 */
+    down = true; moved = false;
+    sx = lx = e.clientX; sl = s.scrollLeft; vx = 0; lt = e.timeStamp;
+    clearTimeout(timer);
+    s.style.scrollSnapType = 'none';
+  });
+  s.addEventListener('pointermove', function(e){
+    if (!down) return;
+    var dx = e.clientX - sx;
+    if (Math.abs(dx) > 4) moved = true;
+    var dt = e.timeStamp - lt;
+    if (dt > 0) vx = (e.clientX - lx) / dt;     /* 마지막 순간의 속도 */
+    lx = e.clientX; lt = e.timeStamp;
+    s.scrollLeft = sl - dx;
+  });
+  function end(){
+    if (!down) return;
+    down = false;
+    var dx = lx - sx;
+    /* 빠르게 튕겼거나 카드 폭의 20% 넘게 끌었으면 다음 장으로 */
+    var flick = Math.abs(vx) > 0.4 || Math.abs(dx) > step() * 0.2;
+    settle(flick ? (dx < 0 ? 1 : -1) : 0);
+  }
+  s.addEventListener('pointerup', end);
+  s.addEventListener('pointercancel', end);
+  s.addEventListener('pointerleave', end);
+  s.addEventListener('click', function(e){ if (moved) { e.stopPropagation(); e.preventDefault(); } }, true);
+
+  /* 휠·트랙패드로 가로 이동해도 멈추면 제자리 */
+  var wt = 0;
+  s.addEventListener('scroll', function(){
+    if (down) return;
+    clearTimeout(wt);
+    wt = setTimeout(function(){ if (!down) settle(0); }, 120);
+  });
+})();
+</script>
 </body>
 </html>

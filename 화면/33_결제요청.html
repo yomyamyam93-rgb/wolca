@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>랜선페이 — 결제 요청</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="screen.css">
+<style>
+  .how{display:flex; gap:9px; margin-bottom:18px;}
+  .how div{flex:1; background:#fff; border-radius:14px; padding:14px 10px; text-align:center; box-shadow:0 1px 3px rgba(0,0,0,.04);}
+  .how .n{width:22px; height:22px; margin:0 auto 8px; border-radius:50%; background:var(--primary-50);
+    color:var(--primary-dark); font-size:11px; font-weight:800; display:flex; align-items:center; justify-content:center;}
+  .how .t{font-size:12px; font-weight:700; line-height:1.4;}
+  .amtbig{display:flex; align-items:baseline; justify-content:flex-end; border-bottom:2px solid var(--primary); padding-bottom:9px;}
+  .amtbig input{flex:1; border:none; outline:none; font-family:inherit; font-size:30px; font-weight:800; text-align:right; min-width:0; background:none;}
+  .amtbig span{font-size:16px; font-weight:800; color:var(--sub); margin-left:6px;}
+  .quick{display:flex; gap:7px; margin-top:12px;}
+  .quick span{flex:1; height:38px; display:flex; align-items:center; justify-content:center; border:1px solid var(--line);
+    border-radius:11px; background:#fff; font-size:13px; font-weight:700; color:var(--sub); cursor:pointer;}
+  .calc{margin-top:16px; padding:14px 16px; border-radius:13px; background:var(--tile);}
+  .crow{display:flex; justify-content:space-between; font-size:13px; padding:4px 0;}
+  .crow .v{font-weight:700;}
+  .crow.tot{margin-top:8px; padding-top:10px; border-top:1px solid var(--border); font-size:14px;}
+  .crow.tot .v{font-size:18px; font-weight:800;}
+  /* 발송 완료 */
+  .doneview{display:none; text-align:center; padding-top:20px;}
+  .doneview.on{display:block;}
+  .doneview .ck{width:74px; height:74px; margin:0 auto 18px; border-radius:50%; background:linear-gradient(180deg,#EAF1FF,#DCE8FF);
+    display:flex; align-items:center; justify-content:center; box-shadow:0 12px 26px -10px rgba(37,99,235,.6);}
+  .doneview .ck iconify-icon{font-size:40px; color:var(--primary);}
+  .doneview h2{font-size:21px; font-weight:800; letter-spacing:-.4px;}
+  .doneview p{font-size:14px; color:var(--sub); margin-top:11px; line-height:1.7;}
+  .linkbox{display:flex; align-items:center; gap:9px; margin-top:22px; padding:14px 15px; border-radius:13px;
+    background:#fff; box-shadow:0 1px 3px rgba(0,0,0,.05); text-align:left;}
+  .linkbox .u{flex:1; min-width:0; font-size:12.5px; color:var(--sub); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  .linkbox button{flex:0 0 auto; height:36px; padding:0 13px; border:none; border-radius:10px; background:var(--primary-50);
+    color:var(--primary-dark); font-family:inherit; font-size:12.5px; font-weight:700; cursor:pointer;}
+  .shares{display:flex; gap:9px; margin-top:12px;}
+  .shares button{flex:1; height:50px; border:1.5px solid var(--line); border-radius:13px; background:#fff;
+    font-family:inherit; font-size:14px; font-weight:700; color:var(--sub); cursor:pointer; display:flex; align-items:center; justify-content:center; gap:6px;}
+  .shares iconify-icon{font-size:17px; color:var(--primary);}
+</style>
+<script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+</head>
+<body>
+<div class="phone">
+  <div class="statusbar"><span class="time">9:41</span><span class="stat">
+    <svg width="18" height="12" viewBox="0 0 18 12"><rect y="8" width="3" height="4" rx="1" fill="#191F28"/><rect x="5" y="5" width="3" height="7" rx="1" fill="#191F28"/><rect x="10" y="2.5" width="3" height="9.5" rx="1" fill="#191F28"/><rect x="15" width="3" height="12" rx="1" fill="#191F28"/></svg>
+    <svg width="26" height="13" viewBox="0 0 26 13"><rect x=".5" y=".5" width="22" height="12" rx="3.5" fill="none" stroke="#191F28" stroke-opacity=".35"/><rect x="2.5" y="2.5" width="16" height="8" rx="1.8" fill="#191F28"/><rect x="24" y="4.5" width="1.6" height="4" rx=".8" fill="#191F28" fill-opacity=".35"/></svg>
+  </span></div>
+
+  <div class="topbar"><div class="back" onclick="lpBack('20_정산.html')">‹</div><div class="ttl">결제 요청</div></div>
+
+  <div class="body hasfoot" id="formView">
+    <div class="sec-s">거래처에 결제 링크를 보내면, 상대가 <b>자기 카드로</b> 결제해요.<br>승인되면 내 계좌로 현금이 입금됩니다.</div>
+
+    <div class="how">
+      <div><div class="n">1</div><div class="t">링크 발송</div></div>
+      <div><div class="n">2</div><div class="t">거래처 결제</div></div>
+      <div><div class="n">3</div><div class="t">내 계좌 입금</div></div>
+    </div>
+
+    <div class="pad">
+      <div class="field" style="margin-bottom:6px">
+        <label>요청 금액</label>
+        <div class="amtbig"><input id="amt" inputmode="numeric" value="3,500,000"><span>원</span></div>
+        <div class="quick">
+          <span onclick="add(500000)">+50만</span><span onclick="add(1000000)">+100만</span>
+          <span onclick="add(5000000)">+500만</span><span onclick="setA(0)">지우기</span>
+        </div>
+      </div>
+      <div class="calc">
+        <div class="crow"><span>수수료 4% (거래처 부담)</span><span class="v" id="fee">140,000원</span></div>
+        <div class="crow"><span>내가 받는 금액</span><span class="v" id="get">3,500,000원</span></div>
+        <div class="crow tot"><span>거래처 결제금액</span><span class="v" id="tot">3,640,000원</span></div>
+      </div>
+    </div>
+
+    <div class="sec-t">받는 사람</div>
+    <div class="pad">
+      <div class="field"><label>거래처 이름</label><input class="tin" value="한빛식자재"></div>
+      <div class="field"><label>휴대폰 번호 <span style="font-weight:500;color:var(--placeholder)">(문자로 링크 발송)</span></label>
+        <input class="tin" inputmode="numeric" placeholder="010-0000-0000" value="010-2345-6789"></div>
+      <div class="field" style="margin-bottom:0"><label>메모 <span style="font-weight:500;color:var(--placeholder)">(선택)</span></label>
+        <input class="tin" placeholder="예) 8월 식자재 대금"></div>
+    </div>
+
+    <div class="sec-t">입금받을 계좌</div>
+    <div class="box">
+      <div class="row" onclick="toast('계좌 변경은 준비 중이에요')">
+        <span class="ic"><iconify-icon icon="mingcute:bank-fill"></iconify-icon></span>
+        <span class="tx"><div class="t">기업 302-1122-3344</div><div class="s">미라클상사 (사업자 계좌)</div></span>
+        <iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon>
+      </div>
+    </div>
+
+    <div class="note">
+      <iconify-icon icon="mingcute:information-fill"></iconify-icon>
+      <div>링크는 <b>7일간</b> 유효해요. 거래처가 결제하면 알림으로 알려드리고, 서류 승인 후 <b>내 계좌로 입금</b>됩니다.</div>
+    </div>
+  </div>
+
+  <!-- 발송 완료 -->
+  <div class="body doneview" id="doneView">
+    <div class="ck"><iconify-icon icon="mingcute:send-plane-fill"></iconify-icon></div>
+    <h2>결제 요청을 보냈어요</h2>
+    <p><b>한빛식자재</b>에게 문자로 링크를 보냈어요.<br>결제가 완료되면 알려드릴게요.</p>
+
+    <div class="linkbox">
+      <span class="u">https://lanseonpay.kr/r/8KD2M9</span>
+      <button onclick="toast('링크를 복사했어요')">복사</button>
+    </div>
+    <div class="shares">
+      <button onclick="toast('카카오톡 공유는 준비 중이에요')"><iconify-icon icon="mingcute:chat-1-fill"></iconify-icon>카카오톡</button>
+      <button onclick="toast('문자 다시 보내기는 준비 중이에요')"><iconify-icon icon="mingcute:message-3-fill"></iconify-icon>문자 재발송</button>
+    </div>
+
+    <div class="note" style="text-align:left">
+      <iconify-icon icon="mingcute:time-fill"></iconify-icon>
+      <div>링크 유효기간 <b>2026년 8월 11일까지</b><br>아직 결제되지 않았어요 · 요청 목록에서 확인할 수 있어요</div>
+    </div>
+  </div>
+
+  <div class="footer" id="foot">
+    <button class="btn" onclick="send()"><iconify-icon icon="mingcute:send-plane-fill"></iconify-icon>결제 요청 보내기</button>
+  </div>
+  <div class="footer" id="foot2" style="display:none">
+    <div class="two">
+      <button class="btn ghost" onclick="lpBack('20_정산.html')">닫기</button>
+      <button class="btn" onclick="location.reload()">또 요청하기</button>
+    </div>
+  </div>
+</div>
+<script src="app.js"></script>
+<script>
+var fmt = function(n){ return n.toLocaleString('ko-KR'); };
+function calc(){
+  var raw = document.getElementById('amt').value.replace(/[^0-9]/g, '');
+  var a = parseInt(raw || '0', 10);
+  document.getElementById('amt').value = a ? fmt(a) : '';
+  var fee = Math.round(a * 0.04);
+  document.getElementById('fee').textContent = fmt(fee) + '원';
+  document.getElementById('get').textContent = fmt(a) + '원';
+  document.getElementById('tot').textContent = fmt(a + fee) + '원';
+}
+function add(n){
+  var raw = document.getElementById('amt').value.replace(/[^0-9]/g, '');
+  document.getElementById('amt').value = fmt(parseInt(raw || '0', 10) + n); calc();
+}
+function setA(n){ document.getElementById('amt').value = n ? fmt(n) : ''; calc(); }
+document.getElementById('amt').addEventListener('input', calc);
+
+function send(){
+  document.getElementById('formView').style.display = 'none';
+  document.getElementById('foot').style.display = 'none';
+  document.getElementById('doneView').classList.add('on');
+  document.getElementById('foot2').style.display = 'block';
+}
+function toast(m){
+  var t = document.createElement('div');
+  t.textContent = m;
+  t.style.cssText = "position:absolute;bottom:110px;left:50%;transform:translateX(-50%);background:#191F28;color:#fff;padding:12px 18px;border-radius:24px;font-size:13px;font-weight:600;z-index:30;opacity:0;transition:.2s;white-space:nowrap";
+  document.querySelector('.phone').appendChild(t);
+  requestAnimationFrame(function(){ t.style.opacity = '1'; });
+  setTimeout(function(){ t.style.opacity = '0'; setTimeout(function(){ t.remove(); }, 200); }, 1600);
+}
+</script>
+</body>
+</html>
