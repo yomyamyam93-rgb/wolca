@@ -82,7 +82,7 @@
   .payrow{display:flex; align-items:center; gap:12px; border:1.5px solid var(--line); border-radius:14px; padding:17px 16px; margin-bottom:10px; cursor:pointer; background:#fff; transition:.12s;}
   .payrow.on{border-color:var(--primary); background:var(--primary-50);}
   .payrow .plabel{flex:1; font-size:16px; font-weight:800; letter-spacing:-.2px;}
-  .payrow .paylogo{flex:1; height:24px; width:auto; align-self:center; object-fit:contain; object-position:left center; -webkit-user-drag:none;}
+  .payrow .paylogo{flex:0 0 auto; height:22px; width:auto; align-self:center; object-fit:contain; object-position:left center; -webkit-user-drag:none;}
   .payrow .rd iconify-icon{font-size:23px; color:var(--border); display:block;}
   .payrow.on .rd iconify-icon{color:var(--primary);}
 
@@ -187,9 +187,9 @@
 
     <!-- 간편결제 -->
     <div id="tabEasy" style="display:none">
-      <div class="payrow on" onclick="selpay(this)"><img class="paylogo" src="../img/카카오페이.png" alt="카카오페이"><span class="rd"><iconify-icon icon="mingcute:check-circle-fill"></iconify-icon></span></div>
-      <div class="payrow" onclick="selpay(this)"><img class="paylogo" src="../img/네이버페이.png" alt="네이버페이"><span class="rd"><iconify-icon icon="mingcute:check-circle-fill"></iconify-icon></span></div>
-      <div class="payrow" onclick="selpay(this)"><img class="paylogo" src="../img/토스페이.png" alt="토스페이"><span class="rd"><iconify-icon icon="mingcute:check-circle-fill"></iconify-icon></span></div>
+      <div class="payrow on" onclick="selpay(this)"><img class="paylogo" src="../img/카카오페이.png" alt=""><span class="plabel">카카오페이</span><span class="rd"><iconify-icon icon="mingcute:check-circle-fill"></iconify-icon></span></div>
+      <div class="payrow" onclick="selpay(this)"><img class="paylogo" src="../img/네이버페이.png" alt=""><span class="plabel">네이버페이</span><span class="rd"><iconify-icon icon="mingcute:check-circle-fill"></iconify-icon></span></div>
+      <div class="payrow" onclick="selpay(this)"><img class="paylogo" src="../img/토스페이.png" alt=""><span class="plabel">토스페이</span><span class="rd"><iconify-icon icon="mingcute:check-circle-fill"></iconify-icon></span></div>
     </div>
 
   </div>
