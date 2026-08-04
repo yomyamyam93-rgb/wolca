@@ -51,7 +51,8 @@
   /* 비회원 카드 입력 */
   .guest .plabel{margin-bottom:8px;}
   .guest .cardno .min{text-align:center; padding:0 4px;}
-  .easy img{height:22px; width:auto; display:block; flex:0 0 auto; -webkit-user-drag:none;}
+  /* 로고 폭을 고정해 이름이 같은 자리에서 시작하게 */
+  .easy img{height:22px; width:62px; flex:0 0 auto; display:block; object-fit:contain; object-position:left center; -webkit-user-drag:none;}
   /* 간편결제 */
   .easylist{display:flex; flex-direction:column; gap:10px;}
   .easy{display:flex; align-items:center; gap:12px; height:58px; padding:0 16px; border:1.5px solid var(--line);
