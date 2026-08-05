@@ -18,20 +18,22 @@
     line-height:1.5; word-break:keep-all; -webkit-font-smoothing:antialiased;}
   iconify-icon{display:inline-block;}
 
-  /* 상단 */
   .top{height:60px; background:#fff; border-bottom:1px solid var(--line); display:flex; align-items:center;
     padding:0 22px; gap:14px; position:sticky; top:0; z-index:20;}
   .top .lg{display:flex; align-items:center; gap:9px; font-size:17px; font-weight:800; letter-spacing:-.3px;}
   .top .lg img{height:26px;}
   .top .tag{font-size:11.5px; font-weight:800; color:var(--primary-dark); background:var(--primary-50); padding:4px 9px; border-radius:7px;}
-  .top .me{margin-left:auto; display:flex; align-items:center; gap:10px; font-size:13.5px; color:var(--sub);}
-  .top .me b{color:var(--ink);}
+  /* 지금 근무 중인 사람 */
+  .who{margin-left:auto; display:flex; align-items:center; gap:8px;}
+  .who .lbl{font-size:12.5px; color:var(--placeholder);}
+  .av{width:30px; height:30px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-size:12px; font-weight:800; color:#fff; border:2px solid #fff;}
+  .avs{display:flex;} .avs .av + .av{margin-left:-8px;}
+  .av.me{box-shadow:0 0 0 2px var(--primary);}
   .top .out{height:34px; padding:0 13px; border:1px solid var(--line); border-radius:9px; background:#fff;
-    font-family:inherit; font-size:13px; font-weight:700; color:var(--sub); cursor:pointer;}
+    font-family:inherit; font-size:13px; font-weight:700; color:var(--sub); cursor:pointer; margin-left:6px;}
 
   .layout{display:flex; min-height:calc(100vh - 60px);}
-
-  /* 왼쪽 메뉴 */
   .side{width:196px; flex:0 0 auto; background:#fff; border-right:1px solid var(--line); padding:16px 12px;}
   .side .grp{font-size:11px; font-weight:800; color:var(--placeholder); padding:14px 10px 7px; letter-spacing:.3px;}
   .side a{display:flex; align-items:center; gap:10px; padding:11px 10px; border-radius:10px;
@@ -46,45 +48,52 @@
   h1{font-size:21px; font-weight:800; letter-spacing:-.4px;}
   .h-sub{font-size:13.5px; color:var(--placeholder); margin-top:5px;}
 
-  /* 지표 */
-  .kpis{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:11px; margin:18px 0 20px;}
+  .kpis{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:11px; margin:18px 0 16px;}
   .kpi{background:#fff; border-radius:14px; padding:15px 17px; border:1px solid var(--line);}
   .kpi .l{font-size:12.5px; color:var(--placeholder);}
   .kpi .v{font-size:23px; font-weight:800; letter-spacing:-.5px; margin-top:5px;}
   .kpi.warn .v{color:var(--danger);}
   .kpi.good .v{color:var(--ok);}
 
-  /* 본문 2단 */
+  /* 상태 탭 */
+  .tabs{display:flex; gap:7px; margin-bottom:14px; flex-wrap:wrap;}
+  .tabs button{height:38px; padding:0 15px; border:1px solid var(--line); border-radius:10px; background:#fff;
+    font-family:inherit; font-size:13.5px; font-weight:700; color:var(--sub); cursor:pointer;}
+  .tabs button.on{background:var(--primary); border-color:var(--primary); color:#fff;}
+  .tabs button .c{margin-left:6px; opacity:.8;}
+
   .cols{display:flex; gap:16px; align-items:flex-start;}
   .list{flex:0 0 340px; background:#fff; border:1px solid var(--line); border-radius:16px; overflow:hidden;}
   .list .lh{display:flex; align-items:center; gap:8px; padding:13px 15px; border-bottom:1px solid var(--line);}
   .list .lh .t{font-size:14px; font-weight:800;}
   .list .lh .cnt{font-size:12px; font-weight:800; color:var(--primary-dark); background:var(--primary-50); padding:3px 8px; border-radius:7px;}
   .list .lh .sortbtn{margin-left:auto; font-size:12px; color:var(--placeholder); background:none; border:none; font-family:inherit; cursor:pointer;}
-  .items{max-height:560px; overflow-y:auto;}
+  .items{max-height:600px; overflow-y:auto;}
   .it{padding:13px 15px; border-bottom:1px solid var(--line); cursor:pointer; transition:.12s;}
   .it:hover{background:#FAFCFF;}
   .it.on{background:var(--primary-50); box-shadow:inset 3px 0 0 var(--primary);}
   .it .r1{display:flex; align-items:center; gap:7px;}
   .it .ty{font-size:13.5px; font-weight:800;}
   .it .amt{margin-left:auto; font-size:13.5px; font-weight:800;}
-  .it .r2{display:flex; align-items:center; gap:7px; margin-top:5px; font-size:12px; color:var(--placeholder);}
+  .it .r2{display:flex; align-items:center; gap:6px; margin-top:5px; font-size:12px; color:var(--placeholder); flex-wrap:wrap;}
+  .seeing{display:inline-flex; align-items:center; gap:5px; font-size:11px; font-weight:800;
+    padding:3px 8px 3px 3px; border-radius:20px; background:#EEF1F4; color:var(--sub);}
+  .seeing .av{width:18px; height:18px; font-size:9px; border-width:0;}
+  .seeing.me{background:var(--ok-bg); color:var(--ok);}
   .badge{font-size:10.5px; font-weight:800; padding:3px 7px; border-radius:6px;}
   .badge.sla{background:var(--danger-bg); color:var(--danger);}
-  .badge.lock{background:#EEF1F4; color:var(--sub);}
-  .badge.two{background:var(--warn-bg); color:var(--warn);}
-  .badge.mine{background:var(--ok-bg); color:var(--ok);}
+  .badge.re{background:var(--primary-50); color:var(--primary-dark);}
+  .badge.big{background:var(--warn-bg); color:var(--warn);}
 
-  /* 상세 */
   .detail{flex:1; min-width:0; background:#fff; border:1px solid var(--line); border-radius:16px; padding:20px 22px;}
   .dtop{display:flex; align-items:flex-start; gap:12px; padding-bottom:16px; border-bottom:1px solid var(--line);}
   .dtop .tt{font-size:19px; font-weight:800; letter-spacing:-.4px;}
   .dtop .ss{font-size:13px; color:var(--placeholder); margin-top:5px;}
-  .dtop .st{margin-left:auto; display:flex; gap:6px; flex-wrap:wrap; justify-content:flex-end;}
+  .dtop .st{margin-left:auto; display:flex; gap:6px; flex-wrap:wrap; justify-content:flex-end; align-items:center;}
 
   .dgrid{display:flex; gap:18px; margin-top:18px; align-items:flex-start; flex-wrap:wrap;}
-  .docbox{flex:1 1 320px; min-width:0;}
-  .docview{height:330px; border:1px solid var(--line); border-radius:12px; background:#F7F9FC;
+  .docbox{flex:1 1 300px; min-width:0;}
+  .docview{height:280px; border:1px solid var(--line); border-radius:12px; background:#F7F9FC;
     display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; color:var(--icon-off);}
   .docview iconify-icon{font-size:44px;}
   .docview .dn{font-size:13px; font-weight:700; color:var(--sub);}
@@ -93,26 +102,40 @@
     font-family:inherit; font-size:12.5px; font-weight:700; color:var(--sub); cursor:pointer;}
   .doctools button:hover{border-color:var(--primary-100); color:var(--primary-dark);}
 
-  .info{flex:1 1 300px; min-width:0;}
-  .irow{display:flex; justify-content:space-between; gap:12px; padding:10px 0; font-size:13.5px; border-bottom:1px solid var(--line);}
+  .info{flex:1 1 280px; min-width:0;}
+  .irow{display:flex; justify-content:space-between; gap:12px; padding:9px 0; font-size:13.5px; border-bottom:1px solid var(--line);}
   .irow .l{color:var(--placeholder); flex:0 0 auto;}
   .irow .v{font-weight:700; text-align:right; word-break:break-all;}
-  .check{display:flex; align-items:center; gap:8px; margin-top:14px; padding:12px 14px; border-radius:11px;
-    background:var(--ok-bg); font-size:13px; font-weight:700; color:var(--ok);}
-  .check.bad{background:var(--danger-bg); color:var(--danger);}
-  .check iconify-icon{font-size:18px;}
 
-  /* 액션 */
-  .acts{display:flex; gap:9px; margin-top:20px; padding-top:18px; border-top:1px solid var(--line);}
+  /* 자동 확인 결과 */
+  .autos{margin-top:14px; display:flex; flex-direction:column; gap:7px;}
+  .auto{display:flex; align-items:center; gap:8px; padding:10px 12px; border-radius:10px;
+    font-size:12.5px; font-weight:700; background:var(--ok-bg); color:var(--ok);}
+  .auto.bad{background:var(--danger-bg); color:var(--danger);}
+  .auto iconify-icon{font-size:16px;}
+
+  /* 체크리스트 */
+  .chk{margin-top:20px; padding:16px 18px; border:1px solid var(--line); border-radius:14px; background:#FAFCFF;}
+  .chk .ch{font-size:13.5px; font-weight:800; margin-bottom:11px; display:flex; align-items:center; gap:7px;}
+  .chk .ch .g{margin-left:auto; font-size:12px; font-weight:700; color:var(--placeholder);}
+  .ck{display:flex; align-items:flex-start; gap:10px; padding:8px 0; font-size:13.5px; cursor:pointer;}
+  .ck .bx{width:20px; height:20px; flex:0 0 auto; border:1.5px solid var(--border); border-radius:6px; background:#fff;
+    display:flex; align-items:center; justify-content:center; margin-top:1px;}
+  .ck .bx iconify-icon{font-size:14px; color:#fff;}
+  .ck.on .bx{background:var(--primary); border-color:var(--primary);}
+  .ck.on .tx{color:var(--ink); font-weight:700;}
+  .ck .tx{color:var(--sub); line-height:1.5;}
+  .ck .tx em{font-style:normal; color:var(--primary-dark); font-weight:700;}
+
+  .acts{display:flex; gap:9px; margin-top:18px; padding-top:16px; border-top:1px solid var(--line); flex-wrap:wrap;}
   .acts button{height:48px; border-radius:12px; font-family:inherit; font-size:15px; font-weight:800; cursor:pointer; border:none;}
-  .acts .claim{flex:1; background:var(--primary); color:#fff;}
-  .acts .ok{flex:1; background:var(--ok); color:#fff;}
-  .acts .no{flex:0 0 130px; background:#fff; border:1.5px solid var(--border); color:var(--danger);}
-  .acts .hold{flex:0 0 120px; background:#fff; border:1.5px solid var(--border); color:var(--sub);}
+  .acts .ok{flex:1; min-width:180px; background:var(--ok); color:#fff;}
+  .acts .fix{flex:0 0 130px; background:#fff; border:1.5px solid var(--border); color:var(--warn);}
+  .acts .no{flex:0 0 100px; background:#fff; border:1.5px solid var(--border); color:var(--danger);}
+  .acts .hold{flex:0 0 100px; background:#fff; border:1.5px solid var(--border); color:var(--sub);}
   .acts button:disabled{background:#EEF1F4; color:var(--placeholder); border-color:var(--line); cursor:default;}
-  .lockmsg{margin-top:12px; font-size:13px; color:var(--placeholder); text-align:center;}
+  .lockmsg{margin-top:11px; font-size:13px; color:var(--placeholder); text-align:center;}
 
-  /* 반려 팝업 */
   .dim{position:fixed; inset:0; background:rgba(15,20,30,.45); opacity:0; pointer-events:none; transition:.25s; z-index:50;}
   .dim.on{opacity:1; pointer-events:auto;}
   .modal{position:fixed; left:50%; top:50%; transform:translate(-50%,-46%) scale(.97); opacity:0; pointer-events:none;
@@ -123,14 +146,14 @@
   .modal .ms{font-size:13.5px; color:var(--placeholder); margin:7px 0 16px;}
   .rsn{display:flex; align-items:center; gap:10px; padding:12px 13px; border:1.5px solid var(--line);
     border-radius:11px; margin-bottom:8px; cursor:pointer; font-size:14px;}
-  .rsn.on{border-color:var(--danger); background:var(--danger-bg); font-weight:700;}
-  .memo{width:100%; height:80px; border:1.5px solid var(--border); border-radius:11px; padding:11px 12px;
+  .rsn.on{border-color:var(--primary); background:var(--primary-50); font-weight:700;}
+  .memo{width:100%; height:78px; border:1.5px solid var(--border); border-radius:11px; padding:11px 12px;
     font-family:inherit; font-size:13.5px; resize:none; margin-top:6px;}
   .memo:focus{outline:none; border-color:var(--primary);}
   .mbtns{display:flex; gap:9px; margin-top:16px;}
   .mbtns button{flex:1; height:46px; border-radius:11px; font-family:inherit; font-size:14.5px; font-weight:800; cursor:pointer;}
   .mbtns .c{border:1.5px solid var(--border); background:#fff; color:var(--sub);}
-  .mbtns .d{border:none; background:var(--danger); color:#fff;}
+  .mbtns .go{border:none; background:var(--primary); color:#fff;}
 
   .toast{position:fixed; left:50%; bottom:36px; transform:translateX(-50%); background:#191F28; color:#fff;
     padding:13px 20px; border-radius:24px; font-size:13.5px; font-weight:700; z-index:60; opacity:0; transition:.2s;}
@@ -148,8 +171,13 @@
 <div class="top">
   <span class="lg"><img src="../img/logo-mark.png" alt="">랜선페이</span>
   <span class="tag">관리자</span>
-  <span class="me">
-    <span><b>김심사</b> · 심사자</span>
+  <span class="who">
+    <span class="lbl">지금 근무 중</span>
+    <span class="avs">
+      <span class="av me" style="background:#2563EB" title="김심사 (나)">김</span>
+      <span class="av" style="background:#7C5CFF" title="박심사">박</span>
+      <span class="av" style="background:#0EA5A5" title="이심사">이</span>
+    </span>
     <button class="out" onclick="toast('로그아웃')">로그아웃</button>
   </span>
 </div>
@@ -157,7 +185,7 @@
 <div class="layout">
   <nav class="side">
     <div class="grp">운영</div>
-    <a class="on"><iconify-icon icon="mingcute:search-2-fill"></iconify-icon>심사<span class="n">8</span></a>
+    <a class="on"><iconify-icon icon="mingcute:search-2-fill"></iconify-icon>심사<span class="n" id="sideN">8</span></a>
     <a onclick="soon()"><iconify-icon icon="mingcute:transfer-3-fill"></iconify-icon>결제 · 송금</a>
     <a onclick="soon()"><iconify-icon icon="mingcute:link-2-fill"></iconify-icon>요청 링크</a>
     <a onclick="soon()"><iconify-icon icon="mingcute:message-3-fill"></iconify-icon>문의</a>
@@ -166,6 +194,7 @@
     <a onclick="soon()"><iconify-icon icon="mingcute:alert-fill"></iconify-icon>이상거래</a>
     <a onclick="soon()"><iconify-icon icon="mingcute:chart-bar-fill"></iconify-icon>통계 · 정산</a>
     <div class="grp">시스템</div>
+    <a onclick="soon()"><iconify-icon icon="mingcute:list-check-fill"></iconify-icon>심사 기준</a>
     <a onclick="soon()"><iconify-icon icon="mingcute:settings-3-fill"></iconify-icon>설정</a>
     <a onclick="soon()"><iconify-icon icon="mingcute:history-fill"></iconify-icon>기록</a>
   </nav>
@@ -181,11 +210,13 @@
       <div class="kpi"><div class="l">평균 심사시간</div><div class="v">6분</div></div>
     </div>
 
+    <div class="tabs" id="tabs"></div>
+
     <div class="cols">
       <section class="list">
         <div class="lh">
-          <span class="t">대기열</span><span class="cnt" id="lCnt">8</span>
-          <button class="sortbtn" onclick="toast('마감 임박순으로 보고 있어요')">마감 임박순 ▾</button>
+          <span class="t" id="lTitle">대기열</span><span class="cnt" id="lCnt">8</span>
+          <button class="sortbtn" onclick="toast('오래 기다린 건이 위로 올라와요')">오래된 순 ▾</button>
         </div>
         <div class="items" id="items"></div>
       </section>
@@ -195,87 +226,158 @@
   </main>
 </div>
 
-<!-- 반려 -->
-<div class="dim" id="dim" onclick="closeNo()"></div>
+<div class="dim" id="dim" onclick="closeM()"></div>
 <div class="modal" id="modal">
-  <h3>반려 사유를 골라주세요</h3>
-  <div class="ms">고른 사유가 신청자에게 문자로 안내됩니다.</div>
+  <h3 id="mTitle"></h3>
+  <div class="ms" id="mSub"></div>
   <div id="rsns"></div>
   <textarea class="memo" id="memo" placeholder="덧붙일 말 (선택)"></textarea>
   <div class="mbtns">
-    <button class="c" onclick="closeNo()">취소</button>
-    <button class="d" onclick="doReject()">반려하고 다음 건</button>
+    <button class="c" onclick="closeM()">취소</button>
+    <button class="go" id="mGo" onclick="doModal()"></button>
   </div>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-/* ── 예시 데이터 ── */
-var ME = '김심사';
-var DATA = [
-  { id:'A-0142', type:'부동산 임대차 · 월세', amt:500000, user:'홍길동', min:34, doc:'임대차계약서 1장',
-    payee:'대성부동산', acct:'KB국민 123456-78-901234', card:'삼성 Deep Dream · 3개월', match:true, lock:null },
-  { id:'A-0143', type:'B2B 매입대금', amt:3500000, user:'미라클상사', min:31, doc:'거래명세서 1장',
-    payee:'한빛식자재', acct:'기업 302-1122-3344', card:'현대 the Green · 일시불', match:true, lock:null, two:true },
-  { id:'A-0144', type:'별도 관리비', amt:156000, user:'김지연', min:12, doc:'관리비 고지서 1장',
-    payee:'행복관리사무소', acct:'신한 110-234-567890', card:'국민 tantan · 3개월', match:true, lock:'박심사' },
-  { id:'A-0145', type:'인건비 · 용역비', amt:1200000, user:'미라클상사', min:9, doc:'용역계약서 1장',
-    payee:'김직원', acct:'토스뱅크 1000-1234-5678', card:'현대 the Green · 3개월', match:false, lock:null, two:true },
-  { id:'A-0146', type:'복비', amt:680000, user:'홍길동', min:6, doc:'중개보수 영수증 1장',
-    payee:'대성부동산', acct:'KB국민 123456-78-901234', card:'삼성 Deep Dream · 3개월', match:true, lock:null },
-  { id:'A-0147', type:'이사비', amt:450000, user:'이수민', min:4, doc:'이사비 견적서 1장',
-    payee:'영구크린', acct:'우리 1002-345-678901', card:'롯데 로카 · 2개월', match:true, lock:null },
-  { id:'A-0148', type:'렌트료 · 렌탈료', amt:390000, user:'박준호', min:3, doc:'렌탈 계약서 1장',
-    payee:'미니렌트카', acct:'하나 123-456789-01', card:'BC 바로 · 일시불', match:true, lock:null },
-  { id:'A-0149', type:'교육비', amt:380000, user:'최유진', min:1, doc:'학원비 고지서 1장',
-    payee:'한빛학원', acct:'농협 302-9876-5432', card:'신한 딥드림 · 3개월', match:true, lock:null }
-];
-var REASONS = ['증빙에 금액이 보이지 않아요','예금주와 계약자가 달라요','서류가 흐리거나 잘렸어요',
-               '유형에 맞지 않는 서류예요','거래를 확인할 수 없어요','이용할 수 없는 거래예요'];
-var cur = 0, pickedReason = -1;
+/* ───── 사람 ───── */
+var ME = { n:'김심사', s:'김', c:'#2563EB' };
+var P박 = { n:'박심사', s:'박', c:'#7C5CFF' };
+var P이 = { n:'이심사', s:'이', c:'#0EA5A5' };
 
-/* ── 목록 ── */
+/* ───── 유형별 확인 항목 (시스템 > 심사 기준에서 관리) ───── */
+var CHECKS = {
+  '부동산 임대차 · 월세': ['계약서에 <em>월세 금액</em>이 보이나요', '입금 계좌가 서류에 있나요',
+                          '예금주가 <em>임대인</em>과 같나요', '계약 기간이 유효한가요'],
+  'B2B 매입대금':        ['<em>공급자 상호</em>가 인쇄돼 있나요', '거래 금액이 신청과 같나요',
+                          '입금 계좌가 사업자 계좌인가요', '수기로만 쓴 증빙은 아닌가요'],
+  '별도 관리비':          ['고지서에 <em>관리비 금액</em>이 보이나요', '납부 계좌가 서류에 있나요',
+                          '청구 대상 주소가 맞나요'],
+  '인건비 · 용역비':      ['계약서에 <em>날인</em>이 있나요', '지급액이 신청과 같나요',
+                          '받는 사람 <em>본인 명의</em> 계좌인가요'],
+  '복비':                ['중개보수 금액이 보이나요', '중개사무소 정보가 있나요', '입금 계좌가 확인되나요'],
+  '이사비':              ['견적 금액이 신청과 같나요', '업체 정보가 확인되나요', '입금 계좌가 있나요'],
+  '렌트료 · 렌탈료':      ['계약 대상과 금액이 보이나요', '납부 계좌가 있나요', '리스 계약은 아닌가요'],
+  '교육비':              ['고지서에 금액이 보이나요', '기관 정보가 확인되나요', '납부 계좌가 있나요']
+};
+var REASONS_FIX = ['서류가 흐리거나 잘렸어요','금액이 보이지 않아요','계좌번호가 보이지 않아요',
+                   '유형에 맞지 않는 서류예요','추가 서류가 필요해요'];
+var REASONS_NO  = ['예금주와 계약 상대가 달라요','거래를 확인할 수 없어요','이용할 수 없는 거래예요',
+                   '위조가 의심돼요','같은 서류를 다시 올렸어요'];
+
+/* ───── 예시 데이터 ───── */
+var DATA = [
+  { id:'A-0142', st:'wait', type:'부동산 임대차 · 월세', amt:500000, user:'홍길동', min:34, doc:'임대차계약서 1장',
+    payee:'대성부동산', acct:'KB국민 123456-78-901234', card:'삼성 Deep Dream · 3개월',
+    autos:[['ok','예금주 확인 — 대성부동산 일치'],['ok','서류에서 읽은 금액 500,000원 — 신청과 같음'],['ok','같은 서류 재사용 없음']], see:null },
+  { id:'A-0143', st:'wait', type:'B2B 매입대금', amt:3500000, user:'미라클상사', min:31, doc:'거래명세서 1장',
+    payee:'한빛식자재', acct:'기업 302-1122-3344', card:'현대 the Green · 일시불',
+    autos:[['ok','예금주 확인 — 한빛식자재 일치'],['ok','서류에서 읽은 금액 3,500,000원 — 신청과 같음'],['ok','같은 서류 재사용 없음']], see:null },
+  { id:'A-0144', st:'wait', type:'별도 관리비', amt:156000, user:'김지연', min:12, doc:'관리비 고지서 1장',
+    payee:'행복관리사무소', acct:'신한 110-234-567890', card:'국민 tantan · 3개월',
+    autos:[['ok','예금주 확인 — 행복관리사무소 일치'],['ok','서류에서 읽은 금액 156,000원 — 신청과 같음'],['ok','같은 서류 재사용 없음']], see:P박 },
+  { id:'A-0145', st:'wait', type:'인건비 · 용역비', amt:1200000, user:'미라클상사', min:9, doc:'용역계약서 1장',
+    payee:'김직원', acct:'토스뱅크 1000-1234-5678', card:'현대 the Green · 3개월',
+    autos:[['bad','예금주 확인 — 서류의 김지원과 다름 (김직원)'],['ok','서류에서 읽은 금액 1,200,000원 — 신청과 같음'],['ok','같은 서류 재사용 없음']], see:null },
+  { id:'A-0146', st:'wait', type:'복비', amt:680000, user:'홍길동', min:6, doc:'중개보수 영수증 1장',
+    payee:'대성부동산', acct:'KB국민 123456-78-901234', card:'삼성 Deep Dream · 3개월',
+    autos:[['ok','예금주 확인 — 대성부동산 일치'],['ok','서류에서 읽은 금액 680,000원 — 신청과 같음'],['bad','2주 전 올린 서류와 같은 이미지예요']], see:P이 },
+  { id:'A-0147', st:'wait', type:'이사비', amt:450000, user:'이수민', min:4, doc:'이사비 견적서 1장',
+    payee:'영구크린', acct:'우리 1002-345-678901', card:'롯데 로카 · 2개월',
+    autos:[['ok','예금주 확인 — 영구크린 일치'],['ok','서류에서 읽은 금액 450,000원 — 신청과 같음'],['ok','같은 서류 재사용 없음']], see:null },
+  { id:'A-0148', st:'wait', type:'렌트료 · 렌탈료', amt:390000, user:'박준호', min:3, doc:'렌탈 계약서 1장',
+    payee:'미니렌트카', acct:'하나 123-456789-01', card:'BC 바로 · 일시불',
+    autos:[['ok','예금주 확인 — 미니렌트카 일치'],['ok','서류에서 읽은 금액 390,000원 — 신청과 같음'],['ok','같은 서류 재사용 없음']], see:null },
+  { id:'A-0149', st:'wait', type:'교육비', amt:380000, user:'최유진', min:1, doc:'학원비 고지서 1장',
+    payee:'한빛학원', acct:'농협 302-9876-5432', card:'신한 딥드림 · 3개월',
+    autos:[['ok','예금주 확인 — 한빛학원 일치'],['ok','서류에서 읽은 금액 380,000원 — 신청과 같음'],['ok','같은 서류 재사용 없음']], see:null },
+
+  { id:'A-0138', st:'fix', type:'복비', amt:300000, user:'정민아', min:96, doc:'중개보수 영수증 1장',
+    payee:'우리부동산', acct:'국민 987-65-432109', card:'삼성 taptap · 3개월',
+    autos:[['bad','서류에서 금액을 읽지 못했어요']], see:null, fixed:'서류가 흐리거나 잘렸어요' },
+  { id:'A-0139', st:'fix', type:'별도 관리비', amt:98000, user:'서동현', min:78, doc:'관리비 고지서 1장',
+    payee:'푸른관리단', acct:'신한 110-987-654321', card:'현대 M · 일시불',
+    autos:[['bad','납부 계좌를 찾지 못했어요']], see:null, fixed:'계좌번호가 보이지 않아요' },
+
+  { id:'A-0131', st:'re', type:'인테리어', amt:2400000, user:'한지훈', min:150, doc:'공사 계약서 2장 (재제출)',
+    payee:'바른시공', acct:'기업 021-345-678901', card:'롯데 로카 · 6개월',
+    autos:[['ok','예금주 확인 — 바른시공 일치'],['ok','서류에서 읽은 금액 2,400,000원 — 신청과 같음'],['ok','같은 서류 재사용 없음']], see:null },
+
+  { id:'A-0127', st:'hold', type:'기타', amt:5000000, user:'오세영', min:210, doc:'거래 확인서 1장',
+    payee:'개인', acct:'카카오뱅크 3333-01-2345678', card:'국민 tantan · 6개월',
+    autos:[['bad','받는 계좌가 개인 명의예요 — 확인 필요'],['ok','서류에서 읽은 금액 5,000,000원 — 신청과 같음']], see:null, holdMemo:'개인 간 거래 · 판단 어려워 보류' }
+];
+
+var TABS = [
+  { k:'wait', t:'대기' }, { k:'fix', t:'보완 대기' }, { k:'re', t:'재심사' }, { k:'hold', t:'보류' }
+];
+var tab = 'wait', cur = 0, mMode = '', pickedR = -1, checked = [];
+
 function won(n){ return n.toLocaleString('ko-KR') + '원'; }
-function drawList(){
-  document.getElementById('items').innerHTML = DATA.map(function(d, i){
-    var b = [];
-    if (d.min >= 30) b.push('<span class="badge sla">' + d.min + '분 경과</span>');
-    if (d.two)      b.push('<span class="badge two">2인 확인</span>');
-    if (d.lock === ME) b.push('<span class="badge mine">내가 심사 중</span>');
-    else if (d.lock)   b.push('<span class="badge lock">' + d.lock + ' 검토 중</span>');
-    return '<div class="it' + (i === cur ? ' on' : '') + '" onclick="pick(' + i + ')">' +
-      '<div class="r1"><span class="ty">' + d.type + '</span><span class="amt">' + won(d.amt) + '</span></div>' +
-      '<div class="r2"><span>' + d.user + '</span><span>·</span><span>' + d.min + '분 전</span></div>' +
-      (b.length ? '<div class="r2">' + b.join('') + '</div>' : '') +
-      '</div>';
+function view(){ return DATA.filter(function(d){ return d.st === tab; }); }
+
+function drawTabs(){
+  document.getElementById('tabs').innerHTML = TABS.map(function(t){
+    var c = DATA.filter(function(d){ return d.st === t.k; }).length;
+    return '<button class="' + (t.k === tab ? 'on' : '') + '" onclick="goTab(\'' + t.k + '\')">' +
+           t.t + '<span class="c">' + c + '</span></button>';
   }).join('');
-  document.getElementById('lCnt').textContent = DATA.length;
-  document.getElementById('kWait').textContent = DATA.length + '건';
-  document.getElementById('kSla').textContent = DATA.filter(function(d){ return d.min >= 30; }).length + '건';
+  document.getElementById('sideN').textContent = DATA.filter(function(d){ return d.st === 'wait'; }).length;
+  document.getElementById('kWait').textContent = DATA.filter(function(d){ return d.st === 'wait'; }).length + '건';
+  document.getElementById('kSla').textContent  = DATA.filter(function(d){ return d.st === 'wait' && d.min >= 30; }).length + '건';
+}
+function goTab(k){ tab = k; cur = 0; drawAll(); }
+
+function seeTag(d){
+  if (!d.see) return '';
+  var me = d.see.n === ME.n;
+  return '<span class="seeing' + (me ? ' me' : '') + '">' +
+         '<span class="av" style="background:' + d.see.c + '">' + d.see.s + '</span>' +
+         d.see.n + (me ? ' (나)' : '') + ' 보는 중</span>';
 }
 
-/* ── 상세 ── */
+function drawList(){
+  var v = view();
+  document.getElementById('lTitle').textContent = (TABS.filter(function(t){ return t.k === tab; })[0] || {}).t;
+  document.getElementById('lCnt').textContent = v.length;
+  document.getElementById('items').innerHTML = v.length ? v.map(function(d, i){
+    var b = [];
+    if (d.st === 'wait' && d.min >= 30) b.push('<span class="badge sla">' + d.min + '분 경과</span>');
+    if (d.st === 're') b.push('<span class="badge re">재제출</span>');
+    if (d.amt >= 3000000) b.push('<span class="badge big">고액</span>');
+    return '<div class="it' + (i === cur ? ' on' : '') + '" onclick="pick(' + i + ')">' +
+      '<div class="r1"><span class="ty">' + d.type + '</span><span class="amt">' + won(d.amt) + '</span></div>' +
+      '<div class="r2"><span>' + d.user + '</span><span>·</span><span>' + d.min + '분 전</span>' + seeTag(d) + '</div>' +
+      (b.length ? '<div class="r2">' + b.join('') + '</div>' : '') +
+      '</div>';
+  }).join('') : '<div style="padding:40px 20px; text-align:center; color:var(--placeholder); font-size:13.5px">여기는 비어 있어요</div>';
+}
+
 function drawDetail(){
-  var d = DATA[cur];
-  if (!d) { document.getElementById('detail').innerHTML = '<div class="lockmsg">대기 중인 건이 없어요.</div>'; return; }
-  var mine = d.lock === ME, other = d.lock && !mine;
+  var v = view(), d = v[cur];
+  var box = document.getElementById('detail');
+  if (!d) { box.innerHTML = '<div class="lockmsg" style="padding:60px 0">고를 건이 없어요.</div>'; return; }
+
+  var others = d.see && d.see.n !== ME.n;
+  var list = CHECKS[d.type] || ['서류에 금액이 보이나요', '입금 계좌가 서류에 있나요', '예금주가 일치하나요'];
+  if (checked.length !== list.length) checked = list.map(function(){ return false; });
 
   var badges = '';
-  if (d.min >= 30) badges += '<span class="badge sla">' + d.min + '분 경과</span>';
-  if (d.two)      badges += '<span class="badge two">2인 확인 필요</span>';
-  if (other)      badges += '<span class="badge lock">' + d.lock + ' 검토 중</span>';
-  if (mine)       badges += '<span class="badge mine">내가 심사 중</span>';
+  if (d.st === 'wait' && d.min >= 30) badges += '<span class="badge sla">' + d.min + '분 경과</span>';
+  if (d.st === 're') badges += '<span class="badge re">재제출</span>';
+  if (d.amt >= 3000000) badges += '<span class="badge big">고액 · 사후 점검 대상</span>';
+  badges += seeTag(d);
 
-  document.getElementById('detail').innerHTML =
+  box.innerHTML =
   '<div class="dtop"><div><div class="tt">' + d.type + '</div>' +
-  '<div class="ss">' + d.id + ' · ' + d.user + ' 신청 · ' + d.min + '분 전</div></div>' +
+  '<div class="ss">' + d.id + ' · ' + d.user + ' 신청 · ' + d.min + '분 전' +
+  (d.fixed ? ' · 보완 요청: ' + d.fixed : '') + (d.holdMemo ? ' · ' + d.holdMemo : '') + '</div></div>' +
   '<div class="st">' + badges + '</div></div>' +
 
   '<div class="dgrid">' +
     '<div class="docbox">' +
-      '<div class="docview"><iconify-icon icon="mingcute:document-fill"></iconify-icon>' +
-      '<div class="dn">' + d.doc + '</div></div>' +
+      '<div class="docview"><iconify-icon icon="mingcute:document-fill"></iconify-icon><div class="dn">' + d.doc + '</div></div>' +
       '<div class="doctools">' +
         '<button onclick="toast(\'크게 보기\')">크게 보기</button>' +
         '<button onclick="toast(\'회전\')">회전</button>' +
@@ -283,75 +385,109 @@ function drawDetail(){
       '</div>' +
     '</div>' +
     '<div class="info">' +
-      row('신청 금액', won(d.amt)) +
-      row('수수료 4%', won(Math.round(d.amt * 0.04))) +
+      row('신청 금액', won(d.amt)) + row('수수료 4%', won(Math.round(d.amt * 0.04))) +
       row('결제 예정', won(d.amt + Math.round(d.amt * 0.04))) +
-      row('받는 분', d.payee) +
-      row('입금 계좌', d.acct) +
-      row('등록 카드', d.card) +
-      (d.match
-        ? '<div class="check"><iconify-icon icon="mingcute:check-circle-fill"></iconify-icon>예금주와 계약 상대가 일치해요</div>'
-        : '<div class="check bad"><iconify-icon icon="mingcute:alert-fill"></iconify-icon>예금주가 서류와 달라요 — 확인 필요</div>') +
+      row('받는 분', d.payee) + row('입금 계좌', d.acct) + row('등록 카드', d.card) +
+      '<div class="autos">' + d.autos.map(function(a){
+        return '<div class="auto' + (a[0] === 'bad' ? ' bad' : '') + '">' +
+          '<iconify-icon icon="' + (a[0] === 'bad' ? 'mingcute:alert-fill' : 'mingcute:check-circle-fill') + '"></iconify-icon>' +
+          a[1] + '</div>';
+      }).join('') + '</div>' +
     '</div>' +
   '</div>' +
 
-  '<div class="acts">' +
-    (mine
-      ? '<button class="ok" onclick="doApprove()">' + (d.two ? '1차 승인 (선임 확인 필요)' : '승인하고 다음 건') + '</button>' +
-        '<button class="no" onclick="openNo()">반려</button>' +
-        '<button class="hold" onclick="unclaim()">놓기</button>'
-      : '<button class="claim" onclick="claim()"' + (other ? ' disabled' : '') + '>' +
-        (other ? d.lock + ' 님이 보고 있어요' : '내가 심사하기') + '</button>') +
+  '<div class="chk"><div class="ch"><iconify-icon icon="mingcute:list-check-fill"></iconify-icon>' + d.type + ' 확인 항목' +
+    '<span class="g" id="ckCnt"></span></div>' +
+    list.map(function(t, i){
+      return '<div class="ck' + (checked[i] ? ' on' : '') + '" onclick="tick(' + i + ')">' +
+        '<span class="bx"><iconify-icon icon="mingcute:check-fill"></iconify-icon></span>' +
+        '<span class="tx">' + t + '</span></div>';
+    }).join('') +
   '</div>' +
-  (mine ? '' : '<div class="lockmsg">' + (other
-      ? '다른 담당자가 먼저 가져갔어요. 다른 건을 골라주세요.'
-      : '먼저 가져와야 승인 · 반려할 수 있어요.') + '</div>');
+
+  '<div class="acts">' +
+    '<button class="ok" id="okBtn" onclick="doApprove()">승인하고 다음 건</button>' +
+    '<button class="fix" onclick="openM(\'fix\')">보완 요청</button>' +
+    '<button class="no" onclick="openM(\'no\')">반려</button>' +
+    '<button class="hold" onclick="doHold()">보류</button>' +
+  '</div>' +
+  (others ? '<div class="lockmsg">' + d.see.n + ' 님도 이 건을 보고 있어요. 겹치지 않게 확인해주세요.</div>' : '');
+
+  syncOk();
 }
 function row(l, v){ return '<div class="irow"><span class="l">' + l + '</span><span class="v">' + v + '</span></div>'; }
 
-/* ── 동작 ── */
-function pick(i){ cur = i; drawList(); drawDetail(); }
-function claim(){
-  var d = DATA[cur];
-  if (d.lock) { toast('다른 담당자가 먼저 가져갔어요'); drawList(); drawDetail(); return; }
-  d.lock = ME;
-  drawList(); drawDetail();
-  toast('이 건을 가져왔어요 · 10분 뒤 자동으로 풀려요');
+function tick(i){ checked[i] = !checked[i]; drawDetail(); }
+function syncOk(){
+  var all = checked.length && checked.every(Boolean);
+  var b = document.getElementById('okBtn');
+  if (b) b.disabled = !all;
+  var c = document.getElementById('ckCnt');
+  if (c) c.textContent = checked.filter(Boolean).length + ' / ' + checked.length + ' 확인';
 }
-function unclaim(){ DATA[cur].lock = null; drawList(); drawDetail(); toast('다시 대기열로 보냈어요'); }
+
+/* 다른 사람이 보고 있다는 표시 — 내가 열면 나로 갱신 */
+function pick(i){
+  var v = view();
+  view().forEach(function(d){ if (d.see && d.see.n === ME.n) d.see = null; });
+  cur = i;
+  var d = view()[cur];
+  if (d && !d.see) d.see = ME;
+  checked = [];
+  drawAll();
+}
+
 function nextOne(msg){
-  DATA.splice(cur, 1);
-  if (cur >= DATA.length) cur = Math.max(0, DATA.length - 1);
-  var done = parseInt(document.getElementById('kMine').textContent, 10) + 1;
-  document.getElementById('kMine').textContent = done + '건';
-  drawList(); drawDetail(); toast(msg);
+  var v = view(), d = v[cur];
+  DATA.splice(DATA.indexOf(d), 1);
+  if (cur >= view().length) cur = Math.max(0, view().length - 1);
+  document.getElementById('kMine').textContent =
+    (parseInt(document.getElementById('kMine').textContent, 10) + 1) + '건';
+  checked = [];
+  drawAll(); toast(msg);
 }
-function doApprove(){
-  var d = DATA[cur];
-  nextOne(d.two ? '1차 승인했어요 · 선임 확인 대기로 넘어갔어요' : '승인했어요 · 결제와 송금이 진행됩니다');
+function moveTo(st, msg){
+  var v = view(), d = v[cur];
+  d.st = st; d.see = null; d.min = 0;
+  if (cur >= view().length) cur = Math.max(0, view().length - 1);
+  checked = [];
+  drawAll(); toast(msg);
 }
-function openNo(){
-  pickedReason = -1;
-  document.getElementById('rsns').innerHTML = REASONS.map(function(r, i){
+function doApprove(){ nextOne('승인했어요 · 결제와 송금이 진행됩니다'); }
+function doHold(){ moveTo('hold', '보류함으로 옮겼어요'); }
+
+function openM(mode){
+  mMode = mode; pickedR = -1;
+  var isFix = mode === 'fix';
+  document.getElementById('mTitle').textContent = isFix ? '무엇을 보완해야 하나요?' : '반려 사유를 골라주세요';
+  document.getElementById('mSub').textContent = isFix
+    ? '고른 내용이 신청자에게 문자로 안내되고, 다시 올리면 재심사로 들어와요.'
+    : '고른 사유가 신청자에게 문자로 안내되고 이 건은 종료됩니다.';
+  document.getElementById('mGo').textContent = isFix ? '보완 요청 보내기' : '반려하기';
+  var rs = isFix ? REASONS_FIX : REASONS_NO;
+  document.getElementById('rsns').innerHTML = rs.map(function(r, i){
     return '<div class="rsn" onclick="pickR(' + i + ')" id="r' + i + '">' + r + '</div>';
   }).join('');
   document.getElementById('memo').value = '';
   document.getElementById('dim').classList.add('on');
   document.getElementById('modal').classList.add('on');
 }
-function closeNo(){
+function closeM(){
   document.getElementById('dim').classList.remove('on');
   document.getElementById('modal').classList.remove('on');
 }
 function pickR(i){
-  pickedReason = i;
-  REASONS.forEach(function(_, k){ document.getElementById('r' + k).classList.toggle('on', k === i); });
+  pickedR = i;
+  document.querySelectorAll('#rsns .rsn').forEach(function(e, k){ e.classList.toggle('on', k === i); });
 }
-function doReject(){
-  if (pickedReason < 0) { toast('반려 사유를 골라주세요'); return; }
-  closeNo();
-  nextOne('반려했어요 · 신청자에게 문자로 안내됩니다');
+function doModal(){
+  if (pickedR < 0) { toast('사유를 골라주세요'); return; }
+  var txt = document.querySelectorAll('#rsns .rsn')[pickedR].textContent;
+  closeM();
+  if (mMode === 'fix') { view()[cur].fixed = txt; moveTo('fix', '보완 요청을 보냈어요 · 문자로 안내됩니다'); }
+  else nextOne('반려했어요 · 신청자에게 문자로 안내됩니다');
 }
+
 function soon(){ toast('이 메뉴는 아직 화면만 잡아둔 상태예요'); }
 var tmr;
 function toast(m){
@@ -359,8 +495,8 @@ function toast(m){
   t.textContent = m; t.classList.add('on');
   clearTimeout(tmr); tmr = setTimeout(function(){ t.classList.remove('on'); }, 1900);
 }
-
-drawList(); drawDetail();
+function drawAll(){ drawTabs(); drawList(); drawDetail(); }
+drawAll();
 </script>
 </body>
 </html>
