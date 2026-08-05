@@ -107,87 +107,17 @@
     <svg width="26" height="13" viewBox="0 0 26 13"><rect x=".5" y=".5" width="22" height="12" rx="3.5" fill="none" stroke="#191F28" stroke-opacity=".35"/><rect x="2.5" y="2.5" width="16" height="8" rx="1.8" fill="#191F28"/><rect x="24" y="4.5" width="1.6" height="4" rx=".8" fill="#191F28" fill-opacity=".35"/></svg>
   </span></div>
 
-  <div class="topbar"><div class="back" onclick="lpBack('20_정산.html')">‹</div><div class="ttl">결제 요청</div></div>
-
-  <div class="body hasfoot" id="formView">
-    <div class="sec-s">거래처에 결제 링크를 보내면, 상대가 <b>자기 카드로</b> 결제해요.<br>거래 증빙은 <b>내가 올리고</b>, 심사가 끝나면 링크가 발송됩니다.</div>
-
-    <div class="how">
-      <div class="st"><div class="n">1</div><div class="t">서류 심사</div></div>
-      <div class="st"><div class="n">2</div><div class="t">링크 발송</div></div>
-      <div class="st"><div class="n">3</div><div class="t">거래처 결제</div></div>
-      <div class="st"><div class="n">4</div><div class="t">내 계좌 입금</div></div>
-    </div>
-
-    <div class="pad">
-      <div class="field" style="margin-bottom:6px">
-        <label>요청 금액</label>
-        <div class="amtbig"><input id="amt" inputmode="numeric" value="3,500,000"><span>원</span></div>
-        <div class="quick">
-          <span onclick="add(500000)">+50만</span><span onclick="add(1000000)">+100만</span>
-          <span onclick="add(5000000)">+500만</span><span onclick="setA(0)">지우기</span>
-        </div>
-      </div>
-      <div class="calc">
-        <div class="crow"><span>수수료 4% (거래처 부담)</span><span class="v" id="fee">140,000원</span></div>
-        <div class="crow"><span>내가 받는 금액</span><span class="v" id="get">3,500,000원</span></div>
-        <div class="crow tot"><span>거래처 결제금액</span><span class="v" id="tot">3,640,000원</span></div>
-      </div>
-    </div>
-
-    <div class="sec-t">받는 사람</div>
-    <div class="pad">
-      <div class="field"><label>거래처 이름</label><input class="tin" id="pName" value="한빛식자재"></div>
-      <div class="field"><label>휴대폰 번호 <span style="font-weight:500;color:var(--placeholder)">(문자로 링크 발송)</span></label>
-        <input class="tin" inputmode="numeric" placeholder="010-0000-0000" value="010-2345-6789"></div>
-      <div class="field" style="margin-bottom:0"><label>메모 <span style="font-weight:500;color:var(--placeholder)">(선택)</span></label>
-        <input class="tin" id="pMemo" placeholder="예) 8월 식자재 대금"></div>
-    </div>
-
-
-    <div class="sec-t">거래 증빙 서류</div>
-    <div class="sec-s">계약서 · 거래명세서 · 세금계산서 중 하나를 올려주세요.<br>거래처가 아니라 <b>내가 올립니다.</b></div>
-    <div class="pad">
-      <div class="updrop" id="upDrop" onclick="pickDoc()">
-        <iconify-icon icon="mingcute:upload-3-fill"></iconify-icon>
-        <div class="ut">서류 사진이나 파일 올리기</div>
-        <div class="us">JPG · PNG · PDF · 20MB 이하</div>
-      </div>
-      <div class="filerow" id="fileRow" style="display:none">
-        <iconify-icon icon="mingcute:document-fill"></iconify-icon>
-        <span class="fn">거래명세서_한빛식자재.pdf</span>
-        <button class="fx" onclick="event.stopPropagation(); dropDoc()">삭제</button>
-      </div>
-      <div class="dochelp" onclick="location.href='11_확인서류안내.html?t=B2B 매입대금'">
-        <iconify-icon icon="mingcute:question-fill"></iconify-icon>어떤 서류가 필요한가요?
-        <iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon>
-      </div>
-    </div>
-
-    <div class="sec-t">입금받을 계좌</div>
-    <div class="box">
-      <div class="row" onclick="openAcct()">
-        <span class="ic"><iconify-icon icon="mingcute:bank-fill"></iconify-icon></span>
-        <span class="tx"><div class="t" id="acctNo">기업 302-1122-3344</div><div class="s" id="acctNm">미라클상사 (사업자 계좌)</div></span>
-        <iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon>
-      </div>
-    </div>
-
-    <div class="note">
-      <iconify-icon icon="mingcute:information-fill"></iconify-icon>
-      <div>결제 링크는 <b>발송 당일 자정까지</b> 열려요. 거래처가 결제하면 알림으로 알려드리고, 곧바로 <b>내 계좌로 입금</b>됩니다.</div>
-    </div>
-  </div>
+  <div class="topbar"><div class="back" onclick="location.href='9_홈_사업자.html'">‹</div><div class="ttl">결제 요청</div></div>
 
   <!-- 발송 완료 -->
-  <div class="body doneview" id="doneView">
+  <div class="body doneview on" id="doneView">
     <div class="ck"><iconify-icon icon="mingcute:send-plane-fill"></iconify-icon></div>
     <h2>서류 심사를 시작했어요</h2>
     <p>보통 <b>30분 이내</b>에 끝나요.<br>승인되면 <b>한빛식자재</b>에게 결제 링크가 문자로 발송됩니다.</p>
 
     <div class="linkbox">
       <span class="u" id="reqUrl">승인 후 링크가 만들어져요</span>
-      <button onclick="copyReq()">복사</button>
+      <button onclick="toast('심사가 끝나면 링크가 발송돼요')">복사</button>
     </div>
     <div class="shares">
       <button onclick="toast('문자를 다시 보냈어요')"><iconify-icon icon="mingcute:message-3-fill"></iconify-icon>문자 재발송</button>
@@ -199,156 +129,21 @@
     </div>
   </div>
 
-  <div class="footer" id="foot">
-    <button class="btn" onclick="send()"><iconify-icon icon="mingcute:send-plane-fill"></iconify-icon>심사 요청하고 링크 보내기</button>
-  </div>
-  <div class="footer" id="foot2" style="display:none">
+  <div class="footer" id="foot2">
     <div class="two">
-      <button class="btn ghost" onclick="lpBack('20_정산.html')">닫기</button>
-      <button class="btn" onclick="location.reload()">또 요청하기</button>
+      <button class="btn ghost" onclick="location.href='9_홈_사업자.html'">홈으로</button>
+      <button class="btn" onclick="location.href='42_요청1_유형.html'">또 요청하기</button>
     </div>
   </div>
 
-  <!-- 입금받을 계좌 선택 -->
-  <div class="dim" id="acDim" onclick="closeAcct()"></div>
-  <div class="sheet" id="acSheet">
-    <div class="handle"></div>
-    <div class="s-top"><h3>입금받을 계좌</h3><button class="s-x" onclick="closeAcct()">✕</button></div>
-
-    <div class="aclist" id="acList">
-      <div class="ac on" onclick="pickAcct(this)" data-no="기업 302-1122-3344" data-nm="미라클상사 (사업자 계좌)">
-        <span class="ic"><iconify-icon icon="mingcute:bank-fill"></iconify-icon></span>
-        <span class="tx"><div class="t">기업 302-1122-3344</div><div class="s">미라클상사 (사업자 계좌)</div></span>
-        <iconify-icon class="ck" icon="mingcute:check-circle-fill"></iconify-icon>
-      </div>
-      <div class="ac" onclick="pickAcct(this)" data-no="국민 123456-04-567890" data-nm="미라클상사 (정산 전용)">
-        <span class="ic"><iconify-icon icon="mingcute:bank-fill"></iconify-icon></span>
-        <span class="tx"><div class="t">국민 123456-04-567890</div><div class="s">미라클상사 (정산 전용)</div></span>
-        <iconify-icon class="ck" icon="mingcute:check-circle-fill"></iconify-icon>
-      </div>
-    </div>
-
-    <div class="acadd" id="acAdd">
-      <div class="ac-h">새 계좌 등록</div>
-      <div class="banks" id="banks">
-        <button class="bk on" onclick="pickBank(this)">기업</button>
-        <button class="bk" onclick="pickBank(this)">국민</button>
-        <button class="bk" onclick="pickBank(this)">신한</button>
-        <button class="bk" onclick="pickBank(this)">우리</button>
-        <button class="bk" onclick="pickBank(this)">하나</button>
-        <button class="bk" onclick="pickBank(this)">농협</button>
-        <button class="bk" onclick="pickBank(this)">카카오뱅크</button>
-        <button class="bk" onclick="pickBank(this)">토스뱅크</button>
-      </div>
-      <input class="tin" id="acNo" inputmode="numeric" placeholder="계좌번호 (- 없이 숫자만)" oninput="acChk()">
-      <div class="acmsg" id="acMsg">사업자 명의 계좌만 등록할 수 있어요.</div>
-      <button class="acbtn" id="acBtn" onclick="addAcct()" disabled>계좌 확인하고 등록</button>
-    </div>
-  </div>
 </div>
 <script src="app.js"></script>
 <script>
-var fmt = function(n){ return n.toLocaleString('ko-KR'); };
-function calc(){
-  var raw = document.getElementById('amt').value.replace(/[^0-9]/g, '');
-  var a = parseInt(raw || '0', 10);
-  document.getElementById('amt').value = a ? fmt(a) : '';
-  var fee = Math.round(a * 0.04);
-  document.getElementById('fee').textContent = fmt(fee) + '원';
-  document.getElementById('get').textContent = fmt(a) + '원';
-  document.getElementById('tot').textContent = fmt(a + fee) + '원';
-}
-function add(n){
-  var raw = document.getElementById('amt').value.replace(/[^0-9]/g, '');
-  document.getElementById('amt').value = fmt(parseInt(raw || '0', 10) + n); calc();
-}
-function setA(n){ document.getElementById('amt').value = n ? fmt(n) : ''; calc(); }
-document.getElementById('amt').addEventListener('input', calc);
-
-var docOk = false;
-function pickDoc(){
-  docOk = true;
-  document.getElementById('upDrop').style.display = 'none';
-  document.getElementById('fileRow').style.display = 'flex';
-  toast('서류를 올렸어요');
-}
-function dropDoc(){
-  docOk = false;
-  document.getElementById('upDrop').style.display = 'block';
-  document.getElementById('fileRow').style.display = 'none';
-}
-function send(){
-  if (!docOk) { toast('거래 증빙 서류를 먼저 올려주세요'); return; }
-  document.getElementById('formView').style.display = 'none';
-  document.getElementById('foot').style.display = 'none';
-  document.getElementById('doneView').classList.add('on');
-  document.getElementById('foot2').style.display = 'block';
-}
 
 /* 입금받을 계좌 선택 · 등록 */
-function openAcct(){
-  document.getElementById('acDim').classList.add('on');
-  document.getElementById('acSheet').classList.add('on');
-}
-function closeAcct(){
-  document.getElementById('acDim').classList.remove('on');
-  document.getElementById('acSheet').classList.remove('on');
-}
-function pickAcct(el){
-  document.querySelectorAll('#acList .ac').forEach(function(x){ x.classList.remove('on'); });
-  el.classList.add('on');
-  document.getElementById('acctNo').textContent = el.dataset.no;
-  document.getElementById('acctNm').textContent = el.dataset.nm;
-  setTimeout(function(){ closeAcct(); toast('입금받을 계좌를 바꿨어요'); }, 200);
-}
-function pickBank(el){
-  document.querySelectorAll('#banks .bk').forEach(function(x){ x.classList.remove('on'); });
-  el.classList.add('on');
-  acChk();
-}
-function acChk(){
-  var v = document.getElementById('acNo').value.replace(/[^0-9]/g, '');
-  document.getElementById('acNo').value = v;
-  var ok = v.length >= 10;
-  document.getElementById('acBtn').disabled = !ok;
-  var m = document.getElementById('acMsg');
-  m.className = ok ? 'acmsg ok' : 'acmsg';
-  m.textContent = ok ? '등록할 수 있는 계좌예요.' : '사업자 명의 계좌만 등록할 수 있어요.';
-}
-function addAcct(){
-  var bank = document.querySelector('#banks .bk.on').textContent;
-  var no = document.getElementById('acNo').value;
-  var el = document.createElement('div');
-  el.className = 'ac';
-  el.dataset.no = bank + ' ' + no;
-  el.dataset.nm = '미라클상사 (사업자 계좌)';
-  el.setAttribute('onclick', 'pickAcct(this)');
-  el.innerHTML = '<span class="ic"><iconify-icon icon="mingcute:bank-fill"></iconify-icon></span>' +
-    '<span class="tx"><div class="t">' + bank + ' ' + no + '</div><div class="s">미라클상사 (사업자 계좌)</div></span>' +
-    '<iconify-icon class="ck" icon="mingcute:check-circle-fill"></iconify-icon>';
-  document.getElementById('acList').appendChild(el);
-  document.getElementById('acNo').value = '';
-  acChk();
-  pickAcct(el);
-}
 
 
 /* 복사되는 링크는 홈페이지 결제 화면으로 실제 연결됨 */
-function reqLink(){
-  var amt  = (document.getElementById('amt').value || '0').replace(/[^0-9]/g, '');
-  var name = document.getElementById('pName').value.trim() || '거래처';
-  var memo = document.getElementById('pMemo').value.trim() || '결제 요청';
-  var q = '?r=8KD2M9&from=' + encodeURIComponent('미라클상사') +
-          '&item=' + encodeURIComponent(memo) +
-          '&amt=' + amt +
-          '&acct=' + encodeURIComponent(document.getElementById('acctNo').textContent) +
-          '&payee=' + encodeURIComponent(name);
-  return new URL('../홈페이지/송금하기.html' + q, location.href).href;
-}
-function copyReq(){
-  if (navigator.clipboard) navigator.clipboard.writeText(reqLink());
-  toast('링크를 복사했어요 · 붙여넣어 열어볼 수 있어요');
-}
 
 function toast(m){
   var t = document.createElement('div');
