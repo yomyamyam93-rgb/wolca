@@ -114,18 +114,36 @@
   .auto.bad{background:var(--danger-bg); color:var(--danger);}
   .auto iconify-icon{font-size:16px;}
 
-  /* 체크리스트 */
-  .chk{margin-top:20px; padding:16px 18px; border:1px solid var(--line); border-radius:14px; background:#FAFCFF;}
-  .chk .ch{font-size:13.5px; font-weight:800; margin-bottom:11px; display:flex; align-items:center; gap:7px;}
-  .chk .ch .g{margin-left:auto; font-size:12px; font-weight:700; color:var(--placeholder);}
-  .ck{display:flex; align-items:flex-start; gap:10px; padding:8px 0; font-size:13.5px; cursor:pointer;}
-  .ck .bx{width:20px; height:20px; flex:0 0 auto; border:1.5px solid var(--border); border-radius:6px; background:#fff;
-    display:flex; align-items:center; justify-content:center; margin-top:1px;}
-  .ck .bx iconify-icon{font-size:14px; color:#fff;}
-  .ck.on .bx{background:var(--primary); border-color:var(--primary);}
-  .ck.on .tx{color:var(--ink); font-weight:700;}
-  .ck .tx{color:var(--sub); line-height:1.5;}
-  .ck .tx em{font-style:normal; color:var(--primary-dark); font-weight:700;}
+  /* AI 판정 */
+  .ai{margin-top:20px; border:1px solid var(--line); border-radius:14px; overflow:hidden;}
+  .ai .vh{display:flex; align-items:center; gap:11px; padding:15px 18px;}
+  .ai .vh .ic{width:38px; height:38px; flex:0 0 auto; border-radius:12px; display:flex; align-items:center; justify-content:center;}
+  .ai .vh .ic iconify-icon{font-size:21px; color:#fff;}
+  .ai .vh .t{font-size:15.5px; font-weight:800;}
+  .ai .vh .s{font-size:12.5px; margin-top:3px;}
+  .ai.ok .vh{background:var(--ok-bg);}
+  .ai.ok .vh .ic{background:var(--ok);}
+  .ai.ok .vh .t{color:var(--ok);}
+  .ai.ok .vh .s{color:#0B7C5E;}
+  .ai.chk .vh{background:var(--warn-bg);}
+  .ai.chk .vh .ic{background:var(--warn);}
+  .ai.chk .vh .t{color:var(--warn);}
+  .ai.chk .vh .s{color:#8A4308;}
+  .ai .rows{padding:6px 18px 14px; background:#fff;}
+  .ai .r{display:flex; align-items:flex-start; gap:9px; padding:9px 0; font-size:13.5px; border-top:1px solid var(--line);}
+  .ai .r:first-child{border-top:none;}
+  .ai .r iconify-icon{font-size:17px; flex:0 0 auto; margin-top:1px; color:var(--ok);}
+  .ai .r.bad iconify-icon{color:var(--danger);}
+  .ai .r .tx{color:var(--sub); line-height:1.55;}
+  .ai .r .tx b{color:var(--ink);}
+  .ai .r.bad .tx b{color:var(--danger);}
+  .confirm{display:flex; align-items:center; gap:10px; margin:0 18px 16px; padding:12px 14px;
+    border:1.5px solid var(--warn); border-radius:11px; background:#fff; cursor:pointer;
+    font-size:13.5px; font-weight:700; color:var(--warn);}
+  .confirm .bx{width:20px; height:20px; flex:0 0 auto; border:1.5px solid var(--warn); border-radius:6px;
+    display:flex; align-items:center; justify-content:center;}
+  .confirm .bx iconify-icon{font-size:14px; color:#fff;}
+  .confirm.on .bx{background:var(--warn);}
 
   .acts{display:flex; gap:9px; margin-top:18px; padding-top:16px; border-top:1px solid var(--line); flex-wrap:wrap;}
   .acts button{height:48px; border-radius:12px; font-family:inherit; font-size:15px; font-weight:800; cursor:pointer; border:none;}
@@ -312,7 +330,7 @@ var DATA = [
 var TABS = [
   { k:'wait', t:'대기' }, { k:'fix', t:'보완 대기' }, { k:'re', t:'재심사' }, { k:'hold', t:'보류' }
 ];
-var tab = 'wait', cur = 0, mMode = '', pickedR = -1, checked = [];
+var tab = 'wait', cur = 0, mMode = '', pickedR = -1, confirmed = false;
 
 function won(n){ return n.toLocaleString('ko-KR') + '원'; }
 function view(){ return DATA.filter(function(d){ return d.st === tab; }); }
@@ -361,7 +379,6 @@ function drawDetail(){
 
   var others = d.see && d.see.n !== ME.n;
   var list = CHECKS[d.type] || ['서류에 금액이 보이나요', '입금 계좌가 서류에 있나요', '예금주가 일치하나요'];
-  if (checked.length !== list.length) checked = list.map(function(){ return false; });
 
   var badges = '';
   if (d.st === 'wait' && d.min >= 30) badges += '<span class="badge sla">' + d.min + '분 경과</span>';
@@ -388,22 +405,11 @@ function drawDetail(){
       row('신청 금액', won(d.amt)) + row('수수료 4%', won(Math.round(d.amt * 0.04))) +
       row('결제 예정', won(d.amt + Math.round(d.amt * 0.04))) +
       row('받는 분', d.payee) + row('입금 계좌', d.acct) + row('등록 카드', d.card) +
-      '<div class="autos">' + d.autos.map(function(a){
-        return '<div class="auto' + (a[0] === 'bad' ? ' bad' : '') + '">' +
-          '<iconify-icon icon="' + (a[0] === 'bad' ? 'mingcute:alert-fill' : 'mingcute:check-circle-fill') + '"></iconify-icon>' +
-          a[1] + '</div>';
-      }).join('') + '</div>' +
+
     '</div>' +
   '</div>' +
 
-  '<div class="chk"><div class="ch"><iconify-icon icon="mingcute:list-check-fill"></iconify-icon>' + d.type + ' 확인 항목' +
-    '<span class="g" id="ckCnt"></span></div>' +
-    list.map(function(t, i){
-      return '<div class="ck' + (checked[i] ? ' on' : '') + '" onclick="tick(' + i + ')">' +
-        '<span class="bx"><iconify-icon icon="mingcute:check-fill"></iconify-icon></span>' +
-        '<span class="tx">' + t + '</span></div>';
-    }).join('') +
-  '</div>' +
+  aiPanel(d, list) +
 
   '<div class="acts">' +
     '<button class="ok" id="okBtn" onclick="doApprove()">승인하고 다음 건</button>' +
@@ -417,13 +423,39 @@ function drawDetail(){
 }
 function row(l, v){ return '<div class="irow"><span class="l">' + l + '</span><span class="v">' + v + '</span></div>'; }
 
-function tick(i){ checked[i] = !checked[i]; drawDetail(); }
+function aiPanel(d, list){
+  var bads = d.autos.filter(function(a){ return a[0] === 'bad'; });
+  var need = bads.length > 0;
+  var rows = list.map(function(t, i){
+    var bad = need && i === 0;
+    var label = t.replace(/<em>/g, '<b>').replace(/<[/]em>/g, '</b>');
+    return '<div class="r' + (bad ? ' bad' : '') + '">' +
+      '<iconify-icon icon="' + (bad ? 'mingcute:alert-fill' : 'mingcute:check-circle-fill') + '"></iconify-icon>' +
+      '<span class="tx">' + label + ' — <b>' + (bad ? '확인 필요' : '확인됨') + '</b></span></div>';
+  }).join('');
+  if (need) rows += bads.map(function(a){
+    return '<div class="r bad"><iconify-icon icon="mingcute:alert-fill"></iconify-icon>' +
+           '<span class="tx"><b>' + a[1] + '</b></span></div>';
+  }).join('');
+  return '<div class="ai ' + (need ? 'chk' : 'ok') + '">' +
+    '<div class="vh"><span class="ic"><iconify-icon icon="' +
+      (need ? 'mingcute:alert-fill' : 'mingcute:check-circle-fill') + '"></iconify-icon></span>' +
+      '<span><div class="t">' + (need ? 'AI 판정 — 확인이 필요해요' : 'AI 판정 — 승인해도 괜찮아요') + '</div>' +
+      '<div class="s">' + (need ? '아래 표시된 항목만 직접 보고 판단해주세요.'
+                                : '서류 · 금액 · 예금주가 모두 맞아요 · 신뢰도 98%') + '</div></span></div>' +
+    '<div class="rows">' + rows + '</div>' +
+    (need ? '<div class="confirm' + (confirmed ? ' on' : '') + '" onclick="toggleConfirm()">' +
+            '<span class="bx"><iconify-icon icon="mingcute:check-fill"></iconify-icon></span>' +
+            '직접 확인했고, 승인해도 된다고 판단했어요</div>' : '') +
+  '</div>';
+}
+function toggleConfirm(){ confirmed = !confirmed; drawDetail(); }
 function syncOk(){
-  var all = checked.length && checked.every(Boolean);
+  var d = view()[cur];
+  if (!d) return;
+  var need = d.autos.some(function(a){ return a[0] === 'bad'; });
   var b = document.getElementById('okBtn');
-  if (b) b.disabled = !all;
-  var c = document.getElementById('ckCnt');
-  if (c) c.textContent = checked.filter(Boolean).length + ' / ' + checked.length + ' 확인';
+  if (b) b.disabled = need && !confirmed;
 }
 
 /* 다른 사람이 보고 있다는 표시 — 내가 열면 나로 갱신 */
@@ -433,7 +465,7 @@ function pick(i){
   cur = i;
   var d = view()[cur];
   if (d && !d.see) d.see = ME;
-  checked = [];
+  confirmed = false;
   drawAll();
 }
 
@@ -443,14 +475,14 @@ function nextOne(msg){
   if (cur >= view().length) cur = Math.max(0, view().length - 1);
   document.getElementById('kMine').textContent =
     (parseInt(document.getElementById('kMine').textContent, 10) + 1) + '건';
-  checked = [];
+  confirmed = false;
   drawAll(); toast(msg);
 }
 function moveTo(st, msg){
   var v = view(), d = v[cur];
   d.st = st; d.see = null; d.min = 0;
   if (cur >= view().length) cur = Math.max(0, view().length - 1);
-  checked = [];
+  confirmed = false;
   drawAll(); toast(msg);
 }
 function doApprove(){ nextOne('승인했어요 · 결제와 송금이 진행됩니다'); }
