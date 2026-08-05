@@ -595,10 +595,9 @@ function ghop(el, next){
   var p = new URLSearchParams(location.search);
   if (!p.get('r')) return;
 
-  /* 요청받은 결제는 본인 카드 인증이 필요 — 수기 입력은 잠금 */
-  var bCard = document.getElementById('pbCard');
-  bCard.disabled = true;
-  bCard.onclick = function(){ alert('요청받은 결제는 앱카드 · 간편결제로만 할 수 있어요.'); };
+  /* 요청받은 결제는 본인 카드 인증이 필요 — 수기 카드결제는 아예 숨김 */
+  document.getElementById('pbCard').style.display = 'none';
+  document.getElementById('pt-card').remove();
   ptab('app', document.getElementById('pbApp'));
 
   var won = Number(p.get('amt') || 680000);
