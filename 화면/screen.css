@@ -1,3 +1,6 @@
+/* 한글은 단어 단위로만 줄바꿈 */
+body{word-break:keep-all; overflow-wrap:break-word;}
+
 /* 랜선페이 앱 화면 공용 스타일 */
 :root{
   --primary:#2563EB; --primary-dark:#1D4ED8; --primary-50:#EFF4FF; --primary-100:#DBE7FF;

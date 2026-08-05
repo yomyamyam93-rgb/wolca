@@ -14,6 +14,8 @@
     --primary-grad:linear-gradient(180deg, color-mix(in srgb, var(--primary) 82%, #ffffff), var(--primary));
   }
   *{box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent;}
+  /* 한글은 단어 단위로만 줄바꿈 (한 글자만 떨어지는 것 방지) */
+  body{word-break:keep-all; overflow-wrap:break-word;}
   body{font-family:'Pretendard',-apple-system,sans-serif; color:var(--ink); background:var(--page-bg);
        display:flex; justify-content:center; align-items:flex-start; padding:24px 0; line-height:1.5; -webkit-font-smoothing:antialiased;}
   .phone{width:390px; height:844px; max-width:100%; background:var(--bg); position:relative; display:flex; flex-direction:column;
