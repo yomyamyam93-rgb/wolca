@@ -7,11 +7,18 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
 <link rel="stylesheet" href="screen.css">
 <style>
-  .how{display:flex; gap:9px; margin-bottom:18px;}
-  .how div{flex:1; background:#fff; border-radius:14px; padding:14px 10px; text-align:center; box-shadow:0 1px 3px rgba(0,0,0,.04);}
-  .how .n{width:22px; height:22px; margin:0 auto 8px; border-radius:50%; background:var(--primary-50);
-    color:var(--primary-dark); font-size:11px; font-weight:800; display:flex; align-items:center; justify-content:center;}
-  .how .t{font-size:12px; font-weight:700; line-height:1.4;}
+  /* 진행 순서 — 한 줄로 이어지는 형태 (41_대신결제요청과 동일) */
+  .how{display:flex; align-items:flex-start; margin:2px 0 22px; padding:16px 6px 14px;
+    background:var(--primary-50); border-radius:16px;}
+  .how .st{flex:1; text-align:center; position:relative;}
+  .how .st:not(:last-child):after{content:''; position:absolute; top:15px; left:calc(50% + 19px); right:calc(-50% + 19px);
+    height:2px; background:var(--primary-100);}
+  .how .n{width:30px; height:30px; margin:0 auto 9px; border-radius:50%;
+    background:var(--primary); background:var(--primary-grad);
+    box-shadow:0 4px 10px -3px color-mix(in srgb, var(--primary) 55%, transparent);
+    color:#fff; font-size:13px; font-weight:800; display:flex; align-items:center; justify-content:center;
+    position:relative; z-index:1;}
+  .how .t{font-size:12px; font-weight:700; color:var(--primary-dark); line-height:1.35; word-break:keep-all;}
   .amtbig{display:flex; align-items:baseline; justify-content:flex-end; border-bottom:2px solid var(--primary); padding-bottom:9px;}
   .amtbig input{flex:1; border:none; outline:none; font-family:inherit; font-size:30px; font-weight:800; text-align:right; min-width:0; background:none;}
   .amtbig span{font-size:16px; font-weight:800; color:var(--sub); margin-left:6px;}
@@ -106,10 +113,10 @@
     <div class="sec-s">거래처에 결제 링크를 보내면, 상대가 <b>자기 카드로</b> 결제해요.<br>거래 증빙은 <b>내가 올리고</b>, 심사가 끝나면 링크가 발송됩니다.</div>
 
     <div class="how">
-      <div><div class="n">1</div><div class="t">서류 심사</div></div>
-      <div><div class="n">2</div><div class="t">링크 발송</div></div>
-      <div><div class="n">3</div><div class="t">거래처 결제</div></div>
-      <div><div class="n">4</div><div class="t">내 계좌 입금</div></div>
+      <div class="st"><div class="n">1</div><div class="t">서류 심사</div></div>
+      <div class="st"><div class="n">2</div><div class="t">링크 발송</div></div>
+      <div class="st"><div class="n">3</div><div class="t">거래처 결제</div></div>
+      <div class="st"><div class="n">4</div><div class="t">내 계좌 입금</div></div>
     </div>
 
     <div class="pad">
