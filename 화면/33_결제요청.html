@@ -43,11 +43,6 @@
   .linkbox .u{flex:1; min-width:0; font-size:12.5px; color:var(--sub); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
   .linkbox button{flex:0 0 auto; height:36px; padding:0 13px; border:none; border-radius:10px; background:var(--primary-50);
     color:var(--primary-dark); font-family:inherit; font-size:12.5px; font-weight:700; cursor:pointer;}
-  .shares{display:flex; gap:9px; margin-top:12px;}
-  .shares button{flex:1; height:50px; border:1.5px solid var(--line); border-radius:13px; background:#fff;
-    font-family:inherit; font-size:14px; font-weight:700; color:var(--sub); cursor:pointer; display:flex; align-items:center; justify-content:center; gap:6px;}
-  .shares iconify-icon{font-size:17px; color:var(--primary);}
-  .shares img{width:17px; height:17px; object-fit:contain;}
 
   /* 계좌 선택 시트 */
   .dim{position:absolute; inset:0; background:rgba(15,20,30,.5); opacity:0; pointer-events:none; transition:opacity .3s; z-index:20;}
@@ -97,6 +92,14 @@
     border:1.5px solid var(--line); font-size:13px; font-weight:700; color:var(--sub); cursor:pointer;}
   .dochelp > iconify-icon:first-child{font-size:17px; color:var(--primary);}
   .dochelp .gv{margin-left:auto; font-size:17px; color:var(--icon-off);}
+  .stepbox{margin-top:22px; padding:16px 18px; border-radius:16px; background:var(--card); text-align:left;
+    box-shadow:0 1px 3px rgba(0,0,0,.05);}
+  .stepbox .sp{display:flex; gap:11px; padding:9px 0;}
+  .stepbox .sp .no{width:22px; height:22px; flex:0 0 auto; border-radius:50%; background:var(--tile);
+    color:var(--placeholder); font-size:11.5px; font-weight:800; display:flex; align-items:center; justify-content:center;}
+  .stepbox .sp.on .no{background:var(--primary); color:#fff;}
+  .stepbox .sp .tx{font-size:13px; color:var(--placeholder); line-height:1.6;}
+  .stepbox .sp.on .tx{color:var(--ink); font-weight:700;}
 </style>
 <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 </head>
@@ -115,17 +118,15 @@
     <h2>서류 심사를 시작했어요</h2>
     <p>보통 <b>30분 이내</b>에 끝나요.<br>승인되면 <b>한빛식자재</b>에게 결제 링크가 문자로 발송됩니다.</p>
 
-    <div class="linkbox">
-      <span class="u" id="reqUrl">승인 후 링크가 만들어져요</span>
-      <button onclick="toast('심사가 끝나면 링크가 발송돼요')">복사</button>
-    </div>
-    <div class="shares">
-      <button onclick="toast('문자를 다시 보냈어요')"><iconify-icon icon="mingcute:message-3-fill"></iconify-icon>문자 재발송</button>
+    <div class="stepbox">
+      <div class="sp on"><span class="no">1</span><span class="tx">서류 심사 중 · 결과를 알림으로 알려드려요</span></div>
+      <div class="sp"><span class="no">2</span><span class="tx">승인되면 거래처에 결제 링크 발송</span></div>
+      <div class="sp"><span class="no">3</span><span class="tx">거래처가 결제하면 내 계좌로 입금</span></div>
     </div>
 
     <div class="note" style="text-align:left">
       <iconify-icon icon="mingcute:time-fill"></iconify-icon>
-      <div>결제 링크는 <b>발송 당일 자정까지</b> 열려요.<br>기간이 지나면 요청 목록에서 다시 보낼 수 있어요.</div>
+      <div>승인되면 <b>링크 복사 · 문자 재발송</b>을 요청 목록에서 할 수 있어요.<br>링크는 발송 당일 자정까지 열려요.</div>
     </div>
   </div>
 

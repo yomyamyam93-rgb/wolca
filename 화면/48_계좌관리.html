@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>랜선페이 — 등록한 계좌</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="screen.css">
+<style>
+  .acc{background:var(--card); border-radius:18px; padding:16px 17px; margin-bottom:11px;
+    box-shadow:0 1px 3px rgba(0,0,0,.05); position:relative;}
+  .acc.main{border:1.5px solid var(--primary);}
+  .acc .top{display:flex; align-items:center; gap:12px;}
+  .acc .ic{width:44px; height:44px; flex:0 0 auto; border-radius:14px; background:var(--primary-50);
+    display:flex; align-items:center; justify-content:center;}
+  .acc .ic iconify-icon{font-size:22px; color:var(--primary);}
+  .acc .tx{flex:1; min-width:0;}
+  .acc .no{font-size:15.5px; font-weight:800; letter-spacing:-.2px;}
+  .acc .nm{font-size:12.5px; color:var(--placeholder); margin-top:3px;}
+  .acc .badge{font-size:10.5px; font-weight:800; color:#fff; background:var(--primary);
+    padding:4px 8px; border-radius:7px; flex:0 0 auto;}
+  .acc .acts{display:flex; gap:8px; margin-top:13px; padding-top:13px; border-top:1px solid var(--line);}
+  .acc .acts button{flex:1; height:40px; border:1.5px solid var(--line); border-radius:11px; background:#fff;
+    font-family:inherit; font-size:13px; font-weight:700; color:var(--sub); cursor:pointer;}
+  .acc .acts button.pri{border-color:var(--primary-100); color:var(--primary-dark); background:var(--primary-50);}
+  .acc .acts button.del{color:var(--danger);}
+
+  .addbtn{display:flex; align-items:center; justify-content:center; gap:7px; width:100%; height:54px;
+    border:1.5px dashed var(--border); border-radius:16px; background:#fff; font-family:inherit;
+    font-size:14.5px; font-weight:700; color:var(--sub); cursor:pointer; margin-top:2px;}
+  .addbtn iconify-icon{font-size:20px; color:var(--primary);}
+
+  .sheet .banks{display:flex; flex-wrap:wrap; gap:7px; margin-bottom:11px;}
+  .sheet .bk{height:38px; padding:0 13px; border:1.5px solid var(--line); border-radius:11px; background:#fff;
+    font-family:inherit; font-size:13px; font-weight:700; color:var(--sub); cursor:pointer;}
+  .sheet .bk.on{border-color:var(--primary); background:var(--primary-50); color:var(--primary-dark);}
+  .acmsg{font-size:12px; color:var(--placeholder); margin:9px 2px 0; line-height:1.6;}
+  .acmsg.ok{color:var(--success); font-weight:700;}
+  .acbtn{width:100%; height:52px; margin-top:14px; border:none; border-radius:14px; cursor:pointer;
+    background:var(--primary-grad); box-shadow:var(--btn-shadow); color:#fff; font-family:inherit; font-size:15px; font-weight:700;}
+  .acbtn:disabled{background:var(--tile); box-shadow:none; color:var(--placeholder); cursor:default;}
+
+  .dim{position:absolute; inset:0; background:rgba(15,20,30,.5); opacity:0; pointer-events:none; transition:opacity .3s; z-index:20;}
+  .dim.on{opacity:1; pointer-events:auto;}
+  .sheet{position:absolute; left:0; right:0; bottom:0; z-index:21; background:#fff; border-radius:24px 24px 0 0;
+    max-height:86%; overflow-y:auto; padding:10px 20px 26px; transform:translateY(100%);
+    transition:transform .4s cubic-bezier(.2,.7,.2,1); scrollbar-width:none;}
+  .sheet::-webkit-scrollbar{display:none;}
+  .sheet.on{transform:translateY(0);}
+  .sheet .handle{width:44px; height:4px; border-radius:3px; background:#DDE2E8; margin:0 auto 14px;}
+  .sheet .s-top{display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;}
+  .sheet .s-top h3{font-size:18px; font-weight:800; letter-spacing:-.3px;}
+  .sheet .s-x{width:34px; height:34px; border:none; background:none; font-size:19px; color:var(--sub); cursor:pointer;}
+</style>
+<script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+</head>
+<body>
+<div class="phone">
+  <div class="statusbar"><span class="time">9:41</span><span class="stat">
+    <svg width="18" height="12" viewBox="0 0 18 12"><rect y="8" width="3" height="4" rx="1" fill="#191F28"/><rect x="5" y="5" width="3" height="7" rx="1" fill="#191F28"/><rect x="10" y="2.5" width="3" height="9.5" rx="1" fill="#191F28"/><rect x="15" width="3" height="12" rx="1" fill="#191F28"/></svg>
+    <svg width="26" height="13" viewBox="0 0 26 13"><rect x=".5" y=".5" width="22" height="12" rx="3.5" fill="none" stroke="#191F28" stroke-opacity=".35"/><rect x="2.5" y="2.5" width="16" height="8" rx="1.8" fill="#191F28"/><rect x="24" y="4.5" width="1.6" height="4" rx=".8" fill="#191F28" fill-opacity=".35"/></svg>
+  </span></div>
+
+  <div class="topbar"><div class="back" onclick="lpBack('21_더보기.html')">‹</div><div class="ttl">등록한 계좌</div></div>
+
+  <div class="body">
+    <div class="sec-s">결제 요청으로 받은 돈이 입금되는 계좌예요.<br>여러 개 등록해두고 요청할 때 골라 쓸 수 있어요.</div>
+
+    <div id="list">
+      <div class="acc main">
+        <div class="top">
+          <span class="ic"><iconify-icon icon="mingcute:bank-fill"></iconify-icon></span>
+          <span class="tx"><div class="no">기업 302-1122-3344</div><div class="nm">미라클상사 (사업자 계좌)</div></span>
+          <span class="badge">기본</span>
+        </div>
+        <div class="acts">
+          <button disabled style="opacity:.45">기본 계좌</button>
+          <button class="del" onclick="del(this)">삭제</button>
+        </div>
+      </div>
+
+      <div class="acc">
+        <div class="top">
+          <span class="ic"><iconify-icon icon="mingcute:bank-fill"></iconify-icon></span>
+          <span class="tx"><div class="no">국민 123456-04-567890</div><div class="nm">미라클상사 (정산 전용)</div></span>
+        </div>
+        <div class="acts">
+          <button class="pri" onclick="setMain(this)">기본으로 설정</button>
+          <button class="del" onclick="del(this)">삭제</button>
+        </div>
+      </div>
+    </div>
+
+    <button class="addbtn" onclick="openSheet()"><iconify-icon icon="mingcute:add-fill"></iconify-icon>새 계좌 등록</button>
+
+    <div class="note" style="text-align:left; margin-top:18px">
+      <iconify-icon icon="mingcute:information-fill"></iconify-icon>
+      <div>사업자 명의 계좌만 등록할 수 있어요. 예금주가 다르면 입금이 막힐 수 있으니 사업자등록증과 같은 이름인지 확인해주세요.</div>
+    </div>
+  </div>
+
+  <!-- 새 계좌 등록 -->
+  <div class="dim" id="dim" onclick="closeSheet()"></div>
+  <div class="sheet" id="sheet">
+    <div class="handle"></div>
+    <div class="s-top"><h3>새 계좌 등록</h3><button class="s-x" onclick="closeSheet()">✕</button></div>
+    <div class="banks" id="banks">
+      <button class="bk on" onclick="pickBank(this)">기업</button>
+      <button class="bk" onclick="pickBank(this)">국민</button>
+      <button class="bk" onclick="pickBank(this)">신한</button>
+      <button class="bk" onclick="pickBank(this)">우리</button>
+      <button class="bk" onclick="pickBank(this)">하나</button>
+      <button class="bk" onclick="pickBank(this)">농협</button>
+      <button class="bk" onclick="pickBank(this)">카카오뱅크</button>
+      <button class="bk" onclick="pickBank(this)">토스뱅크</button>
+    </div>
+    <input class="tin" id="acNo" inputmode="numeric" placeholder="계좌번호 (- 없이 숫자만)" oninput="chk()" style="width:100%">
+    <div class="acmsg" id="acMsg">예금주가 사업자와 같은지 확인해요.</div>
+    <button class="acbtn" id="acBtn" onclick="add()" disabled>계좌 확인하고 등록</button>
+  </div>
+</div>
+<script src="app.js"></script>
+<script>
+function openSheet(){
+  document.getElementById('dim').classList.add('on');
+  document.getElementById('sheet').classList.add('on');
+}
+function closeSheet(){
+  document.getElementById('dim').classList.remove('on');
+  document.getElementById('sheet').classList.remove('on');
+}
+function pickBank(el){
+  document.querySelectorAll('#banks .bk').forEach(function(x){ x.classList.remove('on'); });
+  el.classList.add('on');
+  chk();
+}
+function chk(){
+  var v = document.getElementById('acNo').value.replace(/[^0-9]/g, '');
+  document.getElementById('acNo').value = v;
+  var ok = v.length >= 10;
+  document.getElementById('acBtn').disabled = !ok;
+  var m = document.getElementById('acMsg');
+  m.className = ok ? 'acmsg ok' : 'acmsg';
+  m.textContent = ok ? '미라클상사 명의 계좌예요.' : '예금주가 사업자와 같은지 확인해요.';
+}
+function add(){
+  var bank = document.querySelector('#banks .bk.on').textContent;
+  var no = document.getElementById('acNo').value;
+  var el = document.createElement('div');
+  el.className = 'acc';
+  el.innerHTML =
+    '<div class="top"><span class="ic"><iconify-icon icon="mingcute:bank-fill"></iconify-icon></span>' +
+    '<span class="tx"><div class="no">' + bank + ' ' + no + '</div><div class="nm">미라클상사 (사업자 계좌)</div></span></div>' +
+    '<div class="acts"><button class="pri" onclick="setMain(this)">기본으로 설정</button>' +
+    '<button class="del" onclick="del(this)">삭제</button></div>';
+  document.getElementById('list').appendChild(el);
+  document.getElementById('acNo').value = '';
+  chk();
+  closeSheet();
+  toast('계좌를 등록했어요');
+}
+function setMain(btn){
+  document.querySelectorAll('#list .acc').forEach(function(a){
+    a.classList.remove('main');
+    var b = a.querySelector('.badge'); if (b) b.remove();
+    var f = a.querySelector('.acts button');
+    f.className = 'pri'; f.disabled = false; f.style.opacity = ''; f.textContent = '기본으로 설정';
+    f.setAttribute('onclick', 'setMain(this)');
+  });
+  var acc = btn.closest('.acc');
+  acc.classList.add('main');
+  var badge = document.createElement('span');
+  badge.className = 'badge'; badge.textContent = '기본';
+  acc.querySelector('.top').appendChild(badge);
+  btn.className = ''; btn.disabled = true; btn.style.opacity = '.45'; btn.textContent = '기본 계좌';
+  btn.removeAttribute('onclick');
+  toast('기본 계좌를 바꿨어요');
+}
+function del(btn){
+  var acc = btn.closest('.acc');
+  if (acc.classList.contains('main')) { toast('기본 계좌는 지울 수 없어요'); return; }
+  if (!confirm('이 계좌를 지울까요?')) return;
+  acc.remove();
+  toast('계좌를 지웠어요');
+}
+function toast(m){
+  var t = document.createElement('div');
+  t.textContent = m;
+  t.style.cssText = "position:absolute;bottom:60px;left:50%;transform:translateX(-50%);background:#191F28;color:#fff;padding:12px 18px;border-radius:24px;font-size:13px;font-weight:600;z-index:30;opacity:0;transition:.2s;white-space:nowrap";
+  document.querySelector('.phone').appendChild(t);
+  requestAnimationFrame(function(){ t.style.opacity = '1'; });
+  setTimeout(function(){ t.style.opacity = '0'; setTimeout(function(){ t.remove(); }, 200); }, 1600);
+}
+</script>
+</body>
+</html>
