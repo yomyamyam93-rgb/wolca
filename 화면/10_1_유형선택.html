@@ -62,7 +62,12 @@
 <script>
 function go(){ location.href='10_2_금액.html'; }
 /* 탭바에서 바로 들어온 경우엔 되돌아갈 기록이 없으므로 홈으로 */
-function goBack(){ lpBack('9_홈_개인.html'); }
+function goBack(){
+  /* 첫 단계라 항상 홈으로 (개인·사업자 자동 구분) */
+  var biz=false;
+  try{ biz = sessionStorage.getItem('lp_type')==='biz'; }catch(e){}
+  location.href = biz ? '9_홈_사업자.html' : '9_홈_개인.html';
+}
 </script>
 <script src="app.js"></script>
 </body>
