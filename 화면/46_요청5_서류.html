@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>결제 요청 4 · 증빙 서류</title>
+<title>결제 요청 5 · 증빙 서류</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
 <style>
   :root{
@@ -26,7 +26,7 @@
   .back{width:40px; height:40px; display:flex; align-items:center; justify-content:center; font-size:22px; color:var(--ink); cursor:pointer;}
   .topbar .ttl{flex:1; text-align:center; font-size:16px; font-weight:700; margin-right:40px;}
   .prog{height:4px; background:var(--line); margin:0 24px 6px; border-radius:2px; overflow:hidden;}
-  .prog i{display:block; height:100%; width:100%; background:var(--primary); border-radius:2px;}
+  .prog i{display:block; height:100%; width:83%; background:var(--primary); border-radius:2px;}
 
   .body{flex:1; overflow-y:auto; padding:6px 20px 128px; scrollbar-width:none;}
   .body::-webkit-scrollbar{display:none;}
@@ -81,7 +81,7 @@
       <svg width="26" height="13" viewBox="0 0 26 13"><rect x=".5" y=".5" width="22" height="12" rx="3.5" fill="none" stroke="#191F28" stroke-opacity=".35"/><rect x="2.5" y="2.5" width="16" height="8" rx="1.8" fill="#191F28"/><rect x="24" y="4.5" width="1.6" height="4" rx=".8" fill="#191F28" fill-opacity=".35"/></svg>
     </span>
   </div>
-  <div class="topbar"><div class="back" onclick="lpBack('44_요청3_거래처.html')">‹</div><div class="ttl">결제 요청 4</div></div>
+  <div class="topbar"><div class="back" onclick="lpBack('45_요청4_계좌.html')">‹</div><div class="ttl">결제 요청 5</div></div>
   <div class="prog"><i></i></div>
 
   <div class="body">
@@ -110,18 +110,6 @@
       <button class="fx" onclick="dropDoc()">삭제</button>
     </div>
 
-    <div class="sect">이렇게 요청할게요</div>
-    <div class="sum">
-      <div class="srow"><span>결제 유형</span><span class="v" id="sType">B2B 매입대금</span></div>
-      <div class="srow"><span>거래처</span><span class="v" id="sName">한빛식자재</span></div>
-      <div class="srow"><span>보낼 번호</span><span class="v" id="sPh">010-2345-6789</span></div>
-      <div class="srow"><span>입금받을 계좌</span><span class="v" id="sAcct">기업 302-1122-3344</span></div>
-      <div class="sdiv"></div>
-      <div class="srow"><span>내가 받는 금액</span><span class="v" id="sGet">3,500,000원</span></div>
-      <div class="srow"><span>수수료 4% (거래처 부담)</span><span class="v" id="sFee">140,000원</span></div>
-      <div class="sdiv"></div>
-      <div class="stot"><span class="l">거래처가 결제할 금액</span><span class="v" id="sTot">3,640,000원</span></div>
-    </div>
   </div>
 
   <div class="footer" id="footAttach">
@@ -129,7 +117,7 @@
     <button class="inq" onclick="pickDoc()">앨범 · 파일에서 선택할게요</button>
   </div>
   <div class="footer" id="footSend" style="display:none">
-    <button class="btn-primary" onclick="send()">심사 요청하고 링크 보내기</button>
+    <button class="btn-primary" onclick="send()">다음</button>
     <button class="inq" onclick="pickDoc()">서류 다시 올리기</button>
   </div>
 </div>
@@ -181,8 +169,6 @@ var fmt = function(n){ return n.toLocaleString('ko-KR'); };
 (function(){
   var type = g('rq_type', 'B2B 매입대금');
   var d = DOCS[type] || DOCS['기타'];
-  var amt = parseInt(g('rq_amt', '3500000'), 10);
-  var fee = Math.round(amt * 0.04);
 
   document.getElementById('dTitle').textContent = type;
   document.getElementById('dIntro').textContent = d.intro;
@@ -192,13 +178,9 @@ var fmt = function(n){ return n.toLocaleString('ko-KR'); };
     return '<div class="ditem"><iconify-icon icon="mingcute:check-circle-fill"></iconify-icon><span>' + t + '</span></div>';
   }).join('');
 
-  document.getElementById('sType').textContent = type;
   document.getElementById('sName').textContent = g('rq_name', '한빛식자재');
-  document.getElementById('sPh').textContent   = g('rq_ph', '010-2345-6789');
   document.getElementById('sAcct').textContent = g('rq_acct', '기업 302-1122-3344');
-  document.getElementById('sGet').textContent  = fmt(amt) + '원';
   document.getElementById('sFee').textContent  = fmt(fee) + '원';
-  document.getElementById('sTot').textContent  = fmt(amt + fee) + '원';
 })();
 
 function pickDoc(){
@@ -211,7 +193,7 @@ function dropDoc(){
   document.getElementById('footAttach').style.display = 'block';
   document.getElementById('footSend').style.display = 'none';
 }
-function send(){ location.href = '33_결제요청.html#done'; }
+function send(){ location.href = '47_요청6_확인.html'; }
 </script>
 </body>
 </html>
