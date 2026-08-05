@@ -76,6 +76,20 @@
   .acbtn{width:100%; height:52px; margin-top:14px; border:none; border-radius:14px; cursor:pointer;
     background:var(--primary-grad); box-shadow:var(--btn-shadow); color:#fff; font-family:inherit; font-size:15px; font-weight:700;}
   .acbtn:disabled{background:var(--tile); box-shadow:none; color:var(--placeholder); cursor:default;}
+
+  /* 증빙 서류 */
+  .updrop{border:2px dashed var(--border); border-radius:14px; background:var(--bg); padding:26px 14px; text-align:center; cursor:pointer;}
+  .updrop iconify-icon{font-size:30px; color:var(--primary);}
+  .updrop .ut{font-size:14px; font-weight:700; margin-top:9px;}
+  .updrop .us{font-size:12px; color:var(--placeholder); margin-top:5px;}
+  .filerow{display:flex; align-items:center; gap:10px; padding:13px 14px; border-radius:12px; background:var(--primary-50);}
+  .filerow iconify-icon{font-size:19px; color:var(--primary);}
+  .filerow .fn{flex:1; min-width:0; font-size:13px; font-weight:700; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  .filerow .fx{flex:0 0 auto; border:none; background:none; font-family:inherit; font-size:12.5px; font-weight:700; color:var(--placeholder); cursor:pointer;}
+  .dochelp{display:flex; align-items:center; gap:7px; margin-top:12px; padding:12px 13px; border-radius:12px;
+    border:1.5px solid var(--line); font-size:13px; font-weight:700; color:var(--sub); cursor:pointer;}
+  .dochelp > iconify-icon:first-child{font-size:17px; color:var(--primary);}
+  .dochelp .gv{margin-left:auto; font-size:17px; color:var(--icon-off);}
 </style>
 <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 </head>
@@ -89,12 +103,13 @@
   <div class="topbar"><div class="back" onclick="lpBack('20_정산.html')">‹</div><div class="ttl">결제 요청</div></div>
 
   <div class="body hasfoot" id="formView">
-    <div class="sec-s">거래처에 결제 링크를 보내면, 상대가 <b>자기 카드로</b> 결제해요.<br>승인되면 내 계좌로 현금이 입금됩니다.</div>
+    <div class="sec-s">거래처에 결제 링크를 보내면, 상대가 <b>자기 카드로</b> 결제해요.<br>거래 증빙은 <b>내가 올리고</b>, 심사가 끝나면 링크가 발송됩니다.</div>
 
     <div class="how">
-      <div><div class="n">1</div><div class="t">링크 발송</div></div>
-      <div><div class="n">2</div><div class="t">거래처 결제</div></div>
-      <div><div class="n">3</div><div class="t">내 계좌 입금</div></div>
+      <div><div class="n">1</div><div class="t">서류 심사</div></div>
+      <div><div class="n">2</div><div class="t">링크 발송</div></div>
+      <div><div class="n">3</div><div class="t">거래처 결제</div></div>
+      <div><div class="n">4</div><div class="t">내 계좌 입금</div></div>
     </div>
 
     <div class="pad">
@@ -122,6 +137,26 @@
         <input class="tin" id="pMemo" placeholder="예) 8월 식자재 대금"></div>
     </div>
 
+
+    <div class="sec-t">거래 증빙 서류</div>
+    <div class="sec-s">계약서 · 거래명세서 · 세금계산서 중 하나를 올려주세요.<br>거래처가 아니라 <b>내가 올립니다.</b></div>
+    <div class="pad">
+      <div class="updrop" id="upDrop" onclick="pickDoc()">
+        <iconify-icon icon="mingcute:upload-3-fill"></iconify-icon>
+        <div class="ut">서류 사진이나 파일 올리기</div>
+        <div class="us">JPG · PNG · PDF · 20MB 이하</div>
+      </div>
+      <div class="filerow" id="fileRow" style="display:none">
+        <iconify-icon icon="mingcute:document-fill"></iconify-icon>
+        <span class="fn">거래명세서_한빛식자재.pdf</span>
+        <button class="fx" onclick="event.stopPropagation(); dropDoc()">삭제</button>
+      </div>
+      <div class="dochelp" onclick="location.href='11_확인서류안내.html?t=B2B 매입대금'">
+        <iconify-icon icon="mingcute:question-fill"></iconify-icon>어떤 서류가 필요한가요?
+        <iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon>
+      </div>
+    </div>
+
     <div class="sec-t">입금받을 계좌</div>
     <div class="box">
       <div class="row" onclick="openAcct()">
@@ -133,18 +168,18 @@
 
     <div class="note">
       <iconify-icon icon="mingcute:information-fill"></iconify-icon>
-      <div>링크는 <b>7일간</b> 유효해요. 거래처가 결제하면 알림으로 알려드리고, 서류 승인 후 <b>내 계좌로 입금</b>됩니다.</div>
+      <div>결제 링크는 <b>발송 당일 자정까지</b> 열려요. 거래처가 결제하면 알림으로 알려드리고, 곧바로 <b>내 계좌로 입금</b>됩니다.</div>
     </div>
   </div>
 
   <!-- 발송 완료 -->
   <div class="body doneview" id="doneView">
     <div class="ck"><iconify-icon icon="mingcute:send-plane-fill"></iconify-icon></div>
-    <h2>결제 요청을 보냈어요</h2>
-    <p><b>한빛식자재</b>에게 문자로 링크를 보냈어요.<br>결제가 완료되면 알려드릴게요.</p>
+    <h2>서류 심사를 시작했어요</h2>
+    <p>보통 <b>30분 이내</b>에 끝나요.<br>승인되면 <b>한빛식자재</b>에게 결제 링크가 문자로 발송됩니다.</p>
 
     <div class="linkbox">
-      <span class="u" id="reqUrl">https://lanseonpay.kr/r/8KD2M9</span>
+      <span class="u" id="reqUrl">승인 후 링크가 만들어져요</span>
       <button onclick="copyReq()">복사</button>
     </div>
     <div class="shares">
@@ -153,12 +188,12 @@
 
     <div class="note" style="text-align:left">
       <iconify-icon icon="mingcute:time-fill"></iconify-icon>
-      <div>링크 유효기간 <b>2026년 8월 11일까지</b><br>아직 결제되지 않았어요 · 요청 목록에서 확인할 수 있어요</div>
+      <div>결제 링크는 <b>발송 당일 자정까지</b> 열려요.<br>기간이 지나면 요청 목록에서 다시 보낼 수 있어요.</div>
     </div>
   </div>
 
   <div class="footer" id="foot">
-    <button class="btn" onclick="send()"><iconify-icon icon="mingcute:send-plane-fill"></iconify-icon>결제 요청 보내기</button>
+    <button class="btn" onclick="send()"><iconify-icon icon="mingcute:send-plane-fill"></iconify-icon>심사 요청하고 링크 보내기</button>
   </div>
   <div class="footer" id="foot2" style="display:none">
     <div class="two">
@@ -223,7 +258,20 @@ function add(n){
 function setA(n){ document.getElementById('amt').value = n ? fmt(n) : ''; calc(); }
 document.getElementById('amt').addEventListener('input', calc);
 
+var docOk = false;
+function pickDoc(){
+  docOk = true;
+  document.getElementById('upDrop').style.display = 'none';
+  document.getElementById('fileRow').style.display = 'flex';
+  toast('서류를 올렸어요');
+}
+function dropDoc(){
+  docOk = false;
+  document.getElementById('upDrop').style.display = 'block';
+  document.getElementById('fileRow').style.display = 'none';
+}
 function send(){
+  if (!docOk) { toast('거래 증빙 서류를 먼저 올려주세요'); return; }
   document.getElementById('formView').style.display = 'none';
   document.getElementById('foot').style.display = 'none';
   document.getElementById('doneView').classList.add('on');

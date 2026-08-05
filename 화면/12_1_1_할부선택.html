@@ -105,6 +105,9 @@
   .irow .ck{font-size:22px; color:var(--primary); opacity:0;}
   .irow.on{color:var(--primary-dark);}
   .irow.on .ck{opacity:1;}
+  .instnote{display:flex; gap:8px; margin-top:12px; padding:13px 14px; border-radius:12px; background:var(--tile);
+    font-size:12px; color:var(--sub); line-height:1.65;}
+  .instnote iconify-icon{font-size:16px; flex:0 0 auto; color:var(--primary); margin-top:1px;}
 </style>
 <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 </head>
@@ -191,6 +194,10 @@
       <div class="payrow" onclick="selpay(this)"><img class="paylogo" src="../img/네이버페이.png" alt=""><span class="plabel">네이버페이</span><span class="rd"><iconify-icon icon="mingcute:check-circle-fill"></iconify-icon></span></div>
       <div class="payrow" onclick="selpay(this)"><img class="paylogo" src="../img/토스페이.png" alt=""><span class="plabel">토스페이</span><span class="rd"><iconify-icon icon="mingcute:check-circle-fill"></iconify-icon></span></div>
     </div>
+      <div class="instnote">
+        <iconify-icon icon="mingcute:information-fill"></iconify-icon>
+        <div>무이자 가능 개월은 <b>카드사 행사에 따라 달라져요.</b> 그 이상 개월을 고르면 카드사 기준 할부 수수료(이자)가 붙습니다. 정확한 조건은 카드사 앱·고객센터에서 확인해주세요.</div>
+      </div>
 
   </div>
 
