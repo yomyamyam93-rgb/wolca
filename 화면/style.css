@@ -1,3 +1,6 @@
+/* 한글은 단어 단위로만 줄바꿈 */
+body{word-break:keep-all; overflow-wrap:break-word;}
+
 /* 온보딩 화면 공통 스타일 (랜선페이 · 디자인 가이드) */
 :root{
   --primary:#2563EB; --primary-dark:#1D4ED8; --primary-50:#EFF4FF;
