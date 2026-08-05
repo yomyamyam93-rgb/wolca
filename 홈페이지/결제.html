@@ -157,11 +157,14 @@
   .donebtns{display:flex; flex-direction:column; gap:10px; margin-top:24px;}
   .subbtn{height:52px; border:1.5px solid var(--border); border-radius:14px; background:#fff; font-family:inherit;
     font-size:15px; font-weight:700; color:var(--sub); cursor:pointer;}
-  .applist{display:flex; flex-direction:column; gap:9px;}
-  .appc{display:flex; align-items:center; gap:11px; height:56px; padding:0 16px; border:1.5px solid var(--line);
-    border-radius:15px; background:#fff; font-size:15px; font-weight:700; cursor:pointer; transition:.2s;}
+  .appgrid{display:grid; grid-template-columns:repeat(3,1fr); gap:10px;}
+  .appc{display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px;
+    height:92px; border:1.5px solid var(--line); border-radius:15px; background:#fff; cursor:pointer; transition:.2s;}
   .appc.on{border-color:var(--primary); background:var(--primary-50);}
-  .cdot{width:18px; height:18px; border-radius:6px; flex:0 0 auto;}
+  .appc:hover{border-color:var(--primary-100);}
+  .appc .cdot{width:24px; height:24px; border-radius:8px;}
+  .appc .cn{font-size:13px; font-weight:700; color:var(--sub);}
+  .appc.on .cn{color:var(--primary-dark);}
   .appnote{padding:14px 15px; border-radius:13px; background:var(--gray-bg); font-size:12.5px;
     color:var(--sub); line-height:1.7; margin-bottom:14px;}
   .appnote b{color:var(--ink);}
@@ -273,15 +276,16 @@
       <!-- 앱카드 -->
       <div class="ptab" id="pt-app">
         <div class="appnote">카드사 앱에서 <b>본인 인증 후</b> 결제돼요. 카드 정보는 저장되지 않아요.</div>
-        <div class="applist">
-          <div class="appc on" onclick="pickApp(this)" data-name="삼성카드"><span class="cdot" style="background:#2E6BD8"></span>삼성카드</div>
-          <div class="appc" onclick="pickApp(this)" data-name="현대카드"><span class="cdot" style="background:#191F28"></span>현대카드</div>
-          <div class="appc" onclick="pickApp(this)" data-name="국민카드"><span class="cdot" style="background:#6B5B4E"></span>국민카드</div>
-          <div class="appc" onclick="pickApp(this)" data-name="신한카드"><span class="cdot" style="background:#0046FF"></span>신한카드</div>
-          <div class="appc" onclick="pickApp(this)" data-name="롯데카드"><span class="cdot" style="background:#DA291C"></span>롯데카드</div>
-          <div class="appc" onclick="pickApp(this)" data-name="하나카드"><span class="cdot" style="background:#008485"></span>하나카드</div>
-          <div class="appc" onclick="pickApp(this)" data-name="BC카드"><span class="cdot" style="background:#E8262C"></span>BC카드</div>
-          <div class="appc" onclick="pickApp(this)" data-name="농협카드"><span class="cdot" style="background:#00A651"></span>농협카드</div>
+        <div class="appgrid">
+          <div class="appc on" onclick="pickApp(this)" data-name="삼성카드"><span class="cdot" style="background:#2E6BD8"></span><span class="cn">삼성카드</span></div>
+          <div class="appc" onclick="pickApp(this)" data-name="현대카드"><span class="cdot" style="background:#191F28"></span><span class="cn">현대카드</span></div>
+          <div class="appc" onclick="pickApp(this)" data-name="국민카드"><span class="cdot" style="background:#6B5B4E"></span><span class="cn">국민카드</span></div>
+          <div class="appc" onclick="pickApp(this)" data-name="신한카드"><span class="cdot" style="background:#0046FF"></span><span class="cn">신한카드</span></div>
+          <div class="appc" onclick="pickApp(this)" data-name="롯데카드"><span class="cdot" style="background:#DA291C"></span><span class="cn">롯데카드</span></div>
+          <div class="appc" onclick="pickApp(this)" data-name="하나카드"><span class="cdot" style="background:#008485"></span><span class="cn">하나카드</span></div>
+          <div class="appc" onclick="pickApp(this)" data-name="BC카드"><span class="cdot" style="background:#E8262C"></span><span class="cn">BC카드</span></div>
+          <div class="appc" onclick="pickApp(this)" data-name="농협카드"><span class="cdot" style="background:#00A651"></span><span class="cn">농협카드</span></div>
+          <div class="appc" onclick="pickApp(this)" data-name="우리카드"><span class="cdot" style="background:#0067AC"></span><span class="cn">우리카드</span></div>
         </div>
       </div>
 
@@ -506,7 +510,7 @@ function ptab(name, btn){
   }
 }
 function pickApp(el){
-  document.querySelectorAll('.applist .appc').forEach(function(x){ x.classList.remove('on'); });
+  document.querySelectorAll('.appgrid .appc').forEach(function(x){ x.classList.remove('on'); });
   el.classList.add('on');
   payMethod = el.dataset.name;
 }

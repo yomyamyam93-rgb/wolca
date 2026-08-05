@@ -115,6 +115,13 @@
     color:var(--sub); line-height:1.65; margin-bottom:12px;}
   .appnote b{color:var(--ink);}
   .seg button:disabled{opacity:.45; cursor:default;}
+  .appgrid{display:grid; grid-template-columns:repeat(3,1fr); gap:9px;}
+  .appc{display:flex; flex-direction:column; align-items:center; justify-content:center; gap:7px;
+    height:86px; border:1.5px solid var(--line); border-radius:14px; background:#fff; cursor:pointer; transition:.15s;}
+  .appc.on{border-color:var(--primary); background:var(--primary-50);}
+  .appc .cdot{width:22px; height:22px; border-radius:7px;}
+  .appc .cn{font-size:12.5px; font-weight:700; color:var(--sub);}
+  .appc.on .cn{color:var(--primary-dark);}
 </style>
 <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 </head>
@@ -199,14 +206,17 @@
     <!-- 앱카드 -->
     <div id="tabApp" style="display:none">
       <div class="appnote">카드사 앱에서 <b>본인 인증 후</b> 결제돼요. 카드 정보는 저장되지 않아요.</div>
-      <div class="payrow on" onclick="selpay(this)"><span class="cdot" style="background:#2E6BD8"></span><span class="plabel">삼성카드</span><span class="rd"><iconify-icon icon="mingcute:check-circle-fill"></iconify-icon></span></div>
-      <div class="payrow" onclick="selpay(this)"><span class="cdot" style="background:#191F28"></span><span class="plabel">현대카드</span><span class="rd"><iconify-icon icon="mingcute:check-circle-fill"></iconify-icon></span></div>
-      <div class="payrow" onclick="selpay(this)"><span class="cdot" style="background:#6B5B4E"></span><span class="plabel">국민카드</span><span class="rd"><iconify-icon icon="mingcute:check-circle-fill"></iconify-icon></span></div>
-      <div class="payrow" onclick="selpay(this)"><span class="cdot" style="background:#0046FF"></span><span class="plabel">신한카드</span><span class="rd"><iconify-icon icon="mingcute:check-circle-fill"></iconify-icon></span></div>
-      <div class="payrow" onclick="selpay(this)"><span class="cdot" style="background:#DA291C"></span><span class="plabel">롯데카드</span><span class="rd"><iconify-icon icon="mingcute:check-circle-fill"></iconify-icon></span></div>
-      <div class="payrow" onclick="selpay(this)"><span class="cdot" style="background:#008485"></span><span class="plabel">하나카드</span><span class="rd"><iconify-icon icon="mingcute:check-circle-fill"></iconify-icon></span></div>
-      <div class="payrow" onclick="selpay(this)"><span class="cdot" style="background:#E8262C"></span><span class="plabel">BC카드</span><span class="rd"><iconify-icon icon="mingcute:check-circle-fill"></iconify-icon></span></div>
-      <div class="payrow" onclick="selpay(this)"><span class="cdot" style="background:#00A651"></span><span class="plabel">농협카드</span><span class="rd"><iconify-icon icon="mingcute:check-circle-fill"></iconify-icon></span></div>
+      <div class="appgrid">
+        <div class="appc on" onclick="pickApp(this)"><span class="cdot" style="background:#2E6BD8"></span><span class="cn">삼성카드</span></div>
+        <div class="appc" onclick="pickApp(this)"><span class="cdot" style="background:#191F28"></span><span class="cn">현대카드</span></div>
+        <div class="appc" onclick="pickApp(this)"><span class="cdot" style="background:#6B5B4E"></span><span class="cn">국민카드</span></div>
+        <div class="appc" onclick="pickApp(this)"><span class="cdot" style="background:#0046FF"></span><span class="cn">신한카드</span></div>
+        <div class="appc" onclick="pickApp(this)"><span class="cdot" style="background:#DA291C"></span><span class="cn">롯데카드</span></div>
+        <div class="appc" onclick="pickApp(this)"><span class="cdot" style="background:#008485"></span><span class="cn">하나카드</span></div>
+        <div class="appc" onclick="pickApp(this)"><span class="cdot" style="background:#E8262C"></span><span class="cn">BC카드</span></div>
+        <div class="appc" onclick="pickApp(this)"><span class="cdot" style="background:#00A651"></span><span class="cn">농협카드</span></div>
+        <div class="appc" onclick="pickApp(this)"><span class="cdot" style="background:#0067AC"></span><span class="cn">우리카드</span></div>
+      </div>
     </div>
 
     <!-- 간편결제 -->
@@ -265,6 +275,10 @@ function tab(which){
     if (seg)  seg.classList.toggle('on', k === which);
   });
   try{ sessionStorage.setItem('lp_pm', which); }catch(e){}
+}
+function pickApp(el){
+  document.querySelectorAll(".appgrid .appc").forEach(function(x){x.classList.remove("on");});
+  el.classList.add("on");
 }
 function selpay(el){ document.querySelectorAll('.payrow').forEach(r=>r.classList.remove('on')); el.classList.add('on'); }
 
