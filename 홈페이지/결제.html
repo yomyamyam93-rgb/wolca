@@ -157,6 +157,15 @@
   .donebtns{display:flex; flex-direction:column; gap:10px; margin-top:24px;}
   .subbtn{height:52px; border:1.5px solid var(--border); border-radius:14px; background:#fff; font-family:inherit;
     font-size:15px; font-weight:700; color:var(--sub); cursor:pointer;}
+  .applist{display:flex; flex-direction:column; gap:9px;}
+  .appc{display:flex; align-items:center; gap:11px; height:56px; padding:0 16px; border:1.5px solid var(--line);
+    border-radius:15px; background:#fff; font-size:15px; font-weight:700; cursor:pointer; transition:.2s;}
+  .appc.on{border-color:var(--primary); background:var(--primary-50);}
+  .cdot{width:18px; height:18px; border-radius:6px; flex:0 0 auto;}
+  .appnote{padding:14px 15px; border-radius:13px; background:var(--gray-bg); font-size:12.5px;
+    color:var(--sub); line-height:1.7; margin-bottom:14px;}
+  .appnote b{color:var(--ink);}
+  .pseg button:disabled{opacity:.42; cursor:default;}
 </style>
 </head>
 <body>
@@ -189,8 +198,9 @@
       <div class="sub">대성부동산에게 <b>680,000원</b>을 보냅니다.</div>
 
       <div class="pseg">
-        <button class="on" onclick="ptab('card', this)">카드결제</button>
-        <button onclick="ptab('easy', this)">간편결제</button>
+        <button id="pbCard" class="on" onclick="ptab('card', this)">카드결제</button>
+        <button id="pbApp" onclick="ptab('app', this)">앱카드</button>
+        <button id="pbEasy" onclick="ptab('easy', this)">간편결제</button>
       </div>
 
       <!-- 카드 -->
@@ -256,6 +266,22 @@
         <div class="instnote">
           <iconify-icon icon="mingcute:information-fill"></iconify-icon>
           <div>무이자 가능 개월은 <b>카드사 행사에 따라 달라져요.</b> 그 이상 개월을 고르면 카드사 기준 할부 수수료(이자)가 붙습니다.</div>
+        </div>
+      </div>
+
+
+      <!-- 앱카드 -->
+      <div class="ptab" id="pt-app">
+        <div class="appnote">카드사 앱에서 <b>본인 인증 후</b> 결제돼요. 카드 정보는 저장되지 않아요.</div>
+        <div class="applist">
+          <div class="appc on" onclick="pickApp(this)" data-name="삼성카드"><span class="cdot" style="background:#2E6BD8"></span>삼성카드</div>
+          <div class="appc" onclick="pickApp(this)" data-name="현대카드"><span class="cdot" style="background:#191F28"></span>현대카드</div>
+          <div class="appc" onclick="pickApp(this)" data-name="국민카드"><span class="cdot" style="background:#6B5B4E"></span>국민카드</div>
+          <div class="appc" onclick="pickApp(this)" data-name="신한카드"><span class="cdot" style="background:#0046FF"></span>신한카드</div>
+          <div class="appc" onclick="pickApp(this)" data-name="롯데카드"><span class="cdot" style="background:#DA291C"></span>롯데카드</div>
+          <div class="appc" onclick="pickApp(this)" data-name="하나카드"><span class="cdot" style="background:#008485"></span>하나카드</div>
+          <div class="appc" onclick="pickApp(this)" data-name="BC카드"><span class="cdot" style="background:#E8262C"></span>BC카드</div>
+          <div class="appc" onclick="pickApp(this)" data-name="농협카드"><span class="cdot" style="background:#00A651"></span>농협카드</div>
         </div>
       </div>
 
@@ -461,6 +487,7 @@ function drawer(on){
 var payMethod = '삼성 Deep Dream', payInst = '3개월';
 
 function ptab(name, btn){
+  if (btn && btn.disabled) return;
   document.querySelectorAll('.pseg button').forEach(function(b){ b.classList.toggle('on', b === btn); });
   document.querySelectorAll('.ptab').forEach(function(p){
     p.classList.remove('on');
@@ -469,10 +496,19 @@ function ptab(name, btn){
   if (name === 'easy') {
     payMethod = document.querySelector('.easy.on').dataset.name;
     payInst = '일시불';
+  } else if (name === 'app') {
+    var a = document.querySelector('.applist .appc.on');
+    payMethod = a ? a.dataset.name : '앱카드';
+    payInst = '일시불';
   } else {
     payMethod = document.querySelector('.crd.on .cn').textContent;
     payInst = document.querySelector('.inst span.on').textContent;
   }
+}
+function pickApp(el){
+  document.querySelectorAll('.applist .appc').forEach(function(x){ x.classList.remove('on'); });
+  el.classList.add('on');
+  payMethod = el.dataset.name;
 }
 function pickCard(el){
   document.querySelectorAll('.crd').forEach(function(c){ c.classList.remove('on'); });
@@ -555,8 +591,11 @@ function ghop(el, next){
   var p = new URLSearchParams(location.search);
   if (!p.get('r')) return;
 
-  document.querySelector('.cardlist').style.display = 'none';
-  document.getElementById('guestCard').style.display = 'block';
+  /* 요청받은 결제는 본인 카드 인증이 필요 — 수기 입력은 잠금 */
+  var bCard = document.getElementById('pbCard');
+  bCard.disabled = true;
+  bCard.onclick = function(){ alert('요청받은 결제는 앱카드 · 간편결제로만 할 수 있어요.'); };
+  ptab('app', document.getElementById('pbApp'));
 
   var won = Number(p.get('amt') || 680000);
   var fee = Math.round(won * 0.04);

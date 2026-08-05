@@ -118,6 +118,11 @@
   .instnote{display:flex; gap:8px; margin-top:12px; padding:13px 14px; border-radius:12px; background:var(--tile);
     font-size:12px; color:var(--sub); line-height:1.65;}
   .instnote iconify-icon{font-size:16px; flex:0 0 auto; color:var(--primary); margin-top:1px;}
+  .cdot{width:16px; height:16px; border-radius:5px; flex:0 0 auto;}
+  .appnote{padding:13px 15px; border-radius:13px; background:var(--tile); font-size:12.5px;
+    color:var(--sub); line-height:1.65; margin-bottom:12px;}
+  .appnote b{color:var(--ink);}
+  .seg button:disabled{opacity:.45; cursor:default;}
 </style>
 <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 </head>
@@ -136,6 +141,7 @@
 
     <div class="seg">
       <button id="segCard" class="on" onclick="tab('card')">카드결제</button>
+      <button id="segApp" onclick="tab('app')">앱카드</button>
       <button id="segEasy" onclick="tab('easy')">간편결제</button>
     </div>
 
@@ -198,6 +204,20 @@
       </div>
     </div>
 
+
+    <!-- 앱카드 -->
+    <div id="tabApp" style="display:none">
+      <div class="appnote">카드사 앱에서 <b>본인 인증 후</b> 결제돼요. 카드 정보는 저장되지 않아요.</div>
+      <div class="payrow on" onclick="selpay(this)"><span class="cdot" style="background:#2E6BD8"></span><span class="plabel">삼성카드</span><span class="rd"><iconify-icon icon="mingcute:check-circle-fill"></iconify-icon></span></div>
+      <div class="payrow" onclick="selpay(this)"><span class="cdot" style="background:#191F28"></span><span class="plabel">현대카드</span><span class="rd"><iconify-icon icon="mingcute:check-circle-fill"></iconify-icon></span></div>
+      <div class="payrow" onclick="selpay(this)"><span class="cdot" style="background:#6B5B4E"></span><span class="plabel">국민카드</span><span class="rd"><iconify-icon icon="mingcute:check-circle-fill"></iconify-icon></span></div>
+      <div class="payrow" onclick="selpay(this)"><span class="cdot" style="background:#0046FF"></span><span class="plabel">신한카드</span><span class="rd"><iconify-icon icon="mingcute:check-circle-fill"></iconify-icon></span></div>
+      <div class="payrow" onclick="selpay(this)"><span class="cdot" style="background:#DA291C"></span><span class="plabel">롯데카드</span><span class="rd"><iconify-icon icon="mingcute:check-circle-fill"></iconify-icon></span></div>
+      <div class="payrow" onclick="selpay(this)"><span class="cdot" style="background:#008485"></span><span class="plabel">하나카드</span><span class="rd"><iconify-icon icon="mingcute:check-circle-fill"></iconify-icon></span></div>
+      <div class="payrow" onclick="selpay(this)"><span class="cdot" style="background:#E8262C"></span><span class="plabel">BC카드</span><span class="rd"><iconify-icon icon="mingcute:check-circle-fill"></iconify-icon></span></div>
+      <div class="payrow" onclick="selpay(this)"><span class="cdot" style="background:#00A651"></span><span class="plabel">농협카드</span><span class="rd"><iconify-icon icon="mingcute:check-circle-fill"></iconify-icon></span></div>
+    </div>
+
     <!-- 간편결제 -->
     <div id="tabEasy" style="display:none">
       <div class="payrow on" onclick="selpay(this)"><img class="paylogo" src="../img/카카오페이.png" alt=""><span class="plabel">카카오페이</span><span class="rd"><iconify-icon icon="mingcute:check-circle-fill"></iconify-icon></span></div>
@@ -217,7 +237,7 @@
       <span><b>다른 사람에게 결제 요청 보내기</b></span>
       <iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon>
     </button>
-    <button class="btn-primary" id="payBtn" onclick="location.href='12_2_반복결제.html'">다음</button>
+    <button class="btn-primary" id="payBtn" onclick="goNext()">다음</button>
   </div>
 
   <!-- 할부 바텀시트 -->
@@ -242,12 +262,23 @@
   </div>
 </div>
 <script>
+function goNext(){
+  var pm = 'card';
+  if (document.getElementById('segApp').classList.contains('on'))  pm = 'app';
+  if (document.getElementById('segEasy').classList.contains('on')) pm = 'easy';
+  try{ sessionStorage.setItem('lp_pm', pm); }catch(e){}
+  location.href = '12_2_반복결제.html';
+}
 function tab(which){
-  const isCard = which==='card';
-  document.getElementById('tabCard').style.display = isCard ? '' : 'none';
-  document.getElementById('tabEasy').style.display = isCard ? 'none' : '';
-  document.getElementById('segCard').classList.toggle('on', isCard);
-  document.getElementById('segEasy').classList.toggle('on', !isCard);
+  if (which === 'card' && document.getElementById('segCard').disabled) return;
+  if (which === 'app'  && document.getElementById('segApp').disabled)  return;
+  ['card','app','easy'].forEach(function(k){
+    var pane = document.getElementById('tab' + k.charAt(0).toUpperCase() + k.slice(1));
+    var seg  = document.getElementById('seg'  + k.charAt(0).toUpperCase() + k.slice(1));
+    if (pane) pane.style.display = (k === which) ? '' : 'none';
+    if (seg)  seg.classList.toggle('on', k === which);
+  });
+  try{ sessionStorage.setItem('lp_pm', which); }catch(e){}
 }
 function selpay(el){ document.querySelectorAll('.payrow').forEach(r=>r.classList.remove('on')); el.classList.add('on'); }
 
