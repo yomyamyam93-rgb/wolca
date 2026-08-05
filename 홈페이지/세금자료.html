@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>랜선페이 — 세금계산서 · 부가세 신고</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="web.css">
+<link rel="icon" type="image/png" href="../img/logo-mark.png">
+<script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+<script src="web.js"></script>
+<style>
+  .tx{padding:44px 20px 110px; background:var(--gray-bg);}
+  .tx-in{max-width:920px; margin:0 auto;}
+  .tabs2{display:flex; gap:6px; padding:5px; border-radius:15px; background:#fff; box-shadow:0 1px 3px rgba(25,31,40,.07); margin-bottom:26px;}
+  .tabs2 button{flex:1; height:46px; border:none; border-radius:11px; background:none; font-family:inherit;
+    font-size:15px; font-weight:700; color:var(--placeholder); cursor:pointer; transition:.15s;}
+  .tabs2 button.on{background:var(--primary-50); color:var(--primary-dark);}
+  .pane{display:none;} .pane.on{display:block;}
+
+  .sumcard{display:flex; gap:14px; flex-wrap:wrap; margin-bottom:22px;}
+  .sc{flex:1 1 200px; background:#fff; border-radius:18px; padding:20px 22px; box-shadow:0 1px 3px rgba(25,31,40,.06);}
+  .sc .l{font-size:13px; color:var(--placeholder);}
+  .sc .v{font-size:24px; font-weight:800; letter-spacing:-.5px; margin-top:6px;}
+  .sc .v.blue{color:var(--primary-dark);}
+  .sc .s{font-size:12.5px; color:var(--placeholder); margin-top:5px;}
+
+  .card{background:#fff; border-radius:20px; padding:8px 24px; box-shadow:0 1px 3px rgba(25,31,40,.06); margin-bottom:16px;}
+  .row{display:flex; align-items:center; gap:16px; padding:18px 0;}
+  .row + .row{border-top:1px solid var(--line);}
+  .row .ic{width:42px; height:42px; flex:0 0 auto; border-radius:13px; background:var(--primary-50);
+    display:flex; align-items:center; justify-content:center;}
+  .row .ic iconify-icon{font-size:21px; color:var(--primary);}
+  .row .tx2{flex:1; min-width:0;}
+  .row .t{font-size:15.5px; font-weight:700;}
+  .row .s{font-size:13px; color:var(--placeholder); margin-top:4px;}
+  .row .v{font-size:14px; font-weight:700; color:var(--sub); flex:0 0 auto;}
+  .row .dl{flex:0 0 auto; height:38px; padding:0 15px; border:1.5px solid var(--line); border-radius:11px;
+    background:#fff; font-family:inherit; font-size:13.5px; font-weight:700; color:var(--sub); cursor:pointer;}
+  .row .dl:hover{border-color:var(--primary-100); color:var(--primary-dark);}
+
+  h2.sec-t{font-size:17px; font-weight:800; margin:26px 2px 12px; letter-spacing:-.3px;}
+  .note{display:flex; gap:10px; padding:16px 18px; border-radius:15px; background:#fff;
+    font-size:13.5px; color:var(--sub); line-height:1.75; box-shadow:0 1px 3px rgba(25,31,40,.05);}
+  .note iconify-icon{font-size:19px; flex:0 0 auto; color:var(--primary); margin-top:2px;}
+  .note b{color:var(--ink);}
+  .warn{background:#FFF7ED; box-shadow:none; color:#B45309;}
+  .warn iconify-icon{color:#B45309;}
+  .warn b{color:#8A4308;}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-in">
+    <a class="logo" href="index.html"><img src="../img/logo-mark.png" alt="" style="height:30px"><img src="../img/logo-text.png" alt="랜선페이" style="height:19px"></a>
+    <div class="nav-menu">
+      <a href="이용가이드.html">이용가이드</a>
+      <a href="고객센터.html">고객센터</a>
+    </div>
+    <button class="nav-login" onclick="location.href='로그인.html'">로그인</button>
+    <button class="nav-cta" onclick="location.href='송금하기.html'">송금하기</button>
+    <button class="nav-burger" onclick="drawer(true)" aria-label="전체메뉴"><iconify-icon icon="mingcute:menu-fill"></iconify-icon></button>
+  </div>
+</nav>
+
+<header class="page-hero">
+  <div class="eyebrow">사업자 전용</div>
+  <h1 class="h-lg">세금계산서 · 부가세 신고</h1>
+  <p class="p-lg">랜선페이로 낸 수수료의 세금계산서를 받고,<br>부가세 신고에 쓸 자료를 한 번에 내려받으세요.</p>
+</header>
+
+<section class="tx">
+  <div class="tx-in">
+
+    <div class="tabs2">
+      <button class="on" onclick="pane(0, this)">세금계산서</button>
+      <button onclick="pane(1, this)">부가세 신고</button>
+      <button onclick="pane(2, this)">증빙 서류</button>
+    </div>
+
+    <!-- 세금계산서 -->
+    <div class="pane on">
+      <div class="sumcard">
+        <div class="sc"><div class="l">이번 달 수수료</div><div class="v">736,800원</div><div class="s">공급가액 669,818 + 부가세 66,982</div></div>
+        <div class="sc"><div class="l">발행 완료</div><div class="v blue">14건</div><div class="s">매월 1일 자동 발행</div></div>
+      </div>
+
+      <h2 class="sec-t">월별 발행 내역</h2>
+      <div class="card">
+        <div class="row">
+          <span class="ic"><iconify-icon icon="mingcute:file-certificate-fill"></iconify-icon></span>
+          <span class="tx2"><div class="t">2026년 8월</div><div class="s">수수료 736,800원 · 14건</div></span>
+          <span class="v">발행 완료</span>
+          <button class="dl" onclick="soon()">내려받기</button>
+        </div>
+        <div class="row">
+          <span class="ic"><iconify-icon icon="mingcute:file-certificate-fill"></iconify-icon></span>
+          <span class="tx2"><div class="t">2026년 7월</div><div class="s">수수료 612,400원 · 11건</div></span>
+          <span class="v">발행 완료</span>
+          <button class="dl" onclick="soon()">내려받기</button>
+        </div>
+        <div class="row">
+          <span class="ic"><iconify-icon icon="mingcute:file-certificate-fill"></iconify-icon></span>
+          <span class="tx2"><div class="t">2026년 6월</div><div class="s">수수료 480,000원 · 9건</div></span>
+          <span class="v">발행 완료</span>
+          <button class="dl" onclick="soon()">내려받기</button>
+        </div>
+      </div>
+
+      <h2 class="sec-t">발행 정보</h2>
+      <div class="card">
+        <div class="row"><span class="tx2"><div class="t">상호</div></span><span class="v">미라클상사</span></div>
+        <div class="row"><span class="tx2"><div class="t">사업자등록번호</div></span><span class="v">123-45-67890</span></div>
+        <div class="row"><span class="tx2"><div class="t">받는 이메일</div></span><span class="v">tax@miracle.co.kr</span></div>
+      </div>
+
+      <div class="note">
+        <iconify-icon icon="mingcute:information-fill"></iconify-icon>
+        <div>세금계산서는 <b>랜선페이 수수료에 대해서만</b> 발행됩니다. 거래처에 보낸 대금은 거래처에서 직접 발행받으세요.</div>
+      </div>
+    </div>
+
+    <!-- 부가세 신고 -->
+    <div class="pane">
+      <div class="sumcard">
+        <div class="sc"><div class="l">이번 분기 매입세액</div><div class="v blue">201,000원</div><div class="s">2026년 3분기 (7~9월)</div></div>
+        <div class="sc"><div class="l">신고 기간</div><div class="v">10월 25일까지</div><div class="s">국세청 홈택스에서 신고</div></div>
+      </div>
+
+      <h2 class="sec-t">분기별 내역</h2>
+      <div class="card">
+        <div class="row">
+          <span class="ic"><iconify-icon icon="mingcute:chart-bar-fill"></iconify-icon></span>
+          <span class="tx2"><div class="t">2026년 3분기</div><div class="s">7~9월 · 매입세액 201,000원</div></span>
+          <button class="dl" onclick="soon()">엑셀 내려받기</button>
+        </div>
+        <div class="row">
+          <span class="ic"><iconify-icon icon="mingcute:chart-bar-fill"></iconify-icon></span>
+          <span class="tx2"><div class="t">2026년 2분기</div><div class="s">4~6월 · 매입세액 174,500원</div></span>
+          <button class="dl" onclick="soon()">엑셀 내려받기</button>
+        </div>
+      </div>
+
+      <div class="note warn">
+        <iconify-icon icon="mingcute:alert-fill"></iconify-icon>
+        <div>매입세액 공제가 되는 금액은 <b>수수료 부분뿐</b>입니다. 거래처에 송금된 금액은 거래처에서 받은 증빙으로 처리하셔야 합니다.</div>
+      </div>
+    </div>
+
+    <!-- 증빙 서류 -->
+    <div class="pane">
+      <h2 class="sec-t">자료 내려받기</h2>
+      <div class="card">
+        <div class="row">
+          <span class="ic"><iconify-icon icon="mingcute:document-fill"></iconify-icon></span>
+          <span class="tx2"><div class="t">결제 내역 전체</div><div class="s">기간별 결제·송금 내역 (엑셀)</div></span>
+          <button class="dl" onclick="soon()">내려받기</button>
+        </div>
+        <div class="row">
+          <span class="ic"><iconify-icon icon="mingcute:receipt-fill"></iconify-icon></span>
+          <span class="tx2"><div class="t">거래명세서</div><div class="s">거래처별 명세 (PDF)</div></span>
+          <button class="dl" onclick="soon()">내려받기</button>
+        </div>
+        <div class="row">
+          <span class="ic"><iconify-icon icon="mingcute:transfer-3-fill"></iconify-icon></span>
+          <span class="tx2"><div class="t">이체 확인증</div><div class="s">건별 입금 증빙 (PDF)</div></span>
+          <button class="dl" onclick="soon()">내려받기</button>
+        </div>
+      </div>
+
+      <div class="note">
+        <iconify-icon icon="mingcute:information-fill"></iconify-icon>
+        <div>세무 대리인에게 보낼 자료는 <b>한 번에 내려받기</b>로 묶어서 받을 수 있어요. 앱에서도 같은 자료를 받을 수 있습니다.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="f-in">
+    <div class="f-menu">
+      <a href="이용가이드.html">이용가이드</a>
+      <a href="고객센터.html">고객센터</a>
+      <a href="고객센터.html#faq">자주 묻는 질문</a>
+      <a href="송금하기.html">송금하기</a>
+    </div>
+    <p class="f-co">
+      <span>랜선페이 · (주)미라클컴퍼니</span>
+      <span>대표 김남기</span>
+      <span>서버책임 · 개인정보관리자 민기범</span>
+      <span>사업자등록번호 437-88-03148</span>
+      <span>충청남도 천안시 서북구 쌍용대로 234</span>
+      <span>방영학생활건강빌딩 3층 (성정동)</span>
+      <span>대표번호 1577-6369 (평일 9:00~18:00)</span>
+    </p>
+  </div>
+</footer>
+
+<div class="drawer-layer">
+<div class="drawer-dim" id="ddim" onclick="drawer(false)"></div>
+<aside class="drawer" id="drawer">
+  <div class="d-top"><span class="d-title">전체 메뉴</span><button class="d-x" onclick="drawer(false)">✕</button></div>
+  <a href="고객센터.html#faq"><iconify-icon icon="mingcute:question-fill"></iconify-icon>자주 묻는 질문<span class="gv">›</span></a>
+  <a href="고객센터.html"><iconify-icon icon="mingcute:headphone-fill"></iconify-icon>고객센터<span class="gv">›</span></a>
+  <a href="이용가이드.html"><iconify-icon icon="mingcute:book-2-fill"></iconify-icon>이용가이드<span class="gv">›</span></a>
+  <a href="index.html#reviews"><iconify-icon icon="mingcute:chat-2-fill"></iconify-icon>이용후기<span class="gv">›</span></a>
+  <a href="송금하기.html"><iconify-icon icon="mingcute:flash-fill"></iconify-icon>송금하기<span class="gv">›</span></a>
+  <a href="세금자료.html"><iconify-icon icon="mingcute:file-certificate-fill"></iconify-icon>세금계산서 · 부가세 신고<span class="gv">›</span></a>
+  <button class="d-login" onclick="location.href='로그인.html'">로그인</button>
+</aside>
+</div>
+
+<script>
+function drawer(on){
+  document.getElementById('drawer').classList.toggle('on', on);
+  document.getElementById('ddim').classList.toggle('on', on);
+}
+function pane(i, btn){
+  document.querySelectorAll('.tabs2 button').forEach(function(b){ b.classList.toggle('on', b === btn); });
+  document.querySelectorAll('.pane').forEach(function(p, idx){ p.classList.toggle('on', idx === i); });
+  window.scrollTo({ top: document.querySelector('.tx').offsetTop - 80, behavior: 'smooth' });
+}
+function soon(){ alert('자료 내려받기는 로그인 후 이용할 수 있어요.'); }
+</script>
+</body>
+</html>
