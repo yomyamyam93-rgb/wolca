@@ -289,8 +289,9 @@
     border:1.5px solid var(--line); border-radius:11px; font-size:12.5px; font-weight:700; color:var(--sub);}
   .win .wghost iconify-icon{font-size:15px; color:var(--primary);}
   /* 실제 화면을 그대로 끼워 넣기 (보기 전용) */
-  .win .frame{padding:0; overflow:hidden;}
-  .win .frame iframe{width:100%; border:0; display:block; pointer-events:none;}
+  .win .frame{padding:0; overflow:hidden; position:relative;}
+  .win .frame iframe{width:440px; border:0; display:block; pointer-events:none;
+    transform-origin:0 0; position:absolute; left:0; top:0;}
   .win:has(.frame){height:auto;}
   .sec.s80{padding:80px 0;}
   .sec.s80.last{padding-bottom:110px;}
@@ -567,7 +568,7 @@
           <div class="win">
             <div class="bar"><i></i><i></i><i></i><span class="url"><iconify-icon icon="mingcute:lock-fill"></iconify-icon>lanseonpay.co.kr/송금하기</span></div>
             <div class="wbody frame">
-              <iframe src="송금하기.html?embed=1&s=1" title="실제 화면" scrolling="no" loading="lazy" style="height:560px"></iframe>
+              <iframe src="송금하기.html?embed=1&s=1" title="실제 화면" scrolling="no" loading="lazy" data-h="560"></iframe>
             </div>
           </div>
         </div>
@@ -587,7 +588,7 @@
           <div class="win">
             <div class="bar"><i></i><i></i><i></i><span class="url"><iconify-icon icon="mingcute:lock-fill"></iconify-icon>lanseonpay.co.kr/송금하기</span></div>
             <div class="wbody frame">
-              <iframe src="송금하기.html?embed=1&s=2" title="실제 화면" scrolling="no" loading="lazy" style="height:560px"></iframe>
+              <iframe src="송금하기.html?embed=1&s=2" title="실제 화면" scrolling="no" loading="lazy" data-h="560"></iframe>
             </div>
           </div>
         </div>
@@ -607,7 +608,7 @@
           <div class="win">
             <div class="bar"><i></i><i></i><i></i><span class="url"><iconify-icon icon="mingcute:lock-fill"></iconify-icon>lanseonpay.co.kr/송금하기</span></div>
             <div class="wbody frame">
-              <iframe src="송금하기.html?embed=1&s=3" title="실제 화면" scrolling="no" loading="lazy" style="height:600px"></iframe>
+              <iframe src="송금하기.html?embed=1&s=3" title="실제 화면" scrolling="no" loading="lazy" data-h="600"></iframe>
             </div>
           </div>
         </div>
@@ -627,7 +628,7 @@
           <div class="win">
             <div class="bar"><i></i><i></i><i></i><span class="url"><iconify-icon icon="mingcute:lock-fill"></iconify-icon>lanseonpay.co.kr/송금하기</span></div>
             <div class="wbody frame">
-              <iframe src="송금하기.html?embed=1&s=4" title="실제 화면" scrolling="no" loading="lazy" style="height:560px"></iframe>
+              <iframe src="송금하기.html?embed=1&s=4" title="실제 화면" scrolling="no" loading="lazy" data-h="560"></iframe>
             </div>
           </div>
         </div>
@@ -759,6 +760,24 @@ function pane(name, btn){
     if(p.id==='p-'+name){ void p.offsetWidth; p.classList.add('on'); }
   });
 }
+</script>
+
+<script>
+/* 실제 화면(iframe)을 창 크기에 맞춰 비율 그대로 줄여서 보여줌 */
+function fitFrames(){
+  document.querySelectorAll('.win .frame').forEach(function(box){
+    var f = box.querySelector('iframe');
+    if (!f) return;
+    var h = parseInt(f.dataset.h || '620', 10);
+    var scale = box.clientWidth / 440;
+    f.style.height = h + 'px';
+    f.style.transform = 'scale(' + scale + ')';
+    box.style.height = Math.round(h * scale) + 'px';
+  });
+}
+window.addEventListener('load', fitFrames);
+window.addEventListener('resize', fitFrames);
+document.addEventListener('DOMContentLoaded', fitFrames);
 </script>
 </body>
 </html>
