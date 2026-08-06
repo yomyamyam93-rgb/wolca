@@ -566,9 +566,8 @@
         </div>
         <div class="fvis">
           <div class="win">
-            <div class="bar"><i></i><i></i><i></i><span class="url"><iconify-icon icon="mingcute:lock-fill"></iconify-icon>lanseonpay.co.kr/송금하기</span></div>
             <div class="wbody frame">
-              <iframe src="송금하기.html?embed=1&s=1" title="실제 화면" scrolling="no" loading="lazy" data-h="870"></iframe>
+              <iframe src="송금하기.html?embed=1&s=1" title="실제 화면" scrolling="no" onload="fitFrames()" data-h="870"></iframe>
             </div>
           </div>
         </div>
@@ -586,9 +585,8 @@
         </div>
         <div class="fvis">
           <div class="win">
-            <div class="bar"><i></i><i></i><i></i><span class="url"><iconify-icon icon="mingcute:lock-fill"></iconify-icon>lanseonpay.co.kr/송금하기</span></div>
             <div class="wbody frame">
-              <iframe src="송금하기.html?embed=1&s=2" title="실제 화면" scrolling="no" loading="lazy" data-h="920"></iframe>
+              <iframe src="송금하기.html?embed=1&s=2" title="실제 화면" scrolling="no" onload="fitFrames()" data-h="920"></iframe>
             </div>
           </div>
         </div>
@@ -606,9 +604,8 @@
         </div>
         <div class="fvis">
           <div class="win">
-            <div class="bar"><i></i><i></i><i></i><span class="url"><iconify-icon icon="mingcute:lock-fill"></iconify-icon>lanseonpay.co.kr/송금하기</span></div>
             <div class="wbody frame">
-              <iframe src="송금하기.html?embed=1&s=3" title="실제 화면" scrolling="no" loading="lazy" data-h="1020"></iframe>
+              <iframe src="송금하기.html?embed=1&s=3" title="실제 화면" scrolling="no" onload="fitFrames()" data-h="1020"></iframe>
             </div>
           </div>
         </div>
@@ -626,9 +623,8 @@
         </div>
         <div class="fvis">
           <div class="win">
-            <div class="bar"><i></i><i></i><i></i><span class="url"><iconify-icon icon="mingcute:lock-fill"></iconify-icon>lanseonpay.co.kr/송금하기</span></div>
             <div class="wbody frame">
-              <iframe src="송금하기.html?embed=1&s=4" title="실제 화면" scrolling="no" loading="lazy" data-h="845"></iframe>
+              <iframe src="송금하기.html?embed=1&s=4" title="실제 화면" scrolling="no" onload="fitFrames()" data-h="845"></iframe>
             </div>
           </div>
         </div>
@@ -768,13 +764,17 @@ function fitFrames(){
   document.querySelectorAll('.win .frame').forEach(function(box){
     var f = box.querySelector('iframe');
     if (!f) return;
+    var w = box.clientWidth || box.parentElement.clientWidth || 440;
     var h = parseInt(f.dataset.h || '620', 10);
-    var scale = box.clientWidth / 440;
+    var scale = Math.min(1, w / 440);
     f.style.height = h + 'px';
     f.style.transform = 'scale(' + scale + ')';
     box.style.height = Math.round(h * scale) + 'px';
   });
 }
+/* 탭을 바꾸거나 늦게 그려져도 다시 맞춤 */
+setTimeout(fitFrames, 300);
+setTimeout(fitFrames, 1200);
 window.addEventListener('load', fitFrames);
 window.addEventListener('resize', fitFrames);
 document.addEventListener('DOMContentLoaded', fitFrames);
