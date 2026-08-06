@@ -77,6 +77,9 @@
     background:#fff; font-family:inherit; font-size:15px; font-weight:700; color:var(--sub); cursor:pointer;}
   .csbox .cx{position:absolute; right:14px; top:14px; width:36px; height:36px; border:none; border-radius:50%;
     background:rgba(255,255,255,.9); font-size:18px; color:var(--ink); cursor:pointer;}
+  /* 연락처 — 덩어리 단위로만 줄바꿈 */
+  .nb{white-space:nowrap;}
+  .nb + .nb:before{content:'·'; color:var(--icon-off); margin:0 6px 0 2px;}
 </style>
 </head>
 <body>
@@ -170,7 +173,7 @@
     </div>
 
     <div class="cs-call">
-      <div class="t"><b>더 궁금한 게 있나요?</b><p>대표번호 1577-6369 · 평일 9:00~18:00 (주말 · 공휴일 휴무)</p></div>
+      <div class="t"><b>더 궁금한 게 있나요?</b><p><span class="nb">대표번호 1577-6369</span> <span class="nb">평일 9:00~18:00</span> <span class="nb">(주말 · 공휴일 휴무)</span></p></div>
       <a class="btn ghost" href="문의하기.html">1:1 문의하기</a>
     </div>
   </div>
