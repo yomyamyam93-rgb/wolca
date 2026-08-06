@@ -292,6 +292,15 @@
   .win .frame{padding:0; overflow:hidden;}
   .win .frame iframe{width:100%; border:0; display:block; pointer-events:none;}
   .win:has(.frame){height:auto;}
+  .sec.s80{padding:80px 0;}
+  .sec.s80.last{padding-bottom:110px;}
+  @media(max-width:760px){
+    /* 모바일에서는 위아래 여백을 절반 가까이 */
+    .sec{padding:48px 0;}
+    .sec.s80{padding:44px 0;}
+    .sec.s80.last{padding-bottom:60px;}
+    .flow{gap:48px;}
+  }
 </style>
 </head>
 <body>
@@ -631,7 +640,7 @@
 </section>
 
 <!-- 유형별 필요 서류 -->
-<section class="sec" style="padding:80px 0">
+<section class="sec s80">
   <div class="wrap">
     <h2 class="h-md">유형별 필요 서류</h2>
     <p class="p-md" style="margin-top:8px">증빙에서 금액과 계좌가 보여야 해요. 유형을 눌러 확인하세요.</p>
@@ -688,11 +697,11 @@
 </section>
 
 <!-- CTA -->
-<section class="sec" style="padding:80px 0 110px">
+<section class="sec s80 last">
   <div class="wrap">
     <div class="guide-cta">
-      <h2 class="h-lg">준비됐다면 바로 시작해요</h2>
-      <p class="p-lg" style="margin-top:16px">웹에서 바로 하거나, 앱을 설치해서 쓰세요.</p>
+      <h2 class="h-lg">언제 어디서나 결제하고<br>빠르게 입금해 보세요</h2>
+      <p class="p-lg" style="margin-top:16px">가입 없이 휴대폰 인증 한 번이면<br>지금 바로 송금할 수 있어요.</p>
       <div class="cta-col">
         <a class="btn blue" href="송금하기.html"><iconify-icon icon="mingcute:flash-fill"></iconify-icon>웹에서 바로 송금하기</a>
         <div class="storebtns">
