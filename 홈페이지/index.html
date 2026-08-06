@@ -90,6 +90,11 @@
   /* 안심 배지 */
   .safe{display:flex; justify-content:center; gap:24px; margin-top:26px; flex-wrap:wrap;}
   .safe span{display:inline-flex; align-items:center; gap:7px; font-size:13px; font-weight:600; color:rgba(255,255,255,.72); white-space:nowrap;}
+  @media(max-width:760px){
+    /* 좁은 화면에서는 한 줄에 하나씩 */
+    .safe{flex-direction:column; align-items:center; gap:10px; margin-top:22px;}
+    .safe span{font-size:12.5px;}
+  }
   .safe iconify-icon{font-size:16px; color:#A9C7FF;}
   .hero-btns{display:flex; gap:12px; justify-content:center; flex-wrap:wrap;}
   .storebtns{display:flex; gap:10px; justify-content:center; margin-top:18px;}
