@@ -492,6 +492,7 @@ var payMethod = '삼성 Deep Dream', payInst = '3개월';
 
 function ptab(name, btn){
   if (btn && btn.disabled) return;
+  fitToScreen();
   document.querySelectorAll('.pseg button').forEach(function(b){ b.classList.toggle('on', b === btn); });
   document.querySelectorAll('.ptab').forEach(function(p){
     p.classList.remove('on');
@@ -625,6 +626,25 @@ function ghop(el, next){
   var done = document.querySelector('.done h2');
   if (done) done.textContent = '결제가 완료됐어요';
 })();
+
+/* 결제 화면이 열리거나 수단을 바꿀 때, 결제 카드가 화면 맨 위에 오도록 맞춤 */
+function fitToScreen(){
+  setTimeout(function(){
+    var card = document.getElementById('payStep');
+    if (!card || card.style.display === 'none') card = document.getElementById('doneStep');
+    if (!card) return;
+    var nav = document.querySelector('.nav');
+    var gap = (nav ? nav.offsetHeight : 60) + 10;
+    var y = card.getBoundingClientRect().top + window.scrollY - gap;
+    if (Math.abs(window.scrollY - y) < 6) return;
+    window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+  }, 70);
+}
+window.addEventListener('load', fitToScreen);
+document.addEventListener('focusin', function(e){
+  if (!e.target.closest || !e.target.closest('.paycard')) return;
+  setTimeout(fitToScreen, 250);
+});
 </script>
 </body>
 </html>
