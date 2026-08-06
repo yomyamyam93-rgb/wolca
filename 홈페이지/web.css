@@ -139,15 +139,16 @@ html{scroll-behavior:smooth;}
 section[id], header[id], div[id]{scroll-margin-top:88px;}
 
 /* 회사 정보 — 줄바꿈이 어색하지 않게 덩어리 단위로 */
-.f-co{display:flex; flex-wrap:wrap; gap:0 10px;}
-.f-co span{white-space:nowrap;}
-.f-co span + span:before{content:'·'; color:var(--icon-off); margin-right:10px;}
+.f-co{display:flex; flex-wrap:wrap; gap:4px 14px;}
+.f-co span{display:inline-flex; align-items:baseline; gap:6px;}
+/* 항목 이름은 흐리게, 값은 진하게 — 구분되게 */
+.f-co em{font-style:normal; color:var(--icon-off); font-size:12.5px; white-space:nowrap;}
+.f-co i{font-style:normal; color:var(--icon-off);}
 .f-note{margin-top:10px;}
 .f-note br{display:none;}
 @media(max-width:600px){
   .f-co{display:block;}
-  .f-co span{display:block; white-space:normal;}
-  .f-co span + span:before{content:none;}
+  .f-co span{display:block; margin-bottom:3px;}
   .f-note br{display:inline;}
 }
 
