@@ -96,6 +96,16 @@
   .tab iconify-icon{font-size:19px;}
   .tab.on{background:#fff; color:var(--ink); box-shadow:0 1px 2px rgba(25,31,40,.08), 0 6px 14px -6px rgba(25,31,40,.28);}
   @media(max-width:560px){ .tab{font-size:13px; height:46px;} .tab iconify-icon{font-size:16px;} }
+  @media(max-width:560px){
+    /* 브라우저 목업이 화면을 넘지 않게 */
+    .win{width:100%; height:auto; min-height:380px;}
+    .win .wbody{padding:16px 15px;}
+    .win .wq{font-size:15.5px;}
+    .win .wfield{height:38px; font-size:12.5px;}
+    .win .wbtn{height:42px; font-size:13.5px;}
+    .telcos{gap:5px;}
+    .telcos span{height:33px; font-size:11.5px;}
+  }
 
   /* 패널 전환 (샤라락) */
   .panel{display:none;}
@@ -485,7 +495,7 @@
           <p class="fs">담당자가 서류를 확인하면 받는 분 계좌로 현금이 입금돼요. 보통 <b>영업일 기준 30분 이내</b>, 평균 12분이면 끝납니다.</p>
           <ul class="flist">
             <li>서류가 부족하면 보완 요청을 드려요</li>
-            <li>승인되지 않으면 <b>결제는 전액 자동 취소</b> — 카드값도 청구되지 않아요</li>
+            <li>승인되지 않으면 <b>결제는 전액 자동 취소</b><br>카드값도 청구되지 않아요</li>
           </ul>
         </div>
         <div class="fvis">
