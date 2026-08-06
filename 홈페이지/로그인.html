@@ -85,6 +85,11 @@
   .trow .req{font-size:12px; font-weight:700; color:var(--primary-dark);}
   .trow .opt{font-size:12px; font-weight:700; color:var(--placeholder);}
   .fine{font-size:12px; color:var(--placeholder); text-align:center; margin-top:16px; line-height:1.6;}
+  .bizbox{padding:16px; border:1.5px solid var(--primary-100); border-radius:15px; background:var(--primary-50); margin-bottom:16px;}
+  .bizmsg{font-size:12.5px; color:var(--placeholder); margin-top:8px; line-height:1.6;}
+  .bizmsg.ok{color:var(--success, #059669); font-weight:700;}
+  .bizmsg.no{color:#DC2626; font-weight:700;}
+  .bizmsg b{color:var(--ink);}
 </style>
 </head>
 <body>
@@ -148,6 +153,17 @@
         </div>
       </div>
 
+      <div class="bizbox" id="bizBox" style="display:none">
+        <div class="field" style="margin-bottom:0">
+          <label>사업자등록번호</label>
+          <div class="inrow">
+            <input class="tin" id="bizNo" inputmode="numeric" maxlength="12" placeholder="000-00-00000" oninput="fmtBiz(this)">
+            <button class="inbtn" id="bizBtn" onclick="checkBiz()" disabled>확인</button>
+          </div>
+          <div class="bizmsg" id="bizMsg">국세청에 등록된 사업자인지 확인해요.</div>
+        </div>
+      </div>
+
       <div class="field"><label>이름</label><input class="tin" placeholder="이름 입력"></div>
 
       <div class="field">
@@ -189,7 +205,7 @@
         </div>
       </div>
 
-      <button class="abtn" onclick="alert('회원가입 연동은 준비 중이에요')">가입하고 시작하기</button>
+      <button class="abtn" onclick="joinGo()">가입하고 시작하기</button>
       <div class="fine">본인인증은 통신사를 통해 안전하게 처리돼요.<br>가입 후 앱과 웹에서 같은 계정으로 이용할 수 있어요.</div>
     </div>
 
@@ -249,6 +265,7 @@ function allChk(){
   var to = !all.classList.contains('on');
   all.classList.toggle('on', to);
   document.querySelectorAll('#ap-join .trow:not(.all) .chk').forEach(function(c){ c.classList.toggle('on', to); });
+  if (typeof syncBiz === 'function') syncBiz();
 }
 function syncAll(){
   var boxes = document.querySelectorAll('#ap-join .trow:not(.all) .chk');
@@ -258,6 +275,37 @@ function syncAll(){
 /* 주소에 #회원가입 이 붙어 있으면 회원가입 탭으로 */
 if (location.hash === '#join' || location.hash === '#회원가입') {
   atab('join', document.querySelectorAll('.atab')[1]);
+}
+
+/* 사업자 가입 — 사업자등록번호 확인 */
+var bizOk = false;
+function fmtBiz(el){
+  var v = el.value.replace(/[^0-9]/g, '').slice(0, 10);
+  if (v.length > 5)      v = v.slice(0,3) + '-' + v.slice(3,5) + '-' + v.slice(5);
+  else if (v.length > 3) v = v.slice(0,3) + '-' + v.slice(3);
+  el.value = v;
+  bizOk = false;
+  document.getElementById('bizBtn').disabled = v.replace(/[^0-9]/g, '').length !== 10;
+  var m = document.getElementById('bizMsg');
+  m.className = 'bizmsg';
+  m.textContent = '국세청에 등록된 사업자인지 확인해요.';
+}
+function checkBiz(){
+  var m = document.getElementById('bizMsg');
+  bizOk = true;
+  m.className = 'bizmsg ok';
+  m.innerHTML = '확인됐어요 — <b>미라클상사</b> · 대표 김남기 · 계속사업자';
+}
+function isBiz(){
+  var t = document.querySelectorAll('#ap-join .ut');
+  return t.length > 1 && t[1].classList.contains('on');
+}
+function syncBiz(){
+  document.getElementById('bizBox').style.display = isBiz() ? 'block' : 'none';
+}
+function joinGo(){
+  if (isBiz() && !bizOk) { alert('사업자등록번호를 확인해주세요.'); return; }
+  alert('회원가입 연동은 준비 중이에요');
 }
 </script>
 </body>
