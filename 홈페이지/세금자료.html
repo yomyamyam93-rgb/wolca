@@ -240,8 +240,7 @@ function pane(i, btn){
   document.querySelectorAll('.pane').forEach(function(p, idx){ p.classList.toggle('on', idx === i); });
   window.scrollTo({ top: document.querySelector('.tx').offsetTop - 80, behavior: 'smooth' });
 }
-function soon(){ if (confirm('자료 내려받기는 로그인 후 이용할 수 있어요.
-로그인하러 갈까요?')) location.href='로그인.html'; }
+function soon(){ if (confirm('자료 내려받기는 로그인 후 이용할 수 있어요.\n로그인하러 갈까요?')) location.href='로그인.html'; }
 </script>
 </body>
 </html>
