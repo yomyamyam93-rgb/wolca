@@ -92,7 +92,8 @@ iconify-icon{display:inline-block;}
 .hero-btns{display:flex; gap:12px; justify-content:center; flex-wrap:wrap;}
 .cta-col{display:flex; flex-direction:column; align-items:center; gap:14px; margin-top:40px;}
 .cta-col .btn{width:332px; max-width:100%;}
-.cta-col .storebtns{margin-top:0;}
+.cta-col .storebtns{margin-top:0; width:332px; max-width:100%;}
+.cta-col .storebtn{flex:1; width:auto; min-width:0;}
 .storebtns{display:flex; gap:10px; justify-content:center; margin-top:18px;}
 .storebtn{display:inline-flex; align-items:center; justify-content:center; gap:7px; width:160px; height:50px; border-radius:13px; background:#fff; border:1px solid var(--line); color:var(--ink); font-size:14px; font-weight:700; text-decoration:none; white-space:nowrap;}
 .storebtn iconify-icon{font-size:17px;}
