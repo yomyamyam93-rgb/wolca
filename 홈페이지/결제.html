@@ -169,6 +169,12 @@
     color:var(--sub); line-height:1.7; margin-bottom:14px;}
   .appnote b{color:var(--ink);}
   .pseg button:disabled{opacity:.42; cursor:default;}
+
+  /* 이용가이드 미리보기 모드 */
+  body.embed{background:#fff; overflow:hidden;}
+  body.embed .nav, body.embed .page-hero, body.embed .footer, body.embed .drawer-layer{display:none !important;}
+  body.embed .pay-wrap{padding:0 !important; background:#fff;}
+  body.embed .paycard{box-shadow:none !important; padding:16px 14px !important; margin:0 !important;}
 </style>
 </head>
 <body>
@@ -644,6 +650,13 @@ document.addEventListener('focusin', function(e){
   if (!e.target.closest || !e.target.closest('.paycard')) return;
   setTimeout(fitToScreen, 250);
 });
+
+(function(){
+  var p = new URLSearchParams(location.search);
+  if (!p.get('embed')) return;
+  document.body.classList.add('embed');
+  window.fitToScreen = function(){};
+})();
 </script>
 </body>
 </html>

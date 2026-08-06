@@ -220,6 +220,17 @@
     .dhbox{width:calc(100vw - 24px); max-height:88vh;}
     .dhbox .dhtop{padding:20px 20px 0;} .dhtabs{padding:14px 20px 4px;} .dhbody{padding:12px 20px 22px;}
   }
+
+  /* 이용가이드에 그대로 끼워 넣기 위한 미리보기 모드 */
+  body.embed{background:#fff; overflow:hidden;}
+  body.embed .nav, body.embed .page-hero, body.embed .footer, body.embed .drawer-layer{display:none !important;}
+  body.embed .send{padding:0 !important; background:#fff;}
+  body.embed .send-in{padding:16px 14px 20px;}
+  body.embed .wz-view{width:auto !important; margin-left:0 !important;}
+  body.embed .wz-track{transform:none !important; padding-left:0 !important;}
+  body.embed .wz-card{flex:1 1 auto !important; max-width:100% !important; opacity:1 !important;}
+  body.embed .wz-card:not(.on){display:none !important;}
+  body.embed .authcard{box-shadow:none !important; padding:4px 2px !important;}
 </style>
 </head>
 <body>
@@ -757,6 +768,17 @@ function askSend(){
   document.getElementById('askDone').classList.add('on');
 }
 document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeAsk(); });
+
+/* ?embed=1&s=단계 로 열면 해당 단계 카드만 보여줌 (이용가이드에서 사용) */
+(function(){
+  var p = new URLSearchParams(location.search);
+  if (!p.get('embed')) return;
+  document.body.classList.add('embed');
+  var st = parseInt(p.get('s') || '1', 10);
+  function go(){ if (typeof wzGo === 'function') wzGo(Math.max(0, st - 1)); }
+  if (document.readyState === 'complete') go(); else window.addEventListener('load', go);
+  window.fitToScreen = function(){};
+})();
 </script>
 </body>
 </html>

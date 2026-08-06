@@ -288,6 +288,10 @@
   .win .wghost{display:flex; align-items:center; justify-content:center; gap:6px; height:40px; margin-top:8px;
     border:1.5px solid var(--line); border-radius:11px; font-size:12.5px; font-weight:700; color:var(--sub);}
   .win .wghost iconify-icon{font-size:15px; color:var(--primary);}
+  /* 실제 화면을 그대로 끼워 넣기 (보기 전용) */
+  .win .frame{padding:0; overflow:hidden;}
+  .win .frame iframe{width:100%; border:0; display:block; pointer-events:none;}
+  .win:has(.frame){height:auto;}
 </style>
 </head>
 <body>
@@ -553,16 +557,8 @@
         <div class="fvis">
           <div class="win">
             <div class="bar"><i></i><i></i><i></i><span class="url"><iconify-icon icon="mingcute:lock-fill"></iconify-icon>lanseonpay.co.kr/송금하기</span></div>
-            <div class="wbody">
-              <div class="wq">휴대폰 인증</div>
-              <div class="wsub">본인 명의 휴대폰으로 간편하게 시작해요.</div>
-              <div class="wlbl">통신사</div>
-              <div class="telcos"><span class="on">SKT</span><span>KT</span><span>LG U+</span><span>SKT 알뜰폰</span><span>KT 알뜰폰</span><span>LG 알뜰폰</span></div>
-              <div class="wlbl">이름</div>
-              <div class="wfield ph">이름 입력</div>
-              <div class="wlbl">휴대폰 번호</div>
-              <div class="w2col"><div class="wfield ph">숫자만 입력</div><div class="wfield ph" style="flex:0 0 104px; justify-content:center; background:var(--primary-50); color:var(--primary-dark); font-weight:700; border-color:transparent">인증번호 받기</div></div>
-              <div class="wbtn">인증하고 송금 시작하기</div>
+            <div class="wbody frame">
+              <iframe src="송금하기.html?embed=1&s=1" title="실제 화면" scrolling="no" loading="lazy" style="height:560px"></iframe>
             </div>
           </div>
         </div>
@@ -581,17 +577,8 @@
         <div class="fvis">
           <div class="win">
             <div class="bar"><i></i><i></i><i></i><span class="url"><iconify-icon icon="mingcute:lock-fill"></iconify-icon>lanseonpay.co.kr/송금하기</span></div>
-            <div class="wbody">
-              <div class="wq">결제 정보 입력</div>
-              <div class="wsub">받는 분 계좌와 보낼 금액을 넣어주세요.</div>
-              <div class="wlbl">결제 유형</div>
-              <div class="wfield">부동산 임대차 · 월세</div>
-              <div class="wlbl">보낼 금액</div>
-              <div class="wfield ph">상대방이 받을 금액</div>
-              <div class="wlbl">받는 분 계좌</div>
-              <div class="w2col"><div class="wfield" style="flex:0 0 104px">KB국민</div><div class="wfield ph">계좌번호 입력</div></div>
-              <div class="filerow" style="margin-top:12px"><iconify-icon icon="mingcute:check-circle-fill"></iconify-icon><span class="fn">받는 분 (예금주) · 대성부동산</span></div>
-              <div class="wbtn">다음</div>
+            <div class="wbody frame">
+              <iframe src="송금하기.html?embed=1&s=2" title="실제 화면" scrolling="no" loading="lazy" style="height:560px"></iframe>
             </div>
           </div>
         </div>
@@ -610,19 +597,8 @@
         <div class="fvis">
           <div class="win">
             <div class="bar"><i></i><i></i><i></i><span class="url"><iconify-icon icon="mingcute:lock-fill"></iconify-icon>lanseonpay.co.kr/송금하기</span></div>
-            <div class="wbody">
-              <div class="wq">증빙 서류 첨부</div>
-              <div class="wsub">실제 거래를 증명하는 서류를 올려주세요.</div>
-              <div class="dochelp"><span class="di"><iconify-icon icon="mingcute:document-2-fill"></iconify-icon></span>
-                <span class="dt2"><b>어떤 서류를 올려야 하나요?</b><i>결제 유형 13가지별로 확인해보세요</i></span>
-                <iconify-icon class="dgv" icon="mingcute:right-line"></iconify-icon></div>
-              <div class="drop">
-                <iconify-icon icon="mingcute:upload-3-fill"></iconify-icon>
-                <div class="dt">여기로 파일을 끌어다 놓으세요</div>
-                <div class="ds">JPG · PNG · PDF · 20MB 이하</div>
-              </div>
-              <div class="filerow"><iconify-icon icon="mingcute:document-fill"></iconify-icon><span class="fn">임대차계약서.pdf</span><span class="fx">1.2MB</span></div>
-              <div class="wbtn">다음</div>
+            <div class="wbody frame">
+              <iframe src="송금하기.html?embed=1&s=3" title="실제 화면" scrolling="no" loading="lazy" style="height:600px"></iframe>
             </div>
           </div>
         </div>
@@ -641,17 +617,8 @@
         <div class="fvis">
           <div class="win">
             <div class="bar"><i></i><i></i><i></i><span class="url"><iconify-icon icon="mingcute:lock-fill"></iconify-icon>lanseonpay.co.kr/송금하기</span></div>
-            <div class="wbody">
-              <div class="wq">결제 확인</div>
-              <div class="wsub">지금은 신청만 돼요. 서류가 승인되면 결제 · 입금됩니다.</div>
-              <div class="cbox">
-                <div class="crow"><span class="l">받는 분</span><span class="r">대성부동산</span></div>
-                <div class="crow"><span class="l">신청 금액</span><span class="r">680,000원</span></div>
-                <div class="crow"><span class="l">수수료 4%</span><span class="r">27,200원</span></div>
-                <div class="ctot"><span class="l">총 결제금액</span><span class="v">707,200원</span></div>
-              </div>
-              <div class="wbtn">707,200원 결제 신청하기</div>
-              <div class="wghost"><iconify-icon icon="mingcute:user-add-2-fill"></iconify-icon>다른 사람에게 결제 요청 보내기</div>
+            <div class="wbody frame">
+              <iframe src="송금하기.html?embed=1&s=4" title="실제 화면" scrolling="no" loading="lazy" style="height:560px"></iframe>
             </div>
           </div>
         </div>
