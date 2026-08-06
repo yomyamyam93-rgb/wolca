@@ -257,7 +257,7 @@ function atab(name, btn){
     if (p.id === 'ap-' + name) { void p.offsetWidth; p.classList.add('on'); }
   });
 }
-function utype(el){ document.querySelectorAll('.ut').forEach(function(u){ u.classList.remove('on'); }); el.classList.add('on'); }
+function utype(el){ document.querySelectorAll('.ut').forEach(function(u){ u.classList.remove('on'); }); el.classList.add('on'); syncBiz(); }
 function sendCode(){ document.getElementById('codeField').style.display = 'block'; }
 function oneChk(el){ el.classList.toggle('on'); syncAll(); }
 function allChk(){
