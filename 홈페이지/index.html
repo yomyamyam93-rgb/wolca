@@ -77,7 +77,15 @@
   .pf+.pf{border-left:1px solid rgba(255,255,255,.25);}
   .pf .v{font-size:30px; font-weight:800; color:#fff; letter-spacing:-.7px; white-space:nowrap; text-shadow:0 2px 14px rgba(0,0,0,.35);}
   .pf .l{font-size:13px; color:rgba(255,255,255,.72); margin-top:7px; white-space:nowrap;}
-  @media(max-width:620px){ .pf{padding:6px 20px;} .pf .v{font-size:22px;} .pf .l{font-size:12px;} }
+  @media(max-width:620px){
+    /* 좁은 화면에서는 세 칸을 한 줄에 고르게 */
+    .proof{display:grid; grid-template-columns:repeat(3,1fr); gap:0; margin-top:34px;}
+    .pf{padding:6px 6px;}
+    .pf+.pf{border-left:1px solid rgba(255,255,255,.25);}
+    .pf .v{font-size:19px; letter-spacing:-.5px; white-space:nowrap;}
+    .pf .l{font-size:11px; margin-top:4px; white-space:nowrap;}
+  }
+  @media(max-width:360px){ .pf .v{font-size:17px;} .pf .l{font-size:10.5px;} }
 
   /* 안심 배지 */
   .safe{display:flex; justify-content:center; gap:24px; margin-top:26px; flex-wrap:wrap;}

@@ -150,3 +150,7 @@ section[id], header[id], div[id]{scroll-margin-top:88px;}
   .f-co span + span:before{content:none;}
   .f-note br{display:inline;}
 }
+
+/* 줄바꿈을 보기 좋게 — 마지막 줄에 한 단어만 남지 않도록 */
+h1,h2,h3,h4,.h-xl,.h-lg,.eyebrow,.sub-tit,.q,.t{text-wrap:balance;}
+p,.p-lg,.s,.hint,.f-co,.note,.qs{text-wrap:pretty;}
