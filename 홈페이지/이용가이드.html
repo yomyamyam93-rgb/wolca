@@ -243,6 +243,27 @@
 
   .guide-cta{margin-top:70px; text-align:center; background:var(--gray-bg); border-radius:22px; padding:56px 30px;}
   .guide-cta .hero-btns{display:flex; gap:12px; justify-content:center; margin-top:28px; flex-wrap:wrap;}
+  /* 결제수단 목업 — 실제 앱과 같은 구성 */
+  .seg3{display:flex; gap:4px; background:var(--gray-bg); border-radius:13px; padding:4px; margin-bottom:14px;}
+  .seg3 span{flex:1; text-align:center; padding:9px 0; border-radius:10px; font-size:13px; font-weight:700; color:var(--placeholder);}
+  .seg3 span.on{background:#fff; color:var(--ink); box-shadow:0 1px 3px rgba(25,31,40,.12);}
+  .crow{display:flex; align-items:center; gap:11px; padding:12px 13px; border:1.5px solid var(--line);
+    border-radius:13px; margin-bottom:8px; background:#fff;}
+  .crow.on{border-color:var(--primary); background:var(--primary-50);}
+  .cmini{width:38px; height:25px; flex:0 0 auto; border-radius:5px; position:relative;}
+  .cmini:after{content:''; position:absolute; left:5px; top:8px; width:9px; height:7px; border-radius:2px;
+    background:linear-gradient(135deg,#F1D48A,#C9A24B);}
+  .cmini.samsung{background:linear-gradient(135deg,#2E6BD8,#1B3E82);}
+  .cmini.hyundai{background:linear-gradient(135deg,#3A4A63,#1B2432);}
+  .crow .ct{flex:1; min-width:0; display:flex; flex-direction:column; gap:3px;}
+  .crow .ct b{font-size:13.5px; font-weight:700;}
+  .crow .ct i{font-style:normal; font-size:11.5px; color:var(--placeholder); letter-spacing:.5px;}
+  .crad{width:19px; height:19px; flex:0 0 auto; border-radius:50%; border:1.5px solid var(--border); background:#fff;}
+  .crad.on{border-color:var(--primary); background:var(--primary); box-shadow:inset 0 0 0 3px #fff;}
+  .cadd{padding:11px; border:1.5px dashed var(--border); border-radius:13px; text-align:center;
+    font-size:13px; font-weight:700; color:var(--sub); margin-bottom:4px;}
+  .minfo{margin-top:10px; padding:10px 12px; border-radius:10px; background:var(--gray-bg);
+    font-size:11.5px; color:var(--placeholder); line-height:1.6;}
 </style>
 </head>
 <body>
@@ -406,18 +427,21 @@
           <div class="scr">
             <div class="sprog"><i style="width:85%"></i></div>
             <div class="q">어떻게 결제할까요?</div>
-            <div class="seg"><span class="on">카드결제</span><span>간편결제</span></div>
-            <div class="cface">
-              <div class="br">삼성카드</div>
-              <div class="chip"></div>
-              <div class="no">•••• •••• •••• 4821</div>
-              <div class="bt"><span>Deep Dream</span><span>VISA</span></div>
+            <div class="seg3"><span class="on">카드결제</span><span>앱카드</span><span>간편결제</span></div>
+            <div class="crow on">
+              <span class="cmini samsung"></span>
+              <span class="ct"><b>삼성 Deep Dream</b><i>•••• •••• •••• 4821</i></span>
+              <span class="crad on"></span>
             </div>
-            <div class="dots"><i class="on"></i><i></i><i></i></div>
-            <div class="lbl">할부 개월</div>
-            <div class="instal"><span>일시불</span><span class="on">3개월 무이자</span><span>6개월 무이자</span></div>
-            <div class="lbl">결제 방식</div>
-            <div class="instal"><span class="on">이번만 결제</span><span>매달 예약 결제</span></div>
+            <div class="crow">
+              <span class="cmini hyundai"></span>
+              <span class="ct"><b>현대 the Green</b><i>•••• •••• •••• 3092</i></span>
+              <span class="crad"></span>
+            </div>
+            <div class="cadd">+ 새 카드 등록하기</div>
+            <div class="lbl">할부</div>
+            <div class="instal"><span>일시불</span><span class="on">3개월</span><span>6개월</span></div>
+            <div class="minfo">무이자 가능 개월은 카드사 행사에 따라 달라져요.</div>
             <button class="sbtn">다음</button>
           </div>
         </div>
