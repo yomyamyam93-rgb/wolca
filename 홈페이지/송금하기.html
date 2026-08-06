@@ -462,7 +462,24 @@ function wzGo(n){
   document.getElementById('wzName').textContent = WZ[n];
   document.getElementById('wzPrev').classList.toggle('on', n > 0);
   wzFit();
+  fitToScreen();
 }
+
+/* 단계를 옮기거나 입력할 때, 카드가 화면에 딱 맞게 부드럽게 이동 */
+function fitToScreen(){
+  var w = document.querySelector('.wizard');
+  if (!w) return;
+  var nav = document.querySelector('.nav');
+  var gap = (nav ? nav.offsetHeight : 60) + 12;
+  var y = w.getBoundingClientRect().top + window.scrollY - gap;
+  window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+}
+
+/* 입력칸을 눌렀을 때도 카드가 가려지지 않게 */
+document.addEventListener('focusin', function(e){
+  if (!e.target.closest || !e.target.closest('.wz-card.on')) return;
+  setTimeout(fitToScreen, 250);
+});
 /* 옆 카드를 눌러도 그 단계로 이동 */
 document.addEventListener('DOMContentLoaded', function(){
   var cards = document.querySelectorAll('.wz-card');
