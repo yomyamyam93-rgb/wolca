@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>랜선페이 — 고객센터</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
-<link rel="stylesheet" href="web.css?v=20260811i">
+<link rel="stylesheet" href="web.css?v=20260811j">
 <link rel="icon" type="image/png" href="../img/logo3.png">
 <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
-<script src="web.js?v=20260811i"></script>
+<script src="web.js?v=20260811j"></script>
 <style>
 
   /* 상단 탭 */
@@ -390,6 +390,13 @@ function csTab(i){
   if (pv) pv.style.display = 'none';   /* 탭을 누르면 목록으로 */
 }
 
+
+if(location.hash==='#event') csTab(1);
+if(location.hash==='#faq') csTab(2);
+</script>
+
+<script src="게시글.js?v=20260811j"></script>
+<script>
 /* ===== FAQ : 검색 · 분류 · 페이지 ===== */
 /* FAQS 는 게시글.js 에 있습니다 (홈페이지 · 앱 공용) */
 var FQ_PER = 6;          /* 한 페이지에 보여줄 개수 */
@@ -434,13 +441,6 @@ function fqDraw(page){
   p.innerHTML = html;
 }
 fqCats(); fqDraw(1);
-
-if(location.hash==='#event') csTab(1);
-if(location.hash==='#faq') csTab(2);
-</script>
-
-<script src="게시글.js?v=20260811i"></script>
-<script>
 /* 매거진은 별도 페이지(뉴스룸.html)로 옮김 */
 
 /* 공지 목록 — 고정 공지를 맨 위로. 검색어가 있으면 제목으로 걸러냅니다. */
