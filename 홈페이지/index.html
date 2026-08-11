@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>랜선페이 — 현금으로 내던 돈 카드로</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
-<link rel="stylesheet" href="web.css?v=20260811m">
+<link rel="stylesheet" href="web.css?v=20260811n">
 <link rel="icon" type="image/png" href="../img/logo3.png">
 <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
-<script src="web.js?v=20260811m"></script>
-<script src="게시글.js?v=20260811m"></script>
+<script src="web.js?v=20260811n"></script>
+<script src="게시글.js?v=20260811n"></script>
 <style>
   .reveal{opacity:0; transform:translateY(22px); transition:opacity .55s ease, transform .55s ease;}
   .reveal.in{opacity:1; transform:none;}
@@ -1698,40 +1698,40 @@ document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeD
 /* 이용안내 — 앱 / 웹 단계 안내 */
 var GUIDE = {
   app: [
-    { t:"무엇을 결제할지 먼저 골라요",
-      d:"내 결제 유형에 맞게 선택해주세요. 유형에 따라 <br><b>필요한 서류가 달라지니</b> 실제 용도에 맞게 골라주세요.",
+    { t:"무엇을 결제할지 골라요",
+      d:"유형에 따라 <b>필요한 서류가 달라져요.</b><br>실제 용도에 맞게 골라주세요.",
       s:"<div class=\"sprog\"><i style=\"width:20%\"></i></div> <div class=\"q\">무엇을 결제할까요?</div> <div class=\"fade\" style=\"flex:1; overflow:hidden\"> <div class=\"catrow sel\"><div class=\"cic\"><iconify-icon icon=\"mingcute:home-4-fill\"></iconify-icon></div><div><div class=\"cn\">부동산 임대차</div><div class=\"cd\">월세 · 관리비 · 계약금 · 보증금</div></div><iconify-icon class=\"gv\" icon=\"mingcute:right-line\"></iconify-icon></div> <div class=\"catrow\"><div class=\"cic\"><iconify-icon icon=\"mingcute:building-2-fill\"></iconify-icon></div><div><div class=\"cn\">별도 관리비</div><div class=\"cd\">아파트 · 상가 관리비만 따로 낼 때</div></div><iconify-icon class=\"gv\" icon=\"mingcute:right-line\"></iconify-icon></div> <div class=\"catrow\"><div class=\"cic\"><iconify-icon icon=\"mingcute:paint-brush-fill\"></iconify-icon></div><div><div class=\"cn\">인테리어</div><div class=\"cd\">공사 · 수리 · 시공 · 설치 · 철거비</div></div><iconify-icon class=\"gv\" icon=\"mingcute:right-line\"></iconify-icon></div> <div class=\"catrow\"><div class=\"cic\"><iconify-icon icon=\"mingcute:cash-fill\"></iconify-icon></div><div><div class=\"cn\">복비</div><div class=\"cd\">부동산 중개수수료</div></div><iconify-icon class=\"gv\" icon=\"mingcute:right-line\"></iconify-icon></div> <div class=\"catrow\"><div class=\"cic\"><iconify-icon icon=\"mingcute:truck-fill\"></iconify-icon></div><div><div class=\"cn\">이사비</div><div class=\"cd\">용달 · 포장이사</div></div><iconify-icon class=\"gv\" icon=\"mingcute:right-line\"></iconify-icon></div> <div class=\"catrow\"><div class=\"cic\"><iconify-icon icon=\"mingcute:broom-fill\"></iconify-icon></div><div><div class=\"cn\">청소비</div><div class=\"cd\">입주 · 정기 청소</div></div><iconify-icon class=\"gv\" icon=\"mingcute:right-line\"></iconify-icon></div> <div class=\"catrow\"><div class=\"cic\"><iconify-icon icon=\"mingcute:package-2-fill\"></iconify-icon></div><div><div class=\"cn\">B2B 매입대금</div><div class=\"cd\">거래처 · 식자재 대금</div></div><iconify-icon class=\"gv\" icon=\"mingcute:right-line\"></iconify-icon></div> <div class=\"catrow\"><div class=\"cic\"><iconify-icon icon=\"mingcute:car-fill\"></iconify-icon></div><div><div class=\"cn\">렌트료 · 렌탈료</div><div class=\"cd\">자동차 · 가전 · 생활용품</div></div><iconify-icon class=\"gv\" icon=\"mingcute:right-line\"></iconify-icon></div> <div class=\"catrow\"><div class=\"cic\"><iconify-icon icon=\"mingcute:shield-fill\"></iconify-icon></div><div><div class=\"cn\">보험료</div><div class=\"cd\">건강 · 연금 · 화재</div></div><iconify-icon class=\"gv\" icon=\"mingcute:right-line\"></iconify-icon></div> </div>" },
     { t:"보낼 금액을 입력해요",
-      d:"내 카드에서 빠질 돈이 아니라 <b>상대방이 받아야 하는 금액</b>을 넣어주세요. 수수료는 자동으로 계산됩니다.",
+      d:"내 카드에서 빠질 돈이 아니라 <b>상대방이 받을 금액</b>이에요.<br>수수료는 자동 계산돼요.",
       s:"<div class=\"sprog\"><i style=\"width:40%\"></i></div> <div class=\"q\">얼마를 보낼까요?</div> <div class=\"chipsum\"><iconify-icon icon=\"mingcute:home-4-fill\"></iconify-icon>부동산 임대차 · 월세</div> <div class=\"lbl\">보낼 금액</div> <div class=\"amtrow\"><span class=\"n\">680,000</span><span class=\"w\">원</span></div> <div class=\"qbtns\"><span>+10만</span><span>+50만</span><span>+100만</span></div> <div class=\"feeline\"><span>상대방이 받는 돈</span><span class=\"v\">680,000원</span></div> <div class=\"feeline\" style=\"margin-top:8px\"><span>수수료 4%</span><span class=\"v\">27,200원</span></div> <div class=\"feeline\" style=\"margin-top:8px; background:var(--primary-50); color:var(--primary-dark)\"><span style=\"font-weight:700\">내 카드 결제액</span><span class=\"v\">707,200원</span></div> <div class=\"scrhint\">보낼 금액은 상대방이 받을 금액이에요.<br>수수료는 자동으로 더해집니다.</div> <button class=\"sbtn\">다음</button>" },
-    { t:"받는 분 계좌를 넣고 인증해요",
-      d:"예금주가 자동으로 확인되니 <b>상대방에게 연락하거나 동의를 받을 필요가 없어요.</b> 상대방은 평소처럼 계좌로 현금을 받게 됩니다.",
+    { t:"받는 분 계좌를 인증해요",
+      d:"<b>예금주가 자동으로 확인</b>돼요.<br>상대방 동의나 연락은 필요 없어요.",
       s:"<div class=\"sprog\"><i style=\"width:60%\"></i></div> <div class=\"q\">어디로 보낼까요?</div> <div class=\"lbl\">은행</div> <div class=\"selrow\"><span style=\"display:flex; align-items:center\"><span class=\"bk\">KB</span>국민</span><iconify-icon icon=\"mingcute:down-line\"></iconify-icon></div> <div class=\"lbl\">계좌번호</div> <div class=\"inbox\"><span class=\"txt\">123456-78-901234</span><span class=\"side\">계좌 인증</span></div> <div class=\"vbox\"> <iconify-icon icon=\"mingcute:check-circle-fill\"></iconify-icon> <div><div class=\"vl\">받는 분 (예금주)</div><div class=\"vn\">대성부동산</div></div> </div> <div class=\"scrhint\">상대방 동의 없이도 돼요.<br>인증하면 받는 분이 자동으로 확인돼요.</div> <button class=\"sbtn\">다음</button>" },
-    { t:"증빙 서류를 찍어서 올려요",
-      d:"실제 거래를 증명하는 서류가 필요해요. <br>이 절차를 통해 <b>합법적인 현금 송금</b>이 가능해요.",
+    { t:"증빙 서류를 올려요",
+      d:"<b>실제 거래를 증명하는 서류</b>가 필요해요.<br>이 절차로 합법적인 송금이 됩니다.",
       s:"<div class=\"sprog\"><i style=\"width:70%\"></i></div> <div class=\"q\">고지서를 촬영해주세요</div> <div class=\"cam\"> <div class=\"bill\"> <div class=\"h\">2026년 8월 관리비 청구서</div> <div class=\"sub\">대성부동산 · 납부계좌 KB국민</div> <div class=\"r m\"></div><div class=\"r s\"></div><div class=\"r\"></div><div class=\"r m\"></div> <div class=\"box\"><div class=\"bt\">납부 금액</div><div class=\"bv\">680,000 원</div></div> <div class=\"r\" style=\"margin-top:14px\"></div><div class=\"r s\"></div><div class=\"r m\"></div> </div> <div class=\"fr\"><i></i><i></i><i></i><i></i></div> <div class=\"shot\"></div> </div> <div class=\"camhint\">서류 전체가 프레임 안에 들어오게 맞춰주세요</div>" },
-    { t:"카드를 고르고 할부를 정해요",
-      d:"일반 카드 결제와 똑같아서 <b>포인트 적립</b>도<br><b>카드 실적</b>도 그대로 쌓여요.",
+    { t:"카드와 할부를 정해요",
+      d:"일반 카드 결제와 똑같아서 <b>포인트도 실적도 그대로</b> 쌓여요.",
       s:"<div class=\"sprog\"><i style=\"width:85%\"></i></div> <div class=\"q\">어떻게 결제할까요?</div> <div class=\"seg3\"><span class=\"on\">카드결제</span><span>앱카드</span><span>간편결제</span></div> <div class=\"crow on\"> <span class=\"cmini samsung\"></span> <span class=\"ct\"><b>삼성 Deep Dream</b><i>•••• •••• •••• 4821</i></span> <span class=\"crad on\"></span> </div> <div class=\"crow\"> <span class=\"cmini hyundai\"></span> <span class=\"ct\"><b>현대 the Green</b><i>•••• •••• •••• 3092</i></span> <span class=\"crad\"></span> </div> <div class=\"cadd\">+ 새 카드 등록하기</div> <div class=\"lbl\">할부</div> <div class=\"instal\"><span>일시불</span><span class=\"on\">3개월</span><span>6개월</span></div> <div class=\"minfo\">무이자 가능 개월은 카드사 행사에 따라 달라져요.</div> <button class=\"sbtn\">다음</button>" },
-    { t:"마지막으로 한 번 더 확인해요",
-      d:"결제 버튼을 눌러도 <b>이 시점엔 아직 카드에서 돈이 빠지지 않아요.</b> 서류가 승인된 뒤에 결제와 입금이 함께 이뤄집니다.",
+    { t:"마지막으로 확인해요",
+      d:"지금은 <b>카드에서 돈이 빠지지 않아요.</b><br>서류가 승인된 뒤에 결제됩니다.",
       s:"<div class=\"sprog\"><i style=\"width:95%\"></i></div> <div class=\"q\">이대로 신청할까요?</div> <div class=\"cbox\"> <div class=\"crow\"><span class=\"l\">받는 분</span><span class=\"r\">대성부동산<div class=\"sub2\">부동산 임대차 · 월세</div></span></div> <div class=\"crow\"><span class=\"l\">결제 카드</span><span class=\"r\">삼성 Deep Dream<div class=\"sub2\">•••• 4821 · 3개월 무이자</div></span></div> </div> <div class=\"cbox\"> <div class=\"crow\"><span class=\"l\">신청 금액</span><span class=\"r\">680,000원</span></div> <div class=\"crow\"><span class=\"l\">수수료 4%</span><span class=\"r\">27,200원</span></div> <div class=\"ctot\"><span class=\"l\">총 결제금액</span><span class=\"v\">707,200원</span></div> </div> <button class=\"sbtn\">707,200원 결제 신청하기</button>" },
-    { t:"담당자 확인 후 현금으로 입금돼요",
-      d:"담당자가 서류를 확인하면 받는 분 계좌로 현금이 입금돼요. 보통 <b>영업일 기준 30분 이내</b>, 평균 12분이면 끝납니다.",
+    { t:"확인 후 현금으로 입금돼요",
+      d:"담당자가 서류를 확인하면 바로 입금돼요.<br><b>평균 12분</b>이면 끝납니다.",
       s:"<div class=\"done\"> <div class=\"ck\"><iconify-icon icon=\"mingcute:check-circle-fill\"></iconify-icon></div> <h4>결제 신청이 접수됐어요</h4> <p>담당자 확인 후 <b>승인되면</b> 카드에서 결제되고<br>받는 분에게 바로 현금으로 입금돼요.</p> <div class=\"receipt\"> <div class=\"rr\"><span class=\"l\">받는 곳</span><span class=\"v\">대성부동산</span></div> <div class=\"rr\"><span class=\"l\">결제 유형</span><span class=\"v\">부동산 임대차</span></div> <div class=\"rr\"><span class=\"l\">등록한 카드</span><span class=\"v\">삼성 Deep Dream · 3개월</span></div> <div class=\"rd\"></div> <div class=\"rr\"><span class=\"l\">신청 금액</span><span class=\"v\">680,000원</span></div> <div class=\"rr\"><span class=\"l\">수수료 (4%)</span><span class=\"v\">27,200원</span></div> <div class=\"rr big\"><span class=\"l\">결제 예정 금액</span><span class=\"v\">707,200원</span></div> </div> </div> <button class=\"sbtn\">홈으로</button> <button class=\"subbtn\">결제 영수증 보기</button>" }
   ],
   web: [
     { t:"휴대폰 인증으로 시작해요",
-      d:"가입 및 설치 없이 <b>본인 명의의<br>휴대폰 인증 한 번</b>이면 바로 쓸 수 있어요.",
+      d:"<b>가입도 설치도 없어요.</b><br>본인 명의 휴대폰 인증 한 번이면 됩니다.",
       s:"<div class=\"bar\"><i></i><i></i><i></i></div> <div class=\"wbody\"> <div class=\"wq\">휴대폰 인증</div> <div class=\"wsub\">본인 명의 휴대폰으로 간편하게 시작해요.</div> <div class=\"wlbl\">통신사</div> <div class=\"telcos\"><span class=\"on\">SKT</span><span>KT</span><span>LG U+</span><span>SKT 알뜰폰</span><span>KT 알뜰폰</span><span>LG 알뜰폰</span></div> <div class=\"wlbl\">이름</div> <div class=\"wfield ph\">이름 입력</div> <div class=\"wlbl\">휴대폰 번호</div> <div class=\"w2col\"><div class=\"wfield ph\">숫자만 입력</div><div class=\"wfield ph\" style=\"flex:0 0 104px; justify-content:center; background:var(--primary-50); color:var(--primary-dark); font-weight:700; border-color:transparent\">인증번호 받기</div></div> <div class=\"wbtn\">인증하고 송금 시작하기</div> </div>" },
-    { t:"보낼 금액과 받는 분 계좌를 넣어요",
-      d:"은행과 계좌번호를 넣으면 <b>예금주가 바로 확인</b>돼요. <br>상대방 동의는 필요 없어요.",
+    { t:"금액과 계좌를 넣어요",
+      d:"은행과 계좌번호를 넣으면 <b>예금주가 바로 확인</b>돼요.<br>상대방 동의는 필요 없어요.",
       s:"<div class=\"bar\"><i></i><i></i><i></i></div> <div class=\"wbody\"> <div class=\"wq\">결제 정보 입력</div> <div class=\"wsub\">받는 분 계좌와 보낼 금액을 넣어주세요.</div> <div class=\"wlbl\">결제 유형</div> <div class=\"wfield\">부동산 임대차 · 월세</div> <div class=\"wlbl\">보낼 금액</div> <div class=\"wfield ph\">상대방이 받을 금액</div> <div class=\"wlbl\">받는 분 계좌</div> <div class=\"w2col\"><div class=\"wfield\" style=\"flex:0 0 104px\">KB국민</div><div class=\"wfield ph\">계좌번호 입력</div></div> <div class=\"filerow\" style=\"margin-top:12px\"><iconify-icon icon=\"mingcute:check-circle-fill\"></iconify-icon><span class=\"fn\">받는 분 (예금주) · 대성부동산</span></div> <div class=\"wbtn\">다음</div> </div>" },
-    { t:"서류는 촬영 대신 파일로 올려요",
-      d:"PC에 저장된 <b>스캔본 · 캡처 이미지 · PDF</b>를<br>끌어다 놓기만 하면 돼요.",
+    { t:"서류는 파일로 올려요",
+      d:"PC에 저장된 <b>스캔본 · 캡처 · PDF</b>를<br>끌어다 놓기만 하면 돼요.",
       s:"<div class=\"bar\"><i></i><i></i><i></i></div> <div class=\"wbody\"> <div class=\"wq\">증빙 서류 첨부</div> <div class=\"wsub\">실제 거래를 증명하는 서류를 올려주세요.</div> <div class=\"dochelp\"><span class=\"di\"><iconify-icon icon=\"mingcute:document-2-fill\"></iconify-icon></span> <span class=\"dt2\"><b>어떤 서류를 올려야 하나요?</b><i>결제 유형 13가지별로 확인해보세요</i></span> <iconify-icon class=\"dgv\" icon=\"mingcute:right-line\"></iconify-icon></div> <div class=\"drop\"> <iconify-icon icon=\"mingcute:upload-3-fill\"></iconify-icon> <div class=\"dt\">여기로 파일을 끌어다 놓으세요</div> <div class=\"ds\">JPG · PNG · PDF · 20MB 이하</div> </div> <div class=\"filerow\"><iconify-icon icon=\"mingcute:document-fill\"></iconify-icon><span class=\"fn\">임대차계약서.pdf</span><span class=\"fx\">1.2MB</span></div> <div class=\"wbtn\">다음</div> </div>" },
-    { t:"확인만 하면 신청이 끝나요",
-      d:"금액과 수수료를 확인하고 신청하면 끝.<br><b>서류 승인 뒤에 결제되고 바로 입금</b>돼요.",
+    { t:"확인하면 신청이 끝나요",
+      d:"금액과 수수료를 확인하면 끝.<br><b>승인 뒤 결제되고 바로 입금</b>돼요.",
       s:"<div class=\"bar\"><i></i><i></i><i></i></div> <div class=\"wbody\"> <div class=\"wq\">결제 확인</div> <div class=\"wsub\">지금은 신청만 돼요. 서류가 승인되면 결제 · 입금됩니다.</div> <div class=\"cbox\"> <div class=\"crow\"><span class=\"l\">받는 분</span><span class=\"r\">대성부동산</span></div> <div class=\"crow\"><span class=\"l\">신청 금액</span><span class=\"r\">680,000원</span></div> <div class=\"crow\"><span class=\"l\">수수료 4%</span><span class=\"r\">27,200원</span></div> <div class=\"ctot\"><span class=\"l\">총 결제금액</span><span class=\"v\">707,200원</span></div> </div> <div class=\"wbtn\">707,200원 결제 신청하기</div> <div class=\"wghost\"><iconify-icon icon=\"mingcute:user-add-2-fill\"></iconify-icon>다른 사람에게 결제 요청 보내기</div> </div>" }
   ]
 };
