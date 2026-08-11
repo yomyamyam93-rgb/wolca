@@ -5,14 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>랜선페이 — 결제</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
-<link rel="stylesheet" href="web.css">
-<link rel="icon" type="image/png" href="../img/logo-mark.png">
+<link rel="stylesheet" href="web.css?v=20260811i">
+<link rel="icon" type="image/png" href="../img/logo3.png">
 <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
-<script src="web.js"></script>
+<script src="web.js?v=20260811i"></script>
 <style>
   .pay-wrap{background:#fff; padding:60px 24px 110px;}
   .paybox{width:100%; max-width:520px; margin:0 auto;}
-  .paycard{background:#fff; border-radius:24px; padding:32px 30px; box-shadow:0 18px 50px rgba(25,31,40,.12);}
+  .paycard{background:#fff; border-radius:24px; padding:32px 30px; box-shadow:0 8px 24px rgba(25,31,40,.10);}
   .paycard h2{font-size:21px; font-weight:700; letter-spacing:-.4px;}
   .paycard .sub{font-size:14px; color:var(--sub); margin:8px 0 24px;}
   .plabel{font-size:13px; font-weight:700; color:var(--sub); margin:22px 0 10px;}
@@ -38,7 +38,7 @@
   .crd.hyundai .face{background:linear-gradient(135deg,#2B2B2B,#000);}
   .crd .ct{flex:1; min-width:0;}
   .crd .cn{font-size:15px; font-weight:700;}
-  .crd .cno{font-size:12.5px; color:var(--placeholder); margin-top:3px;}
+  .crd .cno{font-size:13px; color:var(--placeholder); margin-top:3px;}
   .crd .rad{width:21px; height:21px; flex:0 0 auto; border-radius:50%; border:1.5px solid var(--icon-off); background:#fff;
     display:flex; align-items:center; justify-content:center;}
   .crd.on .rad{border-color:var(--primary); background:var(--primary);}
@@ -59,7 +59,7 @@
     border-radius:15px; background:#fff; font-size:15px; font-weight:700; cursor:pointer; transition:border-color .2s, background .2s;}
   .easy.on{border-color:var(--primary); background:var(--primary-50);}
   .instnote{display:flex; gap:8px; margin-top:12px; padding:13px 15px; border-radius:12px; background:var(--gray-bg);
-    font-size:12.5px; color:var(--sub); line-height:1.7;}
+    font-size:13px; color:var(--sub); line-height:1.7;}
   .instnote iconify-icon{font-size:17px; flex:0 0 auto; color:var(--primary); margin-top:1px;}
   /* 할부 */
   .inst{display:flex; gap:8px; flex-wrap:wrap;}
@@ -72,51 +72,52 @@
   .arow{display:flex; justify-content:space-between; font-size:14px; padding:7px 0;}
   .arow .l{color:var(--sub);} .arow .v{font-weight:700;}
   .atot{display:flex; justify-content:space-between; align-items:baseline; margin-top:10px; padding-top:14px; border-top:1px solid var(--border);}
-  .atot .l{font-size:14px; font-weight:700;} .atot .v{font-size:25px; font-weight:800; letter-spacing:-.6px;}
+  .atot .l{font-size:14px; font-weight:700;} .atot .v{font-size:25px; font-weight:700; letter-spacing:-.6px;}
   .ben{margin-top:14px; padding:6px 16px; border-radius:14px; background:linear-gradient(180deg,#E7EFFF,#F4F8FF);
     box-shadow:inset 0 2px 6px rgba(37,99,235,.14);}
-  .ben .b{display:flex; align-items:center; gap:8px; padding:10px 0; font-size:13px; font-weight:700; color:var(--primary-dark);}
+  /* 좁은 화면에서 글자가 넘치지 않게 크기를 자동으로 줄임 */
+  .ben .b{display:flex; align-items:center; gap:6px; padding:10px 0; font-size:13px; font-weight:700; color:var(--primary-dark);}
   .ben .b+.b{border-top:1px solid #DBE7FF;}
-  .ben .b iconify-icon{font-size:16px;}
-  .ben .b .v{margin-left:auto;}
+  .ben .b iconify-icon{font-size:16px; flex:0 0 auto;}
+  .ben .b .v{margin-left:auto; padding-left:8px; white-space:nowrap;}
 
   .paybtn{width:100%; height:58px; border:none; border-radius:16px; margin-top:22px; background:var(--primary-grad);
     box-shadow:var(--btn-shadow); color:#fff; font-family:inherit; font-size:17px; font-weight:700; cursor:pointer;
     transition:transform .16s, filter .2s;}
   .paybtn:hover{transform:translateY(-2px); filter:brightness(1.04);}
   .paybtn:active{transform:translateY(1px);}
-  .fine{font-size:12px; color:var(--placeholder); text-align:center; margin-top:14px; line-height:1.6;}
+  .fine{font-size:13px; color:var(--placeholder); text-align:center; margin-top:14px; line-height:1.6;}
 
   /* 카드 등록 팝업 */
   .mdim{position:fixed; inset:0; background:rgba(15,20,30,.5); z-index:98; opacity:0; pointer-events:none; transition:opacity .3s;}
   .mdim.on{opacity:1; pointer-events:auto;}
   .modal{position:fixed; left:50%; top:50%; z-index:99; width:440px; max-width:calc(100vw - 32px); max-height:88vh; overflow-y:auto;
-    background:#fff; border-radius:24px; padding:28px 26px 26px; box-shadow:0 30px 70px rgba(15,20,30,.4);
+    background:#fff; border-radius:24px; padding:28px 26px 26px; box-shadow:0 12px 32px rgba(15,20,30,.18);
     transform:translate(-50%,-46%) scale(.96); opacity:0; pointer-events:none;
     transition:transform .35s cubic-bezier(.2,.7,.2,1), opacity .3s ease;}
   .modal.on{transform:translate(-50%,-50%) scale(1); opacity:1; pointer-events:auto;}
   .modal .mtop{display:flex; align-items:center; justify-content:space-between; margin-bottom:6px;}
-  .modal h3{font-size:20px; font-weight:800; letter-spacing:-.4px;}
-  .modal .mx{width:36px; height:36px; border:none; background:none; font-size:20px; color:var(--sub); cursor:pointer; border-radius:9px;}
+  .modal h3{font-size:20px; font-weight:700; letter-spacing:-.4px;}
+  .modal .mx{width:44px; height:44px; border:none; background:none; font-size:20px; color:var(--sub); cursor:pointer; border-radius:9px;}
   .modal .mx:hover{background:var(--tile);}
   .modal .msub{font-size:13.5px; color:var(--sub); margin-bottom:22px;}
   .mfield{margin-bottom:15px;}
   .mfield label{display:block; font-size:13px; font-weight:700; color:var(--sub); margin-bottom:8px;}
-  .min{width:100%; height:50px; border:1.5px solid var(--border); border-radius:12px; padding:0 14px; font-family:inherit;
-    font-size:15px; font-weight:600; color:var(--ink); background:#fff; transition:border-color .2s, box-shadow .2s;}
+  .min{width:100%; height:52px; border:1.5px solid var(--border); border-radius:12px; padding:0 14px; font-family:inherit;
+    font-size:16px; font-weight:600; color:var(--ink); background:#fff; transition:border-color .2s, box-shadow .2s;}
   .min::placeholder{color:var(--placeholder); font-weight:500;}
   .min:focus{outline:none; border-color:var(--primary); box-shadow:0 0 0 4px rgba(37,99,235,.12);}
   .cardno{display:flex; align-items:center; gap:6px;}
   .cardno .min{text-align:center; padding:0 4px;}
-  .cardno span{color:var(--icon-off); font-weight:800;}
+  .cardno span{color:var(--icon-off); font-weight:700;}
   .m2{display:flex; gap:10px;} .m2>*{flex:1; min-width:0;}
-  .mhint{font-size:12px; color:var(--placeholder); margin-top:7px; line-height:1.5;}
+  .mhint{font-size:13px; color:var(--placeholder); margin-top:7px; line-height:1.5;}
   .magree{display:flex; align-items:center; gap:10px; margin:18px 0 4px; font-size:13.5px; color:var(--sub); cursor:pointer;}
   .magree .chk{width:22px; height:22px; flex:0 0 auto; border-radius:50%; border:1.5px solid var(--icon-off); background:#fff;
     display:flex; align-items:center; justify-content:center; transition:.2s;}
   .magree .chk iconify-icon{font-size:14px; color:#fff;}
   .magree.on .chk{background:var(--primary); border-color:var(--primary);}
-  .msafe{display:flex; gap:8px; margin-top:16px; padding:13px 15px; border-radius:12px; background:var(--primary-50); font-size:12.5px; color:var(--primary-dark); line-height:1.6;}
+  .msafe{display:flex; gap:8px; margin-top:16px; padding:13px 15px; border-radius:12px; background:var(--primary-50); font-size:13px; color:var(--primary-dark); line-height:1.6;}
   .msafe iconify-icon{font-size:17px; flex:0 0 auto; margin-top:1px;}
   .mbtn{width:100%; height:54px; border:none; border-radius:14px; margin-top:18px; background:var(--primary-grad);
     box-shadow:var(--btn-shadow); color:#fff; font-family:inherit; font-size:16px; font-weight:700; cursor:pointer;
@@ -128,16 +129,16 @@
   .rc{border:1px solid var(--line); border-radius:16px; overflow:hidden;}
   .rc-top{background:var(--gray-bg); padding:20px; text-align:center; border-bottom:1px dashed var(--border);}
   .rc-top .st{display:inline-flex; align-items:center; gap:6px; padding:6px 13px; border-radius:999px; background:#fff;
-    font-size:12px; font-weight:800; color:var(--success);}
+    font-size:13px; font-weight:700; color:var(--success);}
   .rc-top .st iconify-icon{font-size:14px;}
-  .rc-top .amt{font-size:30px; font-weight:800; letter-spacing:-.8px; margin-top:12px;}
-  .rc-top .dt{font-size:12.5px; color:var(--placeholder); margin-top:7px;}
+  .rc-top .amt{font-size:30px; font-weight:700; letter-spacing:-.8px; margin-top:12px;}
+  .rc-top .dt{font-size:13px; color:var(--placeholder); margin-top:7px;}
   .rc-body{padding:18px 20px;}
   .rc-sec+.rc-sec{margin-top:14px; padding-top:14px; border-top:1px solid var(--line);}
-  .rc-sec .h{font-size:11.5px; font-weight:800; color:var(--placeholder); letter-spacing:.3px; margin-bottom:9px;}
+  .rc-sec .h{font-size:13px; font-weight:700; color:var(--placeholder); letter-spacing:.3px; margin-bottom:9px;}
   .rcrow{display:flex; justify-content:space-between; gap:14px; font-size:13.5px; padding:5px 0;}
   .rcrow .l{color:var(--sub); flex:0 0 auto;} .rcrow .v{font-weight:700; text-align:right; word-break:break-all;}
-  .rc-note{font-size:11.5px; color:var(--placeholder); text-align:center; line-height:1.7; padding:14px 20px 18px; background:#FCFDFE; border-top:1px dashed var(--border);}
+  .rc-note{font-size:13px; color:var(--placeholder); text-align:center; line-height:1.7; padding:14px 20px 18px; background:#FCFDFE; border-top:1px dashed var(--border);}
 
   /* 결제 완료 */
   .done{display:none; text-align:center;}
@@ -146,14 +147,14 @@
     background:linear-gradient(180deg,#EAF1FF,#DCE8FF); display:flex; align-items:center; justify-content:center;
     box-shadow:0 12px 26px -10px rgba(37,99,235,.65);}
   .done .ck iconify-icon{font-size:42px; color:var(--primary);}
-  .done h2{font-size:24px; font-weight:800; letter-spacing:-.5px;}
+  .done h2{font-size:24px; font-weight:700; letter-spacing:-.5px;}
   .done p{font-size:15px; color:var(--sub); margin-top:12px; line-height:1.7;}
   .done p b{color:var(--ink);}
   .receipt{margin-top:26px; padding:22px; border-radius:18px; background:var(--gray-bg); text-align:left;}
-  .rr{display:flex; justify-content:space-between; font-size:14px; padding:7px 0;}
-  .rr .l{color:var(--sub);} .rr .v{font-weight:700;}
+  .rr{display:flex; justify-content:space-between; gap:12px; font-size:14px; padding:7px 0;}
+  .rr .l{color:var(--sub); white-space:nowrap;} .rr .v{font-weight:700; text-align:right; word-break:keep-all;}
   .rd{border-top:1px dashed var(--border); margin:12px 0;}
-  .rr.big .v{font-size:19px; font-weight:800;}
+  .rr.big .v{font-size:19px; font-weight:700;}
   .donebtns{display:flex; flex-direction:column; gap:10px; margin-top:24px;}
   .subbtn{height:52px; border:1.5px solid var(--border); border-radius:14px; background:#fff; font-family:inherit;
     font-size:15px; font-weight:700; color:var(--sub); cursor:pointer;}
@@ -165,7 +166,7 @@
   .appc .cdot{width:24px; height:24px; border-radius:8px;}
   .appc .cn{font-size:13px; font-weight:700; color:var(--sub);}
   .appc.on .cn{color:var(--primary-dark);}
-  .appnote{padding:14px 15px; border-radius:13px; background:var(--gray-bg); font-size:12.5px;
+  .appnote{padding:14px 15px; border-radius:13px; background:var(--gray-bg); font-size:13px;
     color:var(--sub); line-height:1.7; margin-bottom:14px;}
   .appnote b{color:var(--ink);}
   .pseg button:disabled{opacity:.42; cursor:default;}
@@ -181,13 +182,13 @@
 
 <nav class="nav">
   <div class="nav-in">
-    <a class="logo" href="index.html"><img src="../img/logo-mark.png" alt="" style="height:30px"><img src="../img/logo-text.png" alt="랜선페이" style="height:19px"></a>
+    <a class="logo" href="index.html"><img src="../img/logo3.png" alt="" style="height:23px"><img src="../img/logo-text.png" alt="랜선페이" style="height:19px"></a>
     <div class="nav-menu">
       <a href="이용가이드.html" class="wide">이용가이드</a>
       <a href="고객센터.html" class="wide">고객센터</a>
-      <a href="로그인.html">로그인</a>
+      <a href="뉴스룸.html" class="wide">뉴스룸</a>
     </div>
-    <button class="nav-cta" onclick="location.href='송금하기.html'">송금하기</button>
+    <button class="nav-cta" onclick="location.href='로그인.html'">로그인</button>
     <button class="nav-burger" onclick="drawer(true)" aria-label="전체메뉴"><iconify-icon icon="mingcute:menu-fill"></iconify-icon></button>
   </div>
 </nav>
@@ -317,14 +318,14 @@
       </div>
 
       <button class="paybtn" id="payBtnMain" onclick="payNow()">707,200원 결제 신청하기</button>
-      <div class="fine">서류 승인 후 결제 · 입금돼요. 미승인 시 전액 자동 취소됩니다.<br>결제는 금융위 등록 PG사를 통해 안전하게 처리돼요.</div>
+      <div class="fine">서류 승인 후 결제 · 입금돼요.<br>미승인 시 전액 자동 취소됩니다.<br>결제는 금융위 등록 PG사를 통해 안전하게 처리돼요.</div>
     </div>
 
     <!-- 결제 완료 -->
     <div class="paycard done" id="doneStep">
       <div class="ck"><iconify-icon icon="mingcute:check-circle-fill"></iconify-icon></div>
       <h2>결제 신청이 접수됐어요</h2>
-      <p>담당자가 서류를 확인하고 있어요. 보통 <b>영업일 기준 30분 이내</b>에 끝나요.<br>승인되면 카드에서 결제되고 대성부동산에게 <b>680,000원</b>이 현금으로 입금돼요.</p>
+      <p>담당자가 서류를 확인하고 있어요.<br>보통 <b>영업일 기준 30분 이내</b>에 끝나요.<br>승인되면 카드에서 결제되고 대성부동산에게 <b>680,000원</b>이 현금으로 입금돼요.</p>
 
       <div class="receipt">
         <div class="rr"><span class="l">받는 곳</span><span class="v">대성부동산</span></div>
@@ -457,13 +458,14 @@
 </div>
 
 <footer class="footer">
-  <div class="f-in">
-    <div class="f-menu">
-      <a href="이용가이드.html">이용가이드</a>
-      <a href="고객센터.html">고객센터</a>
-      <a href="고객센터.html#faq">자주 묻는 질문</a>
-      <a href="송금하기.html">송금하기</a>
+  <div class="f-legal">
+    <div class="f-legal-in">
+      <a href="약관.html?doc=terms">서비스 이용약관</a>
+      <a href="약관.html?doc=privacy">개인정보 처리방침</a>
+      <a href="약관.html?doc=third">개인정보 3자 제공 고지</a>
     </div>
+  </div>
+  <div class="f-in">
     <p class="f-co">
       <span><em>상호</em>랜선페이 · (주)미라클컴퍼니</span>
       <span><em>대표</em>김남기</span>
@@ -471,7 +473,10 @@
       <span><em>사업자등록번호</em>437-88-03148</span>
       <span><em>주소</em>충청남도 천안시 서북구 쌍용대로 234, 방영학생활건강빌딩 3층 (성정동)</span>
       <span><em>대표번호</em>1577-6369 <i>(평일 9:00~18:00)</i></span>
+      <span><em>메일</em>help@lanseonpay.co.kr</span>
     </p>
+    <p class="f-note">랜선페이는 전자금융거래법에 따라 등록된<br>전자지급결제대행(PG) 서비스입니다.</p>
+    <p class="f-copy">Copyright © 2026 랜선페이. All rights reserved.</p>
   </div>
 </footer>
 

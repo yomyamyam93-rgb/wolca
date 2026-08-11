@@ -21,15 +21,15 @@
   <div class="topbar"><div class="back" onclick="lpBack()"><iconify-icon icon="mingcute:left-line"></iconify-icon></div></div>
 
   <div class="page" style="display:flex; flex-direction:column; padding-bottom:16px;">
-    <h1>간편비밀번호를<br>설정해주세요</h1>
-    <p class="lead">결제할 때 쓸 6자리 숫자예요.</p>
+    <h1 id="pTtl">간편비밀번호를<br>설정해주세요</h1>
+    <p class="lead" id="pLead">결제할 때 쓸 6자리 숫자예요.</p>
 
-    <div class="pin-dots">
-      <span class="d on"></span><span class="d on"></span><span class="d"></span>
+    <div class="pin-dots" id="dots">
+      <span class="d"></span><span class="d"></span><span class="d"></span>
       <span class="d"></span><span class="d"></span><span class="d"></span>
     </div>
 
-    <div class="keypad" onclick="if(event.target.tagName==='BUTTON'&&event.target.textContent&&!event.target.classList.contains('del'))location.href='8_가입완료.html'">
+    <div class="keypad" onclick="tap(event)">
       <button>1</button><button>2</button><button>3</button>
       <button>4</button><button>5</button><button>6</button>
       <button>7</button><button>8</button><button>9</button>
@@ -38,5 +38,70 @@
   </div>
 </div>
 <script src="app.js"></script>
+<script>
+/* 더보기에서 들어오면 '변경' 흐름 : 현재 → 새 비밀번호 → 한 번 더
+   가입 중이면 '설정' 흐름 : 새 비밀번호 → 한 번 더 */
+var FROM  = new URLSearchParams(location.search).get('from');
+var CHANGE = (FROM === 'more');
+
+var STEPS = CHANGE
+  ? [ { t:'지금 쓰는<br>간편비밀번호를 넣어주세요', s:'본인 확인을 위해 한 번만 확인해요.' },
+      { t:'새 간편비밀번호를<br>넣어주세요',        s:'결제할 때 쓸 6자리 숫자예요.' },
+      { t:'한 번 더<br>넣어주세요',                s:'확인을 위해 같은 번호를 다시 넣어주세요.' } ]
+  : [ { t:'간편비밀번호를<br>설정해주세요',        s:'결제할 때 쓸 6자리 숫자예요.' },
+      { t:'한 번 더<br>넣어주세요',                s:'확인을 위해 같은 번호를 다시 넣어주세요.' } ];
+
+var step = 0, pin = '', first = '';
+
+function draw(){
+  var st = STEPS[step];
+  document.getElementById('pTtl').innerHTML = st.t;
+  document.getElementById('pLead').textContent = st.s;
+  var d = document.querySelectorAll('#dots .d');
+  d.forEach(function(x, i){ x.classList.toggle('on', i < pin.length); });
+}
+
+function nextStep(){
+  pin = '';
+  step++;
+  if (step >= STEPS.length){
+    location.href = CHANGE ? '21_더보기.html?pwchanged=1' : '8_가입완료.html';
+    return;
+  }
+  draw();
+}
+
+function tap(e){
+  var b = e.target;
+  if (b.tagName !== 'BUTTON') return;
+  if (b.classList.contains('del')){ pin = pin.slice(0, -1); draw(); return; }
+  if (!b.textContent.trim()) return;
+  if (pin.length >= 6) return;
+  pin += b.textContent.trim();
+  draw();
+  if (pin.length < 6) return;
+
+  /* 새 번호 확인 단계에서 앞에 넣은 것과 다르면 다시 */
+  var isConfirm = (step === STEPS.length - 1);
+  var isNew = CHANGE ? (step === 1) : (step === 0);
+  if (isNew) first = pin;
+  if (isConfirm && pin !== first){
+    setTimeout(function(){
+      pin = ''; draw();
+      toast('번호가 서로 달라요. 다시 넣어주세요.');
+    }, 160);
+    return;
+  }
+  setTimeout(nextStep, 160);
+}
+draw();
+function toast(m){
+  var t=document.createElement('div'); t.textContent=m;
+  t.style.cssText="position:absolute;bottom:120px;left:50%;transform:translateX(-50%);background:#191F28;color:#fff;padding:12px 18px;border-radius:24px;font-size:13px;font-weight:600;z-index:30;opacity:0;transition:.2s;white-space:nowrap";
+  document.querySelector('.phone').appendChild(t);
+  requestAnimationFrame(function(){ t.style.opacity='1'; });
+  setTimeout(function(){ t.style.opacity='0'; setTimeout(function(){ t.remove(); },200); },1700);
+}
+</script>
 </body>
 </html>

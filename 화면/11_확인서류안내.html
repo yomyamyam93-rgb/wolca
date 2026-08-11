@@ -6,6 +6,11 @@
 <title>확인서류 안내</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
 <style>
+/* 스크롤바를 보이지 않게 (스크롤은 그대로 됨) */
+html,body{scrollbar-width:none; -ms-overflow-style:none;}
+html::-webkit-scrollbar,body::-webkit-scrollbar{width:0; height:0; display:none;}
+*{scrollbar-width:none;}
+*::-webkit-scrollbar{width:0; height:0;}
   :root{
     --primary:#2563EB; --primary-dark:#1D4ED8; --primary-50:#EFF4FF;
     --page-bg:#c9cdd4; --bg:#FFFFFF; --line:#ECEEF1; --border:#B1B8BE;
@@ -47,9 +52,9 @@
   .keybox .kt{font-size:14px; font-weight:600; color:var(--primary-dark); line-height:1.55;}
 
   /* 임시안내 경고 */
-  .warnbox{display:flex; gap:10px; align-items:flex-start; background:var(--warn-bg); border-radius:14px; padding:14px; margin-bottom:18px;}
-  .warnbox iconify-icon{font-size:20px; color:var(--warn); flex:0 0 auto; margin-top:1px;}
-  .warnbox div{font-size:13px; color:var(--warn); line-height:1.55; font-weight:600;}
+  .warnbox{display:flex; gap:10px; align-items:flex-start; background:var(--primary-50); border-radius:14px; padding:14px; margin-bottom:18px;}
+  .warnbox iconify-icon{font-size:20px; color:var(--primary-dark); flex:0 0 auto; margin-top:1px;}
+  .warnbox div{font-size:13px; color:var(--primary-dark); line-height:1.55; font-weight:600;}
 
   /* 부가 주의 */
   .tips{margin-top:16px;}
@@ -59,7 +64,7 @@
 
   /* 서비스 불가 */
   .blocked{border-color:#F6D6D6; background:#FFFBFB;}
-  .blocked .ditem iconify-icon{color:var(--danger);}
+  .blocked .ditem iconify-icon{color:var(--sub);}
 
   .attach-h{font-size:16px; font-weight:700; margin:26px 0 12px;}
   .drop{display:flex; align-items:center; gap:12px; border:1.5px dashed var(--border); border-radius:14px; padding:16px; cursor:pointer; margin-bottom:10px;}
@@ -72,7 +77,24 @@
   .footer{position:absolute; bottom:0; left:0; right:0; padding:14px 20px 26px; background:linear-gradient(180deg, rgba(255,255,255,0), #fff 28%);}
   .btn-primary{width:100%; height:54px; border:none; border-radius:14px; font-size:16px; font-weight:700; color:#fff; cursor:pointer; background:var(--primary); background:var(--primary-grad); box-shadow:var(--btn-shadow);}
   .inq{display:block; text-align:center; width:100%; background:none; border:none; font-family:inherit; font-size:14px; color:var(--placeholder); margin-top:12px; cursor:pointer;}
-</style>
+
+  /* ===== 하단 탭바 (더보기에서 들어온 화면도 동일하게) ===== */
+  .navbar{position:absolute; bottom:0; left:0; right:0; z-index:20; background:#fff;
+    border-top:1px solid var(--line); padding-top:12px;}
+  .nvbar{display:flex; padding:0 6px;}
+  .nvtab{flex:1; display:flex; flex-direction:column; align-items:center; gap:5px;
+    color:#8B95A1; font-size:11px; font-weight:500; cursor:pointer;}
+  .nvtab iconify-icon{font-size:23px;}
+  .nvtab.on{color:var(--primary); font-weight:700;}
+  .nvtab.center{justify-content:center; gap:0;}
+  .fab{width:56px; height:56px; margin-top:-24px; border:none; padding:0; border-radius:50%; pointer-events:none;
+    display:flex; align-items:center; justify-content:center; background:var(--primary);
+    box-shadow:0 6px 16px rgba(37,99,235,.45), 0 0 0 5px #fff, inset 0 1px 0 rgba(255,255,255,.28);}
+  .fab img{width:29px;}
+  .home-indicator{margin:10px auto 8px; width:134px; height:5px; border-radius:3px; background:var(--ink);}
+  /* 탭바에 내용이 가리지 않게 */
+  .body{padding-bottom:120px !important;}
+  </style>
 </head>
 <body>
 <div class="phone">
@@ -94,6 +116,8 @@
     <button class="btn-primary" onclick="location.href='13_촬영.html'">서류 촬영하기</button>
     <button class="inq" onclick="alert('앨범·파일에서 선택 (준비 중)')">앨범 · 파일에서 선택할게요</button>
   </div>
+
+
 </div>
 
 <script>
@@ -198,5 +222,6 @@ function render(){
 render();
 </script>
 <script src="app.js"></script>
+
 </body>
 </html>

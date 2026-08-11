@@ -5,14 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>랜선페이 — 로그인 · 회원가입</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
-<link rel="stylesheet" href="web.css">
-<link rel="icon" type="image/png" href="../img/logo-mark.png">
+<link rel="stylesheet" href="web.css?v=20260811i">
+<link rel="icon" type="image/png" href="../img/logo3.png">
 <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
-<script src="web.js"></script>
+<script src="web.js?v=20260811i"></script>
 <style>
   .auth-wrap{background:#fff; padding:60px 24px 110px;}
   .authbox{width:100%; max-width:440px; margin:0 auto; background:#fff; border-radius:24px; padding:36px 32px;
-    box-shadow:0 18px 50px rgba(25,31,40,.12);}
+    box-shadow:0 8px 24px rgba(25,31,40,.10);}
 
   /* 로그인 / 회원가입 전환 탭 */
   .atabs{display:flex; gap:5px; padding:5px; border-radius:15px; background:var(--gray-bg); margin-bottom:26px;}
@@ -26,7 +26,7 @@
 
   .field{margin-bottom:16px;}
   .field label{display:block; font-size:13px; font-weight:700; color:var(--sub); margin-bottom:8px;}
-  .tin{width:100%; height:54px; border:1.5px solid var(--border); border-radius:13px; padding:0 16px; font-family:inherit;
+  .tin{width:100%; height:54px; border:1.5px solid var(--border); border-radius:12px; padding:0 16px; font-family:inherit;
     font-size:16px; font-weight:600; color:var(--ink); background:#fff; transition:border-color .2s, box-shadow .2s;}
   .tin::placeholder{color:var(--placeholder); font-weight:500;}
   .tin:focus{outline:none; border-color:var(--primary); box-shadow:0 0 0 4px rgba(37,99,235,.12);}
@@ -47,7 +47,7 @@
   .helprow a:hover{color:var(--ink);}
   .helprow span{color:var(--line);}
 
-  .divider{display:flex; align-items:center; gap:14px; margin:26px 0; font-size:12.5px; color:var(--placeholder);}
+  .divider{display:flex; align-items:center; gap:14px; margin:26px 0; font-size:13px; color:var(--placeholder);}
   .divider:before,.divider:after{content:''; flex:1; height:1px; background:var(--line);}
 
   .sso{display:flex; flex-direction:column; gap:9px;}
@@ -69,7 +69,7 @@
   .ut iconify-icon{font-size:26px; color:var(--icon-off); transition:color .2s;}
   .ut.on iconify-icon{color:var(--primary);}
   .ut .t{font-size:15px; font-weight:700; margin-top:8px;}
-  .ut .s{font-size:12px; color:var(--placeholder); margin-top:4px;}
+  .ut .s{font-size:13px; color:var(--placeholder); margin-top:4px;}
 
   /* 약관 */
   .terms{border:1px solid var(--line); border-radius:14px; padding:6px 16px; margin:6px 0 4px;}
@@ -82,11 +82,11 @@
   .chk.on{background:var(--primary); border-color:var(--primary);}
   .trow .tx{flex:1; color:var(--sub); cursor:pointer;}
   .trow.all .tx{color:var(--ink);}
-  .trow .req{font-size:12px; font-weight:700; color:var(--primary-dark);}
-  .trow .opt{font-size:12px; font-weight:700; color:var(--placeholder);}
-  .fine{font-size:12px; color:var(--placeholder); text-align:center; margin-top:16px; line-height:1.6;}
+  .trow .req{font-size:13px; font-weight:700; color:var(--primary-dark);}
+  .trow .opt{font-size:13px; font-weight:700; color:var(--placeholder);}
+  .fine{font-size:13px; color:var(--placeholder); text-align:center; margin-top:16px; line-height:1.6;}
   .bizbox{padding:16px; border:1.5px solid var(--primary-100); border-radius:15px; background:var(--primary-50); margin-bottom:16px;}
-  .bizmsg{font-size:12.5px; color:var(--placeholder); margin-top:8px; line-height:1.6;}
+  .bizmsg{font-size:13px; color:var(--placeholder); margin-top:8px; line-height:1.6;}
   .bizmsg.ok{color:var(--success, #059669); font-weight:700;}
   .bizmsg.no{color:#DC2626; font-weight:700;}
   .bizmsg b{color:var(--ink);}
@@ -96,13 +96,13 @@
 
 <nav class="nav">
   <div class="nav-in">
-    <a class="logo" href="index.html"><img src="../img/logo-mark.png" alt="" style="height:30px"><img src="../img/logo-text.png" alt="랜선페이" style="height:19px"></a>
+    <a class="logo" href="index.html"><img src="../img/logo3.png" alt="" style="height:23px"><img src="../img/logo-text.png" alt="랜선페이" style="height:19px"></a>
     <div class="nav-menu">
       <a href="이용가이드.html" class="wide">이용가이드</a>
       <a href="고객센터.html" class="wide">고객센터</a>
-      <a href="로그인.html" class="on">로그인</a>
+      <a href="뉴스룸.html" class="wide">뉴스룸</a>
     </div>
-    <button class="nav-cta" onclick="location.href='송금하기.html'">송금하기</button>
+    <button class="nav-cta" onclick="location.href='로그인.html'">로그인</button>
     <button class="nav-burger" onclick="drawer(true)" aria-label="전체메뉴"><iconify-icon icon="mingcute:menu-fill"></iconify-icon></button>
   </div>
 </nav>
@@ -213,13 +213,14 @@
 </section>
 
 <footer class="footer">
-  <div class="f-in">
-    <div class="f-menu">
-      <a href="이용가이드.html">이용가이드</a>
-      <a href="고객센터.html">고객센터</a>
-      <a href="고객센터.html#faq">자주 묻는 질문</a>
-      <a href="송금하기.html">송금하기</a>
+  <div class="f-legal">
+    <div class="f-legal-in">
+      <a href="약관.html?doc=terms">서비스 이용약관</a>
+      <a href="약관.html?doc=privacy">개인정보 처리방침</a>
+      <a href="약관.html?doc=third">개인정보 3자 제공 고지</a>
     </div>
+  </div>
+  <div class="f-in">
     <p class="f-co">
       <span><em>상호</em>랜선페이 · (주)미라클컴퍼니</span>
       <span><em>대표</em>김남기</span>
@@ -227,7 +228,10 @@
       <span><em>사업자등록번호</em>437-88-03148</span>
       <span><em>주소</em>충청남도 천안시 서북구 쌍용대로 234, 방영학생활건강빌딩 3층 (성정동)</span>
       <span><em>대표번호</em>1577-6369 <i>(평일 9:00~18:00)</i></span>
+      <span><em>메일</em>help@lanseonpay.co.kr</span>
     </p>
+    <p class="f-note">랜선페이는 전자금융거래법에 따라 등록된<br>전자지급결제대행(PG) 서비스입니다.</p>
+    <p class="f-copy">Copyright © 2026 랜선페이. All rights reserved.</p>
   </div>
 </footer>
 

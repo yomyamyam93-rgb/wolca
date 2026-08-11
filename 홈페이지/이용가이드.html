@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>랜선페이 — 이용가이드</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
-<link rel="stylesheet" href="web.css">
-<link rel="icon" type="image/png" href="../img/logo-mark.png">
+<link rel="stylesheet" href="web.css?v=20260811i">
+<link rel="icon" type="image/png" href="../img/logo3.png">
 <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
-<script src="web.js"></script>
+<script src="web.js?v=20260811i"></script>
 <style>
 
   /* 진행 순서 (세로 타임라인) */
@@ -16,7 +16,7 @@
   .tl-item{display:flex; gap:22px; position:relative; padding-bottom:44px;}
   .tl-item:last-child{padding-bottom:0;}
   .tl-item:not(:last-child):before{content:''; position:absolute; left:21px; top:48px; bottom:4px; width:2px; background:var(--line);}
-  .tl-no{width:44px; height:44px; border-radius:50%; background:var(--primary-50); color:var(--primary-dark); font-size:17px; font-weight:800; display:flex; align-items:center; justify-content:center; flex:0 0 auto;}
+  .tl-no{width:44px; height:44px; border-radius:50%; background:var(--primary-50); color:var(--primary-dark); font-size:17px; font-weight:700; display:flex; align-items:center; justify-content:center; flex:0 0 auto;}
   .tl-body .t{font-size:19px; font-weight:700; letter-spacing:-.3px;}
   .tl-body .s{font-size:15px; color:var(--sub); margin-top:8px; line-height:1.7;}
   .tl-body .tip{display:inline-flex; align-items:center; gap:6px; margin-top:12px; font-size:13px; font-weight:600; color:var(--primary-dark); background:var(--primary-50); padding:8px 13px; border-radius:10px;}
@@ -32,11 +32,11 @@
   .docs summary .arw{margin-left:auto; color:var(--icon-off); font-size:20px; transition:.2s;}
   .docs details[open] summary .arw{transform:rotate(180deg);}
   .docs .d-body{padding:4px 8px 24px 8px;}
-  .docs .d-badge{display:inline-block; font-size:12px; font-weight:700; color:var(--primary-dark); background:var(--primary-50); padding:5px 10px; border-radius:8px; margin-bottom:12px;}
+  .docs .d-badge{display:inline-block; font-size:13px; font-weight:700; color:var(--primary-dark); background:var(--primary-50); padding:5px 10px; border-radius:8px; margin-bottom:12px;}
   .docs ul{list-style:none;}
   .docs li{position:relative; padding-left:26px; font-size:15px; color:var(--ink); margin-bottom:9px; line-height:1.6;}
   .docs li:before{content:''; position:absolute; left:2px; top:7px; width:14px; height:14px; border-radius:50%; background:var(--primary-50);}
-  .docs li:after{content:'✓'; position:absolute; left:5px; top:1px; font-size:10px; color:var(--primary-dark); font-weight:800;}
+  .docs li:after{content:'✓'; position:absolute; left:5px; top:1px; font-size:12px; color:var(--primary-dark); font-weight:700;}
   .docs .d-key{margin-top:12px; font-size:13px; font-weight:600; color:var(--primary-dark);}
 
   /* ===== 진행 순서 (실제 앱 화면 목업) ===== */
@@ -45,12 +45,20 @@
   .fstep:nth-child(even){flex-direction:row-reverse;}
   .fstep .ftxt{flex:1; min-width:0;}
   .fstep .fvis{flex:0 0 auto; display:flex; justify-content:center;}
-  @media(max-width:900px){ .flow{gap:64px;} .fstep,.fstep:nth-child(even){flex-direction:column; gap:32px;} .fstep .ftxt{width:100%;} }
+  @media(max-width:900px){
+    .flow{gap:64px;}
+    .fstep,.fstep:nth-child(even){flex-direction:column; gap:32px;}
+    /* 세로로 쌓이면 글도 가운데로 (앱 · 웹 탭 공통) */
+    .fstep .ftxt{width:100%; text-align:center;}
+    .fstep .fs,.fstep .flist,.fstep .fwarn{margin-left:auto; margin-right:auto;}
+    .fstep .flist{display:inline-block; text-align:left;}   /* 점 목록은 글줄만 왼쪽 */
+    .fstep .fwarn{justify-content:center; text-align:left;}
+  }
 
-  .fno{display:inline-flex; align-items:center; gap:9px; font-size:13px; font-weight:800; color:var(--primary-dark);
+  .fno{display:inline-flex; align-items:center; gap:9px; font-size:13px; font-weight:700; color:var(--primary-dark);
     background:var(--primary-50); padding:7px 14px; border-radius:999px; margin-bottom:16px;}
-  .fno .dot{width:20px; height:20px; border-radius:50%; background:var(--primary); color:#fff; display:flex; align-items:center; justify-content:center; font-size:12px;}
-  .fstep h3{font-size:27px; font-weight:800; letter-spacing:-.6px; line-height:1.35;}
+  .fno .dot{width:20px; height:20px; border-radius:50%; background:var(--primary); color:#fff; display:flex; align-items:center; justify-content:center; font-size:13px;}
+  .fstep h3{font-size:27px; font-weight:700; letter-spacing:-.6px; line-height:1.35;}
   /* 한 줄이 너무 길어지지 않게 폭 제한 (한글 25자 안팎) */
   .fstep .fs,.fstep .flist,.fstep .fwarn{max-width:420px;}
   .fstep h3,.fstep .fs,.fstep .flist li,.fstep .fwarn{word-break:keep-all;}
@@ -67,7 +75,7 @@
   /* 휴대폰 화면 비율로 크기 통일 (340 × 640) */
   .scr{width:340px; height:640px; max-width:100%; display:flex; flex-direction:column; overflow:hidden;
     background:linear-gradient(180deg,#fff,#FAFBFD); border:1px solid var(--line); border-radius:30px; padding:26px 20px 24px;
-    box-shadow:0 1px 2px rgba(25,31,40,.05), 0 10px 20px -10px rgba(25,31,40,.16), 0 40px 70px -36px rgba(21,42,84,.5), inset 0 1px 0 #fff;}
+    box-shadow:0 1px 2px rgba(25,31,40,.05), 0 10px 20px -10px rgba(25,31,40,.16), 0 16px 34px -20px rgba(21,42,84,.32), inset 0 1px 0 #fff;}
   /* 살짝 기울여 입체감 (마우스 올리면 정면으로) */
   .fstep .fvis{perspective:1600px;}
   .fstep .scr,.fstep .win{transform:rotateY(-9deg) rotateX(3deg); transition:transform .7s cubic-bezier(.2,.7,.2,1), box-shadow .7s;}
@@ -90,16 +98,27 @@
   .tabs{position:sticky; top:76px; z-index:40; display:flex; gap:6px; max-width:600px; margin:-38px auto 88px; padding:6px; border-radius:18px;
     background:var(--gray-bg); border:1px solid rgba(255,255,255,.9);
     box-shadow:0 2px 6px rgba(25,31,40,.08), 0 14px 30px -14px rgba(21,42,84,.45);}
-  .tab{flex:1; height:52px; display:flex; align-items:center; justify-content:center; gap:8px; border:none; border-radius:13px;
+  .tab{flex:1; height:52px; display:flex; align-items:center; justify-content:center; gap:8px; border:none; border-radius:12px;
     background:none; font-family:inherit; font-size:15px; font-weight:700; color:var(--placeholder); cursor:pointer; white-space:nowrap;
     transition:background .3s, color .3s, box-shadow .3s;}
-  .tab iconify-icon{font-size:19px;}
+  .tab iconify-icon{font-size:19px; color:var(--primary);}
   .tab.on{background:#fff; color:var(--ink); box-shadow:0 1px 2px rgba(25,31,40,.08), 0 6px 14px -6px rgba(25,31,40,.28);}
   @media(max-width:560px){ .tab{font-size:13px; height:46px;} .tab iconify-icon{font-size:16px;} }
   @media(max-width:560px){
     /* 브라우저 목업이 화면을 넘지 않게 */
     .fstep .fvis{width:100%; max-width:100%; min-width:0;}
-    .win{width:100%; max-width:100%; height:auto; min-height:380px;}
+    /* 브라우저 창 (윈도우 기준) */
+  .win .bar{height:38px; flex:0 0 auto; display:flex; align-items:center; justify-content:flex-end; gap:0;
+    background:#F1F3F5; border-bottom:1px solid var(--line);}
+  /* 최소화 · 최대화 · 닫기 */
+  .win .bar i{width:40px; height:38px; display:flex; align-items:center; justify-content:center;
+    font-style:normal; font-size:11px; color:#5A626B; background:none; border-radius:0;}
+  .win .bar i:before{content:'';}
+  .win .bar i:nth-child(1):before{content:''; display:block; width:11px; height:1.5px; background:#5A626B;}
+  .win .bar i:nth-child(2):before{content:''; display:block; width:10px; height:10px; border:1.5px solid #5A626B;}
+  .win .bar i:nth-child(3):before{content:'✕'; font-size:12px; line-height:1;}
+  .win .bar i:nth-child(3){color:#5A626B;}
+  .win{width:100%; max-width:100%; height:auto; min-height:460px;}
     .win .wbody{padding:16px 15px;}
     .win .wq{font-size:15.5px;}
     .win .wfield{height:38px; font-size:12.5px;}
@@ -120,14 +139,9 @@
   .secmark p{font-size:15px; color:var(--sub); margin-top:10px; line-height:1.7;}
 
   /* 브라우저 창 목업 (웹 가이드용) */
-  .win{width:440px; height:440px; max-width:100%; display:flex; flex-direction:column; overflow:hidden;
+  .win{width:440px; height:520px; max-width:100%; display:flex; flex-direction:column; overflow:hidden;
     border-radius:16px; border:1px solid var(--line); background:#fff;
-    box-shadow:0 1px 2px rgba(25,31,40,.05), 0 10px 20px -10px rgba(25,31,40,.16), 0 40px 70px -36px rgba(21,42,84,.5);}
-  .win .bar{height:40px; flex:0 0 auto; display:flex; align-items:center; gap:6px; padding:0 13px; background:#EEF1F5; border-bottom:1px solid var(--line);}
-  .win .bar i{width:10px; height:10px; border-radius:50%; background:#D5DAE1;}
-  .win .bar i:nth-child(1){background:#FF5F57;} .win .bar i:nth-child(2){background:#FEBC2E;} .win .bar i:nth-child(3){background:#28C840;}
-  .win .url{flex:1; height:24px; margin-left:10px; border-radius:7px; background:#fff; display:flex; align-items:center; gap:6px; padding:0 10px; font-size:11px; color:var(--placeholder);}
-  .win .url iconify-icon{font-size:12px; color:#22C55E;}
+    box-shadow:0 1px 2px rgba(25,31,40,.05), 0 10px 20px -10px rgba(25,31,40,.16), 0 16px 34px -20px rgba(21,42,84,.32);}
   .win .wbody{flex:1; padding:22px 22px; overflow:hidden; display:flex; flex-direction:column;}
   .win .wq{font-size:17px; font-weight:700; letter-spacing:-.3px; margin-bottom:14px;}
   .win .wlbl{font-size:12px; color:var(--placeholder); margin:12px 0 6px;}
@@ -160,7 +174,7 @@
   .chipsum{display:inline-flex; align-items:center; gap:7px; padding:8px 12px; border-radius:10px; background:var(--primary-50); color:var(--primary-dark); font-size:12.5px; font-weight:700; margin-bottom:16px;}
   .chipsum iconify-icon{font-size:15px;}
   .subbtn{height:42px; width:100%; margin-top:6px; border:none; background:none; color:var(--sub); font-family:inherit; font-size:14px; font-weight:600;}
-  .fade{position:relative;}
+  .fade{position:relative; padding-top:4px;}   /* 선택된 항목의 파란 테두리가 잘리지 않게 */
   .fade:after{content:''; position:absolute; left:0; right:0; bottom:0; height:44px; background:linear-gradient(180deg, rgba(255,255,255,0), #FBFCFE);}
 
   /* 1. 유형 선택 */
@@ -175,8 +189,8 @@
 
   /* 2. 금액 */
   .amtrow{display:flex; align-items:baseline; justify-content:flex-end; border-bottom:2px solid var(--primary); padding-bottom:10px;}
-  .amtrow .n{font-size:32px; font-weight:800; letter-spacing:-.8px;}
-  .amtrow .w{font-size:16px; font-weight:800; color:var(--sub); margin-left:6px;}
+  .amtrow .n{font-size:32px; font-weight:700; letter-spacing:-.8px;}
+  .amtrow .w{font-size:16px; font-weight:700; color:var(--sub); margin-left:6px;}
   .qbtns{display:flex; gap:7px; margin-top:14px;}
   .qbtns span{flex:1; height:38px; display:flex; align-items:center; justify-content:center; border:1px solid var(--line); border-radius:11px; background:#fff; font-size:13px; font-weight:700; color:var(--sub);}
   .feeline{display:flex; justify-content:space-between; font-size:13px; margin-top:18px; padding:12px 14px; border-radius:12px; background:var(--gray-bg);}
@@ -184,7 +198,7 @@
 
   /* 3. 계좌 */
   .selrow{display:flex; align-items:center; justify-content:space-between; height:50px; padding:0 14px; border:1px solid var(--line); border-radius:13px; background:#fff; font-size:15px; font-weight:700;}
-  .selrow .bk{display:inline-flex; align-items:center; justify-content:center; width:24px; height:24px; border-radius:7px; background:#FFBC00; color:#3B2B00; font-size:10px; font-weight:800; margin-right:8px;}
+  .selrow .bk{display:inline-flex; align-items:center; justify-content:center; width:24px; height:24px; border-radius:7px; background:#FFBC00; color:#3B2B00; font-size:10px; font-weight:700; margin-right:8px;}
   .selrow iconify-icon{color:var(--icon-off); font-size:18px;}
   .inbox{display:flex; align-items:center; gap:8px; height:50px; padding:0 8px 0 14px; border:1px solid var(--line); border-radius:13px; background:#fff;}
   .inbox .txt{flex:1; font-size:15px; font-weight:700;}
@@ -192,19 +206,19 @@
   .vbox{display:flex; align-items:center; gap:11px; margin-top:12px; padding:16px; border-radius:15px; background:linear-gradient(180deg,#E9F0FF,#F6F9FF); border:2px solid var(--primary); box-shadow:0 0 0 4px rgba(37,99,235,.10);}
   .vbox iconify-icon{font-size:24px; color:var(--primary); flex:0 0 auto;}
   .vbox .vl{font-size:12px; color:var(--sub);}
-  .vbox .vn{font-size:20px; font-weight:800; letter-spacing:-.4px; margin-top:2px;}
+  .vbox .vn{font-size:20px; font-weight:700; letter-spacing:-.4px; margin-top:2px;}
 
   /* 4. 촬영 */
   .cam{position:relative; flex:1; min-height:250px; border-radius:18px; background:#12161D; overflow:hidden; display:flex; align-items:center; justify-content:center;}
   .cam .bill{width:214px; background:#fff; border-radius:6px; padding:20px 18px; transform:rotate(-1.2deg);
-    box-shadow:0 10px 30px rgba(0,0,0,.45);}
-  .cam .bill .h{font-size:12px; font-weight:800; color:#191F28; letter-spacing:-.2px;}
+    box-shadow:0 6px 16px rgba(0,0,0,.25);}
+  .cam .bill .h{font-size:12px; font-weight:700; color:#191F28; letter-spacing:-.2px;}
   .cam .bill .sub{font-size:9px; color:#8B95A1; margin-top:5px;}
   .cam .bill .r{height:6px; border-radius:3px; background:#E8EBEF; margin-top:11px;}
   .cam .bill .r.s{width:62%;} .cam .bill .r.m{width:80%;}
   .cam .bill .box{margin-top:14px; padding:12px 12px; border-radius:7px; background:#EFF4FF;}
   .cam .bill .bt{font-size:9px; color:#4E5968;}
-  .cam .bill .bv{font-size:18px; font-weight:800; color:#191F28; margin-top:4px; letter-spacing:-.4px;}
+  .cam .bill .bv{font-size:18px; font-weight:700; color:#191F28; margin-top:4px; letter-spacing:-.4px;}
   .cam .fr{position:absolute; inset:26px 34px;}
   .cam .fr i{position:absolute; width:24px; height:24px; border:2.5px solid #fff; border-radius:4px;}
   .cam .fr i:nth-child(1){top:0; left:0; border-right:0; border-bottom:0;}
@@ -229,28 +243,23 @@
   .crow{display:flex; justify-content:space-between; align-items:flex-start; gap:12px; font-size:13px; padding:9px 0;}
   .crow .l{color:var(--sub); flex:0 0 auto;} .crow .r{font-weight:700; text-align:right;}
   .crow .sub2{font-size:11px; color:var(--placeholder); font-weight:500; margin-top:3px;}
-  .cbox{border:1px solid var(--line); border-radius:15px; padding:14px 16px; background:#fff; margin-bottom:10px;}
+  .cbox{border:1px solid var(--line); border-radius:15px; padding:12px 14px; background:#fff; margin-bottom:8px;}
   .ctot{display:flex; justify-content:space-between; align-items:baseline; padding-top:11px; margin-top:5px; border-top:1px solid var(--line);}
-  .ctot .l{font-size:13px; font-weight:700;} .ctot .v{font-size:21px; font-weight:800; letter-spacing:-.4px;}
-  .cben{margin-top:12px; padding:6px 14px; border-radius:13px; background:linear-gradient(180deg,#E7EFFF,#F4F8FF); box-shadow:inset 0 2px 6px rgba(37,99,235,.14);}
-  .cben .b{display:flex; align-items:center; gap:8px; padding:9px 0; font-size:12.5px; color:var(--primary-dark); font-weight:700;}
-  .cben .b+.b{border-top:1px solid #DBE7FF;}
-  .cben .b iconify-icon{font-size:15px;}
-  .cben .b .v{margin-left:auto;}
+  .ctot .l{font-size:13px; font-weight:700;} .ctot .v{font-size:21px; font-weight:700; letter-spacing:-.4px;}
 
   /* 7. 완료 */
   .done{text-align:center; padding:10px 0 4px;}
   .done .ck{width:64px; height:64px; margin:0 auto 16px; border-radius:50%; background:linear-gradient(180deg,#EAF1FF,#DCE8FF); display:flex; align-items:center; justify-content:center;
     box-shadow:0 8px 18px -8px rgba(37,99,235,.6);}
   .done .ck iconify-icon{font-size:34px; color:var(--primary);}
-  .done h4{font-size:20px; font-weight:800; letter-spacing:-.4px;}
+  .done h4{font-size:20px; font-weight:700; letter-spacing:-.4px;}
   .done p{font-size:13px; color:var(--sub); margin-top:8px; line-height:1.6;}
   .done p b{color:var(--ink);}
   .receipt{margin-top:18px; padding:16px; border-radius:15px; background:var(--gray-bg); text-align:left;}
   .receipt .rr{display:flex; justify-content:space-between; font-size:13px; padding:6px 0;}
   .receipt .rr .l{color:var(--sub);} .receipt .rr .v{font-weight:700;}
   .receipt .rd{border-top:1px dashed var(--border); margin:9px 0;}
-  .receipt .rr.big .v{font-size:17px; font-weight:800;}
+  .receipt .rr.big .v{font-size:17px; font-weight:700;}
 
   .guide-cta{margin-top:70px; text-align:center; background:var(--gray-bg); border-radius:22px; padding:56px 30px;}
   .guide-cta .hero-btns{display:flex; gap:12px; justify-content:center; margin-top:28px; flex-wrap:wrap;}
@@ -258,8 +267,8 @@
   .seg3{display:flex; gap:4px; background:var(--gray-bg); border-radius:13px; padding:4px; margin-bottom:14px;}
   .seg3 span{flex:1; text-align:center; padding:9px 0; border-radius:10px; font-size:13px; font-weight:700; color:var(--placeholder);}
   .seg3 span.on{background:#fff; color:var(--ink); box-shadow:0 1px 3px rgba(25,31,40,.12);}
-  .crow{display:flex; align-items:center; gap:11px; padding:12px 13px; border:1.5px solid var(--line);
-    border-radius:13px; margin-bottom:8px; background:#fff;}
+  .crow{display:flex; align-items:center; gap:11px; padding:10px 13px; border:1.5px solid var(--line);
+    border-radius:13px; margin-bottom:6px; background:#fff;}
   .crow.on{border-color:var(--primary); background:var(--primary-50);}
   .cmini{width:38px; height:25px; flex:0 0 auto; border-radius:5px; position:relative;}
   .cmini:after{content:''; position:absolute; left:5px; top:8px; width:9px; height:7px; border-radius:2px;
@@ -288,11 +297,6 @@
   .win .wghost{display:flex; align-items:center; justify-content:center; gap:6px; height:40px; margin-top:8px;
     border:1.5px solid var(--line); border-radius:11px; font-size:12.5px; font-weight:700; color:var(--sub);}
   .win .wghost iconify-icon{font-size:15px; color:var(--primary);}
-  /* 실제 화면을 그대로 끼워 넣기 (보기 전용) */
-  .win .frame{padding:0; overflow:hidden; position:relative;}
-  .win .frame iframe{width:440px; border:0; display:block; pointer-events:none;
-    transform-origin:0 0; position:absolute; left:0; top:0;}
-  .win:has(.frame){height:auto;}
   .sec.s80{padding:80px 0;}
   .sec.s80.last{padding-bottom:110px;}
   @media(max-width:760px){
@@ -308,13 +312,13 @@
 
 <nav class="nav">
   <div class="nav-in">
-    <a class="logo" href="index.html"><img src="../img/logo-mark.png" alt="" style="height:30px"><img src="../img/logo-text.png" alt="랜선페이" style="height:19px"></a>
+    <a class="logo" href="index.html"><img src="../img/logo3.png" alt="" style="height:23px"><img src="../img/logo-text.png" alt="랜선페이" style="height:19px"></a>
     <div class="nav-menu">
       <a href="이용가이드.html" class="wide on">이용가이드</a>
       <a href="고객센터.html" class="wide">고객센터</a>
-      <a href="로그인.html">로그인</a>
+      <a href="뉴스룸.html" class="wide">뉴스룸</a>
     </div>
-    <button class="nav-cta" onclick="location.href='송금하기.html'">송금하기</button>
+    <button class="nav-cta" onclick="location.href='로그인.html'">로그인</button>
     <button class="nav-burger" onclick="drawer(true)" aria-label="전체메뉴"><iconify-icon icon="mingcute:menu-fill"></iconify-icon></button>
   </div>
 </nav>
@@ -343,7 +347,7 @@
         <div class="ftxt">
           <span class="fno"><span class="dot">1</span>STEP 1</span>
           <h3>무엇을 결제할지<br>먼저 골라요</h3>
-          <p class="fs">내 결제 유형에 맞게 선택해주세요. 유형에 따라 <b>필요한 서류가 달라지니</b> 실제 용도에 맞게 골라주세요.</p>
+          <p class="fs">내 결제 유형에 맞게 선택해주세요. 유형에 따라 <br><b>필요한 서류가 달라지니</b> 실제 용도에 맞게 골라주세요.</p>
         </div>
         <div class="fvis">
           <div class="scr">
@@ -422,7 +426,7 @@
         <div class="ftxt">
           <span class="fno"><span class="dot">4</span>STEP 4</span>
           <h3>증빙 서류를<br>찍어서 올려요</h3>
-          <p class="fs">실제 거래를 증명하는 서류가 필요해요. 이 절차를 통해 <b>합법적인 현금 송금</b>이 가능해요.</p>
+          <p class="fs">실제 거래를 증명하는 서류가 필요해요. <br>이 절차를 통해 <b>합법적인 현금 송금</b>이 가능해요.</p>
           <ul class="flist">
             <li>서류에 <b>금액과 계좌번호</b>가 보여야 해요</li>
             <li>갤러리 속 사진 · 캡처도 그대로 올릴 수 있어요</li>
@@ -504,11 +508,6 @@
               <div class="crow"><span class="l">신청 금액</span><span class="r">680,000원</span></div>
               <div class="crow"><span class="l">수수료 4%</span><span class="r">27,200원</span></div>
               <div class="ctot"><span class="l">총 결제금액</span><span class="v">707,200원</span></div>
-              <div class="cben">
-                <div class="b"><iconify-icon icon="mingcute:gift-fill"></iconify-icon>카드 포인트 적립<span class="v">+6,660원</span></div>
-                <div class="b"><iconify-icon icon="mingcute:bank-card-fill"></iconify-icon>3개월 무이자 할부<span class="v">이자 0원</span></div>
-                <div class="b"><iconify-icon icon="mingcute:bill-fill"></iconify-icon>연말정산 세액공제<span class="v">대상</span></div>
-              </div>
             </div>
             <button class="sbtn">707,200원 결제 신청하기</button>
           </div>
@@ -559,15 +558,24 @@
         <div class="ftxt">
           <span class="fno"><span class="dot">1</span>STEP 1</span>
           <h3>휴대폰 인증으로<br>시작해요</h3>
-          <p class="fs">회원가입이나 앱 설치 없이 <b>본인 명의 휴대폰 인증</b> 한 번이면 바로 쓸 수 있어요.</p>
+          <p class="fs">가입 및 설치 없이 <b>본인 명의의<br>휴대폰 인증 한 번</b>이면 바로 쓸 수 있어요.</p>
           <ul class="flist">
             <li>알뜰폰도 인증할 수 있어요</li>
           </ul>
         </div>
         <div class="fvis">
           <div class="win">
-            <div class="wbody frame">
-              <iframe src="송금하기.html?embed=1&s=1" title="실제 화면" scrolling="no" onload="fitFrames()" data-h="870"></iframe>
+            <div class="bar"><i></i><i></i><i></i></div>
+            <div class="wbody">
+              <div class="wq">휴대폰 인증</div>
+              <div class="wsub">본인 명의 휴대폰으로 간편하게 시작해요.</div>
+              <div class="wlbl">통신사</div>
+              <div class="telcos"><span class="on">SKT</span><span>KT</span><span>LG U+</span><span>SKT 알뜰폰</span><span>KT 알뜰폰</span><span>LG 알뜰폰</span></div>
+              <div class="wlbl">이름</div>
+              <div class="wfield ph">이름 입력</div>
+              <div class="wlbl">휴대폰 번호</div>
+              <div class="w2col"><div class="wfield ph">숫자만 입력</div><div class="wfield ph" style="flex:0 0 104px; justify-content:center; background:var(--primary-50); color:var(--primary-dark); font-weight:700; border-color:transparent">인증번호 받기</div></div>
+              <div class="wbtn">인증하고 송금 시작하기</div>
             </div>
           </div>
         </div>
@@ -578,15 +586,25 @@
         <div class="ftxt">
           <span class="fno"><span class="dot">2</span>STEP 2</span>
           <h3>보낼 금액과<br>받는 분 계좌를 넣어요</h3>
-          <p class="fs">은행과 계좌번호를 넣으면 <b>예금주가 바로 확인</b>돼요. 상대방 동의는 필요 없어요.</p>
+          <p class="fs">은행과 계좌번호를 넣으면 <b>예금주가 바로 확인</b>돼요. <br>상대방 동의는 필요 없어요.</p>
           <ul class="flist">
             <li>계좌번호를 넣으면 <b>받는 분 이름이 자동</b>으로 떠요</li>
           </ul>
         </div>
         <div class="fvis">
           <div class="win">
-            <div class="wbody frame">
-              <iframe src="송금하기.html?embed=1&s=2" title="실제 화면" scrolling="no" onload="fitFrames()" data-h="920"></iframe>
+            <div class="bar"><i></i><i></i><i></i></div>
+            <div class="wbody">
+              <div class="wq">결제 정보 입력</div>
+              <div class="wsub">받는 분 계좌와 보낼 금액을 넣어주세요.</div>
+              <div class="wlbl">결제 유형</div>
+              <div class="wfield">부동산 임대차 · 월세</div>
+              <div class="wlbl">보낼 금액</div>
+              <div class="wfield ph">상대방이 받을 금액</div>
+              <div class="wlbl">받는 분 계좌</div>
+              <div class="w2col"><div class="wfield" style="flex:0 0 104px">KB국민</div><div class="wfield ph">계좌번호 입력</div></div>
+              <div class="filerow" style="margin-top:12px"><iconify-icon icon="mingcute:check-circle-fill"></iconify-icon><span class="fn">받는 분 (예금주) · 대성부동산</span></div>
+              <div class="wbtn">다음</div>
             </div>
           </div>
         </div>
@@ -597,15 +615,27 @@
         <div class="ftxt">
           <span class="fno"><span class="dot">3</span>STEP 3</span>
           <h3>서류는 촬영 대신<br>파일로 올려요</h3>
-          <p class="fs">PC에 저장된 <b>스캔본 · 캡처 이미지 · PDF</b>를 끌어다 놓기만 하면 돼요.</p>
+          <p class="fs">PC에 저장된 <b>스캔본 · 캡처 이미지 · PDF</b>를<br>끌어다 놓기만 하면 돼요.</p>
           <ul class="flist">
             <li>유형마다 서류가 달라요 → <b>유형별 필요 서류</b> 참고</li>
           </ul>
         </div>
         <div class="fvis">
           <div class="win">
-            <div class="wbody frame">
-              <iframe src="송금하기.html?embed=1&s=3" title="실제 화면" scrolling="no" onload="fitFrames()" data-h="1020"></iframe>
+            <div class="bar"><i></i><i></i><i></i></div>
+            <div class="wbody">
+              <div class="wq">증빙 서류 첨부</div>
+              <div class="wsub">실제 거래를 증명하는 서류를 올려주세요.</div>
+              <div class="dochelp"><span class="di"><iconify-icon icon="mingcute:document-2-fill"></iconify-icon></span>
+                <span class="dt2"><b>어떤 서류를 올려야 하나요?</b><i>결제 유형 13가지별로 확인해보세요</i></span>
+                <iconify-icon class="dgv" icon="mingcute:right-line"></iconify-icon></div>
+              <div class="drop">
+                <iconify-icon icon="mingcute:upload-3-fill"></iconify-icon>
+                <div class="dt">여기로 파일을 끌어다 놓으세요</div>
+                <div class="ds">JPG · PNG · PDF · 20MB 이하</div>
+              </div>
+              <div class="filerow"><iconify-icon icon="mingcute:document-fill"></iconify-icon><span class="fn">임대차계약서.pdf</span><span class="fx">1.2MB</span></div>
+              <div class="wbtn">다음</div>
             </div>
           </div>
         </div>
@@ -616,15 +646,25 @@
         <div class="ftxt">
           <span class="fno"><span class="dot">4</span>STEP 4</span>
           <h3>확인만 하면<br>신청이 끝나요</h3>
-          <p class="fs">보낼 금액과 수수료를 확인하고 신청하면 끝이에요. <b>서류가 승인된 뒤에 결제되고, 받는 분에게 바로 입금</b>돼요.</p>
+          <p class="fs">금액과 수수료를 확인하고 신청하면 끝.<br><b>서류 승인 뒤에 결제되고 바로 입금</b>돼요.</p>
           <ul class="flist">
             <li>승인 · 입금 결과를 <b>문자로 알려드려요</b></li>
           </ul>
         </div>
         <div class="fvis">
           <div class="win">
-            <div class="wbody frame">
-              <iframe src="송금하기.html?embed=1&s=4" title="실제 화면" scrolling="no" onload="fitFrames()" data-h="845"></iframe>
+            <div class="bar"><i></i><i></i><i></i></div>
+            <div class="wbody">
+              <div class="wq">결제 확인</div>
+              <div class="wsub">지금은 신청만 돼요. 서류가 승인되면 결제 · 입금됩니다.</div>
+              <div class="cbox">
+                <div class="crow"><span class="l">받는 분</span><span class="r">대성부동산</span></div>
+                <div class="crow"><span class="l">신청 금액</span><span class="r">680,000원</span></div>
+                <div class="crow"><span class="l">수수료 4%</span><span class="r">27,200원</span></div>
+                <div class="ctot"><span class="l">총 결제금액</span><span class="v">707,200원</span></div>
+              </div>
+              <div class="wbtn">707,200원 결제 신청하기</div>
+              <div class="wghost"><iconify-icon icon="mingcute:user-add-2-fill"></iconify-icon>다른 사람에게 결제 요청 보내기</div>
             </div>
           </div>
         </div>
@@ -640,7 +680,7 @@
 <section class="sec s80">
   <div class="wrap">
     <h2 class="h-md">유형별 필요 서류</h2>
-    <p class="p-md" style="margin-top:8px">증빙에서 금액과 계좌가 보여야 해요. 유형을 눌러 확인하세요.</p>
+    <p class="p-md" style="margin-top:8px">증빙에서 금액과 계좌가 보여야 해요.<br>유형을 눌러 확인하세요.</p>
     <div class="docs">
       <details>
         <summary><span class="d-t">부동산 임대차</span><span class="d-s">월세 · 계약금 · 보증금</span><iconify-icon class="arw" icon="mingcute:down-line"></iconify-icon></summary>
@@ -711,13 +751,14 @@
 </section>
 
 <footer class="footer">
-  <div class="f-in">
-    <div class="f-menu">
-      <a href="이용가이드.html">이용가이드</a>
-      <a href="고객센터.html">고객센터</a>
-      <a href="고객센터.html#faq">자주 묻는 질문</a>
-      <a href="송금하기.html">송금하기</a>
+  <div class="f-legal">
+    <div class="f-legal-in">
+      <a href="약관.html?doc=terms">서비스 이용약관</a>
+      <a href="약관.html?doc=privacy">개인정보 처리방침</a>
+      <a href="약관.html?doc=third">개인정보 3자 제공 고지</a>
     </div>
+  </div>
+  <div class="f-in">
     <p class="f-co">
       <span><em>상호</em>랜선페이 · (주)미라클컴퍼니</span>
       <span><em>대표</em>김남기</span>
@@ -725,7 +766,10 @@
       <span><em>사업자등록번호</em>437-88-03148</span>
       <span><em>주소</em>충청남도 천안시 서북구 쌍용대로 234, 방영학생활건강빌딩 3층 (성정동)</span>
       <span><em>대표번호</em>1577-6369 <i>(평일 9:00~18:00)</i></span>
+      <span><em>메일</em>help@lanseonpay.co.kr</span>
     </p>
+    <p class="f-note">랜선페이는 전자금융거래법에 따라 등록된<br>전자지급결제대행(PG) 서비스입니다.</p>
+    <p class="f-copy">Copyright © 2026 랜선페이. All rights reserved.</p>
   </div>
 </footer>
 
@@ -738,7 +782,6 @@
   <a href="이용가이드.html"><iconify-icon icon="mingcute:book-2-fill"></iconify-icon>이용가이드<span class="gv">›</span></a>
   <a href="index.html#reviews"><iconify-icon icon="mingcute:chat-2-fill"></iconify-icon>이용후기<span class="gv">›</span></a>
   <a href="송금하기.html"><iconify-icon icon="mingcute:flash-fill"></iconify-icon>송금하기<span class="gv">›</span></a>
-  <a href="javascript:void(0);" onclick="location.href='세금자료.html'; return false;"><iconify-icon icon="mingcute:file-certificate-fill"></iconify-icon>세금계산서 · 부가세 신고<span class="gv">›</span></a>
   <button class="d-login" onclick="location.href='로그인.html'">로그인</button>
 </aside>
 </div>
@@ -758,26 +801,5 @@ function pane(name, btn){
 }
 </script>
 
-<script>
-/* 실제 화면(iframe)을 창 크기에 맞춰 비율 그대로 줄여서 보여줌 */
-function fitFrames(){
-  document.querySelectorAll('.win .frame').forEach(function(box){
-    var f = box.querySelector('iframe');
-    if (!f) return;
-    var w = box.clientWidth || box.parentElement.clientWidth || 440;
-    var h = parseInt(f.dataset.h || '620', 10);
-    var scale = Math.min(1, w / 440);
-    f.style.height = h + 'px';
-    f.style.transform = 'scale(' + scale + ')';
-    box.style.height = Math.round(h * scale) + 'px';
-  });
-}
-/* 탭을 바꾸거나 늦게 그려져도 다시 맞춤 */
-setTimeout(fitFrames, 300);
-setTimeout(fitFrames, 1200);
-window.addEventListener('load', fitFrames);
-window.addEventListener('resize', fitFrames);
-document.addEventListener('DOMContentLoaded', fitFrames);
-</script>
 </body>
 </html>

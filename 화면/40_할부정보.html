@@ -7,6 +7,11 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
 <link rel="stylesheet" href="screen.css">
 <style>
+/* 스크롤바를 보이지 않게 (스크롤은 그대로 됨) */
+html,body{scrollbar-width:none; -ms-overflow-style:none;}
+html::-webkit-scrollbar,body::-webkit-scrollbar{width:0; height:0; display:none;}
+*{scrollbar-width:none;}
+*::-webkit-scrollbar{width:0; height:0;}
   .calcbox{background:var(--card); border-radius:20px; padding:20px; box-shadow:0 1px 3px rgba(0,0,0,.05);}
   .amtin{display:flex; align-items:baseline; border-bottom:2px solid var(--primary); padding-bottom:8px;}
   .amtin input{flex:1; border:none; outline:none; font-family:inherit; font-size:26px; font-weight:800; text-align:right; min-width:0; background:none;}
@@ -32,6 +37,21 @@
   .cardrow .n{font-size:14.5px; font-weight:700;}
   .cardrow .s{font-size:12px; color:var(--placeholder); margin-top:3px;}
   .cardrow .mo{font-size:12px; font-weight:800; color:var(--primary-dark); background:var(--primary-50); padding:5px 9px; border-radius:7px; white-space:nowrap;}
+  /* 무이자 목록 */
+  .target{display:inline-block; margin:2px 0 4px; padding:5px 11px; border-radius:8px;
+    background:var(--primary-50); color:var(--primary-dark); font-size:12.5px; font-weight:700;}
+  .hint{font-size:13px; color:var(--sub); line-height:1.7; margin-bottom:10px;}
+  .crow2{display:flex; align-items:center; gap:11px; padding:13px 0;}
+  .crow2+.crow2{border-top:1px solid var(--line);}
+  .clogo2{width:26px; height:22px; flex:0 0 auto; object-fit:contain; object-position:center;}
+  .clogo2.wide{width:38px; height:13px;}
+  .crow2 .n{flex:1; min-width:0; font-size:14.5px; font-weight:600;}
+  .crow2 .mo2{font-size:13.5px; font-weight:700; color:var(--primary-dark); white-space:nowrap; text-align:right;}
+  .crow2 .mo2 i{display:block; font-style:normal; font-size:12px; font-weight:600; color:var(--placeholder); margin-top:2px;}
+  .fnotes{list-style:none;}
+  .fnotes li{position:relative; padding-left:14px; font-size:13px; color:var(--sub); line-height:1.75; margin-bottom:9px;}
+  .fnotes li:before{content:'·'; position:absolute; left:3px; color:var(--icon-off);}
+  .fnotes b{color:var(--ink);}
 </style>
 <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 </head>
@@ -45,54 +65,21 @@
   <div class="topbar"><div class="back" onclick="lpBack('9_홈_개인.html')">‹</div><div class="ttl">카드 할부 정보</div></div>
 
   <div class="body hasfoot">
-    <div class="sec-s">금액과 개월 수를 넣으면 <b>매달 얼마씩</b> 나가는지 바로 계산해드려요.</div>
+    <div class="sec-s">이번 달 카드사별 무이자 · 부분 무이자 조건이에요.</div>
+    <div class="target" id="fTarget"></div>
 
-    <div class="calcbox">
-      <div class="field" style="margin-bottom:0">
-        <label>결제 금액 (수수료 포함)</label>
-        <div class="amtin"><input id="amt" inputmode="numeric" value="1,040,000"><span>원</span></div>
-      </div>
-      <div class="mchips" id="mchips">
-        <span onclick="setM(this,0)">일시불</span>
-        <span class="on" onclick="setM(this,3)">3개월</span>
-        <span onclick="setM(this,6)">6개월</span>
-        <span onclick="setM(this,12)">12개월</span>
-      </div>
-      <div class="res">
-        <div class="rrow"><span class="l">할부 개월</span><span class="v" id="rM">3개월 무이자</span></div>
-        <div class="rrow"><span class="l">할부 이자</span><span class="v" id="rI">0원</span></div>
-        <div class="rrow big"><span class="l">매달 내는 금액</span><span class="v" id="rMon">346,700원</span></div>
-      </div>
+    <div class="sec-t">무이자 행사</div>
+    <div class="box" id="freeBox"></div>
+
+    <div class="sec-t">부분 무이자 행사</div>
+    <div class="pad" style="padding-bottom:0">
+      <div class="hint">앞 몇 회차의 이자만 내고 나머지는 카드사가 부담해요.</div>
     </div>
+    <div class="box" id="partBox"></div>
 
-    <div class="sec-t">카드사별 무이자 (2026년 8월)</div>
-    <div class="box">
-      <div class="cardrow"><span class="face s"></span>
-        <span class="tx"><div class="n">삼성카드</div><div class="s">5만원 이상 결제 시</div></span>
-        <span class="mo">2~6개월</span></div>
-      <div class="cardrow"><span class="face n"></span>
-        <span class="tx"><div class="n">신한카드</div><div class="s">5만원 이상 결제 시</div></span>
-        <span class="mo">2~5개월</span></div>
-      <div class="cardrow"><span class="face h"></span>
-        <span class="tx"><div class="n">현대카드</div><div class="s">5만원 이상 결제 시</div></span>
-        <span class="mo">2~3개월</span></div>
-      <div class="cardrow"><span class="face"></span>
-        <span class="tx"><div class="n">국민 · 롯데 · 하나</div><div class="s">부분 무이자 (일부 개월 이자 발생)</div></span>
-        <span class="mo">2~3개월</span></div>
-    </div>
-
-    <div class="sec-t">부분 무이자란?</div>
+    <div class="sec-t">유의사항</div>
     <div class="pad">
-      <div style="font-size:13.5px; color:var(--sub); line-height:1.8">
-        <b style="color:var(--ink)">앞 몇 개월치 이자만 내가 부담</b>하는 방식이에요.<br>
-        예) 6개월 부분 무이자 → <b style="color:var(--ink)">1~2회차는 이자 부담</b>, 3~6회차는 무이자<br><br>
-        카드사 이벤트에 따라 조건이 달라지니, 결제 화면에서 <b style="color:var(--ink)">적용 가능한 개월 수</b>를 꼭 확인하세요.
-      </div>
-    </div>
-
-    <div class="note">
-      <iconify-icon icon="mingcute:alert-fill"></iconify-icon>
-      <div>무이자 할부는 <b>카드사가 제공</b>하는 혜택이라 조기 종료될 수 있어요. 무이자 결제 건은 카드사 정책상 <b>포인트 적립에서 제외</b>되는 경우가 있습니다.</div>
+      <ul class="fnotes" id="noteBox"></ul>
     </div>
   </div>
 
@@ -100,34 +87,30 @@
     <button class="btn" onclick="location.href='10_1_유형선택.html'">이 조건으로 결제하기</button>
   </div>
 </div>
+<script src="../홈페이지/게시글.js"></script>
 <script src="app.js"></script>
 <script>
-var months = 3;
-var fmt = function(n){ return Math.round(n).toLocaleString('ko-KR'); };
-function setM(el, m){
-  document.querySelectorAll('#mchips span').forEach(function(s){ s.classList.remove('on'); });
-  el.classList.add('on');
-  months = m; calc();
-}
-function calc(){
-  var raw = document.getElementById('amt').value.replace(/[^0-9]/g, '');
-  var a = parseInt(raw || '0', 10);
-  document.getElementById('amt').value = a ? fmt(a) : '';
-  if (months === 0) {
-    document.getElementById('rM').textContent = '일시불';
-    document.getElementById('rI').textContent = '0원';
-    document.getElementById('rMon').textContent = fmt(a) + '원';
-    return;
+/* 홈페이지와 같은 무이자 데이터(게시글.js)를 씁니다 */
+(function(){
+  if (typeof FREE_CARDS === 'undefined') return;
+  function logo(name){
+    var g = CARD_LOGO[name] || {};
+    return g.img ? '<img class="clogo2' + (g.wide ? ' wide' : '') + '" src="' + g.img
+                 + '" alt="" onerror="this.remove()">' : '<span class="clogo2"></span>';
   }
-  var free = (months <= 6);                 /* 6개월까지 무이자 가정 */
-  var rate = free ? 0 : 0.15;               /* 12개월은 연 15% 가정 */
-  var interest = Math.round(a * rate * months / 12);
-  document.getElementById('rM').textContent = months + '개월' + (free ? ' 무이자' : ' (이자 발생)');
-  document.getElementById('rI').textContent = fmt(interest) + '원';
-  document.getElementById('rMon').textContent = fmt((a + interest) / months) + '원';
-}
-document.getElementById('amt').addEventListener('input', calc);
-calc();
+  document.getElementById('fTarget').textContent = '대상 : ' + FREE_TARGET;
+  document.getElementById('freeBox').innerHTML = FREE_CARDS.map(function(c){
+    return '<div class="crow2">' + logo(c.name) + '<span class="n">' + c.name
+         + '</span><span class="mo2">' + c.term + '</span></div>';
+  }).join('');
+  document.getElementById('partBox').innerHTML = FREE_PARTIAL.map(function(c){
+    var t = c.rows.map(function(r){ return r.term + ' <i>' + r.burden + '</i>'; }).join('');
+    return '<div class="crow2">' + logo(c.name) + '<span class="n">' + c.name
+         + '</span><span class="mo2">' + t + '</span></div>';
+  }).join('');
+  document.getElementById('noteBox').innerHTML =
+    FREE_NOTES.map(function(t){ return '<li>' + t + '</li>'; }).join('');
+})();
 </script>
 </body>
 </html>

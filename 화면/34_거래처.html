@@ -7,6 +7,11 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
 <link rel="stylesheet" href="screen.css">
 <style>
+/* 스크롤바를 보이지 않게 (스크롤은 그대로 됨) */
+html,body{scrollbar-width:none; -ms-overflow-style:none;}
+html::-webkit-scrollbar,body::-webkit-scrollbar{width:0; height:0; display:none;}
+*{scrollbar-width:none;}
+*::-webkit-scrollbar{width:0; height:0;}
   .biz{display:flex; align-items:center; gap:12px; background:var(--card); border-radius:16px; padding:15px; margin-bottom:9px;
     box-shadow:0 1px 3px rgba(0,0,0,.05); cursor:pointer;}
   .biz .av{width:44px; height:44px; flex:0 0 auto; border-radius:15px; background:var(--primary-50); color:var(--primary-dark);
@@ -24,7 +29,7 @@
   .dhead .nm{font-size:19px; font-weight:800; letter-spacing:-.3px;}
   .dhead .ac{font-size:13px; color:var(--sub); margin-top:7px;}
   .dhead .ok{display:inline-flex; align-items:center; gap:5px; margin-top:12px; font-size:11.5px; font-weight:800;
-    color:var(--success); background:var(--success-bg); padding:5px 10px; border-radius:8px;}
+    color:var(--sub); background:var(--tile); padding:5px 10px; border-radius:8px;}
   .dhead .ok iconify-icon{font-size:13px;}
   .dstat{display:flex; margin-top:16px; padding-top:15px; border-top:1px solid var(--line);}
   .dstat > div{flex:1; text-align:center;}
@@ -48,19 +53,16 @@
     <div class="sec-s">자주 보내는 곳을 저장해두면 <b>계좌를 매번 입력하지 않아도</b> 돼요.</div>
 
     <div class="biz" onclick="openBiz('대성부동산','대성','KB국민 123456-78-901234','1,200,000원','매달 25일 · 8건','임대료')">
-      <span class="av">대성</span>
       <span class="tx"><div class="nm">대성부동산</div><div class="ac">KB국민 123456-78-901234</div></span>
       <span class="rt"><div class="amt">1,200,000원</div><div class="cnt">매달 25일</div></span>
     </div>
 
     <div class="biz" onclick="openBiz('한빛식자재','한빛','기업 302-1122-3344','4,350,000원','최근 지난주 · 22건','매입대금')">
-      <span class="av">한빛</span>
       <span class="tx"><div class="nm">한빛식자재</div><div class="ac">기업 302-1122-3344</div></span>
       <span class="rt"><div class="amt">4,350,000원</div><div class="cnt">지난주</div></span>
     </div>
 
     <div class="biz" onclick="openBiz('김직원','김직','신한 110-234-567890','2,400,000원','매달 10일 · 12건','급여')">
-      <span class="av">김직</span>
       <span class="tx"><div class="nm">김직원 (급여)</div><div class="ac">신한 110-234-567890</div></span>
       <span class="rt"><div class="amt">2,400,000원</div><div class="cnt">매달 10일</div></span>
     </div>
@@ -74,7 +76,6 @@
   <!-- 상세 -->
   <div class="body hasfoot" id="detailView" style="display:none">
     <div class="dhead">
-      <div class="av" id="dAv">대성</div>
       <div class="nm" id="dNm">대성부동산</div>
       <div class="ac" id="dAc">KB국민 123456-78-901234</div>
       <div class="ok"><iconify-icon icon="mingcute:check-circle-fill"></iconify-icon>예금주 확인 완료</div>
@@ -116,8 +117,8 @@
         <iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon>
       </div>
       <div class="row" onclick="askDel()">
-        <span class="ic" style="background:var(--danger-bg)"><iconify-icon icon="mingcute:delete-2-fill" style="color:var(--danger)"></iconify-icon></span>
-        <span class="tx"><div class="t" style="color:var(--danger)">거래처 삭제</div></span>
+        <span class="ic" style="background:var(--danger-bg)"><iconify-icon icon="mingcute:delete-2-fill" style="color:var(--sub)"></iconify-icon></span>
+        <span class="tx"><div class="t" style="color:var(--sub)">거래처 삭제</div></span>
       </div>
     </div>
   </div>
@@ -157,7 +158,6 @@
 <script>
 function openBiz(nm, av, ac, amt, cnt, use){
   document.getElementById('dNm').textContent = nm;
-  document.getElementById('dAv').textContent = av;
   document.getElementById('dAc').textContent = ac;
   document.getElementById('dSum').textContent = amt;
   document.getElementById('dCnt').textContent = cnt.split('·').pop().trim();
@@ -190,7 +190,7 @@ function addBiz(){
   el.className = 'biz';
   var use = document.getElementById('nUse').value.trim() || '기타';
   el.setAttribute('onclick', "openBiz('" + nm + "','" + nm.slice(0,2) + "','" + bank + ' ' + acc + "','0원','0건','" + use + "')");
-  el.innerHTML = '<span class="av">' + nm.slice(0,2) + '</span>' +
+  el.innerHTML = '' +
     '<span class="tx"><div class="nm">' + nm + '</div><div class="ac">' + bank + ' ' + acc + '</div></span>' +
     '<span class="rt"><div class="amt">0원</div><div class="cnt">거래 없음</div></span>';
   var v = document.getElementById('listView');

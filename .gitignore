@@ -1,8 +1,13 @@
-# 디자인 원본 (사이트에서 쓰지 않음, 용량 큼)
-*.psd
+# 작업 도구 설정 (사이트와 무관)
+.claude/
+.agents/
+skills-lock.json
 
-# 이벤트 이미지 원본 (실제로 쓰는 건 ev-*.jpg)
-img/이벤트/GettyImages-*.jpg
-img/이벤트/ChatGPT Image *.png
-img/이벤트/이벤트종료.jpg
-img/이벤트/이벤트포인트.jpg
+# 되돌리기용 사본 — 컴퓨터에만 두고 공개하지 않음
+_백업_*/
+
+# 지금 화면에서 쓰지 않는 이미지
+img/ChatGPT Image*.png
+img/Gemini_Generated_Image*.png
+img/logo4.png
+img/**/ChatGPT Image*.png

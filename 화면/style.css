@@ -1,3 +1,10 @@
+
+/* 앱 화면에서는 스크롤바를 보이지 않게 (스크롤은 그대로 됨) */
+html,body{scrollbar-width:none; -ms-overflow-style:none;}
+html::-webkit-scrollbar,body::-webkit-scrollbar{width:0; height:0; display:none;}
+*{scrollbar-width:none;}
+*::-webkit-scrollbar{width:0; height:0;}
+html{scrollbar-gutter:stable;}   /* 화면마다 스크롤바 유무로 폰이 밀리는 것 방지 */
 /* 한글은 단어 단위로만 줄바꿈 */
 body{word-break:keep-all; overflow-wrap:break-word;}
 

@@ -6,6 +6,11 @@
 <title>결제 1 · 할부 선택(시트)</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
 <style>
+/* 스크롤바를 보이지 않게 (스크롤은 그대로 됨) */
+html,body{scrollbar-width:none; -ms-overflow-style:none;}
+html::-webkit-scrollbar,body::-webkit-scrollbar{width:0; height:0; display:none;}
+*{scrollbar-width:none;}
+*::-webkit-scrollbar{width:0; height:0;}
   :root{--primary:#2563EB; --primary-dark:#1D4ED8; --primary-50:#EFF4FF; --page-bg:#c9cdd4; --bg:#FFFFFF; --line:#ECEEF1; --border:#B1B8BE; --tile:#EEF1F4; --icon-off:#B0B8C1; --sub:#4E5968; --ink:#191F28; --placeholder:#8B95A1; --success:#059669;
     --primary-grad:linear-gradient(180deg, color-mix(in srgb, var(--primary) 82%, #ffffff), var(--primary)); --btn-shadow:0 4px 12px color-mix(in srgb, var(--primary) 32%, transparent), inset 0 1px 0 rgba(255,255,255,.18);}
   *{box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent;}
@@ -31,7 +36,7 @@
   .seg button.on{background:#fff; color:var(--ink); box-shadow:0 1px 3px rgba(0,0,0,.1);}
 
   /* 카드 트랙 (중앙 정렬 캐러셀) */
-  .cardscroll{display:flex; gap:14px; overflow-x:auto; scroll-snap-type:x mandatory; margin:0 -24px; padding:2px 0; scrollbar-width:none; cursor:grab;}
+  .cardscroll{display:flex; gap:14px; overflow-x:auto; overflow-y:hidden; scroll-snap-type:x mandatory; margin:0 -24px; padding:2px 0; scrollbar-width:none; cursor:grab;}
   .cardscroll:active{cursor:grabbing;}
   .cardscroll::-webkit-scrollbar{display:none;}
   .slide{flex:0 0 80%; scroll-snap-align:center;}
@@ -122,6 +127,11 @@
   .appc .cdot{width:22px; height:22px; border-radius:7px;}
   .appc .cn{font-size:12.5px; font-weight:700; color:var(--sub);}
   .appc.on .cn{color:var(--primary-dark);}
+  /* 카드사 로고 (색 네모 대신) */
+  .clogo{width:22px; height:22px; flex:0 0 auto; object-fit:contain; object-position:center; -webkit-user-drag:none;}
+  .clogo.wide{width:34px; height:14px; object-fit:contain;}
+  .appc .clogo{width:26px; height:26px;}
+  .appc .clogo.wide{width:40px; height:15px;}
 </style>
 <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 </head>
@@ -211,15 +221,15 @@
     <!-- 앱카드 -->
     <div id="tabApp" style="display:none">
       <div class="appgrid">
-        <div class="appc on" onclick="pickApp(this)"><span class="cdot" style="background:#2E6BD8"></span><span class="cn">삼성카드</span></div>
-        <div class="appc" onclick="pickApp(this)"><span class="cdot" style="background:#191F28"></span><span class="cn">현대카드</span></div>
-        <div class="appc" onclick="pickApp(this)"><span class="cdot" style="background:#6B5B4E"></span><span class="cn">국민카드</span></div>
-        <div class="appc" onclick="pickApp(this)"><span class="cdot" style="background:#0046FF"></span><span class="cn">신한카드</span></div>
-        <div class="appc" onclick="pickApp(this)"><span class="cdot" style="background:#DA291C"></span><span class="cn">롯데카드</span></div>
-        <div class="appc" onclick="pickApp(this)"><span class="cdot" style="background:#008485"></span><span class="cn">하나카드</span></div>
-        <div class="appc" onclick="pickApp(this)"><span class="cdot" style="background:#E8262C"></span><span class="cn">BC카드</span></div>
-        <div class="appc" onclick="pickApp(this)"><span class="cdot" style="background:#00A651"></span><span class="cn">농협카드</span></div>
-        <div class="appc" onclick="pickApp(this)"><span class="cdot" style="background:#0067AC"></span><span class="cn">우리카드</span></div>
+        <div class="appc on" onclick="pickApp(this)"><img class="clogo wide" src="../img/카드사/samsung.svg" alt="" onerror="this.remove()"><span class="cn">삼성카드</span></div>
+        <div class="appc" onclick="pickApp(this)"><img class="clogo wide" src="../img/카드사/hyundai.svg" alt="" onerror="this.remove()"><span class="cn">현대카드</span></div>
+        <div class="appc" onclick="pickApp(this)"><img class="clogo" src="../img/카드사/icon/kb.svg" alt="" onerror="this.remove()"><span class="cn">국민카드</span></div>
+        <div class="appc" onclick="pickApp(this)"><img class="clogo" src="../img/카드사/icon/shinhan.svg" alt="" onerror="this.remove()"><span class="cn">신한카드</span></div>
+        <div class="appc" onclick="pickApp(this)"><img class="clogo" src="../img/카드사/icon/lotte.svg" alt="" onerror="this.remove()"><span class="cn">롯데카드</span></div>
+        <div class="appc" onclick="pickApp(this)"><img class="clogo" src="../img/카드사/icon/hana.svg" alt="" onerror="this.remove()"><span class="cn">하나카드</span></div>
+        <div class="appc" onclick="pickApp(this)"><img class="clogo" src="../img/카드사/icon/bc.svg" alt="" onerror="this.remove()"><span class="cn">BC카드</span></div>
+        <div class="appc" onclick="pickApp(this)"><img class="clogo" src="../img/카드사/icon/nh.svg" alt="" onerror="this.remove()"><span class="cn">농협카드</span></div>
+        <div class="appc" onclick="pickApp(this)"><img class="clogo" src="../img/카드사/icon/woori.svg" alt="" onerror="this.remove()"><span class="cn">우리카드</span></div>
       </div>
     </div>
 

@@ -6,6 +6,13 @@
 <title>랜선페이 — 공지사항</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
 <style>
+/* 스크롤바를 보이지 않게 (스크롤은 그대로 됨) */
+html,body{scrollbar-width:none; -ms-overflow-style:none;}
+html::-webkit-scrollbar,body::-webkit-scrollbar{width:0; height:0; display:none;}
+*{scrollbar-width:none;}
+*::-webkit-scrollbar{width:0; height:0;}
+html{scrollbar-gutter:stable;}
+
   :root{
     --primary:#2563EB; --primary-dark:#1D4ED8; --primary-50:#EFF4FF;
     --page-bg:#c9cdd4; --bg:#F4F5F6; --card:#FFFFFF; --line:#ECEEF1; --border:#B1B8BE;
@@ -35,7 +42,7 @@
   .it+.it{border-top:1px solid var(--line);}
   .it .top{display:flex; align-items:center; gap:8px; margin-bottom:7px;}
   .it .tag{font-size:11px; font-weight:800; padding:4px 8px; border-radius:7px; color:var(--primary-dark); background:var(--primary-50);}
-  .it .tag.fix{color:var(--warn); background:var(--warn-bg);}
+  .it .tag.fix{color:var(--primary-dark); background:var(--primary-50);}
   .it .new{width:16px; height:16px; border-radius:50%; background:#EF4444; color:#fff; font-size:9px; font-weight:800;
     display:flex; align-items:center; justify-content:center;}
   .it .d{margin-left:auto; font-size:12px; color:var(--placeholder);}
@@ -54,6 +61,50 @@
   .dc ul{margin:10px 0 0 2px; list-style:none;}
   .dc li{position:relative; padding-left:16px; margin-bottom:7px;}
   .dc li:before{content:''; position:absolute; left:2px; top:9px; width:5px; height:5px; border-radius:50%; background:var(--primary);}
+
+  /* ===== 하단 탭바 ===== */
+  .navbar{position:absolute; bottom:0; left:0; right:0; z-index:20; background:#fff;
+    border-top:1px solid var(--line); padding-top:12px;}
+  .nvbar{display:flex; padding:0 6px;}
+  .nvtab{flex:1; display:flex; flex-direction:column; align-items:center; gap:5px;
+    color:#8B95A1; font-size:11px; font-weight:500; cursor:pointer;}
+  .nvtab iconify-icon{font-size:23px;}
+  .nvtab.on{color:var(--primary); font-weight:700;}
+  .nvtab.center{justify-content:center; gap:0;}
+  .fab{width:56px; height:56px; margin-top:-24px; border:none; padding:0; border-radius:50%; pointer-events:none;
+    display:flex; align-items:center; justify-content:center; background:var(--primary);
+    box-shadow:0 6px 16px rgba(37,99,235,.45), 0 0 0 5px #fff, inset 0 1px 0 rgba(255,255,255,.28);}
+  .fab img{width:29px;}
+  .home-indicator{margin:10px auto 8px; width:134px; height:5px; border-radius:3px; background:var(--ink);}
+  .body,.detail{padding-bottom:112px !important;}
+  .detail{overflow-y:auto;}
+  .dnote{margin-top:18px; padding:14px 16px; border-radius:12px; background:var(--primary-50);
+    color:var(--primary-dark); font-size:13px; line-height:1.75;}
+  .dnote b{color:var(--primary-dark);}
+  /* 무이자 표 (홈페이지와 같은 데이터) */
+  .fsec{margin-top:24px; font-size:15.5px; font-weight:800; color:var(--ink);}
+  .fsub{margin-top:6px; font-size:13px; color:var(--sub); line-height:1.6;}
+  .ftarget{display:block; width:fit-content; margin-top:12px; padding:5px 10px; border-radius:8px;
+    background:var(--primary-50); color:var(--primary-dark); font-size:12.5px; font-weight:800;}
+  .ftable{width:100%; border-collapse:collapse; margin-top:12px;}
+  .ftable th,.ftable td{padding:10px 2px; border-bottom:1px solid var(--line); font-size:13.5px; text-align:left; color:var(--ink);}
+  .ftable thead th{font-size:12px; font-weight:800; color:var(--placeholder); border-bottom:1.5px solid var(--ink);}
+  .ftable .r{text-align:right;}
+  .ftable tbody td{font-weight:800; color:var(--primary-dark);}
+  .fcard{display:flex; align-items:center; gap:8px; min-height:28px;}
+  .flogo-slot{flex:0 0 auto; width:44px; height:20px; display:flex; align-items:center;}
+  .flogo{max-width:100%; max-height:100%; object-fit:contain; object-position:left center;}
+  .flogo.wide{max-height:11px;}
+  .fname{font-size:13.5px; font-weight:700; white-space:nowrap;}
+  .ftable.part th,.ftable.part td{padding:8px 2px; border-bottom:none; vertical-align:middle;}
+  .ftable.part tr.grp th,.ftable.part tr.grp td{border-top:1px solid var(--line);}
+  .ftable.part tr.grp:first-child th,.ftable.part tr.grp:first-child td{border-top:none;}
+  .ftable.part .mo{font-size:13px; font-weight:700; color:var(--ink);}
+  .ftable.part .bd{font-size:12.5px; font-weight:600; color:var(--sub);}
+  .fnotes{list-style:none; margin-top:12px;}
+  .fnotes li{position:relative; padding-left:13px; font-size:13px; color:var(--sub); line-height:1.7; margin-bottom:8px;}
+  .fnotes li:before{content:'·'; position:absolute; left:2px; color:var(--icon-off);}
+  .fnotes b{color:var(--ink);}
 </style>
 <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 </head>
@@ -69,60 +120,63 @@
 
   <!-- 목록 -->
   <div class="body" id="listView">
-    <div class="list">
-      <div class="it" onclick="open1()">
-        <div class="top"><span class="tag">공지</span><span class="new">N</span><span class="d">2026.08.01</span></div>
-        <div class="t">8월 무이자 할부 카드사 안내 (삼성 · 신한 · 현대 최대 6개월)</div>
-      </div>
-      <div class="it" onclick="open1()">
-        <div class="top"><span class="tag fix">점검</span><span class="d">2026.07.28</span></div>
-        <div class="t">8월 5일(수) 새벽 2~4시 시스템 점검 안내</div>
-      </div>
-      <div class="it" onclick="open1()">
-        <div class="top"><span class="tag">공지</span><span class="d">2026.07.20</span></div>
-        <div class="t">개인정보 처리방침 개정 안내 (8월 1일 시행)</div>
-      </div>
-      <div class="it" onclick="open1()">
-        <div class="top"><span class="tag">안내</span><span class="d">2026.07.11</span></div>
-        <div class="t">여신전문금융업법에 따른 서비스 불가 거래 안내</div>
-      </div>
-      <div class="it" onclick="open1()">
-        <div class="top"><span class="tag">공지</span><span class="d">2026.07.02</span></div>
-        <div class="t">예약 결제 기능이 새로 추가됐어요</div>
-      </div>
-    </div>
+    <div class="list" id="noList"></div>
   </div>
-
   <!-- 상세 -->
   <div class="detail" id="detailView">
-    <div class="dh">
-      <span class="tag">공지</span>
-      <div class="t">8월 무이자 할부 카드사 안내<br>(삼성 · 신한 · 현대 최대 6개월)</div>
-      <div class="d">2026.08.01</div>
-    </div>
-    <div class="dc">
-      안녕하세요, 랜선페이입니다.<br><br>
-      8월 한 달간 아래 카드사에서 <b>무이자 할부</b>를 제공합니다.
-      <ul>
-        <li><b>삼성카드</b> — 2~6개월 무이자</li>
-        <li><b>신한카드</b> — 2~5개월 무이자</li>
-        <li><b>현대카드</b> — 2~3개월 무이자</li>
-      </ul>
-      <br>
-      결제 화면에서 카드를 고르면 <b>적용 가능한 무이자 개월 수</b>가 자동으로 표시됩니다.<br><br>
-      · 기간: 2026년 8월 1일 ~ 8월 31일<br>
-      · 대상: 5만원 이상 결제 건<br>
-      · 카드사 사정에 따라 조기 종료될 수 있어요.<br><br>
-      감사합니다.
-    </div>
+    <div class="dh"><span class="tag" id="dTag"></span>
+      <div class="t" id="dTtl"></div><div class="d" id="dDate"></div></div>
+    <div class="dc" id="dBody"></div>
   </div>
+  <div class="navbar">
+    <div class="nvbar">
+      <div class="nvtab" onclick="location.href='9_홈_개인.html'"><iconify-icon icon="mingcute:home-4-fill"></iconify-icon><span>홈</span></div>
+      <div class="nvtab" onclick="location.href='15_내결제.html'"><iconify-icon icon="mingcute:bill-fill"></iconify-icon><span>내 결제</span></div>
+      <div class="nvtab center" onclick="location.href='10_1_유형선택.html'" aria-label="결제하기"><button class="fab"><img src="../img/logo3-white.png" alt="결제하기"></button></div>
+      <div class="nvtab" onclick="location.href='19_혜택.html'"><iconify-icon icon="mingcute:gift-fill"></iconify-icon><span>혜택</span></div>
+      <div class="nvtab on" onclick="location.href='21_더보기.html'"><iconify-icon icon="mingcute:menu-fill"></iconify-icon><span>더보기</span></div>
+    </div>
+    <div class="home-indicator"></div>
+  </div>
+
 </div>
+<script src="../홈페이지/게시글.js"></script>
 <script src="app.js"></script>
 <script>
-function open1(){
+/* 홈페이지와 같은 공지 데이터(게시글.js 의 NOS)를 씁니다 */
+var NO_ORDER = (typeof NOS === 'undefined') ? [] :
+  NOS.map(function(n, i){ return {n:n, i:i}; })
+     .sort(function(a, b){ return (b.n.pin ? 1 : 0) - (a.n.pin ? 1 : 0); });
+
+function drawList(){
+  document.getElementById('noList').innerHTML = NO_ORDER.map(function(r){
+    return '<div class="it" onclick="open1(' + r.i + ')">'
+      + '<div class="top"><span class="tag' + (r.n.tag === '점검' ? ' fix' : '') + '">' + r.n.tag + '</span>'
+      + (r.n.pin ? '<span class="new">N</span>' : '')
+      + '<span class="d">' + r.n.meta + '</span></div>'
+      + '<div class="t">' + r.n.ttl + '</div></div>';
+  }).join('');
+}
+
+function open1(i){
+  var n = NOS[i];
+  if (!n) return;
+  document.getElementById('dTag').textContent = n.tag;
+  document.getElementById('dTtl').innerHTML = n.ttl;
+  document.getElementById('dDate').textContent = n.meta;
+  document.getElementById('dBody').innerHTML =
+      n.body.replace(/\n/g, '<br>')
+      + (n.table && typeof freeHTML === 'function' ? freeHTML() : '')
+      + (n.note ? '<div class="dnote"><b>유의사항</b><br>' + n.note + '</div>' : '');
   document.getElementById('listView').style.display = 'none';
   document.getElementById('detailView').classList.add('on');
-  document.getElementById('ttl').textContent = '공지사항';
+  document.getElementById('detailView').scrollTop = 0;
+}
+drawList();
+/* 홈에서 '카드 할부 정보'로 들어오면 무이자 공지를 바로 열어줍니다 */
+if (location.hash === '#free'){
+  var fi = NOS.findIndex(function(n){ return n.table; });
+  if (fi > -1) open1(fi);
 }
 function back(){
   if (document.getElementById('detailView').classList.contains('on')) {

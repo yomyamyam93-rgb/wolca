@@ -6,6 +6,11 @@
 <title>랜선페이 — 카드 관리</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
 <style>
+/* 스크롤바를 보이지 않게 (스크롤은 그대로 됨) */
+html,body{scrollbar-width:none; -ms-overflow-style:none;}
+html::-webkit-scrollbar,body::-webkit-scrollbar{width:0; height:0; display:none;}
+*{scrollbar-width:none;}
+*::-webkit-scrollbar{width:0; height:0;}
   :root{
     --primary:#2563EB; --primary-dark:#1D4ED8; --primary-50:#EFF4FF; --primary-100:#DBE7FF;
     --page-bg:#c9cdd4; --bg:#F4F5F6; --card:#FFFFFF; --line:#ECEEF1; --border:#B1B8BE;
@@ -69,7 +74,7 @@
   .act{display:flex; align-items:center; gap:12px; padding:15px 4px; font-size:15px; font-weight:600; cursor:pointer;}
   .act+.act{border-top:1px solid var(--line);}
   .act iconify-icon{font-size:20px; color:var(--primary);}
-  .act.danger{color:var(--danger);} .act.danger iconify-icon{color:var(--danger);}
+  .act.danger{color:var(--sub);} .act.danger iconify-icon{color:var(--sub);}
 
   /* 등록 폼 */
   .field{margin-bottom:14px;}
@@ -92,6 +97,28 @@
   .safe iconify-icon{font-size:17px; flex:0 0 auto; margin-top:1px;}
   .sbtn{width:100%; height:54px; margin-top:16px; border:none; border-radius:14px; background:var(--primary-grad);
     box-shadow:var(--btn-shadow); color:#fff; font-family:inherit; font-size:16px; font-weight:700; cursor:pointer;}
+  /* 등록 방식 전환 (카드번호 / 앱카드) */
+  .way{display:flex; gap:4px; padding:4px; border-radius:13px; background:var(--tile); margin-bottom:16px;}
+  .wtab{flex:1; display:flex; align-items:center; justify-content:center; gap:6px; height:44px;
+    border:none; border-radius:10px; background:none; font-family:inherit; font-size:13.5px;
+    font-weight:700; color:var(--placeholder); cursor:pointer; transition:.16s;}
+  .wtab iconify-icon{font-size:17px;}
+  .wtab.on{background:#fff; color:var(--ink); box-shadow:0 1px 3px rgba(25,31,40,.14);}
+  .sub2{font-size:13px; color:var(--sub); line-height:1.7; margin-bottom:14px;}
+  .sub2 b{color:var(--ink);}
+  /* 앱카드 카드사 격자 */
+  .appgrid{display:grid; grid-template-columns:repeat(3,1fr); gap:9px;}
+  .apc{display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px;
+    aspect-ratio:1/1; border:1.5px solid var(--line); border-radius:14px; background:#fff;
+    font-family:inherit; cursor:pointer; transition:.16s;}
+  .apc.on{border-color:var(--primary); background:var(--primary-50);}
+  .apf{width:32px; height:26px; display:flex; align-items:center; justify-content:center;}
+  .apf img{max-width:26px; max-height:24px; object-fit:contain;}
+  .apf img.wide{max-width:32px; max-height:12px;}
+  .apn{font-size:12.5px; font-weight:700; color:var(--sub);}
+  .apc.on .apn{color:var(--primary-dark);}
+  .acbtn2{width:100%; height:54px; margin-top:18px; border:none; border-radius:15px; cursor:pointer;
+    background:var(--primary); color:#fff; font-family:inherit; font-size:16px; font-weight:700;}
 </style>
 <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 </head>
@@ -151,6 +178,20 @@
     <h3>새 카드 등록</h3>
     <div class="sub">본인 명의 카드만 등록할 수 있어요.</div>
 
+    <div class="way">
+      <button class="wtab on" onclick="setWay(this,'num')"><iconify-icon icon="mingcute:bank-card-fill"></iconify-icon>카드번호 입력</button>
+      <button class="wtab" onclick="setWay(this,'app')"><iconify-icon icon="mingcute:cellphone-2-fill"></iconify-icon>앱카드로 등록</button>
+    </div>
+
+    <!-- 앱카드로 등록 -->
+    <div id="wayApp" style="display:none">
+      <div class="sub2">쓰시는 카드사를 고르면 <b>해당 카드사 앱</b>이 열려요. 앱에서 인증만 하면 카드번호를 넣지 않아도 등록됩니다.</div>
+      <div class="appgrid" id="appgrid"></div>
+      <button class="acbtn2" id="appBtn" onclick="goApp()">카드사 앱으로 등록하기</button>
+    </div>
+
+    <!-- 카드번호 직접 입력 -->
+    <div id="wayNum">
     <div class="field">
       <label>카드번호</label>
       <div class="cno">
@@ -176,10 +217,44 @@
       <div>등록만으로는 결제되지 않아요. 결제할 때마다 카드를 직접 고릅니다.</div>
     </div>
     <button class="sbtn" onclick="addCard()">카드 등록하기</button>
+    </div><!-- /wayNum -->
   </div>
 </div>
 <script src="app.js"></script>
 <script>
+/* 앱카드로 등록 */
+var APP_CARDS = [
+  { n:'신한', img:'../img/카드사/icon/shinhan.svg' },
+  { n:'KB국민', img:'../img/카드사/icon/kb.svg' },
+  { n:'삼성', img:'../img/카드사/samsung.svg', wide:true },
+  { n:'현대', img:'../img/카드사/hyundai.svg', wide:true },
+  { n:'롯데', img:'../img/카드사/icon/lotte.svg' },
+  { n:'우리', img:'../img/카드사/icon/woori.svg' },
+  { n:'하나', img:'../img/카드사/icon/hana.svg' },
+  { n:'NH농협', img:'../img/카드사/icon/nh.svg' },
+  { n:'BC', img:'../img/카드사/icon/bc.svg' }
+];
+var APP_PICK = 0;
+function buildApp(){
+  document.getElementById('appgrid').innerHTML = APP_CARDS.map(function(c, i){
+    return '<button class="apc' + (i === APP_PICK ? ' on' : '') + '" onclick="pickApp(' + i + ')">'
+      + '<span class="apf"><img class="' + (c.wide ? 'wide' : '') + '" src="' + c.img
+      + '" alt="" onerror="this.remove()"></span><span class="apn">' + c.n + '카드</span></button>';
+  }).join('');
+}
+function pickApp(i){ APP_PICK = i; buildApp(); }
+function setWay(el, w){
+  document.querySelectorAll('.wtab').forEach(function(t){ t.classList.remove('on'); });
+  el.classList.add('on');
+  document.getElementById('wayNum').style.display = (w === 'num') ? 'block' : 'none';
+  document.getElementById('wayApp').style.display = (w === 'app') ? 'block' : 'none';
+  if (w === 'app') buildApp();
+}
+function goApp(){
+  var c = APP_CARDS[APP_PICK];
+  toast(c.n + '카드 앱으로 이동해요 (준비 중)');
+}
+
 var curName = '', curMain = false;
 function goBack(){ lpBack('21_더보기.html'); }
 function openSheet(name, isMain){

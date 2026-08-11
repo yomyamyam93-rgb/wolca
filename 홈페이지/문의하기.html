@@ -5,32 +5,32 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>랜선페이 — 1:1 문의하기</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
-<link rel="stylesheet" href="web.css">
-<link rel="icon" type="image/png" href="../img/logo-mark.png">
+<link rel="stylesheet" href="web.css?v=20260811i">
+<link rel="icon" type="image/png" href="../img/logo3.png">
 <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
-<script src="web.js"></script>
+<script src="web.js?v=20260811i"></script>
 <style>
   .qa{padding:44px 20px 110px; background:var(--gray-bg);}
   .qa-in{max-width:1000px; margin:0 auto; display:flex; gap:26px; align-items:flex-start; flex-wrap:wrap;}
 
   .form{flex:1 1 460px; min-width:0; background:#fff; border-radius:24px; padding:32px 30px;
-    box-shadow:0 18px 50px rgba(25,31,40,.12);}
-  .form h2{font-size:21px; font-weight:800; letter-spacing:-.4px;}
+    box-shadow:0 8px 24px rgba(25,31,40,.10);}
+  .form h2{font-size:21px; font-weight:700; letter-spacing:-.4px;}
   .form .sub{font-size:14px; color:var(--sub); margin:8px 0 24px; line-height:1.6;}
 
   .field{margin-bottom:16px;}
   .field label{display:block; font-size:13px; font-weight:700; color:var(--sub); margin-bottom:8px;}
-  .tin{width:100%; height:52px; border:1.5px solid var(--border); border-radius:13px; padding:0 15px;
-    font-family:inherit; font-size:15px; font-weight:600; color:var(--ink); background:#fff;
+  .tin{width:100%; height:52px; border:1.5px solid var(--border); border-radius:12px; padding:0 15px;
+    font-family:inherit; font-size:16px; font-weight:600; color:var(--ink); background:#fff;
     transition:border-color .2s, box-shadow .2s;}
   .tin::placeholder{color:var(--placeholder); font-weight:500;}
   .tin:focus{outline:none; border-color:var(--primary); box-shadow:0 0 0 4px rgba(37,99,235,.12);}
   textarea.tin{height:150px; padding:14px 15px; resize:vertical; line-height:1.7;}
   .chips{display:flex; flex-wrap:wrap; gap:8px;}
-  .chip{height:40px; padding:0 15px; border:1.5px solid var(--line); border-radius:12px; background:#fff;
+  .chip{height:48px; padding:0 15px; border:1.5px solid var(--line); border-radius:12px; background:#fff;
     font-family:inherit; font-size:13.5px; font-weight:700; color:var(--sub); cursor:pointer; transition:.16s;}
   .chip.on{border-color:var(--primary); background:var(--primary-50); color:var(--primary-dark);}
-  .hint{font-size:12.5px; color:var(--placeholder); margin-top:7px; line-height:1.6;}
+  .hint{font-size:13px; color:var(--placeholder); margin-top:7px; line-height:1.6;}
   .sbtn{width:100%; height:56px; border:none; border-radius:15px; margin-top:12px; cursor:pointer;
     background:var(--primary); background:var(--primary-grad); box-shadow:var(--btn-shadow);
     color:#fff; font-family:inherit; font-size:16px; font-weight:700; transition:transform .16s, filter .2s;}
@@ -38,14 +38,14 @@
 
   .side{flex:1 1 300px; min-width:0;}
   .box{background:#fff; border-radius:20px; padding:22px 24px; box-shadow:0 1px 3px rgba(25,31,40,.06); margin-bottom:14px;}
-  .box h3{font-size:16px; font-weight:800; margin-bottom:14px; letter-spacing:-.3px;}
+  .box h3{font-size:16px; font-weight:700; margin-bottom:14px; letter-spacing:-.3px;}
   .irow{display:flex; align-items:center; gap:12px; padding:11px 0;}
   .irow + .irow{border-top:1px solid var(--line);}
   .irow .ic{width:40px; height:40px; flex:0 0 auto; border-radius:13px; background:var(--primary-50);
     display:flex; align-items:center; justify-content:center;}
   .irow .ic iconify-icon{font-size:20px; color:var(--primary);}
   .irow .t{font-size:14.5px; font-weight:700;}
-  .irow .s{font-size:12.5px; color:var(--placeholder); margin-top:3px;}
+  .irow .s{font-size:13px; color:var(--placeholder); margin-top:3px;}
   .faqlink{display:flex; align-items:center; gap:9px; padding:15px 16px; border-radius:14px;
     background:var(--primary-50); font-size:14px; font-weight:700; color:var(--primary-dark); cursor:pointer;}
   .faqlink iconify-icon{font-size:19px;}
@@ -58,7 +58,7 @@
   .dck{width:64px; height:64px; margin:6px auto 18px; border-radius:50%; background:var(--primary-50);
     display:flex; align-items:center; justify-content:center;}
   .dck iconify-icon{font-size:34px; color:var(--primary);}
-  .dt{font-size:21px; font-weight:800; letter-spacing:-.4px;}
+  .dt{font-size:21px; font-weight:700; letter-spacing:-.4px;}
   .ds{font-size:14px; color:var(--sub); margin-top:11px; line-height:1.7;}
   .dno{margin-top:20px; padding:15px 16px; border-radius:14px; background:var(--gray-bg);
     font-size:14px; font-weight:700;}
@@ -70,13 +70,13 @@
 
 <nav class="nav">
   <div class="nav-in">
-    <a class="logo" href="index.html"><img src="../img/logo-mark.png" alt="" style="height:30px"><img src="../img/logo-text.png" alt="랜선페이" style="height:19px"></a>
+    <a class="logo" href="index.html"><img src="../img/logo3.png" alt="" style="height:23px"><img src="../img/logo-text.png" alt="랜선페이" style="height:19px"></a>
     <div class="nav-menu">
       <a href="이용가이드.html" class="wide">이용가이드</a>
-      <a href="고객센터.html" class="wide on">고객센터</a>
-      <a href="로그인.html">로그인</a>
+      <a href="고객센터.html" class="wide">고객센터</a>
+      <a href="뉴스룸.html" class="wide">뉴스룸</a>
     </div>
-    <button class="nav-cta" onclick="location.href='송금하기.html'">송금하기</button>
+    <button class="nav-cta" onclick="location.href='로그인.html'">로그인</button>
     <button class="nav-burger" onclick="drawer(true)" aria-label="전체메뉴"><iconify-icon icon="mingcute:menu-fill"></iconify-icon></button>
   </div>
 </nav>
@@ -125,7 +125,7 @@
       <button class="sbtn" onclick="send()">문의 보내기</button>
     </div>
 
-    <div class="form done" id="done" style="box-shadow:0 18px 50px rgba(25,31,40,.12)">
+    <div class="form done" id="done" style="box-shadow:0 8px 24px rgba(25,31,40,.10)">
       <div class="dck"><iconify-icon icon="mingcute:check-circle-fill"></iconify-icon></div>
       <div class="dt">문의가 접수됐어요</div>
       <div class="ds">영업일 기준 <b>하루 안에</b><br><b id="dPh">010-0000-0000</b> 으로 답변드릴게요.</div>
@@ -162,13 +162,14 @@
 </section>
 
 <footer class="footer">
-  <div class="f-in">
-    <div class="f-menu">
-      <a href="이용가이드.html">이용가이드</a>
-      <a href="고객센터.html">고객센터</a>
-      <a href="고객센터.html#faq">자주 묻는 질문</a>
-      <a href="송금하기.html">송금하기</a>
+  <div class="f-legal">
+    <div class="f-legal-in">
+      <a href="약관.html?doc=terms">서비스 이용약관</a>
+      <a href="약관.html?doc=privacy">개인정보 처리방침</a>
+      <a href="약관.html?doc=third">개인정보 3자 제공 고지</a>
     </div>
+  </div>
+  <div class="f-in">
     <p class="f-co">
       <span><em>상호</em>랜선페이 · (주)미라클컴퍼니</span>
       <span><em>대표</em>김남기</span>
@@ -176,7 +177,10 @@
       <span><em>사업자등록번호</em>437-88-03148</span>
       <span><em>주소</em>충청남도 천안시 서북구 쌍용대로 234, 방영학생활건강빌딩 3층 (성정동)</span>
       <span><em>대표번호</em>1577-6369 <i>(평일 9:00~18:00)</i></span>
+      <span><em>메일</em>help@lanseonpay.co.kr</span>
     </p>
+    <p class="f-note">랜선페이는 전자금융거래법에 따라 등록된<br>전자지급결제대행(PG) 서비스입니다.</p>
+    <p class="f-copy">Copyright © 2026 랜선페이. All rights reserved.</p>
   </div>
 </footer>
 
@@ -189,7 +193,6 @@
   <a href="이용가이드.html"><iconify-icon icon="mingcute:book-2-fill"></iconify-icon>이용가이드<span class="gv">›</span></a>
   <a href="index.html#reviews"><iconify-icon icon="mingcute:chat-2-fill"></iconify-icon>이용후기<span class="gv">›</span></a>
   <a href="송금하기.html"><iconify-icon icon="mingcute:flash-fill"></iconify-icon>송금하기<span class="gv">›</span></a>
-  <a href="세금자료.html"><iconify-icon icon="mingcute:file-certificate-fill"></iconify-icon>세금계산서 · 부가세 신고<span class="gv">›</span></a>
   <button class="d-login" onclick="location.href='로그인.html'">로그인</button>
 </aside>
 </div>

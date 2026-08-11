@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>랜선페이 — 뉴스룸</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="web.css?v=20260811i">
+<link rel="icon" type="image/png" href="../img/logo3.png">
+<script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+<script src="web.js?v=20260811i"></script>
+<style>
+  /* 뉴스 카드 (게시판과 같은 규격) */
+  .news{max-width:1040px; margin:0 auto; padding:0 24px; display:grid; grid-template-columns:repeat(3,1fr); gap:16px;}
+  .nw{display:block; background:#fff; border:1px solid var(--line); border-radius:18px; overflow:hidden;
+    text-decoration:none; color:var(--ink); transition:transform .2s, box-shadow .2s, border-color .2s;}
+  .nw:hover{transform:translateY(-3px); border-color:var(--primary); box-shadow:0 10px 24px -14px rgba(37,99,235,.6);}
+  .nw-vis{display:block; height:170px; background:var(--tile);}
+  .nw-vis img{width:100%; height:100%; object-fit:cover; display:block; -webkit-user-drag:none;}
+  .nw-body{display:block; padding:16px 18px 20px;}
+  .nw-top{display:flex; align-items:center; justify-content:space-between; gap:10px;}
+  .nw-top b{font-size:13px; font-weight:700; color:var(--primary-dark);}
+  .nw-top i{font-style:normal; font-size:13px; color:var(--placeholder);}
+  .nw-t{display:block; font-size:16px; font-weight:600; line-height:1.5; margin-top:10px; word-break:keep-all;
+    display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;}
+  .nw.soon{cursor:default;}
+  .nw.soon:hover{transform:none; border-color:var(--line); box-shadow:none;}
+  @media(max-width:900px){ .news{grid-template-columns:1fr 1fr;} }
+  @media(max-width:560px){ .news{grid-template-columns:1fr; gap:12px; padding:0 16px;} .nw-vis{height:180px;} }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-in">
+    <a class="logo" href="index.html"><img src="../img/logo3.png" alt="" style="height:23px"><img src="../img/logo-text.png" alt="랜선페이" style="height:19px"></a>
+    <div class="nav-menu">
+      <a href="이용가이드.html" class="wide">이용가이드</a>
+      <a href="고객센터.html" class="wide">고객센터</a>
+      <a href="뉴스룸.html" class="wide on">뉴스룸</a>
+    </div>
+    <button class="nav-cta" onclick="location.href='로그인.html'">로그인</button>
+    <button class="nav-burger" onclick="drawer(true)" aria-label="전체메뉴"><iconify-icon icon="mingcute:menu-fill"></iconify-icon></button>
+  </div>
+</nav>
+
+<header class="page-hero">
+  <div class="eyebrow">뉴스룸</div>
+  <h1 class="h-lg">언론에 실린 랜선페이 소식</h1>
+  <p class="p-lg">보안 강화 · 결제 확대 · 나눔 활동을 기사로 확인해보세요.</p>
+</header>
+
+<section class="sec" style="padding-top:56px">
+  <div class="news" id="newsList"></div>
+</section>
+
+<footer class="footer">
+  <div class="f-legal">
+    <div class="f-legal-in">
+      <a href="약관.html?doc=terms">서비스 이용약관</a>
+      <a href="약관.html?doc=privacy">개인정보 처리방침</a>
+      <a href="약관.html?doc=third">개인정보 3자 제공 고지</a>
+    </div>
+  </div>
+  <div class="f-in">
+    <p class="f-co">
+      <span><em>상호</em>랜선페이 · (주)미라클컴퍼니</span>
+      <span><em>대표</em>김남기</span>
+      <span><em>서버책임 · 개인정보관리자</em>민기범</span>
+      <span><em>사업자등록번호</em>437-88-03148</span>
+      <span><em>주소</em>충청남도 천안시 서북구 쌍용대로 234, 방영학생활건강빌딩 3층 (성정동)</span>
+      <span><em>대표번호</em>1577-6369 <i>(평일 9:00~18:00)</i></span>
+      <span><em>메일</em>help@lanseonpay.co.kr</span>
+    </p>
+    <p class="f-note">랜선페이는 전자금융거래법에 따라 등록된<br>전자지급결제대행(PG) 서비스입니다.</p>
+    <p class="f-copy">Copyright © 2026 랜선페이. All rights reserved.</p>
+  </div>
+</footer>
+
+<div class="drawer-layer">
+<div class="drawer-dim" id="ddim" onclick="drawer(false)"></div>
+<aside class="drawer" id="drawer">
+  <div class="d-top"><span class="d-title">전체 메뉴</span><button class="d-x" onclick="drawer(false)">✕</button></div>
+  <a href="이용가이드.html"><iconify-icon icon="mingcute:book-2-fill"></iconify-icon>이용가이드<span class="gv">›</span></a>
+  <a href="고객센터.html"><iconify-icon icon="mingcute:headphone-fill"></iconify-icon>고객센터<span class="gv">›</span></a>
+  <a href="뉴스룸.html"><iconify-icon icon="mingcute:news-2-fill"></iconify-icon>뉴스룸<span class="gv">›</span></a>
+  <a href="고객센터.html#faq"><iconify-icon icon="mingcute:question-fill"></iconify-icon>자주 묻는 질문<span class="gv">›</span></a>
+  <a href="송금하기.html"><iconify-icon icon="mingcute:flash-fill"></iconify-icon>송금하기<span class="gv">›</span></a>
+  <button class="d-login" onclick="location.href='로그인.html'">로그인</button>
+</aside>
+</div>
+
+<script src="게시글.js?v=20260811i"></script>
+<script>
+function drawer(on){
+  document.getElementById('drawer').classList.toggle('on', on);
+  document.getElementById('ddim').classList.toggle('on', on);
+}
+
+/* 기사 목록 — 글 데이터는 게시글.js 한 곳에서 관리 */
+document.getElementById('newsList').innerHTML = MAGS.map(function(m){
+  var href = m.url ? m.url : 'javascript:void(0);';
+  var attr = m.url ? ' target="_blank" rel="noopener"' : ' onclick="return false;" class="nw soon"';
+  return '<a class="nw" href="' + href + '"' + attr + '>'
+       + '<span class="nw-vis"><img src="' + m.img + '" alt="" onerror="this.remove()"></span>'
+       + '<span class="nw-body">'
+       + '<span class="nw-top"><b>' + m.press + '</b><i>' + m.date + '</i></span>'
+       + '<span class="nw-t">' + m.ttl + '</span>'
+       + '</span></a>';
+}).join('');
+</script>
+</body>
+</html>

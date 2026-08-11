@@ -6,6 +6,11 @@
 <title>랜선페이 — 더보기</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
 <style>
+/* 스크롤바를 보이지 않게 (스크롤은 그대로 됨) */
+html,body{scrollbar-width:none; -ms-overflow-style:none;}
+html::-webkit-scrollbar,body::-webkit-scrollbar{width:0; height:0; display:none;}
+*{scrollbar-width:none;}
+*::-webkit-scrollbar{width:0; height:0;}
   :root{
     --primary:#2563EB; --primary-dark:#1D4ED8; --primary-50:#EFF4FF; --primary-100:#DBE7FF;
     --page-bg:#c9cdd4; --bg:#F4F5F6; --card:#FFFFFF; --line:#ECEEF1; --border:#B1B8BE;
@@ -38,7 +43,6 @@
   .me .av iconify-icon{font-size:27px; color:var(--primary);}
   .me .nm{font-size:18px; font-weight:800; letter-spacing:-.3px;}
   .me .ph{font-size:12.5px; color:var(--placeholder); margin-top:3px;}
-  .me .type{font-size:11px; font-weight:800; color:var(--primary-dark); background:var(--primary-50); padding:4px 9px; border-radius:7px;}
   .me .grid{display:flex; margin-top:18px; padding-top:16px; border-top:1px solid var(--line);}
   .me .g{flex:1; text-align:center; cursor:pointer;}
   .me .g+.g{border-left:1px solid var(--line);}
@@ -114,7 +118,7 @@
       <div class="top">
         <span class="av"><iconify-icon icon="mingcute:user-3-fill"></iconify-icon></span>
         <span style="flex:1">
-          <div class="nm">김랜선 <span class="type" id="typeTag">개인</span></div>
+          <div class="nm">김랜선</div>
           <div class="ph">010-1234-5678</div>
         </span>
         <iconify-icon class="gv" icon="mingcute:right-line" style="color:var(--icon-off); font-size:18px" onclick="location.href='26_내정보.html'"></iconify-icon>
@@ -194,9 +198,9 @@
     <!-- 서비스 -->
     <div class="sec-t">서비스</div>
     <div class="group">
-      <div class="item" onclick="location.href='17_사용방법.html'">
-        <span class="ic"><iconify-icon icon="mingcute:book-2-fill"></iconify-icon></span>
-        <span class="t">이용 방법</span>
+      <div class="item" onclick="location.href='33_필요서류.html'">
+        <span class="ic"><iconify-icon icon="mingcute:file-fill"></iconify-icon></span>
+        <span class="t">필요 서류</span>
         <iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon>
       </div>
       <div class="item" onclick="location.href='27_공지사항.html'">
@@ -207,9 +211,13 @@
         <span class="ic"><iconify-icon icon="mingcute:gift-fill"></iconify-icon></span>
         <span class="t">이벤트</span><span class="badge">3</span>
       </div>
+      <div class="item" onclick="location.href='32_뉴스룸.html'">
+        <span class="ic"><iconify-icon icon="mingcute:news-fill"></iconify-icon></span>
+        <span class="t">뉴스룸</span>
+      </div>
       <div class="item" onclick="location.href='29_자주묻는질문.html'">
         <span class="ic"><iconify-icon icon="mingcute:question-fill"></iconify-icon></span>
-        <span class="t">자주 묻는 질문</span>
+        <span class="t">FAQ</span>
         <iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon>
       </div>
       <div class="item" onclick="location.href='30_채팅상담.html'">
@@ -236,7 +244,7 @@
         <span class="t">혜택 · 이벤트 알림</span>
         <span class="tg" onclick="this.classList.toggle('on')"></span>
       </div>
-      <div class="item" onclick="location.href='7_간편비밀번호.html'">
+      <div class="item" onclick="location.href='7_간편비밀번호.html?from=more'">
         <span class="ic"><iconify-icon icon="mingcute:lock-fill"></iconify-icon></span>
         <span class="t">간편 비밀번호 변경</span>
         <iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon>
@@ -260,7 +268,7 @@
     <div class="tabs">
       <div class="tab" id="tabHome" onclick="location.href='9_홈_개인.html'"><iconify-icon icon="mingcute:home-4-fill"></iconify-icon><span>홈</span></div>
       <div class="tab" id="tabPay" onclick="location.href='15_내결제.html'"><iconify-icon icon="mingcute:bill-fill"></iconify-icon><span>내 결제</span></div>
-      <div class="tab center" onclick="location.href='10_1_유형선택.html'" aria-label="결제하기"><button class="fab"><img src="../img/logo-mark-white.png" alt="결제하기"></button></div>
+      <div class="tab center" onclick="location.href='10_1_유형선택.html'" aria-label="결제하기"><button class="fab"><img src="../img/logo3-white.png" alt="결제하기"></button></div>
       <div class="tab" id="tabBen" onclick="location.href='19_혜택.html'"><iconify-icon icon="mingcute:gift-fill"></iconify-icon><span>혜택</span></div>
       <div class="tab on"><iconify-icon icon="mingcute:menu-fill"></iconify-icon><span>더보기</span></div>
     </div>
@@ -273,7 +281,6 @@
 (function(){
   var biz = (function(){try{if(sessionStorage.getItem('lp_type')==='biz')return true;}catch(e){} return new URLSearchParams(location.search).get('type')==='biz';})();
   var q = biz ? '?type=biz' : '';
-  document.getElementById('typeTag').textContent = biz ? '사업자' : '개인';
   document.getElementById('typeVal').textContent = biz ? '사업자' : '개인';
   document.getElementById('typeDesc').textContent = biz
     ? '매입대금 · 인건비 · 임대료 등 사업 결제'

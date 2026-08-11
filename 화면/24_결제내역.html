@@ -6,6 +6,11 @@
 <title>랜선페이 — 결제 내역</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
 <style>
+/* 스크롤바를 보이지 않게 (스크롤은 그대로 됨) */
+html,body{scrollbar-width:none; -ms-overflow-style:none;}
+html::-webkit-scrollbar,body::-webkit-scrollbar{width:0; height:0; display:none;}
+*{scrollbar-width:none;}
+*::-webkit-scrollbar{width:0; height:0;}
   :root{
     --primary:#2563EB; --primary-dark:#1D4ED8; --primary-50:#EFF4FF; --primary-100:#DBE7FF;
     --page-bg:#c9cdd4; --bg:#F4F5F6; --card:#FFFFFF; --line:#ECEEF1; --border:#B1B8BE;
@@ -31,11 +36,11 @@
   .topbar .act{width:44px; height:44px; display:flex; align-items:center; justify-content:center; font-size:21px; color:var(--sub); cursor:pointer;}
 
   /* 필터 */
-  .filters{display:flex; gap:7px; padding:4px 20px 14px; background:var(--bg); flex:0 0 auto; overflow-x:auto; scrollbar-width:none;}
+  .filters{display:flex; gap:7px; padding:4px 20px 14px; background:var(--bg); flex:0 0 auto; overflow-x:auto; overflow-y:hidden; scrollbar-width:none;}
   .filters::-webkit-scrollbar{display:none;}
   .fchip{flex:0 0 auto; padding:9px 15px; border-radius:999px; border:1px solid var(--line); background:#fff;
     font-size:13px; font-weight:700; color:var(--sub); cursor:pointer; white-space:nowrap; transition:.2s;}
-  .fchip.on{background:var(--ink); border-color:var(--ink); color:#fff;}
+  .fchip.on{background:var(--primary); border-color:var(--primary); color:#fff;}
 
   .body{flex:1; overflow-y:auto; padding:0 20px 40px; scrollbar-width:none;}
   .body::-webkit-scrollbar{display:none;}
@@ -58,8 +63,8 @@
   .it .v{font-size:14.5px; font-weight:800; white-space:nowrap;}
   .it.cancel .v{color:var(--placeholder); text-decoration:line-through;}
   .it .st{font-size:11px; font-weight:800; padding:3px 7px; border-radius:6px; margin-top:5px; display:inline-block;}
-  .st.ok{color:var(--success); background:var(--success-bg);}
-  .st.wait{color:var(--warn); background:var(--warn-bg);}
+  .st.ok{color:var(--sub); background:var(--tile);}
+  .st.wait{color:var(--primary-dark); background:var(--primary-50);}
   .st.no{color:var(--placeholder); background:var(--tile);}
   .st.draft{color:var(--primary-dark); background:var(--primary-50);}
 

@@ -5,20 +5,33 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>랜선페이 — 현금으로 내던 돈 카드로</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
-<link rel="stylesheet" href="web.css">
-<link rel="icon" type="image/png" href="../img/logo-mark.png">
+<link rel="stylesheet" href="web.css?v=20260811i">
+<link rel="icon" type="image/png" href="../img/logo3.png">
 <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
-<script src="web.js"></script>
+<script src="web.js?v=20260811i"></script>
+<script src="게시글.js?v=20260811i"></script>
 <style>
   .reveal{opacity:0; transform:translateY(22px); transition:opacity .55s ease, transform .55s ease;}
   .reveal.in{opacity:1; transform:none;}
   @media (prefers-reduced-motion: reduce){ .reveal{opacity:1; transform:none; transition:none;} }
 
   /* 히어로 */
-  .hero{position:relative; overflow:hidden; background:#0A1526; color:#fff; text-align:center; padding:96px 24px 100px;}
-  .hero h1{font-size:58px; text-shadow:0 2px 24px rgba(0,0,0,.35);}
-  @media(max-width:760px){ .hero h1{font-size:34px;} .hero{padding:64px 20px 76px;} }
-  .hero-in{position:relative; z-index:3;}
+  .hero{position:relative; overflow:hidden; background:#0A1526; color:#fff; padding:112px 0 120px;}
+  .hero h1{font-size:52px; text-shadow:0 2px 24px rgba(0,0,0,.35);}
+  /* 좌 : 문구 · 우 : 휴대폰 화면 */
+  /* 상단바 · 본문 섹션(.wrap)과 좌우 선을 똑같이 맞춤 : 1040px + 좌우 24px */
+  .hero-in{position:relative; z-index:3; max-width:1040px; margin:0 auto; padding:0 24px;
+    display:flex; align-items:center; gap:64px;}
+  .hero-txt{flex:1; min-width:0; text-align:left;}
+  .hero-vis{flex:0 0 auto;}
+  @media(max-width:960px){
+    /* 좁아지면 문구 위 · 화면 아래로 */
+    .hero{padding:92px 0 100px;}
+    .hero-in{padding:0 16px;}
+    .hero h1{font-size:34px;}
+    .hero-in{flex-direction:column; gap:48px;}
+    .hero-txt{text-align:center; width:100%;}   /* 폭을 부모에 맞춤 — 좁은 화면에서 삐져나가지 않게 */
+  }
 
   /* 배경 사진 슬라이드 (그라디언트 스와이프) */
   .hero-bg{position:absolute; inset:0; z-index:0; overflow:hidden;}
@@ -40,73 +53,639 @@
   .hero .hl{background:linear-gradient(180deg, transparent 60%, rgba(37,99,235,.62) 60%); padding:0 4px;}
   .hero .p-lg{margin:26px auto 34px; max-width:600px; color:rgba(255,255,255,.86); text-shadow:0 1px 12px rgba(0,0,0,.3);}
   .hero .p-lg b{color:#fff; font-weight:700;}
-  .hero .cta-col{margin-top:40px;}
+  .hero .cta-col{margin-top:48px;}
 
-  /* 서비스 소개 단락 */
-  .intro{padding-bottom:0;}
-  .intro .p-lg{margin:24px auto 0; max-width:680px;}
-  .intro .p-lg b{color:var(--ink); font-weight:700;}
-  .intro .bl{color:var(--primary-dark);}
-  .intro + .pts{padding:40px 24px 110px;}
-  @media(max-width:760px){ .intro + .pts{padding-bottom:70px;} }
-
+  /* 포인트 타일 */
   /* 파란 띠 섹션 (앞뒤 흰 섹션과 확실히 분리) */
   .sec.band{background:var(--primary-50);}
   .hero .btn.ghost{background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.55); color:#fff; backdrop-filter:blur(6px);}
-  .hero .storebtn{background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.42); color:#fff; backdrop-filter:blur(6px);}
+  .hero .storebtn{background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.5); color:#fff; backdrop-filter:blur(6px);}
+  .hero .storebtns{width:100%; max-width:332px;}
+  .hero .storebtn{flex:1; width:auto;}
 
-  /* 실시간 알림 배지 */
-  .live{display:inline-flex; align-items:center; gap:10px; background:#fff; border:1px solid var(--line); border-radius:999px;
-    padding:10px 20px; font-size:14px; font-weight:600; color:var(--sub); margin-bottom:26px; max-width:100%;
-    box-shadow:0 8px 24px -14px rgba(25,31,40,.35); transition:opacity .3s;}
-  .live b{color:var(--ink); font-weight:800;}
-  .live .dot{width:8px; height:8px; flex:0 0 auto; border-radius:50%; background:#22C55E; animation:blip 1.6s ease-in-out infinite;}
-  @keyframes blip{0%,100%{box-shadow:0 0 0 0 rgba(34,197,94,.45);} 50%{box-shadow:0 0 0 6px rgba(34,197,94,0);}}
-  /* 위에서 아래로 밀어내는 세로 슬라이드 (폭은 가장 긴 문구 기준 고정) */
-  .live .tickwrap{position:relative; display:block; height:21px; overflow:hidden; max-width:100%;}
-  .live .tick{position:absolute; left:0; top:0; width:100%; white-space:nowrap; line-height:21px;
-    transform:translateY(-100%); opacity:0;
-    transition:transform .6s cubic-bezier(.33,0,.2,1), opacity .6s ease;}
-  .live .tick.on{transform:translateY(0); opacity:1;}
-  .live .tick.out{transform:translateY(100%); opacity:0;}
-  @media(max-width:560px){ .live{font-size:12px;} .live .tickwrap{height:18px;} .live .tick{line-height:18px;} }
-
-  /* 사회적 증거 카운터 */
-  .proof{display:flex; justify-content:center; align-items:center; margin-top:48px; flex-wrap:wrap;}
-  .pf{padding:6px 40px; text-align:center;}
-  .pf+.pf{border-left:1px solid rgba(255,255,255,.25);}
-  .pf .v{font-size:30px; font-weight:800; color:#fff; letter-spacing:-.7px; white-space:nowrap; text-shadow:0 2px 14px rgba(0,0,0,.35);}
-  .pf .l{font-size:13px; color:rgba(255,255,255,.72); margin-top:7px; white-space:nowrap;}
-  @media(max-width:620px){
-    /* 좁은 화면에서는 세 칸을 한 줄에 고르게 */
-    .proof{display:grid; grid-template-columns:repeat(3,1fr); gap:0; margin-top:34px;}
-    .pf{padding:6px 6px;}
-    .pf+.pf{border-left:1px solid rgba(255,255,255,.25);}
-    .pf .v{font-size:19px; letter-spacing:-.5px; white-space:nowrap;}
-    .pf .l{font-size:11px; margin-top:4px; white-space:nowrap;}
-  }
-  @media(max-width:360px){ .pf .v{font-size:17px;} .pf .l{font-size:10.5px;} }
-
+  /* 서비스 한 줄 정의 */
+  .define{max-width:520px; margin:26px 0 0; font-size:17px; line-height:1.75; color:rgba(255,255,255,.9);
+    text-shadow:0 1px 12px rgba(0,0,0,.35); word-break:keep-all;}
+  .define b{color:#fff; font-weight:700;}
+  .hero-txt .cta-col{align-items:flex-start; margin-top:38px;}
   /* 안심 배지 */
-  .safe{display:flex; justify-content:center; gap:24px; margin-top:26px; flex-wrap:wrap;}
-  .safe span{display:inline-flex; align-items:center; gap:7px; font-size:13px; font-weight:600; color:rgba(255,255,255,.72); white-space:nowrap;}
+  .safe{display:flex; justify-content:center; gap:8px 20px; margin-top:26px; flex-wrap:wrap;}
+  .safe span{display:inline-flex; align-items:center; gap:6px; font-size:13px; font-weight:600;
+    color:rgba(255,255,255,.72); white-space:nowrap;}
+  .safe iconify-icon{font-size:15px; color:#A9C7FF;}
+  .hero-txt .safe{justify-content:flex-start; margin-top:34px;}
+  @media(max-width:960px){ .hero-txt .safe{justify-content:center;} }
   @media(max-width:760px){
-    /* 좁은 화면에서는 한 줄에 하나씩 */
-    .safe{flex-direction:column; align-items:center; gap:10px; margin-top:22px;}
-    .safe span{font-size:12.5px;}
+    /* 한 줄에 3개가 다 들어가게 */
+    .safe{flex-wrap:nowrap; gap:14px; margin-top:32px;}
+    .safe span{font-size:13px; gap:4px;}
+    .safe iconify-icon{font-size:12px;}
   }
-  .safe iconify-icon{font-size:16px; color:#A9C7FF;}
-  .hero-btns{display:flex; gap:12px; justify-content:center; flex-wrap:wrap;}
-  .storebtns{display:flex; gap:10px; justify-content:center; margin-top:18px;}
-  .storebtn{display:inline-flex; align-items:center; justify-content:center; gap:7px; width:160px; height:50px; border-radius:13px; background:#fff; border:1px solid var(--line); color:var(--ink); font-size:14px; font-weight:700; text-decoration:none; white-space:nowrap;}
-  .storebtn iconify-icon{font-size:17px;}
+  @media(max-width:400px){ .safe{flex-wrap:wrap; gap:8px 14px;} }   /* 아주 좁으면 두 줄로 */
+  @media(max-width:960px){
+    .define{margin-left:auto; margin-right:auto;}
+    .hero-txt .cta-col{align-items:center;}
+  }
+  @media(max-width:760px){ .define{font-size:15px; margin-top:22px;} .hero-txt .cta-col{margin-top:32px;} }
 
-  /* 포인트 타일 (크고 직관적으로) */
-  .pts{max-width:1040px; margin:0 auto; padding:64px 24px 0; display:grid; grid-template-columns:repeat(3,1fr); gap:14px;}
-  .pt{background:#fff; border:1px solid var(--line); border-radius:20px; padding:28px 14px; display:flex; flex-direction:column; align-items:center; gap:12px; text-align:center;}
-  .pt iconify-icon{font-size:30px; color:var(--primary);}
-  .pt .t{font-size:17px; font-weight:700; letter-spacing:-.3px; white-space:nowrap;}
-  @media(max-width:760px){ .pts{grid-template-columns:1fr 1fr;} .pt .t{font-size:15px;} }
+  /* 히어로 휴대폰 화면 — 카드로 결제하면 현금이 송금된다 */
+  .hero-vis .scr{width:340px; height:620px; max-width:100%; display:flex; flex-direction:column; overflow:hidden;
+    background:linear-gradient(180deg,#fff,#FAFBFD); border:1px solid rgba(255,255,255,.5); border-radius:34px; padding:26px 22px 26px;
+    color:var(--ink); text-align:left;
+    box-shadow:0 10px 20px -10px rgba(0,0,0,.5), 0 40px 80px -30px rgba(0,0,0,.85), inset 0 1px 0 #fff;}
+  .hero-vis .sprog{height:3px; flex:0 0 auto; background:var(--line); border-radius:2px; overflow:hidden; margin-bottom:22px;}
+  .hero-vis .sprog i{display:block; height:100%; background:var(--primary); border-radius:2px;}
+
+  /* 단계 이름 */
+  .hp-lead{display:flex; align-items:center; gap:8px; font-size:13px; font-weight:700; color:var(--sub); text-shadow:none;}
+  .hp-ico{width:26px; height:26px; flex:0 0 auto; border-radius:9px; background:var(--primary-50);
+    display:flex; align-items:center; justify-content:center;}
+  .hp-ico iconify-icon{font-size:15px; color:var(--primary);}
+
+  /* 위 : 카드 결제 */
+  .hp-card{margin-top:10px; border-radius:18px; padding:18px 20px; color:#fff;
+    aspect-ratio:1.586/1; display:flex; flex-direction:column; justify-content:space-between;
+    background:linear-gradient(135deg,#1E3A8A,#2563EB 55%,#3B82F6);
+    box-shadow:0 12px 24px -12px rgba(37,99,235,.85);}
+  .hp-cardtop{display:flex; align-items:center; justify-content:space-between; gap:8px;}
+  .hp-brand{font-size:13.5px; font-weight:700;}
+  .hp-inst{font-size:11px; font-weight:700; background:rgba(255,255,255,.22); border-radius:999px; padding:3px 9px; white-space:nowrap;}
+  .hp-num{font-size:13px; letter-spacing:1.5px; color:rgba(255,255,255,.82);}
+  .hp-amt{font-size:22px; font-weight:700; letter-spacing:-.5px; margin-top:5px; white-space:nowrap;}
+
+  /* 가운데 : 카드 → 현금으로 바뀌는 구간 */
+  .hp-flow{display:flex; align-items:center; gap:8px; margin:18px 0;}
+  .hp-line{flex:1; height:1px; background:var(--line);}
+  .hp-chip{display:inline-flex; align-items:center; gap:4px; flex:0 0 auto; font-size:11.5px; font-weight:700;
+    color:var(--primary-dark); background:var(--primary-50); border-radius:999px; padding:5px 10px; white-space:nowrap;}
+  .hp-chip iconify-icon{font-size:14px; animation:bob 1.6s ease-in-out infinite;}
+
+  /* 아래 : 현금 입금 */
+  .hp-recv{flex:1; margin-top:10px; border:1.5px solid var(--primary); border-radius:18px; padding:18px 20px;
+    display:flex; flex-direction:column; justify-content:center;
+    background:linear-gradient(180deg,#EEF4FF,#F8FAFF);}
+  .hp-recvtop{display:flex; align-items:center; gap:6px; font-size:12px; font-weight:700; color:var(--primary-dark);}
+  .hp-recvtop iconify-icon{font-size:16px;}
+  .hp-nm{font-size:19px; font-weight:700; letter-spacing:-.4px; margin-top:8px;}
+  .hp-sub{font-size:12px; color:var(--sub); margin-top:3px;}
+  .hp-cash{font-size:20px; font-weight:700; color:var(--primary-dark); margin-top:12px; white-space:nowrap;}
+  .hp-cash i{font-style:normal; font-size:12px; font-weight:700; color:var(--sub); margin-left:5px;}
+
+  /* 살짝 기울여 입체감 (마우스 올리면 정면으로) */
+  .hero-vis{perspective:1600px;}
+  .hero-vis .scr{transform:rotateY(-10deg) rotateX(3deg); transition:transform .7s cubic-bezier(.2,.7,.2,1);}
+  .hero-vis .scr:hover{transform:none;}
+  @media(max-width:960px){ .hero-vis .scr,.hero-vis .scr:hover{transform:none;} }
+  @media (prefers-reduced-motion: reduce){ .hero-vis .scr{transform:none; transition:none;} }
+  @media(max-width:560px){
+    .hero-vis{display:none;}   /* 모바일에서는 히어로 목업 생략 */
+    .hero-vis .scr{width:300px; height:548px; padding:22px 18px;}
+    .hp-amt{font-size:20px;} .hp-nm{font-size:17.5px;} .hp-cash{font-size:18px;}
+    .hp-chip{font-size:11px; padding:5px 9px;}
+  }
+
+  /* 어떤 서비스인가 · 3단계 (카드 없이 번호 + 점선으로 연결) */
+  .steps3{display:flex; justify-content:center; gap:0; margin-top:56px;}
+  .st3{position:relative; flex:1; min-width:0; padding:0 18px; text-align:center;}
+  /* 번호 사이를 잇는 점선 — 번호 원의 세로 중앙에 맞춤 */
+  .st3:not(:last-child):after{content:''; position:absolute; top:34px; left:calc(50% + 46px); right:calc(-50% + 46px);
+    border-top:2px dotted #C9D6EC;}
+  .st3-no{width:68px; height:68px; margin:0 auto; border-radius:22px; background:#fff; border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center; font-size:22px; font-weight:700; color:var(--primary);
+    box-shadow:0 2px 5px rgba(25,31,40,.05), 0 14px 26px -16px rgba(21,42,84,.5);}
+  .st3-t{font-size:18px; font-weight:700; letter-spacing:-.3px; margin-top:22px; word-break:keep-all;}
+  .st3-d{font-size:14px; color:var(--sub); line-height:1.7; margin-top:9px; word-break:keep-all; text-wrap:balance;}
+  .st3-tm{display:inline-flex; align-items:center; gap:6px; margin-top:14px; font-size:13px; font-weight:700;
+    color:var(--primary-dark); background:var(--primary-50); border-radius:999px; padding:6px 12px; white-space:nowrap;}
+  .st3-tm iconify-icon{font-size:14px;}
+  .how3-tip{display:inline-flex; align-items:center; gap:8px; margin-top:44px; font-size:14px; color:var(--sub);
+    background:var(--gray-bg); border-radius:999px; padding:11px 18px; word-break:keep-all; text-align:left;}
+  .how3-tip span{text-wrap:balance;}   /* 줄이 나뉘어도 위아래 길이가 비슷하게 */
+  .how3-tip b{color:var(--ink); font-weight:700;}
+  .how3-tip iconify-icon{font-size:18px; color:var(--primary); flex:0 0 auto;}
+  @media(max-width:820px){
+    /* 좁은 화면 : 헤더와 단계 사이 선, 번호 타일은 세로선으로 연결 */
+    .steps3{flex-direction:column; gap:26px; margin-top:28px; max-width:440px; margin-left:auto; margin-right:auto;
+      border-top:1px solid var(--line); padding-top:30px;}
+    .st3{display:grid; grid-template-columns:44px 1fr auto; column-gap:14px; row-gap:3px;
+      align-items:center; padding:0; text-align:left; position:relative;}
+    .st3:not(:last-child):after{content:none;}
+    .st3:not(:last-child):before{content:''; position:absolute; left:21px; top:52px; bottom:-26px;
+      width:2px; background:var(--line); border:0;}
+    .st3-no{grid-row:1 / span 2; align-self:center; width:44px; height:44px; margin:0; border-radius:14px;
+      font-size:16px; position:relative; z-index:1;}
+    .st3-t{grid-column:2; align-self:center; font-size:15.5px; margin-top:0;}
+    .st3-d{grid-column:2; align-self:center; font-size:13px; color:var(--sub); margin-top:0; text-wrap:pretty;}
+    /* 시간 배지 : 01·02·03 번호와 세로 중심을 맞춤 (번호처럼 두 줄에 걸쳐 가운데 정렬) */
+    .st3-tm{grid-column:3; grid-row:1 / span 2; align-self:center; margin:0; font-size:13px; padding:5px 8px; gap:4px; line-height:1;}
+    .st3-tm iconify-icon{font-size:13px;}
+  }
+
+
+  /* 무엇을 카드로 낼 수 있나 — 항목 카드 */
+  .cases-sec .p-lg{margin-top:14px;}
+  .cases{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:40px; text-align:left;}
+  .case{position:relative; display:flex; flex-direction:column; align-items:flex-start;
+    background:#fff; border:1px solid var(--line); border-radius:20px; padding:24px 22px;
+    font-family:inherit; color:var(--ink); text-align:left; cursor:pointer;
+    transition:transform .2s, box-shadow .2s, border-color .2s;}
+  .case:hover{transform:translateY(-3px); border-color:var(--primary);
+    box-shadow:0 10px 24px -14px rgba(37,99,235,.6);}
+  .case iconify-icon{font-size:26px; color:var(--primary);}
+  .case .ct{font-size:17.5px; font-weight:700; letter-spacing:-.3px; margin-top:12px;}
+  .case .cs{font-size:13.5px; color:var(--sub); line-height:1.6; margin-top:6px; word-break:keep-all;}
+  .case .ck{display:inline-flex; align-items:center; gap:3px; font-size:13px; font-weight:700;
+    color:var(--primary-dark); margin-top:16px;}
+  .case .ck iconify-icon{font-size:15px; color:var(--primary-dark);}
+  .cases-note{display:inline-flex; align-items:flex-start; gap:7px; margin-top:26px; font-size:13.5px; color:var(--sub); text-align:left; word-break:keep-all;}
+  .cases-note iconify-icon{font-size:17px; color:var(--primary); flex:0 0 auto;}
+  @media(max-width:900px){ .cases{grid-template-columns:1fr 1fr;} }
+  @media(max-width:600px){
+    .cases{grid-template-columns:1fr; gap:12px; margin-top:30px;}
+    .case{padding:20px 18px;}
+    .case .ct{font-size:16.5px;}
+    .cases-note{font-size:13px; text-align:left;}
+  }
+
+  /* 항목별 필요 서류 팝업 — 송금하기 화면의 서류 안내와 같은 방식 */
+  .cdim{position:fixed; inset:0; background:rgba(15,20,30,.5); z-index:98; opacity:0; pointer-events:none; transition:opacity .3s;}
+  .cdim.on{opacity:1; pointer-events:auto;}
+  .docbox{position:fixed; left:50%; top:50%; z-index:99; width:520px; max-width:calc(100vw - 32px); max-height:84vh;
+    display:flex; flex-direction:column; background:#fff; border-radius:22px; overflow:hidden;
+    transform:translate(-50%,-50%) scale(.96); opacity:0; pointer-events:none; transition:transform .3s, opacity .3s;
+    box-shadow:0 12px 32px -8px rgba(10,21,38,.25);}
+  .docbox.on{transform:translate(-50%,-50%) scale(1); opacity:1; pointer-events:auto;}
+  .docbox-top{display:flex; align-items:center; justify-content:space-between; padding:24px 26px 0;}
+  .docbox-top h3{font-size:20px; font-weight:700; letter-spacing:-.4px;}
+  .docbox-x{width:44px; height:44px; border:none; background:none; font-size:20px; color:var(--sub); cursor:pointer; border-radius:9px;}
+  .docbox-x:hover{background:var(--gray-bg);}
+  .docbox-body{flex:1; overflow-y:auto; padding:16px 26px 26px; text-align:left;}
+  .docbox-btm{padding:0 26px 24px;}
+  .docbox-btm .btn{width:100%;}
+  .cd-intro{font-size:14px; color:var(--sub); line-height:1.6;}
+  .cd-case{margin-top:16px; padding:16px 18px; border:1px solid var(--line); border-radius:14px;}
+  .cd-case .cdt{font-size:13.5px; font-weight:700; margin-bottom:10px;}
+  .cd-case .cdn{display:block; font-size:13px; font-weight:700; color:var(--placeholder); margin-bottom:9px;}
+  .cd-case ul{list-style:none;}
+  .cd-case li{display:flex; gap:8px; font-size:14px; color:var(--ink); padding:5px 0; line-height:1.55;}
+  .cd-case li iconify-icon{font-size:17px; color:var(--primary); flex:0 0 auto; margin-top:2px;}
+  .cd-key{display:flex; gap:8px; margin-top:16px; padding:13px 15px; border-radius:12px; background:var(--primary-50);
+    font-size:13px; font-weight:600; color:var(--primary-dark); line-height:1.6;}
+  .cd-key iconify-icon{font-size:17px; flex:0 0 auto; margin-top:1px;}
+  .cd-tip{margin-top:14px; font-size:13px; color:var(--placeholder); line-height:1.75; padding-left:13px; text-indent:-13px;}
+  @media(max-width:560px){
+    .docbox-top{padding:20px 20px 0;} .docbox-top h3{font-size:18px;}
+    .docbox-body{padding:14px 20px 22px;} .docbox-btm{padding:0 20px 20px;}
+  }
+
+  /* 무엇을 카드로 낼 수 있나 — 항목 카드 */
+  .cases-sec .p-lg{margin-top:14px;}
+  .cases{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:40px; text-align:left;}
+  .case{position:relative; display:flex; flex-direction:column; align-items:flex-start;
+    background:#fff; border:1px solid var(--line); border-radius:20px; padding:24px 22px;
+    font-family:inherit; color:var(--ink); text-align:left; cursor:pointer;
+    transition:transform .2s, box-shadow .2s, border-color .2s;}
+  .case:hover{transform:translateY(-3px); border-color:var(--primary);
+    box-shadow:0 10px 24px -14px rgba(37,99,235,.6);}
+  .case iconify-icon{font-size:26px; color:var(--primary);}
+  .case .ct{font-size:17.5px; font-weight:700; letter-spacing:-.3px; margin-top:12px;}
+  .case .cs{font-size:13.5px; color:var(--sub); line-height:1.6; margin-top:6px; word-break:keep-all;}
+  .case .ck{display:inline-flex; align-items:center; gap:3px; font-size:13px; font-weight:700;
+    color:var(--primary-dark); margin-top:16px;}
+  .case .ck iconify-icon{font-size:15px; color:var(--primary-dark);}
+  .cases-note{display:inline-flex; align-items:flex-start; gap:7px; margin-top:26px; font-size:13.5px; color:var(--sub); text-align:left; word-break:keep-all;}
+  .cases-note iconify-icon{font-size:17px; color:var(--primary); flex:0 0 auto;}
+  @media(max-width:900px){ .cases{grid-template-columns:1fr 1fr;} }
+  @media(max-width:600px){
+    .cases{grid-template-columns:1fr; gap:12px; margin-top:30px;}
+    .case{padding:20px 18px;}
+    .case .ct{font-size:16.5px;}
+    .cases-note{font-size:13px; text-align:left;}
+  }
+
+  /* 무엇이 좋은지 — 아이콘 + 설명 (위 카드 그리드와 다르게 테두리 없이) */
+  .pts{max-width:940px; margin:48px auto 0; display:grid; grid-template-columns:1fr 1fr; gap:34px 44px; text-align:left;}
+  .pt{display:flex; align-items:flex-start; gap:16px;}
+  .pt .pi{flex:0 0 auto; width:46px; height:46px; border-radius:14px; background:var(--primary-50);
+    display:flex; align-items:center; justify-content:center;}
+  .pt iconify-icon{font-size:24px; color:var(--primary);}
+  .pt .t{font-size:17px; font-weight:700; letter-spacing:-.3px;}
+  .pt .d{font-size:14px; color:var(--sub); line-height:1.7; margin-top:6px; word-break:keep-all;}
+  @media(max-width:760px){
+    .pts{grid-template-columns:1fr; gap:24px; margin-top:34px;}
+    .pt .t{font-size:16px;} .pt .d{font-size:13.5px;}
+    .pt .pi{width:42px; height:42px; border-radius:12px;}
+  }
+
+  /* ④ USP 4개 — 가로로 (디자인 가이드 : 값 카드에는 아이콘 없이) */
+  .usps{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:48px; text-align:center;}
+  .up{background:#fff; border:1px solid var(--line); border-radius:14px; padding:30px 22px;}
+  .ui{width:44px; height:44px; border-radius:14px; background:var(--tile); margin:0 auto 16px;
+    display:flex; align-items:center; justify-content:center;}
+  .ui iconify-icon{font-size:22px; color:var(--primary);}
+  .ut{font-size:18px; font-weight:700; color:var(--ink); letter-spacing:-.3px; line-height:1.45; word-break:keep-all;}
+  .ut em{font-style:normal; color:var(--primary);}
+  .ud{font-size:14px; color:var(--sub); line-height:1.7; margin-top:10px; word-break:keep-all;}
+  @media(max-width:1000px){ .usps{grid-template-columns:1fr 1fr;} }
+  @media(max-width:600px){
+    .usps{grid-template-columns:1fr; margin-top:32px;}
+    .up{padding:20px 16px;}
+    .ui{width:36px; height:36px; border-radius:11px; margin-bottom:12px;}
+    .ut{font-size:17px;} .ut br{display:none;} .ud br{display:none;}
+  }
+
+  /* 사용 가능 카드사 — 얇은 띠에서 로고가 천천히 흐름 */
+  .cardco{padding:64px 0; background:#0A1526; color:#fff;}
+  .cardco .h-lg{color:#fff;}
+  .cardco .p-lg{color:rgba(255,255,255,.72);}
+  .colist{display:flex; flex-wrap:wrap; justify-content:center; gap:12px; margin-top:34px;}
+  .co{display:inline-flex; align-items:center; justify-content:center; height:52px; padding:0 24px; margin-right:0;
+    background:#fff; border:none; border-radius:999px; white-space:nowrap; flex:0 0 auto;}
+  .colg{height:20px; width:auto; max-width:110px; display:block; object-fit:contain; -webkit-user-drag:none;}
+  .colg[alt="BC카드"]{height:28px;}   /* BC는 세로형 심볼이라 조금 크게 */
+  .conote{margin-top:26px; font-size:13px; color:rgba(255,255,255,.55);}
+  /* 알약 두 벌 트랙 — PC에서는 흔적 없이 원래 나열 */
+  .cotrk{display:contents;}
+  .cotrk .dup{display:none;}
+  @keyframes coRoll{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
+  @media(max-width:760px){
+    .cardco{padding:48px 0;}
+    .cardco .p-lg{font-size:15px;}
+    /* 좌우 여백 없이 화면 끝까지 */
+    .colist{margin:26px -16px 0; overflow:hidden; flex-wrap:nowrap; justify-content:flex-start;}
+    .cotrk{display:flex; gap:8px; width:max-content; animation:coRoll 26s linear infinite;}
+    .cotrk .dup{display:inline-flex;}
+    .co{height:42px; padding:0 16px;}
+    .colg{height:15px; max-width:84px;}
+    .colg[alt="BC카드"]{height:21px;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .cotrk{animation:none !important; flex-wrap:wrap; width:auto; justify-content:center;}
+  }
+
+  /* 후기 위 수치 — 카드 없이 큰 숫자만 (가이드 12장 : 같은 블록 반복 금지) */
+  #reviews .p-lg{margin-top:20px;}
+  .rvstat{display:flex; justify-content:center; flex-wrap:wrap; gap:24px 72px; margin-top:52px;}
+  .rs{text-align:center;}
+  .rs .v{font-size:44px; font-weight:700; color:var(--primary); letter-spacing:-1.2px; line-height:1.15; white-space:nowrap;}
+  .rs .l{font-size:15px; font-weight:700; color:var(--ink); margin-top:12px; white-space:nowrap;}
+  .rs .d{font-size:13.5px; color:var(--placeholder); margin-top:6px; white-space:nowrap;}
+  @media(max-width:760px){
+    /* 3개가 반드시 한 줄에 */
+    .rvstat{display:grid; grid-template-columns:repeat(3,1fr); gap:0; margin-top:34px;}
+    .rs .v{font-size:20px; letter-spacing:-.5px;}
+    .rs .l{font-size:13px; margin-top:0; margin-bottom:6px;}
+    .rs .d{display:none;}
+  }
+
+  /* 되는 것들 — 회색 알약으로 나열 */
+  .whys{display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin-top:32px;}
+  .wy{font-size:14px; font-weight:700; color:var(--sub); background:var(--gray-bg);
+    border-radius:999px; padding:12px 20px; white-space:nowrap;}
+  @media(max-width:600px){ .wy{font-size:13px; padding:10px 15px;} }
+
+  /* ⑤ 결제 요청 — 좌 설명 · 우 대화 */
+  .ways{padding:140px 0 90px;}
+  .ways .wrap + .ways-in{margin-top:72px;}   /* 공통 헤더와 첫 장면 사이 */
+  .ways.mid{padding:90px 0;}
+  .ways.mid + .ways,.ways.mid ~ .ways:last-of-type{padding-top:0;}
+  .ways.mid + .ways{padding:90px 0 140px;}
+  /* 좌우 절반씩 같은 폭 — 지그재그로 뒤집혀도 글 · 그림의 세로 기준선이 맞도록 */
+  .ways-in{display:flex; align-items:center; gap:72px;}
+  .ways-txt{flex:1 1 0; min-width:0;}
+  .ways-txt .p-lg{margin-top:18px;}
+  .ways-vis{flex:1 1 0; min-width:0; display:flex; justify-content:flex-start;}
+  .wsw{display:flex; gap:8px; margin-top:26px; max-width:420px;}
+
+  .wsb{flex:1; min-width:0; height:52px; padding:0 16px; border-radius:12px; border:1px solid var(--line); background:#fff;
+    font-family:inherit; font-size:15px; font-weight:700; color:var(--sub); cursor:pointer; white-space:nowrap;
+    transition:background .2s, border-color .2s, color .2s;}
+  .wsb.on{background:var(--primary); border-color:var(--primary); color:#fff;}
+  .wul{list-style:none; margin-top:24px;}
+  .wul li{position:relative; padding-left:26px; font-size:15px; color:var(--sub); line-height:1.7; margin-bottom:10px; word-break:keep-all;}
+  .wul li:before{content:''; position:absolute; left:4px; top:9px; width:7px; height:7px; border-radius:50%; background:var(--primary);}
+  .wul li b{color:var(--ink); font-weight:700;}
+
+  /* 받는 사람에게 도착한 문자 */
+  .sms{width:420px; max-width:100%;}
+  .sms-bub{display:block; background:#fff; border:1px solid var(--line);
+    border-radius:18px; border-top-left-radius:6px; padding:20px 22px;
+    box-shadow:0 2px 6px rgba(25,31,40,.05), 0 20px 40px -24px rgba(21,42,84,.5);}
+  .sms-bub b{display:block; font-size:15.5px; font-weight:700; line-height:1.55; word-break:keep-all;}
+  .sms-item{display:block; font-size:13.5px; color:var(--sub); margin-top:12px;}
+  .sms-amt{display:block; font-size:26px; font-weight:700; letter-spacing:-.6px; margin-top:4px;}
+  .sms-link{display:flex; align-items:center; font-size:14.5px; font-weight:700; color:var(--primary-dark); margin-top:14px;
+    padding-top:14px; border-top:1px solid var(--line);}
+  .sms-link .gv{font-style:normal; margin-left:auto; color:var(--icon-off); font-size:17px;}
+  .sms-sub{display:block; font-size:13px; color:var(--placeholder); margin-top:6px;}
+  @media(max-width:560px){
+    .sms{width:100%;}
+    .sms-bub{padding:17px 18px;}
+    .sms-amt{font-size:22px;}
+  }
+  /* 활용법 3장면 — 가운데 선으로 묶고, 번호는 각 장면 소제목에 */
+  .ways .ways-txt .h-lg{font-size:30px; letter-spacing:-.6px;}   /* 묶음 제목(h-xl)보다 한 단계 작게 */
+  .eyebrow.wno{display:inline-flex; align-items:center; gap:8px;}
+  .wnum{width:24px; height:24px; border-radius:50%; background:var(--primary); color:#fff;
+    font-size:13px; font-weight:700; display:inline-flex; align-items:center; justify-content:center;}
+  /* 좌우 반전 장면 */
+  .ways-in.rev{flex-direction:row-reverse;}
+
+  /* 모바일 : 장면을 세로로 쌓기 */
+  @media(max-width:900px){
+    .ways{padding:76px 0 56px;}
+    /* 모바일 : 헤더 · 01 · 02 · 03 사이마다 얇은 선으로 구분 */
+    .ways.s1 .wrap > .wrap{padding-bottom:44px; border-bottom:1px solid var(--line);}   /* 헤더(안쪽 상자)에만 */
+    .ways .wrap + .ways-in{margin-top:56px;}
+    .ways-txt .p-lg{display:none;}   /* 모바일에서는 장면 부가설명 생략 */
+    .ways-txt .wsw{margin-top:26px;}
+    .ways.mid{padding:0 0 56px;}
+    .ways.mid + .ways{padding:0 0 84px;}
+    .ways.mid > .wrap:before,.ways.mid + .ways > .wrap:before{content:''; display:block; height:1px;
+      background:var(--line); margin-bottom:56px;}
+    .ways-in,.ways-in.rev{flex-direction:column; align-items:stretch; gap:32px;}
+    .ways-txt{width:100%; text-align:left;}   /* 장면 글은 왼쪽 정렬 */
+    .wsw{margin-left:0; margin-right:0;}
+    .ways-vis{width:100%; justify-content:center;}
+    .sms,.noti,.split{width:100%; max-width:440px; margin:0 auto;}
+    .ways .ways-txt .h-lg{font-size:20px; letter-spacing:-.4px;}
+  }
+
+  /* 예약송금 — 알림 두 장 */
+  .noti{width:420px; max-width:100%; display:flex; flex-direction:column; gap:14px;}
+  .nt{display:flex; align-items:flex-start; gap:12px; background:#fff; border:1px solid var(--line);
+    border-radius:16px; padding:18px 20px;
+    box-shadow:0 2px 6px rgba(25,31,40,.05), 0 20px 40px -24px rgba(21,42,84,.5);}
+  .nt-ic{width:40px; height:40px; flex:0 0 auto; border-radius:13px; background:var(--tile);
+    display:flex; align-items:center; justify-content:center;}
+  .nt-ic iconify-icon{font-size:21px; color:var(--primary);}
+  .nt-b{flex:1; min-width:0;}
+  .nt-t{font-size:15.5px; font-weight:700;}
+  .nt-s{font-size:13.5px; color:var(--sub); line-height:1.6; margin-top:4px; word-break:keep-all;}
+  .nt-tm{flex:0 0 auto; font-size:13px; color:var(--placeholder); padding-top:2px;}
+
+  /* 나눠서 결제 — 카드 두 장 → 한 번에 입금 */
+  .split{width:420px; max-width:100%;}
+  .sp-cards{display:flex; align-items:stretch; gap:10px;}
+  .sp-card{flex:1; min-width:0; border-radius:14px; padding:16px 18px;
+    background:#fff; border:1px solid var(--line);
+    box-shadow:0 2px 6px rgba(25,31,40,.05), 0 20px 40px -24px rgba(21,42,84,.5);}
+  .sp-bank{display:block; font-size:13px; font-weight:700; color:var(--sub);}
+  .sp-amt{display:block; font-size:19px; font-weight:700; color:var(--ink); letter-spacing:-.4px; margin-top:10px; white-space:nowrap;}
+  .sp-plus{flex:0 0 auto; align-self:center; font-size:20px; font-weight:700; color:var(--icon-off);}
+  .sp-arr{display:flex; align-items:center; justify-content:center; gap:6px; margin:14px 0;
+    font-size:13px; font-weight:700; color:var(--primary-dark);}
+  .sp-arr iconify-icon{font-size:18px; animation:bob 1.6s ease-in-out infinite;}
+  .sp-recv{display:flex; align-items:center; justify-content:space-between; gap:12px;
+    border:1.5px solid var(--primary); border-radius:16px; padding:18px 20px;
+    background:linear-gradient(180deg,#EEF4FF,#F8FAFF);
+    box-shadow:0 2px 6px rgba(25,31,40,.05), 0 20px 40px -24px rgba(21,42,84,.5);}
+  .sp-l{display:flex; align-items:center; gap:7px; font-size:14px; font-weight:700; color:var(--primary-dark);}
+  .sp-l iconify-icon{font-size:18px;}
+  .sp-v{font-size:22px; font-weight:700; letter-spacing:-.5px; white-space:nowrap;}
+  @media(max-width:560px){
+    .noti,.split{width:100%;}
+    .nt{padding:15px 16px;}
+    .nt-t{font-size:14.5px;} .nt-s{font-size:13px;}
+    .sp-amt{font-size:17px;} .sp-v{font-size:19px;}
+  }
+
+  @media(max-width:900px){
+    .ways .ways-txt .h-lg{font-size:20px; letter-spacing:-.4px;}
+  }
+
+  /* 단락 사이 얇은 CTA 띠 */
+  .ctaband{background:var(--primary); color:#fff;}
+  .cb-in{max-width:1040px; margin:0 auto; padding:26px 24px; display:flex; align-items:center; justify-content:space-between; gap:24px;}
+  .cb-t{font-size:20px; font-weight:700; letter-spacing:-.4px; word-break:keep-all;}
+  .cb-t span{display:block; font-size:14px; font-weight:600; color:rgba(255,255,255,.82); margin-top:6px; letter-spacing:0;}
+  .cb-b{flex:0 0 auto; display:inline-flex; align-items:center; gap:7px; height:52px; padding:0 24px; border-radius:13px;
+    background:#fff; color:var(--primary-dark); font-size:15px; font-weight:700; text-decoration:none;
+    box-shadow:0 2px 6px rgba(10,21,38,.18);}
+  .cb-b iconify-icon{font-size:18px;}
+  @media(max-width:760px){
+    .cb-in{flex-direction:column; align-items:center; text-align:center; gap:18px; padding:24px 20px;}
+    .cb-t{font-size:17px;} .cb-t span{font-size:13px;}
+    .cb-b{width:100%; justify-content:center;}
+  }
+
+  /* ⑥ 이용안내 */
+  .guide .p-lg{margin-top:16px;}
+  .gtabs{display:inline-flex; gap:8px; margin-top:32px;}
+  .gtab{height:52px; padding:0 26px; border:1px solid var(--line); border-radius:12px; background:#fff;
+    font-family:inherit; font-size:16px; font-weight:700; color:var(--sub); cursor:pointer; white-space:nowrap;}
+  .gtab.on{background:var(--primary); border-color:var(--primary); color:#fff;}
+  /* 앱 · 웹을 오갈 때 칸 크기가 흔들리지 않게 높이를 고정 */
+  /* 화면과 단계 목록을 한 상자로 */
+  /* 회색은 '박스'가 아니라 섹션 배경 (.sec.guide) 으로 깔았습니다 — 테두리 한 겹 제거 */
+  .gwrap{display:flex; align-items:center; justify-content:center; gap:56px; max-width:1040px; margin:52px auto 0;
+    min-height:720px; padding:0; background:none; border-radius:0; text-align:left;}
+  .gvis{flex:0 0 auto; display:flex; justify-content:center; align-items:center; width:440px; max-width:100%; height:640px;}
+  /* 휴대폰 화면 */
+  .gscr > *{flex:0 0 auto;}   /* 화면 안 요소가 눌려 찌그러지지 않게 */
+  .gscr{width:340px; height:640px; max-width:100%; flex:0 0 auto; display:flex; flex-direction:column; overflow:hidden;
+    background:linear-gradient(180deg,#fff,#FAFBFD); border:1px solid var(--line); border-radius:30px; padding:26px 20px 24px;
+    box-shadow:0 1px 2px rgba(25,31,40,.05), 0 10px 20px -10px rgba(25,31,40,.16),
+      0 16px 34px -20px rgba(21,42,84,.32), inset 0 1px 0 #fff;}
+  .gsteps{flex:1; min-width:0; max-width:520px; padding-top:6px;}
+  .gslides,.gwrap .gdots{display:none;}   /* 단계 슬라이드 · 진행 점은 모바일 전용 */
+  .gstep{border:1px solid transparent; border-radius:14px; padding:16px 18px; cursor:pointer; transition:background .2s, border-color .2s;}
+  .gstep+.gstep{margin-top:6px;}
+  .gstep:hover{background:rgba(255,255,255,.65);}
+  .gstep.on{background:#fff; border-color:var(--line);}
+  .gs-h{display:flex; align-items:center; gap:12px;}
+  .gs-no{width:30px; height:30px; flex:0 0 auto; border-radius:50%; background:var(--tile); color:var(--sub);
+    display:flex; align-items:center; justify-content:center; font-size:13.5px; font-weight:700;}
+  .gstep.on .gs-no{background:var(--primary); color:#fff;}
+  .gs-t{font-size:16.5px; font-weight:700; color:var(--sub);}
+  .gstep.on .gs-t{color:var(--ink);}
+  .gs-d{display:none; font-size:14.5px; color:var(--sub); line-height:1.75; margin:10px 0 2px 42px; word-break:keep-all; text-wrap:pretty;}
+  .gstep.on .gs-d{display:block;}
+  .gs-d b{color:var(--ink); font-weight:700;}
+  /* 전환 모션 */
+  @keyframes gIn{ from{opacity:0; transform:translateY(12px);} to{opacity:1; transform:none;} }
+  @keyframes gFade{ from{opacity:0;} to{opacity:1;} }
+  .gscr.anim,.win.anim{animation:gIn .45s cubic-bezier(.2,.7,.2,1) both;}
+  .gstep.on .gs-d{animation:gFade .4s ease both;}
+  .gstep{transition:background .25s, border-color .25s, transform .2s;}
+  .gstep:active{transform:scale(.99);}
+  .gs-no{transition:background .25s, color .25s, transform .25s;}
+  .gstep.on .gs-no{transform:scale(1.08);}
+  .gtab{transition:background .25s, color .25s;}
+  @media (prefers-reduced-motion: reduce){
+    .gscr.anim,.win.anim,.gstep.on .gs-d{animation:none;}
+    .gstep,.gs-no,.gtab{transition:none;}
+  }
+
+  /* 목업 안 요소 — 이용가이드 화면과 동일 */
+  .gscr .sbtn,.scr .sbtn{margin-top:auto;}
+  .gscr .done,.scr .done{margin:auto 0;}
+  .gscr .sprog,.scr .sprog{height:3px; background:var(--line); border-radius:2px; overflow:hidden; margin-bottom:18px;}
+  .gscr .sprog i,.scr .sprog i{display:block; height:100%; background:var(--primary); border-radius:2px;}
+  .gscr .q,.scr .q{font-size:19px; font-weight:700; letter-spacing:-.4px; margin-bottom:16px;}
+  .gscr .lbl,.scr .lbl{font-size:12px; color:var(--placeholder); margin:14px 0 6px;}
+  .gscr .sbtn,.scr .sbtn{height:48px; width:100%; margin-top:18px; border:none; border-radius:13px; background:var(--primary-grad); color:#fff; font-family:inherit; font-size:15px; font-weight:700;
+    box-shadow:0 2px 4px rgba(37,99,235,.3), 0 10px 20px -8px rgba(37,99,235,.5), inset 0 1px 0 rgba(255,255,255,.35);}
+  .win .wbody{padding:16px 15px;}
+  .win .wq{font-size:15.5px;}
+  .win .wfield{height:38px; font-size:12.5px;}
+  .win .wbtn{height:42px; font-size:13.5px;}
+  .telcos{gap:5px;}
+  .telcos span{height:33px; font-size:11.5px;}
+  /* 브라우저 창 (윈도우 기준) */
+  .win .bar{height:38px; flex:0 0 auto; display:flex; align-items:center; justify-content:flex-end; gap:0;
+    background:#F1F3F5; border-bottom:1px solid var(--line);}
+  /* 최소화 · 최대화 · 닫기 */
+  .win .bar i{width:40px; height:38px; display:flex; align-items:center; justify-content:center;
+    font-style:normal; font-size:11px; color:#5A626B; background:none; border-radius:0;}
+  .win .bar i:before{content:'';}
+  .win .bar i:nth-child(1):before{content:''; display:block; width:11px; height:1.5px; background:#5A626B;}
+  .win .bar i:nth-child(2):before{content:''; display:block; width:10px; height:10px; border:1.5px solid #5A626B;}
+  .win .bar i:nth-child(3):before{content:'✕'; font-size:12px; line-height:1;}
+  .win .bar i:nth-child(3){color:#5A626B;}
+  .win{width:416px; height:560px; max-width:100%; flex:0 0 auto; display:flex; flex-direction:column; overflow:hidden;
+    border-radius:16px; border:1px solid var(--line); background:#fff;
+    box-shadow:0 1px 2px rgba(25,31,40,.05), 0 10px 20px -10px rgba(25,31,40,.16), 0 16px 34px -20px rgba(21,42,84,.32);}
+  .win .wbody{flex:1; padding:22px 22px; overflow:hidden; display:flex; flex-direction:column;}
+  .win .wq{font-size:17px; font-weight:700; letter-spacing:-.3px; margin-bottom:14px;}
+  .win .wlbl{font-size:12px; color:var(--placeholder); margin:12px 0 6px;}
+  .win .wfield{height:42px; border:1px solid var(--line); border-radius:10px; background:#fff; display:flex; align-items:center; padding:0 12px; font-size:13.5px; font-weight:600;}
+  .win .wfield.ph{color:var(--placeholder); font-weight:500;}
+  .win .wbtn{height:46px; margin-top:auto; border-radius:11px; background:var(--primary-grad); color:#fff; font-size:14.5px; font-weight:700; display:flex; align-items:center; justify-content:center;
+    box-shadow:0 2px 4px rgba(37,99,235,.3), 0 8px 16px -6px rgba(37,99,235,.5), inset 0 1px 0 rgba(255,255,255,.35);}
+  .win .wsub{font-size:12.5px; color:var(--sub); margin:-8px 0 4px;}
+  .telcos{display:grid; grid-template-columns:repeat(3,1fr); gap:6px;}
+  .telcos span{height:36px; display:flex; align-items:center; justify-content:center; border:1px solid var(--line); border-radius:9px; font-size:12.5px; font-weight:700; color:var(--sub); background:#fff;}
+  .telcos span.on{border-color:var(--primary); background:var(--primary-50); color:var(--primary-dark); box-shadow:0 0 0 3px rgba(37,99,235,.10);}
+  .drop{flex:1; min-height:120px; border:2px dashed #C9D3E0; border-radius:14px; background:#FAFBFD; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; text-align:center;}
+  .drop iconify-icon{font-size:32px; color:var(--primary);}
+  .drop .dt{font-size:13.5px; font-weight:700;}
+  .drop .ds{font-size:11.5px; color:var(--placeholder);}
+  .filerow{display:flex; align-items:center; gap:10px; margin-top:10px; padding:11px 13px; border-radius:11px; background:var(--primary-50);}
+  .filerow iconify-icon{font-size:18px; color:var(--primary);}
+  .filerow .fn{font-size:12.5px; font-weight:700; flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  .filerow .fx{font-size:11px; color:var(--placeholder);}
+  .w2col{display:flex; gap:10px;}
+  .seg{display:flex; gap:4px; background:var(--gray-bg); border-radius:13px; padding:4px; margin-bottom:16px;}
+  .seg span{flex:1; text-align:center; padding:9px 0; font-size:13px; font-weight:700; color:var(--placeholder); border-radius:10px;}
+  .seg span.on{background:#fff; color:var(--ink); box-shadow:0 1px 3px rgba(25,31,40,.14);}
+  .dots{display:flex; gap:5px; justify-content:center; margin-top:12px;}
+  .dots i{width:6px; height:6px; border-radius:50%; background:var(--line);}
+  .dots i.on{width:18px; border-radius:3px; background:var(--primary);}
+  .scrhint{font-size:12.5px; color:var(--placeholder); line-height:1.6; margin-top:14px;}
+  .chipsum{display:inline-flex; align-items:center; gap:7px; padding:8px 12px; border-radius:10px; background:var(--primary-50); color:var(--primary-dark); font-size:12.5px; font-weight:700; margin-bottom:16px;}
+  .chipsum iconify-icon{font-size:15px;}
+  .subbtn{height:42px; width:100%; margin-top:6px; border:none; background:none; color:var(--sub); font-family:inherit; font-size:14px; font-weight:600;}
+  .fade{position:relative; padding-top:4px;}   /* 선택된 항목의 파란 테두리가 잘리지 않게 */
+  .fade:after{content:''; position:absolute; left:0; right:0; bottom:0; height:44px; background:linear-gradient(180deg, rgba(255,255,255,0), #FBFCFE);}
+  .catrow{display:flex; align-items:center; gap:12px; padding:13px 12px; border-radius:14px; background:#fff; border:1px solid var(--line); margin-bottom:8px;}
+  .catrow.sel{border-color:var(--primary); background:var(--primary-50); box-shadow:0 0 0 3px rgba(37,99,235,.10);}
+  .catrow .cic{width:38px; height:38px; flex:0 0 auto; border-radius:12px; background:var(--primary-50); display:flex; align-items:center; justify-content:center;}
+  .catrow.sel .cic{background:#fff;}
+  .catrow .cic iconify-icon{font-size:20px; color:var(--primary);}
+  .catrow .cn{font-size:15px; font-weight:700;}
+  .catrow .cd{font-size:12px; color:var(--placeholder); margin-top:2px;}
+  .catrow .gv{margin-left:auto; color:var(--icon-off); font-size:18px;}
+  .amtrow{display:flex; align-items:baseline; justify-content:flex-end; border-bottom:2px solid var(--primary); padding-bottom:10px;}
+  .amtrow .n{font-size:32px; font-weight:700; letter-spacing:-.8px;}
+  .amtrow .w{font-size:16px; font-weight:700; color:var(--sub); margin-left:6px;}
+  .qbtns{display:flex; gap:7px; margin-top:14px;}
+  .qbtns span{flex:1; height:38px; display:flex; align-items:center; justify-content:center; border:1px solid var(--line); border-radius:11px; background:#fff; font-size:13px; font-weight:700; color:var(--sub);}
+  .feeline{display:flex; justify-content:space-between; font-size:13px; margin-top:18px; padding:12px 14px; border-radius:12px; background:var(--gray-bg);}
+  .feeline .v{font-weight:700;}
+  .selrow{display:flex; align-items:center; justify-content:space-between; height:50px; padding:0 14px; border:1px solid var(--line); border-radius:13px; background:#fff; font-size:15px; font-weight:700;}
+  .selrow .bk{display:inline-flex; align-items:center; justify-content:center; width:24px; height:24px; border-radius:7px; background:#FFBC00; color:#3B2B00; font-size:10px; font-weight:700; margin-right:8px;}
+  .selrow iconify-icon{color:var(--icon-off); font-size:18px;}
+  .inbox{display:flex; align-items:center; gap:8px; height:50px; padding:0 8px 0 14px; border:1px solid var(--line); border-radius:13px; background:#fff;}
+  .inbox .txt{flex:1; font-size:15px; font-weight:700;}
+  .inbox .side{height:34px; padding:0 12px; border-radius:9px; background:var(--primary-50); color:var(--primary-dark); font-size:13px; font-weight:700; display:flex; align-items:center;}
+  .vbox{display:flex; align-items:center; gap:11px; margin-top:12px; padding:16px; border-radius:15px; background:linear-gradient(180deg,#E9F0FF,#F6F9FF); border:2px solid var(--primary); box-shadow:0 0 0 4px rgba(37,99,235,.10);}
+  .vbox iconify-icon{font-size:24px; color:var(--primary); flex:0 0 auto;}
+  .vbox .vl{font-size:12px; color:var(--sub);}
+  .vbox .vn{font-size:20px; font-weight:700; letter-spacing:-.4px; margin-top:2px;}
+  .cam{position:relative; flex:1; min-height:250px; border-radius:18px; background:#12161D; overflow:hidden; display:flex; align-items:center; justify-content:center;}
+  .cam .bill{width:214px; background:#fff; border-radius:6px; padding:20px 18px; transform:rotate(-1.2deg);
+    box-shadow:0 6px 16px rgba(0,0,0,.25);}
+  .cam .bill .h{font-size:12px; font-weight:700; color:#191F28; letter-spacing:-.2px;}
+  .cam .bill .sub{font-size:9px; color:#8B95A1; margin-top:5px;}
+  .cam .bill .r{height:6px; border-radius:3px; background:#E8EBEF; margin-top:11px;}
+  .cam .bill .r.s{width:62%;}
+  .cam .bill .box{margin-top:14px; padding:12px 12px; border-radius:7px; background:#EFF4FF;}
+  .cam .bill .bt{font-size:9px; color:#4E5968;}
+  .cam .bill .bv{font-size:18px; font-weight:700; color:#191F28; margin-top:4px; letter-spacing:-.4px;}
+  .cam .fr{position:absolute; inset:26px 34px;}
+  .cam .fr i{position:absolute; width:24px; height:24px; border:2.5px solid #fff; border-radius:4px;}
+  .cam .fr i:nth-child(1){top:0; left:0; border-right:0; border-bottom:0;}
+  .cam .fr i:nth-child(2){top:0; right:0; border-left:0; border-bottom:0;}
+  .cam .fr i:nth-child(3){bottom:0; left:0; border-right:0; border-top:0;}
+  .cam .fr i:nth-child(4){bottom:0; right:0; border-left:0; border-top:0;}
+  .cam .shot{position:absolute; bottom:14px; left:50%; transform:translateX(-50%); width:46px; height:46px; border-radius:50%; background:#fff; box-shadow:0 0 0 3px rgba(255,255,255,.35);}
+  .camhint{font-size:12px; color:var(--placeholder); text-align:center; margin-top:12px;}
+  .cface{height:132px; border-radius:16px; padding:16px; color:#fff; display:flex; flex-direction:column; justify-content:space-between;
+    background:linear-gradient(135deg,#3A4A63,#1B2432); box-shadow:0 10px 22px -10px rgba(25,31,40,.6);}
+  .cface .br{font-size:12px; font-weight:700; opacity:.9;}
+  .cface .chip{width:30px; height:22px; border-radius:5px; background:linear-gradient(135deg,#F1D48A,#C9A24B);}
+  .cface .no{font-size:14px; letter-spacing:1.5px; font-weight:700;}
+  .cface .bt{display:flex; justify-content:space-between; align-items:center; font-size:11px; opacity:.85;}
+  .instal{display:flex; gap:7px; margin-top:14px; flex-wrap:wrap;}
+  .instal span{padding:9px 13px; border-radius:10px; border:1px solid var(--line); background:#fff; font-size:13px; font-weight:700; color:var(--sub);}
+  .instal span.on{border-color:var(--primary); background:var(--primary-50); color:var(--primary-dark); box-shadow:0 0 0 3px rgba(37,99,235,.10);}
+  .crow{display:flex; justify-content:space-between; align-items:flex-start; gap:12px; font-size:13px; padding:9px 0;}
+  .crow .l{color:var(--sub); flex:0 0 auto;}
+  .crow .sub2{font-size:11px; color:var(--placeholder); font-weight:500; margin-top:3px;}
+  .cbox{border:1px solid var(--line); border-radius:15px; padding:12px 14px; background:#fff; margin-bottom:8px;}
+  .ctot{display:flex; justify-content:space-between; align-items:baseline; padding-top:11px; margin-top:5px; border-top:1px solid var(--line);}
+  .ctot .l{font-size:13px; font-weight:700;}
+  .done{text-align:center; padding:10px 0 4px;}
+  .done .ck{width:64px; height:64px; margin:0 auto 16px; border-radius:50%; background:linear-gradient(180deg,#EAF1FF,#DCE8FF); display:flex; align-items:center; justify-content:center;
+    box-shadow:0 8px 18px -8px rgba(37,99,235,.6);}
+  .done .ck iconify-icon{font-size:34px; color:var(--primary);}
+  .done h4{font-size:20px; font-weight:700; letter-spacing:-.4px;}
+  .done p{font-size:13px; color:var(--sub); margin-top:8px; line-height:1.6;}
+  .done p b{color:var(--ink);}
+  .receipt{margin-top:18px; padding:16px; border-radius:15px; background:var(--gray-bg); text-align:left;}
+  .receipt .rr{display:flex; justify-content:space-between; font-size:13px; padding:6px 0;}
+  .receipt .rr .l{color:var(--sub);}
+  .receipt .rd{border-top:1px dashed var(--border); margin:9px 0;}
+  .receipt .rr.big .v{font-size:17px; font-weight:700;}
+  .seg3{display:flex; gap:4px; background:var(--gray-bg); border-radius:13px; padding:4px; margin-bottom:14px;}
+  .seg3 span{flex:1; text-align:center; padding:9px 0; border-radius:10px; font-size:13px; font-weight:700; color:var(--placeholder);}
+  .seg3 span.on{background:#fff; color:var(--ink); box-shadow:0 1px 3px rgba(25,31,40,.12);}
+  .crow{display:flex; align-items:center; gap:11px; padding:10px 13px; border:1.5px solid var(--line);
+    border-radius:13px; margin-bottom:6px; background:#fff;}
+  .crow.on{border-color:var(--primary); background:var(--primary-50);}
+  .cmini{width:38px; height:25px; flex:0 0 auto; border-radius:5px; position:relative;}
+  .cmini:after{content:''; position:absolute; left:5px; top:8px; width:9px; height:7px; border-radius:2px;
+    background:linear-gradient(135deg,#F1D48A,#C9A24B);}
+  .cmini.samsung{background:linear-gradient(135deg,#2E6BD8,#1B3E82);}
+  .cmini.hyundai{background:linear-gradient(135deg,#3A4A63,#1B2432);}
+  .crow .ct{flex:1; min-width:0; display:flex; flex-direction:column; gap:3px;}
+  .crow .ct b{font-size:13.5px; font-weight:700;}
+  .crow .ct i{font-style:normal; font-size:11.5px; color:var(--placeholder); letter-spacing:.5px;}
+  .crad{width:19px; height:19px; flex:0 0 auto; border-radius:50%; border:1.5px solid var(--border); background:#fff;}
+  .crad.on{border-color:var(--primary); background:var(--primary); box-shadow:inset 0 0 0 3px #fff;}
+  .cadd{padding:11px; border:1.5px dashed var(--border); border-radius:13px; text-align:center;
+    font-size:13px; font-weight:700; color:var(--sub); margin-bottom:4px;}
+  .minfo{margin-top:10px; padding:10px 12px; border-radius:10px; background:var(--gray-bg);
+    font-size:11.5px; color:var(--placeholder); line-height:1.6;}
+  .win .dochelp{display:flex; align-items:center; gap:9px; padding:10px 11px; margin-bottom:11px;
+    border:1.5px solid var(--primary-100); border-radius:12px; background:var(--primary-50);}
+  .win .dochelp .di{width:30px; height:30px; flex:0 0 auto; border-radius:9px; background:var(--primary);
+    display:flex; align-items:center; justify-content:center;}
+  .win .dochelp .di iconify-icon{font-size:16px; color:#fff;}
+  .win .dochelp .dt2{flex:1; min-width:0; display:flex; flex-direction:column; gap:2px;}
+  .win .dochelp .dt2 b{font-size:12.5px; color:var(--primary-dark);}
+  .win .dochelp .dt2 i{font-style:normal; font-size:11px; color:var(--primary); opacity:.85;}
+  .win .dochelp .dgv{font-size:16px; color:var(--primary); flex:0 0 auto;}
+  .win .wghost{display:flex; align-items:center; justify-content:center; gap:6px; height:40px; margin-top:8px;
+    border:1.5px solid var(--line); border-radius:11px; font-size:12.5px; font-weight:700; color:var(--sub);}
+  .win .wghost iconify-icon{font-size:15px; color:var(--primary);}
+  @media(max-width:900px){
+    .gwrap{flex-direction:column; gap:28px; min-height:0; padding:0;}
+    .gvis{width:100%; height:auto;}
+    .gsteps{width:100%;}
+    .gtab{font-size:13.5px; padding:0 14px;}
+  }
 
   /* 계산기 (폰 안에) */
   .usp{display:flex; align-items:center; gap:70px;}
@@ -117,99 +696,61 @@
   @media(max-width:820px){ .usp,.usp.rev{flex-direction:column; gap:44px; align-items:flex-start;} }
 
   /* UI 조각 (폰 프레임 없이 화면 안 UI만) */
-  .mock{width:360px; max-width:100%; display:flex; flex-direction:column;}
-  /* 살짝 기울여 입체감 (마우스 올리면 정면으로) */
-  .usp .vis .mock{transform:perspective(1400px) rotateY(-8deg) rotateX(3deg); transform-style:preserve-3d; transition:transform .7s cubic-bezier(.2,.7,.2,1);}
-  .usp.rev .vis .mock{transform:perspective(1400px) rotateY(8deg) rotateX(3deg);}
-  .usp .vis .mock:hover,.usp.rev .vis .mock:hover{transform:perspective(1400px) rotateY(0) rotateX(0);}
-  @media(max-width:820px){ .usp .vis .mock,.usp.rev .vis .mock{transform:none;} }
-  @media (prefers-reduced-motion: reduce){ .usp .vis .mock,.usp.rev .vis .mock{transform:none; transition:none;} }
-  .m-card{background:linear-gradient(180deg,#fff,#FAFBFD); border:1px solid var(--line); border-radius:18px; padding:18px; margin-bottom:12px;
-    box-shadow:0 1px 2px rgba(25,31,40,.05), 0 6px 14px -8px rgba(25,31,40,.16), 0 22px 40px -26px rgba(25,31,40,.4), inset 0 1px 0 #fff;}
-  .m-label{font-size:12px; color:var(--placeholder);}
-  .m-val{font-size:16px; font-weight:700; margin-top:3px; white-space:nowrap;}
-  .m-hr{border-top:1px solid var(--line); margin:12px 0;}
-  .m-arow{display:flex; justify-content:space-between; align-items:center; padding:5px 0; font-size:13px; white-space:nowrap;}
-  .m-arow .l{color:var(--sub);} .m-arow .v{font-weight:700; color:var(--ink);}
-  .m-arow.blue .l,.m-arow.blue .v{color:var(--primary-dark);}
-  .m-total{display:flex; justify-content:space-between; align-items:baseline; white-space:nowrap;}
-  .m-total .l{font-size:13px; font-weight:700;}
-  .m-total .v{font-size:22px; font-weight:800; letter-spacing:-.4px;}
-  .m-btn{height:52px; border:none; border-radius:14px; width:100%; background:var(--primary); background:var(--primary-grad); color:#fff; font-family:inherit; font-size:16px; font-weight:700; cursor:pointer; white-space:nowrap;
-    box-shadow:0 2px 4px rgba(37,99,235,.32), 0 10px 20px -8px rgba(37,99,235,.55), inset 0 1px 0 rgba(255,255,255,.38), inset 0 -2px 0 rgba(0,0,0,.10);
-    transition:transform .15s, box-shadow .15s;}
-  .m-btn:hover{transform:translateY(-2px); box-shadow:0 3px 6px rgba(37,99,235,.32), 0 16px 28px -10px rgba(37,99,235,.6), inset 0 1px 0 rgba(255,255,255,.38), inset 0 -2px 0 rgba(0,0,0,.10);}
-  .m-btn:active{transform:translateY(1px); box-shadow:0 1px 3px rgba(37,99,235,.35), inset 0 2px 5px rgba(0,0,0,.18);}
-  /* 안쪽으로 눌린 홈처럼 */
-  .m-ben{background:linear-gradient(180deg,#E7EFFF,#F4F8FF); border-radius:16px; padding:6px 16px; margin-bottom:12px;
-    box-shadow:inset 0 2px 6px rgba(37,99,235,.16), inset 0 -1px 0 rgba(255,255,255,.9);}
-  .m-ben .m-arow{padding:9px 0;}
-  .m-ben .m-arow+.m-arow{border-top:1px solid #DBE7FF;}
-  .bk{display:inline-flex; align-items:center; justify-content:center; width:26px; height:26px; border-radius:8px; background:#FFBC00; color:#3B2B00; font-size:10px; font-weight:800; margin-right:8px;}
-  .vrow{display:flex; align-items:center; gap:10px;}
-  .vrow iconify-icon{font-size:22px; color:var(--primary); flex:0 0 auto;}
-  /* 계산기 (중앙 정렬 · 입력칸 강조) */
-  .calcbox{max-width:560px; margin:40px auto 0; text-align:left; background:linear-gradient(180deg,#fff,#FAFCFF); border:1px solid rgba(255,255,255,.9);
-    border-radius:28px; padding:30px 30px 28px;
-    box-shadow:0 1px 2px rgba(25,31,40,.06), 0 10px 20px -10px rgba(25,31,40,.16), 0 40px 70px -36px rgba(21,42,84,.55), inset 0 1px 0 #fff;}
-  @media(max-width:560px){ .calcbox{padding:24px 20px 22px; border-radius:22px;} }
-  .amt-hint{display:flex; align-items:center; justify-content:center; gap:8px; font-size:15px; font-weight:700; color:var(--primary-dark); margin-bottom:12px;}
-  .amt-hint iconify-icon{font-size:19px; animation:bob 1.5s ease-in-out infinite;}
-  .calcbox:not(.empty) .amt-hint{visibility:hidden;}
   @keyframes bob{0%,100%{transform:translateY(-3px);} 50%{transform:translateY(3px);}}
-  .amt-field{background:linear-gradient(180deg,#fff,#F6FAFF); border:2px solid var(--primary); border-radius:20px; padding:18px 22px 20px;
-    box-shadow:0 0 0 6px rgba(49,113,246,.10), 0 12px 24px -14px rgba(37,99,235,.6), inset 0 1px 0 #fff; transition:box-shadow .25s;}
-  .amt-field.filled{box-shadow:0 2px 5px rgba(25,31,40,.06), 0 14px 28px -16px rgba(25,31,40,.4), inset 0 1px 0 #fff;}
-  .amt-field .m-label{font-size:13px; font-weight:700; color:var(--primary-dark);}
-  .amt-in{display:flex; align-items:center; border-bottom:2px solid var(--line); padding-bottom:8px; margin-top:8px;}
-  .amt-field.filled .amt-in{border-bottom-color:var(--primary);}
-  .amt-in input{flex:1; border:none; outline:none; font-family:inherit; font-size:30px; font-weight:800; color:var(--ink); text-align:right; min-width:0; background:none; letter-spacing:-.5px;}
-  .amt-in input::placeholder{color:#B7C0CC; font-size:20px; font-weight:600; letter-spacing:0;}
-  .amt-in .won{font-size:17px; font-weight:800; color:var(--sub); margin-left:8px;}
-  .quick{display:flex; gap:7px; margin-top:14px;}
-  .quick button{flex:1; height:40px; border:1px solid #E3E8EF; background:linear-gradient(180deg,#fff,#F2F5FA); border-radius:11px; font-family:inherit; font-size:13px; font-weight:700; color:var(--sub); cursor:pointer; white-space:nowrap;
-    box-shadow:0 1px 2px rgba(25,31,40,.08), 0 3px 6px -3px rgba(25,31,40,.14), inset 0 1px 0 #fff; transition:transform .12s, box-shadow .12s;}
-  .quick button:hover{border-color:var(--primary); color:var(--primary-dark); transform:translateY(-1px); box-shadow:0 2px 4px rgba(25,31,40,.1), 0 6px 12px -5px rgba(37,99,235,.4), inset 0 1px 0 #fff;}
-  .quick button:active{transform:translateY(1px); box-shadow:inset 0 2px 5px rgba(25,31,40,.16);}
-  .calcbox .m-ben{margin-top:14px;}
-  .calcbox .m-ben .m-arow{font-size:14px;}
-  .calcbox .m-card{margin-top:12px; margin-bottom:14px; background:linear-gradient(180deg,#F5F7FA,#EDF1F6); border-color:#E4E9F0;
-    box-shadow:inset 0 2px 5px rgba(25,31,40,.10), inset 0 -1px 0 rgba(255,255,255,.9);}
-  .calcbox.empty .m-ben,.calcbox.empty .m-card{opacity:.45;}
-  .calcbox.empty .m-btn{opacity:.45; pointer-events:none;}
+  /* 자주 묻는 질문 — 주제별 탭 + 한 줄에 하나씩 */
+  .fqtabs{display:inline-flex; gap:8px; margin-top:30px; flex-wrap:wrap; justify-content:center;}
+  .fqtab{height:46px; padding:0 20px; border:1px solid var(--line); border-radius:12px; background:#fff;
+    font-family:inherit; font-size:15px; font-weight:700; color:var(--sub); cursor:pointer; white-space:nowrap;
+    transition:background .2s, border-color .2s, color .2s;}
+  .fqtab.on{background:var(--primary); border-color:var(--primary); color:#fff;}
+  .fqbody{max-width:880px; margin:36px auto 0; display:flex; flex-direction:column; gap:12px; text-align:left;}
+  .fqpanel{display:none;}
+  .fqpanel.on{display:flex; flex-direction:column; gap:12px; animation:fqIn .35s ease both;}
+  @keyframes fqIn{from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:none;}}
+  /* 가로로 넓은 카드 하나에 Q줄 + A줄 */
+  /* 아이콘 + 질문 / 그 아래 답변 */
+  .fq{background:#fff; border:1px solid var(--line); border-radius:14px; padding:24px 26px;}
+  .fq-q{display:flex; align-items:center; gap:14px; font-size:17px; font-weight:700; color:var(--ink);
+    letter-spacing:-.3px; line-height:1.5; word-break:keep-all;}
+  .fq-q .fq-ic{flex:0 0 auto; width:44px; height:44px; border-radius:12px; background:var(--tile);
+    display:flex; align-items:center; justify-content:center;}
+  .fq-q .fq-ic iconify-icon{font-size:22px; color:var(--primary);}
+  .fq-q .fq-t{flex:1; min-width:0;}
+  .fa{display:block; font-size:15px; color:var(--sub); line-height:1.8;
+    margin-top:16px; word-break:keep-all;}
+  .fa .at{display:block; text-wrap:pretty;}
+  @media(max-width:820px){
+    .fqtabs{gap:6px; margin-top:26px;}
+    .fqtab{height:42px; padding:0 14px; font-size:13.5px;}
+    .fqbody{margin-top:28px; gap:10px;}
+    .fq{padding:18px;}
+    .fq-q{font-size:15.5px; gap:12px;}
+    .fq-q .fq-ic{width:40px; height:40px; border-radius:11px;}
+    .fq-q .fq-ic iconify-icon{font-size:20px;}
+    .fa{font-size:14px; margin-top:12px;}
+  }
 
-  /* 예금주 확인 강조 */
-  .downarr{display:flex; justify-content:center; margin:2px 0 10px; color:var(--placeholder);}
-  .downarr iconify-icon{font-size:24px; animation:bob 1.6s ease-in-out infinite;}
-  .payee{background:linear-gradient(180deg,#E9F0FF,#F6F9FF); border:2px solid var(--primary); border-radius:18px; padding:20px;
-    box-shadow:0 0 0 6px rgba(49,113,246,.10), 0 4px 10px -4px rgba(37,99,235,.35), 0 26px 46px -24px rgba(37,99,235,.7), inset 0 1px 0 #fff;}
-  .payee .cap{display:flex; align-items:center; gap:7px; font-size:13px; font-weight:700; color:var(--primary-dark);}
-  .payee .cap iconify-icon{font-size:18px;}
-  .payee .nm{font-size:28px; font-weight:800; letter-spacing:-.6px; margin-top:8px;}
-  .payee .sub{font-size:13px; color:var(--sub); margin-top:6px;}
-
-  /* 혜택 강조 */
-  .benbig{background:linear-gradient(180deg,#E9F0FF,#F7FAFF); border:1px solid rgba(255,255,255,.9); border-radius:20px; padding:8px 20px; margin-bottom:12px;
-    box-shadow:0 2px 5px rgba(25,31,40,.06), 0 12px 24px -12px rgba(37,99,235,.35), 0 36px 60px -34px rgba(21,42,84,.6), inset 0 1px 0 #fff;}
-  .brow{display:flex; align-items:center; gap:13px; padding:16px 0;}
-  .brow+.brow{border-top:1px solid rgba(37,99,235,.13); box-shadow:inset 0 1px 0 rgba(255,255,255,.85);}
-  .brow .bi{width:40px; height:40px; flex:0 0 auto; border-radius:13px; background:linear-gradient(180deg,#fff,#E9EFF9); display:flex; align-items:center; justify-content:center;
-    box-shadow:0 1px 2px rgba(25,31,40,.10), 0 6px 12px -5px rgba(25,31,40,.28), inset 0 1px 0 #fff;}
-  .brow .bi iconify-icon{font-size:21px; color:var(--primary);}
-  .brow .bt{flex:1; min-width:0;}
-  .brow .bt .l{font-size:13px; color:var(--sub);}
-  .brow .bt .v{font-size:19px; font-weight:800; color:var(--primary-dark); letter-spacing:-.4px; margin-top:2px; white-space:nowrap;}
-  .brow .bt .d{font-size:12.5px; color:var(--sub); margin-top:5px; line-height:1.5;}
-  .paysum{font-size:12.5px; color:var(--placeholder); line-height:1.6; margin-top:22px; max-width:420px;}
-
-  /* 걱정 해소 */
-  .worries{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:54px;}
-  .wr{background:#fff; border:1px solid var(--line); border-radius:20px; padding:28px 26px;}
-  .wr .wq{display:flex; gap:10px; align-items:flex-start; font-size:18px; font-weight:700; letter-spacing:-.3px; line-height:1.45;}
-  .wr .wq .qm{color:var(--primary); font-weight:800; flex:0 0 auto;}
-  .wr .wa{font-size:14px; color:var(--sub); line-height:1.7; margin-top:14px;}
-  .wr .wa b{color:var(--ink);}
-  @media(max-width:820px){ .worries{grid-template-columns:1fr;} }
+  /* ⑦ 뉴스룸 */
+  .news-sec{overflow-x:clip;}   /* 화면 밖으로 흐르는 줄이 페이지 가로 스크롤을 만들지 않게 */
+  .news-sec .p-lg{margin-top:18px;}
+  .nr-more{display:inline-flex; align-items:center; gap:3px; margin-top:10px; min-height:48px; font-size:14.5px; font-weight:700;
+    color:var(--primary-dark); text-decoration:none;}
+  .nr-more iconify-icon{font-size:17px;}
+  /* 기사 줄 — 가로로 흐르고, 손으로도 넘길 수 있음 */
+  .nr-list{display:flex; gap:16px; margin:48px calc(50% - 50vw) 0; text-align:left; overflow-x:auto; overflow-y:hidden;
+    padding:0 24px 8px; scrollbar-width:none; cursor:grab; user-select:none;}
+  .nr-list::-webkit-scrollbar{display:none;}
+  .nr-list:active{cursor:grabbing;}
+  .nr{flex:0 0 300px; display:block; background:#fff; border:1px solid var(--line); border-radius:16px; overflow:hidden;
+    text-decoration:none; color:var(--ink); transition:transform .2s, box-shadow .2s, border-color .2s;}
+  .nr:hover{transform:translateY(-3px); border-color:var(--primary); box-shadow:0 12px 26px -16px rgba(37,99,235,.6);}
+  .nr .vis{display:block; height:168px; background:var(--tile);}
+  .nr .vis img{width:100%; height:100%; object-fit:cover; display:block; -webkit-user-drag:none;}
+  .nr .body{display:block; padding:16px 18px 20px;}
+  .nr .p{display:flex; align-items:center; justify-content:space-between; gap:10px; font-size:13px; color:var(--placeholder);}
+  .nr .p b{font-weight:700; color:var(--primary-dark);}
+  .nr .t{display:block; font-size:16px; font-weight:600; line-height:1.55; margin-top:10px; word-break:keep-all;
+    display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;}
 
   /* 진행과정 (아이콘) */
   /* 진행 4단계 — 3D로 띄운 카드, 마우스 올리면 펼쳐짐 */
@@ -232,14 +773,14 @@
   .stp.open .sic{transform:scale(1.08);}
   .stp .sic iconify-icon{font-size:22px; color:var(--primary);}
   .stp .body{flex:1; min-width:0;}
-  .stp .no{font-size:11px; font-weight:800; color:var(--primary-dark); letter-spacing:.5px;}
+  .stp .no{font-size:13px; font-weight:700; color:var(--primary-dark); letter-spacing:.5px;}
   .stp .t{font-size:17px; font-weight:700; letter-spacing:-.3px; margin-top:3px;}
   /* 펼침 높이를 고정값으로 — 한 번에 하나만 열리므로 전체 칸 높이가 변하지 않음 */
   .stp .more{height:0; opacity:0; overflow:hidden; transition:height .5s ease, opacity .35s ease, margin-top .5s ease;}
   .stp.open .more{height:134px; opacity:1; margin-top:10px;}
   .stp .s{font-size:14px; color:var(--sub); line-height:1.65;}
   .stp .tm{display:inline-flex; align-items:center; gap:5px; margin-top:10px; padding:5px 11px; border-radius:999px;
-    background:var(--primary-50); color:var(--primary-dark); font-size:12px; font-weight:700; white-space:nowrap;}
+    background:var(--primary-50); color:var(--primary-dark); font-size:13px; font-weight:700; white-space:nowrap;}
   .stp .tm iconify-icon{font-size:14px;}
   /* 좁은 화면: 기울임 없이, 설명은 항상 펼침 */
   @media(max-width:820px){
@@ -253,20 +794,21 @@
   @media (prefers-reduced-motion: reduce){ .stp{transform:none; transition:none;} }
 
   /* 후기 롤링 */
-  .rv-wrap{overflow-x:auto; scrollbar-width:none; margin-top:54px; cursor:grab;}
+  .rv-wrap{overflow-x:auto; overflow-y:hidden; scrollbar-width:none; margin-top:54px; cursor:grab;}
   .rv-wrap::-webkit-scrollbar{display:none;}
   .rv-wrap:active{cursor:grabbing;}
   .rv-track{display:flex; gap:14px; width:max-content; padding:4px 2px;}
   .rv{width:300px; flex:0 0 auto; background:#fff; border-radius:18px; padding:24px 22px; box-shadow:0 1px 3px rgba(0,0,0,.05); text-align:left;}
   .rv .stars{color:var(--primary); font-size:14px; letter-spacing:2px; margin-bottom:12px;}
   .rv .q{font-size:15px; font-weight:600; line-height:1.6; letter-spacing:-.2px;}
-  .rv .who{font-size:12px; color:var(--placeholder); margin-top:14px;}
+  .rv .who{font-size:13px; color:var(--placeholder); margin-top:14px;}
 
   /* 수수료 · 안전 (심플) */
   .stats{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:54px;}
-  .stat{background:#fff; border:1px solid var(--line); border-radius:20px; padding:30px 14px; text-align:center;}
+  .stat{background:#fff; border:1px solid var(--line); border-radius:20px; padding:30px 14px; text-align:center;
+    display:flex; flex-direction:column; justify-content:center;}
   .stat .sl{font-size:13px; font-weight:700; color:var(--placeholder); margin-bottom:10px;}
-  .stat .sv{font-size:30px; font-weight:800; letter-spacing:-.6px; color:var(--primary-dark); white-space:nowrap;}
+  .stat .sv{font-size:30px; font-weight:700; letter-spacing:-.6px; color:var(--primary-dark); white-space:nowrap;}
   .stat .ss{font-size:13px; color:var(--sub); margin-top:8px; white-space:nowrap;}
   .stat.pay .sv{color:var(--ink);}
   @media(max-width:820px){ .stats{grid-template-columns:1fr 1fr;} }
@@ -280,24 +822,157 @@
   .tb iconify-icon{font-size:20px; color:var(--primary);}
 
   /* 마지막 CTA */
-  .last{background:var(--gray-bg); text-align:center; padding:120px 24px;}
-  .last .p-lg{margin-top:18px;}
+  /* 마지막 CTA — 히어로와 같은 어두운 배경으로 페이지를 닫아줌 */
+  .last{background:#0A1526; color:#fff; text-align:center; padding:120px 24px;}
+  .last .h-lg{color:#fff;}
+  .last .p-lg{margin-top:18px; color:#AEB8C6;}
+  .last .storebtn{background:rgba(255,255,255,.08); border-color:rgba(255,255,255,.22); color:#fff;}
+  .last .storebtn:hover{background:rgba(255,255,255,.14); border-color:rgba(255,255,255,.4); box-shadow:none;}
   .cta-col{display:flex; flex-direction:column; align-items:center; gap:14px; margin-top:40px;}
-  .cta-col .btn{width:332px; max-width:100%;}
+  .cta-col .btn{width:100%; max-width:332px;}
   .cta-col .storebtns{margin-top:0;}
+
+  /* ===== 모바일 정리 ===== */
+  @media(max-width:560px){
+    /* 1. 활용법 장면 정리 */
+    .ways .wrap + .ways-in{margin-top:36px;}
+    .ways-in{gap:24px;}
+    .wsw{max-width:100%;}
+    .wsb{height:46px; font-size:13.5px; padding:0 8px;}
+    .sms-bub{padding:17px 18px;}
+    .sms-amt{font-size:22px;}
+    /* 1. 결제 요청 : 말풍선만 크게 (정렬·여백은 위 900px 규칙을 따름) */
+    .chat{width:100%; max-width:100%;}
+    .ch-row{gap:0; margin-top:20px;}
+    .ch-row .ava,.ch-row .ch-nm{display:none;}
+    .bub{max-width:88%; font-size:15px; padding:13px 16px; border-radius:16px;}
+    .bub.card{width:100%; max-width:100%; padding:18px; border-radius:16px;}
+    .lk-n{font-size:15px;} .lk-a{font-size:25px;}
+    .lk-u{font-size:13.5px; margin-top:12px; padding-top:12px;}
+
+    /* 2. 항목 : 한 줄에 세 개 (아이콘 + 이름만) */
+    .cases{grid-template-columns:repeat(3,1fr); gap:8px;}
+    .case{aspect-ratio:1/1; padding:10px 6px; align-items:center; justify-content:center; text-align:center; border-radius:14px;}
+    .case iconify-icon{font-size:22px;}
+    .case .ct{font-size:13px; margin-top:8px; line-height:1.35;}
+    .case .cs,.case .ck{display:none;}
+    .cases-note{font-size:13px; margin-top:20px;}
+
+    /* 5. 긴 문장은 강제 줄바꿈 대신 자연스럽게 흐르도록 */
+
+    /* 6. 이용안내 : 단계별 화면을 옆으로 넘겨보기 (한 화면에 한 장) */
+    .guide .p-lg{margin-top:14px;}
+    .gtabs{display:flex; width:100%; gap:8px; margin-top:24px;}   /* 탭 두 개가 좌우를 꽉 채움 */
+    .gtab{flex:1; min-width:0; height:48px; padding:0 8px; font-size:14.5px;}
+    .gwrap{display:block; padding:0; background:none; border-radius:0; min-height:0; margin-top:20px;}
+    .gvis,.gsteps{display:none;}
+    .gwrap .gdots{display:flex;}
+    /* 좌우 여백 없이 화면 끝까지 */
+    .gslides{display:flex; min-width:0; gap:0; overflow-x:auto; overflow-y:hidden; scroll-snap-type:x mandatory;
+      margin:0 -24px; padding:4px 0 8px; scrollbar-width:none;}
+    .gslides::-webkit-scrollbar{display:none;}
+    .gslide{flex:0 0 100%; scroll-snap-align:center; display:flex; flex-direction:column; align-items:center;}
+    .gsl-h{width:330px;}
+    .gdots{margin-top:14px;}
+    .gsl-h{display:flex; align-items:flex-start; gap:8px; margin-bottom:10px; min-height:40px;}
+    .gsl-no{width:24px; height:24px; flex:0 0 auto; border-radius:50%; background:var(--primary); color:#fff;
+      font-size:13px; font-weight:700; display:flex; align-items:center; justify-content:center;}
+    .gsl-t{font-size:14px; font-weight:700; line-height:1.4; padding-top:2px; word-break:keep-all;}
+    .gscr-wrap{width:330px; height:621px; overflow:hidden; border-radius:28px;}
+    .gscr-wrap .gscr{width:340px; height:640px; max-width:none; transform:scale(.97); transform-origin:top left;}
+    .gscr-wrap .win{width:440px; height:520px; max-width:none; transform:scale(.75); transform-origin:top left;}
+    .gslide.web .gscr-wrap{height:390px;}
+    .guide-mobtip{display:block;}
+
+    /* 7. 매거진 : 가로 슬라이드 (카드 비율 유지) */
+    .nr-list{gap:12px; margin-top:32px; padding:0 16px 6px;}
+    .nr{flex:0 0 250px;}
+    .nr .vis{height:141px;}
+    .nr .body{padding:14px 15px 16px;}
+    .nr .t{font-size:14.5px;}
+
+    /* 8. 자주 묻는 질문 : 눌러서 펼치기 */
+    .fq{cursor:pointer;}
+    .fq .fa{display:none;}
+    .fq.open .fa{display:block;}
+    .fq-q{font-size:15px;}
+    .fq-q:after{content:''; margin-left:8px; flex:0 0 auto; width:8px; height:8px;
+      border-right:2px solid var(--icon-off); border-bottom:2px solid var(--icon-off);
+      transform:rotate(45deg); transition:transform .2s;}
+    .fq.open .fq-q:after{transform:rotate(-135deg);}
+    .fa{font-size:13.5px; line-height:1.75; margin-top:10px;}
+    .fqtabs{display:flex; width:100%; gap:6px;}
+    .fqtab{flex:1; height:44px; padding:0 6px; font-size:13px;}
+
+    /* 되는 것들 알약 */
+    .whys{gap:6px;}
+    .wy{font-size:13px; padding:9px 13px;}
+  }
+  .guide-mobtip{display:none; margin-top:16px; font-size:13px; color:var(--placeholder); text-align:center;}
+
+  /* 이번 달 무이자 팝업 */
+  .fpdim{position:fixed; inset:0; background:rgba(15,20,30,.5); z-index:98; opacity:0; pointer-events:none; transition:opacity .3s;}
+  .fpdim.on{opacity:1; pointer-events:auto;}
+  .fpop{position:fixed; left:50%; top:50%; z-index:99; width:460px; max-width:calc(100vw - 32px); max-height:84vh;
+    display:flex; flex-direction:column; background:#fff; border-radius:22px; overflow:hidden;
+    transform:translate(-50%,-50%) scale(.96); opacity:0; pointer-events:none; transition:transform .3s, opacity .3s;
+    box-shadow:0 12px 32px -8px rgba(10,21,38,.25);}
+  .fpop.on{transform:translate(-50%,-50%) scale(1); opacity:1; pointer-events:auto;}
+  .fp-top{display:flex; align-items:center; justify-content:space-between; padding:24px 26px 0;}
+  .fp-top h3{font-size:20px; font-weight:700; letter-spacing:-.4px;}
+  .fp-x{width:44px; height:44px; border:none; background:none; font-size:20px; color:var(--sub); cursor:pointer; border-radius:9px;}
+  .fp-x:hover{background:var(--gray-bg);}
+  .fp-body{flex:1; overflow-y:auto; padding:6px 26px 20px; text-align:left;}
+  .fp-btm{padding:0 26px 22px; display:flex; flex-direction:column; gap:12px;}
+  .fp-chk{display:flex; align-items:center; gap:8px; min-height:48px; padding:0 4px; font-size:13.5px; color:var(--sub); cursor:pointer;}
+  .fp-chk input{width:22px; height:22px; accent-color:var(--primary);}
+  .fp-go{width:100%; height:52px; border-radius:13px; font-size:15.5px;}
+  /* 표 */
+  .ftarget{display:block; width:fit-content; height:26px; line-height:26px; margin-top:10px; padding:0 11px; border-radius:8px;
+    background:var(--primary-50); color:var(--primary-dark); font-size:13px; font-weight:700;}
+  .ftable{width:100%; border-collapse:collapse; margin-top:18px;}
+  .ftable th,.ftable td{padding:11px 4px; border-bottom:1px solid var(--line); font-size:14.5px; text-align:left;}
+  .ftable thead th{font-size:13px; font-weight:700; color:var(--placeholder); border-bottom:2px solid var(--ink); padding-bottom:9px;}
+  .ftable tbody th{font-weight:600;}
+  /* 카드사 = 로고 + 이름. 로고 자리를 고정폭으로 잡아 이름 시작선을 맞춤 */
+  .fcard{display:flex; align-items:center; gap:8px; min-height:28px;}
+  .flogo-slot{flex:0 0 auto; width:48px; height:20px; display:flex; align-items:center;}
+  .flogo{max-width:100%; max-height:100%; object-fit:contain; object-position:left center; -webkit-user-drag:none;}
+  .flogo.wide{max-height:12px;}   /* 심볼이 없는 워드마크 로고 (삼성 · 현대 · 씨티) */
+  .fname{font-size:14px; font-weight:600; color:var(--ink); white-space:nowrap;}
+  .ftable tbody td{font-weight:700; color:var(--primary-dark); text-align:right; white-space:nowrap;}
+  .ftable .r{text-align:right;}
+  /* 소제목 */
+  .fsec{margin-top:28px; font-size:16px; font-weight:700; letter-spacing:-.2px;}
+  .fsub{margin-top:6px; font-size:13px; color:var(--sub); line-height:1.6;}
+  /* 부분 무이자 — 카드사 한 칸에 개월이 여러 줄 */
+  .ftable.part th,.ftable.part td{padding:9px 3px; vertical-align:middle; border-bottom:none;}
+  .ftable.part tbody th{border-bottom:none;}
+  .ftable.part tr.grp th,.ftable.part tr.grp td{border-top:1px solid var(--line);}
+  .ftable.part tr.grp:first-child th,.ftable.part tr.grp:first-child td{border-top:none;}
+  .ftable.part .mo{font-size:13.5px; font-weight:600; color:var(--ink); text-align:left;}
+  .ftable.part .bd{font-size:13px; font-weight:600; color:var(--sub);}
+  .fnotes{list-style:none; margin-top:18px;}
+  .fnotes li{position:relative; padding-left:14px; font-size:13px; color:var(--placeholder); line-height:1.7; margin-bottom:7px; word-break:keep-all;}
+  .fnotes li:before{content:'·'; position:absolute; left:3px;}
+  @media(max-width:560px){
+    .fp-top{padding:20px 20px 0;} .fp-top h3{font-size:18px;}
+    .fp-body{padding:6px 20px 16px;} .fp-btm{padding:0 20px 18px;}
+    .ftable th,.ftable td{font-size:13.5px; padding:10px 2px;}
+  }
 </style>
 </head>
 <body>
 
 <nav class="nav">
   <div class="nav-in">
-    <a class="logo" href="index.html"><img src="../img/logo-mark.png" alt="" style="height:30px"><img src="../img/logo-text.png" alt="랜선페이" style="height:19px"></a>
+    <a class="logo" href="index.html"><img src="../img/logo3.png" alt="" style="height:23px"><img src="../img/logo-text.png" alt="랜선페이" style="height:19px"></a>
     <div class="nav-menu">
       <a href="이용가이드.html" class="wide">이용가이드</a>
       <a href="고객센터.html" class="wide">고객센터</a>
-      <a href="로그인.html">로그인</a>
+      <a href="뉴스룸.html" class="wide">뉴스룸</a>
     </div>
-    <button class="nav-cta" onclick="location.href='송금하기.html'">송금하기</button>
+    <button class="nav-cta" onclick="location.href='로그인.html'">로그인</button>
     <button class="nav-burger" onclick="drawer(true)" aria-label="전체메뉴"><iconify-icon icon="mingcute:menu-fill"></iconify-icon></button>
   </div>
 </nav>
@@ -312,247 +987,435 @@
   </div>
 
   <div class="hero-in">
-  <!-- 실시간 알림 배지 (문구·수치는 예시 → 실제 데이터로 교체 필요) -->
-  <div class="live" id="live"><span class="dot"></span><span class="tickwrap" id="liveTxt"><span class="tick on">방금 <b>마포구</b>에서 월세 <b>820,000원</b>이 카드로 결제됐어요</span></span></div>
+    <!-- 왼쪽 : 문구 -->
+    <div class="hero-txt">
+      <h1 class="h-xl"><span class="l1" id="line1">이번 달 <span class="roll">월세</span></span><br><span class="hl">신용카드로 결제하세요</span></h1>
 
-  <h1 class="h-xl"><span class="l1" id="line1">이번 달 <span class="roll">월세</span></span><br><span class="hl">신용카드로 결제하세요</span></h1>
-  <div class="cta-col">
-    <a class="btn blue" href="#calc"><iconify-icon icon="mingcute:calculator-fill"></iconify-icon>30초면 끝, 내 금액 계산해보기</a>
-    <a class="btn ghost" href="송금하기.html"><iconify-icon icon="mingcute:flash-fill"></iconify-icon>바로 송금하기</a>
-    <div class="storebtns">
-      <a class="storebtn" href="javascript:void(0);"><iconify-icon icon="mingcute:apple-fill"></iconify-icon>App Store</a>
-      <a class="storebtn" href="javascript:void(0);"><iconify-icon icon="mingcute:google-play-fill"></iconify-icon>Google Play</a>
+      <!-- 무슨 서비스인지 한 문장으로 -->
+      <p class="define">현금으로만 내야 했던 돈도 <b>신용카드로 결제하세요.</b> <br>
+        받는 분에게는 <b>현금으로 보내드려요.</b></p>
+
+      <div class="cta-col">
+        <a class="btn blue" href="송금하기.html"><iconify-icon icon="mingcute:flash-fill"></iconify-icon>바로 송금하기</a>
+        <div class="storebtns">
+          <a class="storebtn" href="javascript:void(0);"><iconify-icon icon="mingcute:apple-fill"></iconify-icon>App Store</a>
+          <a class="storebtn" href="javascript:void(0);"><iconify-icon icon="mingcute:google-play-fill"></iconify-icon>Google Play</a>
+        </div>
+      </div>
+
+      <div class="safe">
+        <span><iconify-icon icon="mingcute:shield-fill"></iconify-icon>금융위 등록 PG사</span>
+        <span><iconify-icon icon="mingcute:document-fill"></iconify-icon>서류 검토 후 승인</span>
+        <span><iconify-icon icon="mingcute:refresh-2-fill"></iconify-icon>미승인 자동 취소</span>
+      </div>
     </div>
-  </div>
 
-  <!-- 사회적 증거 (수치는 예시 → 실제 수치로 교체 필요) -->
-  <div class="proof">
-    <div class="pf"><div class="v"><span class="cnt" data-to="128">0</span>억원</div><div class="l">누적 송금액</div></div>
-    <div class="pf"><div class="v"><span class="cnt" data-to="42000">0</span>명</div><div class="l">함께 쓰는 이웃</div></div>
-    <div class="pf"><div class="v">평균 <span class="cnt" data-to="12">0</span>분</div><div class="l">신청부터 입금까지</div></div>
-  </div>
+    <!-- 오른쪽 : 카드로 결제하면 현금이 송금된다 -->
+    <div class="hero-vis">
+      <div class="scr">
+        <div class="sprog"><i style="width:100%"></i></div>
 
-  <div class="safe">
-    <span><iconify-icon icon="mingcute:shield-fill"></iconify-icon>금융위 등록 PG사 결제</span>
-    <span><iconify-icon icon="mingcute:document-fill"></iconify-icon>증빙 검토 후 승인</span>
-    <span><iconify-icon icon="mingcute:refresh-2-fill"></iconify-icon>미승인 시 전액 자동 취소</span>
-  </div>
+        <div class="hp-lead"><span class="hp-ico"><iconify-icon icon="mingcute:bank-card-fill"></iconify-icon></span>내 카드로 결제</div>
+        <div class="hp-card">
+          <div class="hp-cardtop"><span class="hp-brand">신한카드</span><span class="hp-inst">6개월 무이자</span></div>
+          <div class="hp-num">**** **** **** 4821</div>
+          <div class="hp-amt">707,200원</div>
+        </div>
+
+        <div class="hp-flow">
+          <span class="hp-line"></span>
+          <span class="hp-chip"><iconify-icon icon="mingcute:arrow-down-fill"></iconify-icon>랜선페이가 현금으로 바꿔서 보내요</span>
+          <span class="hp-line"></span>
+        </div>
+
+        <div class="hp-lead"><span class="hp-ico"><iconify-icon icon="mingcute:cash-fill"></iconify-icon></span>받는 분에게는 현금으로</div>
+        <div class="hp-recv">
+          <div class="hp-recvtop"><iconify-icon icon="mingcute:check-circle-fill"></iconify-icon>입금 완료</div>
+          <div class="hp-nm">대성부동산</div>
+          <div class="hp-sub">KB국민 123456-78-901234</div>
+          <div class="hp-cash">680,000원 <i>현금 입금</i></div>
+        </div>
+      </div>
+    </div>
   </div>
 </header>
 
-<!-- ② 서비스 소개 -->
-<section class="sec intro">
+<!-- ② 어떤 서비스인가 · 3단계 -->
+<section class="sec how3">
   <div class="wrap reveal" style="text-align:center">
-    <div class="eyebrow">랜선페이가 하는 일</div>
-    <h2 class="h-lg">카드로 결제하면<br>상대방에게 <span class="bl">현금</span>을 보내줘요</h2>
-    <p class="p-lg"><b>현금으로만 내야 하는 돈</b>을 계좌로 송금하고<br>
-      결제한 만큼 <b>할부로 나눠서</b> 낼 수 있어요.</p>
+    <div class="eyebrow">랜선페이란?</div>
+    <h2 class="h-lg">현금으로만 내던 돈<br>이제 카드로 내세요</h2>
+    <p class="p-lg">카드로 결제하면 현금으로 송금돼요<br>
+      신청 <b>3분</b> · 입금까지 <b>평균 12분</b></p>
+
+    <div class="steps3">
+      <div class="st3">
+        <div class="st3-no">01</div>
+        <div class="st3-t">보낼 곳과 금액 입력</div>
+        <div class="st3-d">받는 분 이름은 자동으로 확인돼요</div>
+        <div class="st3-tm"><iconify-icon icon="mingcute:time-fill"></iconify-icon>약 1분</div>
+      </div>
+      <div class="st3">
+        <div class="st3-no">02</div>
+        <div class="st3-t">서류 촬영해서 첨부</div>
+        <div class="st3-d">계약서나 고지서 하나만 찍어 올리면 돼요</div>
+        <div class="st3-tm"><iconify-icon icon="mingcute:time-fill"></iconify-icon>약 2분</div>
+      </div>
+      <div class="st3">
+        <div class="st3-no">03</div>
+        <div class="st3-t">카드로 결제하면 현금 입금</div>
+        <div class="st3-d">확인이 끝나면 바로 현금이 들어가요</div>
+        <div class="st3-tm"><iconify-icon icon="mingcute:time-fill"></iconify-icon>평균 12분</div>
+      </div>
+    </div>
+
+    <div class="how3-tip"><iconify-icon icon="mingcute:flash-fill"></iconify-icon><span>다음 달부터는 서류 없이 <b>1분</b>이면 끝나요.</span></div>
   </div>
 </section>
 
-<!-- ③ 포인트 타일 -->
-<div class="pts reveal">
-  <div class="pt"><iconify-icon icon="mingcute:user-x-fill"></iconify-icon><span class="t">상대방 동의 불필요</span></div>
-  <div class="pt"><iconify-icon icon="mingcute:flash-fill"></iconify-icon><span class="t">확인 후 바로 입금</span></div>
-  <div class="pt"><iconify-icon icon="mingcute:bank-card-fill"></iconify-icon><span class="t">최대 6개월 무이자</span></div>
-  <div class="pt"><iconify-icon icon="mingcute:coin-fill"></iconify-icon><span class="t">수수료 4% 하나</span></div>
-  <div class="pt"><iconify-icon icon="mingcute:shield-fill"></iconify-icon><span class="t">미승인 시 자동 취소</span></div>
-  <div class="pt"><iconify-icon icon="mingcute:bill-fill"></iconify-icon><span class="t">소득공제 · 경비처리</span></div>
+<!-- ② 무엇을 카드로 낼 수 있나 (누르면 필요 서류 팝업) -->
+<section class="sec tint cases-sec">
+  <div class="wrap reveal" style="text-align:center">
+    <div class="eyebrow">결제 가능한 항목</div>
+    <h2 class="h-lg">무엇을 카드로 낼까요?</h2>
+    <p class="p-lg">항목을 누르면 <b>필요한 서류</b>를 바로 볼 수 있어요.</p>
+
+    <div class="cases">
+      <button class="case" onclick="openDoc('부동산 임대차')">
+        <iconify-icon icon="mingcute:home-4-fill"></iconify-icon>
+        <span class="ct">부동산 임대차</span>
+        <span class="cs">월세 · 관리비 · 계약금 · 보증금</span>
+        <span class="ck">필요 서류 보기<iconify-icon icon="mingcute:right-line"></iconify-icon></span>
+      </button>
+      <button class="case" onclick="openDoc('별도 관리비')">
+        <iconify-icon icon="mingcute:building-2-fill"></iconify-icon>
+        <span class="ct">별도 관리비</span>
+        <span class="cs">아파트 · 상가 관리비만 따로 낼 때</span>
+        <span class="ck">필요 서류 보기<iconify-icon icon="mingcute:right-line"></iconify-icon></span>
+      </button>
+      <button class="case" onclick="openDoc('복비')">
+        <iconify-icon icon="mingcute:cash-fill"></iconify-icon>
+        <span class="ct">복비</span>
+        <span class="cs">부동산 중개수수료</span>
+        <span class="ck">필요 서류 보기<iconify-icon icon="mingcute:right-line"></iconify-icon></span>
+      </button>
+      <button class="case" onclick="openDoc('이사비')">
+        <iconify-icon icon="mingcute:truck-fill"></iconify-icon>
+        <span class="ct">이사비</span>
+        <span class="cs">용달 · 포장이사</span>
+        <span class="ck">필요 서류 보기<iconify-icon icon="mingcute:right-line"></iconify-icon></span>
+      </button>
+      <button class="case" onclick="openDoc('인테리어')">
+        <iconify-icon icon="mingcute:paint-brush-fill"></iconify-icon>
+        <span class="ct">인테리어</span>
+        <span class="cs">공사 · 수리 · 시공 · 철거</span>
+        <span class="ck">필요 서류 보기<iconify-icon icon="mingcute:right-line"></iconify-icon></span>
+      </button>
+      <button class="case" onclick="openDoc('청소비')">
+        <iconify-icon icon="mingcute:broom-fill"></iconify-icon>
+        <span class="ct">청소비</span>
+        <span class="cs">입주 · 정기 청소</span>
+        <span class="ck">필요 서류 보기<iconify-icon icon="mingcute:right-line"></iconify-icon></span>
+      </button>
+      <button class="case" onclick="openDoc('교육비')">
+        <iconify-icon icon="mingcute:book-5-fill"></iconify-icon>
+        <span class="ct">교육비</span>
+        <span class="cs">학원비 · 등록금 · 과외</span>
+        <span class="ck">필요 서류 보기<iconify-icon icon="mingcute:right-line"></iconify-icon></span>
+      </button>
+      <button class="case" onclick="openDoc('보험료')">
+        <iconify-icon icon="mingcute:shield-fill"></iconify-icon>
+        <span class="ct">보험료</span>
+        <span class="cs">건강 · 연금 · 화재</span>
+        <span class="ck">필요 서류 보기<iconify-icon icon="mingcute:right-line"></iconify-icon></span>
+      </button>
+      <button class="case" onclick="openDoc('B2B 매입대금')">
+        <iconify-icon icon="mingcute:package-2-fill"></iconify-icon>
+        <span class="ct">B2B 매입대금</span>
+        <span class="cs">거래처 · 식자재 대금</span>
+        <span class="ck">필요 서류 보기<iconify-icon icon="mingcute:right-line"></iconify-icon></span>
+      </button>
+    </div>
+
+    <div class="cases-note"><iconify-icon icon="mingcute:information-fill"></iconify-icon><span>이 밖에 렌트료 · 인건비도 서류만 있으면 가능해요.</span></div>
+  </div>
+</section>
+
+<!-- 항목별 필요 서류 팝업 -->
+<div class="cdim" id="cDim" onclick="closeDoc()"></div>
+<div class="docbox" id="cBox" role="dialog" aria-label="필요 서류">
+  <div class="docbox-top">
+    <h3 id="cTitle">필요 서류</h3>
+    <button class="docbox-x" onclick="closeDoc()" aria-label="닫기">✕</button>
+  </div>
+  <div class="docbox-body" id="cBody"></div>
+  <div class="docbox-btm">
+    <a class="btn blue" href="송금하기.html"><iconify-icon icon="mingcute:flash-fill"></iconify-icon>이 항목으로 바로 송금하기</a>
+  </div>
 </div>
 
-<!-- ③ 계산기 (폰 안에) -->
-<section class="sec band" id="calc">
+<!-- ④ 랜선페이를 쓰면 (USP 4개 + 되는 것들 나열) -->
+<section class="sec usp1">
   <div class="wrap reveal" style="text-align:center">
-    <div class="eyebrow">미리 계산해보세요</div>
-    <h2 class="h-lg">보낼 금액을 넣고<br>비용과 혜택을 확인해보세요</h2>
+    <div class="eyebrow">랜선페이 혜택</div>
+    <h2 class="h-lg">카드로 내면<br>이런 게 달라져요</h2>
 
-    <div class="calcbox empty" id="calcbox">
-      <div class="amt-hint"><iconify-icon icon="mingcute:arrow-down-fill"></iconify-icon>여기에 금액을 입력해보세요</div>
-      <div class="amt-field" id="amtField">
-        <label class="m-label" for="amt">보낼 금액</label>
-        <div class="amt-in"><input id="amt" inputmode="numeric" placeholder="금액 입력" autocomplete="off"><span class="won">원</span></div>
-        <div class="quick">
-          <button type="button" onclick="addAmt(100000)">+10만</button>
-          <button type="button" onclick="addAmt(500000)">+50만</button>
-          <button type="button" onclick="addAmt(1000000)">+100만</button>
-          <button type="button" onclick="setAmt(0)">지우기</button>
-        </div>
+    <div class="usps">
+      <div class="up">
+        <span class="ui"><iconify-icon icon="mingcute:gift-fill"></iconify-icon></span>
+        <div class="ut"><em>포인트</em>도 쌓이고 <br><em>실적</em>도 잡혀요</div>
+        <div class="ud">쇼핑몰 결제와 똑같아요</div>
       </div>
-      <div class="m-ben">
-        <div class="m-arow"><span class="l">상대방이 받는 돈</span><span class="v" id="rGet">-</span></div>
-        <div class="m-arow"><span class="l">수수료 4%</span><span class="v" id="rFee">-</span></div>
-        <div class="m-arow blue"><span class="l">6개월 무이자 시 월</span><span class="v" id="rMon">-</span></div>
-        <div class="m-arow blue"><span class="l">카드 적립 예상</span><span class="v" id="rPt">-</span></div>
+      <div class="up">
+        <span class="ui"><iconify-icon icon="mingcute:bill-fill"></iconify-icon></span>
+        <div class="ut"><em>세금</em>에서 <br>돌려받을 수 있어요</div>
+        <div class="ud">필요한 자료는 앱에서 발급</div>
       </div>
-      <div class="m-card">
-        <div class="m-total"><span class="l">내 카드 결제액</span><span class="v" id="rTotal">-</span></div>
+      <div class="up">
+        <span class="ui"><iconify-icon icon="mingcute:cellphone-2-fill"></iconify-icon></span>
+        <div class="ut"><em>앱 설치 없이</em> <br>송금할 수 있어요</div>
+        <div class="ud">휴대폰 인증 한 번이면 끝</div>
       </div>
-      <button class="m-btn" onclick="location.href='송금하기.html'">이 금액으로 바로 송금하기</button>
     </div>
-  </div>
-</section>
 
-<!-- ④ 걱정 해소 -->
-<section class="sec tint">
-  <div class="wrap reveal" style="text-align:center">
-    <div class="eyebrow">이런 걱정 되시죠?</div>
-    <h2 class="h-lg">괜찮아요 이렇게 지켜드려요</h2>
-    <div class="worries" style="text-align:left">
-      <div class="wr">
-        <div class="wq"><span class="qm">Q</span>카드깡 아닌가요?</div>
-        <div class="wa">아니에요. 계약서 · 고지서 같은 <b>실제 거래 증빙을 담당자가 검토하고 승인된 결제만</b> 입금돼요. 내 계좌나 지인 계좌로는 보낼 수 없어요.</div>
-      </div>
-      <div class="wr">
-        <div class="wq"><span class="qm">Q</span>상대방 동의가 필요한가요?</div>
-        <div class="wa">필요 없어요. <b>은행과 계좌번호만 알면</b> 예금주 확인까지 자동으로 끝나요. 상대방은 평소처럼 현금으로 받을 뿐이에요.</div>
-      </div>
-      <div class="wr">
-        <div class="wq"><span class="qm">Q</span>승인이 안 되면 어떻게 되나요?</div>
-        <div class="wa">결제는 <b>자동으로 취소</b>되고 카드값도 청구되지 않아요. 환불을 기다릴 필요 자체가 없어요.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ⑤ USP 폰 목업 (실제 앱 화면 복제) -->
-<section class="sec">
-  <div class="wrap usp reveal">
-    <div class="txt">
-      <div class="eyebrow">즉시 송금</div>
-      <h2 class="h-lg">계좌번호만 입력하면<br>쉽게 보낼 수 있어요</h2>
-      <p class="p-lg">상대방 동의가 필요하지 않아요.<br>은행과 계좌만 입력하고 보내보세요.</p>
-    </div>
-    <div class="vis">
-      <div class="mock">
-        <div class="m-card">
-          <div class="m-label">은행</div>
-          <div class="m-val" style="display:flex; align-items:center; margin-top:6px"><span class="bk">KB</span>국민</div>
-          <div class="m-label" style="margin-top:14px">계좌번호</div>
-          <div class="m-val">123456-78-901234</div>
-        </div>
-        <div class="downarr"><iconify-icon icon="mingcute:arrow-down-fill"></iconify-icon></div>
-        <div class="payee">
-          <div class="cap"><iconify-icon icon="mingcute:check-circle-fill"></iconify-icon>받는 분이 바로 확인됐어요</div>
-          <div class="nm">대성부동산</div>
-          <div class="sub">예금주 · KB국민 123456-78-901234</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="sec tint">
-  <div class="wrap usp rev reveal">
-    <div class="txt">
-      <div class="eyebrow">카드 혜택</div>
-      <h2 class="h-lg">카드로 결제하고<br>혜택까지 받아보세요</h2>
-      <p class="p-lg">무이자 할부로 나눠 내고<br>카드포인트, 실적, 세금공제까지 챙기세요.</p>
-      <div class="paysum">세액공제액은 총급여 · 월세액에 따라 달라져요 (연 750만원 한도 기준)</div>
-    </div>
-    <div class="vis">
-      <div class="mock">
-        <div class="benbig">
-          <div class="brow">
-            <div class="bi"><iconify-icon icon="mingcute:gift-fill"></iconify-icon></div>
-            <div class="bt"><div class="l">카드 포인트 적립</div><div class="v">결제액의 0.5 ~ 1%</div><div class="d">카드 실적에도 그대로 반영돼요</div></div>
-          </div>
-          <div class="brow">
-            <div class="bi"><iconify-icon icon="mingcute:calendar-month-fill"></iconify-icon></div>
-            <div class="bt"><div class="l">무이자 할부</div><div class="v">최대 6개월 · 이자 0원</div><div class="d">목돈을 한 번에 안 내도 돼요</div></div>
-          </div>
-          <div class="brow">
-            <div class="bi"><iconify-icon icon="mingcute:bill-fill"></iconify-icon></div>
-            <div class="bt"><div class="l">연말정산 세액공제</div><div class="v">월세 연 최대 127만원</div><div class="d">현금영수증 없이 카드 내역으로 증빙돼요</div></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ⑥ 진행 과정 (아이콘) -->
-<section class="sec" id="process">
-  <div class="wrap usp reveal">
-    <div class="txt">
-      <div class="eyebrow">진행 과정</div>
-      <h2 class="h-lg">4단계면 끝나요</h2>
-      <p class="p-lg">신청까지 평균 12분이 소요돼요.<br>4가지 단계로 쉽게 결제하세요.</p>
-      <a class="btn ghost" href="이용가이드.html" style="margin-top:28px"><iconify-icon icon="mingcute:book-5-fill"></iconify-icon>이용 방법 자세히 보기</a>
-    </div>
-    <div class="vis">
-      <div class="stepstack">
-        <div class="stp open">
-          <div class="sic"><iconify-icon icon="mingcute:edit-2-fill"></iconify-icon></div>
-          <div class="body">
-            <div class="no">STEP 1</div><div class="t">결제 정보 입력</div>
-            <div class="more">
-              <div class="s">받는 분의 은행 · 계좌번호와 보낼 금액을 넣어요. 예금주 이름은 자동으로 확인되니 상대방에게 따로 물어볼 필요가 없어요.</div>
-              <span class="tm"><iconify-icon icon="mingcute:time-fill"></iconify-icon>약 1분</span>
-            </div>
-          </div>
-        </div>
-        <div class="stp">
-          <div class="sic"><iconify-icon icon="mingcute:camera-2-fill"></iconify-icon></div>
-          <div class="body">
-            <div class="no">STEP 2</div><div class="t">서류 촬영 · 첨부</div>
-            <div class="more">
-              <div class="s">임대차계약서 · 관리비 고지서 · 거래명세서 중 하나를 휴대폰으로 찍어 올려요. 실제 거래가 맞는지 확인하는 절차예요.</div>
-              <span class="tm"><iconify-icon icon="mingcute:time-fill"></iconify-icon>약 2분</span>
-            </div>
-          </div>
-        </div>
-        <div class="stp">
-          <div class="sic"><iconify-icon icon="mingcute:bank-card-fill"></iconify-icon></div>
-          <div class="body">
-            <div class="no">STEP 3</div><div class="t">카드로 결제</div>
-            <div class="more">
-              <div class="s">쓸 카드를 고르고 할부 개월 수를 정하면 끝이에요. 최대 6개월 무이자, 카드 포인트도 그대로 쌓여요.</div>
-              <span class="tm"><iconify-icon icon="mingcute:time-fill"></iconify-icon>약 1분</span>
-            </div>
-          </div>
-        </div>
-        <div class="stp">
-          <div class="sic"><iconify-icon icon="mingcute:check-circle-fill"></iconify-icon></div>
-          <div class="body">
-            <div class="no">STEP 4</div><div class="t">확인 후 입금</div>
-            <div class="more">
-              <div class="s">담당자가 서류를 검토하고 승인하면 받는 분 계좌로 현금이 입금돼요. 승인이 안 되면 결제는 전액 자동 취소됩니다.</div>
-              <span class="tm"><iconify-icon icon="mingcute:time-fill"></iconify-icon>평균 12분</span>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="whys">
+      <span class="wy">상대방 동의 불필요</span>
+      <span class="wy">연중무휴</span>
+      <span class="wy">2~6개월 무이자</span>
+      <span class="wy">수수료 4% 하나</span>
+      <span class="wy">예약송금 · 자동납부</span>
+      <span class="wy">나눠서 결제</span>
     </div>
   </div>
 </section>
 
 <!-- ⑦ 후기 (30개 롤링) -->
-<section class="sec tint" id="reviews">
+<!-- ④-3 사용 가능 카드사 -->
+<section class="cardco reveal">
+  <div class="wrap" style="text-align:center">
+    <h2 class="h-lg">주요 카드사<br>모두 사용할 수 있어요</h2>
+    <p class="p-lg">갖고 있는 국내 신용카드로 바로 결제하세요.</p>
+    <div class="colist">
+      <span class="co"><img class="colg" src="../img/카드사/shinhan.svg" alt="신한"></span>
+      <span class="co"><img class="colg" src="../img/카드사/kb.svg" alt="KB국민"></span>
+      <span class="co"><img class="colg" src="../img/카드사/samsung.svg" alt="삼성"></span>
+      <span class="co"><img class="colg" src="../img/카드사/hyundai.svg" alt="현대카드"></span>
+      <span class="co"><img class="colg" src="../img/카드사/lotte.svg" alt="롯데"></span>
+      <span class="co"><img class="colg" src="../img/카드사/woori.svg" alt="우리"></span>
+      <span class="co"><img class="colg" src="../img/카드사/hana.svg" alt="하나"></span>
+      <span class="co"><img class="colg" src="../img/카드사/nh.svg" alt="NH농협"></span>
+      <span class="co"><img class="colg" src="../img/카드사/bc.svg" alt="BC카드"></span>
+      <span class="co"><img class="colg" src="../img/카드사/citi.svg" alt="씨티"></span>
+    </div>
+    <p class="conote">무이자 개월 수는 카드사 행사에 따라 달라요.</p>
+  </div>
+</section>
+
+<section class="sec band" id="reviews">
   <div class="wrap reveal" style="text-align:center">
     <div class="eyebrow">이용 후기</div>
-    <h2 class="h-lg">먼저 써본 분들의 이야기</h2>
+    <h2 class="h-lg">랜선페이를 써본 고객들의<br>실제 이용 후기</h2>
+
+    <p class="p-lg">이미 많은 분들이 매달 랜선페이로 내고 있어요.</p>
+
+    <!-- 수치는 예시 → 실제 데이터로 교체 필요 -->
+    <div class="rvstat">
+      <div class="rs">
+        <div class="l">지금까지 보낸 금액</div>
+        <div class="v">128억원</div>
+        <div class="d">매달 늘고 있어요</div>
+      </div>
+      <div class="rs">
+        <div class="l">함께 쓰는 이웃</div>
+        <div class="v">42,000명</div>
+        <div class="d">직장인부터 사업자까지</div>
+      </div>
+      <div class="rs">
+        <div class="l">평균 만족도</div>
+        <div class="v">4.8점</div>
+        <div class="d">5점 만점 기준</div>
+      </div>
+    </div>
   </div>
   <div class="rv-wrap reveal" id="rvWrap">
     <div class="rv-track" id="rvTrack"></div>
   </div>
 </section>
 
-<!-- ⑧ 수수료 · 안전 (심플) -->
-<section class="sec" id="fee">
+<!-- ⑤ 결제 요청 — 흐름 한 장 + 두 경우 -->
+<section class="sec ways s1">
+  <div class="wrap reveal">
+    <div class="wrap reveal" style="text-align:center">
+    <div class="eyebrow">랜선페이 100% 활용법</div>
+    <h2 class="h-lg">이렇게도 쓸 수 있어요</h2>
+    <p class="p-lg">결제요청부터 자동납부까지 <br>상황에 맞게 골라 쓰세요.</p>
+  </div>
+
+  <div class="ways-in">
+      <div class="ways-txt">
+        <div class="eyebrow wno"><span class="wnum">01</span>결제 요청</div>
+        <h2 class="h-lg">내가 낼 돈도 · 내가 받을 돈도<br>결제요청 하세요</h2>
+        <p class="p-lg" id="wayDesc">내가 내야 하는 월세나 관리비를 <br>가족이나 지인이 대신 결제해줘요.</p>
+
+        <div class="wsw">
+          <button class="wsb on" onclick="wayTab('me',this)">내가 낼 돈 요청하기</button>
+          <button class="wsb" onclick="wayTab('biz',this)">거래처 대금 요청하기</button>
+        </div>
+
+      </div>
+
+      <div class="ways-vis">
+        <div class="sms">
+          <div class="sms-bub">
+            <b id="wayMsg">김미나님이 월세 결제를 요청했어요.</b>
+            <span class="sms-item" id="wayItem">부동산 임대차 · 월세</span>
+            <span class="sms-amt" id="wayAmt">707,200원</span>
+            <span class="sms-link">결제요청 링크 바로가기<i class="gv">›</i></span>
+            <span class="sms-sub">링크를 눌러 카드로 결제해주세요.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑤-2 예약송금 · 자동납부 -->
+<section class="sec ways mid">
+  <div class="wrap reveal">
+    <div class="ways-in rev">
+      <div class="ways-txt">
+        <div class="eyebrow wno"><span class="wnum">02</span>예약송금 · 자동납부</div>
+        <h2 class="h-lg">이제 안 챙겨도 돼요<br>자동으로 납부하세요</h2>
+        <p class="p-lg">매달 정한 날짜에 알아서 결제되고 송금돼요. <br>깜빡할 일도 늦을 일도 없어요.</p>
+      </div>
+      <div class="ways-vis">
+        <div class="noti">
+          <div class="nt">
+            <span class="nt-ic"><iconify-icon icon="mingcute:alarm-2-fill"></iconify-icon></span>
+            <div class="nt-b">
+              <div class="nt-t">내일은 자동납부 날이에요</div>
+              <div class="nt-s">10월 25일 (수) 월세 680,000원이 결제될 예정이에요.</div>
+            </div>
+            <span class="nt-tm">오전 10:00</span>
+          </div>
+          <div class="nt">
+            <span class="nt-ic"><iconify-icon icon="mingcute:check-circle-fill"></iconify-icon></span>
+            <div class="nt-b">
+              <div class="nt-t">자동납부가 끝났어요</div>
+              <div class="nt-s">집주인 계좌로 680,000원이 입금됐어요.</div>
+            </div>
+            <span class="nt-tm">오전 10:02</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑤-3 나눠서 결제 -->
+<section class="sec ways">
+  <div class="wrap reveal">
+    <div class="ways-in">
+      <div class="ways-txt">
+        <div class="eyebrow wno"><span class="wnum">03</span>나눠서 결제</div>
+        <h2 class="h-lg">여러 카드 한도를<br>나눠서 결제하세요</h2>
+        <p class="p-lg">두 장으로 나눠 결제해도 <br>받는 분에게는 한 번에 입금돼요.</p>
+      </div>
+      <div class="ways-vis">
+        <div class="split">
+          <div class="sp-cards">
+            <div class="sp-card"><span class="sp-bank">신한카드</span><span class="sp-amt">400,000원</span></div>
+            <div class="sp-plus">+</div>
+            <div class="sp-card"><span class="sp-bank">KB국민카드</span><span class="sp-amt">280,000원</span></div>
+          </div>
+          <div class="sp-arr"><iconify-icon icon="mingcute:arrow-down-fill"></iconify-icon><span>합쳐서 한 번에</span></div>
+          <div class="sp-recv">
+            <div class="sp-l"><iconify-icon icon="mingcute:check-circle-fill"></iconify-icon>집주인 계좌 입금</div>
+            <div class="sp-v">680,000원</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 단락 사이 얇은 CTA -->
+<div class="ctaband reveal">
+  <div class="cb-in">
+    <div class="cb-t">지금 바로 카드로 낼 수 있어요<span>서류 한 장이면 3분 만에 신청이 끝나요</span></div>
+    <a class="cb-b" href="송금하기.html"><iconify-icon icon="mingcute:flash-fill"></iconify-icon>바로 송금하기</a>
+  </div>
+</div>
+
+<!-- ⑥ 이용안내 — 앱 / 웹 -->
+<section class="sec guide tint">
   <div class="wrap reveal" style="text-align:center">
-    <div class="eyebrow">수수료</div>
-    <h2 class="h-lg">수수료는 4% 하나<br>혜택은 더 많아요</h2>
-    <div class="stats">
-      <div class="stat pay"><div class="sl">수수료</div><div class="sv">4%</div><div class="ss">숨은 비용 없음</div></div>
-      <div class="stat"><div class="sl">혜택</div><div class="sv">최대 1.5%</div><div class="ss">포인트 · 캐시백</div></div>
-      <div class="stat"><div class="sl">혜택</div><div class="sv">6개월</div><div class="ss">무이자 할부</div></div>
-      <div class="stat"><div class="sl">혜택</div><div class="sv">최대 17%</div><div class="ss">월세 세액공제</div></div>
+    <div class="eyebrow">이용방법</div>
+    <h2 class="h-lg">랜선페이 상세 이용가이드<br>이렇게 사용해요</h2>
+    <p class="p-lg">단계를 누르면 실제 화면과 함께 볼 수 있어요.</p>
+
+    <div class="gtabs">
+      <button class="gtab on" onclick="gMode('app',this)">앱으로 이용하기</button>
+      <button class="gtab" onclick="gMode('web',this)">웹으로 이용하기</button>
     </div>
-    <div class="trustband">
-      <span class="tb"><iconify-icon icon="mingcute:safe-lock-fill"></iconify-icon>결제대행(PG) 정식 등록</span>
-      <span class="tb"><iconify-icon icon="mingcute:shield-shape-fill"></iconify-icon>승인 후에만 입금</span>
-      <span class="tb"><iconify-icon icon="mingcute:scale-fill"></iconify-icon>여신전문금융업법 준수</span>
+
+    <div class="gwrap">
+      <div class="gvis app" id="gVis"><div class="gscr" id="gScr"></div></div>
+      <div class="gsteps" id="gSteps"></div>
+      <div class="gslides" id="gSlides"></div>
+      <div class="dots gdots" id="gDots"></div>
     </div>
+    <p class="guide-mobtip">옆으로 넘기면 다음 단계를 볼 수 있어요.</p>
+  </div>
+</section>
+
+<!-- ⑦ 매거진 — 성장과 신뢰 -->
+<section class="sec news-sec">
+  <div class="wrap reveal" style="text-align:center">
+    <div class="eyebrow">뉴스룸</div>
+    <h2 class="h-lg">언론에 실린<br>랜선페이 소식</h2>
+    <p class="p-lg">보안 강화 · 결제 확대 · 나눔 활동을 기사로 확인해보세요.</p>
+
+    <a class="nr-more" href="뉴스룸.html">뉴스룸 전체 보기<iconify-icon icon="mingcute:right-line"></iconify-icon></a>
+
+    <div class="nr-list" id="nrList"></div>
+  </div>
+</section>
+
+<section class="sec tint">
+  <div class="wrap reveal" style="text-align:center">
+    <div class="eyebrow">FAQ</div>
+    <h2 class="h-lg">자주 묻는 질문</h2>
+    <p class="p-lg">가장 많이 묻는 질문만 모았어요.</p>
+    <div class="fqtabs"><button class="fqtab on" onclick="fqTab(0,this)">안전 · 신뢰</button><button class="fqtab" onclick="fqTab(1,this)">비용 · 혜택</button><button class="fqtab" onclick="fqTab(2,this)">이용 방법</button></div>
+
+    <div class="fqbody">
+      <div class="fqpanel on" id="fqp0">
+        <div class="fq"><div class="fq-q"><span class="fq-ic"><iconify-icon icon="mingcute:shield-fill"></iconify-icon></span><span class="fq-t">카드깡 아닌가요?</span></div><div class="fa"><span class="at">아니에요. 계약서나 고지서 같은 <b>실제 거래 서류를 담당자가 확인한 결제만</b> 입금돼요. 내 계좌나 지인 계좌로는 보낼 수 없고요.</span></div></div>
+        <div class="fq"><div class="fq-q"><span class="fq-ic"><iconify-icon icon="mingcute:chart-bar-fill"></iconify-icon></span><span class="fq-t">대출인가요? 신용점수가 떨어지나요?</span></div><div class="fa"><span class="at">대출이 아니에요. <b>카드론이나 현금서비스와 다른 일반 신용카드 결제</b>라 이자도 없고 신용점수도 그대로예요.</span></div></div>
+        <div class="fq"><div class="fq-q"><span class="fq-ic"><iconify-icon icon="mingcute:user-3-fill"></iconify-icon></span><span class="fq-t">상대방 동의가 필요한가요?</span></div><div class="fa"><span class="at">필요 없어요. <b>은행과 계좌번호만 알면</b> 받는 분 이름까지 자동으로 확인돼요. 상대방에게는 따로 연락이 가지 않아요.</span></div></div>
+        <div class="fq"><div class="fq-q"><span class="fq-ic"><iconify-icon icon="mingcute:group-3-fill"></iconify-icon></span><span class="fq-t">상대방도 가입해야 하나요?</span></div><div class="fa"><span class="at">아니요. 받는 분은 <b>평소처럼 계좌로 현금을 받을 뿐</b>이라 가입도 앱 설치도 필요 없어요.</span></div></div>
+        <div class="fq"><div class="fq-q"><span class="fq-ic"><iconify-icon icon="mingcute:refresh-2-fill"></iconify-icon></span><span class="fq-t">승인이 안 되면 어떻게 되나요?</span></div><div class="fa"><span class="at">결제가 <b>자동으로 취소</b>되고 카드값도 청구되지 않아요. 환불을 기다릴 일이 없습니다.</span></div></div>
+        <div class="fq"><div class="fq-q"><span class="fq-ic"><iconify-icon icon="mingcute:information-fill"></iconify-icon></span><span class="fq-t">이용할 수 없는 거래도 있나요?</span></div><div class="fa"><span class="at">있어요. 실제 거래 없이 카드값을 현금으로 바꾸는 행위, 빚 상환 · 이자 납부 · 투자 목적 결제는 <b>법으로 금지</b>되어 있어요.</span></div></div>
+      </div>
+      <div class="fqpanel" id="fqp1">
+        <div class="fq"><div class="fq-q"><span class="fq-ic"><iconify-icon icon="mingcute:wallet-4-fill"></iconify-icon></span><span class="fq-t">수수료 말고 숨은 비용이 있나요?</span></div><div class="fa"><span class="at">없어요. 비용은 <b>결제할 때 붙는 수수료 4%</b>가 전부예요. 가입비도 월 이용료도 없어요.</span></div></div>
+        <div class="fq"><div class="fq-q"><span class="fq-ic"><iconify-icon icon="mingcute:bank-card-fill"></iconify-icon></span><span class="fq-t">무이자 할부는 몇 개월까지 되나요?</span></div><div class="fa"><span class="at"><b>2~6개월</b>까지 가능해요. 가능한 개월 수는 카드사 행사에 따라 달라지고, 결제창에서 지금 되는 조건을 보여드려요.</span></div></div>
+        <div class="fq"><div class="fq-q"><span class="fq-ic"><iconify-icon icon="mingcute:gift-fill"></iconify-icon></span><span class="fq-t">카드 포인트와 실적도 쌓이나요?</span></div><div class="fa"><span class="at">네. 쇼핑몰에서 결제한 것과 똑같이 <b>포인트 · 캐시백이 쌓이고 카드 실적에도 들어갑니다.</b></span></div></div>
+        <div class="fq"><div class="fq-q"><span class="fq-ic"><iconify-icon icon="mingcute:bill-fill"></iconify-icon></span><span class="fq-t">연말정산 세액공제가 되나요?</span></div><div class="fa"><span class="at">월세는 <b>세액공제 대상</b>이에요. 사업자라면 경비처리도 됩니다. 필요한 자료는 앱에서 바로 받을 수 있어요.</span></div></div>
+        <div class="fq"><div class="fq-q"><span class="fq-ic"><iconify-icon icon="mingcute:card-pay-fill"></iconify-icon></span><span class="fq-t">카드 한도가 모자라면 어떻게 하나요?</span></div><div class="fa"><span class="at"><b>나눠서 결제</b>할 수 있어요. 카드 두 장으로 나눠 결제해도 상대방에게는 한 번에 합쳐서 송금됩니다.</span></div></div>
+        <div class="fq"><div class="fq-q"><span class="fq-ic"><iconify-icon icon="mingcute:flash-fill"></iconify-icon></span><span class="fq-t">입금까지 얼마나 걸리나요?</span></div><div class="fa"><span class="at">서류 확인이 끝나면 바로 보내드려요. 신청부터 입금까지 <b>평균 12분</b> 정도 걸립니다.</span></div></div>
+      </div>
+      <div class="fqpanel" id="fqp2">
+        <div class="fq"><div class="fq-q"><span class="fq-ic"><iconify-icon icon="mingcute:grid-fill"></iconify-icon></span><span class="fq-t">어떤 항목을 낼 수 있나요?</span></div><div class="fa"><span class="at">월세 · 관리비 · 복비 · 이사비 · 인테리어 · 청소비 · 교육비 · 보험료 · B2B 매입대금 등 <b>실제 거래를 증명할 수 있으면</b> 대부분 가능해요.</span></div></div>
+        <div class="fq"><div class="fq-q"><span class="fq-ic"><iconify-icon icon="mingcute:file-fill"></iconify-icon></span><span class="fq-t">어떤 서류가 필요한가요?</span></div><div class="fa"><span class="at">유형마다 달라요. 월세는 계약서, 관리비는 고지서처럼 <b>금액과 계좌가 보이는 서류 한 장</b>이면 됩니다.</span></div></div>
+        <div class="fq"><div class="fq-q"><span class="fq-ic"><iconify-icon icon="mingcute:calendar-2-fill"></iconify-icon></span><span class="fq-t">매달 낼 때도 서류를 계속 올려야 하나요?</span></div><div class="fa"><span class="at">아니요. 한 번 등록한 계약은 <b>다음 달부터 서류 없이 1분</b>이면 끝나요.</span></div></div>
+        <div class="fq"><div class="fq-q"><span class="fq-ic"><iconify-icon icon="mingcute:time-fill"></iconify-icon></span><span class="fq-t">매달 자동으로 낼 수 있나요?</span></div><div class="fa"><span class="at">네. <b>예약송금과 자동납부</b>를 쓰면 정한 날짜에 알아서 결제되고 송금돼요.</span></div></div>
+        <div class="fq"><div class="fq-q"><span class="fq-ic"><iconify-icon icon="mingcute:store-fill"></iconify-icon></span><span class="fq-t">주말이나 공휴일에도 되나요?</span></div><div class="fa"><span class="at">네. <b>연중무휴</b>로 운영해요. 주말과 공휴일에도 결제하고 송금할 수 있어요.</span></div></div>
+        <div class="fq"><div class="fq-q"><span class="fq-ic"><iconify-icon icon="mingcute:cellphone-2-fill"></iconify-icon></span><span class="fq-t">앱을 꼭 깔아야 하나요?</span></div><div class="fa"><span class="at">아니요. <b>웹에서 휴대폰 인증 한 번</b>이면 회원가입 없이 송금까지 끝나요. PC · 태블릿 · 휴대폰 모두 됩니다.</span></div></div>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -572,13 +1435,14 @@
 </section>
 
 <footer class="footer">
-  <div class="f-in">
-    <div class="f-menu">
-      <a href="이용가이드.html">이용가이드</a>
-      <a href="고객센터.html">고객센터</a>
-      <a href="고객센터.html#faq">자주 묻는 질문</a>
-      <a href="송금하기.html">송금하기</a>
+  <div class="f-legal">
+    <div class="f-legal-in">
+      <a href="약관.html?doc=terms">서비스 이용약관</a>
+      <a href="약관.html?doc=privacy">개인정보 처리방침</a>
+      <a href="약관.html?doc=third">개인정보 3자 제공 고지</a>
     </div>
+  </div>
+  <div class="f-in">
     <p class="f-co">
       <span><em>상호</em>랜선페이 · (주)미라클컴퍼니</span>
       <span><em>대표</em>김남기</span>
@@ -586,12 +1450,28 @@
       <span><em>사업자등록번호</em>437-88-03148</span>
       <span><em>주소</em>충청남도 천안시 서북구 쌍용대로 234, 방영학생활건강빌딩 3층 (성정동)</span>
       <span><em>대표번호</em>1577-6369 <i>(평일 9:00~18:00)</i></span>
+      <span><em>메일</em>help@lanseonpay.co.kr</span>
     </p>
     <p class="f-note">랜선페이는 전자금융거래법에 따라 등록된<br>전자지급결제대행(PG) 서비스입니다.</p>
+    <p class="f-copy">Copyright © 2026 랜선페이. All rights reserved.</p>
   </div>
 </footer>
 
 <!-- 전체메뉴 드로어 -->
+<!-- 이번 달 무이자 안내 팝업 -->
+<div class="fpdim" id="fpDim" onclick="closeFree()"></div>
+<div class="fpop" id="fpBox" role="dialog" aria-label="이번 달 무이자 할부 안내">
+  <div class="fp-top">
+    <h3 id="fpTtl">이번 달 무이자 할부</h3>
+    <button class="fp-x" onclick="closeFree()" aria-label="닫기">✕</button>
+  </div>
+  <div class="fp-body" id="fpBody"></div>
+  <div class="fp-btm">
+    <label class="fp-chk"><input type="checkbox" id="fpToday">오늘 하루 보지 않기</label>
+    <button class="btn blue fp-go" onclick="location.href='고객센터.html?type=notice&id=0'">자세히 보기</button>
+  </div>
+</div>
+
 <div class="drawer-layer">
 <div class="drawer-dim" id="ddim" onclick="drawer(false)"></div>
 <aside class="drawer" id="drawer">
@@ -601,7 +1481,6 @@
   <a href="이용가이드.html"><iconify-icon icon="mingcute:book-2-fill"></iconify-icon>이용가이드<span class="gv">›</span></a>
   <a href="index.html#reviews"><iconify-icon icon="mingcute:chat-2-fill"></iconify-icon>이용후기<span class="gv">›</span></a>
   <a href="송금하기.html"><iconify-icon icon="mingcute:flash-fill"></iconify-icon>송금하기<span class="gv">›</span></a>
-  <a href="javascript:void(0);" onclick="location.href='세금자료.html'; return false;"><iconify-icon icon="mingcute:file-certificate-fill"></iconify-icon>세금계산서 · 부가세 신고<span class="gv">›</span></a>
   <button class="d-login" onclick="location.href='로그인.html'">로그인</button>
 </aside>
 </div>
@@ -646,72 +1525,6 @@ setInterval(()=>{
   el.classList.add('on');
 }, 7000);
 
-/* 실시간 알림 배지 (예시 문구 — 실제 데이터 연동 시 교체) */
-const LIVE=[
-  '방금 <b>마포구</b>에서 월세 <b>820,000원</b>이 카드로 결제됐어요',
-  '<b>3분 전</b> 자재대금 <b>2,400,000원</b>이 6개월 무이자로 나눠졌어요',
-  '오늘 <b>1,284명</b>이 카드로 현금 결제를 대신했어요',
-  '<b>8분 전</b> 관리비 <b>310,000원</b>, 신청 12분 만에 입금 완료',
-  '<b>방금</b> 이사비 <b>1,500,000원</b>이 예금주 확인 후 송금됐어요'
-];
-const tickWrap=document.getElementById('liveTxt');
-/* 가장 긴 문구 기준으로 폭을 미리 고정 — 글자 바뀌어도 박스가 안 늘었다 줄었다 함 */
-(()=>{
-  const probe=document.createElement('span');
-  probe.style.cssText='position:absolute; visibility:hidden; white-space:nowrap;';
-  tickWrap.appendChild(probe);
-  let w=0;
-  LIVE.forEach(t=>{ probe.innerHTML=t; w=Math.max(w, probe.offsetWidth); });
-  probe.remove();
-  tickWrap.style.width=w+'px';
-})();
-let li=0;
-setInterval(()=>{
-  li=(li+1)%LIVE.length;
-  const prev=tickWrap.querySelector('.tick.on');
-  const next=document.createElement('span');
-  next.className='tick';           // 위쪽(-100%)에서 대기
-  next.innerHTML=LIVE[li];
-  tickWrap.appendChild(next);
-  void next.offsetWidth;
-  if(prev){ prev.classList.remove('on'); prev.classList.add('out'); }  // 아래로 밀려남
-  next.classList.add('on');
-  setTimeout(()=>prev&&prev.remove(), 700);
-}, 4200);
-
-/* 숫자 카운트업 */
-document.querySelectorAll('.cnt').forEach(el=>{
-  const to=parseInt(el.dataset.to,10), dur=1100, t0=Date.now();
-  const id=setInterval(()=>{
-    const p=Math.min((Date.now()-t0)/dur,1), e=1-Math.pow(1-p,3);
-    el.textContent=Math.round(to*e).toLocaleString('ko-KR');
-    if(p>=1) clearInterval(id);
-  }, 40);
-});
-
-/* 계산기 */
-const fmt=n=>n.toLocaleString('ko-KR');
-function calc(){
-  const raw=document.getElementById('amt').value.replace(/[^0-9]/g,'');
-  const a=parseInt(raw||'0',10);
-  const fee=Math.round(a*0.04), total=a+fee;
-  document.getElementById('amt').value=a?fmt(a):'';
-  document.getElementById('calcbox').classList.toggle('empty', !a);
-  document.getElementById('amtField').classList.toggle('filled', !!a);
-  const put=(id,v)=>document.getElementById(id).textContent=a?v:'-';
-  put('rGet', fmt(a)+'원');
-  put('rFee', fmt(fee)+'원');
-  put('rMon', fmt(Math.round(total/6/100)*100)+'원');
-  put('rPt', '+'+fmt(Math.round(a*0.01))+'원');
-  put('rTotal', fmt(total)+'원');
-}
-function addAmt(n){
-  const raw=document.getElementById('amt').value.replace(/[^0-9]/g,'');
-  document.getElementById('amt').value=fmt((parseInt(raw||'0',10))+n); calc();
-}
-function setAmt(n){ document.getElementById('amt').value=n?fmt(n):''; calc(); }
-document.getElementById('amt').addEventListener('input', calc);
-calc();
 
 /* 후기 30개 + 좌측 자동 롤링 (호버·터치 시 멈춤, 직접 스크롤 가능) */
 const RV=[
@@ -749,20 +1562,359 @@ const RV=[
 const track=document.getElementById('rvTrack');
 track.innerHTML=[...RV,...RV].map(r=>'<div class="rv"><div class="stars">'+'★'.repeat(r[0])+'☆'.repeat(5-r[0])+'</div><div class="q">"'+r[1]+'"</div><div class="who">'+r[2]+'</div></div>').join('');
 const wrapEl=document.getElementById('rvWrap');
-let rvPause=false;
-['pointerenter','pointerdown','touchstart'].forEach(ev=>wrapEl.addEventListener(ev,()=>rvPause=true));
-['pointerleave','pointerup','touchend'].forEach(ev=>wrapEl.addEventListener(ev,()=>rvPause=false));
-setInterval(()=>{
-  if(!rvPause){
-    wrapEl.scrollLeft+=1;
-    if(wrapEl.scrollLeft>=track.scrollWidth/2) wrapEl.scrollLeft-=track.scrollWidth/2;
+/* 후기 롤링 — 마우스를 올려도 계속 흐르고, 잡아끌면 속도가 부드럽게 줄었다가 다시 붙음 */
+(function(){
+  var speed = 0.45, target = 0.45;          /* target 을 향해 속도를 서서히 맞춤 */
+  var dragging = false, touching = false, moved = 0, startX = 0, startPos = 0, tt;
+  function half(){ return track.scrollWidth / 2; }
+  function wrap(v){
+    var h = half();
+    if (!h) return v;
+    if (v >= h) v -= h;
+    if (v < 1) v += h;
+    return v;
   }
-}, 24);
+  var pos = wrapEl.scrollLeft;
+
+  wrapEl.addEventListener('pointerdown', function(e){
+    if (e.pointerType !== 'mouse') return;
+    dragging = true; moved = 0; startX = e.clientX; startPos = pos; target = 0;
+    wrapEl.setPointerCapture(e.pointerId);
+  });
+  wrapEl.addEventListener('pointermove', function(e){
+    if (!dragging) return;
+    moved = Math.max(moved, Math.abs(e.clientX - startX));
+    pos = wrap(startPos - (e.clientX - startX));
+    wrapEl.scrollLeft = pos;
+  });
+  ['pointerup','pointercancel'].forEach(function(ev){
+    wrapEl.addEventListener(ev, function(){ dragging = false; target = 0.45; });
+  });
+  wrapEl.addEventListener('dragstart', function(e){ e.preventDefault(); });
+
+  /* 손가락 스크롤은 브라우저에 맡기고, 그동안 자동 이동만 양보 */
+  wrapEl.addEventListener('touchstart', function(){ touching = true; target = 0; clearTimeout(tt); }, {passive:true});
+  wrapEl.addEventListener('touchend', function(){ tt = setTimeout(function(){ touching = false; target = 0.45; }, 700); }, {passive:true});
+
+  wrapEl.addEventListener('scroll', function(){
+    var w = wrap(wrapEl.scrollLeft);
+    if (w !== wrapEl.scrollLeft) wrapEl.scrollLeft = w;
+    pos = wrapEl.scrollLeft;
+  }, {passive:true});
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  (function tick(){
+    speed += (target - speed) * 0.06;   /* 부드럽게 멈추고 부드럽게 출발 */
+    if (!dragging && !touching && speed > 0.005){
+      pos = wrap(pos + speed);
+      wrapEl.scrollLeft = pos;
+    }
+    requestAnimationFrame(tick);
+  })();
+})();
 
 /* 은은한 등장 (안전장치 포함) */
 const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }),{threshold:.08});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 setTimeout(()=>document.querySelectorAll('.reveal:not(.in)').forEach(el=>el.classList.add('in')), 2500);
+
+/* 항목별 필요 서류 팝업 — 송금하기 페이지와 같은 기준 */
+var CASE_DOCS = {
+  '부동산 임대차': { intro:'계약 상황에 맞는 서류를 준비해주세요.', cases:[
+    {t:'중개사 확인 또는 확정일자가 있는 계약', items:['정식 계약서']},
+    {t:'확인 · 확정일자가 없는 계약', all:true, items:['계약서','최근 월세 입금내역 2~3회분']},
+    {t:'계약서를 잃어버렸다면', all:true, items:['건축물대장등본 (PC에서 무료 발급)','최근 월세 입금내역 2~3회분']}
+  ], key:'계좌 예금주와 집주인이 같아야 이용할 수 있어요.',
+     tip:'주소 · 주민번호 · 휴대폰번호는 가리고 올려주세요.' },
+  '별도 관리비': { intro:'아래 중 하나만 준비하면 돼요.', cases:[
+    {items:['관리비 고지서(청구서)','관리비 알림톡 캡처','관리비 영수증','세금계산서']}
+  ], key:'서류에서 관리비 금액과 납부계좌가 보여야 해요.',
+     tip:'알림톡은 발신자와 내용이 한 화면에 다 보이게 캡처해주세요.' },
+  '복비': { intro:'아래 중 하나만 준비하면 돼요.', cases:[
+    {items:['중개보수가 적힌 계약서','중개보수 영수증']}
+  ], key:'서류에서 금액과 계좌가 보여야 해요.',
+     tip:'계좌가 안 보이면 부동산 명함 사진을 함께 올려주세요.' },
+  '이사비': { intro:'아래 중 하나만 준비하면 돼요.', cases:[
+    {items:['이사앱 주문내역 캡처','이사비 견적서','계약서','문자 · 카톡 내역 (업체 명함 포함)']}
+  ], key:'서류에서 금액과 계좌가 보여야 해요.',
+     tip:'100만원 이상이면 업체 사업자등록증을 더 요청할 수 있어요.' },
+  '인테리어': { intro:'아래 중 하나만 준비하면 돼요.', cases:[
+    {items:['공사 · 시공 계약서','견적서','영수증 또는 세금계산서','문자 · 카톡 내역 (업체 정보 포함)']}
+  ], key:'서류에서 금액과 납부계좌가 보여야 해요.' },
+  '청소비': { intro:'아래 중 하나만 준비하면 돼요.', cases:[
+    {items:['청소앱 주문내역 캡처','청소비 견적서','계약서','문자 · 카톡 내역 (업체 명함 포함)']}
+  ], key:'서류에서 금액과 계좌가 보여야 해요.',
+     tip:'50만원 이상이면 업체 사업자등록증을 더 요청할 수 있어요.' },
+  '교육비': { intro:'상황에 맞는 서류를 준비해주세요.', cases:[
+    {t:'학원비 · 수강료 · 등록금', items:['고지서(청구서)','알림톡 · 납부안내 메일 캡처','온라인 공지문 캡처']},
+    {t:'과외 · 레슨', all:true, items:['강사 확인 서류 (신고필증 · 강사 프로필 캡처 등)','계약서 · 영수증 · 문자 내역 중 하나']}
+  ], key:'서류에서 금액과 계좌가 보여야 해요.' },
+  '보험료': { intro:'아래 중 하나만 준비하면 돼요.', cases:[
+    {items:['보험증권(계약서)','보험가입 온라인조회 캡처','보험사 납부안내 알림톡 캡처']}
+  ], key:'보험사 납부용 가상계좌로만 낼 수 있어요. 본인 계좌로는 안 돼요.' },
+  'B2B 매입대금': { intro:'송금할 계좌 유형에 맞춰 준비해주세요.', cases:[
+    {t:'거래처 사업자계좌로 송금', items:['세금계산서 · 거래명세서 · 영수증 · 계약서 중 하나']},
+    {t:'대표 개인계좌로 송금', all:true, items:['위 서류 중 하나','거래처 사업자등록증 사본']}
+  ], key:'손으로만 쓴 서류는 쓸 수 없어요.' }
+};
+
+function openDoc(name){
+  var d = CASE_DOCS[name];
+  if (!d) return;
+  document.getElementById('cTitle').textContent = name + ' · 필요 서류';
+  var h = '<div class="cd-intro">' + d.intro + '</div>';
+  d.cases.forEach(function(c){
+    h += '<div class="cd-case">';
+    if (c.t) h += '<div class="cdt">' + c.t + '</div>';
+    /* 안내 문장과 같은 말이 되는 경우엔 배지를 넣지 않음 */
+    if (d.cases.length > 1) h += '<span class="cdn">' + (c.all ? '모두 필요해요' : '아래 중 하나') + '</span>';
+    h += '<ul>';
+    c.items.forEach(function(it){
+      h += '<li><iconify-icon icon="mingcute:check-circle-fill"></iconify-icon><span>' + it + '</span></li>';
+    });
+    h += '</ul></div>';
+  });
+  if (d.key) h += '<div class="cd-key"><iconify-icon icon="mingcute:alert-fill"></iconify-icon><span>' + d.key + '</span></div>';
+  if (d.tip) h += '<div class="cd-tip">· ' + d.tip + '</div>';
+  document.getElementById('cBody').innerHTML = h;
+  document.getElementById('cBody').scrollTop = 0;
+  document.getElementById('cDim').classList.add('on');
+  document.getElementById('cBox').classList.add('on');
+  document.body.style.overflow = 'hidden';
+}
+function closeDoc(){
+  document.getElementById('cDim').classList.remove('on');
+  document.getElementById('cBox').classList.remove('on');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeDoc(); });
+
+/* 이용안내 — 앱 / 웹 단계 안내 */
+var GUIDE = {
+  app: [
+    { t:"무엇을 결제할지 먼저 골라요",
+      d:"내 결제 유형에 맞게 선택해주세요. 유형에 따라 <br><b>필요한 서류가 달라지니</b> 실제 용도에 맞게 골라주세요.",
+      s:"<div class=\"sprog\"><i style=\"width:20%\"></i></div> <div class=\"q\">무엇을 결제할까요?</div> <div class=\"fade\" style=\"flex:1; overflow:hidden\"> <div class=\"catrow sel\"><div class=\"cic\"><iconify-icon icon=\"mingcute:home-4-fill\"></iconify-icon></div><div><div class=\"cn\">부동산 임대차</div><div class=\"cd\">월세 · 관리비 · 계약금 · 보증금</div></div><iconify-icon class=\"gv\" icon=\"mingcute:right-line\"></iconify-icon></div> <div class=\"catrow\"><div class=\"cic\"><iconify-icon icon=\"mingcute:building-2-fill\"></iconify-icon></div><div><div class=\"cn\">별도 관리비</div><div class=\"cd\">아파트 · 상가 관리비만 따로 낼 때</div></div><iconify-icon class=\"gv\" icon=\"mingcute:right-line\"></iconify-icon></div> <div class=\"catrow\"><div class=\"cic\"><iconify-icon icon=\"mingcute:paint-brush-fill\"></iconify-icon></div><div><div class=\"cn\">인테리어</div><div class=\"cd\">공사 · 수리 · 시공 · 설치 · 철거비</div></div><iconify-icon class=\"gv\" icon=\"mingcute:right-line\"></iconify-icon></div> <div class=\"catrow\"><div class=\"cic\"><iconify-icon icon=\"mingcute:cash-fill\"></iconify-icon></div><div><div class=\"cn\">복비</div><div class=\"cd\">부동산 중개수수료</div></div><iconify-icon class=\"gv\" icon=\"mingcute:right-line\"></iconify-icon></div> <div class=\"catrow\"><div class=\"cic\"><iconify-icon icon=\"mingcute:truck-fill\"></iconify-icon></div><div><div class=\"cn\">이사비</div><div class=\"cd\">용달 · 포장이사</div></div><iconify-icon class=\"gv\" icon=\"mingcute:right-line\"></iconify-icon></div> <div class=\"catrow\"><div class=\"cic\"><iconify-icon icon=\"mingcute:broom-fill\"></iconify-icon></div><div><div class=\"cn\">청소비</div><div class=\"cd\">입주 · 정기 청소</div></div><iconify-icon class=\"gv\" icon=\"mingcute:right-line\"></iconify-icon></div> <div class=\"catrow\"><div class=\"cic\"><iconify-icon icon=\"mingcute:package-2-fill\"></iconify-icon></div><div><div class=\"cn\">B2B 매입대금</div><div class=\"cd\">거래처 · 식자재 대금</div></div><iconify-icon class=\"gv\" icon=\"mingcute:right-line\"></iconify-icon></div> <div class=\"catrow\"><div class=\"cic\"><iconify-icon icon=\"mingcute:car-fill\"></iconify-icon></div><div><div class=\"cn\">렌트료 · 렌탈료</div><div class=\"cd\">자동차 · 가전 · 생활용품</div></div><iconify-icon class=\"gv\" icon=\"mingcute:right-line\"></iconify-icon></div> <div class=\"catrow\"><div class=\"cic\"><iconify-icon icon=\"mingcute:shield-fill\"></iconify-icon></div><div><div class=\"cn\">보험료</div><div class=\"cd\">건강 · 연금 · 화재</div></div><iconify-icon class=\"gv\" icon=\"mingcute:right-line\"></iconify-icon></div> </div>" },
+    { t:"보낼 금액을 입력해요",
+      d:"내 카드에서 빠질 돈이 아니라 <b>상대방이 받아야 하는 금액</b>을 넣어주세요. 수수료는 자동으로 계산됩니다.",
+      s:"<div class=\"sprog\"><i style=\"width:40%\"></i></div> <div class=\"q\">얼마를 보낼까요?</div> <div class=\"chipsum\"><iconify-icon icon=\"mingcute:home-4-fill\"></iconify-icon>부동산 임대차 · 월세</div> <div class=\"lbl\">보낼 금액</div> <div class=\"amtrow\"><span class=\"n\">680,000</span><span class=\"w\">원</span></div> <div class=\"qbtns\"><span>+10만</span><span>+50만</span><span>+100만</span></div> <div class=\"feeline\"><span>상대방이 받는 돈</span><span class=\"v\">680,000원</span></div> <div class=\"feeline\" style=\"margin-top:8px\"><span>수수료 4%</span><span class=\"v\">27,200원</span></div> <div class=\"feeline\" style=\"margin-top:8px; background:var(--primary-50); color:var(--primary-dark)\"><span style=\"font-weight:700\">내 카드 결제액</span><span class=\"v\">707,200원</span></div> <div class=\"scrhint\">보낼 금액은 상대방이 받을 금액이에요.<br>수수료는 자동으로 더해집니다.</div> <button class=\"sbtn\">다음</button>" },
+    { t:"받는 분 계좌를 넣고 인증해요",
+      d:"예금주가 자동으로 확인되니 <b>상대방에게 연락하거나 동의를 받을 필요가 없어요.</b> 상대방은 평소처럼 계좌로 현금을 받게 됩니다.",
+      s:"<div class=\"sprog\"><i style=\"width:60%\"></i></div> <div class=\"q\">어디로 보낼까요?</div> <div class=\"lbl\">은행</div> <div class=\"selrow\"><span style=\"display:flex; align-items:center\"><span class=\"bk\">KB</span>국민</span><iconify-icon icon=\"mingcute:down-line\"></iconify-icon></div> <div class=\"lbl\">계좌번호</div> <div class=\"inbox\"><span class=\"txt\">123456-78-901234</span><span class=\"side\">계좌 인증</span></div> <div class=\"vbox\"> <iconify-icon icon=\"mingcute:check-circle-fill\"></iconify-icon> <div><div class=\"vl\">받는 분 (예금주)</div><div class=\"vn\">대성부동산</div></div> </div> <div class=\"scrhint\">상대방 동의 없이도 돼요.<br>인증하면 받는 분이 자동으로 확인돼요.</div> <button class=\"sbtn\">다음</button>" },
+    { t:"증빙 서류를 찍어서 올려요",
+      d:"실제 거래를 증명하는 서류가 필요해요. <br>이 절차를 통해 <b>합법적인 현금 송금</b>이 가능해요.",
+      s:"<div class=\"sprog\"><i style=\"width:70%\"></i></div> <div class=\"q\">고지서를 촬영해주세요</div> <div class=\"cam\"> <div class=\"bill\"> <div class=\"h\">2026년 8월 관리비 청구서</div> <div class=\"sub\">대성부동산 · 납부계좌 KB국민</div> <div class=\"r m\"></div><div class=\"r s\"></div><div class=\"r\"></div><div class=\"r m\"></div> <div class=\"box\"><div class=\"bt\">납부 금액</div><div class=\"bv\">680,000 원</div></div> <div class=\"r\" style=\"margin-top:14px\"></div><div class=\"r s\"></div><div class=\"r m\"></div> </div> <div class=\"fr\"><i></i><i></i><i></i><i></i></div> <div class=\"shot\"></div> </div> <div class=\"camhint\">서류 전체가 프레임 안에 들어오게 맞춰주세요</div>" },
+    { t:"카드를 고르고 할부를 정해요",
+      d:"일반 카드 결제와 똑같아서 <b>포인트 적립</b>도<br><b>카드 실적</b>도 그대로 쌓여요.",
+      s:"<div class=\"sprog\"><i style=\"width:85%\"></i></div> <div class=\"q\">어떻게 결제할까요?</div> <div class=\"seg3\"><span class=\"on\">카드결제</span><span>앱카드</span><span>간편결제</span></div> <div class=\"crow on\"> <span class=\"cmini samsung\"></span> <span class=\"ct\"><b>삼성 Deep Dream</b><i>•••• •••• •••• 4821</i></span> <span class=\"crad on\"></span> </div> <div class=\"crow\"> <span class=\"cmini hyundai\"></span> <span class=\"ct\"><b>현대 the Green</b><i>•••• •••• •••• 3092</i></span> <span class=\"crad\"></span> </div> <div class=\"cadd\">+ 새 카드 등록하기</div> <div class=\"lbl\">할부</div> <div class=\"instal\"><span>일시불</span><span class=\"on\">3개월</span><span>6개월</span></div> <div class=\"minfo\">무이자 가능 개월은 카드사 행사에 따라 달라져요.</div> <button class=\"sbtn\">다음</button>" },
+    { t:"마지막으로 한 번 더 확인해요",
+      d:"결제 버튼을 눌러도 <b>이 시점엔 아직 카드에서 돈이 빠지지 않아요.</b> 서류가 승인된 뒤에 결제와 입금이 함께 이뤄집니다.",
+      s:"<div class=\"sprog\"><i style=\"width:95%\"></i></div> <div class=\"q\">이대로 신청할까요?</div> <div class=\"cbox\"> <div class=\"crow\"><span class=\"l\">받는 분</span><span class=\"r\">대성부동산<div class=\"sub2\">부동산 임대차 · 월세</div></span></div> <div class=\"crow\"><span class=\"l\">결제 카드</span><span class=\"r\">삼성 Deep Dream<div class=\"sub2\">•••• 4821 · 3개월 무이자</div></span></div> </div> <div class=\"cbox\"> <div class=\"crow\"><span class=\"l\">신청 금액</span><span class=\"r\">680,000원</span></div> <div class=\"crow\"><span class=\"l\">수수료 4%</span><span class=\"r\">27,200원</span></div> <div class=\"ctot\"><span class=\"l\">총 결제금액</span><span class=\"v\">707,200원</span></div> </div> <button class=\"sbtn\">707,200원 결제 신청하기</button>" },
+    { t:"담당자 확인 후 현금으로 입금돼요",
+      d:"담당자가 서류를 확인하면 받는 분 계좌로 현금이 입금돼요. 보통 <b>영업일 기준 30분 이내</b>, 평균 12분이면 끝납니다.",
+      s:"<div class=\"done\"> <div class=\"ck\"><iconify-icon icon=\"mingcute:check-circle-fill\"></iconify-icon></div> <h4>결제 신청이 접수됐어요</h4> <p>담당자 확인 후 <b>승인되면</b> 카드에서 결제되고<br>받는 분에게 바로 현금으로 입금돼요.</p> <div class=\"receipt\"> <div class=\"rr\"><span class=\"l\">받는 곳</span><span class=\"v\">대성부동산</span></div> <div class=\"rr\"><span class=\"l\">결제 유형</span><span class=\"v\">부동산 임대차</span></div> <div class=\"rr\"><span class=\"l\">등록한 카드</span><span class=\"v\">삼성 Deep Dream · 3개월</span></div> <div class=\"rd\"></div> <div class=\"rr\"><span class=\"l\">신청 금액</span><span class=\"v\">680,000원</span></div> <div class=\"rr\"><span class=\"l\">수수료 (4%)</span><span class=\"v\">27,200원</span></div> <div class=\"rr big\"><span class=\"l\">결제 예정 금액</span><span class=\"v\">707,200원</span></div> </div> </div> <button class=\"sbtn\">홈으로</button> <button class=\"subbtn\">결제 영수증 보기</button>" }
+  ],
+  web: [
+    { t:"휴대폰 인증으로 시작해요",
+      d:"가입 및 설치 없이 <b>본인 명의의<br>휴대폰 인증 한 번</b>이면 바로 쓸 수 있어요.",
+      s:"<div class=\"bar\"><i></i><i></i><i></i></div> <div class=\"wbody\"> <div class=\"wq\">휴대폰 인증</div> <div class=\"wsub\">본인 명의 휴대폰으로 간편하게 시작해요.</div> <div class=\"wlbl\">통신사</div> <div class=\"telcos\"><span class=\"on\">SKT</span><span>KT</span><span>LG U+</span><span>SKT 알뜰폰</span><span>KT 알뜰폰</span><span>LG 알뜰폰</span></div> <div class=\"wlbl\">이름</div> <div class=\"wfield ph\">이름 입력</div> <div class=\"wlbl\">휴대폰 번호</div> <div class=\"w2col\"><div class=\"wfield ph\">숫자만 입력</div><div class=\"wfield ph\" style=\"flex:0 0 104px; justify-content:center; background:var(--primary-50); color:var(--primary-dark); font-weight:700; border-color:transparent\">인증번호 받기</div></div> <div class=\"wbtn\">인증하고 송금 시작하기</div> </div>" },
+    { t:"보낼 금액과 받는 분 계좌를 넣어요",
+      d:"은행과 계좌번호를 넣으면 <b>예금주가 바로 확인</b>돼요. <br>상대방 동의는 필요 없어요.",
+      s:"<div class=\"bar\"><i></i><i></i><i></i></div> <div class=\"wbody\"> <div class=\"wq\">결제 정보 입력</div> <div class=\"wsub\">받는 분 계좌와 보낼 금액을 넣어주세요.</div> <div class=\"wlbl\">결제 유형</div> <div class=\"wfield\">부동산 임대차 · 월세</div> <div class=\"wlbl\">보낼 금액</div> <div class=\"wfield ph\">상대방이 받을 금액</div> <div class=\"wlbl\">받는 분 계좌</div> <div class=\"w2col\"><div class=\"wfield\" style=\"flex:0 0 104px\">KB국민</div><div class=\"wfield ph\">계좌번호 입력</div></div> <div class=\"filerow\" style=\"margin-top:12px\"><iconify-icon icon=\"mingcute:check-circle-fill\"></iconify-icon><span class=\"fn\">받는 분 (예금주) · 대성부동산</span></div> <div class=\"wbtn\">다음</div> </div>" },
+    { t:"서류는 촬영 대신 파일로 올려요",
+      d:"PC에 저장된 <b>스캔본 · 캡처 이미지 · PDF</b>를<br>끌어다 놓기만 하면 돼요.",
+      s:"<div class=\"bar\"><i></i><i></i><i></i></div> <div class=\"wbody\"> <div class=\"wq\">증빙 서류 첨부</div> <div class=\"wsub\">실제 거래를 증명하는 서류를 올려주세요.</div> <div class=\"dochelp\"><span class=\"di\"><iconify-icon icon=\"mingcute:document-2-fill\"></iconify-icon></span> <span class=\"dt2\"><b>어떤 서류를 올려야 하나요?</b><i>결제 유형 13가지별로 확인해보세요</i></span> <iconify-icon class=\"dgv\" icon=\"mingcute:right-line\"></iconify-icon></div> <div class=\"drop\"> <iconify-icon icon=\"mingcute:upload-3-fill\"></iconify-icon> <div class=\"dt\">여기로 파일을 끌어다 놓으세요</div> <div class=\"ds\">JPG · PNG · PDF · 20MB 이하</div> </div> <div class=\"filerow\"><iconify-icon icon=\"mingcute:document-fill\"></iconify-icon><span class=\"fn\">임대차계약서.pdf</span><span class=\"fx\">1.2MB</span></div> <div class=\"wbtn\">다음</div> </div>" },
+    { t:"확인만 하면 신청이 끝나요",
+      d:"금액과 수수료를 확인하고 신청하면 끝.<br><b>서류 승인 뒤에 결제되고 바로 입금</b>돼요.",
+      s:"<div class=\"bar\"><i></i><i></i><i></i></div> <div class=\"wbody\"> <div class=\"wq\">결제 확인</div> <div class=\"wsub\">지금은 신청만 돼요. 서류가 승인되면 결제 · 입금됩니다.</div> <div class=\"cbox\"> <div class=\"crow\"><span class=\"l\">받는 분</span><span class=\"r\">대성부동산</span></div> <div class=\"crow\"><span class=\"l\">신청 금액</span><span class=\"r\">680,000원</span></div> <div class=\"crow\"><span class=\"l\">수수료 4%</span><span class=\"r\">27,200원</span></div> <div class=\"ctot\"><span class=\"l\">총 결제금액</span><span class=\"v\">707,200원</span></div> </div> <div class=\"wbtn\">707,200원 결제 신청하기</div> <div class=\"wghost\"><iconify-icon icon=\"mingcute:user-add-2-fill\"></iconify-icon>다른 사람에게 결제 요청 보내기</div> </div>" }
+  ]
+};
+var gCur = 'app';
+function gRender(mode, idx){
+  gCur = mode;
+  var list = GUIDE[mode];
+  document.getElementById('gSteps').innerHTML = list.map(function(st, i){
+    return '<div class="gstep' + (i === idx ? ' on' : '') + '" onclick="gPick(' + i + ')">'
+         + '<div class="gs-h"><span class="gs-no">' + (i + 1) + '</span><span class="gs-t">' + st.t + '</span></div>'
+         + '<div class="gs-d">' + st.d + '</div></div>';
+  }).join('');
+  var box = document.getElementById('gScr');
+  box.className = (mode === 'web') ? 'win' : 'gscr';
+  box.innerHTML = list[idx].s;
+  /* 모바일 : 단계별 화면을 옆으로 넘겨보는 슬라이드 */
+  var sl = document.getElementById('gSlides');
+  if (sl) sl.innerHTML = list.map(function(st, i){
+    var scr = (mode === 'web') ? '<div class="win">' + st.s + '</div>' : '<div class="gscr">' + st.s + '</div>';
+    return '<div class="gslide ' + mode + '">'
+         + '<div class="gsl-h"><span class="gsl-no">' + (i + 1) + '</span><span class="gsl-t">' + st.t + '</span></div>'
+         + '<div class="gscr-wrap">' + scr + '</div></div>';
+  }).join('');
+  var dots = document.getElementById('gDots');
+  if (dots){
+    dots.innerHTML = list.map(function(_, i){ return '<i' + (i === 0 ? ' class="on"' : '') + '></i>'; }).join('');
+    if (sl && !sl.__dotBound){
+      sl.__dotBound = true;
+      sl.addEventListener('scroll', function(){
+        var i = Math.round(sl.scrollLeft / sl.clientWidth);
+        [].forEach.call(document.getElementById('gDots').children, function(d, j){ d.classList.toggle('on', j === i); });
+      }, {passive:true});
+    }
+    sl.scrollLeft = 0;
+  }
+  void box.offsetWidth;            // 애니메이션을 처음부터 다시 재생
+  box.classList.add('anim');
+}
+function gPick(i){ gRender(gCur, i); }
+function gMode(mode, btn){
+  document.querySelectorAll('.gtab').forEach(function(b){ b.classList.remove('on'); });
+  btn.classList.add('on');
+  gRender(mode, 0);
+}
+gRender('app', 0);
+
+/* 결제 요청 — 내가 낼 돈 / 거래처 대금 전환 */
+var WAYS = {
+  me: { msg:'김미나님이 월세 결제를 요청했어요.', item:'부동산 임대차 · 월세', amt:'707,200원',
+        desc:'내가 내야 하는 월세나 관리비를 <br>가족이나 지인이 대신 결제해줘요.' },
+  biz:{ msg:'랜선페이에서 물품 대금 결제를 요청했어요.', item:'B2B 매입대금', amt:'5,200,000원',
+        desc:'내가 받아야 할 대금을 <br>거래처가 카드로 결제해서 보내줘요.' }
+};
+function wayTab(k, btn){
+  var w = WAYS[k];
+  document.querySelectorAll('.wsb').forEach(function(b){ b.classList.remove('on'); });
+  btn.classList.add('on');
+  document.getElementById('wayMsg').textContent = w.msg;
+  document.getElementById('wayItem').textContent = w.item;
+  document.getElementById('wayAmt').textContent = w.amt;
+  document.getElementById('wayDesc').innerHTML = w.desc;
+}
+
+/* 뉴스룸 — 기사 카드 (게시글.js 의 MAGS 사용) */
+(function(){
+  var box = document.getElementById('nrList');
+  if (!box || typeof MAGS === 'undefined') return;
+  var items = MAGS.slice(0, 6); items = items.concat(items);   /* 두 벌 이어 붙여 끊김 없이 */
+  box.innerHTML = items.map(function(m){
+    var href = m.url ? m.url : '뉴스룸.html';
+    var attr = m.url ? ' target="_blank" rel="noopener"' : '';
+    return '<a class="nr" href="' + href + '"' + attr + '>'
+         + '<span class="vis"><img src="' + m.img + '" alt="" onerror="this.remove()"></span>'
+         + '<span class="body"><span class="p"><b>' + m.press + '</b><span>' + m.date + '</span></span>'
+         + '<span class="t">' + m.ttl + '</span></span></a>';
+  }).join('');
+})();
+
+/* 자주 묻는 질문 — 주제 전환 */
+function fqTab(i, btn){
+  document.querySelectorAll('.fqtab').forEach(function(b){ b.classList.remove('on'); });
+  btn.classList.add('on');
+  document.querySelectorAll('.fqpanel').forEach(function(p, idx){ p.classList.toggle('on', idx === i); });
+}
+
+/* 자주 묻는 질문 — 모바일에서는 눌러서 펼치기 */
+document.querySelectorAll('.fq').forEach(function(el){
+  el.addEventListener('click', function(){
+    if (window.matchMedia('(max-width:560px)').matches) el.classList.toggle('open');
+  });
+});
+
+/* 뉴스룸 — 쉬지 않고 흐르고, 잡아끌면 부드럽게 멈췄다가 다시 붙음 */
+(function(){
+  var box = document.getElementById('nrList');
+  if (!box) return;
+  var speed = 0.25, target = 0.25;
+  var dragging = false, touching = false, moved = 0, startX = 0, startPos = 0, tt;
+  function half(){ return box.scrollWidth / 2; }
+  function wrap(v){
+    var h = half();
+    if (!h) return v;
+    if (v >= h) v -= h;
+    if (v < 1) v += h;
+    return v;
+  }
+  var pos = half() ? half() / 2 : 0;
+  box.scrollLeft = pos;
+
+  function release(){ dragging = false; target = 0.25; }
+  box.addEventListener('pointerdown', function(e){
+    if (e.pointerType !== 'mouse') return;
+    dragging = true; moved = 0; startX = e.clientX; startPos = pos; target = 0;
+    box.setPointerCapture(e.pointerId);
+  });
+  box.addEventListener('pointermove', function(e){
+    if (!dragging) return;
+    moved = Math.max(moved, Math.abs(e.clientX - startX));
+    pos = wrap(startPos - (e.clientX - startX));
+    box.scrollLeft = pos;
+  });
+  ['pointerup','pointercancel','lostpointercapture'].forEach(function(ev){
+    box.addEventListener(ev, release);
+  });
+  window.addEventListener('blur', release);                       /* 새 탭으로 나가도 멈춘 채 남지 않게 */
+  document.addEventListener('visibilitychange', function(){ if (!document.hidden) release(); });
+  box.addEventListener('click', function(e){ if (moved > 6) { e.preventDefault(); e.stopPropagation(); } }, true);
+  box.addEventListener('dragstart', function(e){ e.preventDefault(); });
+
+  box.addEventListener('touchstart', function(){ touching = true; target = 0; clearTimeout(tt); }, {passive:true});
+  box.addEventListener('touchend', function(){ tt = setTimeout(function(){ touching = false; target = 0.25; }, 700); }, {passive:true});
+
+  box.addEventListener('scroll', function(){
+    var w = wrap(box.scrollLeft);
+    if (w !== box.scrollLeft) box.scrollLeft = w;
+    pos = box.scrollLeft;
+  }, {passive:true});
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  (function tick(){
+    speed += (target - speed) * 0.06;
+    if (!dragging && !touching && speed > 0.005){
+      pos = wrap(pos + speed);
+      box.scrollLeft = pos;
+    }
+    requestAnimationFrame(tick);
+  })();
+})();
+
+/* 카드사 알약 — 모바일 롤링을 위해 트랙으로 감싸고 두 벌 복제 */
+(function(){
+  var list = document.querySelector('.colist');
+  if (!list || list.querySelector('.cotrk')) return;
+  var track = document.createElement('div');
+  track.className = 'cotrk';
+  while (list.firstChild) track.appendChild(list.firstChild);
+  [].slice.call(track.children).forEach(function(el){
+    var c = el.cloneNode(true);
+    c.classList.add('dup');
+    c.setAttribute('aria-hidden','true');
+    track.appendChild(c);
+  });
+  list.appendChild(track);
+})();
+
+/* 이번 달 무이자 안내 팝업 — 하루 한 번만 */
+function closeFree(){
+  var t = document.getElementById('fpToday');
+  if (t && t.checked){
+    try{ localStorage.setItem('lsp_free_hide', new Date().toDateString()); }catch(e){}
+  }
+  document.getElementById('fpDim').classList.remove('on');
+  document.getElementById('fpBox').classList.remove('on');
+}
+(function(){
+  if (typeof FREE_CARDS === 'undefined') return;
+  var hide = null;
+  try{ hide = localStorage.getItem('lsp_free_hide'); }catch(e){}
+  if (hide === new Date().toDateString()) return;
+
+  document.getElementById('fpTtl').textContent = FREE_MONTH + ' 무이자 할부';
+  document.getElementById('fpBody').innerHTML = freeHTML();
+
+  setTimeout(function(){
+    document.getElementById('fpDim').classList.add('on');
+    document.getElementById('fpBox').classList.add('on');
+  }, 700);
+})();
+document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeFree(); });
 </script>
 </body>
 </html>

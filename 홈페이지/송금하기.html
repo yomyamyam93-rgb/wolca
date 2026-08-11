@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>랜선페이 — 송금하기</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
-<link rel="stylesheet" href="web.css">
-<link rel="icon" type="image/png" href="../img/logo-mark.png">
+<link rel="stylesheet" href="web.css?v=20260811i">
+<link rel="icon" type="image/png" href="../img/logo3.png">
 <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
-<script src="web.js"></script>
+<script src="web.js?v=20260811i"></script>
 <style>
   .send{background:#fff; overflow-x:hidden;}   /* 100vw 캐러셀이 가로 스크롤을 만들지 않게 */
   .send-in{max-width:1040px; margin:0 auto; padding:60px 24px 100px; display:flex; flex-direction:column; align-items:center;}
@@ -33,8 +33,8 @@
   .wz-card.on{opacity:1; transform:none; pointer-events:auto;}
   .wz-card:not(.on) .authcard{box-shadow:0 10px 30px rgba(25,31,40,.08);}
   /* 카드 안 '이전' 버튼 — 눈에 띄게 */
-  .wz-back{display:inline-flex; align-items:center; gap:5px; margin-bottom:18px; padding:9px 14px 9px 11px;
-    border:1.5px solid var(--line); border-radius:11px; background:#fff;
+  .wz-back{display:inline-flex; align-items:center; gap:5px; margin-bottom:18px; min-height:48px; padding:0 16px 0 13px;
+    border:1.5px solid var(--line); border-radius:12px; background:#fff;
     font-family:inherit; font-size:13.5px; font-weight:700; color:var(--sub); cursor:pointer;
     transition:border-color .2s, color .2s, transform .15s;}
   .wz-back:hover{border-color:var(--primary); color:var(--primary-dark); transform:translateX(-2px);}
@@ -53,31 +53,31 @@
   .row2{display:flex; gap:9px;} .row2>*{flex:1; min-width:0;}
   .okbox{display:flex; align-items:center; gap:11px; margin-top:14px; padding:15px; border-radius:14px; background:var(--primary-50);}
   .okbox iconify-icon{font-size:22px; color:var(--primary); flex:0 0 auto;}
-  .okbox .l{font-size:12px; color:var(--sub);} .okbox .v{font-size:17px; font-weight:800; margin-top:2px;}
+  .okbox .l{font-size:13px; color:var(--sub);} .okbox .v{font-size:17px; font-weight:700; margin-top:2px;}
   .updrop{border:2px dashed #C9D3E0; border-radius:16px; background:#FAFBFD; padding:34px 16px; text-align:center;}
   .updrop iconify-icon{font-size:34px; color:var(--primary);}
   .updrop .t{font-size:14.5px; font-weight:700; margin-top:10px;}
-  .updrop .s{font-size:12.5px; color:var(--placeholder); margin-top:5px;}
+  .updrop .s{font-size:13px; color:var(--placeholder); margin-top:5px;}
   .filerow{display:flex; align-items:center; gap:10px; margin-top:12px; padding:13px 14px; border-radius:12px; background:var(--primary-50);}
   .filerow iconify-icon{font-size:19px; color:var(--primary);}
   .filerow .fn{flex:1; min-width:0; font-size:13.5px; font-weight:700; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
-  .filerow .fx{font-size:12px; color:var(--placeholder);}
+  .filerow .fx{font-size:13px; color:var(--placeholder);}
   .sumrow{display:flex; justify-content:space-between; font-size:14px; padding:9px 0;}
   .sumrow .l{color:var(--sub);} .sumrow .v{font-weight:700;}
   .sumtot{display:flex; justify-content:space-between; align-items:baseline; margin-top:8px; padding-top:13px; border-top:1px solid var(--line);}
-  .sumtot .l{font-size:14px; font-weight:700;} .sumtot .v{font-size:23px; font-weight:800; letter-spacing:-.5px;}
+  .sumtot .l{font-size:14px; font-weight:700;} .sumtot .v{font-size:23px; font-weight:700; letter-spacing:-.5px;}
   .points{display:flex; gap:30px; flex-wrap:wrap; justify-content:center; margin-top:38px;}
   .points .pt{display:flex; align-items:center; gap:10px; font-size:14.5px; font-weight:600; color:var(--sub); white-space:nowrap;}
   .points .pt iconify-icon{font-size:19px; color:var(--primary);}
 
   /* 인증 폼 카드 */
-  .authcard{flex:0 0 420px; max-width:100%; background:#fff; border-radius:24px; padding:34px 30px; box-shadow:0 18px 50px rgba(25,31,40,.12);}
+  .authcard{flex:0 0 420px; max-width:100%; background:#fff; border-radius:24px; padding:34px 30px; box-shadow:0 8px 24px rgba(25,31,40,.10);}
   @media(max-width:860px){ .authcard{flex:1; width:100%;} }
   .authcard h2{font-size:21px; font-weight:700; letter-spacing:-.4px;}
   .authcard .sub{font-size:14px; color:var(--sub); margin:8px 0 24px;}
   .field{margin-bottom:16px;}
   .field label{display:block; font-size:13px; font-weight:700; color:var(--sub); margin-bottom:8px;}
-  .tin{width:100%; height:54px; border:1.5px solid var(--border); border-radius:13px; padding:0 16px; font-family:inherit; font-size:16px; font-weight:600; color:var(--ink); background:#fff;}
+  .tin{width:100%; height:54px; border:1.5px solid var(--border); border-radius:12px; padding:0 16px; font-family:inherit; font-size:16px; font-weight:600; color:var(--ink); background:#fff;}
   .tin::placeholder{color:var(--placeholder); font-weight:500;}
   .tin:focus{outline:none; border-color:var(--primary);}
   .telcos{display:grid; grid-template-columns:repeat(3,1fr); gap:8px;}
@@ -93,11 +93,11 @@
   .codebox .code-row{position:relative;}
   .codebox .timer{position:absolute; right:16px; top:16px; font-size:14px; font-weight:700; color:var(--primary-dark);}
   .auth-btn{width:100%; height:56px; border:none; border-radius:15px; margin-top:10px; background:var(--primary); background:var(--primary-grad); box-shadow:var(--btn-shadow); color:#fff; font-family:inherit; font-size:16px; font-weight:700; cursor:pointer;}
-  .auth-fine{font-size:12px; color:var(--placeholder); text-align:center; margin-top:14px; line-height:1.6;}
+  .auth-fine{font-size:13px; color:var(--placeholder); text-align:center; margin-top:14px; line-height:1.6;}
 
   /* 요청받은 결제 — 바꿀 수 없는 항목 */
   .fld.lock{justify-content:space-between; background:var(--gray-bg); color:var(--ink);}
-  .fld.lock .lk{display:inline-flex; align-items:center; gap:4px; font-size:11.5px; font-weight:700; color:var(--placeholder);}
+  .fld.lock .lk{display:inline-flex; align-items:center; gap:4px; font-size:13px; font-weight:700; color:var(--placeholder);}
   .fld.lock .lk iconify-icon{font-size:13px;}
 
   /* 필수 동의 (요청받은 결제) */
@@ -127,32 +127,32 @@
   .mdim{position:fixed; inset:0; background:rgba(15,20,30,.5); z-index:98; opacity:0; pointer-events:none; transition:opacity .3s;}
   .mdim.on{opacity:1; pointer-events:auto;}
   .askbox{position:fixed; left:50%; top:50%; z-index:99; width:460px; max-width:calc(100vw - 28px); max-height:88vh; overflow-y:auto;
-    background:#fff; border-radius:24px; padding:28px 26px 26px; box-shadow:0 30px 70px rgba(15,20,30,.4);
+    background:#fff; border-radius:24px; padding:28px 26px 26px; box-shadow:0 12px 32px rgba(15,20,30,.18);
     transform:translate(-50%,-46%) scale(.96); opacity:0; pointer-events:none;
     transition:transform .35s cubic-bezier(.2,.7,.2,1), opacity .3s;}
   .askbox.on{transform:translate(-50%,-50%) scale(1); opacity:1; pointer-events:auto;}
   .askbox .atop{display:flex; align-items:center; justify-content:between; justify-content:space-between; margin-bottom:6px;}
-  .askbox h3{font-size:20px; font-weight:800; letter-spacing:-.4px;}
-  .askbox .ax{width:36px; height:36px; border:none; background:none; font-size:20px; color:var(--sub); cursor:pointer; border-radius:9px;}
+  .askbox h3{font-size:20px; font-weight:700; letter-spacing:-.4px;}
+  .askbox .ax{width:44px; height:44px; border:none; background:none; font-size:20px; color:var(--sub); cursor:pointer; border-radius:9px;}
   .askbox .asub{font-size:13.5px; color:var(--sub); margin-bottom:20px; line-height:1.6;}
   .asum{padding:16px 18px; border-radius:15px; background:var(--gray-bg);}
-  .asum .t1{font-size:15.5px; font-weight:800; letter-spacing:-.3px;}
-  .asum .t2{font-size:12.5px; color:var(--placeholder); margin-top:4px;}
+  .asum .t1{font-size:15.5px; font-weight:700; letter-spacing:-.3px;}
+  .asum .t2{font-size:13px; color:var(--placeholder); margin-top:4px;}
   .asum .ar{display:flex; justify-content:space-between; font-size:13.5px; padding:4px 0; margin-top:10px;}
   .asum .ar b{font-weight:700;}
   .asum .adiv{border-top:1px solid var(--border); margin:9px 0;}
   .asum .atot{display:flex; justify-content:space-between; align-items:baseline;}
-  .asum .atot .v{font-size:19px; font-weight:800; color:var(--primary-dark);}
+  .asum .atot .v{font-size:19px; font-weight:700; color:var(--primary-dark);}
   .adoc{display:flex; align-items:center; gap:7px; margin-top:12px; padding:11px 13px; border-radius:11px;
-    background:var(--primary-50); font-size:12.5px; font-weight:700; color:var(--primary-dark);}
+    background:var(--primary-50); font-size:13px; font-weight:700; color:var(--primary-dark);}
   .adoc iconify-icon{font-size:16px;}
   .aprev{margin-top:12px; padding:14px 15px; border-radius:13px; background:var(--gray-bg);
-    font-size:12.5px; color:var(--sub); line-height:1.85; white-space:pre-line;}
+    font-size:13px; color:var(--sub); line-height:1.85; white-space:pre-line;}
   .aprev b{color:var(--ink);}
   .asteps{margin-top:18px; padding:16px 18px; border:1px solid var(--line); border-radius:15px;}
   .asteps .sp{display:flex; gap:11px; padding:8px 0;}
   .asteps .sp .no{width:22px; height:22px; flex:0 0 auto; border-radius:50%; background:var(--gray-bg);
-    color:var(--placeholder); font-size:11.5px; font-weight:800; display:flex; align-items:center; justify-content:center;}
+    color:var(--placeholder); font-size:13px; font-weight:700; display:flex; align-items:center; justify-content:center;}
   .asteps .sp.on .no{background:var(--primary); color:#fff;}
   .asteps .sp .tx{font-size:13px; color:var(--placeholder); line-height:1.6;}
   .asteps .sp.on .tx{color:var(--ink); font-weight:700;}
@@ -165,10 +165,10 @@
   /* 요청받은 결제 안내 */
   .rq-note{margin:0 0 18px; padding:16px 17px; border-radius:15px; background:var(--primary-50); border:1.5px solid var(--primary-100);}
   .rq-note .n1{font-size:14px; font-weight:700; color:var(--primary-dark);}
-  .rq-note .n2{font-size:15.5px; font-weight:800; margin-top:8px; letter-spacing:-.2px;}
+  .rq-note .n2{font-size:15.5px; font-weight:700; margin-top:8px; letter-spacing:-.2px;}
   .rq-note .n3{font-size:14px; color:var(--sub); margin-top:5px;}
   .rq-note .n3 b{font-size:16px; color:var(--ink);}
-  .rq-note .n4{font-size:12px; color:var(--primary); margin-top:10px; padding-top:10px; border-top:1px solid var(--primary-100);}
+  .rq-note .n4{font-size:13px; color:var(--primary); margin-top:10px; padding-top:10px; border-top:1px solid var(--primary-100);}
   /* 서류 안내 배너 */
   .dhbanner{display:flex; align-items:center; gap:13px; width:100%; margin:0 0 16px; padding:15px 16px; cursor:pointer;
     border:1.5px solid var(--primary-100); border-radius:15px; background:var(--primary-50); font-family:inherit; text-align:left;
@@ -178,22 +178,22 @@
     display:flex; align-items:center; justify-content:center;}
   .dhbanner .bi iconify-icon{font-size:21px; color:#fff;}
   .dhbanner .bt{flex:1; min-width:0;}
-  .dhbanner .b1{display:block; font-size:14.5px; font-weight:800; color:var(--primary-dark); letter-spacing:-.2px;}
-  .dhbanner .b2{display:block; font-size:12.5px; color:var(--primary); margin-top:3px; opacity:.85;}
+  .dhbanner .b1{display:block; font-size:14.5px; font-weight:700; color:var(--primary-dark); letter-spacing:-.2px;}
+  .dhbanner .b2{display:block; font-size:13px; color:var(--primary); margin-top:3px; opacity:.85;}
   .dhbanner .bc{font-size:19px; color:var(--primary); flex:0 0 auto;}
   /* 필요 서류 안내 팝업 */
   .mdim{position:fixed; inset:0; background:rgba(15,20,30,.5); z-index:98; opacity:0; pointer-events:none; transition:opacity .3s;}
   .mdim.on{opacity:1; pointer-events:auto;}
   .dhbox{position:fixed; left:50%; top:50%; z-index:99; width:520px; max-width:calc(100vw - 32px); max-height:84vh;
-    display:flex; flex-direction:column; background:#fff; border-radius:24px; box-shadow:0 30px 70px rgba(15,20,30,.4);
+    display:flex; flex-direction:column; background:#fff; border-radius:24px; box-shadow:0 12px 32px rgba(15,20,30,.18);
     transform:translate(-50%,-46%) scale(.96); opacity:0; pointer-events:none;
     transition:transform .35s cubic-bezier(.2,.7,.2,1), opacity .3s ease;}
   .dhbox.on{transform:translate(-50%,-50%) scale(1); opacity:1; pointer-events:auto;}
   .dhbox .dhtop{display:flex; align-items:center; justify-content:space-between; padding:24px 26px 0;}
-  .dhbox h3{font-size:20px; font-weight:800; letter-spacing:-.4px;}
-  .dhbox .dhx{width:36px; height:36px; border:none; background:none; font-size:20px; color:var(--sub); cursor:pointer; border-radius:9px;}
+  .dhbox h3{font-size:20px; font-weight:700; letter-spacing:-.4px;}
+  .dhbox .dhx{width:44px; height:44px; border:none; background:none; font-size:20px; color:var(--sub); cursor:pointer; border-radius:9px;}
   .dhbox .dhx:hover{background:var(--tile);}
-  .dhtabs{display:flex; gap:7px; overflow-x:auto; padding:16px 26px 4px; scrollbar-width:none;}
+  .dhtabs{display:flex; gap:7px; overflow-x:auto; overflow-y:hidden; padding:16px 26px 4px; scrollbar-width:none;}
   .dhtabs::-webkit-scrollbar{display:none;}
   .dhtabs button{flex:0 0 auto; height:36px; padding:0 14px; border-radius:999px; border:1.5px solid var(--line);
     background:#fff; font-family:inherit; font-size:13px; font-weight:700; color:var(--sub); cursor:pointer; transition:.18s;}
@@ -203,10 +203,10 @@
   .dhbody{flex:1; overflow-y:auto; padding:14px 26px 26px;}
   .dhintro{font-size:14px; color:var(--sub); line-height:1.6;}
   .dhwarn{display:flex; gap:8px; margin-top:12px; padding:12px 14px; border-radius:12px; background:#FFF7ED;
-    font-size:12.5px; color:#B45309; line-height:1.6;}
+    font-size:13px; color:#B45309; line-height:1.6;}
   .dhcase{margin-top:16px; padding:16px 18px; border:1px solid var(--line); border-radius:14px;}
-  .dhcase .ct{font-size:13.5px; font-weight:800; margin-bottom:10px;}
-  .dhcase .cn{font-size:11.5px; font-weight:700; color:var(--placeholder); margin-bottom:9px;}
+  .dhcase .ct{font-size:13.5px; font-weight:700; margin-bottom:10px;}
+  .dhcase .cn{font-size:13px; font-weight:700; color:var(--placeholder); margin-bottom:9px;}
   .dhcase ul{list-style:none;}
   .dhcase li{display:flex; gap:8px; font-size:14px; color:var(--ink); padding:5px 0; line-height:1.55;}
   .dhcase li iconify-icon{font-size:17px; color:var(--primary); flex:0 0 auto; margin-top:2px;}
@@ -214,7 +214,7 @@
   .dhkey{display:flex; gap:8px; margin-top:16px; padding:13px 15px; border-radius:12px; background:var(--primary-50);
     font-size:13px; color:var(--primary-dark); font-weight:600; line-height:1.6;}
   .dhkey iconify-icon{font-size:17px; flex:0 0 auto; margin-top:1px;}
-  .dhtips{margin-top:14px; font-size:12.5px; color:var(--placeholder); line-height:1.75;}
+  .dhtips{margin-top:14px; font-size:13px; color:var(--placeholder); line-height:1.75;}
   .dhtips div{padding-left:13px; text-indent:-13px;}
   @media(max-width:560px){
     .dhbox{width:calc(100vw - 24px); max-height:88vh;}
@@ -237,13 +237,13 @@
 
 <nav class="nav">
   <div class="nav-in">
-    <a class="logo" href="index.html"><img src="../img/logo-mark.png" alt="" style="height:30px"><img src="../img/logo-text.png" alt="랜선페이" style="height:19px"></a>
+    <a class="logo" href="index.html"><img src="../img/logo3.png" alt="" style="height:23px"><img src="../img/logo-text.png" alt="랜선페이" style="height:19px"></a>
     <div class="nav-menu">
       <a href="이용가이드.html" class="wide">이용가이드</a>
       <a href="고객센터.html" class="wide">고객센터</a>
-      <a href="로그인.html">로그인</a>
+      <a href="뉴스룸.html" class="wide">뉴스룸</a>
     </div>
-    <button class="nav-cta" onclick="location.href='송금하기.html'">송금하기</button>
+    <button class="nav-cta" onclick="location.href='로그인.html'">로그인</button>
     <button class="nav-burger" onclick="drawer(true)" aria-label="전체메뉴"><iconify-icon icon="mingcute:menu-fill"></iconify-icon></button>
   </div>
 </nav>
@@ -391,22 +391,18 @@
       </div><!-- /wz-view -->
     </div><!-- /wizard -->
 
-    <div class="points">
-      <div class="pt"><iconify-icon icon="mingcute:flash-fill"></iconify-icon>상대방 동의 없이 계좌만 알면 돼요</div>
-      <div class="pt"><iconify-icon icon="mingcute:bank-card-fill"></iconify-icon>할부 · 포인트 적립은 쓰던 카드 그대로</div>
-      <div class="pt"><iconify-icon icon="mingcute:shield-fill"></iconify-icon>담당자 확인 후 입금 · 미승인 시 자동 취소</div>
-    </div>
   </div>
 </section>
 
 <footer class="footer">
-  <div class="f-in">
-    <div class="f-menu">
-      <a href="이용가이드.html">이용가이드</a>
-      <a href="고객센터.html">고객센터</a>
-      <a href="고객센터.html#faq">자주 묻는 질문</a>
-      <a href="송금하기.html">송금하기</a>
+  <div class="f-legal">
+    <div class="f-legal-in">
+      <a href="약관.html?doc=terms">서비스 이용약관</a>
+      <a href="약관.html?doc=privacy">개인정보 처리방침</a>
+      <a href="약관.html?doc=third">개인정보 3자 제공 고지</a>
     </div>
+  </div>
+  <div class="f-in">
     <p class="f-co">
       <span><em>상호</em>랜선페이 · (주)미라클컴퍼니</span>
       <span><em>대표</em>김남기</span>
@@ -414,7 +410,10 @@
       <span><em>사업자등록번호</em>437-88-03148</span>
       <span><em>주소</em>충청남도 천안시 서북구 쌍용대로 234, 방영학생활건강빌딩 3층 (성정동)</span>
       <span><em>대표번호</em>1577-6369 <i>(평일 9:00~18:00)</i></span>
+      <span><em>메일</em>help@lanseonpay.co.kr</span>
     </p>
+    <p class="f-note">랜선페이는 전자금융거래법에 따라 등록된<br>전자지급결제대행(PG) 서비스입니다.</p>
+    <p class="f-copy">Copyright © 2026 랜선페이. All rights reserved.</p>
   </div>
 </footer>
 
@@ -427,7 +426,6 @@
   <a href="이용가이드.html"><iconify-icon icon="mingcute:book-2-fill"></iconify-icon>이용가이드<span class="gv">›</span></a>
   <a href="index.html#reviews"><iconify-icon icon="mingcute:chat-2-fill"></iconify-icon>이용후기<span class="gv">›</span></a>
   <a href="송금하기.html"><iconify-icon icon="mingcute:flash-fill"></iconify-icon>송금하기<span class="gv">›</span></a>
-  <a href="javascript:void(0);" onclick="location.href='세금자료.html'; return false;"><iconify-icon icon="mingcute:file-certificate-fill"></iconify-icon>세금계산서 · 부가세 신고<span class="gv">›</span></a>
   <button class="d-login" onclick="location.href='로그인.html'">로그인</button>
 </aside>
 </div>

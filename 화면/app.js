@@ -148,3 +148,42 @@
     location.href = prev || fallback || '9_홈_개인.html';
   };
 })();
+
+/* ===== 앱 공용 : 아래에서 올라오는 확인 시트 =====
+   브라우저 confirm() 대신 씁니다.  askSheet({t, s, ok, danger, onOk}) */
+(function(){
+  var CSS = ''
+    + '.ask-layer{position:absolute; inset:0; z-index:70; pointer-events:none;}'
+    + '.ask-dim{position:absolute; inset:0; background:rgba(15,20,30,.5); opacity:0; transition:opacity .28s;}'
+    + '.ask-layer.on{pointer-events:auto;} .ask-layer.on .ask-dim{opacity:1;}'
+    + '.ask-sheet{position:absolute; left:0; right:0; bottom:0; background:#fff; border-radius:24px 24px 0 0;'
+    + ' padding:10px 20px 26px; transform:translateY(100%); transition:transform .34s cubic-bezier(.2,.7,.2,1);}'
+    + '.ask-layer.on .ask-sheet{transform:translateY(0);}'
+    + '.ask-h{width:44px; height:4px; border-radius:3px; background:#DDE2E8; margin:0 auto 16px;}'
+    + '.ask-t{font-size:18px; font-weight:800; letter-spacing:-.3px;}'
+    + '.ask-s{font-size:13.5px; color:#4E5968; line-height:1.7; margin-top:9px;}'
+    + '.ask-b{display:flex; gap:9px; margin-top:22px;}'
+    + '.ask-b button{flex:1; height:54px; border:none; border-radius:15px; font-family:inherit;'
+    + ' font-size:15.5px; font-weight:700; cursor:pointer;}'
+    + '.ask-no{background:#EEF1F4; color:#4E5968;}'
+    + '.ask-ok{background:#2563EB; color:#fff;}';
+  var st = document.createElement('style'); st.textContent = CSS;
+  document.head.appendChild(st);
+
+  window.askSheet = function(o){
+    var host = document.querySelector('.phone') || document.body;
+    var w = document.createElement('div');
+    w.className = 'ask-layer';
+    w.innerHTML = '<div class="ask-dim"></div><div class="ask-sheet"><div class="ask-h"></div>'
+      + '<div class="ask-t">' + (o.t || '') + '</div>'
+      + (o.s ? '<div class="ask-s">' + o.s + '</div>' : '')
+      + '<div class="ask-b"><button class="ask-no">' + (o.no || '취소') + '</button>'
+      + '<button class="ask-ok' + (o.danger ? ' danger' : '') + '">' + (o.ok || '확인') + '</button></div></div>';
+    host.appendChild(w);
+    requestAnimationFrame(function(){ w.classList.add('on'); });
+    function close(){ w.classList.remove('on'); setTimeout(function(){ w.remove(); }, 320); }
+    w.querySelector('.ask-dim').onclick = close;
+    w.querySelector('.ask-no').onclick = close;
+    w.querySelector('.ask-ok').onclick = function(){ close(); if (o.onOk) o.onOk(); };
+  };
+})();

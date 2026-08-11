@@ -6,6 +6,11 @@
 <title>랜선페이 — 결제 상세</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
 <style>
+/* 스크롤바를 보이지 않게 (스크롤은 그대로 됨) */
+html,body{scrollbar-width:none; -ms-overflow-style:none;}
+html::-webkit-scrollbar,body::-webkit-scrollbar{width:0; height:0; display:none;}
+*{scrollbar-width:none;}
+*::-webkit-scrollbar{width:0; height:0;}
   :root{
     --primary:#2563EB; --primary-dark:#1D4ED8; --primary-50:#EFF4FF; --primary-100:#DBE7FF;
     --page-bg:#c9cdd4; --bg:#F4F5F6; --card:#FFFFFF; --line:#ECEEF1; --border:#B1B8BE;
@@ -36,7 +41,7 @@
   /* 상태 헤더 */
   .head{background:var(--card); border-radius:20px; padding:22px; box-shadow:0 1px 3px rgba(0,0,0,.04); text-align:center;}
   .head .st{display:inline-flex; align-items:center; gap:6px; padding:6px 13px; border-radius:999px;
-    font-size:12px; font-weight:800; color:var(--warn); background:var(--warn-bg);}
+    font-size:12px; font-weight:800; color:var(--primary-dark); background:var(--primary-50);}
   .head .st iconify-icon{font-size:14px;}
   .head .amt{font-size:31px; font-weight:800; letter-spacing:-.9px; margin-top:13px;}
   .head .to{font-size:13.5px; color:var(--sub); margin-top:8px;}
@@ -333,7 +338,7 @@
   }
 
   if (st === 'done') {
-    document.getElementById('hSt').style.cssText = 'color:#059669;background:#EAF7F0';
+    document.getElementById('hSt').style.cssText = 'color:var(--sub);background:var(--tile)';
     document.getElementById('hIc').setAttribute('icon', 'mingcute:check-circle-fill');
     document.getElementById('hStT').textContent = '처리 완료';
     document.getElementById('hTo').textContent = '대성부동산에게 500,000원이 입금됐어요';
@@ -369,9 +374,10 @@
 
 function goBack(){ lpBack('15_내결제.html'); }
 function askCancel(){
-  if (confirm('결제를 취소할까요?\n서류 확인 중에는 수수료 없이 취소돼요.')) {
+  askSheet({ t:'결제를 취소할까요?', s:'서류 확인 중에는 수수료 없이 취소돼요.',
+    ok:'결제 취소', danger:true, onOk:function(){
     toast('취소 요청을 보냈어요 (준비 중)');
-  }
+  } });
 }
 
 function openRc(){ show('rc'); }

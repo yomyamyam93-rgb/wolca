@@ -7,13 +7,21 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
 <link rel="stylesheet" href="screen.css">
 <style>
+/* 스크롤바를 보이지 않게 (스크롤은 그대로 됨) */
+html,body{scrollbar-width:none; -ms-overflow-style:none;}
+html::-webkit-scrollbar,body::-webkit-scrollbar{width:0; height:0; display:none;}
+*{scrollbar-width:none;}
+*::-webkit-scrollbar{width:0; height:0;}
   .big{background:var(--card); border-radius:20px; padding:22px; box-shadow:0 1px 3px rgba(0,0,0,.05);}
   .big .l{font-size:13px; color:var(--placeholder);}
   .big .v{font-size:29px; font-weight:800; letter-spacing:-.9px; margin-top:5px;}
   .big .s{font-size:12.5px; color:var(--sub); margin-top:9px; line-height:1.65;}
   .big .est{display:flex; align-items:center; gap:8px; margin-top:16px; padding:13px 15px; border-radius:13px; background:var(--primary-50);}
   .big .est iconify-icon{font-size:19px; color:var(--primary);}
-  .big .est .t{flex:1; font-size:12.5px; color:var(--primary-dark); font-weight:600;}
+  /* '예상 환급액' 은 한 줄, 가정 조건은 아랫줄 작은 글씨로 */
+  .big .est .t{flex:1; min-width:0; font-size:13px; color:var(--primary-dark); font-weight:700; white-space:nowrap;}
+  .big .est .t i{display:block; font-style:normal; font-size:12px; font-weight:500;
+    color:var(--sub); margin-top:2px; white-space:nowrap;}
   .big .est .n{font-size:16px; font-weight:800; color:var(--primary-dark);}
   .mrow{display:flex; align-items:center; gap:12px; padding:14px 0;}
   .mrow + .mrow{border-top:1px solid var(--line);}
@@ -22,7 +30,7 @@
   .yseg{display:flex; gap:7px; margin-bottom:14px;}
   .yseg span{padding:9px 15px; border-radius:999px; border:1px solid var(--line); background:#fff;
     font-size:13px; font-weight:700; color:var(--sub); cursor:pointer;}
-  .yseg span.on{background:var(--ink); border-color:var(--ink); color:#fff;}
+  .yseg span.on{background:var(--primary); border-color:var(--primary); color:#fff;}
 </style>
 <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 </head>
@@ -47,7 +55,7 @@
       <div class="s">2026년 1월 ~ 8월 · 총 8건<br>월세 세액공제는 <b>연 750만원 한도</b>로 공제받을 수 있어요.</div>
       <div class="est">
         <iconify-icon icon="mingcute:receive-money-fill"></iconify-icon>
-        <span class="t">예상 환급액 (공제율 17% 가정)</span>
+        <span class="t">예상 환급액<i>공제율 17% 가정</i></span>
         <span class="n">1,040,400원</span>
       </div>
     </div>

@@ -6,6 +6,11 @@
 <title>랜선페이 — 예약 결제</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
 <style>
+/* 스크롤바를 보이지 않게 (스크롤은 그대로 됨) */
+html,body{scrollbar-width:none; -ms-overflow-style:none;}
+html::-webkit-scrollbar,body::-webkit-scrollbar{width:0; height:0; display:none;}
+*{scrollbar-width:none;}
+*::-webkit-scrollbar{width:0; height:0;}
   :root{
     --primary:#2563EB; --primary-dark:#1D4ED8; --primary-50:#EFF4FF; --primary-100:#DBE7FF;
     --page-bg:#c9cdd4; --bg:#F4F5F6; --card:#FFFFFF; --line:#ECEEF1; --border:#B1B8BE;
@@ -64,8 +69,8 @@
   .rsv .card{display:inline-flex; align-items:center; gap:5px; padding:6px 11px; border-radius:9px; background:var(--tile);
     font-size:12.5px; font-weight:600; color:var(--sub);}
   .rsv .st{margin-left:auto; font-size:11.5px; font-weight:800; padding:5px 9px; border-radius:8px;}
-  .rsv .st.on{color:var(--success); background:var(--success-bg);}
-  .rsv .st.wait{color:var(--warn); background:var(--warn-bg);}
+  .rsv .st.on{color:var(--sub); background:var(--tile);}
+  .rsv .st.wait{color:var(--primary-dark); background:var(--primary-50);}
   .rsv .st.stop{color:var(--placeholder); background:var(--tile);}
 
   .rsv .dday{display:flex; align-items:center; gap:7px; margin-top:12px; padding:11px 13px; border-radius:12px;
@@ -94,6 +99,38 @@
   .sheet .act iconify-icon{font-size:20px; color:var(--primary);}
   .sheet .act.danger{color:#DC2626;}
   .sheet .act.danger iconify-icon{color:#DC2626;}
+  /* 날짜 격자 (예약결제일 화면과 같은 모양) */
+  .daygrid{display:grid; grid-template-columns:repeat(7,1fr); gap:7px;}
+  .day{height:40px; display:flex; align-items:center; justify-content:center; border-radius:10px;
+    font-size:15px; font-weight:600; color:var(--ink); background:var(--tile); cursor:pointer;}
+  .day.on{background:var(--primary); color:#fff;}
+  .lastday{margin-top:8px;}
+  .lastday .day{width:100%; height:46px; font-size:14px;}
+  .ehint{font-size:12.5px; color:var(--placeholder); line-height:1.6; margin-top:14px;}
+  .elbl{display:block; font-size:13px; font-weight:700; color:var(--sub); margin-bottom:8px;}
+  .eamt{display:flex; align-items:center; gap:6px; height:56px; padding:0 16px;
+    border:1.5px solid var(--border); border-radius:14px; background:#fff;}
+  .eamt input{flex:1; min-width:0; border:none; outline:none; background:none;
+    font-family:inherit; font-size:22px; font-weight:800; color:var(--ink); text-align:right;}
+  .eamt span{font-size:15px; font-weight:700; color:var(--sub);}
+  .cchips{display:flex; flex-wrap:wrap; gap:8px;}
+  .cchip{height:44px; display:inline-flex; align-items:center; padding:0 14px;
+    border:1.5px solid var(--line); border-radius:12px; background:#fff;
+    font-size:13.5px; font-weight:700; color:var(--sub); cursor:pointer;}
+  .cchip.on{border-color:var(--primary); background:var(--primary-50); color:var(--primary-dark);}
+    border-radius:14px; background:#fff; cursor:pointer;}
+  .crd2.on{border-color:var(--primary); background:var(--primary-50);}
+  .crd2 img{width:26px; height:22px; flex:0 0 auto; object-fit:contain;}
+  .crd2 img.wide{width:38px; height:13px;}
+  .crd2 .tx{flex:1; min-width:0;}
+  .crd2 .n{font-size:14.5px; font-weight:700;}
+  .crd2 .no{font-size:12.5px; color:var(--placeholder); margin-top:2px;}
+  .crd2 .rd{width:20px; height:20px; flex:0 0 auto; border-radius:50%; border:2px solid var(--border);}
+  .crd2.on .rd{border-color:var(--primary); background:var(--primary); box-shadow:inset 0 0 0 3px #fff;}
+  .sheet{max-height:88%; overflow-y:auto; scrollbar-width:none;}
+  .sheet::-webkit-scrollbar{display:none;}
+  .ebtn{width:100%; height:54px; margin-top:20px; border:none; border-radius:15px; cursor:pointer;
+    background:var(--primary); color:#fff; font-family:inherit; font-size:16px; font-weight:700;}
 </style>
 <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 </head>
@@ -119,7 +156,7 @@
     <div class="sec-t">예약 목록 <span class="cnt" id="sumC">3건</span></div>
 
     <!-- 개인 1 -->
-    <div class="rsv only-me" onclick="openSheet('월세')">
+    <div class="rsv only-me" onclick="openSheet(this,'월세')">
       <div class="top">
         <span class="ic"><iconify-icon icon="mingcute:home-4-fill"></iconify-icon></span>
         <span class="tx"><div class="nm">월세</div><div class="to">대성부동산 · KB국민 123456-78-901234</div></span>
@@ -134,7 +171,7 @@
     </div>
 
     <!-- 개인 2 -->
-    <div class="rsv only-me" onclick="openSheet('관리비')">
+    <div class="rsv only-me" onclick="openSheet(this,'관리비')">
       <div class="top">
         <span class="ic"><iconify-icon icon="mingcute:building-2-fill"></iconify-icon></span>
         <span class="tx"><div class="nm">관리비</div><div class="to">대성관리사무소 · 신한 110-234-567890</div></span>
@@ -149,7 +186,7 @@
     </div>
 
     <!-- 사업자 1 -->
-    <div class="rsv only-biz" style="display:none" onclick="openSheet('직원 급여')">
+    <div class="rsv only-biz" style="display:none" onclick="openSheet(this,'직원 급여')">
       <div class="top">
         <span class="ic"><iconify-icon icon="mingcute:group-3-fill"></iconify-icon></span>
         <span class="tx"><div class="nm">직원 급여</div><div class="to">김직원 · 기업 302-1122-3344</div></span>
@@ -164,7 +201,7 @@
     </div>
 
     <!-- 사업자 2 -->
-    <div class="rsv only-biz" style="display:none" onclick="openSheet('사무실 임대료')">
+    <div class="rsv only-biz" style="display:none" onclick="openSheet(this,'사무실 임대료')">
       <div class="top">
         <span class="ic"><iconify-icon icon="mingcute:building-2-fill"></iconify-icon></span>
         <span class="tx"><div class="nm">사무실 임대료</div><div class="to">대성부동산 · KB국민 123456-78-901234</div></span>
@@ -179,7 +216,7 @@
     </div>
 
     <!-- 사업자 3 -->
-    <div class="rsv only-biz off" style="display:none" onclick="openSheet('식자재 대금')">
+    <div class="rsv only-biz off" style="display:none" onclick="openSheet(this,'식자재 대금')">
       <div class="top">
         <span class="ic"><iconify-icon icon="mingcute:package-2-fill"></iconify-icon></span>
         <span class="tx"><div class="nm">식자재 대금</div><div class="to">한빛식자재 · 기업 302-1122-3344</div></span>
@@ -193,7 +230,7 @@
     </div>
 
     <!-- 개인 3 -->
-    <div class="rsv only-me off" onclick="openSheet('학원비')">
+    <div class="rsv only-me off" onclick="openSheet(this,'학원비')">
       <div class="top">
         <span class="ic"><iconify-icon icon="mingcute:mortarboard-fill"></iconify-icon></span>
         <span class="tx"><div class="nm">학원비</div><div class="to">한빛학원 · 우리 1002-345-678901</div></span>
@@ -223,11 +260,26 @@
     <div class="handle"></div>
     <h3 id="shTitle">월세</h3>
     <div class="sub">이 예약 결제를 어떻게 할까요?</div>
-    <div class="act" onclick="location.href='16_예약결제일.html'"><iconify-icon icon="mingcute:calendar-month-fill"></iconify-icon>결제일 변경</div>
-    <div class="act" onclick="toast('금액 변경은 준비 중이에요')"><iconify-icon icon="mingcute:edit-2-fill"></iconify-icon>금액 · 카드 변경</div>
-    <div class="act" onclick="toast('건너뛰기는 준비 중이에요')"><iconify-icon icon="mingcute:skip-forward-fill"></iconify-icon>이번 달만 건너뛰기</div>
-    <div class="act" onclick="toast('일시정지는 준비 중이에요')"><iconify-icon icon="mingcute:pause-circle-fill"></iconify-icon>일시정지</div>
-    <div class="act danger" onclick="toast('삭제는 준비 중이에요')"><iconify-icon icon="mingcute:delete-2-fill"></iconify-icon>예약 삭제</div>
+    <div class="act" onclick="openEdit()"><iconify-icon icon="mingcute:calendar-month-fill"></iconify-icon>결제일 변경</div>
+    <div class="act" onclick="goCard()"><iconify-icon icon="mingcute:bank-card-fill"></iconify-icon>결제 카드 변경</div>
+    <div class="act" id="actPause" onclick="togglePause()"><iconify-icon icon="mingcute:pause-circle-fill"></iconify-icon>일시정지</div>
+    <div class="act danger" onclick="askDelete()"><iconify-icon icon="mingcute:delete-2-fill"></iconify-icon>예약 삭제</div>
+  </div>
+
+  <!-- 결제일 · 금액/카드 변경 -->
+  <div class="dim" id="dim2" onclick="closeEdit()"></div>
+  <div class="sheet" id="editSheet">
+    <div class="handle"></div>
+    <h3 id="edTtl">예약</h3>
+    <div class="sub" id="edSub"></div>
+
+    <div id="edDay" style="display:none">
+      <div class="daygrid" id="daygrid"></div>
+      <div class="lastday"><div class="day" data-d="말일" onclick="pickDay(this)">말일 (그달 마지막 날)</div></div>
+      <p class="ehint" id="dayNote">매월 <b>1일</b>에 자동으로 결제돼요.</p>
+    </div>
+
+    <button class="ebtn" onclick="saveEdit()">이대로 바꾸기</button>
   </div>
 </div>
 <script src="app.js"></script>
@@ -246,10 +298,98 @@
 })();
 
 function goBack(){ lpBack('15_내결제.html'); }
-function openSheet(name){
+if (new URLSearchParams(location.search).get('changed')){ setTimeout(function(){ toast('결제 카드를 바꿨어요'); }, 300); }
+
+var CUR = null;   /* 지금 관리 중인 예약 카드 */
+
+function openSheet(el, name){
+  CUR = el;
   document.getElementById('shTitle').textContent = name;
+  var paused = CUR && CUR.classList.contains('off');
+  document.getElementById('actPause').innerHTML = paused
+    ? '<iconify-icon icon="mingcute:play-circle-fill"></iconify-icon>다시 이어서 내기'
+    : '<iconify-icon icon="mingcute:pause-circle-fill"></iconify-icon>일시정지';
   document.getElementById('dim').classList.add('on');
   document.getElementById('sheet').classList.add('on');
+}
+
+function setPaused(card, paused){
+  card.classList.toggle('off', paused);
+  var st = card.querySelector('.st');
+  if (st){
+    st.className = 'st ' + (paused ? 'stop' : 'on');
+    st.textContent = paused ? '일시정지' : '자동결제';
+  }
+  var dd = card.querySelector('.dday');
+  if (dd) dd.style.display = paused ? 'none' : '';
+}
+function togglePause(){
+  if (!CUR) return closeSheet();
+  var paused = CUR.classList.contains('off');
+  var name = (CUR.querySelector('.nm') || {}).textContent || '예약';
+  closeSheet();
+  setPaused(CUR, !paused);
+  toast(name + (paused ? ' 다시 이어서 낼게요' : ' 일시정지했어요'));
+}
+
+
+/* 결제일 고르기 (예약결제일 화면과 같은 1~31 격자) */
+var PICK = { day:'' };
+function buildDayGrid(cur){
+  var h = '';
+  for (var d = 1; d <= 31; d++){
+    h += '<div class="day' + (cur === d + '일' ? ' on' : '') + '" data-d="' + d + '일" onclick="pickDay(this)">' + d + '</div>';
+  }
+  document.getElementById('daygrid').innerHTML = h;
+  document.querySelector('.lastday .day').classList.toggle('on', cur === '말일');
+}
+function pickDay(el){
+  document.querySelectorAll('#edDay .day').forEach(function(d){ d.classList.remove('on'); });
+  el.classList.add('on');
+  PICK.day = el.dataset.d;
+  document.getElementById('dayNote').innerHTML = '매월 <b>' + PICK.day + '</b>에 자동으로 결제돼요.';
+}
+
+/* 결제 카드 변경 — 결제할 때 쓰는 그 화면을 그대로 씁니다 */
+function goCard(){
+  if (!CUR) return closeSheet();
+  try{ sessionStorage.setItem('rsv_name', (CUR.querySelector('.nm') || {}).textContent || ''); }catch(e){}
+  location.href = '12_1_결제수단.html?from=rsv';
+}
+/* 결제일만 이 시트에서 바꿉니다 (금액은 예약할 때 정해진 값 그대로) */
+function openEdit(){
+  if (!CUR) return closeSheet();
+  closeSheet();
+  document.getElementById('edTtl').textContent = (CUR.querySelector('.nm') || {}).textContent || '예약';
+  document.getElementById('edSub').textContent = '매월 며칠에 낼까요?';
+  document.getElementById('edDay').style.display = 'block';
+  var raw = (CUR.querySelector('.day') || {}).textContent || '';
+  var cur = /말일/.test(raw) ? '말일' : ((raw.match(/(\d+일)/) || [])[1] || '1일');
+  PICK.day = cur;
+  buildDayGrid(cur);
+  document.getElementById('dayNote').innerHTML = '매월 <b>' + cur + '</b>에 자동으로 결제돼요.';
+  document.getElementById('dim2').classList.add('on');
+  document.getElementById('editSheet').classList.add('on');
+}
+function closeEdit(){
+  document.getElementById('dim2').classList.remove('on');
+  document.getElementById('editSheet').classList.remove('on');
+}
+function saveEdit(){
+  if (!CUR) return closeEdit();
+  var txt = PICK.day || '1일';
+  var dayEl = CUR.querySelector('.day');
+  if (dayEl) dayEl.innerHTML = '<iconify-icon icon="mingcute:calendar-month-fill"></iconify-icon>'
+    + (txt === '말일' ? '말일 (그달 마지막 날)' : '매월 ' + txt);
+  closeEdit();
+  toast('결제일을 ' + txt + '로 바꿨어요');
+}
+function askDelete(){
+  if (!CUR) return closeSheet();
+  var card = CUR, name = (card.querySelector('.nm') || {}).textContent || '예약';
+  closeSheet();
+  askSheet({ t:'예약을 지울까요?', s:name + '<br>지운 예약은 되돌릴 수 없어요.',
+    ok:'삭제', danger:true, onOk:function(){ card.remove(); toast('예약을 지웠어요'); } });
 }
 function closeSheet(){
   document.getElementById('dim').classList.remove('on');

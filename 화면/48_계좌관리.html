@@ -7,6 +7,11 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
 <link rel="stylesheet" href="screen.css">
 <style>
+/* 스크롤바를 보이지 않게 (스크롤은 그대로 됨) */
+html,body{scrollbar-width:none; -ms-overflow-style:none;}
+html::-webkit-scrollbar,body::-webkit-scrollbar{width:0; height:0; display:none;}
+*{scrollbar-width:none;}
+*::-webkit-scrollbar{width:0; height:0;}
   .acc{background:var(--card); border-radius:18px; padding:16px 17px; margin-bottom:11px;
     box-shadow:0 1px 3px rgba(0,0,0,.05); position:relative;}
   .acc.main{border:1.5px solid var(--primary);}
@@ -20,22 +25,18 @@
   .acc .badge{font-size:10.5px; font-weight:800; color:#fff; background:var(--primary);
     padding:4px 8px; border-radius:7px; flex:0 0 auto;}
   .acc .acts{display:flex; gap:8px; margin-top:13px; padding-top:13px; border-top:1px solid var(--line);}
-  .acc .acts button{flex:1; height:40px; border:1.5px solid var(--line); border-radius:11px; background:#fff;
+  .acc .acts button{flex:1; height:44px; border:none; border-radius:12px; background:var(--tile);
     font-family:inherit; font-size:13px; font-weight:700; color:var(--sub); cursor:pointer;}
   .acc .acts button.pri{border-color:var(--primary-100); color:var(--primary-dark); background:var(--primary-50);}
-  .acc .acts button.del{color:var(--danger);}
+  .acc .acts button.del{color:var(--sub);}
 
   .addbtn{display:flex; align-items:center; justify-content:center; gap:7px; width:100%; height:54px;
     border:1.5px dashed var(--border); border-radius:16px; background:#fff; font-family:inherit;
     font-size:14.5px; font-weight:700; color:var(--sub); cursor:pointer; margin-top:2px;}
   .addbtn iconify-icon{font-size:20px; color:var(--primary);}
 
-  .sheet .banks{display:flex; flex-wrap:wrap; gap:7px; margin-bottom:11px;}
-  .sheet .bk{height:38px; padding:0 13px; border:1.5px solid var(--line); border-radius:11px; background:#fff;
-    font-family:inherit; font-size:13px; font-weight:700; color:var(--sub); cursor:pointer;}
-  .sheet .bk.on{border-color:var(--primary); background:var(--primary-50); color:var(--primary-dark);}
   .acmsg{font-size:12px; color:var(--placeholder); margin:9px 2px 0; line-height:1.6;}
-  .acmsg.ok{color:var(--success); font-weight:700;}
+  .acmsg.ok{color:var(--sub); font-weight:700;}
   .acbtn{width:100%; height:52px; margin-top:14px; border:none; border-radius:14px; cursor:pointer;
     background:var(--primary-grad); box-shadow:var(--btn-shadow); color:#fff; font-family:inherit; font-size:15px; font-weight:700;}
   .acbtn:disabled{background:var(--tile); box-shadow:none; color:var(--placeholder); cursor:default;}
@@ -51,6 +52,25 @@
   .sheet .s-top{display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;}
   .sheet .s-top h3{font-size:18px; font-weight:800; letter-spacing:-.3px;}
   .sheet .s-x{width:34px; height:34px; border:none; background:none; font-size:19px; color:var(--sub); cursor:pointer;}
+  /* 은행 로고 */
+  .acc .ic img.blogo{width:24px; height:22px; object-fit:contain; object-position:center;}
+  /* 은행 고르기 — 정사각 타일 격자 */
+  .sheet .banks{display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-bottom:14px;
+    max-height:238px; overflow-y:auto; scrollbar-width:none;}
+  .sheet .banks::-webkit-scrollbar{display:none;}
+  .sheet .bk{display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px;
+    aspect-ratio:1/1; padding:6px 4px; border:1.5px solid var(--line); border-radius:14px; background:#fff;
+    font-family:inherit; cursor:pointer; transition:.16s;}
+  .sheet .bk.on{border-color:var(--primary); background:var(--primary-50);}
+  .bkf{width:30px; height:30px; display:flex; align-items:center; justify-content:center;
+    border-radius:10px; background:var(--tile); overflow:hidden; flex:0 0 auto;}
+  .sheet .bk.on .bkf{background:#fff;}
+  .bkl{max-width:22px; max-height:20px; object-fit:contain;}
+  .bkl.wide{max-width:26px; max-height:11px;}
+  .bki{font-size:14px; font-weight:800; color:var(--sub);}
+  .bkn{font-size:11.5px; font-weight:700; color:var(--sub); line-height:1.2; text-align:center;
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:100%;}
+  .sheet .bk.on .bkn{color:var(--primary-dark);}
 </style>
 <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 </head>
@@ -104,16 +124,7 @@
   <div class="sheet" id="sheet">
     <div class="handle"></div>
     <div class="s-top"><h3>새 계좌 등록</h3><button class="s-x" onclick="closeSheet()">✕</button></div>
-    <div class="banks" id="banks">
-      <button class="bk on" onclick="pickBank(this)">기업</button>
-      <button class="bk" onclick="pickBank(this)">국민</button>
-      <button class="bk" onclick="pickBank(this)">신한</button>
-      <button class="bk" onclick="pickBank(this)">우리</button>
-      <button class="bk" onclick="pickBank(this)">하나</button>
-      <button class="bk" onclick="pickBank(this)">농협</button>
-      <button class="bk" onclick="pickBank(this)">카카오뱅크</button>
-      <button class="bk" onclick="pickBank(this)">토스뱅크</button>
-    </div>
+    <div class="banks" id="banks"></div>
     <input class="tin" id="acNo" inputmode="numeric" placeholder="계좌번호 (- 없이 숫자만)" oninput="chk()" style="width:100%">
     <div class="acmsg" id="acMsg">예금주가 사업자와 같은지 확인해요.</div>
     <button class="acbtn" id="acBtn" onclick="add()" disabled>계좌 확인하고 등록</button>
@@ -129,11 +140,37 @@ function closeSheet(){
   document.getElementById('dim').classList.remove('on');
   document.getElementById('sheet').classList.remove('on');
 }
+/* 은행 목록 — 정사각 타일. 로고가 있으면 로고, 없으면 이름 첫 글자 */
+var BANKS = [
+  { n:'국민',   img:'../img/카드사/icon/kb.svg' },
+  { n:'신한',   img:'../img/카드사/icon/shinhan.svg' },
+  { n:'우리',   img:'../img/카드사/icon/woori.svg' },
+  { n:'하나',   img:'../img/카드사/icon/hana.svg' },
+  { n:'농협',   img:'../img/카드사/icon/nh.svg' },
+  { n:'기업' }, { n:'카카오뱅크' }, { n:'토스뱅크' },
+  { n:'SC제일' }, { n:'씨티', img:'../img/카드사/citi.svg', wide:true },
+  { n:'수협' }, { n:'대구' }, { n:'부산' }, { n:'경남' },
+  { n:'광주' }, { n:'전북' }, { n:'제주' }, { n:'새마을' },
+  { n:'신협' }, { n:'우체국' }, { n:'산업' }, { n:'케이뱅크' }
+];
+var BANK_PICK = '국민';
+
+function buildBanks(){
+  document.getElementById('banks').innerHTML = BANKS.map(function(b){
+    var face = b.img
+      ? '<img class="bkl' + (b.wide ? ' wide' : '') + '" src="' + b.img + '" alt="" onerror="this.replaceWith(document.createTextNode(\'' + b.n.charAt(0) + '\'))">'
+      : '<span class="bki">' + b.n.charAt(0) + '</span>';
+    return '<button class="bk' + (b.n === BANK_PICK ? ' on' : '') + '" onclick="pickBank(this)" data-n="' + b.n + '">'
+      + '<span class="bkf">' + face + '</span><span class="bkn">' + b.n + '</span></button>';
+  }).join('');
+}
 function pickBank(el){
   document.querySelectorAll('#banks .bk').forEach(function(x){ x.classList.remove('on'); });
   el.classList.add('on');
+  BANK_PICK = el.dataset.n;
   chk();
 }
+buildBanks();
 function chk(){
   var v = document.getElementById('acNo').value.replace(/[^0-9]/g, '');
   document.getElementById('acNo').value = v;
@@ -176,12 +213,35 @@ function setMain(btn){
   btn.removeAttribute('onclick');
   toast('기본 계좌를 바꿨어요');
 }
+/* 은행 로고 — 카드사와 겹치는 곳은 심볼을 그대로 씁니다 */
+var BANK_LOGO = {
+  '국민':'../img/카드사/icon/kb.svg',   'KB국민':'../img/카드사/icon/kb.svg',
+  '신한':'../img/카드사/icon/shinhan.svg',
+  '하나':'../img/카드사/icon/hana.svg',
+  '우리':'../img/카드사/icon/woori.svg',
+  '농협':'../img/카드사/icon/nh.svg',   'NH농협':'../img/카드사/icon/nh.svg'
+};
+function bankIcon(no){
+  var name = (no || '').split(' ')[0];
+  var src = BANK_LOGO[name];
+  return src
+    ? '<img class="blogo" src="' + src + '" alt="" onerror="this.replaceWith(document.createTextNode(\'\'))">'
+    : '<iconify-icon icon="mingcute:bank-fill"></iconify-icon>';
+}
+(function(){   /* 이미 그려진 계좌 줄에도 로고 반영 */
+  document.querySelectorAll('.acc').forEach(function(a){
+    var no = a.querySelector('.no'), ic = a.querySelector('.ic');
+    if (no && ic) ic.innerHTML = bankIcon(no.textContent);
+  });
+})();
+
+
 function del(btn){
   var acc = btn.closest('.acc');
   if (acc.classList.contains('main')) { toast('기본 계좌는 지울 수 없어요'); return; }
-  if (!confirm('이 계좌를 지울까요?')) return;
-  acc.remove();
-  toast('계좌를 지웠어요');
+  var no = (acc.querySelector('.no') || {}).textContent || '';
+  askSheet({ t:'이 계좌를 지울까요?', s:no + '<br>지운 계좌는 되돌릴 수 없어요.',
+    ok:'삭제', danger:true, onOk:function(){ acc.remove(); toast('계좌를 지웠어요'); } });
 }
 function toast(m){
   var t = document.createElement('div');
