@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>랜선페이 — 현금으로 내던 돈 카드로</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
-<link rel="stylesheet" href="web.css?v=20260811j">
+<link rel="stylesheet" href="web.css?v=20260811k">
 <link rel="icon" type="image/png" href="../img/logo3.png">
 <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
-<script src="web.js?v=20260811j"></script>
-<script src="게시글.js?v=20260811j"></script>
+<script src="web.js?v=20260811k"></script>
+<script src="게시글.js?v=20260811k"></script>
 <style>
   .reveal{opacity:0; transform:translateY(22px); transition:opacity .55s ease, transform .55s ease;}
   .reveal.in{opacity:1; transform:none;}
@@ -215,10 +215,16 @@
     transform:translate(-50%,-50%) scale(.96); opacity:0; pointer-events:none; transition:transform .3s, opacity .3s;
     box-shadow:0 12px 32px -8px rgba(10,21,38,.25);}
   .docbox.on{transform:translate(-50%,-50%) scale(1); opacity:1; pointer-events:auto;}
-  .docbox-top{display:flex; align-items:center; justify-content:space-between; padding:24px 26px 0;}
-  .docbox-top h3{font-size:20px; font-weight:700; letter-spacing:-.4px;}
-  .docbox-x{width:44px; height:44px; border:none; background:none; font-size:20px; color:var(--sub); cursor:pointer; border-radius:9px;}
-  .docbox-x:hover{background:var(--gray-bg);}
+  .docbox-top{display:flex; align-items:center; justify-content:space-between; gap:12px; padding:24px 26px 0;}
+  .docbox-top h3{flex:1; min-width:0; font-size:20px; font-weight:700; letter-spacing:-.4px; word-break:keep-all;}
+  /* 닫기 = '다른 항목 보기' (누르면 닫히고 항목 목록으로 돌아감) */
+  .docbox-x{display:inline-flex; align-items:center; gap:2px; flex:0 0 auto; min-height:44px;
+    padding:0 10px 0 12px; border:none; background:none; border-radius:10px; cursor:pointer;
+    font-family:inherit; font-size:14px; font-weight:700; color:var(--sub); white-space:nowrap;
+    transition:background .2s, color .2s;}
+  .docbox-x iconify-icon{font-size:18px; color:var(--icon-off);}
+  .docbox-x:hover{background:var(--gray-bg); color:var(--ink);}
+  .docbox-x:hover iconify-icon{color:var(--sub);}
   .docbox-body{flex:1; overflow-y:auto; padding:16px 26px 26px; text-align:left;}
   .docbox-btm{padding:0 26px 24px;}
   .docbox-btm .btn{width:100%;}
@@ -234,7 +240,8 @@
   .cd-key iconify-icon{font-size:17px; flex:0 0 auto; margin-top:1px;}
   .cd-tip{margin-top:14px; font-size:13px; color:var(--placeholder); line-height:1.75; padding-left:13px; text-indent:-13px;}
   @media(max-width:560px){
-    .docbox-top{padding:20px 20px 0;} .docbox-top h3{font-size:18px;}
+    .docbox-top{padding:20px 20px 0; gap:8px;} .docbox-top h3{font-size:18px;}
+    .docbox-x{font-size:13px; padding:0 8px 0 10px;}
     .docbox-body{padding:14px 20px 22px;} .docbox-btm{padding:0 20px 20px;}
   }
 
@@ -1146,7 +1153,7 @@
 <div class="docbox" id="cBox" role="dialog" aria-label="필요 서류">
   <div class="docbox-top">
     <h3 id="cTitle">필요 서류</h3>
-    <button class="docbox-x" onclick="closeDoc()" aria-label="닫기">✕</button>
+    <button class="docbox-x" onclick="closeDoc()">다른 항목 보기<iconify-icon icon="mingcute:right-line"></iconify-icon></button>
   </div>
   <div class="docbox-body" id="cBody"></div>
   <div class="docbox-btm">
