@@ -128,9 +128,26 @@ html.fonts-loading body{opacity:0;}
 html.fonts-ready body{animation:pageIn .5s cubic-bezier(.2,.7,.2,1) both;}
 @keyframes pageIn{ from{opacity:0;} to{opacity:1;} }
 
-/* 스크롤 등장 */
-.reveal{opacity:0; transform:translateY(24px); transition:opacity .6s ease, transform .6s cubic-bezier(.2,.7,.2,1);}
+/* ===== 등장 모션 =====
+   ⚠️ 규칙 두 가지
+      1) 미리 움직이지 않는다 — 화면에 들어왔을 때만 시작한다 (.in / .play 는 web.js 가 붙임)
+      2) 급하지 않게 — 0.8~1초, 부드러운 감속 */
+.js-motion .reveal{opacity:0; transform:translateY(18px);
+  transition:opacity .45s cubic-bezier(.22,.8,.3,1), transform .45s cubic-bezier(.22,.8,.3,1);}
 .reveal.in{opacity:1; transform:none;}
+/* 한 묶음 안에서 차례로 — web.js 가 순서(--i)를 붙여 준다 */
+.reveal.d1{transition-delay:.06s;} .reveal.d2{transition-delay:.12s;}
+.reveal.d3{transition-delay:.18s;} .reveal.d4{transition-delay:.24s;}
+.reveal.d5{transition-delay:.30s;}
+
+/* 여러 개가 차례로 나타나는 묶음 */
+.js-motion .stagger > *{opacity:0; transform:translateY(14px);
+  transition:opacity .42s cubic-bezier(.22,.8,.3,1), transform .42s cubic-bezier(.22,.8,.3,1);}
+.stagger.in > *{opacity:1; transform:none;
+  transition-delay:calc(var(--i,0) * var(--step, .08s));}
+/* 촤르륵 — 간격을 더 짧게, 살짝 커지면서 */
+.stagger.quick{--step:.045s;}
+.stagger.quick > *{transform:translateY(10px) scale(.94);}
 
 /* 상호작용 */
 html{scroll-behavior:smooth;}
@@ -149,8 +166,10 @@ html{scroll-behavior:smooth;}
 @media (prefers-reduced-motion: reduce){
   html{scroll-behavior:auto;}
   html.fonts-ready body{animation:none;}
-  .reveal{opacity:1; transform:none; transition:none;}
+  .reveal,.stagger > *{opacity:1; transform:none; transition:none;}
   .btn:hover,.storebtn:hover{transform:none;}
+  /* 반복 모션 전부 정지 */
+  *,*:before,*:after{animation:none !important;}
 }
 
 

@@ -5,15 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>랜선페이 — 현금으로 내던 돈 카드로</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
-<link rel="stylesheet" href="web.css?v=20260812e">
+<link rel="stylesheet" href="web.css?v=20260813a">
 <link rel="icon" type="image/png" href="../img/logo3.png">
 <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
-<script src="web.js?v=20260812e"></script>
-<script src="게시글.js?v=20260812e"></script>
+<script src="web.js?v=20260813a"></script>
+<script src="게시글.js?v=20260813a"></script>
 <style>
-  .reveal{opacity:0; transform:translateY(22px); transition:opacity .55s ease, transform .55s ease;}
-  .reveal.in{opacity:1; transform:none;}
-  @media (prefers-reduced-motion: reduce){ .reveal{opacity:1; transform:none; transition:none;} }
+  /* 등장 모션은 web.css · web.js 한 곳에서 관리합니다 (여기서 또 정의하면 그게 이깁니다) */
 
   /* 히어로 */
   .hero{position:relative; overflow:hidden; background:#0A1526; color:#fff; padding:112px 0 120px;}
@@ -980,6 +978,82 @@
 
 
 
+
+  /* ===== 구역별 모션 =====
+     ⚠️ 전부 화면에 들어왔을 때만 시작합니다 (web.js 가 .play 를 붙임).
+        속도는 일부러 느리게 잡았습니다. */
+
+  /* 카드사 로고 — 촤르륵 차례로 (넓은 화면만. 좁은 화면은 이미 옆으로 흐르고 있음)
+     로고는 .cotrk 로 한 번 감싸여 있어서 .stagger 자동 순서가 닿지 않는다 → 여기서 직접 준다 */
+  @media(min-width:761px){
+    .js-motion .colist .co{opacity:0; transform:translateY(14px) scale(.92);
+      transition:opacity .38s cubic-bezier(.22,.8,.3,1), transform .38s cubic-bezier(.22,.8,.3,1);}
+    .colist.in .co{opacity:1; transform:none;}
+    .colist.in .co:nth-child(1){transition-delay:0s;}
+    .colist.in .co:nth-child(2){transition-delay:0.045s;}
+    .colist.in .co:nth-child(3){transition-delay:0.090s;}
+    .colist.in .co:nth-child(4){transition-delay:0.135s;}
+    .colist.in .co:nth-child(5){transition-delay:0.180s;}
+    .colist.in .co:nth-child(6){transition-delay:0.225s;}
+    .colist.in .co:nth-child(7){transition-delay:0.270s;}
+    .colist.in .co:nth-child(8){transition-delay:0.315s;}
+    .colist.in .co:nth-child(9){transition-delay:0.360s;}
+    .colist.in .co:nth-child(10){transition-delay:0.405s;}
+  }
+
+  /* 히어로 폰 화면 — 위아래로 천천히 둥둥 */
+  @keyframes heroFloat{ 0%,100%{transform:translateY(-9px);} 50%{transform:translateY(9px);} }
+  .hero-vis.play{animation:heroFloat 4.5s ease-in-out infinite;}
+
+  /* ① 결제 요청 — 문자가 도착하는 느낌 (천천히 반복) */
+  @keyframes smsArrive{
+    0%{opacity:0; transform:translateY(20px) scale(.965);}
+    9%{opacity:1; transform:translateY(-4px) scale(1.008);}
+    13%{transform:none;}
+    85%{opacity:1; transform:none;}
+    95%,100%{opacity:0; transform:translateY(-10px) scale(.99);}
+  }
+  @keyframes smsPing{ 0%,13%{background:transparent;} 19%{background:var(--primary-50);} 34%,100%{background:transparent;} }
+  .js-motion .sms .sms-bub{opacity:0;}
+  .sms.play .sms-bub{animation:smsArrive 5.5s cubic-bezier(.22,.8,.3,1) infinite;}
+  .sms.play .sms-link{animation:smsPing 5.5s ease-out infinite; border-radius:0 0 8px 8px;}
+
+  /* ② 예약송금 — 알림이 위에서 차례로 내려옴 (천천히 반복) */
+  @keyframes ntDrop{
+    0%,3%{opacity:0; transform:translateY(-16px) scale(.97);}
+    12%{opacity:1; transform:translateY(0) scale(1);}
+    84%{opacity:1; transform:none;}
+    94%,100%{opacity:0; transform:translateY(-10px);}
+  }
+  .js-motion .noti .nt{opacity:0;}
+  .noti.play .nt{animation:ntDrop 6s cubic-bezier(.22,.8,.3,1) infinite;}
+  .noti.play .nt:nth-child(2){animation-delay:.9s;}
+
+  /* ③ 나눠서 결제 — 카드 → 화살표 → 집주인 계좌 순으로 쌓임 */
+  @keyframes spRise{
+    0%,5%{opacity:0; transform:translateY(18px);}
+    16%,86%{opacity:1; transform:none;}
+    96%,100%{opacity:0; transform:translateY(-8px);}
+  }
+  .js-motion .split .sp-card,.js-motion .split .sp-plus,.js-motion .split .sp-arr,.js-motion .split .sp-recv{opacity:0;}
+  .split.play .sp-cards .sp-card:first-child{animation:spRise 7s ease-out infinite;}
+  .split.play .sp-plus{animation:spRise 7s ease-out infinite .3s;}
+  .split.play .sp-cards .sp-card:last-child{animation:spRise 7s ease-out infinite .6s;}
+  .split.play .sp-arr{animation:spRise 7s ease-out infinite .95s;}
+  .split.play .sp-recv{animation:spRise 7s ease-out infinite 1.35s;}
+  /* 집주인 계좌 — 파란빛이 은은하게 퍼져 나감 */
+  .sp-recv{position:relative; overflow:hidden;}
+  .sp-recv > *{position:relative; z-index:1;}
+  .sp-recv:before{content:''; position:absolute; left:50%; top:50%; width:12px; height:12px; border-radius:50%;
+    transform:translate(-50%,-50%) scale(1); opacity:0; pointer-events:none;
+    background:radial-gradient(circle, rgba(37,99,235,.34), rgba(37,99,235,0) 70%);}
+  @keyframes spGlow{
+    0%,30%{opacity:0; transform:translate(-50%,-50%) scale(1);}
+    38%{opacity:1;}
+    76%,100%{opacity:0; transform:translate(-50%,-50%) scale(44);}
+  }
+  .split.play .sp-recv:before{animation:spGlow 7s ease-out infinite;}
+
 /* ===== 넓은 화면(1360px~) 자동 생성 — 아래는 손으로 고치지 마세요 ===== */
 @media(min-width:1360px){
   .hero{padding:145.5px 0 156px;}
@@ -1331,6 +1405,8 @@
   .fnotes{margin-top:23.5px;}
   .fnotes li{padding-left:18px; font-size:17px; margin-bottom:9px;}
   .fnotes li:before{left:4px;}
+  .sms.play .sms-link{border-radius:0 0 10.5px 10.5px;}
+  .sp-recv:before{width:15.5px; height:15.5px;}
 
   /* 팝업 · 서랍 안은 원래 크기 그대로 */
   :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .fp-top{padding:24px 26px 0;}
@@ -1410,7 +1486,7 @@
     </div>
 
     <!-- 오른쪽 : 카드로 결제하면 현금이 송금된다 -->
-    <div class="hero-vis">
+    <div class="hero-vis" data-loop>
       <div class="scr">
         <div class="sprog"><i style="width:100%"></i></div>
 
@@ -1447,7 +1523,7 @@
     <p class="p-lg">카드로 결제하면 현금으로 송금돼요<br>
       신청 <b>3분</b> · 입금까지 <b>평균 12분</b></p>
 
-    <div class="steps3">
+    <div class="steps3 stagger" style="--step:.11s">
       <div class="st3">
         <div class="st3-no">01</div>
         <div class="st3-t">보낼 곳과 금액 입력</div>
@@ -1594,7 +1670,7 @@
   <div class="wrap" style="text-align:center">
     <h2 class="h-lg">주요 카드사<br>모두 사용할 수 있어요</h2>
     <p class="p-lg">갖고 있는 국내 신용카드로 바로 결제하세요.</p>
-    <div class="colist">
+    <div class="colist stagger quick">
       <span class="co"><img class="colg" src="../img/카드사/shinhan.svg" alt="신한"></span>
       <span class="co"><img class="colg" src="../img/카드사/kb.svg" alt="KB국민"></span>
       <span class="co"><img class="colg" src="../img/카드사/samsung.svg" alt="삼성"></span>
@@ -1621,17 +1697,17 @@
     <div class="rvstat">
       <div class="rs">
         <div class="l">지금까지 보낸 금액</div>
-        <div class="v">128억원</div>
+        <div class="v countup">128억원</div>
         <div class="d">매달 늘고 있어요</div>
       </div>
       <div class="rs">
         <div class="l">함께 쓰는 이웃</div>
-        <div class="v">42,000명</div>
+        <div class="v countup">42,000명</div>
         <div class="d">직장인부터 사업자까지</div>
       </div>
       <div class="rs">
         <div class="l">평균 만족도</div>
-        <div class="v">4.8점</div>
+        <div class="v countup">4.8점</div>
         <div class="d">5점 만점 기준</div>
       </div>
     </div>
@@ -1664,7 +1740,7 @@
       </div>
 
       <div class="ways-vis">
-        <div class="sms">
+        <div class="sms" data-loop>
           <div class="sms-bub">
             <b id="wayMsg">김미나님이 월세 결제를 요청했어요.</b>
             <span class="sms-item" id="wayItem">부동산 임대차 · 월세</span>
@@ -1688,7 +1764,7 @@
         <p class="p-lg">매달 정한 날짜에 알아서 결제되고 송금돼요. <br>깜빡할 일도 늦을 일도 없어요.</p>
       </div>
       <div class="ways-vis">
-        <div class="noti">
+        <div class="noti" data-loop>
           <div class="nt">
             <span class="nt-ic"><iconify-icon icon="mingcute:alarm-2-fill"></iconify-icon></span>
             <div class="nt-b">
@@ -1721,7 +1797,7 @@
         <p class="p-lg">두 장으로 나눠 결제해도 <br>받는 분에게는 한 번에 입금돼요.</p>
       </div>
       <div class="ways-vis">
-        <div class="split">
+        <div class="split" data-loop>
           <div class="sp-cards">
             <div class="sp-card"><span class="sp-bank">신한카드</span><span class="sp-amt">400,000원</span></div>
             <div class="sp-plus">+</div>
@@ -2011,10 +2087,9 @@ const wrapEl=document.getElementById('rvWrap');
   })();
 })();
 
-/* 은은한 등장 (안전장치 포함) */
-const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }),{threshold:.08});
-document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-setTimeout(()=>document.querySelectorAll('.reveal:not(.in)').forEach(el=>el.classList.add('in')), 2500);
+/* 등장 모션은 web.js 가 담당합니다.
+   예전에는 여기서 한 번 더 감시하고 2.5초 뒤 전부 강제로 나타냈는데,
+   그 탓에 스크롤하기도 전에 다 보여서 모션이 없는 것처럼 느껴졌습니다. */
 
 /* 항목별 필요 서류 팝업 — 송금하기 페이지와 같은 기준 */
 var CASE_DOCS = {
