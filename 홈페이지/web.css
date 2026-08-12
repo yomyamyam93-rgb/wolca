@@ -180,13 +180,7 @@ p,.p-lg,.s,.hint,.f-co,.note,.qs{text-wrap:pretty;}
 /* ===== 넓은 화면(1360px~) 자동 생성 — 아래는 손으로 고치지 마세요 ===== */
 @media(min-width:1360px){
   .wrap{padding:0 31px;}
-  .nav-in{padding:0 31px; height:83px;}
-  .logo{gap:10.5px; min-height:62.5px; font-size:26px;}
-  .logo .mark{width:39px; height:39px; border-radius:11.5px; font-size:22px;}
-  .nav-menu{gap:31px; margin-right:21px;}
-  .nav-menu a{font-size:19.5px; padding:10.5px 2px;}
-  .nav-cta{height:57px; padding:0 22px; margin-left:21px; border-radius:15.5px; font-size:19px;}
-  .nav-burger{width:62.5px; height:62.5px; margin-left:8px; font-size:34px; border-radius:15.5px;}
+  .nav-in{padding:0 31px;}
   .drawer{width:416px; padding:26px 28.5px;}
   .drawer .d-top{margin-bottom:18px;}
   .drawer .d-title{font-size:22px;}
@@ -206,14 +200,8 @@ p,.p-lg,.s,.hint,.f-co,.note,.qs{text-wrap:pretty;}
   .p-md{font-size:19.5px;}
   .btn{gap:10.5px; height:73px; padding:0 34px; border-radius:15.5px; font-size:21px;}
   .btn iconify-icon{font-size:26px;}
-  .f-legal-in{padding:5px 31px; gap:0 34px;}
-  .f-legal-in a{min-height:62.5px; font-size:18px;}
-  .f-copy{margin-top:18px; font-size:17px;}
-  .footer{padding:60px 0 78px;}
+  .f-legal-in{padding:5px 31px;}
   .footer .f-in{padding:0 31px;}
-  .footer .f-menu{gap:28.5px; margin-bottom:26px;}
-  .footer .f-menu a{font-size:18px;}
-  .footer p{font-size:17px;}
   .hero-btns{gap:15.5px;}
   .cta-col{gap:18px; margin-top:52px;}
   .cta-col .btn{max-width:431.5px;}
@@ -223,12 +211,5 @@ p,.p-lg,.s,.hint,.f-co,.note,.qs{text-wrap:pretty;}
   .storebtn iconify-icon{font-size:22px;}
   .page-hero{height:520px; padding:0 31px;}
   .page-hero .p-lg{margin-top:23.5px;}
-  section[id], header[id], div[id]{scroll-margin-top:114.5px;}
-  .f-co{gap:5px 18px;}
-  .f-co span{gap:8px;}
-  .f-co em{font-size:17px; margin-right:8px;}
-  .f-note{margin-top:13px;}
-  .logo img:first-child{height:30px !important;}
-  .logo img:last-child{height:25px !important;}
 }
 /* ===== 넓은 화면 끝 ===== */
