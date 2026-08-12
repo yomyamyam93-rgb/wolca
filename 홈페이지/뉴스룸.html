@@ -5,13 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>랜선페이 — 뉴스룸</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
-<link rel="stylesheet" href="web.css?v=20260811n">
+<link rel="stylesheet" href="web.css?v=20260812c">
 <link rel="icon" type="image/png" href="../img/logo3.png">
 <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
-<script src="web.js?v=20260811n"></script>
+<script src="web.js?v=20260812c"></script>
 <style>
   /* 뉴스 카드 (게시판과 같은 규격) */
-  .news{max-width:1040px; margin:0 auto; padding:0 24px; display:grid; grid-template-columns:repeat(3,1fr); gap:16px;}
+  .news{max-width:var(--maxw); margin:0 auto; padding:0 24px; display:grid; grid-template-columns:repeat(3,1fr); gap:16px;}
   .nw{display:block; background:#fff; border:1px solid var(--line); border-radius:18px; overflow:hidden;
     text-decoration:none; color:var(--ink); transition:transform .2s, box-shadow .2s, border-color .2s;}
   .nw:hover{transform:translateY(-3px); border-color:var(--primary); box-shadow:0 10px 24px -14px rgba(37,99,235,.6);}
@@ -26,7 +26,21 @@
   .nw.soon{cursor:default;}
   .nw.soon:hover{transform:none; border-color:var(--line); box-shadow:none;}
   @media(max-width:900px){ .news{grid-template-columns:1fr 1fr;} }
-  @media(max-width:560px){ .news{grid-template-columns:1fr; gap:12px; padding:0 16px;} .nw-vis{height:180px;} }
+  @media(max-width:560px){ .news{grid-template-columns:1fr; gap:12px; padding:0 20px;} .nw-vis{height:180px;} }
+
+
+/* ===== 넓은 화면(1360px~) 자동 생성 — 아래는 손으로 고치지 마세요 ===== */
+@media(min-width:1360px){
+  .news{padding:0 31px; gap:21px;}
+  .nw{border-radius:23.5px;}
+  .nw-vis{height:221px;}
+  .nw-body{padding:21px 23.5px 26px;}
+  .nw-top{gap:13px;}
+  .nw-top b{font-size:17px;}
+  .nw-top i{font-size:17px;}
+  .nw-t{font-size:21px; margin-top:13px;}
+}
+/* ===== 넓은 화면 끝 ===== */
 </style>
 </head>
 <body>
@@ -90,7 +104,7 @@
 </aside>
 </div>
 
-<script src="게시글.js?v=20260811n"></script>
+<script src="게시글.js?v=20260812c"></script>
 <script>
 function drawer(on){
   document.getElementById('drawer').classList.toggle('on', on);

@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>랜선페이 — 이용가이드</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
-<link rel="stylesheet" href="web.css?v=20260811n">
+<link rel="stylesheet" href="web.css?v=20260812c">
 <link rel="icon" type="image/png" href="../img/logo3.png">
 <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
-<script src="web.js?v=20260811n"></script>
+<script src="web.js?v=20260812c"></script>
 <style>
 
   /* 진행 순서 (세로 타임라인) */
@@ -40,7 +40,7 @@
   .docs .d-key{margin-top:12px; font-size:13px; font-weight:600; color:var(--primary-dark);}
 
   /* ===== 진행 순서 (실제 앱 화면 목업) ===== */
-  .flow{max-width:1040px; margin:60px auto 0; display:flex; flex-direction:column; gap:96px;}
+  .flow{max-width:var(--maxw); margin:60px auto 0; display:flex; flex-direction:column; gap:96px;}
   .fstep{display:flex; align-items:center; gap:64px;}
   .fstep:nth-child(even){flex-direction:row-reverse;}
   .fstep .ftxt{flex:1; min-width:0;}
@@ -312,6 +312,164 @@
     .fstep h3{font-size:22px; letter-spacing:-.4px; text-wrap:balance;}
     .fstep .fs{font-size:14.5px; max-width:320px; text-wrap:pretty;}
   }
+  /* 넓은 화면 : 단계 제목 한 단계 크게 */
+  @media(min-width:1100px){ .fstep h3{font-size:30px;} .fstep .fs{font-size:17px;} }
+
+
+/* ===== 넓은 화면(1360px~) 자동 생성 — 아래는 손으로 고치지 마세요 ===== */
+@media(min-width:1360px){
+  .tl{max-width:884px; margin:65px auto 0;}
+  .tl-item{gap:28.5px; padding-bottom:57px;}
+  .tl-item:not(:last-child):before{left:27.5px; top:62.5px; bottom:5px;}
+  .tl-no{width:57px; height:57px; font-size:22px;}
+  .tl-body .t{font-size:24.5px;}
+  .tl-body .s{font-size:19.5px; margin-top:10.5px;}
+  .tl-body .tip{gap:8px; margin-top:15.5px; font-size:17px; padding:10.5px 17px; border-radius:13px;}
+  .tl-body .tip iconify-icon{font-size:21px;}
+  .docs{margin-top:52px;}
+  .docs summary{gap:18px; padding:24.5px 10.5px;}
+  .docs .d-t{font-size:21px;}
+  .docs .d-s{font-size:17px;}
+  .docs summary .arw{font-size:26px;}
+  .docs .d-body{padding:5px 10.5px 31px 10.5px;}
+  .docs .d-badge{font-size:17px; padding:6.5px 13px; border-radius:10.5px; margin-bottom:15.5px;}
+  .docs li{padding-left:34px; font-size:19.5px; margin-bottom:11.5px;}
+  .docs li:before{top:9px; width:18px; height:18px;}
+  .docs li:after{left:6.5px; font-size:15.5px;}
+  .docs .d-key{margin-top:15.5px; font-size:17px;}
+  .flow{margin:78px auto 0; gap:125px;}
+  .fstep{gap:83px;}
+  .fno{gap:11.5px; font-size:17px; padding:9px 18px; border-radius:1298.5px; margin-bottom:21px;}
+  .fno .dot{width:26px; height:26px; font-size:17px;}
+  .fstep h3{font-size:35px;}
+  .fstep .fs,.fstep .flist,.fstep .fwarn{max-width:546px;}
+  .fstep .fs{font-size:21px; margin-top:18px;}
+  .flist{margin-top:23.5px;}
+  .flist li{padding-left:31px; font-size:19.5px; margin-bottom:10.5px;}
+  .flist li:before{left:4px; top:11.5px; width:9px; height:9px;}
+  .fwarn{gap:11.5px; margin-top:23.5px; padding:18px 21px; border-radius:17px; font-size:18px;}
+  .fwarn iconify-icon{font-size:23.5px;}
+  .scr{width:442px; height:832px; border-radius:39px; padding:34px 26px 31px;}
+  .scr .sprog{height:4px; margin-bottom:23.5px;}
+  .scr .q{font-size:24.5px; margin-bottom:21px;}
+  .scr .lbl{font-size:15.5px; margin:18px 0 8px;}
+  .scr .sbtn{height:62.5px; margin-top:23.5px; border-radius:17px; font-size:19.5px;}
+  .tabs{top:99px; gap:8px; max-width:780px; margin:-49.5px auto 114.5px; padding:8px; border-radius:23.5px;}
+  .tab{height:67.5px; gap:10.5px; border-radius:15.5px; font-size:19.5px;}
+  .tab iconify-icon{font-size:24.5px;}
+  .secmark{margin-bottom:26px;}
+  .secmark p{font-size:19.5px; margin-top:13px;}
+  .win{width:572px; height:676px; border-radius:21px;}
+  .win .wbody{padding:28.5px 28.5px;}
+  .win .wq{font-size:22px; margin-bottom:18px;}
+  .win .wlbl{font-size:15.5px; margin:15.5px 0 8px;}
+  .win .wfield{height:54.5px; border-radius:13px; padding:0 15.5px; font-size:17.5px;}
+  .win .wbtn{height:60px; border-radius:14.5px; font-size:19px;}
+  .win .wsub{font-size:16px; margin:-10.5px 0 5px;}
+  .telcos{gap:8px;}
+  .telcos span{height:47px; border-radius:11.5px; font-size:16px;}
+  .drop{min-height:156px; border-radius:18px; gap:10.5px;}
+  .drop iconify-icon{font-size:41.5px;}
+  .drop .dt{font-size:17.5px;}
+  .drop .ds{font-size:15px;}
+  .filerow{gap:13px; margin-top:13px; padding:14.5px 17px; border-radius:14.5px;}
+  .filerow iconify-icon{font-size:23.5px;}
+  .filerow .fn{font-size:16px;}
+  .filerow .fx{font-size:14.5px;}
+  .w2col{gap:13px;}
+  .seg{gap:5px; border-radius:17px; padding:5px; margin-bottom:21px;}
+  .seg span{padding:11.5px 0; font-size:17px; border-radius:13px;}
+  .dots{gap:6.5px; margin-top:15.5px;}
+  .dots i{width:8px; height:8px;}
+  .dots i.on{width:23.5px; border-radius:4px;}
+  .scrhint{font-size:16px; margin-top:18px;}
+  .chipsum{gap:9px; padding:10.5px 15.5px; border-radius:13px; font-size:16px; margin-bottom:21px;}
+  .chipsum iconify-icon{font-size:19.5px;}
+  .subbtn{height:54.5px; margin-top:8px; font-size:18px;}
+  .fade{padding-top:5px;}
+  .fade:after{height:57px;}
+  .catrow{gap:15.5px; padding:17px 15.5px; border-radius:18px; margin-bottom:10.5px;}
+  .catrow .cic{width:49.5px; height:49.5px; border-radius:15.5px;}
+  .catrow .cic iconify-icon{font-size:26px;}
+  .catrow .cn{font-size:19.5px;}
+  .catrow .cd{font-size:15.5px;}
+  .catrow .gv{font-size:23.5px;}
+  .amtrow{padding-bottom:13px;}
+  .amtrow .n{font-size:41.5px;}
+  .amtrow .w{font-size:21px; margin-left:8px;}
+  .qbtns{gap:9px; margin-top:18px;}
+  .qbtns span{height:49.5px; border-radius:14.5px; font-size:17px;}
+  .feeline{font-size:17px; margin-top:23.5px; padding:15.5px 18px; border-radius:15.5px;}
+  .selrow{height:65px; padding:0 18px; border-radius:17px; font-size:19.5px;}
+  .selrow .bk{width:31px; height:31px; border-radius:9px; font-size:13px; margin-right:10.5px;}
+  .selrow iconify-icon{font-size:23.5px;}
+  .inbox{gap:10.5px; height:65px; padding:0 10.5px 0 18px; border-radius:17px;}
+  .inbox .txt{font-size:19.5px;}
+  .inbox .side{height:44px; padding:0 15.5px; border-radius:11.5px; font-size:17px;}
+  .vbox{gap:14.5px; margin-top:15.5px; padding:21px; border-radius:19.5px;}
+  .vbox iconify-icon{font-size:31px;}
+  .vbox .vl{font-size:15.5px;}
+  .vbox .vn{font-size:26px;}
+  .cam{min-height:325px; border-radius:23.5px;}
+  .cam .bill{width:278px; border-radius:8px; padding:26px 23.5px;}
+  .cam .bill .h{font-size:15.5px;}
+  .cam .bill .sub{font-size:11.5px; margin-top:6.5px;}
+  .cam .bill .r{height:8px; border-radius:4px; margin-top:14.5px;}
+  .cam .bill .box{margin-top:18px; padding:15.5px 15.5px; border-radius:9px;}
+  .cam .bill .bt{font-size:11.5px;}
+  .cam .bill .bv{font-size:23.5px; margin-top:5px;}
+  .cam .fr i{width:31px; height:31px; border-radius:5px;}
+  .cam .shot{bottom:18px; width:60px; height:60px;}
+  .camhint{font-size:15.5px; margin-top:15.5px;}
+  .cface{height:171.5px; border-radius:21px; padding:21px;}
+  .cface .br{font-size:15.5px;}
+  .cface .chip{width:39px; height:28.5px; border-radius:6.5px;}
+  .cface .no{font-size:18px;}
+  .cface .bt{font-size:14.5px;}
+  .instal{gap:9px; margin-top:18px;}
+  .instal span{padding:11.5px 17px; border-radius:13px; font-size:17px;}
+  .crow{gap:15.5px; font-size:17px; padding:11.5px 0;}
+  .crow .sub2{font-size:14.5px; margin-top:4px;}
+  .cbox{border-radius:19.5px; padding:15.5px 18px; margin-bottom:10.5px;}
+  .ctot{padding-top:14.5px; margin-top:6.5px;}
+  .ctot .l{font-size:17px;}
+  .ctot .v{font-size:27.5px;}
+  .done{padding:13px 0 5px;}
+  .done .ck{width:83px; height:83px; margin:0 auto 21px;}
+  .done .ck iconify-icon{font-size:44px;}
+  .done h4{font-size:26px;}
+  .done p{font-size:17px; margin-top:10.5px;}
+  .receipt{margin-top:23.5px; padding:21px; border-radius:19.5px;}
+  .receipt .rr{font-size:17px; padding:8px 0;}
+  .receipt .rd{margin:11.5px 0;}
+  .receipt .rr.big .v{font-size:22px;}
+  .guide-cta{margin-top:91px; border-radius:28.5px; padding:73px 39px;}
+  .guide-cta .hero-btns{gap:15.5px; margin-top:36.5px;}
+  .seg3{gap:5px; border-radius:17px; padding:5px; margin-bottom:18px;}
+  .seg3 span{padding:11.5px 0; border-radius:13px; font-size:17px;}
+  .crow{gap:14.5px; padding:13px 17px; border-radius:17px; margin-bottom:8px;}
+  .cmini{width:49.5px; height:32.5px; border-radius:6.5px;}
+  .cmini:after{left:6.5px; top:10.5px; width:11.5px; height:9px;}
+  .crow .ct{gap:4px;}
+  .crow .ct b{font-size:17.5px;}
+  .crow .ct i{font-size:15px;}
+  .crad{width:24.5px; height:24.5px;}
+  .cadd{padding:14.5px; border-radius:17px; font-size:17px; margin-bottom:5px;}
+  .minfo{margin-top:13px; padding:13px 15.5px; border-radius:13px; font-size:15px;}
+  .win .dochelp{gap:11.5px; padding:13px 14.5px; margin-bottom:14.5px; border-radius:15.5px;}
+  .win .dochelp .di{width:39px; height:39px; border-radius:11.5px;}
+  .win .dochelp .di iconify-icon{font-size:21px;}
+  .win .dochelp .dt2 b{font-size:16px;}
+  .win .dochelp .dt2 i{font-size:14.5px;}
+  .win .dochelp .dgv{font-size:21px;}
+  .win .wghost{gap:8px; height:52px; margin-top:10.5px; border-radius:14.5px; font-size:16px;}
+  .win .wghost iconify-icon{font-size:19.5px;}
+  .sec.s80{padding:104px 0;}
+  .sec.s80.last{padding-bottom:143px;}
+  .fstep h3{font-size:39px;}
+  .fstep .fs{font-size:22px;}
+}
+/* ===== 넓은 화면 끝 ===== */
 </style>
 </head>
 <body>

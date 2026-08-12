@@ -11,3 +11,6 @@ img/ChatGPT Image*.png
 img/Gemini_Generated_Image*.png
 img/logo4.png
 img/**/ChatGPT Image*.png
+
+# 포토샵 작업 원본 (용량이 커서 깃허브에 올리지 않음)
+*.psd

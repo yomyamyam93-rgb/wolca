@@ -5,13 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>랜선페이 — 송금하기</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
-<link rel="stylesheet" href="web.css?v=20260811n">
+<link rel="stylesheet" href="web.css?v=20260812c">
 <link rel="icon" type="image/png" href="../img/logo3.png">
 <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
-<script src="web.js?v=20260811n"></script>
+<script src="web.js?v=20260812c"></script>
 <style>
   .send{background:#fff; overflow-x:hidden;}   /* 100vw 캐러셀이 가로 스크롤을 만들지 않게 */
-  .send-in{max-width:1040px; margin:0 auto; padding:60px 24px 100px; display:flex; flex-direction:column; align-items:center;}
+  .send-in{max-width:var(--maxw); margin:0 auto; padding:60px 24px 100px; display:flex; flex-direction:column; align-items:center;}
+  @media(max-width:760px){ .send-in{padding-left:20px; padding-right:20px;} }   /* 휴대폰 화면 좌우 여백 */
   /* 단계 진행 (카드가 옆으로 밀림) */
   .wizard{width:100%;}
   .wz-top{max-width:460px; margin:0 auto 22px;}
@@ -231,6 +232,124 @@
   body.embed .wz-card{flex:1 1 auto !important; max-width:100% !important; opacity:1 !important;}
   body.embed .wz-card:not(.on){display:none !important;}
   body.embed .authcard{box-shadow:none !important; padding:4px 2px !important;}
+
+
+/* ===== 넓은 화면(1360px~) 자동 생성 — 아래는 손으로 고치지 마세요 ===== */
+@media(min-width:1360px){
+  .send-in{padding:78px 31px 130px;}
+  .wz-top{max-width:598px; margin:0 auto 28.5px;}
+  .wz-head{margin-bottom:13px;}
+  .wz-name{font-size:19.5px;}
+  .wz-count{font-size:17px;}
+  .wz-bar{height:6.5px; border-radius:4px;}
+  .wz-bar i{border-radius:4px;}
+  .wz-view{padding:13px 0 44px;}
+  .wz-track{gap:31px;}
+  .wz-card{flex:0 0 598px;}
+  .wz-back{gap:6.5px; margin-bottom:23.5px; min-height:62.5px; padding:0 21px 0 17px; border-radius:15.5px; font-size:17.5px;}
+  .wz-back iconify-icon{font-size:21px;}
+  .wz-prev{gap:5px; margin-right:13px; padding:8px 14.5px 8px 10.5px; border-radius:11.5px; font-size:17px;}
+  .wz-prev iconify-icon{font-size:19.5px;}
+  .fld{height:67.5px; border-radius:17px; padding:0 19.5px; font-size:19.5px;}
+  .row2{gap:11.5px;}
+  .okbox{gap:14.5px; margin-top:18px; padding:19.5px; border-radius:18px;}
+  .okbox iconify-icon{font-size:28.5px;}
+  .okbox .l{font-size:17px;}
+  .okbox .v{font-size:22px;}
+  .updrop{border-radius:21px; padding:44px 21px;}
+  .updrop iconify-icon{font-size:44px;}
+  .updrop .t{font-size:19px; margin-top:13px;}
+  .updrop .s{font-size:17px; margin-top:6.5px;}
+  .filerow{gap:13px; margin-top:15.5px; padding:17px 18px; border-radius:15.5px;}
+  .filerow iconify-icon{font-size:24.5px;}
+  .filerow .fn{font-size:17.5px;}
+  .filerow .fx{font-size:17px;}
+  .sumrow{font-size:18px; padding:11.5px 0;}
+  .sumtot{margin-top:10.5px; padding-top:17px;}
+  .sumtot .l{font-size:18px;}
+  .sumtot .v{font-size:30px;}
+  .points{gap:39px; margin-top:49.5px;}
+  .points .pt{gap:13px; font-size:19px;}
+  .points .pt iconify-icon{font-size:24.5px;}
+  .authcard{flex:0 0 546px; border-radius:31px; padding:44px 39px;}
+  .authcard h2{font-size:27.5px;}
+  .authcard .sub{font-size:18px; margin:10.5px 0 31px;}
+  .field{margin-bottom:21px;}
+  .field label{font-size:17px; margin-bottom:10.5px;}
+  .tin{height:70px; border-radius:15.5px; padding:0 21px; font-size:21px;}
+  .telcos{gap:10.5px;}
+  .telco{height:62.5px; border-radius:15.5px; font-size:18px;}
+  .phone-row{gap:10.5px;}
+  .phone-row .req{height:70px; padding:0 21px; border-radius:17px; font-size:18px;}
+  .codebox.on{max-height:156px; margin-bottom:21px;}
+  .codebox .timer{right:21px; top:21px; font-size:18px;}
+  .auth-btn{height:73px; border-radius:19.5px; margin-top:13px; font-size:21px;}
+  .auth-fine{font-size:17px; margin-top:18px;}
+  .fld.lock .lk{gap:5px; font-size:17px;}
+  .fld.lock .lk iconify-icon{font-size:17px;}
+  .agl{margin:0 0 5px;}
+  .agl .ag{gap:11.5px; padding:17px 0; font-size:17.5px;}
+  .agl .ag iconify-icon{font-size:22px; margin-top:4px;}
+  .agq{margin-top:21px; padding:19.5px 21px; border-radius:18px; font-size:17.5px;}
+  .agchk{gap:13px; margin-top:18px; padding:18px 19.5px; border-radius:17px; font-size:18px;}
+  .agchk .bx{width:28.5px; height:28.5px;}
+  .agchk .bx iconify-icon{font-size:18px;}
+  .askbtn{gap:9px; height:65px; margin-top:13px; border-radius:18px; font-size:19px;}
+  .askbtn iconify-icon{font-size:23.5px;}
+  .askbox{width:598px; border-radius:31px; padding:36.5px 34px 34px;}
+  .askbox .atop{margin-bottom:8px;}
+  .askbox h3{font-size:26px;}
+  .askbox .ax{width:57px; height:57px; font-size:26px; border-radius:11.5px;}
+  .askbox .asub{font-size:17.5px; margin-bottom:26px;}
+  .asum{padding:21px 23.5px; border-radius:19.5px;}
+  .asum .t1{font-size:20px;}
+  .asum .t2{font-size:17px; margin-top:5px;}
+  .asum .ar{font-size:17.5px; padding:5px 0; margin-top:13px;}
+  .asum .adiv{margin:11.5px 0;}
+  .asum .atot .v{font-size:24.5px;}
+  .adoc{gap:9px; margin-top:15.5px; padding:14.5px 17px; border-radius:14.5px; font-size:17px;}
+  .adoc iconify-icon{font-size:21px;}
+  .aprev{margin-top:15.5px; padding:18px 19.5px; border-radius:17px; font-size:17px;}
+  .asteps{margin-top:23.5px; padding:21px 23.5px; border-radius:19.5px;}
+  .asteps .sp{gap:14.5px; padding:10.5px 0;}
+  .asteps .sp .no{width:28.5px; height:28.5px; font-size:17px;}
+  .asteps .sp .tx{font-size:17px;}
+  .askck{width:80.5px; height:80.5px; margin:8px auto 21px;}
+  .askck iconify-icon{font-size:44px;}
+  .rq-note{margin:0 0 23.5px; padding:21px 22px; border-radius:19.5px;}
+  .rq-note .n1{font-size:18px;}
+  .rq-note .n2{font-size:20px; margin-top:10.5px;}
+  .rq-note .n3{font-size:18px; margin-top:6.5px;}
+  .rq-note .n3 b{font-size:21px;}
+  .rq-note .n4{font-size:17px; margin-top:13px; padding-top:13px;}
+  .dhbanner{gap:17px; margin:0 0 21px; padding:19.5px 21px; border-radius:19.5px;}
+  .dhbanner .bi{width:52px; height:52px; border-radius:17px;}
+  .dhbanner .bi iconify-icon{font-size:27.5px;}
+  .dhbanner .b1{font-size:19px;}
+  .dhbanner .b2{font-size:17px; margin-top:4px;}
+  .dhbanner .bc{font-size:24.5px;}
+  .dhbox{width:676px; border-radius:31px;}
+  .dhbox .dhtop{padding:31px 34px 0;}
+  .dhbox h3{font-size:26px;}
+  .dhbox .dhx{width:57px; height:57px; font-size:26px; border-radius:11.5px;}
+  .dhtabs{gap:9px; padding:21px 34px 5px;}
+  .dhtabs button{height:47px; padding:0 18px; border-radius:1298.5px; font-size:17px;}
+  .dhbody{padding:18px 34px 34px;}
+  .dhintro{font-size:18px;}
+  .dhwarn{gap:10.5px; margin-top:15.5px; padding:15.5px 18px; border-radius:15.5px; font-size:17px;}
+  .dhcase{margin-top:21px; padding:21px 23.5px; border-radius:18px;}
+  .dhcase .ct{font-size:17.5px; margin-bottom:13px;}
+  .dhcase .cn{font-size:17px; margin-bottom:11.5px;}
+  .dhcase li{gap:10.5px; font-size:18px; padding:6.5px 0;}
+  .dhcase li iconify-icon{font-size:22px;}
+  .dhkey{gap:10.5px; margin-top:21px; padding:17px 19.5px; border-radius:15.5px; font-size:17px;}
+  .dhkey iconify-icon{font-size:22px;}
+  .dhtips{margin-top:18px; font-size:17px;}
+  .dhtips div{padding-left:17px; text-indent:-17px;}
+  body.embed .send-in{padding:21px 18px 26px;}
+  body.embed .authcard{padding:5px 2px !important;}
+}
+/* ===== 넓은 화면 끝 ===== */
 </style>
 </head>
 <body>

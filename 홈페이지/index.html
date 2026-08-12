@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>랜선페이 — 현금으로 내던 돈 카드로</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
-<link rel="stylesheet" href="web.css?v=20260811n">
+<link rel="stylesheet" href="web.css?v=20260812c">
 <link rel="icon" type="image/png" href="../img/logo3.png">
 <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
-<script src="web.js?v=20260811n"></script>
-<script src="게시글.js?v=20260811n"></script>
+<script src="web.js?v=20260812c"></script>
+<script src="게시글.js?v=20260812c"></script>
 <style>
   .reveal{opacity:0; transform:translateY(22px); transition:opacity .55s ease, transform .55s ease;}
   .reveal.in{opacity:1; transform:none;}
@@ -20,14 +20,14 @@
   .hero h1{font-size:52px; text-shadow:0 2px 24px rgba(0,0,0,.35);}
   /* 좌 : 문구 · 우 : 휴대폰 화면 */
   /* 상단바 · 본문 섹션(.wrap)과 좌우 선을 똑같이 맞춤 : 1040px + 좌우 24px */
-  .hero-in{position:relative; z-index:3; max-width:1040px; margin:0 auto; padding:0 24px;
+  .hero-in{position:relative; z-index:3; max-width:var(--maxw); margin:0 auto; padding:0 24px;
     display:flex; align-items:center; gap:64px;}
   .hero-txt{flex:1; min-width:0; text-align:left;}
   .hero-vis{flex:0 0 auto;}
   @media(max-width:960px){
     /* 좁아지면 문구 위 · 화면 아래로 */
     .hero{padding:92px 0 100px;}
-    .hero-in{padding:0 16px;}
+    .hero-in{padding:0 20px;}
     .hero h1{font-size:34px;}
     .hero-in{flex-direction:column; gap:48px;}
     .hero-txt{text-align:center; width:100%;}   /* 폭을 부모에 맞춤 — 좁은 화면에서 삐져나가지 않게 */
@@ -354,6 +354,9 @@
   /* ⑤ 결제 요청 — 좌 설명 · 우 대화 */
   .ways{padding:140px 0 90px;}
   .ways .wrap + .ways-in{margin-top:72px;}   /* 공통 헤더와 첫 장면 사이 */
+  /* 머리글이 여백 상자(.wrap) 안에 또 여백 상자라 좌우 여백이 두 번 들어감.
+     안쪽 것을 0 으로 두어 01 · 02 · 03 과 시작선을 맞춤 */
+  .ways .wrap > .wrap{padding-left:0; padding-right:0;}
   .ways.mid{padding:90px 0;}
   .ways.mid + .ways,.ways.mid ~ .ways:last-of-type{padding-top:0;}
   .ways.mid + .ways{padding:90px 0 140px;}
@@ -361,7 +364,7 @@
   .ways-in{display:flex; align-items:center; gap:72px;}
   .ways-txt{flex:1 1 0; min-width:0;}
   .ways-txt .p-lg{margin-top:18px;}
-  .ways-vis{flex:1 1 0; min-width:0; display:flex; justify-content:flex-start;}
+  .ways-vis{flex:1 1 0; min-width:0; display:flex; justify-content:center;}
   .wsw{display:flex; gap:8px; margin-top:26px; max-width:420px;}
 
   .wsb{flex:1; min-width:0; height:52px; padding:0 16px; border-radius:12px; border:1px solid var(--line); background:#fff;
@@ -463,7 +466,7 @@
 
   /* 단락 사이 얇은 CTA 띠 */
   .ctaband{background:var(--primary); color:#fff;}
-  .cb-in{max-width:1040px; margin:0 auto; padding:26px 24px; display:flex; align-items:center; justify-content:space-between; gap:24px;}
+  .cb-in{max-width:var(--maxw); margin:0 auto; padding:26px 24px; display:flex; align-items:center; justify-content:space-between; gap:24px;}
   .cb-t{font-size:20px; font-weight:700; letter-spacing:-.4px; word-break:keep-all;}
   .cb-t span{display:block; font-size:14px; font-weight:600; color:rgba(255,255,255,.82); margin-top:6px; letter-spacing:0;}
   .cb-b{flex:0 0 auto; display:inline-flex; align-items:center; gap:7px; height:52px; padding:0 24px; border-radius:13px;
@@ -485,7 +488,7 @@
   /* 앱 · 웹을 오갈 때 칸 크기가 흔들리지 않게 높이를 고정 */
   /* 화면과 단계 목록을 한 상자로 */
   /* 회색은 '박스'가 아니라 섹션 배경 (.sec.guide) 으로 깔았습니다 — 테두리 한 겹 제거 */
-  .gwrap{display:flex; align-items:center; justify-content:center; gap:56px; max-width:1040px; margin:52px auto 0;
+  .gwrap{display:flex; align-items:center; justify-content:center; gap:56px; max-width:var(--maxw); margin:52px auto 0;
     min-height:720px; padding:0; background:none; border-radius:0; text-align:left;}
   .gvis{flex:0 0 auto; display:flex; justify-content:center; align-items:center; width:440px; max-width:100%; height:640px;}
   /* 휴대폰 화면 */
@@ -831,6 +834,7 @@
   /* 마지막 CTA */
   /* 마지막 CTA — 히어로와 같은 어두운 배경으로 페이지를 닫아줌 */
   .last{background:#0A1526; color:#fff; text-align:center; padding:120px 24px;}
+  @media(max-width:760px){ .last{padding-left:20px; padding-right:20px;} }   /* 휴대폰 화면 좌우 여백 */
   .last .h-lg{color:#fff;}
   .last .p-lg{margin-top:18px; color:#AEB8C6;}
   .last .storebtn{background:rgba(255,255,255,.08); border-color:rgba(255,255,255,.22); color:#fff;}
@@ -892,7 +896,7 @@
     .guide-mobtip{display:block;}
 
     /* 7. 매거진 : 가로 슬라이드 (카드 비율 유지) */
-    .nr-list{gap:12px; margin-top:32px; padding:0 16px 6px;}
+    .nr-list{gap:12px; margin-top:32px; padding:0 20px 6px;}
     .nr{flex:0 0 250px;}
     .nr .vis{height:141px;}
     .nr .body{padding:14px 15px 16px;}
@@ -967,6 +971,372 @@
     .fp-body{padding:6px 20px 16px;} .fp-btm{padding:0 20px 18px;}
     .ftable th,.ftable td{font-size:13.5px; padding:10px 2px;}
   }
+  
+  
+
+
+
+/* ===== 넓은 화면(1360px~) 자동 생성 — 아래는 손으로 고치지 마세요 ===== */
+@media(min-width:1360px){
+  .hero{padding:145.5px 0 156px;}
+  .hero h1{font-size:67.5px;}
+  .hero-in{padding:0 31px; gap:83px;}
+  .hero .hl{padding:0 5px;}
+  .hero .p-lg{margin:34px auto 44px; max-width:780px;}
+  .hero .cta-col{margin-top:62.5px;}
+  .hero .storebtns{max-width:431.5px;}
+  .define{max-width:676px; margin:34px 0 0; font-size:22px;}
+  .hero-txt .cta-col{margin-top:49.5px;}
+  .safe{gap:10.5px 26px; margin-top:34px;}
+  .safe span{gap:8px; font-size:17px;}
+  .safe iconify-icon{font-size:19.5px;}
+  .hero-txt .safe{margin-top:44px;}
+  .hero-vis .scr{width:442px; height:806px; border-radius:44px; padding:34px 28.5px 34px;}
+  .hero-vis .sprog{height:4px; margin-bottom:28.5px;}
+  .hp-lead{gap:10.5px; font-size:17px;}
+  .hp-ico{width:34px; height:34px; border-radius:11.5px;}
+  .hp-ico iconify-icon{font-size:19.5px;}
+  .hp-card{margin-top:13px; border-radius:23.5px; padding:23.5px 26px;}
+  .hp-cardtop{gap:10.5px;}
+  .hp-brand{font-size:17.5px;}
+  .hp-inst{font-size:14.5px; border-radius:1298.5px; padding:4px 11.5px;}
+  .hp-num{font-size:17px;}
+  .hp-amt{font-size:28.5px; margin-top:6.5px;}
+  .hp-flow{gap:10.5px; margin:23.5px 0;}
+  .hp-chip{gap:5px; font-size:15px; border-radius:1298.5px; padding:6.5px 13px;}
+  .hp-chip iconify-icon{font-size:18px;}
+  .hp-recv{margin-top:13px; border-radius:23.5px; padding:23.5px 26px;}
+  .hp-recvtop{gap:8px; font-size:15.5px;}
+  .hp-recvtop iconify-icon{font-size:21px;}
+  .hp-nm{font-size:24.5px; margin-top:10.5px;}
+  .hp-sub{font-size:15.5px; margin-top:4px;}
+  .hp-cash{font-size:26px; margin-top:15.5px;}
+  .hp-cash i{font-size:15.5px; margin-left:6.5px;}
+  .steps3{margin-top:73px;}
+  .st3{padding:0 23.5px;}
+  .st3:not(:last-child):after{top:44px;}
+  .st3-no{width:88.5px; height:88.5px; border-radius:28.5px; font-size:28.5px;}
+  .st3-t{font-size:23.5px; margin-top:28.5px;}
+  .st3-d{font-size:18px; margin-top:11.5px;}
+  .st3-tm{gap:8px; margin-top:18px; font-size:17px; border-radius:1298.5px; padding:8px 15.5px;}
+  .st3-tm iconify-icon{font-size:18px;}
+  .how3-tip{gap:10.5px; margin-top:57px; font-size:18px; border-radius:1298.5px; padding:14.5px 23.5px;}
+  .how3-tip iconify-icon{font-size:23.5px;}
+  .cases-sec .p-lg{margin-top:18px;}
+  .cases{gap:18px; margin-top:52px;}
+  .case{border-radius:26px; padding:31px 28.5px;}
+  .case iconify-icon{font-size:34px;}
+  .case .ct{font-size:23px; margin-top:15.5px;}
+  .case .cs{font-size:17.5px; margin-top:8px;}
+  .case .ck{gap:4px; font-size:17px; margin-top:21px;}
+  .case .ck iconify-icon{font-size:19.5px;}
+  .cases-note{gap:9px; margin-top:34px; font-size:17.5px;}
+  .cases-note iconify-icon{font-size:22px;}
+  .docbox{width:676px; border-radius:28.5px;}
+  .docbox-top{gap:15.5px; padding:31px 34px 0;}
+  .docbox-top h3{font-size:26px;}
+  .docbox-x{min-height:57px; padding:0 13px 0 15.5px; border-radius:13px; font-size:18px;}
+  .docbox-x iconify-icon{font-size:23.5px;}
+  .docbox-body{padding:21px 34px 34px;}
+  .docbox-btm{padding:0 34px 31px;}
+  .cd-intro{font-size:18px;}
+  .cd-case{margin-top:21px; padding:21px 23.5px; border-radius:18px;}
+  .cd-case .cdt{font-size:17.5px; margin-bottom:13px;}
+  .cd-case .cdn{font-size:17px; margin-bottom:11.5px;}
+  .cd-case li{gap:10.5px; font-size:18px; padding:6.5px 0;}
+  .cd-case li iconify-icon{font-size:22px;}
+  .cd-key{gap:10.5px; margin-top:21px; padding:17px 19.5px; border-radius:15.5px; font-size:17px;}
+  .cd-key iconify-icon{font-size:22px;}
+  .cd-tip{margin-top:18px; font-size:17px; padding-left:17px; text-indent:-17px;}
+  .cases-sec .p-lg{margin-top:18px;}
+  .cases{gap:18px; margin-top:52px;}
+  .case{border-radius:26px; padding:31px 28.5px;}
+  .case iconify-icon{font-size:34px;}
+  .case .ct{font-size:23px; margin-top:15.5px;}
+  .case .cs{font-size:17.5px; margin-top:8px;}
+  .case .ck{gap:4px; font-size:17px; margin-top:21px;}
+  .case .ck iconify-icon{font-size:19.5px;}
+  .cases-note{gap:9px; margin-top:34px; font-size:17.5px;}
+  .cases-note iconify-icon{font-size:22px;}
+  .pts{max-width:1222px; margin:62.5px auto 0; gap:44px 57px;}
+  .pt{gap:21px;}
+  .pt .pi{width:60px; height:60px; border-radius:18px;}
+  .pt iconify-icon{font-size:31px;}
+  .pt .t{font-size:22px;}
+  .pt .d{font-size:18px; margin-top:8px;}
+  .usps{gap:15.5px; margin-top:62.5px;}
+  .up{border-radius:18px; padding:39px 28.5px;}
+  .ui{width:57px; height:57px; border-radius:18px; margin:0 auto 21px;}
+  .ui iconify-icon{font-size:28.5px;}
+  .ut{font-size:23.5px;}
+  .ud{font-size:18px; margin-top:13px;}
+  .cardco{padding:83px 0;}
+  .colist{gap:15.5px; margin-top:44px;}
+  .co{height:67.5px; padding:0 31px; border-radius:1298.5px;}
+  .colg{height:26px; max-width:143px;}
+  .colg[alt="BC카드"]{height:36.5px;}
+  .conote{margin-top:34px; font-size:17px;}
+  #reviews .p-lg{margin-top:26px;}
+  .rvstat{gap:31px 93.5px; margin-top:67.5px;}
+  .rs .v{font-size:57px;}
+  .rs .l{font-size:19.5px; margin-top:15.5px;}
+  .rs .d{font-size:17.5px; margin-top:8px;}
+  .whys{gap:10.5px; margin-top:41.5px;}
+  .wy{font-size:18px; border-radius:1298.5px; padding:15.5px 26px;}
+  .ways{padding:182px 0 117px;}
+  .ways .wrap + .ways-in{margin-top:93.5px;}
+  .ways.mid{padding:117px 0;}
+  .ways.mid + .ways{padding:117px 0 182px;}
+  .ways-in{gap:93.5px;}
+  .ways-txt .p-lg{margin-top:23.5px;}
+  .wsw{gap:10.5px; margin-top:34px; max-width:546px;}
+  .wsb{height:67.5px; padding:0 21px; border-radius:15.5px; font-size:19.5px;}
+  .wul{margin-top:31px;}
+  .wul li{padding-left:34px; font-size:19.5px; margin-bottom:13px;}
+  .wul li:before{left:5px; top:11.5px; width:9px; height:9px;}
+  .sms{width:546px;}
+  .sms-bub{border-radius:23.5px; padding:26px 28.5px;}
+  .sms-bub b{font-size:20px;}
+  .sms-item{font-size:17.5px; margin-top:15.5px;}
+  .sms-amt{font-size:34px; margin-top:5px;}
+  .sms-link{font-size:19px; margin-top:18px; padding-top:18px;}
+  .sms-link .gv{font-size:22px;}
+  .sms-sub{font-size:17px; margin-top:8px;}
+  .ways .ways-txt .h-lg{font-size:39px;}
+  .eyebrow.wno{gap:10.5px;}
+  .wnum{width:31px; height:31px; font-size:17px;}
+  .noti{width:546px; gap:18px;}
+  .nt{gap:15.5px; border-radius:21px; padding:23.5px 26px;}
+  .nt-ic{width:52px; height:52px; border-radius:17px;}
+  .nt-ic iconify-icon{font-size:27.5px;}
+  .nt-t{font-size:20px;}
+  .nt-s{font-size:17.5px; margin-top:5px;}
+  .nt-tm{font-size:17px;}
+  .split{width:546px;}
+  .sp-cards{gap:13px;}
+  .sp-card{border-radius:18px; padding:21px 23.5px;}
+  .sp-bank{font-size:17px;}
+  .sp-amt{font-size:24.5px; margin-top:13px;}
+  .sp-plus{font-size:26px;}
+  .sp-arr{gap:8px; margin:18px 0; font-size:17px;}
+  .sp-arr iconify-icon{font-size:23.5px;}
+  .sp-recv{gap:15.5px; border-radius:21px; padding:23.5px 26px;}
+  .sp-l{gap:9px; font-size:18px;}
+  .sp-l iconify-icon{font-size:23.5px;}
+  .sp-v{font-size:28.5px;}
+  .cb-in{padding:34px 31px; gap:31px;}
+  .cb-t{font-size:26px;}
+  .cb-t span{font-size:18px; margin-top:8px;}
+  .cb-b{gap:9px; height:67.5px; padding:0 31px; border-radius:17px; font-size:19.5px;}
+  .cb-b iconify-icon{font-size:23.5px;}
+  .guide .p-lg{margin-top:21px;}
+  .gtabs{gap:10.5px; margin-top:41.5px;}
+  .gtab{height:67.5px; padding:0 34px; border-radius:15.5px; font-size:21px;}
+  .gwrap{gap:73px; margin:67.5px auto 0; min-height:936px;}
+  .gvis{width:572px; height:832px;}
+  .gscr{width:442px; height:832px; border-radius:39px; padding:34px 26px 31px;}
+  .gsteps{max-width:676px; padding-top:8px;}
+  .gstep{border-radius:18px; padding:21px 23.5px;}
+  .gstep+.gstep{margin-top:8px;}
+  .gs-h{gap:15.5px;}
+  .gs-no{width:39px; height:39px; font-size:17.5px;}
+  .gs-t{font-size:21.5px;}
+  .gs-d{font-size:19px; margin:13px 0 2px 54.5px;}
+  .gscr .sprog,.scr .sprog{height:4px; margin-bottom:23.5px;}
+  .gscr .q,.scr .q{font-size:24.5px; margin-bottom:21px;}
+  .gscr .lbl,.scr .lbl{font-size:15.5px; margin:18px 0 8px;}
+  .gscr .sbtn,.scr .sbtn{height:62.5px; margin-top:23.5px; border-radius:17px; font-size:19.5px;}
+  .win .wbody{padding:21px 19.5px;}
+  .win .wq{font-size:20px;}
+  .win .wfield{height:49.5px; font-size:16px;}
+  .win .wbtn{height:54.5px; font-size:17.5px;}
+  .telcos{gap:6.5px;}
+  .telcos span{height:43px; font-size:15px;}
+  .win .bar{height:49.5px;}
+  .win .bar i{width:52px; height:49.5px; font-size:14.5px;}
+  .win .bar i:nth-child(1):before{width:14.5px;}
+  .win .bar i:nth-child(2):before{width:13px; height:13px;}
+  .win .bar i:nth-child(3):before{font-size:15.5px;}
+  .win{width:541px; height:728px; border-radius:21px;}
+  .win .wbody{padding:28.5px 28.5px;}
+  .win .wq{font-size:22px; margin-bottom:18px;}
+  .win .wlbl{font-size:15.5px; margin:15.5px 0 8px;}
+  .win .wfield{height:54.5px; border-radius:13px; padding:0 15.5px; font-size:17.5px;}
+  .win .wbtn{height:60px; border-radius:14.5px; font-size:19px;}
+  .win .wsub{font-size:16px; margin:-10.5px 0 5px;}
+  .telcos{gap:8px;}
+  .telcos span{height:47px; border-radius:11.5px; font-size:16px;}
+  .drop{min-height:156px; border-radius:18px; gap:10.5px;}
+  .drop iconify-icon{font-size:41.5px;}
+  .drop .dt{font-size:17.5px;}
+  .drop .ds{font-size:15px;}
+  .filerow{gap:13px; margin-top:13px; padding:14.5px 17px; border-radius:14.5px;}
+  .filerow iconify-icon{font-size:23.5px;}
+  .filerow .fn{font-size:16px;}
+  .filerow .fx{font-size:14.5px;}
+  .w2col{gap:13px;}
+  .seg{gap:5px; border-radius:17px; padding:5px; margin-bottom:21px;}
+  .seg span{padding:11.5px 0; font-size:17px; border-radius:13px;}
+  .dots{gap:6.5px; margin-top:15.5px;}
+  .dots i{width:8px; height:8px;}
+  .dots i.on{width:23.5px; border-radius:4px;}
+  .scrhint{font-size:16px; margin-top:18px;}
+  .chipsum{gap:9px; padding:10.5px 15.5px; border-radius:13px; font-size:16px; margin-bottom:21px;}
+  .chipsum iconify-icon{font-size:19.5px;}
+  .subbtn{height:54.5px; margin-top:8px; font-size:18px;}
+  .fade{padding-top:5px;}
+  .fade:after{height:57px;}
+  .catrow{gap:15.5px; padding:17px 15.5px; border-radius:18px; margin-bottom:10.5px;}
+  .catrow .cic{width:49.5px; height:49.5px; border-radius:15.5px;}
+  .catrow .cic iconify-icon{font-size:26px;}
+  .catrow .cn{font-size:19.5px;}
+  .catrow .cd{font-size:15.5px;}
+  .catrow .gv{font-size:23.5px;}
+  .amtrow{padding-bottom:13px;}
+  .amtrow .n{font-size:41.5px;}
+  .amtrow .w{font-size:21px; margin-left:8px;}
+  .qbtns{gap:9px; margin-top:18px;}
+  .qbtns span{height:49.5px; border-radius:14.5px; font-size:17px;}
+  .feeline{font-size:17px; margin-top:23.5px; padding:15.5px 18px; border-radius:15.5px;}
+  .selrow{height:65px; padding:0 18px; border-radius:17px; font-size:19.5px;}
+  .selrow .bk{width:31px; height:31px; border-radius:9px; font-size:13px; margin-right:10.5px;}
+  .selrow iconify-icon{font-size:23.5px;}
+  .inbox{gap:10.5px; height:65px; padding:0 10.5px 0 18px; border-radius:17px;}
+  .inbox .txt{font-size:19.5px;}
+  .inbox .side{height:44px; padding:0 15.5px; border-radius:11.5px; font-size:17px;}
+  .vbox{gap:14.5px; margin-top:15.5px; padding:21px; border-radius:19.5px;}
+  .vbox iconify-icon{font-size:31px;}
+  .vbox .vl{font-size:15.5px;}
+  .vbox .vn{font-size:26px;}
+  .cam{min-height:325px; border-radius:23.5px;}
+  .cam .bill{width:278px; border-radius:8px; padding:26px 23.5px;}
+  .cam .bill .h{font-size:15.5px;}
+  .cam .bill .sub{font-size:11.5px; margin-top:6.5px;}
+  .cam .bill .r{height:8px; border-radius:4px; margin-top:14.5px;}
+  .cam .bill .box{margin-top:18px; padding:15.5px 15.5px; border-radius:9px;}
+  .cam .bill .bt{font-size:11.5px;}
+  .cam .bill .bv{font-size:23.5px; margin-top:5px;}
+  .cam .fr i{width:31px; height:31px; border-radius:5px;}
+  .cam .shot{bottom:18px; width:60px; height:60px;}
+  .camhint{font-size:15.5px; margin-top:15.5px;}
+  .cface{height:171.5px; border-radius:21px; padding:21px;}
+  .cface .br{font-size:15.5px;}
+  .cface .chip{width:39px; height:28.5px; border-radius:6.5px;}
+  .cface .no{font-size:18px;}
+  .cface .bt{font-size:14.5px;}
+  .instal{gap:9px; margin-top:18px;}
+  .instal span{padding:11.5px 17px; border-radius:13px; font-size:17px;}
+  .crow{gap:15.5px; font-size:17px; padding:11.5px 0;}
+  .crow .sub2{font-size:14.5px; margin-top:4px;}
+  .cbox{border-radius:19.5px; padding:15.5px 18px; margin-bottom:10.5px;}
+  .ctot{padding-top:14.5px; margin-top:6.5px;}
+  .ctot .l{font-size:17px;}
+  .done{padding:13px 0 5px;}
+  .done .ck{width:83px; height:83px; margin:0 auto 21px;}
+  .done .ck iconify-icon{font-size:44px;}
+  .done h4{font-size:26px;}
+  .done p{font-size:17px; margin-top:10.5px;}
+  .receipt{margin-top:23.5px; padding:21px; border-radius:19.5px;}
+  .receipt .rr{font-size:17px; padding:8px 0;}
+  .receipt .rd{margin:11.5px 0;}
+  .receipt .rr.big .v{font-size:22px;}
+  .seg3{gap:5px; border-radius:17px; padding:5px; margin-bottom:18px;}
+  .seg3 span{padding:11.5px 0; border-radius:13px; font-size:17px;}
+  .crow{gap:14.5px; padding:13px 17px; border-radius:17px; margin-bottom:8px;}
+  .cmini{width:49.5px; height:32.5px; border-radius:6.5px;}
+  .cmini:after{left:6.5px; top:10.5px; width:11.5px; height:9px;}
+  .crow .ct{gap:4px;}
+  .crow .ct b{font-size:17.5px;}
+  .crow .ct i{font-size:15px;}
+  .crad{width:24.5px; height:24.5px;}
+  .cadd{padding:14.5px; border-radius:17px; font-size:17px; margin-bottom:5px;}
+  .minfo{margin-top:13px; padding:13px 15.5px; border-radius:13px; font-size:15px;}
+  .win .dochelp{gap:11.5px; padding:13px 14.5px; margin-bottom:14.5px; border-radius:15.5px;}
+  .win .dochelp .di{width:39px; height:39px; border-radius:11.5px;}
+  .win .dochelp .di iconify-icon{font-size:21px;}
+  .win .dochelp .dt2 b{font-size:16px;}
+  .win .dochelp .dt2 i{font-size:14.5px;}
+  .win .dochelp .dgv{font-size:21px;}
+  .win .wghost{gap:8px; height:52px; margin-top:10.5px; border-radius:14.5px; font-size:16px;}
+  .win .wghost iconify-icon{font-size:19.5px;}
+  .usp{gap:91px;}
+  .usp .txt .p-lg{margin-top:28.5px;}
+  .fqtabs{gap:10.5px; margin-top:39px;}
+  .fqtab{height:60px; padding:0 26px; border-radius:15.5px; font-size:19.5px;}
+  .fqbody{max-width:1144px; margin:47px auto 0; gap:15.5px;}
+  .fqpanel.on{gap:15.5px;}
+  .fq{border-radius:18px; padding:31px 34px;}
+  .fq-q{gap:18px; font-size:22px;}
+  .fq-q .fq-ic{width:57px; height:57px; border-radius:15.5px;}
+  .fq-q .fq-ic iconify-icon{font-size:28.5px;}
+  .fa{font-size:19.5px; margin-top:21px;}
+  .news-sec .p-lg{margin-top:23.5px;}
+  .nr-more{gap:4px; margin-top:13px; min-height:62.5px; font-size:19px;}
+  .nr-more iconify-icon{font-size:22px;}
+  .nr-list{gap:21px; padding:0 31px 10.5px;}
+  .nr{flex:0 0 390px; border-radius:21px;}
+  .nr .vis{height:218.5px;}
+  .nr .body{padding:21px 23.5px 26px;}
+  .nr .p{gap:13px; font-size:17px;}
+  .nr .t{font-size:21px; margin-top:13px;}
+  .stepstack{width:520px; gap:15.5px;}
+  .stepstack{height:676px;}
+  #process .wrap{min-height:676px;}
+  .stp{gap:18px; padding:23.5px 26px; border-radius:26px;}
+  .stp .sic{width:57px; height:57px; border-radius:18px;}
+  .stp .sic iconify-icon{font-size:28.5px;}
+  .stp .no{font-size:17px;}
+  .stp .t{font-size:22px; margin-top:4px;}
+  .stp.open .more{height:174px; margin-top:13px;}
+  .stp .s{font-size:18px;}
+  .stp .tm{gap:6.5px; margin-top:13px; padding:6.5px 14.5px; border-radius:1298.5px; font-size:17px;}
+  .stp .tm iconify-icon{font-size:18px;}
+  .rv-wrap{margin-top:70px;}
+  .rv-track{gap:18px; padding:5px 2px;}
+  .rv{width:390px; border-radius:23.5px; padding:31px 28.5px;}
+  .rv .stars{font-size:18px; margin-bottom:15.5px;}
+  .rv .q{font-size:19.5px;}
+  .rv .who{font-size:17px; margin-top:18px;}
+  .stats{gap:18px; margin-top:70px;}
+  .stat{border-radius:26px; padding:39px 18px;}
+  .stat .sl{font-size:17px; margin-bottom:13px;}
+  .stat .sv{font-size:39px;}
+  .stat .ss{font-size:17px; margin-top:10.5px;}
+  .trustband{gap:47px; margin-top:57px;}
+  .tb{gap:11.5px; font-size:19.5px;}
+  .tb iconify-icon{font-size:26px;}
+  .last{padding:156px 31px;}
+  .last .p-lg{margin-top:23.5px;}
+  .cta-col{gap:18px; margin-top:52px;}
+  .cta-col .btn{max-width:431.5px;}
+  .guide-mobtip{margin-top:21px; font-size:17px;}
+  .fpop{width:598px; border-radius:28.5px;}
+  .fp-top{padding:31px 34px 0;}
+  .fp-top h3{font-size:26px;}
+  .fp-x{width:57px; height:57px; font-size:26px; border-radius:11.5px;}
+  .fp-body{padding:8px 34px 26px;}
+  .fp-btm{padding:0 34px 28.5px; gap:15.5px;}
+  .fp-chk{gap:10.5px; min-height:62.5px; padding:0 5px; font-size:17.5px;}
+  .fp-chk input{width:28.5px; height:28.5px;}
+  .fp-go{height:67.5px; border-radius:17px; font-size:20px;}
+  .ftarget{height:34px; margin-top:13px; padding:0 14.5px; border-radius:10.5px; font-size:17px;}
+  .ftable{margin-top:23.5px;}
+  .ftable th,.ftable td{padding:14.5px 5px; font-size:19px;}
+  .ftable thead th{font-size:17px; padding-bottom:11.5px;}
+  .fcard{gap:10.5px; min-height:36.5px;}
+  .flogo-slot{width:62.5px; height:26px;}
+  .flogo.wide{max-height:15.5px;}
+  .fname{font-size:18px;}
+  .fsec{margin-top:36.5px; font-size:21px;}
+  .fsub{margin-top:8px; font-size:17px;}
+  .ftable.part th,.ftable.part td{padding:11.5px 4px;}
+  .ftable.part .mo{font-size:17.5px;}
+  .ftable.part .bd{font-size:17px;}
+  .fnotes{margin-top:23.5px;}
+  .fnotes li{padding-left:18px; font-size:17px; margin-bottom:9px;}
+  .fnotes li:before{left:4px;}
+}
+/* ===== 넓은 화면 끝 ===== */
 </style>
 </head>
 <body>

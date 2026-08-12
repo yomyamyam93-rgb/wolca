@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>랜선페이 — 세금계산서 · 부가세 신고</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
-<link rel="stylesheet" href="web.css?v=20260811n">
+<link rel="stylesheet" href="web.css?v=20260812c">
 <link rel="icon" type="image/png" href="../img/logo3.png">
 <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
-<script src="web.js?v=20260811n"></script>
+<script src="web.js?v=20260812c"></script>
 <style>
   .tx{padding:44px 20px 110px; background:var(--gray-bg);}
   .tx-in{max-width:920px; margin:0 auto;}
@@ -66,6 +66,39 @@
     color:#fff; font-family:inherit; font-size:15.5px; font-weight:700;}
   .lgghost{width:100%; height:46px; margin-top:8px; border:none; background:none; cursor:pointer;
     font-family:inherit; font-size:14px; font-weight:600; color:var(--placeholder);}
+
+
+/* ===== 넓은 화면(1360px~) 자동 생성 — 아래는 손으로 고치지 마세요 ===== */
+@media(min-width:1360px){
+  .tx{padding:57px 26px 143px;}
+  .tx-in{max-width:1196px;}
+  .tabs2{gap:8px; padding:6.5px; border-radius:19.5px; margin-bottom:34px;}
+  .tabs2 button{height:60px; border-radius:14.5px; font-size:19.5px;}
+  .sumcard{gap:18px; margin-bottom:28.5px;}
+  .sc{flex:1 1 260px; border-radius:23.5px; padding:26px 28.5px;}
+  .sc .l{font-size:17px;}
+  .sc .v{font-size:31px; margin-top:8px;}
+  .sc .s{font-size:17px; margin-top:6.5px;}
+  .card{border-radius:26px; padding:10.5px 31px; margin-bottom:21px;}
+  .row{gap:21px; padding:23.5px 0;}
+  .row .ic{width:54.5px; height:54.5px; border-radius:17px;}
+  .row .ic iconify-icon{font-size:27.5px;}
+  .row .t{font-size:20px;}
+  .row .s{font-size:17px; margin-top:5px;}
+  .row .v{font-size:18px;}
+  .row .dl{height:62.5px; padding:0 19.5px; border-radius:15.5px; font-size:17.5px;}
+  h2.sec-t{font-size:22px; margin:34px 2px 15.5px;}
+  .note{gap:13px; padding:21px 23.5px; border-radius:19.5px; font-size:17.5px;}
+  .note iconify-icon{font-size:24.5px;}
+  .lgbox{width:494px; border-radius:28.5px; padding:39px 34px 31px;}
+  .lgic{width:78px; height:78px; margin:0 auto 21px;}
+  .lgic iconify-icon{font-size:39px;}
+  .lgbox h3{font-size:24.5px;}
+  .lgbox p{font-size:18px; margin-top:13px;}
+  .lgbtn{height:67.5px; margin-top:28.5px; border-radius:18px; font-size:20px;}
+  .lgghost{height:60px; margin-top:10.5px; font-size:18px;}
+}
+/* ===== 넓은 화면 끝 ===== */
 </style>
 </head>
 <body>

@@ -2,6 +2,7 @@
 :root{
   --primary:#2563EB; --primary-dark:#1D4ED8; --primary-50:#EFF4FF; --primary-100:#DBE7FF;
   --bg:#FFFFFF; --gray-bg:#F4F5F6; --line:#ECEEF1; --border:#B1B8BE; --tile:#EEF1F4; --icon-off:#B0B8C1;
+  --maxw:1280px;   /* 본문 최대 폭 — 이 값만 바꾸면 전체가 같이 넓어짐 */
   --sub:#4E5968; --ink:#191F28; --placeholder:#6B7684; --success:#059669;
   --primary-grad:linear-gradient(180deg, color-mix(in srgb, var(--primary) 82%, #ffffff), var(--primary));
   --btn-shadow:0 4px 12px color-mix(in srgb, var(--primary) 32%, transparent), inset 0 1px 0 rgba(255,255,255,.18);
@@ -18,12 +19,12 @@ body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic 
      color:var(--ink); background:var(--bg); line-height:1.5; -webkit-font-smoothing:antialiased;
      word-break:keep-all; overflow-wrap:break-word;}
 iconify-icon{display:inline-block;}
-.wrap{max-width:1040px; margin:0 auto; padding:0 24px;}
-@media(max-width:760px){ .wrap{padding:0 16px;} }
+.wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px;}
+@media(max-width:760px){ .wrap{padding:0 20px;} }   /* 휴대폰 화면 좌우 여백 (카드 안쪽 패딩보다 좁지 않게) */
 
 /* 상단 내비 */
 .nav{position:sticky; top:0; z-index:50; background:rgba(255,255,255,.92); backdrop-filter:blur(10px); border-bottom:1px solid var(--line);}
-.nav-in{max-width:1040px; margin:0 auto; padding:0 24px; height:64px; display:flex; align-items:center; gap:0;}
+.nav-in{max-width:var(--maxw); margin:0 auto; padding:0 24px; height:64px; display:flex; align-items:center; gap:0;}
 .logo{display:flex; align-items:center; gap:8px; min-height:48px; font-size:20px; font-weight:700; color:var(--ink); text-decoration:none; letter-spacing:-.3px;}
 .logo .mark{width:30px; height:30px; border-radius:9px; background:var(--primary); color:#fff; display:flex; align-items:center; justify-content:center; font-size:17px;}
 .nav-menu{display:flex; align-items:center; gap:24px; margin-left:auto; margin-right:16px;}
@@ -40,7 +41,7 @@ iconify-icon{display:inline-block;}
 .nav-burger:hover{background:var(--tile);}
 @media(max-width:760px){
   /* 좁은 화면 : 로고 + 로그인 · 송금하기 + 햄버거 */
-  .nav-in{padding:0 16px;}
+  .nav-in{padding:0 20px;}
   .nav-menu{gap:16px; margin-right:0;}
   .nav-menu a.wide{display:none;}
   .nav-menu a{font-size:14px;}
@@ -93,16 +94,17 @@ iconify-icon{display:inline-block;}
 
 /* 푸터 */
 .f-legal{border-top:1px solid var(--line); background:#fff;}
-.f-legal-in{max-width:1040px; margin:0 auto; padding:4px 24px; display:flex; flex-wrap:wrap; gap:0 26px;}
+.f-legal-in{max-width:var(--maxw); margin:0 auto; padding:4px 24px; display:flex; flex-wrap:wrap; gap:0 26px;}
 .f-legal-in a{display:inline-flex; align-items:center; min-height:48px; font-size:14px; font-weight:600; color:var(--ink); text-decoration:none;}
 .f-legal-in a:hover{color:var(--primary-dark);}
 .f-copy{margin-top:14px; font-size:13px; color:var(--placeholder);}
-@media(max-width:600px){ .f-legal-in{gap:0 16px; padding:4px 16px;} .f-legal-in a{font-size:13px;} }
+@media(max-width:600px){ .f-legal-in{gap:0 16px; padding:4px 20px;} .f-legal-in a{font-size:13px;} }
 .footer{border-top:1px solid var(--line); padding:46px 0 60px; background:#fff;}
-.footer .f-in{max-width:1040px; margin:0 auto; padding:0 24px;}
+.footer .f-in{max-width:var(--maxw); margin:0 auto; padding:0 24px;}
 .footer .f-menu{display:flex; gap:22px; flex-wrap:wrap; margin-bottom:20px;}
 .footer .f-menu a{font-size:14px; font-weight:600; color:var(--sub); text-decoration:none;}
 .footer p{font-size:13px; color:var(--placeholder); line-height:1.8;}
+@media(max-width:760px){ .footer .f-in{padding:0 20px;} }
 
 /* CTA 버튼 묶음 (메인 · 이용가이드 공용) */
 .hero-btns{display:flex; gap:12px; justify-content:center; flex-wrap:wrap;}
@@ -118,7 +120,7 @@ iconify-icon{display:inline-block;}
 .page-hero{height:400px; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:0 24px;
   background:linear-gradient(180deg, #E4EDFF 0%, var(--primary-50) 58%, #F7FAFF 100%);}
 .page-hero .p-lg{margin-top:18px;}
-@media(max-width:760px){ .page-hero{height:320px;} }
+@media(max-width:760px){ .page-hero{height:320px; padding:0 20px;} }
 
 /* ===== 모션 ===== */
 /* 폰트 로딩 중 글자 튐 방지 + 페이지 진입 */
@@ -174,3 +176,59 @@ section[id], header[id], div[id]{scroll-margin-top:88px;}
 /* 줄바꿈을 보기 좋게 — 마지막 줄에 한 단어만 남지 않도록 */
 h1,h2,h3,h4,.h-xl,.h-lg,.eyebrow,.sub-tit,.q,.t{text-wrap:balance;}
 p,.p-lg,.s,.hint,.f-co,.note,.qs{text-wrap:pretty;}
+
+/* ===== 넓은 화면(1360px~) 자동 생성 — 아래는 손으로 고치지 마세요 ===== */
+@media(min-width:1360px){
+  .wrap{padding:0 31px;}
+  .nav-in{padding:0 31px; height:83px;}
+  .logo{gap:10.5px; min-height:62.5px; font-size:26px;}
+  .logo .mark{width:39px; height:39px; border-radius:11.5px; font-size:22px;}
+  .nav-menu{gap:31px; margin-right:21px;}
+  .nav-menu a{font-size:19.5px; padding:10.5px 2px;}
+  .nav-cta{height:57px; padding:0 22px; margin-left:21px; border-radius:15.5px; font-size:19px;}
+  .nav-burger{width:62.5px; height:62.5px; margin-left:8px; font-size:34px; border-radius:15.5px;}
+  .drawer{width:416px; padding:26px 28.5px;}
+  .drawer .d-top{margin-bottom:18px;}
+  .drawer .d-title{font-size:22px;}
+  .drawer .d-x{width:62.5px; height:62.5px; margin-right:-10.5px; font-size:28.5px; border-radius:15.5px;}
+  .drawer a{gap:15.5px; padding:19.5px 5px; font-size:21px;}
+  .drawer a iconify-icon{font-size:27.5px;}
+  .drawer a .gv{font-size:23.5px;}
+  .drawer .d-login{margin-top:23.5px; height:67.5px; border-radius:15.5px; font-size:19.5px;}
+  .sec{padding:143px 0;}
+  .eyebrow{font-size:21px; margin-bottom:18px;}
+  .h-xl{font-size:67.5px;}
+  .h-lg{font-size:49.5px;}
+  .h-md{font-size:34px;}
+  .p-lg{font-size:23.5px;}
+  .h-xl + .p-lg,.h-lg + .p-lg,.h-md + .p-lg{margin-top:23.5px;}
+  .h-xl + .p-md,.h-lg + .p-md{margin-top:18px;}
+  .p-md{font-size:19.5px;}
+  .btn{gap:10.5px; height:73px; padding:0 34px; border-radius:15.5px; font-size:21px;}
+  .btn iconify-icon{font-size:26px;}
+  .f-legal-in{padding:5px 31px; gap:0 34px;}
+  .f-legal-in a{min-height:62.5px; font-size:18px;}
+  .f-copy{margin-top:18px; font-size:17px;}
+  .footer{padding:60px 0 78px;}
+  .footer .f-in{padding:0 31px;}
+  .footer .f-menu{gap:28.5px; margin-bottom:26px;}
+  .footer .f-menu a{font-size:18px;}
+  .footer p{font-size:17px;}
+  .hero-btns{gap:15.5px;}
+  .cta-col{gap:18px; margin-top:52px;}
+  .cta-col .btn{max-width:431.5px;}
+  .cta-col .storebtns{max-width:431.5px;}
+  .storebtns{gap:13px; margin-top:23.5px;}
+  .storebtn{gap:9px; width:208px; height:65px; border-radius:15.5px; font-size:18px;}
+  .storebtn iconify-icon{font-size:22px;}
+  .page-hero{height:520px; padding:0 31px;}
+  .page-hero .p-lg{margin-top:23.5px;}
+  section[id], header[id], div[id]{scroll-margin-top:114.5px;}
+  .f-co{gap:5px 18px;}
+  .f-co span{gap:8px;}
+  .f-co em{font-size:17px; margin-right:8px;}
+  .f-note{margin-top:13px;}
+  .logo img:first-child{height:30px !important;}
+  .logo img:last-child{height:25px !important;}
+}
+/* ===== 넓은 화면 끝 ===== */

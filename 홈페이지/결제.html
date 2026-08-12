@@ -5,12 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>랜선페이 — 결제</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
-<link rel="stylesheet" href="web.css?v=20260811n">
+<link rel="stylesheet" href="web.css?v=20260812c">
 <link rel="icon" type="image/png" href="../img/logo3.png">
 <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
-<script src="web.js?v=20260811n"></script>
+<script src="web.js?v=20260812c"></script>
 <style>
   .pay-wrap{background:#fff; padding:60px 24px 110px;}
+  @media(max-width:760px){ .pay-wrap{padding-left:20px; padding-right:20px;} }   /* 휴대폰 화면 좌우 여백 */
   .paybox{width:100%; max-width:520px; margin:0 auto;}
   .paycard{background:#fff; border-radius:24px; padding:32px 30px; box-shadow:0 8px 24px rgba(25,31,40,.10);}
   .paycard h2{font-size:21px; font-weight:700; letter-spacing:-.4px;}
@@ -176,6 +177,96 @@
   body.embed .nav, body.embed .page-hero, body.embed .footer, body.embed .drawer-layer{display:none !important;}
   body.embed .pay-wrap{padding:0 !important; background:#fff;}
   body.embed .paycard{box-shadow:none !important; padding:16px 14px !important; margin:0 !important;}
+
+
+/* ===== 넓은 화면(1360px~) 자동 생성 — 아래는 손으로 고치지 마세요 ===== */
+@media(min-width:1360px){
+  .pay-wrap{padding:78px 31px 143px;}
+  .paybox{max-width:676px;}
+  .paycard{border-radius:31px; padding:41.5px 39px;}
+  .paycard h2{font-size:27.5px;}
+  .paycard .sub{font-size:18px; margin:10.5px 0 31px;}
+  .plabel{font-size:17px; margin:28.5px 0 13px;}
+  .pseg{gap:6.5px; padding:6.5px; border-radius:18px; margin-bottom:26px;}
+  .pseg button{height:57px; border-radius:13px; font-size:18px;}
+  .cardlist{gap:13px;}
+  .crd{gap:18px; padding:19.5px 21px; border-radius:21px;}
+  .crd .face{width:67.5px; height:44px; border-radius:9px;}
+  .crd .face:after{left:9px; top:14.5px; width:15.5px; height:11.5px;}
+  .crd .cn{font-size:19.5px;}
+  .crd .cno{font-size:17px; margin-top:4px;}
+  .crd .rad{width:27.5px; height:27.5px;}
+  .crd .rad iconify-icon{font-size:17px;}
+  .addcard{gap:9px; height:67.5px; border-radius:18px; font-size:18px;}
+  .addcard iconify-icon{font-size:22px;}
+  .guest .plabel{margin-bottom:10.5px;}
+  .guest .cardno .min{padding:0 5px;}
+  .easy img{height:28.5px; width:80.5px;}
+  .easylist{gap:13px;}
+  .easy{gap:15.5px; height:75.5px; padding:0 21px; border-radius:19.5px; font-size:19.5px;}
+  .instnote{gap:10.5px; margin-top:15.5px; padding:17px 19.5px; border-radius:15.5px; font-size:17px;}
+  .instnote iconify-icon{font-size:22px;}
+  .inst{gap:10.5px;}
+  .inst span{padding:14.5px 19.5px; border-radius:15.5px; font-size:18px;}
+  .amt{margin-top:34px; padding:26px; border-radius:23.5px;}
+  .arow{font-size:18px; padding:9px 0;}
+  .atot{margin-top:13px; padding-top:18px;}
+  .atot .l{font-size:18px;}
+  .atot .v{font-size:32.5px;}
+  .ben{margin-top:18px; padding:8px 21px; border-radius:18px;}
+  .ben .b{gap:8px; padding:13px 0; font-size:17px;}
+  .ben .b iconify-icon{font-size:21px;}
+  .ben .b .v{padding-left:10.5px;}
+  .paybtn{height:75.5px; border-radius:21px; margin-top:28.5px; font-size:22px;}
+  .fine{font-size:17px; margin-top:18px;}
+  .modal{width:572px; border-radius:31px; padding:36.5px 34px 34px;}
+  .modal .mtop{margin-bottom:8px;}
+  .modal h3{font-size:26px;}
+  .modal .mx{width:57px; height:57px; font-size:26px; border-radius:11.5px;}
+  .modal .msub{font-size:17.5px; margin-bottom:28.5px;}
+  .mfield{margin-bottom:19.5px;}
+  .mfield label{font-size:17px; margin-bottom:10.5px;}
+  .min{height:67.5px; border-radius:15.5px; padding:0 18px; font-size:21px;}
+  .cardno{gap:8px;}
+  .cardno .min{padding:0 5px;}
+  .m2{gap:13px;}
+  .mhint{font-size:17px; margin-top:9px;}
+  .magree{gap:13px; margin:23.5px 0 5px; font-size:17.5px;}
+  .magree .chk{width:28.5px; height:28.5px;}
+  .magree .chk iconify-icon{font-size:18px;}
+  .msafe{gap:10.5px; margin-top:21px; padding:17px 19.5px; border-radius:15.5px; font-size:17px;}
+  .msafe iconify-icon{font-size:22px;}
+  .mbtn{height:70px; border-radius:18px; margin-top:23.5px; font-size:21px;}
+  .mbtn.ghost{margin-top:11.5px;}
+  .rc{border-radius:21px;}
+  .rc-top{padding:26px;}
+  .rc-top .st{gap:8px; padding:8px 17px; border-radius:1298.5px; font-size:17px;}
+  .rc-top .st iconify-icon{font-size:18px;}
+  .rc-top .amt{font-size:39px; margin-top:15.5px;}
+  .rc-top .dt{font-size:17px; margin-top:9px;}
+  .rc-body{padding:23.5px 26px;}
+  .rc-sec+.rc-sec{margin-top:18px; padding-top:18px;}
+  .rc-sec .h{font-size:17px; margin-bottom:11.5px;}
+  .rcrow{gap:18px; font-size:17.5px; padding:6.5px 0;}
+  .rc-note{font-size:17px; padding:18px 26px 23.5px;}
+  .done .ck{width:101.5px; height:101.5px; margin:0 auto 26px;}
+  .done .ck iconify-icon{font-size:54.5px;}
+  .done h2{font-size:31px;}
+  .done p{font-size:19.5px; margin-top:15.5px;}
+  .receipt{margin-top:34px; padding:28.5px; border-radius:23.5px;}
+  .rr{gap:15.5px; font-size:18px; padding:9px 0;}
+  .rd{margin:15.5px 0;}
+  .rr.big .v{font-size:24.5px;}
+  .donebtns{gap:13px; margin-top:31px;}
+  .subbtn{height:67.5px; border-radius:18px; font-size:19.5px;}
+  .appgrid{gap:13px;}
+  .appc{gap:10.5px; height:119.5px; border-radius:19.5px;}
+  .appc .cdot{width:31px; height:31px; border-radius:10.5px;}
+  .appc .cn{font-size:17px;}
+  .appnote{padding:18px 19.5px; border-radius:17px; font-size:17px; margin-bottom:18px;}
+  body.embed .paycard{padding:21px 18px !important;}
+}
+/* ===== 넓은 화면 끝 ===== */
 </style>
 </head>
 <body>
