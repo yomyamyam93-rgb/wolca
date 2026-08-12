@@ -46,7 +46,7 @@ html{scrollbar-gutter:stable;}
   --hero-dark:#1E2A4A;  /* 사업자 히어로 배경 */
 
   /* ── 모양·간격 ── */
-  --r-btn:12px; --r-card:14px; --r-badge:8px; --pad:16px;
+  --r-btn:12px; --r-card:14px; --r-badge:8px; --pad:20px;   /* 화면 좌우 여백 */
 
   /* ── 버튼 입체감 (은은한 그라데이션·그림자) ── */
   --primary-grad:linear-gradient(180deg, color-mix(in srgb, var(--primary) 82%, #ffffff), var(--primary));
