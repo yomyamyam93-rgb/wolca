@@ -182,6 +182,7 @@
 
 
 
+
 /* ===== 넓은 화면(1360px~) 자동 생성 — 아래는 손으로 고치지 마세요 ===== */
 @media(min-width:1360px){
   .pay-wrap{padding:78px 31px 143px;}
@@ -222,11 +223,6 @@
   .ben .b .v{padding-left:10.5px;}
   .paybtn{height:75.5px; border-radius:21px; margin-top:28.5px; font-size:22px;}
   .fine{font-size:17px; margin-top:18px;}
-  .modal{width:572px; border-radius:31px; padding:36.5px 34px 34px;}
-  .modal .mtop{margin-bottom:8px;}
-  .modal h3{font-size:26px;}
-  .modal .mx{width:57px; height:57px; font-size:26px; border-radius:11.5px;}
-  .modal .msub{font-size:17.5px; margin-bottom:28.5px;}
   .mfield{margin-bottom:19.5px;}
   .mfield label{font-size:17px; margin-bottom:10.5px;}
   .min{height:67.5px; border-radius:15.5px; padding:0 18px; font-size:21px;}
@@ -268,6 +264,34 @@
   .appc .cn{font-size:17px;}
   .appnote{padding:18px 19.5px; border-radius:17px; font-size:17px; margin-bottom:18px;}
   body.embed .paycard{padding:21px 18px !important;}
+
+  /* 팝업 · 서랍 안은 원래 크기 그대로 */
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .amt{margin-top:26px; padding:20px; border-radius:18px;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .mfield{margin-bottom:15px;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .mfield label{font-size:13px; margin-bottom:8px;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .min{height:52px; border-radius:12px; padding:0 14px; font-size:16px;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .cardno{gap:6px;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .cardno .min{padding:0 4px;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .m2{gap:10px;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .mhint{font-size:13px; margin-top:7px;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .magree{gap:10px; margin:18px 0 4px; font-size:13.5px;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .magree .chk{width:22px; height:22px;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .magree .chk iconify-icon{font-size:14px;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .msafe{gap:8px; margin-top:16px; padding:13px 15px; border-radius:12px; font-size:13px;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .msafe iconify-icon{font-size:17px;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .mbtn{height:54px; border-radius:14px; margin-top:18px; font-size:16px;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .mbtn.ghost{margin-top:9px;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .rc{border-radius:16px;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .rc-top{padding:20px;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .rc-top .st{gap:6px; padding:6px 13px; border-radius:999px; font-size:13px;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .rc-top .st iconify-icon{font-size:14px;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .rc-top .amt{font-size:30px; margin-top:12px;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .rc-top .dt{font-size:13px; margin-top:7px;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .rc-body{padding:18px 20px;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .rc-sec+.rc-sec{margin-top:14px; padding-top:14px;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .rc-sec .h{font-size:13px; margin-bottom:9px;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .rcrow{gap:14px; font-size:13.5px; padding:5px 0;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .rc-note{font-size:13px; padding:14px 20px 18px;}
 }
 /* ===== 넓은 화면 끝 ===== */
 </style>

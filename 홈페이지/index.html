@@ -979,6 +979,7 @@
 
 
 
+
 /* ===== 넓은 화면(1360px~) 자동 생성 — 아래는 손으로 고치지 마세요 ===== */
 @media(min-width:1360px){
   .hero{padding:145.5px 0 156px;}
@@ -1035,13 +1036,6 @@
   .case .ck iconify-icon{font-size:19.5px;}
   .cases-note{gap:9px; margin-top:34px; font-size:17.5px;}
   .cases-note iconify-icon{font-size:22px;}
-  .docbox{width:676px; border-radius:28.5px;}
-  .docbox-top{gap:15.5px; padding:31px 34px 0;}
-  .docbox-top h3{font-size:26px;}
-  .docbox-x{min-height:57px; padding:0 13px 0 15.5px; border-radius:13px; font-size:18px;}
-  .docbox-x iconify-icon{font-size:23.5px;}
-  .docbox-body{padding:21px 34px 34px;}
-  .docbox-btm{padding:0 34px 31px;}
   .cd-intro{font-size:18px;}
   .cd-case{margin-top:21px; padding:21px 23.5px; border-radius:18px;}
   .cd-case .cdt{font-size:17.5px; margin-bottom:13px;}
@@ -1313,7 +1307,6 @@
   .cta-col{gap:18px; margin-top:52px;}
   .cta-col .btn{max-width:431.5px;}
   .guide-mobtip{margin-top:21px; font-size:17px;}
-  .fpop{width:598px; border-radius:28.5px;}
   .fp-top{padding:31px 34px 0;}
   .fp-top h3{font-size:26px;}
   .fp-x{width:57px; height:57px; font-size:26px; border-radius:11.5px;}
@@ -1338,6 +1331,32 @@
   .fnotes{margin-top:23.5px;}
   .fnotes li{padding-left:18px; font-size:17px; margin-bottom:9px;}
   .fnotes li:before{left:4px;}
+
+  /* 팝업 · 서랍 안은 원래 크기 그대로 */
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .fp-top{padding:24px 26px 0;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .fp-top h3{font-size:20px;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .fp-x{width:44px; height:44px; font-size:20px; border-radius:9px;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .fp-body{padding:6px 26px 20px;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .fp-btm{padding:0 26px 22px; gap:12px;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .fp-chk{gap:8px; min-height:48px; padding:0 4px; font-size:13.5px;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .fp-chk input{width:22px; height:22px;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .fp-go{height:52px; border-radius:13px; font-size:15.5px;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .ftarget{height:26px; margin-top:10px; padding:0 11px; border-radius:8px; font-size:13px;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .ftable{margin-top:18px;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .ftable th,.ftable td{padding:11px 4px; font-size:14.5px;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .ftable thead th{font-size:13px; padding-bottom:9px;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .fcard{gap:8px; min-height:28px;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .flogo-slot{width:48px; height:20px;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .flogo.wide{max-height:12px;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .fname{font-size:14px;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .fsec{margin-top:28px; font-size:16px;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .fsub{margin-top:6px; font-size:13px;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .ftable.part th,.ftable.part td{padding:9px 3px;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .ftable.part .mo{font-size:13.5px;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .ftable.part .bd{font-size:13px;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .fnotes{margin-top:18px;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .fnotes li{padding-left:14px; font-size:13px; margin-bottom:7px;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .fnotes li:before{left:3px;}
 }
 /* ===== 넓은 화면 끝 ===== */
 </style>

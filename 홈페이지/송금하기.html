@@ -237,6 +237,7 @@
 
 
 
+
 /* ===== 넓은 화면(1360px~) 자동 생성 — 아래는 손으로 고치지 마세요 ===== */
 @media(min-width:1360px){
   .send-in{padding:78px 31px 130px;}
@@ -299,11 +300,6 @@
   .agchk .bx iconify-icon{font-size:18px;}
   .askbtn{gap:9px; height:65px; margin-top:13px; border-radius:18px; font-size:19px;}
   .askbtn iconify-icon{font-size:23.5px;}
-  .askbox{width:598px; border-radius:31px; padding:36.5px 34px 34px;}
-  .askbox .atop{margin-bottom:8px;}
-  .askbox h3{font-size:26px;}
-  .askbox .ax{width:57px; height:57px; font-size:26px; border-radius:11.5px;}
-  .askbox .asub{font-size:17.5px; margin-bottom:26px;}
   .asum{padding:21px 23.5px; border-radius:19.5px;}
   .asum .t1{font-size:20px;}
   .asum .t2{font-size:17px; margin-top:5px;}
@@ -331,10 +327,6 @@
   .dhbanner .b1{font-size:19px;}
   .dhbanner .b2{font-size:17px; margin-top:4px;}
   .dhbanner .bc{font-size:24.5px;}
-  .dhbox{width:676px; border-radius:31px;}
-  .dhbox .dhtop{padding:31px 34px 0;}
-  .dhbox h3{font-size:26px;}
-  .dhbox .dhx{width:57px; height:57px; font-size:26px; border-radius:11.5px;}
   .dhtabs{gap:9px; padding:21px 34px 5px;}
   .dhtabs button{height:47px; padding:0 18px; border-radius:1298.5px; font-size:17px;}
   .dhbody{padding:18px 34px 34px;}
@@ -351,6 +343,31 @@
   .dhtips div{padding-left:17px; text-indent:-17px;}
   body.embed .send-in{padding:21px 18px 26px;}
   body.embed .authcard{padding:5px 2px !important;}
+
+  /* 팝업 · 서랍 안은 원래 크기 그대로 */
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .field{margin-bottom:16px;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .field label{font-size:13px; margin-bottom:8px;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .tin{height:54px; border-radius:12px; padding:0 16px; font-size:16px;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .auth-btn{height:56px; border-radius:15px; margin-top:10px; font-size:16px;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .auth-fine{font-size:13px; margin-top:14px;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .asum{padding:16px 18px; border-radius:15px;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .asum .t1{font-size:15.5px;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .asum .t2{font-size:13px; margin-top:4px;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .asum .ar{font-size:13.5px; padding:4px 0; margin-top:10px;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .asum .adiv{margin:9px 0;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .asum .atot .v{font-size:19px;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .adoc{gap:7px; margin-top:12px; padding:11px 13px; border-radius:11px; font-size:13px;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .adoc iconify-icon{font-size:16px;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .aprev{margin-top:12px; padding:14px 15px; border-radius:13px; font-size:13px;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .asteps{margin-top:18px; padding:16px 18px; border-radius:15px;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .asteps .sp{gap:11px; padding:8px 0;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .asteps .sp .no{width:22px; height:22px; font-size:13px;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .asteps .sp .tx{font-size:13px;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .askck{width:62px; height:62px; margin:6px auto 16px;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .askck iconify-icon{font-size:34px;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .dhtabs{gap:7px; padding:16px 26px 4px;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .dhtabs button{height:36px; padding:0 14px; border-radius:999px; font-size:13px;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .dhbody{padding:14px 26px 26px;}
 }
 /* ===== 넓은 화면 끝 ===== */
 </style>

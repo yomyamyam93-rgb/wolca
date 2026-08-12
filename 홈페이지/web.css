@@ -181,14 +181,6 @@ p,.p-lg,.s,.hint,.f-co,.note,.qs{text-wrap:pretty;}
 @media(min-width:1360px){
   .wrap{padding:0 31px;}
   .nav-in{padding:0 31px;}
-  .drawer{width:416px; padding:26px 28.5px;}
-  .drawer .d-top{margin-bottom:18px;}
-  .drawer .d-title{font-size:22px;}
-  .drawer .d-x{width:62.5px; height:62.5px; margin-right:-10.5px; font-size:28.5px; border-radius:15.5px;}
-  .drawer a{gap:15.5px; padding:19.5px 5px; font-size:21px;}
-  .drawer a iconify-icon{font-size:27.5px;}
-  .drawer a .gv{font-size:23.5px;}
-  .drawer .d-login{margin-top:23.5px; height:67.5px; border-radius:15.5px; font-size:19.5px;}
   .sec{padding:143px 0;}
   .eyebrow{font-size:21px; margin-bottom:18px;}
   .h-xl{font-size:67.5px;}
@@ -211,5 +203,9 @@ p,.p-lg,.s,.hint,.f-co,.note,.qs{text-wrap:pretty;}
   .storebtn iconify-icon{font-size:22px;}
   .page-hero{height:520px; padding:0 31px;}
   .page-hero .p-lg{margin-top:23.5px;}
+
+  /* 팝업 · 서랍 안은 원래 크기 그대로 */
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .btn{gap:8px; height:56px; padding:0 26px; border-radius:12px; font-size:16px;}
+  :is(.drawer,.docbox,.fpop,.modal,.askbox,.dhbox,.lgbox) .btn iconify-icon{font-size:20px;}
 }
 /* ===== 넓은 화면 끝 ===== */
