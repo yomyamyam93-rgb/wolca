@@ -1,0 +1,310 @@
+/* ============================================================
+   랜선페이 — 통합 폼 (PC 웹 · 모바일 웹 · 모바일 앱 공용)
+   DESIGN_GUIDE.md 를 그대로 옮겨 놓은 파일입니다.
+   색·크기를 바꾸려면 아래 :root 한 곳만 고치면 전체가 따라옵니다.
+   ============================================================ */
+
+:root{
+  /* 브랜드색 — 사장님 색으로 바꾸려면 여기만 (가이드 2장) */
+  --primary:#2563EB; --primary-600:#1D4ED8; --primary-700:#1E40AF;
+  --primary-50:#EFF4FF; --primary-100:#DBE7FF;
+
+  /* 회색 (가이드 2장) */
+  --bg:#F4F5F6; --card:#FFFFFF; --line:#ECEEF1; --border:#B1B8BE;
+  --sub:#464C53; --ink:#1E2124; --placeholder:#8A9099; --icon-off:#9AA1AC;
+  --dark:#141A22;                     /* 어두운 섹션 · 푸터 */
+
+  /* 의미색 (가이드 2장) — 뜻이 있을 때만 쓴다 */
+  --success:#059669; --success-bg:#ECFDF3;
+  --warn:#B45309;    --warn-bg:#FFFAEB;
+  --danger:#DC2626;  --danger-bg:#FEF3F2;
+
+  /* 치수 (가이드 3·4장) */
+  --pad:20px;        /* 화면 좌우 여백 — 항상 20px */
+  --maxw:1240px;     /* PC 본문 최대 폭 */
+  --appbar:56px;        /* 상단바 높이 */
+  --tab:60px;        /* 하단 탭바 높이 */
+  --safe:env(safe-area-inset-bottom, 0px);
+
+  /* 파란 버튼만 예외로 입체감 허용 (가이드 5장) */
+  --grad:linear-gradient(180deg, color-mix(in srgb, var(--primary) 84%, #fff), var(--primary));
+  --btn-shadow:0 4px 12px color-mix(in srgb, var(--primary) 28%, transparent), inset 0 1px 0 rgba(255,255,255,.18);
+  --soft:0 2px 8px rgba(0,0,0,.06);   /* 가이드 5장 — 최대 그림자 */
+}
+
+*{box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent;}
+html{-webkit-text-size-adjust:100%; scroll-behavior:smooth;}
+body{
+  font-family:Pretendard,-apple-system,BlinkMacSystemFont,"Noto Sans KR",sans-serif;
+  background:var(--card); color:var(--ink); line-height:1.5;
+  word-break:keep-all; overflow-wrap:break-word; -webkit-font-smoothing:antialiased;
+}
+/* 스크롤바 숨김(스크롤은 그대로). hidden 은 sticky 를 깨므로 clip */
+html,body{overflow-x:clip; scrollbar-width:none;}
+body::-webkit-scrollbar{width:0; height:0;}
+iconify-icon{display:inline-block;}
+a{color:inherit; text-decoration:none;}
+button{font-family:inherit; cursor:pointer; border:none; background:none; color:inherit;}
+img{max-width:100%;}
+
+/* ---------- 글자 (굵기는 400/700 만 · 가이드 1장) ----------
+   ★크기 차이를 크게 벌렸습니다.
+     가이드 원본은 앱 화면 기준(제목 22 / 본문 16)이라 차이가 1.4배뿐입니다.
+     그러면 「무엇이 중요한지」가 안 보입니다. 소개 화면은 3~4배로 벌립니다. */
+.h-hero{font-size:38px; font-weight:800; line-height:1.22; letter-spacing:-0.6px;}
+.h-sec {font-size:32px; font-weight:800; line-height:1.26; letter-spacing:-0.5px;}
+.h-card{font-size:19px; font-weight:700; line-height:1.4; letter-spacing:-.2px;}
+.t-body{font-size:16px; line-height:1.6;}
+.t-sub {font-size:15px; line-height:1.6; color:var(--sub);}
+.t-cap {font-size:13px; line-height:1.5; color:var(--sub);}
+.t-amt {font-size:34px; font-weight:800; line-height:1.2; letter-spacing:-1px;}
+@media(min-width:768px){
+  .h-hero{font-size:52px; letter-spacing:-0.8px;}
+  .h-sec {font-size:48px; letter-spacing:-0.7px;}
+  .t-amt {font-size:44px;}
+}
+@media(min-width:1024px){
+  .h-hero{font-size:68px; letter-spacing:-1px;}
+  .h-sec {font-size:64px; letter-spacing:-0.9px;}
+}
+
+/* ★★강조 세 가지 — 「이 단락에서 뭘 봐야 하나」를 눈에 박히게 */
+/* ① 파란 글자 — 제목 안에서 핵심 낱말만 */
+.hl{color:var(--primary);}
+/* ③ 큰 숫자 — 단락의 결론이 숫자일 때 */
+.big{font-size:40px; font-weight:800; line-height:1.1; letter-spacing:-1.4px; color:var(--primary);}
+@media(min-width:768px){ .big{font-size:56px; letter-spacing:-2px;} }
+
+/* ============================================================
+   폼 = 상단바 + 본문 + 하단 탭바 4개.  세 화면 모두 이 뼈대.
+   ============================================================ */
+.wrap{max-width:var(--maxw); margin:0 auto; padding-left:var(--pad); padding-right:var(--pad);}
+
+/* ---------- 상단바 (가이드 6장 · 56px) ---------- */
+.appbar{position:sticky; top:0; z-index:40; height:var(--appbar);
+  background:rgba(255,255,255,.92); backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);}
+.appbar-in{max-width:var(--maxw); margin:0 auto; height:100%;
+  padding:0 var(--pad); display:flex; align-items:center; gap:8px;}
+.appbar .logo{display:flex; align-items:center; gap:7px; min-height:48px;}
+.appbar .logo img:first-child{height:22px;}
+.appbar .logo img:last-child{height:17px;}
+.appbar .acts{margin-left:auto; display:flex; align-items:center; gap:2px;}
+.appbar .act{position:relative; width:48px; height:48px; border-radius:12px;
+  display:flex; align-items:center; justify-content:center; font-size:22px; color:var(--sub);}
+.appbar .act:hover{background:var(--bg);}
+.appbar .act .dot{position:absolute; top:11px; right:11px; width:6px; height:6px;
+  border-radius:50%; background:var(--danger);}
+.appbar .back{width:48px; height:48px; margin-left:-12px;
+  display:flex; align-items:center; justify-content:center; font-size:24px;}
+.appbar .ttl{font-size:17px; font-weight:700; letter-spacing:-.3px;}
+/* 상단바 안의 작은 CTA */
+.appbar-cta{height:40px; padding:0 16px; border-radius:12px; font-size:14px; font-weight:700;
+  background:var(--primary); background:var(--grad); box-shadow:var(--btn-shadow); color:#fff;
+  display:inline-flex; align-items:center; white-space:nowrap;}
+
+/* ---------- 본문 ---------- */
+.main{padding-bottom:0;}
+.main.hascta{padding-bottom:calc(var(--safe) + 96px);}
+
+/* ---------- 우상단 메뉴 (PC) · 햄버거(모바일) ---------- */
+.gnb{margin-left:auto; display:none; align-items:center; gap:2px;}
+.gnb a{display:inline-flex; align-items:center; min-height:44px; padding:0 14px;
+  font-size:15px; font-weight:700; color:var(--sub); border-radius:10px;}
+.gnb a:hover{background:var(--bg); color:var(--ink);}
+.gnb a.on{color:var(--primary-600);}
+.burger{margin-left:auto; width:48px; height:48px; border-radius:12px;
+  display:flex; align-items:center; justify-content:center; font-size:24px; color:var(--sub);}
+.burger:hover{background:var(--bg);}
+@media(min-width:1024px){ .gnb{display:flex;} .burger{display:none;} }
+
+/* ---------- 늘 따라다니는 시작 버튼 ---------- */
+.fab{position:fixed; left:50%; transform:translateX(-50%); bottom:calc(20px + var(--safe)); z-index:70;
+  display:inline-flex; align-items:center; gap:8px; height:56px; padding:0 24px;
+  border-radius:8px; background:var(--primary); background:var(--grad);
+  color:#fff; font-size:16px; font-weight:700; white-space:nowrap;
+  transition:opacity .3s, transform .3s, filter .2s;}
+.fab iconify-icon{font-size:20px;}
+.fab:hover{transform:translateX(-50%) translateY(-2px); filter:brightness(1.05);}
+/* 히어로 화면에선 숨었다가 두 번째 화면부터 나타난다 (app.js) */
+.fab.hide{opacity:0; pointer-events:none; transform:translateX(-50%) translateY(14px);}
+@media(max-width:639px){ .fab{bottom:calc(16px + var(--safe)); height:52px; padding:0 20px; font-size:15px;} }
+
+/* 작은 배너 — 공지 · 자주 묻는 질문처럼 큰 머리가 필요 없는 페이지 */
+.banner.slim{padding:38px 0 32px;}
+@media(min-width:768px){ .banner.slim{padding:54px 0 42px;} }
+.banner.slim .h-hero{font-size:23px; letter-spacing:-.4px;}
+@media(min-width:768px){ .banner.slim .h-hero{font-size:29px;} }
+.banner.slim p{margin-top:8px; font-size:13.5px;}
+@media(min-width:768px){ .banner.slim p{font-size:15px;} }
+
+/* ---------- 소식 묶음 탭 — 자주 묻는 질문 · 공지사항이 한 틀에서 오간다 ---------- */
+.ptabs{display:flex; justify-content:center; background:var(--card); border-bottom:1px solid var(--line);}
+.ptabs a{position:relative; padding:16px 6px 15px; margin:0 26px; font-size:15px; font-weight:700; color:var(--sub);}
+@media(min-width:768px){ .ptabs a{font-size:16.5px; margin:0 46px;} }
+.ptabs a.on{color:var(--primary-600);}
+.ptabs a.on:after{content:''; position:absolute; left:0; right:0; bottom:-1px; height:2px; background:var(--primary);}
+
+/* ---------- 하위 페이지 공용 배너 · 슬림 푸터 ---------- */
+.banner{background:var(--primary); background:var(--grad); color:#fff; padding:64px 0 56px; text-align:center;}
+.banner .h-hero{color:#fff;}
+.banner .h-hero .hl{color:#fff;}
+.banner p{margin-top:14px; font-size:15px; line-height:1.7; color:rgba(255,255,255,.85);}
+@media(min-width:768px){ .banner{padding:120px 0 88px;} .banner p{font-size:19px;} }
+/* 내용이 짧아도 푸터는 화면 바닥에 · 길면 자연스럽게 밀려남 */
+body{display:flex; flex-direction:column; min-height:100svh;}
+main{flex:1 0 auto;}
+.foot{margin-top:auto; background:var(--dark); color:rgba(255,255,255,.6); padding:40px 0 48px;}
+/* 약관 줄 — 밝고 굵게 */
+.fpolicy{display:flex; flex-wrap:wrap; gap:8px 28px;}
+.fpolicy a{font-size:13.5px; font-weight:700; color:rgba(255,255,255,.9);}
+/* 사업자 정보 — 항목(흐리게) · 내용(밝게) */
+.finfo{display:flex; flex-wrap:wrap; gap:6px 26px; margin-top:22px; max-width:1020px;}
+.finfo span{font-size:13px; line-height:1.8; color:rgba(255,255,255,.78);}
+.finfo b{font-weight:500; color:rgba(255,255,255,.4); margin-right:8px;}
+.fnote{margin-top:20px; font-size:12.5px; color:rgba(255,255,255,.45);}
+.fcopy{margin-top:8px; font-size:12.5px; color:rgba(255,255,255,.3);}
+
+/* ============================================================
+   섹션 — 단락마다 「무엇을 강조하나」가 한눈에 보이게
+   ============================================================ */
+.sec{padding:72px 0;}
+.sec.tint{background:#F7F8FA;}   /* 카드 그리드 구간만 — 흰 카드가 떠 보이게 */
+.sec.dark{background:var(--dark); color:#fff;}
+.sec.blue{background:var(--primary); color:#fff;}
+.sec.tight{padding:56px 0;}
+@media(min-width:768px){ .sec{padding:120px 0;} .sec.tight{padding:84px 0;} }
+
+/* 섹션 머리 — 뱃지 + 제목 + 설명 */
+.head{text-align:center;}
+.head .eyebrow{display:block; color:var(--primary-600);
+  font-size:15px; font-weight:700; letter-spacing:-.2px; margin-bottom:16px;}
+@media(min-width:768px){ .head .eyebrow{font-size:19px; margin-bottom:22px;} }
+.sec.dark .head .eyebrow{color:#9DC0FF;}
+.head .h-sec + p{margin-top:18px; font-size:16px; line-height:1.75; color:var(--sub);}
+.sec.dark .head .h-sec + p{color:rgba(255,255,255,.72);}
+.head + *{margin-top:44px;}
+@media(min-width:768px){ .head .h-sec + p{font-size:18px;} .head + *{margin-top:76px;} }
+@media(min-width:1024px){ .head .h-sec + p{font-size:21px;} }
+
+/* ---------- 카드 (가이드 6장 · 흰 배경 + 얇은 테두리) ---------- */
+.card{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:22px;}
+@media(min-width:768px){ .card{padding:30px;} }
+.grid{display:grid; gap:14px;}
+.grid.c2{grid-template-columns:1fr;}
+.grid.c3{grid-template-columns:1fr;}
+.grid.c4{grid-template-columns:1fr 1fr;}
+@media(min-width:640px){ .grid.c2,.grid.c3{grid-template-columns:1fr 1fr;} }
+@media(min-width:900px){ .grid.c3{grid-template-columns:repeat(3,1fr);} .grid.c4{grid-template-columns:repeat(4,1fr);} }
+@media(min-width:768px){ .grid{gap:24px;} }
+
+/* ---------- 버튼 (가이드 6장) ---------- */
+.btn{display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  height:52px; padding:0 24px; border-radius:8px;
+  font-size:16px; font-weight:700; white-space:nowrap;
+  transition:transform .15s, filter .2s, box-shadow .2s;}
+.btn iconify-icon{font-size:20px;}
+.btn-logo{height:20px; width:auto;}
+.btn:hover{transform:translateY(-1px); filter:brightness(1.04);}
+.btn:active{transform:translateY(1px);}
+.btn.full{width:100%;}
+.btn-primary{background:var(--primary); background:var(--grad); box-shadow:var(--btn-shadow); color:#fff;}
+.btn-secondary{background:var(--primary-50); color:var(--primary-600);}
+.btn-outline{background:var(--card); border:1px solid var(--border); color:var(--ink);}
+.btn-white{background:#fff; color:var(--primary-600);}
+.btn-ghost{height:44px; padding:0 8px; color:var(--primary-600); font-weight:700;}
+.btn-lg{height:64px; padding:0 36px; font-size:19px; border-radius:14px;}
+
+/* 단락마다 넣는 CTA 줄 — 「바로 송금하기」로 보내는 자리 */
+.ctarow{margin-top:32px; display:flex; flex-direction:column; align-items:center; gap:10px;}
+.ctarow .btn{width:100%; max-width:340px;}
+.ctarow .hint{font-size:13px; color:var(--sub);}
+.sec.dark .ctarow .hint,.sec.blue .ctarow .hint{color:rgba(255,255,255,.7);}
+@media(min-width:640px){ .ctarow{flex-direction:row; justify-content:center; gap:12px;} .ctarow .btn{width:auto;} }
+
+/* 하단 고정 CTA (앱 화면용) */
+.cta{position:fixed; left:0; right:0; z-index:45; bottom:0;
+  background:var(--card); border-top:1px solid var(--line); padding:12px 0 calc(12px + var(--safe));}
+.cta-in{max-width:var(--maxw); margin:0 auto; padding:0 var(--pad);}
+.cta .btn{width:100%;}
+@media(min-width:1024px){
+  .cta{bottom:0; padding:0 0 100px; border-top:none;
+    background:linear-gradient(180deg, rgba(255,255,255,0), var(--card) 45%);}
+  .cta-in{max-width:560px;}
+}
+
+/* ---------- 입력창 (가이드 6장) ---------- */
+.field{margin-top:16px;}
+.field > label{display:block; font-size:13px; font-weight:700; color:var(--sub); margin-bottom:8px;}
+.input{width:100%; height:52px; padding:0 16px; border-radius:12px;
+  border:1px solid var(--border); background:var(--card);
+  font-family:inherit; font-size:16px; color:var(--ink);}
+.input::placeholder{color:var(--placeholder);}
+.input:focus{outline:none; border:2px solid var(--primary); padding:0 15px;}
+
+/* ---------- 뱃지 (가이드 6장 · 24px · radius 8) ---------- */
+.badge{display:inline-flex; align-items:center; height:28px; padding:0 10px;
+  border-radius:8px; font-size:13px; font-weight:700;
+  background:var(--primary-50); color:var(--primary-600);}
+.badge.ok{background:var(--success-bg); color:var(--success);}
+.badge.warn{background:var(--warn-bg); color:var(--warn);}
+.badge.solid{background:var(--primary); color:#fff;}
+
+/* ---------- 목록 행 ---------- */
+.row{display:flex; align-items:center; gap:12px; min-height:56px; padding:10px 8px;}
+.row + .row{border-top:1px solid var(--line);}
+.row .ic{width:40px; height:40px; flex:0 0 auto; border-radius:12px;
+  background:var(--primary-50); color:var(--primary);
+  display:flex; align-items:center; justify-content:center; font-size:20px;}
+.row .tx{flex:1; min-width:0;}
+.row .tx b{display:block; font-size:16px; font-weight:700;}
+.row .tx span{display:block; font-size:13px; color:var(--sub); margin-top:2px;}
+.row .gv{flex:0 0 auto; font-size:20px; color:var(--icon-off);}
+
+/* ---------- 전체메뉴 서랍 ---------- */
+.dim{position:fixed; inset:0; z-index:60; background:rgba(15,23,42,.45);
+  opacity:0; pointer-events:none; transition:opacity .25s;}
+.dim.on{opacity:1; pointer-events:auto;}
+.drawer{position:fixed; top:0; right:0; bottom:0; z-index:61; width:min(360px, 86vw);
+  background:var(--card); display:flex; flex-direction:column;
+  transform:translateX(102%); transition:transform .3s cubic-bezier(.22,.8,.3,1);
+  box-shadow:-8px 0 32px rgba(15,23,42,.12);}
+.drawer.on{transform:none;}
+.drawer-top{display:flex; align-items:center; justify-content:space-between; flex:0 0 auto;
+  height:var(--appbar); padding:0 8px 0 20px; border-bottom:1px solid var(--line);}
+.drawer-top b{font-size:16px; font-weight:700;}
+.drawer-top .x{background:none; border:none; padding:10px 12px; cursor:pointer;
+  font-size:17px; line-height:1; color:var(--sub);}
+.drawer-body{flex:1; overflow-y:auto; padding:8px 12px 24px;}
+
+.countup{font-variant-numeric:tabular-nums;}
+
+/* ============================================================
+   등장 모션 — js-motion 이 붙어야만 숨긴다.
+   (스크립트가 실패하면 내용이 그냥 다 보인다)
+   ============================================================ */
+.js-motion .up{opacity:0; transform:translateY(16px);
+  transition:opacity .45s cubic-bezier(.22,.8,.3,1), transform .45s cubic-bezier(.22,.8,.3,1);}
+.up.in{opacity:1; transform:none;}
+.up.d1{transition-delay:.06s} .up.d2{transition-delay:.12s} .up.d3{transition-delay:.18s}
+.up.d4{transition-delay:.24s} .up.d5{transition-delay:.30s}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto;}
+  .js-motion .up{opacity:1; transform:none; transition:none;}
+  *,*::before,*::after{animation:none !important; transition:none !important;}
+}
+
+/* ---------- 「자세히 보기」 — 두 층 읽기 ----------
+   훑는 층 : 제목·결론(굵게·파랑)만 보고 지나갈 수 있다
+   상세 층 : 필요한 사람만 눌러서 꼼꼼한 내용을 본다 (여닫는 움직임은 app.js) */
+.more{margin-top:14px; border-top:1px solid var(--line);}
+.more summary{display:flex; align-items:center; gap:4px; min-height:44px; cursor:pointer; list-style:none;
+  font-size:14px; font-weight:700; color:var(--placeholder);}
+.more summary::-webkit-details-marker{display:none;}
+.more summary iconify-icon{font-size:16px; transition:transform .25s;}
+.more[open] summary iconify-icon{transform:rotate(180deg);}
+.more-b{padding:2px 0 10px; font-size:14px; line-height:1.75; color:var(--sub);}
+.more-b b{color:var(--ink);}
+.more-b ul{list-style:none;}
+.more-b li{position:relative; padding-left:15px; margin-bottom:7px;}
+.more-b li:before{content:'·'; position:absolute; left:3px; color:var(--icon-off);}

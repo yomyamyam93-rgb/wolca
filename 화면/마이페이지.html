@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>랜선페이 — 마이페이지</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="../style.css?v=15">
+<style>
+  body{background:#EDF0F4;}
+  .apphull{width:100%; max-width:480px; min-height:100svh; margin:0 auto; background:#fff;
+    box-shadow:0 0 44px rgba(15,23,42,.10); display:flex; flex-direction:column; padding-bottom:40px;}
+  .topbar{height:52px; position:sticky; top:0; z-index:50; background:#fff; display:flex; align-items:center; padding:0 10px; flex:0 0 auto;}
+  .back{width:40px; height:40px; display:flex; align-items:center; justify-content:center;
+    font-size:24px; color:var(--ink); cursor:pointer;}
+  .topbar .ttl{flex:1; text-align:center; font-size:16px; font-weight:700; margin-right:40px;}
+  .abody{flex:1; padding:6px 20px 30px;}
+
+  /* 프로필 카드 */
+  .prof{background:var(--primary-50); border-radius:8px; padding:20px; display:flex;
+    align-items:center; gap:14px;}
+  .prof .av{width:52px; height:52px; border-radius:999px; background:var(--primary);
+    background:var(--grad); color:#fff; font-size:20px; font-weight:800;
+    display:flex; align-items:center; justify-content:center; flex:0 0 auto;}
+  .prof .tx b{display:block; font-size:17px; font-weight:800; letter-spacing:-.3px;}
+  .prof .tx span{display:block; margin-top:3px; font-size:12.5px; color:var(--sub);}
+
+  .glabel{margin:24px 2px 8px; font-size:13px; font-weight:700; color:var(--placeholder);}
+  .gcard{background:#fff; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,.06); padding:2px 16px;}
+  .grow{display:flex; align-items:center; justify-content:space-between; gap:12px; padding:15px 0;
+    border-bottom:1px solid var(--line); color:var(--ink); font-size:15px; font-weight:600;}
+  .gcard .grow:last-child{border-bottom:none;}
+  .grow i{font-style:normal; color:var(--icon-off); font-size:17px;}
+  .grow span.v{font-size:13.5px; font-weight:500; color:var(--sub);}
+
+  .outbtn{width:100%; height:48px; margin-top:26px; border:1px solid var(--line); border-radius:8px;
+    background:#fff; font:inherit; font-size:14.5px; font-weight:700; color:var(--sub); cursor:pointer;}
+</style>
+</head>
+<body>
+<div class="apphull">
+  <div class="topbar"><div class="back" onclick="history.length>1?history.back():location.href='../app.html'">‹</div><div class="ttl">마이페이지</div></div>
+
+  <div class="abody">
+    <div class="prof">
+      <span class="av">김</span>
+      <span class="tx"><b>김미역</b><span>일반회원 · 010-1234-5678</span></span>
+    </div>
+
+    <div class="glabel">내 정보</div>
+    <div class="gcard">
+      <a class="grow" href="#">이름<span class="v">김미역</span></a>
+      <a class="grow" href="#">휴대폰 번호<span class="v">010-1234-5678</span></a>
+      <a class="grow" href="#">이메일<span class="v">miyeok@naver.com</span></a>
+      <a class="grow" href="#">비밀번호 변경<i>›</i></a>
+    </div>
+
+    <div class="glabel">설정</div>
+    <div class="gcard">
+      <a class="grow" href="결제관리.html">결제 관리<i>›</i></a>
+      <a class="grow" href="#">알림 설정<i>›</i></a>
+      <a class="grow" href="약관.html#terms">약관 · 정책<i>›</i></a>
+    </div>
+
+    <button class="outbtn" type="button">로그아웃</button>
+  </div>
+</div>
+</body>
+</html>

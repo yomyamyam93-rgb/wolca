@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>랜선페이 — 이용안내</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="style.css?v=15">
+<link rel="icon" type="image/png" href="img/logo3.png">
+<script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+<script src="app.js?v=15"></script>
+<style>
+  /* 페이지 배너 */
+  .banner{padding:40px 0 32px; text-align:center;}
+  
+  .banner p{margin-top:14px; font-size:15px; line-height:1.7; color:rgba(255,255,255,.85);}
+  @media(min-width:768px){ .banner{padding:64px 0 48px;} .banner p{font-size:17px;} }
+
+  /* 서브탭 — 단비페이처럼 밑줄 */
+  .subtabs{position:sticky; top:var(--appbar); z-index:30; background:var(--card);
+    border-bottom:1px solid var(--line); display:flex; justify-content:center; gap:4px;}
+  .subtab{min-height:52px; padding:0 18px; font-size:15px; font-weight:700; color:var(--placeholder);
+    border-bottom:2px solid transparent; margin-bottom:-1px; white-space:nowrap;}
+  .subtab.on{color:var(--ink); border-bottom-color:var(--primary);}
+  @media(min-width:768px){ .subtab{padding:0 32px; font-size:16px; min-height:58px;} }
+
+  .panel{display:none;} .panel.on{display:block;}
+
+  /* 한 눈에 보는 프로세스 — 5단계 */
+  .flow{display:grid; grid-template-columns:repeat(5,1fr); gap:38px;}
+  .fs{position:relative; background:#fff; border-radius:8px;
+    padding:30px 16px 26px; text-align:center; box-shadow:0 2px 8px rgba(0,0,0,.05);}
+  .fs .no{display:inline-flex; align-items:center; justify-content:center; width:34px; height:34px;
+    border-radius:999px; background:var(--primary); background:var(--grad); box-shadow:var(--btn-shadow);
+    color:#fff; font-size:13.5px; font-weight:700;}
+  .fs h3{margin-top:12px; font-size:19px; font-weight:800; letter-spacing:-.4px;}
+  .fs img{width:84px; height:84px; object-fit:contain; margin-top:18px;}
+  .fs p{margin-top:18px; padding-top:16px; border-top:1px solid var(--line);
+    font-size:14px; line-height:1.7; color:var(--sub);}
+  /* 다음 단계 화살표 — 로고식 */
+  .fnx{position:absolute; right:-31px; top:50%; transform:translateY(-50%); z-index:1;
+    color:var(--primary); opacity:.6; line-height:0; display:none;}
+  .fnx svg{width:24px; height:16px;}
+  @media(min-width:1050px){ .fnx{display:block;} }
+  @media(max-width:1049px){
+    .flow{gap:0; grid-template-columns:repeat(5,minmax(0,1fr));}
+    .fs{position:relative; background:none; box-shadow:none; padding:0; border-radius:0;
+      display:grid; grid-template-rows:30px 30px 30px; justify-items:center; align-items:center;}
+    .fs:not(:last-child):after{content:''; position:absolute; top:44px;
+      left:calc(50% + 19px); right:calc(-50% + 19px); height:2px;
+      background:var(--primary-100, #D6E4FF);}
+    .fs .no{grid-row:2; width:30px; height:30px; font-size:12px; position:relative; z-index:1;}
+    .fs h3{grid-row:3; margin:0; font-size:11.5px; letter-spacing:-.4px; line-height:1.35; white-space:nowrap;}
+    .fs:nth-child(even) h3{grid-row:1;}
+    .fs img{display:none;}
+    .fs p{display:none;}
+  }
+
+  /* 단계 상세 — 맨바탕에 번호 · 제목 · 순서 안내 · 폰 목업 (조이페이 배치) */
+  .steps2{max-width:980px; margin:0 auto; display:grid; gap:76px;}
+  .sd{display:flex; flex-direction:column; align-items:center; text-align:center;}
+  .sd .no{display:inline-flex; align-items:center; justify-content:center; width:38px; height:38px;
+    border-radius:999px; background:var(--primary); background:var(--grad); box-shadow:var(--btn-shadow);
+    color:#fff; font-size:14px; font-weight:700;}
+  .sd h3{margin-top:12px; font-size:21px; font-weight:800; letter-spacing:-.4px;}
+  @media(min-width:768px){ .sd h3{font-size:25px;} }
+  .sd ol{display:inline-block; text-align:left; max-width:430px; margin-top:16px; list-style:none; counter-reset:s;}
+  .sd ol li{position:relative; counter-increment:s; padding-left:30px; margin-bottom:10px;
+    font-size:14.5px; line-height:1.7; color:var(--sub);}
+  @media(min-width:768px){ .sd ol li{font-size:15.5px;} }
+  .sd ol li:last-child{margin-bottom:0;}
+  .sd ol li:before{content:counter(s); position:absolute; left:0; top:3px; width:20px; height:20px;
+    border-radius:999px; background:var(--primary-50); color:var(--primary-600);
+    font-size:12px; font-weight:700; display:flex; align-items:center; justify-content:center;}
+  .sd li b{color:var(--ink); font-weight:700;}
+
+  /* 정적 폰 목업 — 우리 화면을 요약해 그린 정지 그림 */
+  /* 토스식 — 베젤 없이 화면만 크게 둥글려 띄운다 */
+  .phone{position:relative; margin:52px auto 0; width:322px; min-height:590px; background:#fff;
+    border-radius:30px; padding:26px 22px 30px; text-align:left;
+    display:flex; flex-direction:column;
+    box-shadow:0 24px 48px rgba(15,23,42,.14), 0 4px 12px rgba(15,23,42,.06);}
+  .phone .cap{display:none;}
+  .phone .cap{display:block; width:52px; height:5px; border-radius:999px; background:#E7EBF0; margin:0 auto 12px;}
+  .mk-bar{display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;}
+  .mk-bar img{height:17px; width:auto;}
+  .mk-bar i{font-style:normal; font-size:19px; color:var(--ink); line-height:1;}
+  .mk-h{font-size:19px; font-weight:800; line-height:1.4; letter-spacing:-.4px;}
+  .mk-p{margin-top:7px; font-size:12.5px; line-height:1.65; color:var(--sub);}
+  .mk-btn{position:relative; margin-top:16px; height:44px; border-radius:8px;
+    background:var(--primary); background:var(--grad); color:#fff; font-size:14px; font-weight:700;
+    display:flex; align-items:center; justify-content:center; gap:7px;}
+  .mk-btn img{height:15px; width:auto;}
+  .mk-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-top:12px;}
+  .mk-it{position:relative; border:1px solid var(--line); border-radius:8px; padding:12px 2px;
+    font-size:12px; font-weight:700; text-align:center; color:var(--sub);}
+  .mk-it.on{background:var(--primary); border-color:var(--primary); color:#fff;}
+  .mk-field{margin-top:13px;}
+  .mk-field > span{font-size:11.5px; font-weight:700; color:var(--placeholder);}
+  .mk-input{margin-top:5px; height:38px; border:1px solid var(--line); border-radius:8px;
+    display:flex; align-items:center; justify-content:space-between; padding:0 12px;
+    font-size:13.5px; font-weight:700; color:var(--ink);}
+  .mk-input b{font-weight:400; color:var(--placeholder); font-size:12px;}
+  .mk-row{margin-top:11px; border:1px solid var(--line); border-radius:8px; padding:11px 12px;}
+  .mk-row b{display:block; font-size:13px;}
+  .mk-row span{display:block; margin-top:3px; font-size:11px; color:var(--sub);}
+
+  /* 클릭 포인터 — 손끝(그림 좌측상단)이 누를 지점에 닿게 */
+  img.tap, .mk-btn img.tap, .mk-btn2 img.tap{position:absolute; left:72%; top:58%; width:44px; height:auto;
+    z-index:2; pointer-events:none; filter:drop-shadow(0 2px 4px rgba(15,23,42,.25));}
+
+
+  /* 등록 화면 재현 부품 */
+  .mk-top{display:flex; align-items:center; margin:-4px 0 8px;}
+  .mk-top i{font-style:normal; font-size:17px; color:var(--ink); width:22px;}
+  .mk-top b{flex:1; text-align:center; font-size:13px; margin-right:22px;}
+  .mk-prog{display:flex; gap:5px; margin-bottom:6px;}
+  .mk-prog i{flex:1; height:3px; border-radius:2px; background:var(--line);}
+  .mk-prog i.on{background:var(--primary);}
+  .mk-cap{font-size:10.5px; font-weight:700; color:var(--placeholder);}
+  .mk-q{margin-top:7px; font-size:17px; font-weight:800; letter-spacing:-.3px;}
+  .mk-okay{margin-top:4px; font-size:10.5px; font-weight:700; color:#059669;}
+  .mk-est{margin-top:13px; background:var(--primary-50); border-radius:8px; padding:10px 12px; font-size:11.5px;}
+  .mk-est div{display:flex; justify-content:space-between; margin-bottom:4px;}
+  .mk-est div:last-child{margin-bottom:0;}
+  .mk-est b{font-weight:800;}
+  .mk-card{display:flex; align-items:center; gap:9px; border:1px solid var(--line); border-radius:8px;
+    padding:8px 11px; margin-top:7px; font-size:12.5px; font-weight:700;}
+  .mk-card.on{border-color:var(--primary); background:var(--primary-50);}
+  .mk-card .chip{width:34px; height:23px; border-radius:5px; flex:0 0 auto;
+    background:linear-gradient(135deg,#1596a6,#0a3f70);}
+  .mk-card .chip.a{background:linear-gradient(135deg,#22375f,#0e1a30);}
+  .mk-card small{display:block; font-weight:500; font-size:10px; color:var(--placeholder);}
+  .mk-card .ck{margin-left:auto; color:var(--primary); font-size:14px; font-weight:800;}
+  .mk-seg{display:flex; gap:7px; margin-top:6px;}
+  .mk-seg span{flex:1; height:32px; border-radius:8px; border:1px solid var(--line); display:flex;
+    align-items:center; justify-content:center; font-size:12px; font-weight:700; color:var(--sub);}
+  .mk-seg span.on{border-color:var(--primary); background:var(--primary-50); color:var(--primary-600);}
+  .phone .mk-field:has(.mk-seg):nth-last-child(2){margin-bottom:14px;}
+  .mk-docs{margin-top:12px; background:var(--primary-50); border-radius:8px; padding:8px 12px;}
+  .mk-docs b{display:block; font-size:11.5px; margin-bottom:5px;}
+  .mk-docs div{font-size:11px; color:var(--sub); margin-bottom:3px; line-height:1.5;}
+  .mk-docs div:last-child{margin-bottom:0;}
+  .mk-docs i{font-style:normal; color:var(--primary); font-weight:800; margin-right:4px;}
+  .mk-up{margin-top:12px; border:1.5px dashed var(--line); border-radius:8px; padding:13px 10px; text-align:center;}
+  .mk-up b{display:block; font-size:12px;}
+  .mk-up small{display:block; margin-top:2px; font-size:10px; color:var(--placeholder);}
+  .mk-file{display:flex; align-items:center; gap:6px; margin-top:8px; background:#F7F8FA;
+    border-radius:8px; padding:8px 10px; font-size:11px; color:var(--sub);}
+  .mk-file i{font-style:normal; color:#059669; font-weight:800;}
+  .mk-done{margin:16px auto 0; width:62px; height:62px; border-radius:999px; color:#fff; font-size:28px;
+    background:var(--primary); background:var(--grad); display:flex; align-items:center; justify-content:center;}
+  .mk-dh{margin-top:12px; text-align:center; font-size:17px; font-weight:800; letter-spacing:-.3px;}
+  .mk-dp{margin-top:5px; text-align:center; font-size:11.5px; color:var(--sub); line-height:1.6;}
+  .mk-sum{margin-top:14px; border:1px solid var(--line); border-radius:8px; padding:10px 12px;}
+  .mk-sum div{display:flex; justify-content:space-between; font-size:11.5px; margin-bottom:4px;}
+  .mk-sum div:last-child{margin-bottom:0;}
+  .mk-sum span{color:var(--placeholder);}
+  .mk-sum b{font-weight:700;}
+
+  .mk-it img{display:block; width:26px; height:26px; object-fit:contain; margin:0 auto 5px;}
+  .phones{display:flex; flex-wrap:wrap; justify-content:center; align-items:stretch; gap:0 22px;}
+  .phones .phone{margin:52px 0 0;}
+  .pnx{align-self:center; margin-top:52px; color:var(--primary); opacity:.6; line-height:0; display:none;}
+  .pnx svg{width:26px; height:17px;}
+  @media(min-width:740px){ .pnx{display:block;} }
+
+  /* 앱 홈 · 가입 목업 부품 */
+  .mk-abar{display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;}
+  .mk-abar img{height:17px; width:auto;}
+  .mk-me{width:26px; height:26px; border-radius:999px; background:#F1F3F6; display:flex;
+    align-items:center; justify-content:center; color:var(--sub);}
+  .mk-me iconify-icon{font-size:15px;}
+  .mk-usp{display:flex; align-items:center; gap:10px; background:var(--primary-50);
+    margin:0 -22px; padding:10px 22px;}
+  .mk-usp .tx b{display:block; font-size:13px; letter-spacing:-.3px;}
+  .mk-usp .tx small{display:block; margin-top:3px; font-size:10px; color:var(--sub); line-height:1.5;}
+  .mk-uno{display:inline-block; padding:2px 8px; border-radius:999px; background:var(--primary);
+    color:#fff; font-size:9px; font-weight:700; margin-bottom:5px;}
+  .mk-usp > img{width:42px; height:48px; object-fit:contain; margin-left:auto;}
+  .mk-dots{display:flex; justify-content:center; gap:4px; margin-top:6px;}
+  .mk-dots i{width:4px; height:4px; border-radius:999px; background:var(--line);}
+  .mk-dots i.on{width:11px; background:var(--primary);}
+  .mk-grid.g4{grid-template-columns:repeat(4,1fr); gap:5px;}
+  .g4 .mk-it{padding:7px 1px 6px; font-size:9.5px;}
+  .g4 .mk-it img{width:18px; height:18px; margin-bottom:2px;}
+  .mk-tab{display:flex; margin:auto -22px -30px; padding:8px 0 13px; border-top:1px solid var(--line);
+    border-radius:0 0 30px 30px; background:#fff;}
+  .mk-tab span{flex:1; display:flex; flex-direction:column; align-items:center; gap:3px;
+    font-size:8.5px; font-weight:700; color:var(--placeholder);}
+  .mk-tab iconify-icon{font-size:15px;}
+  .mk-tab span.on{color:var(--primary);}
+  .mk-div{display:flex; align-items:center; gap:8px; margin-top:16px; color:var(--placeholder); font-size:10.5px;}
+  .mk-div:before,.mk-div:after{content:''; flex:1; height:1px; background:var(--line);}
+  .mk-kakao,.mk-naver{height:40px; border-radius:8px; display:flex; align-items:center;
+    justify-content:center; gap:6px; font-size:12.5px; font-weight:700;}
+  .mk-kakao{margin-top:12px; background:#FEE500; color:#191919;}
+  .mk-naver{margin-top:8px; background:#03C75A; color:#fff;}
+  .mk-kakao img,.mk-naver img{height:14px; width:auto;}
+
+  /* 웹 메인 목업 부품 — 실제 모바일 화면 실측 × 0.84 배율 */
+  .mk-bar2{display:flex; align-items:center; justify-content:space-between;
+    margin:0 -22px; padding:13px 18px; border-bottom:1px solid var(--line);}
+  .mk-bar2 .lg{display:flex; align-items:center; gap:6px;}
+  .mk-bar2 .lg img:first-child{height:19px; width:auto;}
+  .mk-bar2 .lg img:last-child{height:14px; width:auto;}
+  .mk-bar2 i{font-style:normal; font-size:21px; color:var(--ink); line-height:1;}
+  .mk-h2{margin-top:14px; font-size:29px; font-weight:800; line-height:1.25; letter-spacing:-1px;}
+  .mk-lead{margin-top:9px; font-size:13px; line-height:1.75; color:var(--placeholder);}
+  .mk-lead2{font-size:13px; line-height:1.8; font-weight:700; color:var(--ink);}
+  .mk-lead2 span{color:var(--placeholder); font-weight:400;}
+  .mk-btns{display:flex; gap:9px; margin-top:14px;}
+  .mk-btn2{position:relative; flex:1; height:40px; border-radius:8px; display:flex; align-items:center;
+    justify-content:center; gap:6px; font-size:12px; font-weight:700;}
+  .mk-btn2.b{background:var(--primary); background:var(--grad); color:#fff;}
+  .mk-btn2.w{border:1px solid var(--line); background:#fff; color:var(--ink);}
+  .mk-btn2 img{height:14px; width:auto;}
+  .mk-ucs{display:flex; gap:8px; justify-content:center; margin:14px -22px 0; overflow:hidden;}
+  .mk-ucs .mk-uc{flex:0 0 268px;}
+  .mk-uc{position:relative; background:var(--primary-50); border-radius:8px; padding:18px; min-height:176px;}
+  .mk-uno{display:inline-block; padding:5px 12px; border-radius:999px; background:var(--primary);
+    color:#fff; font-size:11px; font-weight:700; letter-spacing:.4px;}
+  .mk-uc b{display:block; margin-top:9px; font-size:18px; font-weight:800; letter-spacing:-.5px;}
+  .mk-uc small{display:block; margin-top:6px; font-size:12px; color:var(--sub); line-height:1.65;}
+  .mk-uc > img{position:absolute; right:18px; bottom:18px; width:50px; height:52px; object-fit:contain;}
+  .mk-arws{display:flex; justify-content:center; gap:10px; margin-top:12px;}
+  .mk-arws span{width:37px; height:37px; border-radius:999px; border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center; font-size:16px; color:var(--ink);
+    background:#fff; box-shadow:0 1px 4px rgba(15,23,42,.06);}
+
+  /* 목업 2개 단계 — 모바일은 설명 · 목업이 번호 순서대로, PC는 기존 배치 */
+  @media(max-width:739px){
+    .sd .phone{margin-top:22px;}
+    .sdx ol.ob{margin-top:64px;}
+  }
+  @media(min-width:740px){
+    .sdx{display:grid; grid-template-columns:auto auto; justify-content:center; justify-items:center; align-items:stretch;}
+    .sdx .sdl{grid-row:1; grid-column:1/3;}
+    .sdx ol.oa{grid-row:2; grid-column:1/3;}
+    .sdx ol.oa li:last-child{margin-bottom:10px;}
+    .sdx ol.ob{grid-row:3; grid-column:1/3; margin-top:0;}
+    .sdx .phone.pa{grid-row:4; grid-column:1; margin:52px 32px 0 0;}
+    .sdx .phone.pb{grid-row:4; grid-column:2; margin:52px 0 0 32px;}
+    .sdx .pnx{grid-row:4; grid-column:1/3; justify-self:center; align-self:center; margin-top:52px;}
+  }
+
+  /* 칩 필터 */
+  .chips{display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin-bottom:24px;}
+  .chip{height:38px; padding:0 16px; border-radius:999px; border:1px solid var(--line);
+    background:var(--card); font-size:14px; font-weight:700; color:var(--sub);}
+  .chip.on{background:var(--primary-50); border-color:var(--primary-100); color:var(--primary-600);}
+
+  /* 아코디언 (자주 묻는 질문 · 필요 서류) */
+  .acc{border-top:2px solid var(--ink); max-width:980px; margin:0 auto;}
+  .acc details{border-bottom:1px solid var(--line);}
+  .acc summary{display:flex; align-items:center; gap:12px; min-height:68px; padding:16px 4px;
+    cursor:pointer; list-style:none; font-size:17px; font-weight:700; line-height:1.5;}
+  .acc summary::-webkit-details-marker{display:none;}
+  .acc .q{flex:0 0 auto; font-size:16px; font-weight:700; color:var(--primary);}
+  .acc summary .t{flex:1; min-width:0;}
+  .acc summary .arw{flex:0 0 auto; font-size:20px; color:var(--icon-off); transition:transform .25s;}
+  .acc details[open] summary .arw{transform:rotate(180deg);}
+  .acc .a{padding:2px 4px 22px 34px; font-size:16px; line-height:1.8; color:var(--sub);}
+  .acc .a b{color:var(--ink);}
+  .acc .a ul{list-style:none; margin-top:8px;}
+  .acc .a li{position:relative; padding-left:16px; margin-bottom:6px;}
+  .acc .a li:before{content:'·'; position:absolute; left:4px; color:var(--icon-off);}
+
+  /* 공지 목록 */
+  .board{border-top:2px solid var(--ink);}
+  .board a{display:flex; align-items:center; gap:12px; min-height:68px; padding:14px 4px;
+    border-bottom:1px solid var(--line);}
+  .board a:hover{background:var(--bg);}
+  .board .t{flex:1; min-width:0; font-size:16px; font-weight:700; line-height:1.5;}
+  .board .d{flex:0 0 auto; font-size:13px; color:var(--placeholder);}
+  @media(max-width:600px){
+    .board a{flex-wrap:wrap; gap:8px 10px;}
+    .board .t{flex:1 1 100%; order:3;}
+  }
+</style>
+</head>
+<body>
+
+<header class="appbar">
+  <div class="appbar-in">
+    <a class="logo" href="index.html"><img src="img/logo3.png" alt=""><img src="img/logo-text.png" alt="랜선페이"></a>
+    <nav class="gnb">
+      <a href="about.html">회사소개</a>
+      <a href="guide.html" class="on">이용가이드</a>
+      <a href="notice.html">공지사항</a>
+      <a href="faq.html">자주 묻는 질문</a>
+      <a href="cs.html">고객센터</a>
+    </nav>
+    <button class="burger" onclick="drawer(true)" aria-label="전체메뉴"><iconify-icon icon="mingcute:menu-fill"></iconify-icon></button>
+  </div>
+</header>
+
+<main class="main">
+
+  <section class="banner slim">
+    <div class="wrap">
+      <h1 class="h-hero">이용가이드</h1>
+      <p>계약등록부터 송금까지 이용가이드 A to Z!</p>
+    </div>
+  </section>
+
+
+
+
+  <!-- ============ 이용가이드 ============ -->
+
+    <section class="sec tight tint">
+      <div class="wrap">
+        <div class="head">
+          <h2 class="h-sec">한 눈에 보는 <span class="hl">프로세스</span></h2>
+          <p>간단한 5단계로 빠르고 안전하게 이용하세요!</p>
+        </div>
+        <div class="flow">
+          <div class="fs"><span class="no">01</span><h3>시작하기</h3><img src="img/guide3d/01.png" alt=""><p>간편하게 회원가입 후<br>본인인증까지 진행해요</p><span class="fnx"><svg viewBox="0 0 24 16" aria-hidden="true"><path d="M1.5 5.8h11V1.6L22.6 8l-10.1 6.4v-4.2h-11z" fill="currentColor" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span></div>
+          <div class="fs"><span class="no">02</span><h3>결제 정보 입력</h3><img src="img/guide3d/02.png" alt=""><p>항목을 고르고 받는 분<br>계좌와 금액을 입력해요</p><span class="fnx"><svg viewBox="0 0 24 16" aria-hidden="true"><path d="M1.5 5.8h11V1.6L22.6 8l-10.1 6.4v-4.2h-11z" fill="currentColor" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span></div>
+          <div class="fs"><span class="no">03</span><h3>결제 방식 선택</h3><img src="img/guide3d/04.png" alt=""><p>결제할 카드와 할부<br>송금 시점까지 정해요</p><span class="fnx"><svg viewBox="0 0 24 16" aria-hidden="true"><path d="M1.5 5.8h11V1.6L22.6 8l-10.1 6.4v-4.2h-11z" fill="currentColor" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span></div>
+          <div class="fs"><span class="no">04</span><h3>서류 제출</h3><img src="img/guide3d/03.png" alt=""><p>증빙 서류를 올리면<br>연중무휴 검토가 시작돼요</p><span class="fnx"><svg viewBox="0 0 24 16" aria-hidden="true"><path d="M1.5 5.8h11V1.6L22.6 8l-10.1 6.4v-4.2h-11z" fill="currentColor" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span></div>
+          <div class="fs"><span class="no">05</span><h3>송금 완료</h3><img src="img/guide3d/05.png" alt=""><p>승인되면 카드로 결제되고<br>현금이 빠르게 입금돼요</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="wrap">
+
+        <div class="steps2">
+
+        <div class="sd sdx">
+          <div class="sdl">
+            <span class="no">01</span>
+            <h3>시작하기</h3>
+          </div>
+            <ol class="oa">
+              <li>홈 화면의 <b>바로 송금하기</b> 버튼을 누르세요</li>
+            </ol>
+          <div class="phone pa">
+            <span class="cap"></span>
+            <div class="mk-bar2"><span class="lg"><img src="img/logo3.png" alt=""><img src="img/logo-text.png" alt="랜선페이"></span><i>≡</i></div>
+            <div class="mk-h2">현금으로만 내던 돈<br>이제 <span class="hl">카드로 결제</span>하세요</div>
+            <div class="mk-lead">월세 · 관리비 · 보증금 · 매입대금처럼</div>
+            <div class="mk-lead2">계좌로 보내야 하는 비용을 카드로 결제하고<br>상대방 계좌로 송금하는 <span>서비스입니다</span></div>
+            <div class="mk-btns">
+              <div class="mk-btn2 b"><img src="img/logo3-white.png" alt="">바로 송금하기<img class="tap" src="img/포인트.png" alt=""></div>
+              <div class="mk-btn2 w">어떻게 이용하나요?</div>
+            </div>
+            <div class="mk-ucs">
+              <div class="mk-uc">
+                <span class="mk-uno">02</span>
+                <b>최대 24개월 할부</b>
+                <small>큰 금액도 할부로 가볍게<br>무이자는 최대 7개월<br>부담을 나눠서 내세요</small>
+                <img src="img/usp3d/02.png" alt="">
+              </div>
+              <div class="mk-uc">
+                <span class="mk-uno">03</span>
+                <b>소득 · 세액공제 환급</b>
+                <small>소득공제는 자동 환급<br>세액공제로 월세 납부액의<br>최대 17%를 돌려받아요</small>
+                <img src="img/usp3d/03.png" alt="">
+              </div>
+              <div class="mk-uc">
+                <span class="mk-uno">04</span>
+                <b>카드사 포인트 적립</b>
+                <small>정상 결제와 똑같이 처리돼<br>카드 실적 인정은 물론<br>포인트도 차곡차곡 쌓여요</small>
+                <img src="img/usp3d/04.png" alt="">
+              </div>
+            </div>
+            <div class="mk-arws"><span>‹</span><span>›</span></div>
+          </div>
+            <ol class="ob" style="counter-reset:s 1">
+              <li>휴대폰 번호를 넣고 <b>인증번호 6자리</b>를 입력하세요</li>
+              <li><b>카카오 · 네이버</b>로도 간편하게 시작할 수 있어요</li>
+            </ol>
+          <div class="phone pb">
+            <span class="cap"></span>
+            <div class="mk-bar"><img src="img/logo-text.png" alt="랜선페이"></div>
+            <div class="mk-h">휴대폰 번호로<br><span class="hl">간편하게 시작하세요</span></div>
+            <div class="mk-field"><span>휴대폰 번호</span>
+              <div class="mk-input">010-1234-5678</div>
+            </div>
+            <div class="mk-field"><span>인증번호 6자리</span>
+              <div class="mk-input">482913</div>
+              <div class="mk-okay">✓ 인증번호가 확인됐어요</div>
+            </div>
+            <div class="mk-btn" style="margin-top:auto">인증하고 시작하기<img class="tap" src="img/포인트.png" alt=""></div>
+            <div class="mk-div">또는 간편하게</div>
+            <div class="mk-kakao"><img src="img/카카오아이콘.png" alt="">카카오로 계속하기</div>
+            <div class="mk-naver"><img src="img/네이버아이콘.png" alt="">네이버로 계속하기</div>
+          </div>
+          <span class="pnx"><svg viewBox="0 0 24 16" aria-hidden="true"><path d="M1.5 5.8h11V1.6L22.6 8l-10.1 6.4v-4.2h-11z" fill="currentColor" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span>
+        </div>
+
+        <div class="sd sdx">
+          <div class="sdl">
+            <span class="no">02</span>
+            <h3>결제 정보 입력</h3>
+          </div>
+            <ol class="oa">
+              <li>홈에서 결제할 <b>항목</b>을 누르면 필요 서류가 바로 보여요</li>
+              <li><b>월세 결제하기</b> 버튼을 눌러 등록을 시작하세요</li>
+            </ol>
+          <div class="phone pa">
+            <span class="cap"></span>
+            <div class="mk-abar"><img src="img/logo-text.png" alt="랜선페이"><span class="mk-me"><iconify-icon icon="mingcute:user-3-fill"></iconify-icon></span></div>
+            <div class="mk-usp">
+              <div class="tx"><span class="mk-uno">01</span><b>임대인 동의 불필요</b><small>집주인 동의나 가입 없이<br>계좌로 현금이 바로 입금돼요</small></div>
+              <img src="img/usp3d/01.png" alt="">
+            </div>
+            <div class="mk-dots"><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="mk-q" style="margin-top:9px">어떤 항목을 결제할까요?</div>
+            <div class="mk-grid g4">
+              <span class="mk-it on"><img src="img/item3d/w01.png" alt="">월세</span>
+              <span class="mk-it"><img src="img/item3d/02.png" alt="">관리비</span>
+              <span class="mk-it"><img src="img/item3d/03.png" alt="">인건비</span>
+              <span class="mk-it"><img src="img/item3d/04.png" alt="">보증금</span>
+              <span class="mk-it"><img src="img/item3d/05.png" alt="">매입대금</span>
+              <span class="mk-it"><img src="img/item3d/06.png" alt="">학원비</span>
+              <span class="mk-it"><img src="img/item3d/07.png" alt="">학교공과금</span>
+              <span class="mk-it"><img src="img/item3d/08.png" alt="">인테리어</span>
+              <span class="mk-it"><img src="img/item3d/09.png" alt="">이사</span>
+              <span class="mk-it"><img src="img/item3d/10.png" alt="">청소비</span>
+              <span class="mk-it"><img src="img/item3d/11.png" alt="">중개수수료</span>
+              <span class="mk-it"><img src="img/item3d/12.png" alt="">기타</span>
+            </div>
+            <div class="mk-docs">
+              <b>월세 필요 서류</b>
+              <div><i>✓</i>정식 임대차계약서면 바로 돼요</div>
+              <div><i>✓</i>확정일자 없으면 입금내역 2~3회</div>
+            </div>
+            <div class="mk-btn" style="margin-top:12px"><img src="img/logo3-white.png" alt="">월세 결제하기<img class="tap" src="img/포인트.png" alt=""></div>
+            <div class="mk-tab">
+              <span class="on"><iconify-icon icon="mingcute:home-4-fill"></iconify-icon>홈</span>
+              <span><iconify-icon icon="mingcute:bank-card-fill"></iconify-icon>결제하기</span>
+              <span><iconify-icon icon="mingcute:book-2-fill"></iconify-icon>이용안내</span>
+              <span><iconify-icon icon="mingcute:menu-fill"></iconify-icon>전체메뉴</span>
+            </div>
+          </div>
+            <ol class="ob" style="counter-reset:s 2">
+              <li>입금 은행과 계좌번호를 넣고 <b>예금주 확인</b>을 누르세요</li>
+              <li><b>보낼 금액</b>을 넣으면 수수료와 결제 총액이 미리 계산돼요</li>
+            </ol>
+          <div class="phone pb">
+            <span class="cap"></span>
+            <div class="mk-top"><i>‹</i><b>결제 등록</b></div>
+            <div class="mk-prog"><i class="on"></i><i class="on"></i><i></i><i></i></div>
+            <div class="mk-cap">STEP 2 / 4</div>
+            <div class="mk-q">받는 분 정보를 입력하세요</div>
+            <div class="mk-field"><span>입금 은행</span>
+              <div class="mk-input">KB국민<b>▾</b></div>
+            </div>
+            <div class="mk-field"><span>계좌번호</span>
+              <div class="mk-input">123456-78-901234</div>
+              <div class="mk-okay">✓ 예금주 확인이 완료됐어요 · 김집주</div>
+            </div>
+            <div class="mk-field"><span>송금액</span>
+              <div class="mk-input">700,000<b>원</b></div>
+            </div>
+            <div class="mk-est">
+              <div><span>예상 수수료 (3.8%)</span><b>26,600원</b></div>
+              <div><span>예상 결제 총액</span><b>726,600원</b></div>
+            </div>
+            <div class="mk-btn" style="margin-top:auto">다음<img class="tap" src="img/포인트.png" alt=""></div>
+          </div>
+          <span class="pnx"><svg viewBox="0 0 24 16" aria-hidden="true"><path d="M1.5 5.8h11V1.6L22.6 8l-10.1 6.4v-4.2h-11z" fill="currentColor" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span>
+        </div>
+
+        <div class="sd">
+          <div class="sdl">
+            <span class="no">03</span>
+            <h3>결제 방식 선택</h3>
+            <ol>
+              <li><b>신용카드</b>와 <b>앱카드</b> 중 결제 수단을 고르세요</li>
+              <li>결제할 <b>카드</b>와 <b>할부 개월</b>을 고르세요 · 행사 중엔 무이자도 보여요</li>
+              <li><b>즉시 송금</b>이나 <b>예약 송금</b>을 정하고 다음을 누르세요</li>
+            </ol>
+          </div>
+          <div class="phone">
+            <span class="cap"></span>
+            <div class="mk-top"><i>‹</i><b>결제 등록</b></div>
+            <div class="mk-prog"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div>
+            <div class="mk-cap">STEP 3 / 4</div>
+            <div class="mk-q">어떻게 결제할까요?</div>
+            <div class="mk-field"><span>결제 수단</span>
+              <div class="mk-seg"><span class="on">신용카드</span><span>앱카드</span></div>
+            </div>
+            <div class="mk-field"><span>카드 선택</span>
+              <div class="mk-card on"><span class="chip"></span><span>신한카드<small>**** 1479 · 개인</small></span><span class="ck">✓</span></div>
+              <div class="mk-card"><span class="chip a"></span><span>삼성카드<small>**** 0552 · 개인</small></span></div>
+            </div>
+            <div class="mk-field"><span>할부</span>
+              <div class="mk-input">3개월 (무이자)<b>▾</b></div>
+            </div>
+            <div class="mk-field"><span>송금 시점</span>
+              <div class="mk-seg"><span class="on">즉시 송금</span><span>예약 송금</span></div>
+            </div>
+            <div class="mk-btn" style="margin-top:auto">다음<img class="tap" src="img/포인트.png" alt=""></div>
+          </div>
+        </div>
+
+        <div class="sd">
+          <div class="sdl">
+            <span class="no">04</span>
+            <h3>서류 제출</h3>
+            <ol>
+              <li>화면에 뜨는 <b>필요 서류</b>를 확인하세요 · 대부분 한 장이면 돼요</li>
+              <li>서류를 <b>촬영하거나 파일로</b> 올리세요 · 최대 5개까지 돼요</li>
+              <li>입력 내용을 확인하고 <b>등록 완료</b>를 누르면 접수돼요</li>
+            </ol>
+          </div>
+          <div class="phone">
+            <span class="cap"></span>
+            <div class="mk-top"><i>‹</i><b>결제 등록</b></div>
+            <div class="mk-prog"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div>
+            <div class="mk-cap">STEP 4 / 4</div>
+            <div class="mk-q">서류를 올리고 확인하세요</div>
+            <div class="mk-docs">
+              <b>월세 필요 서류</b>
+              <div><i>✓</i>정식 임대차계약서면 바로 돼요</div>
+              <div><i>✓</i>확정일자 없으면 입금내역 2~3회</div>
+              <div><i>✓</i>분실 시 건축물대장등본이면 돼요</div>
+            </div>
+            <div class="mk-up"><b>서류 촬영 또는 파일 올리기</b><small>PDF · 사진 · 문서 파일 최대 5개</small></div>
+            <div class="mk-file"><i>✓</i>임대차계약서.jpg</div>
+            <div class="mk-btn" style="margin-top:auto">등록 완료<img class="tap" src="img/포인트.png" alt=""></div>
+          </div>
+        </div>
+
+        <div class="sd sdx">
+          <div class="sdl">
+            <span class="no">05</span>
+            <h3>송금 완료</h3>
+          </div>
+            <ol class="oa">
+              <li>접수되면 <b>연중무휴 검토</b>가 시작되고 보통 10분 안에 결과를 알려드려요</li>
+            </ol>
+          <div class="phone pa">
+            <span class="cap"></span>
+            <div class="mk-done">✓</div>
+            <div class="mk-dh">결제 신청이 접수됐어요</div>
+            <div class="mk-dp">서류 검토가 끝나면<br>바로 문자로 알려드려요</div>
+            <div class="mk-sum">
+              <div><span>항목</span><b>월세</b></div>
+              <div><span>받는 분</span><b>김집주 · KB국민</b></div>
+              <div><span>송금액</span><b>700,000원</b></div>
+              <div><span>결제</span><b>신한카드 · 3개월 무이자</b></div>
+              <div><span>송금 시점</span><b>즉시 송금</b></div>
+            </div>
+            <div class="mk-btn" style="margin-top:auto">홈으로</div>
+          </div>
+            <ol class="ob" style="counter-reset:s 1">
+              <li>승인되면 카드로 결제되고 <b>평균 5분 안에</b> 받는 분 계좌로 현금이 입금돼요</li>
+              <li>진행 상태는 <b>전체메뉴 → 결제 내역</b>에서 언제든 확인할 수 있어요</li>
+            </ol>
+          <div class="phone pb">
+            <span class="cap"></span>
+            <div class="mk-done">✓</div>
+            <div class="mk-dh">송금이 완료됐어요</div>
+            <div class="mk-dp">김집주님 계좌로<br>현금 700,000원이 입금됐어요</div>
+            <div class="mk-sum">
+              <div><span>받는 분</span><b>김집주 · KB국민</b></div>
+              <div><span>입금액</span><b>700,000원</b></div>
+              <div><span>카드 결제</span><b>신한카드 · 726,600원</b></div>
+              <div><span>걸린 시간</span><b>접수 후 11분</b></div>
+            </div>
+            <div class="mk-btn" style="margin-top:auto">홈으로</div>
+          </div>
+          <span class="pnx"><svg viewBox="0 0 24 16" aria-hidden="true"><path d="M1.5 5.8h11V1.6L22.6 8l-10.1 6.4v-4.2h-11z" fill="currentColor" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span>
+        </div>
+
+        </div>
+    </section>
+
+    <!-- 필요 서류 -->
+</main>
+
+
+
+
+
+<footer class="foot">
+  <div class="wrap">
+    <nav class="fpolicy">
+      <a href="약관.html#terms">서비스 이용약관</a>
+      <a href="약관.html#privacy">개인정보 처리방침</a>
+      <a href="약관.html#thirdparty">개인정보 3자 제공 고지</a>
+    </nav>
+    <div class="finfo">
+      <span><b>상호</b>랜선페이 · (주)미라클컴퍼니</span>
+      <span><b>대표</b>김남기</span>
+      <span><b>서버책임 · 개인정보관리자</b>민기범</span>
+      <span><b>사업자등록번호</b>437-88-03148</span>
+      <span><b>주소</b>충청남도 천안시 서북구 쌍용대로 234, 방영학생활건강빌딩 3층 (성정동)</span>
+      <span><b>대표번호</b>1577-6369 (평일 9:00~18:00)</span>
+      <span><b>메일</b>help@lanseonpay.co.kr</span>
+    </div>
+    <p class="fnote">랜선페이는 전자금융거래법에 따라 등록된 전자지급결제대행(PG) 서비스입니다.</p>
+    <p class="fcopy">Copyright © 2026 랜선페이. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- 전체메뉴 서랍 (모바일) -->
+<div class="dim" id="dim" onclick="drawer(false)"></div>
+<aside class="drawer" id="drawer">
+  <div class="drawer-top"><b>메뉴</b><button class="x" onclick="drawer(false)" aria-label="닫기">✕</button></div>
+  <div class="drawer-body">
+    <a class="row" href="index.html"><span class="tx"><b>홈</b></span><iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon></a>
+    <a class="row" href="about.html"><span class="tx"><b>회사소개</b></span><iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon></a>
+    <a class="row" href="guide.html"><span class="tx"><b>이용가이드</b></span><iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon></a>
+    <a class="row" href="notice.html"><span class="tx"><b>공지사항</b></span><iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon></a>
+    <a class="row" href="faq.html"><span class="tx"><b>자주 묻는 질문</b></span><iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon></a>
+    <a class="row" href="cs.html"><span class="tx"><b>고객센터</b></span><iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon></a>
+    <a class="row" href="pay.html"><span class="tx"><b>송금하기</b></span><iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon></a>
+  </div>
+</aside>
+
+<!-- 늘 따라다니는 시작 버튼 -->
+<a class="fab" href="app.html"><img class="btn-logo" src="img/logo3-white.png" alt="">무료로 시작하기</a>
+</body>
+</html>

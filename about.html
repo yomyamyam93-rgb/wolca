@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>랜선페이 — 회사소개</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="style.css?v=15">
+<link rel="icon" type="image/png" href="img/logo3.png">
+<script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+<script src="app.js?v=15"></script>
+<style>
+  /* 기준: 섹션 간격 넉넉하게 · 제목 아래 46px */
+  .main .sec.tight{padding:116px 0;}
+  @media(min-width:768px){
+    /* 한 화면에 한 단락씩 */
+    .main .sec.tight{min-height:92svh; display:flex; align-items:center; padding:80px 0;}
+    .main .sec.tight > .wrap{width:100%;}
+    .main .sec.tight:has(.sns){min-height:0; display:block; padding:100px 0;}
+  }
+  @media(max-width:767px){ .main .sec.tight{padding:76px 0;} }
+  .head{margin-bottom:40px; text-align:left;}
+  /* 영상 · 수치가 있는 두 섹션은 글도 가운데 */
+  .sec:has(.avid) .head, .sec:has(.astats) .head{text-align:center;}
+  .sec:has(.avid) .prose, .sec:has(.astats) .prose{margin:0 auto; text-align:center;}
+  /* 소개 페이지 — 랜딩보다 차분한 제목 크기 */
+  .head .eyebrow{font-size:13.5px; margin-bottom:10px;}
+  .head .h-sec{font-size:23px; letter-spacing:-.5px;}
+  @media(min-width:768px){
+    .head .eyebrow{font-size:14.5px; margin-bottom:12px;}
+    .head .h-sec{font-size:27px;}
+  }
+
+  /* 3단 이미지 */
+  .aphotos{display:flex; overflow-x:auto; gap:12px; margin:52px -20px 0; padding:0 20px 6px;
+    scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; scrollbar-width:none;}
+  .aphotos::-webkit-scrollbar{display:none;}
+  .aphotos img{user-select:none; -webkit-user-drag:none; pointer-events:none;}
+  .aphotos{cursor:grab; touch-action:pan-y;}
+  .aphotos img{flex:0 0 78%; scroll-snap-align:center;}
+  @media(min-width:768px){
+    .aphotos{display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin:52px 0 0; padding:0; overflow:visible;}
+    .aphotos img{flex:auto;}
+  }
+  .aphotos img{width:100%; aspect-ratio:3/4; object-fit:cover; border-radius:8px; display:block;}
+
+  /* 줄글 */
+  .prose{max-width:760px; margin:0; font-size:16px; line-height:1.95; color:var(--sub);}
+  .prose p{text-wrap:pretty;}
+  .h-sec, .afin p{text-wrap:balance;}
+  .prose p + p{margin-top:36px;}
+  .prose b{color:var(--ink);}
+  @media(min-width:768px){ .prose{font-size:17px;} }
+
+  /* 흐름 영상 — 가운데 */
+  .avid{max-width:760px; margin:52px auto 0; overflow:hidden;}
+  .avid video{width:134%; margin:-23.2% -15.9% -27.5% -17.8%; filter:brightness(1.012); display:block;}
+
+  /* 항목 타일 12개 — 장식용 */
+  .aitems{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:52px;}
+  @media(min-width:640px){ .aitems{grid-template-columns:repeat(4,1fr);} }
+  @media(min-width:900px){ .aitems{grid-template-columns:repeat(6,1fr); gap:16px;} }
+  .ai{position:relative; overflow:hidden; background:#fff; border-radius:8px; padding:22px 8px 18px;
+    text-align:center; box-shadow:0 2px 8px rgba(0,0,0,.05);}
+  .ai:before{content:''; position:absolute; inset:0; border-radius:8px;
+    background:var(--primary); background:var(--grad); opacity:0; transition:opacity .5s ease;}
+  .ai img{position:relative; z-index:1; width:52px; height:52px; object-fit:contain; transition:opacity .5s ease;}
+  .ai .w{position:absolute; z-index:1; left:50%; top:22px; transform:translateX(-50%); opacity:0;}
+  .ai b{position:relative; z-index:1; display:block; margin-top:10px; font-size:14px; font-weight:700;
+    letter-spacing:-.3px; transition:color .5s ease;}
+  .ai.on:before{opacity:1;}
+  .ai.on img:not(.w){opacity:0;}
+  .ai.on .w{opacity:1;}
+  .ai.on b{color:#fff;}
+
+  /* 큰 수치 — 우측 정렬 */
+  .astats{margin-top:64px; display:flex; flex-wrap:wrap; justify-content:center;
+    gap:28px 64px; text-align:center;}
+  .ast b{display:block; font-size:clamp(30px, 3.6vw, 46px); font-weight:800; color:var(--primary);
+    letter-spacing:-1.5px; line-height:1; white-space:nowrap;}
+  .ast b span.countup{font-size:inherit; color:inherit; display:inline; margin:0;}
+  .ast b i{font-style:normal; font-size:.5em;}
+  .ast > span{display:block; margin-top:9px; font-size:14px; color:var(--sub);}
+
+  /* 마무리 — 파란 밴드 + CTA */
+  .afin{background:var(--primary); background:var(--grad); padding:96px 0; text-align:center; color:#fff;}
+  .afin p{font-size:clamp(22px, 3vw, 30px); font-weight:800; letter-spacing:-.8px; line-height:1.55;}
+  .afin p .hl{color:#fff;}
+  .fbts{display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin-top:34px;}
+  .fbtn{display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    width:190px; height:52px; border-radius:8px; background:#fff; color:var(--primary-600);
+    font-size:15.5px; font-weight:700; box-shadow:0 6px 18px rgba(15,23,42,.16);}
+  .fbtn img{height:18px; width:auto;}
+  .fbtn.ghost{background:rgba(255,255,255,.14); color:#fff; box-shadow:none;
+    border:1px solid rgba(255,255,255,.38);}
+  @media(max-width:767px){
+    .fbts{width:100%;}
+    .fbtn{flex:1 1 100%; width:100%;}
+    .fbtn.ghost{flex:1 1 calc(50% - 5px); width:auto;}
+  }
+
+</style>
+</head>
+<body>
+
+<header class="appbar">
+  <div class="appbar-in">
+    <a class="logo" href="index.html"><img src="img/logo3.png" alt=""><img src="img/logo-text.png" alt="랜선페이"></a>
+    <nav class="gnb">
+      <a href="about.html" class="on">회사소개</a>
+      <a href="guide.html">이용가이드</a>
+      <a href="notice.html">공지사항</a>
+      <a href="faq.html">자주 묻는 질문</a>
+      <a href="cs.html">고객센터</a>
+    </nav>
+    <button class="burger" onclick="drawer(true)" aria-label="전체메뉴"><iconify-icon icon="mingcute:menu-fill"></iconify-icon></button>
+  </div>
+</header>
+
+<main class="main">
+  <section class="banner slim">
+    <div class="wrap">
+      <h1 class="h-hero">회사소개</h1>
+      <p>현금거래의 불편을 카드 한 장으로 푸는 랜선페이입니다.</p>
+    </div>
+  </section>
+
+  <!-- 1. 질문 -->
+  <section class="sec tight">
+    <div class="wrap">
+      <div class="head">
+        <span class="eyebrow">질문에서 시작했습니다</span>
+        <h2 class="h-sec">월세는 왜 카드로 <span class="hl">결제할 수 없을까?</span></h2>
+      </div>
+      <div class="prose">
+        <p>월세일은 급여일보다 먼저 옵니다. 집주인은 계좌이체만 받고 카드는 받아주지 않습니다.
+          카드 한도는 남아 있는데 정작 현금이 없습니다. 할부도 포인트도 쓸 수 없는 돈이 매달 빠져나갑니다.</p>
+        <p>카드로 낼 수만 있다면 이야기가 달라집니다. 큰 금액은 <b>할부로 나눠 내며</b> 부담을 줄일 수 있습니다.
+          결제한 만큼 <b>카드 실적</b>이 쌓이고 포인트와 마일리지도 적립됩니다.
+          연말정산에서는 소득공제와 <b>월세 세액공제</b>까지 챙길 수 있습니다.
+          매달 그냥 사라지던 돈이 혜택으로 돌아오는 겁니다.</p>
+        <p>랜선페이는 바로 이 지점에 집중했습니다.
+          현금으로만 오가던 돈을 카드로 결제할 수 있게 만드는 것.
+          <b>그 하나를 서비스로 만들었습니다.</b></p>
+      </div>
+      <div class="aphotos">
+        <img src="img/회사소개/a01.jpg" alt="">
+        <img src="img/회사소개/a02.jpg" alt="">
+        <img src="img/회사소개/a03.jpg" alt="">
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. 해답 + 영상 -->
+  <section class="sec tight">
+    <div class="wrap">
+      <div class="head">
+        <span class="eyebrow">그래서 랜선페이를 만들었습니다</span>
+        <h2 class="h-sec">카드로 결제하면 <span class="hl">현금으로 보내드립니다</span></h2>
+      </div>
+      <div class="prose">
+        <p>답은 간단했습니다. 보내는 분은 <b>카드로 결제</b>하고 받는 분은 평소처럼 <b>계좌로 현금</b>을 받으면 됩니다.
+          받는 분이 가맹점일 필요도 없고 따로 동의할 필요도 없습니다.
+          서류로 실거래만 확인되면 랜선페이가 결제와 송금 사이를 안전하게 이어줍니다.</p>
+      </div>
+      <div class="avid">
+        <video autoplay muted loop playsinline src="img/hero3d.mp4?v=2" poster="img/hero3d.jpg"></video>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. 달라진 일상 -->
+  <section class="sec tight">
+    <div class="wrap">
+      <div class="head">
+        <span class="eyebrow">그렇게 달라진 일상</span>
+        <h2 class="h-sec">생활 곳곳의 현금을 <span class="hl">카드로</span> 바꿉니다</h2>
+      </div>
+      <div class="prose">
+        <p>이제 월세와 관리비 같은 <b>주거비</b>부터 인건비와 매입대금 같은 <b>사업 자금</b>
+          그리고 학원비와 이사처럼 목돈이 드는 <b>생활비</b>까지 카드 한 장으로 해결합니다.
+          당장 현금이 없어도 결제일을 미루지 않고 할부로 부담을 나누며 카드 혜택과 세액공제까지 챙깁니다.</p>
+      </div>
+      <div class="aitems" id="aitems">
+        <div class="ai on"><img src="img/item3d/01.png" alt=""><img class="w" src="img/item3d/w01.png" alt=""><b>월세</b></div>
+        <div class="ai"><img src="img/item3d/02.png" alt=""><img class="w" src="img/item3d/w02.png" alt=""><b>관리비</b></div>
+        <div class="ai"><img src="img/item3d/03.png" alt=""><img class="w" src="img/item3d/w03.png" alt=""><b>인건비</b></div>
+        <div class="ai"><img src="img/item3d/04.png" alt=""><img class="w" src="img/item3d/w04.png" alt=""><b>보증금</b></div>
+        <div class="ai"><img src="img/item3d/05.png" alt=""><img class="w" src="img/item3d/w05.png" alt=""><b>매입대금</b></div>
+        <div class="ai"><img src="img/item3d/06.png" alt=""><img class="w" src="img/item3d/w06.png" alt=""><b>학원비</b></div>
+        <div class="ai"><img src="img/item3d/07.png" alt=""><img class="w" src="img/item3d/w07.png" alt=""><b>학교공과금</b></div>
+        <div class="ai"><img src="img/item3d/08.png" alt=""><img class="w" src="img/item3d/w08.png" alt=""><b>인테리어</b></div>
+        <div class="ai"><img src="img/item3d/09.png" alt=""><img class="w" src="img/item3d/w09.png" alt=""><b>이사</b></div>
+        <div class="ai"><img src="img/item3d/10.png" alt=""><img class="w" src="img/item3d/w10.png" alt=""><b>청소비</b></div>
+        <div class="ai"><img src="img/item3d/11.png" alt=""><img class="w" src="img/item3d/w11.png" alt=""><b>중개수수료</b></div>
+        <div class="ai"><img src="img/item3d/12.png" alt=""><img class="w" src="img/item3d/w12.png" alt=""><b>기타</b></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. 일하는 방식 -->
+  <section class="sec tight">
+    <div class="wrap">
+      <div class="head">
+        <span class="eyebrow">일하는 방식</span>
+        <h2 class="h-sec">이 원칙이 <span class="hl">서비스 품질</span>이 됩니다</h2>
+      </div>
+      <div class="prose">
+        <p>랜선페이는 고객의 하루에서 출발합니다. 돈이 급한 순간에는 <b>속도가 곧 신뢰</b>라고 믿기에
+          검토부터 입금까지 군더더기를 없앴습니다.
+          전자금융거래법에 따라 등록된 PG 로서 모든 거래를 증빙 위에서 처리하며 <b>안전을 기본값</b>으로 삼습니다.</p>
+        <p>그렇게 지금까지 <b>4만 2천여 명</b>이 랜선페이와 함께 <b>128억 원</b>을 주고받았습니다.
+          결제부터 입금까지는 <b>평균 5분</b>이면 충분합니다.</p>
+      </div>
+      <div class="astats">
+        <div class="ast"><b><span class="countup">42,000</span><i>명+</i></b><span>이용자</span></div>
+        <div class="ast"><b><span class="countup">128</span><i>억원</i></b><span>총 거래금액</span></div>
+        <div class="ast"><b><span class="countup">4.8</span><i>점</i></b><span>평균 평점</span></div>
+        <div class="ast"><b><i>평균 </i><span class="countup">5</span><i>분</i></b><span>송금 속도</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. 마무리 CTA -->
+  <section class="afin">
+    <div class="wrap">
+      <p>카드 하나로 일상을 가볍게<br>랜선페이는 <span class="hl">편리함</span>을 만듭니다</p>
+      <div class="fbts">
+        <a class="fbtn" href="app.html"><img src="img/logo3.png" alt="">무료로 시작하기</a>
+        <a class="fbtn ghost" href="https://www.instagram.com" target="_blank" rel="noopener"><img src="img/sns-insta.png" alt="">인스타그램</a>
+        <a class="fbtn ghost" href="https://www.youtube.com" target="_blank" rel="noopener"><img src="img/sns-youtube.png" alt="">유튜브</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <nav class="fpolicy">
+      <a href="약관.html#terms">서비스 이용약관</a>
+      <a href="약관.html#privacy">개인정보 처리방침</a>
+      <a href="약관.html#thirdparty">개인정보 3자 제공 고지</a>
+    </nav>
+    <div class="finfo">
+      <span><b>상호</b>랜선페이 · (주)미라클컴퍼니</span>
+      <span><b>대표</b>김남기</span>
+      <span><b>서버책임 · 개인정보관리자</b>민기범</span>
+      <span><b>사업자등록번호</b>437-88-03148</span>
+      <span><b>주소</b>충청남도 천안시 서북구 쌍용대로 234, 방영학생활건강빌딩 3층 (성정동)</span>
+      <span><b>대표번호</b>1577-6369 (평일 9:00~18:00)</span>
+      <span><b>메일</b>help@lanseonpay.co.kr</span>
+    </div>
+    <p class="fnote">랜선페이는 전자금융거래법에 따라 등록된 전자지급결제대행(PG) 서비스입니다.</p>
+    <p class="fcopy">Copyright © 2026 랜선페이. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- 전체메뉴 서랍 (모바일) -->
+<div class="dim" id="dim" onclick="drawer(false)"></div>
+<aside class="drawer" id="drawer">
+  <div class="drawer-top"><b>메뉴</b><button class="x" onclick="drawer(false)" aria-label="닫기">✕</button></div>
+  <div class="drawer-body">
+    <a class="row" href="index.html"><span class="tx"><b>홈</b></span><iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon></a>
+    <a class="row" href="about.html"><span class="tx"><b>회사소개</b></span><iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon></a>
+    <a class="row" href="guide.html"><span class="tx"><b>이용가이드</b></span><iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon></a>
+    <a class="row" href="notice.html"><span class="tx"><b>공지사항</b></span><iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon></a>
+    <a class="row" href="faq.html"><span class="tx"><b>자주 묻는 질문</b></span><iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon></a>
+    <a class="row" href="cs.html"><span class="tx"><b>고객센터</b></span><iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon></a>
+    <a class="row" href="pay.html"><span class="tx"><b>송금하기</b></span><iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon></a>
+  </div>
+</aside>
+
+<!-- 늘 따라다니는 시작 버튼 -->
+<a class="fab" href="app.html"><img class="btn-logo" src="img/logo3-white.png" alt="">무료로 시작하기</a>
+
+<script>
+/* 항목 타일 강조가 한 칸씩 돌아가며 옮겨간다 */
+(function () {
+  var 판 = document.getElementById('aitems');
+  if (!판 || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var 들 = 판.children, i = 0;
+  setInterval(function () {
+    i = (i + 1) % 들.length;
+    [].forEach.call(들, function (el, ix) { el.classList.toggle('on', ix === i); });
+  }, 1000);
+})();
+</script>
+<script>
+/* 사진 줄 — 마우스로 끌어서 넘기기 (이미지 고스트 드래그 차단) */
+(function () {
+  document.querySelectorAll('.aphotos').forEach(function (판) {
+    var 끌기 = false, x0 = 0, s0 = 0;
+    판.addEventListener('pointerdown', function (e) {
+      끌기 = true; x0 = e.clientX; s0 = 판.scrollLeft;
+      판.style.scrollSnapType = 'none';
+      판.setPointerCapture(e.pointerId);
+    });
+    판.addEventListener('pointermove', function (e) {
+      if (끌기) 판.scrollLeft = s0 - (e.clientX - x0);
+    });
+    ['pointerup', 'pointercancel'].forEach(function (t) {
+      판.addEventListener(t, function () { 끌기 = false; 판.style.scrollSnapType = ''; });
+    });
+  });
+})();
+</script>
+</body>
+</html>

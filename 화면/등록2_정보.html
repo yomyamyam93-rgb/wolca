@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>결제 등록 · 받는 분 정보</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+<style>
+  :root{--primary:#2563EB; --primary-dark:#1D4ED8; --primary-50:#EFF4FF; --bg:#FFFFFF; --line:#ECEEF1;
+    --sub:#4E5968; --ink:#191F28; --placeholder:#8B95A1; --danger:#DC2626; --ok:#059669;
+    --grad:linear-gradient(180deg, color-mix(in srgb, var(--primary) 82%, #ffffff), var(--primary));}
+  *{box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent;}
+  html,body{scrollbar-width:none;} body::-webkit-scrollbar{display:none;}
+  body{font-family:'Pretendard',sans-serif; color:var(--ink); background:#EDF0F4;
+    word-break:keep-all; line-height:1.5; -webkit-font-smoothing:antialiased;}
+  .phone{width:100%; max-width:480px; min-height:100svh; margin:0 auto; background:#fff;
+    box-shadow:0 0 44px rgba(15,23,42,.10); display:flex; flex-direction:column;}
+  .topbar{height:52px; position:sticky; top:0; z-index:50; background:#fff; display:flex; align-items:center; padding:0 10px; flex:0 0 auto;}
+  .back{width:40px; height:40px; display:flex; align-items:center; justify-content:center; font-size:24px; cursor:pointer;}
+  .topbar .ttl{flex:1; text-align:center; font-size:16px; font-weight:700; margin-right:40px;}
+  .prog4{display:flex; gap:6px; margin:2px 20px 8px;}
+  .prog4 i{flex:1; height:4px; border-radius:2px; background:var(--line);}
+  .prog4 i.on{background:var(--primary);}
+  .stepcap{margin:0 20px; font-size:12.5px; font-weight:700; color:var(--placeholder);}
+  .body{flex:1; padding:10px 20px 30px;}
+  .q{font-size:21px; font-weight:800; letter-spacing:-.3px; margin:6px 0 18px;}
+  .fld{margin-bottom:16px;}
+  .fld > label{display:block; font-size:13.5px; font-weight:700; margin-bottom:7px;}
+  .fld > label small{font-weight:500; color:var(--placeholder);}
+  .in, select.in{width:100%; height:50px; border:1px solid var(--line); border-radius:8px;
+    padding:0 14px; font:inherit; font-size:15.5px; background:#fff; color:var(--ink); outline:none;}
+  .in:focus{border-color:var(--primary);}
+  .in::placeholder{color:var(--placeholder);}
+  .withbtn{display:flex; gap:8px;}
+  .withbtn .in{flex:1; min-width:0;}
+  .chkbtn{flex:0 0 auto; padding:0 15px; border-radius:8px; border:1px solid var(--line);
+    background:#fff; font:inherit; font-size:13.5px; font-weight:700; color:var(--primary-dark); cursor:pointer;}
+  .hint{margin-top:6px; font-size:12px; color:var(--placeholder);}
+  .hint.ok{color:var(--ok); font-weight:700;}
+  .hint.err{color:var(--danger); font-weight:700;}
+  .est{margin-top:20px; background:var(--primary-50); border-radius:8px; padding:15px 16px; font-size:13.5px;}
+  .est .er{display:flex; justify-content:space-between; margin-bottom:6px;}
+  .est .er b{font-weight:800;}
+  .est .es{font-size:11.5px; color:var(--sub); margin-top:4px;}
+  .navs{display:flex; gap:10px; margin-top:26px;}
+  .navs button{flex:1; height:52px; border-radius:8px; font:inherit; font-size:15.5px; font-weight:700; cursor:pointer;}
+  .prev{border:1px solid var(--line); background:#fff; color:var(--ink);}
+  .next{border:none; color:#fff; background:var(--primary); background:var(--grad);
+    box-shadow:0 4px 12px color-mix(in srgb, var(--primary) 32%, transparent);}
+</style>
+</head>
+<body>
+<div class="phone">
+  <div class="topbar"><div class="back" onclick="location.href='10_1_유형선택.html'">‹</div><div class="ttl">결제 등록</div></div>
+  <div class="prog4"><i class="on"></i><i class="on"></i><i></i><i></i></div>
+  <div class="stepcap">STEP 2 / 4</div>
+
+  <div class="body">
+    <div class="q">받는 분 정보를 입력하세요</div>
+
+    <div class="fld"><label>입금 은행 <small>(필수)</small></label>
+      <select class="in" id="은행">
+        <option value="">은행 선택</option>
+        <option>신한</option><option>KB국민</option><option>우리</option><option>하나</option>
+        <option>NH농협</option><option>IBK기업</option><option>카카오뱅크</option><option>토스뱅크</option><option>새마을금고</option>
+      </select>
+    </div>
+
+    <div class="fld"><label>계좌번호 <small>(필수)</small></label>
+      <div class="withbtn">
+        <input class="in" id="계좌" inputmode="numeric" placeholder="- 없이 숫자만">
+        <button class="chkbtn" id="예금주확인" type="button">예금주 확인</button>
+      </div>
+      <div class="hint" id="계좌힌트">받는 분 계좌로만 송금됩니다.</div>
+    </div>
+
+    <div class="fld"><label>예금주명 <small>(필수)</small></label>
+      <input class="in" id="예금주" placeholder="예금주명">
+    </div>
+
+    <div class="fld"><label>받는 분 휴대폰 <small>(필수)</small></label>
+      <input class="in" id="휴대폰" inputmode="numeric" placeholder="- 없이 숫자만">
+      <div class="hint">받는 분 확인과 송금 안내에만 사용됩니다.</div>
+    </div>
+
+    <div class="fld"><label>송금액 <small>(필수)</small></label>
+      <input class="in" id="금액" inputmode="numeric" placeholder="보낼 금액을 입력하세요">
+    </div>
+
+    <div class="est" id="예상" style="display:none">
+      <div class="er"><span>예상 수수료 (3.8%)</span><b id="수수료">0원</b></div>
+      <div class="er"><span>예상 결제 총액</span><b id="총액">0원</b></div>
+      <div class="es">실제 수수료는 부가세 포함 기준으로 결제 시점에 확정됩니다.</div>
+    </div>
+
+    <div class="hint err" id="오류" style="display:none"></div>
+
+    <div class="navs">
+      <button class="prev" type="button" onclick="location.href='10_1_유형선택.html'">이전</button>
+      <button class="next" type="button" id="다음">다음</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var 저장 = {};
+  try { 저장 = JSON.parse(sessionStorage.getItem('lp_reg') || '{}'); } catch (e) {}
+  ['은행','계좌','예금주','휴대폰'].forEach(function (k) { if (저장[k]) $(k).value = 저장[k]; });
+  if (저장.금액) { $('금액').value = Number(저장.금액).toLocaleString('ko-KR'); }
+
+  function 값() { return Number(($('금액').value || '').replace(/[^0-9]/g, '')) || 0; }
+  function 계산() {
+    var n = 값();
+    $('금액').value = n ? n.toLocaleString('ko-KR') : '';
+    $('예상').style.display = n ? 'block' : 'none';
+    if (n) {
+      var 비 = Math.round(n * 0.038);
+      $('수수료').textContent = 비.toLocaleString('ko-KR') + '원';
+      $('총액').textContent = (n + 비).toLocaleString('ko-KR') + '원';
+    }
+  }
+  $('금액').addEventListener('input', 계산);
+  계산();
+
+  $('예금주확인').addEventListener('click', function () {
+    var h = $('계좌힌트');
+    if (!$('은행').value || !$('계좌').value) {
+      h.className = 'hint err'; h.textContent = '은행과 계좌번호를 먼저 입력해주세요.';
+      return;
+    }
+    h.className = 'hint ok';
+    h.textContent = '예금주 확인이 완료됐어요' + ($('예금주').value ? ' · ' + $('예금주').value : '');
+  });
+
+  $('다음').addEventListener('click', function () {
+    var 빠짐 = [];
+    if (!$('은행').value) 빠짐.push('입금 은행');
+    if (!$('계좌').value) 빠짐.push('계좌번호');
+    if (!$('예금주').value) 빠짐.push('예금주명');
+    if (!$('휴대폰').value) 빠짐.push('휴대폰');
+    if (!값()) 빠짐.push('송금액');
+    var 오류 = $('오류');
+    if (빠짐.length) { 오류.style.display = 'block'; 오류.textContent = 빠짐[0] + '을(를) 입력해주세요.'; return; }
+    저장.은행 = $('은행').value; 저장.계좌 = $('계좌').value; 저장.예금주 = $('예금주').value;
+    저장.휴대폰 = $('휴대폰').value; 저장.금액 = 값();
+    sessionStorage.setItem('lp_reg', JSON.stringify(저장));
+    location.href = '등록3_결제.html';
+  });
+})();
+</script>
+</body>
+</html>

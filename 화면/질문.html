@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>랜선페이 — 자주 묻는 질문</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="../style.css?v=15">
+<script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+<script src="../app.js?v=15"></script>
+<style>
+  body{background:#EDF0F4;}
+  .phone{width:100%; max-width:480px; min-height:100svh; margin:0 auto; background:#fff;
+    box-shadow:0 0 44px rgba(15,23,42,.10); display:flex; flex-direction:column;}
+  .topbar{height:52px; position:sticky; top:0; z-index:50; background:#fff; display:flex; align-items:center; padding:0 10px; flex:0 0 auto;}
+  .back{width:40px; height:40px; display:flex; align-items:center; justify-content:center;
+    font-size:24px; color:var(--ink); cursor:pointer;}
+  .topbar .ttl{flex:1; text-align:center; font-size:16px; font-weight:700; margin-right:40px;}
+  .abody{flex:1; padding:8px 20px 40px;}
+  .gh{margin:24px 2px 8px; font-size:14px; font-weight:800; color:var(--primary-600); letter-spacing:-.2px;}
+  .gh:first-child{margin-top:8px;}
+  /* (옛 칩 규칙 — 미사용) */
+  .chips{display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin-bottom:24px; max-width:100%; margin-left:auto; margin-right:auto;}
+  .chip{height:38px; padding:0 16px; border-radius:999px; border:1px solid var(--line);
+    background:var(--card); font-size:14px; font-weight:700; color:var(--sub);}
+  .chip.on{background:var(--primary-50); border-color:var(--primary-100); color:var(--primary-600);}
+
+  /* 질문 아코디언 */
+  .acc{max-width:100%; margin:0 auto;}
+  .acc details{border-bottom:1px solid var(--line);}
+  .acc details:last-child{border-bottom:none;}
+  .acc summary{display:flex; align-items:center; gap:12px; min-height:68px; padding:16px 4px;
+    cursor:pointer; list-style:none; font-size:17px; font-weight:700; line-height:1.5;}
+  .acc summary::-webkit-details-marker{display:none;}
+  .acc .q{flex:0 0 auto; font-size:16px; font-weight:700; color:var(--primary);}
+  .acc summary .t{flex:1; min-width:0;}
+  .acc summary .arw{flex:0 0 auto; font-size:20px; color:var(--icon-off); transition:transform .25s;}
+  .acc details[open] summary .arw{transform:rotate(180deg);}
+  .acc .a{padding:2px 4px 22px 34px; font-size:16px; line-height:1.8; color:var(--sub);}
+  .acc .a b{color:var(--ink);}
+
+  /* 파란 머리 카드 */
+  .ghead{background:var(--primary); background:var(--grad); color:#fff; border-radius:8px;
+    padding:22px 20px; margin-bottom:22px;}
+  .ghead b{display:block; font-size:19px; font-weight:800; letter-spacing:-.4px;}
+  .ghead span{display:block; margin-top:6px; font-size:13px; color:rgba(255,255,255,.85);}
+  .ghead + .gh{margin-top:0;}
+</style>
+</head>
+<body>
+<div class="phone">
+  <div class="topbar"><div class="back" onclick="history.length>1?history.back():location.href='../app.html'">‹</div><div class="ttl">자주 묻는 질문</div></div>
+  <div class="abody">
+      <div class="ghead">
+        <b>자주 묻는 질문</b>
+        <span>궁금한 점을 골라서 바로 확인하세요</span>
+      </div>
+      <div class="gh">가입 · 서류</div>
+      <div class="acc">
+        <details data-cat="가입"><summary><span class="q">Q.</span><span class="t">이게 무슨 서비스예요? 대출인가요?</span><iconify-icon class="arw" icon="mingcute:down-line"></iconify-icon></summary>
+          <div class="a">대출이 아닙니다. 현금으로 내야 하던 돈을 <b>카드로 결제</b>하면 저희가 받는 분 계좌로 <b>현금을 대신 보내드리는</b> 서비스예요. 카드값은 다음 달 카드 결제일에 내시면 됩니다.</div></details>
+        <details data-cat="가입"><summary><span class="q">Q.</span><span class="t">세입자 본인만 이용할 수 있나요?</span><iconify-icon class="arw" icon="mingcute:down-line"></iconify-icon></summary>
+          <div class="a">본인 명의 계약이 원칙입니다. 다만 가족이 대신 내주는 경우도 가능해요. 계약서와 결제하는 분의 관계를 확인할 수 있는 서류를 함께 올려주세요.</div></details>
+        <details data-cat="가입"><summary><span class="q">Q.</span><span class="t">서류는 무엇이 필요한가요?</span><iconify-icon class="arw" icon="mingcute:down-line"></iconify-icon></summary>
+          <div class="a">항목마다 다르지만 대부분 <b>한 장</b>이면 됩니다. 월세는 임대차 계약서 · 관리비는 고지서 · 인건비는 근로계약서 + 급여명세서예요. 자세한 목록은 공지사항의 「유형별 필요 서류 한눈에 보기」에서 확인하세요.</div></details>
+      </div>
+      <div class="gh">결제하기</div>
+      <div class="acc">
+        <details data-cat="결제"><summary><span class="q">Q.</span><span class="t">어떤 카드든 다 되나요?</span><iconify-icon class="arw" icon="mingcute:down-line"></iconify-icon></summary>
+          <div class="a">국내 주요 카드사 10곳 모두 가능합니다. 체크카드는 안 되고 <b>신용카드</b>만 됩니다. 법인카드는 사업 목적 결제만 가능해요.</div></details>
+        <details data-cat="결제"><summary><span class="q">Q.</span><span class="t">할부로 나눠 낼 수 있나요?</span><iconify-icon class="arw" icon="mingcute:down-line"></iconify-icon></summary>
+          <div class="a">최대 12개월 할부가 됩니다. 카드사 행사 기간에는 무이자 할부도 적용돼요. 무이자 개월 수는 카드사 행사에 따라 매달 달라집니다.</div></details>
+      </div>
+      <div class="gh">이용료 · 비용</div>
+      <div class="acc">
+        <details data-cat="비용"><summary><span class="q">Q.</span><span class="t">수수료는 얼마인가요?</span><iconify-icon class="arw" icon="mingcute:down-line"></iconify-icon></summary>
+          <div class="a">송금 금액의 <b>3.8%</b> (부가세 별도)입니다. 결제 전에 정확한 금액을 화면에서 미리 보여드려요. 숨은 비용은 없습니다.</div></details>
+        <details data-cat="비용"><summary><span class="q">Q.</span><span class="t">월세 세액공제는 어떻게 받나요?</span><iconify-icon class="arw" icon="mingcute:down-line"></iconify-icon></summary>
+          <div class="a">카드로 낸 월세도 <b>현금영수증과 같이</b> 세액공제 대상입니다. 연말정산 때 쓸 증빙은 화면에서 바로 내려받을 수 있어요. 소득 구간에 따라 최대 17%까지 환급됩니다.</div></details>
+      </div>
+      <div class="gh">송금 안내</div>
+      <div class="acc">
+        <details data-cat="송금"><summary><span class="q">Q.</span><span class="t">송금은 얼마나 걸리나요?</span><iconify-icon class="arw" icon="mingcute:down-line"></iconify-icon></summary>
+          <div class="a">서류 승인 후 결제하면 <b>평균 5분</b> 안에 입금됩니다. 예약 송금을 걸어 두면 정한 날짜에 자동으로 나갑니다.</div></details>
+        <details data-cat="송금"><summary><span class="q">Q.</span><span class="t">받는 분 동의가 필요한가요?</span><iconify-icon class="arw" icon="mingcute:down-line"></iconify-icon></summary>
+          <div class="a">필요 없습니다. 받는 분에게는 <b>평범한 계좌 입금</b>으로 보입니다. 송금자명도 원하는 이름으로 바꿀 수 있어요.</div></details>
+      </div>
+      <div class="gh">취소 · 환불</div>
+      <div class="acc">
+        <details data-cat="취소"><summary><span class="q">Q.</span><span class="t">결제를 취소할 수 있나요?</span><iconify-icon class="arw" icon="mingcute:down-line"></iconify-icon></summary>
+          <div class="a"><b>송금 전</b>이면 전액 취소됩니다. 이미 송금이 끝났다면 받는 분에게 직접 돌려받으셔야 해요. 예약 송금은 송금일 전날까지 취소할 수 있습니다.</div></details>
+        <details data-cat="취소"><summary><span class="q">Q.</span><span class="t">서류가 반려되면 어떻게 되나요?</span><iconify-icon class="arw" icon="mingcute:down-line"></iconify-icon></summary>
+          <div class="a">결제 전이라 <b>돈이 나가지 않습니다.</b> 무엇이 부족한지 카카오톡으로 알려드려요. 서류만 다시 올려주시면 됩니다.</div></details>
+      </div>
+  </div>
+</div>
+
+</body>
+</html>

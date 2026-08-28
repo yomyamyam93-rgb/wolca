@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>랜선페이 — 고객센터</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="style.css?v=15">
+<link rel="icon" type="image/png" href="img/logo3.png">
+<script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+<script src="app.js?v=15"></script>
+<style>
+  .wrapn{max-width:640px; margin:0 auto;}
+  .grp{margin-top:28px; font-size:13px; font-weight:700; color:var(--placeholder); margin-bottom:6px;}
+  .menu{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:4px 16px;}
+  .call{margin-top:28px; padding:24px; border-radius:14px; background:var(--primary-50);
+    border:1px solid var(--primary-100); text-align:center;}
+  .call b{display:block; font-size:28px; font-weight:700; letter-spacing:-.5px; color:var(--primary-700);}
+  .call span{display:block; margin-top:6px; font-size:13px; color:var(--sub);}
+</style>
+</head>
+<body>
+
+<header class="appbar">
+  <div class="appbar-in">
+    <a class="logo" href="index.html"><img src="img/logo3.png" alt=""><img src="img/logo-text.png" alt="랜선페이"></a>
+    <nav class="gnb">
+      <a href="about.html">회사소개</a>
+      <a href="guide.html">이용가이드</a>
+      <a href="notice.html">공지사항</a>
+      <a href="faq.html">자주 묻는 질문</a>
+      <a href="cs.html" class="on">고객센터</a>
+    </nav>
+    <button class="burger" onclick="drawer(true)" aria-label="전체메뉴"><iconify-icon icon="mingcute:menu-fill"></iconify-icon></button>
+  </div>
+</header>
+
+<main class="main">
+  <section class="banner slim">
+    <div class="wrap">
+      <h1 class="h-hero">무엇을 도와드릴까요?</h1>
+      <p>막히는 곳이 있으면 편한 방법으로 물어보세요.</p>
+    </div>
+  </section>
+
+  <section class="sec tight" style="padding-top:40px">
+    <div class="wrap wrapn">
+
+      <div class="call">
+        <b>1577-6369</b>
+        <span>평일 09:00~18:00 (점심 12:00~13:00)</span>
+      </div>
+
+      <div class="grp">문의하기</div>
+      <div class="menu">
+        <a class="row" href="#">
+          <span class="tx"><b>채팅 상담</b><span>365일 24시간</span></span>
+          <iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon></a>
+        <a class="row" href="#">
+          <span class="tx"><b>카카오톡 1:1 상담</b><span>평일 09:00~18:00</span></span>
+          <iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon></a>
+        <a class="row" href="#">
+          <span class="tx"><b>메일 문의</b><span>help@lanseonpay.co.kr</span></span>
+          <iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon></a>
+      </div>
+
+      <div class="grp">궁금한 것 먼저 찾아보기</div>
+      <div class="menu">
+        <a class="row" href="faq.html">
+          <span class="tx"><b>자주 묻는 질문</b><span>수수료 · 세액공제 · 취소</span></span>
+          <iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon></a>
+        <a class="row" href="guide.html">
+          <span class="tx"><b>이용가이드</b><span>신청부터 송금까지 5단계</span></span>
+          <iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon></a>
+        <a class="row" href="notice.html#n8">
+          <span class="tx"><b>필요 서류</b><span>유형별로 무엇이 필요한지</span></span>
+          <iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon></a>
+      </div>
+
+      <div class="grp">약관 · 정책</div>
+      <div class="menu">
+        <a class="row" href="약관.html#terms">
+          <span class="tx"><b>서비스 이용약관</b></span>
+          <iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon></a>
+        <a class="row" href="약관.html#privacy">
+          <span class="tx"><b>개인정보 처리방침</b></span>
+          <iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon></a>
+        <a class="row" href="약관.html#thirdparty">
+          <span class="tx"><b>개인정보 3자 제공 고지</b></span>
+          <iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon></a>
+      </div>
+
+      <p class="t-cap" style="margin-top:24px; text-align:center">
+        (주)미라클컴퍼니 · 사업자등록번호 437-88-03148<br>
+        랜선페이는 전자금융거래법에 따라 등록된 전자지급결제대행(PG) 서비스입니다.
+      </p>
+
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <nav class="fpolicy">
+      <a href="약관.html#terms">서비스 이용약관</a>
+      <a href="약관.html#privacy">개인정보 처리방침</a>
+      <a href="약관.html#thirdparty">개인정보 3자 제공 고지</a>
+    </nav>
+    <div class="finfo">
+      <span><b>상호</b>랜선페이 · (주)미라클컴퍼니</span>
+      <span><b>대표</b>김남기</span>
+      <span><b>서버책임 · 개인정보관리자</b>민기범</span>
+      <span><b>사업자등록번호</b>437-88-03148</span>
+      <span><b>주소</b>충청남도 천안시 서북구 쌍용대로 234, 방영학생활건강빌딩 3층 (성정동)</span>
+      <span><b>대표번호</b>1577-6369 (평일 9:00~18:00)</span>
+      <span><b>메일</b>help@lanseonpay.co.kr</span>
+    </div>
+    <p class="fnote">랜선페이는 전자금융거래법에 따라 등록된 전자지급결제대행(PG) 서비스입니다.</p>
+    <p class="fcopy">Copyright © 2026 랜선페이. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- 전체메뉴 서랍 (모바일) -->
+<div class="dim" id="dim" onclick="drawer(false)"></div>
+<aside class="drawer" id="drawer">
+  <div class="drawer-top"><b>메뉴</b><button class="x" onclick="drawer(false)" aria-label="닫기">✕</button></div>
+  <div class="drawer-body">
+    <a class="row" href="index.html"><span class="tx"><b>홈</b></span><iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon></a>
+    <a class="row" href="guide.html"><span class="tx"><b>이용가이드</b></span><iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon></a>
+    <a class="row" href="notice.html"><span class="tx"><b>공지사항</b></span><iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon></a>
+    <a class="row" href="faq.html"><span class="tx"><b>자주 묻는 질문</b></span><iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon></a>
+    <a class="row" href="cs.html"><span class="tx"><b>고객센터</b></span><iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon></a>
+    <a class="row" href="pay.html"><span class="tx"><b>송금하기</b></span><iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon></a>
+  </div>
+</aside>
+
+<!-- 늘 따라다니는 시작 버튼 -->
+<a class="fab" href="app.html"><img class="btn-logo" src="img/logo3-white.png" alt="">무료로 시작하기</a>
+
+</body>
+</html>

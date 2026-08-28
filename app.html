@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>랜선페이 — 홈</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="style.css?v=15">
+<link rel="icon" type="image/png" href="img/logo3.png">
+<script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+<script src="app.js?v=15"></script>
+<style>
+  /* ===== 앱 틀 — 웹에서도 같은 앱 화면 (가운데 480px) ===== */
+  body{background:#EDF0F4;}
+  .apphull{--cardw:calc(min(480px, 100vw) - 32px); position:relative; max-width:480px; margin:0 auto;
+    min-height:100svh; background:#fff; box-shadow:0 0 44px rgba(15,23,42,.08); padding-bottom:110px;}
+
+  /* 상단바 : 로고 + 내 정보 */
+  .atop{position:sticky; top:0; z-index:40; display:flex; align-items:center; justify-content:space-between;
+    height:56px; padding:0 16px; background:rgba(255,255,255,.94); backdrop-filter:blur(8px);}
+  .atop .lg{display:flex; align-items:center; gap:7px;}
+  .atop .lg img:first-child{height:22px;} .atop .lg img:last-child{height:15px;}
+  .atop .me{width:38px; height:38px; border-radius:999px; background:var(--primary-50);
+    display:flex; align-items:center; justify-content:center; font-size:20px; color:var(--primary);}
+
+  /* 파란 배너 카드 */
+  .abanner{position:relative; margin:10px 16px 0; border-radius:8px; overflow:hidden;
+    background:var(--primary); background:var(--grad); color:#fff; padding:24px 22px;}
+  .abanner .s{font-size:13px; font-weight:700; color:rgba(255,255,255,.85);}
+  .abanner h1{margin-top:8px; font-size:26px; font-weight:800; line-height:1.3; letter-spacing:-.5px;}
+  .abanner h1 b{color:#BFDBFE;}
+  .abanner img{position:absolute; right:18px; bottom:16px; width:64px; height:auto;
+    filter:drop-shadow(0 6px 12px rgba(5,12,24,.3));}
+
+  /* 공지 한 줄 */
+  .anotice{display:flex; align-items:center; gap:8px; margin:14px 16px 0; padding:12px 14px;
+    background:#F4F6F9; border-radius:8px; color:inherit;}
+  .anotice .badge{flex:0 0 auto;}
+  .anotice span{flex:1; min-width:0; font-size:13px; font-weight:600;
+    overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  .anotice iconify-icon{flex:0 0 auto; color:var(--placeholder);}
+
+  /* 항목 격자 */
+  .asec{margin:28px 16px 0;}
+  .asec:has(.ggrid){margin-top:16px;}
+  .asec > b{display:block; font-size:18.5px; font-weight:800; letter-spacing:-.4px;}
+  .agrid{display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-top:12px;}
+  .ait{background:#fff; border-radius:8px; padding:16px 2px 13px; text-align:center; color:inherit;
+    box-shadow:0 2px 8px rgba(0,0,0,.06);}
+  .ait img{width:42px; height:42px; object-fit:contain;}
+  .ait b{display:block; margin-top:9px; font-size:12px; font-weight:700; letter-spacing:-.4px; white-space:nowrap;}
+
+  /* 항목 선택 상태 + 필요서류 패널 */
+  .ait.on{background:var(--primary);}
+  .ait.on b{color:#fff;}
+  .ait img.w{display:none;}
+  .ait.on img.w{display:inline;}
+  .ait.on img:not(.w){display:none;}
+  .apanel{margin-top:12px; background:#fff; border-radius:8px; padding:16px; box-shadow:0 2px 8px rgba(0,0,0,.06);}
+  .apanel > b{display:block; font-size:16.5px; font-weight:800; letter-spacing:-.3px;}
+  .apanel .dr{display:flex; gap:8px; margin-top:9px; font-size:13px; color:var(--ink); line-height:1.55;}
+  .apanel .dr i{font-style:normal; color:var(--primary); font-weight:800; flex:0 0 auto;}
+  .apanel .dr b{color:var(--primary-600); font-weight:700;}
+  .apgo{display:flex; align-items:center; justify-content:center; gap:7px; margin-top:14px;
+    height:48px; border-radius:8px; background:var(--primary); background:var(--grad);
+    color:#fff; font-size:14.5px; font-weight:700; box-shadow:var(--btn-shadow);}
+  .apgo img{height:15px;}
+
+  /* USP 롤링 띠 — 홈페이지처럼 한 장씩 자동으로 밀린다 */
+  .uspband{margin-top:0;}
+  /* 이벤트 카드 — PC 는 앱 왼쪽에 상시 · 휴대폰은 하루 한 번 팝업 */
+  .apop{position:fixed; z-index:55; top:50%; left:50%; transform:translate(-50%,-50%);
+    width:min(330px, 86vw); background:#fff; border-radius:8px; overflow:hidden;
+    box-shadow:0 14px 44px rgba(15,23,42,.28);}
+  .apop[hidden]{display:none;}
+  .apop-view{position:relative; overflow:hidden; touch-action:pan-y; cursor:grab;}
+  .apop-track{display:flex; width:600%; transition:transform .45s cubic-bezier(.3,.6,.25,1);}
+  .apop-track img{width:calc(100% / 6); flex:0 0 auto; display:block; aspect-ratio:4/5; object-fit:cover;}
+  .apop-arw{position:absolute; top:50%; transform:translateY(-50%); width:34px; height:34px;
+    border-radius:999px; border:none; background:rgba(255,255,255,.92); color:var(--ink);
+    font-size:16px; cursor:pointer; display:flex; align-items:center; justify-content:center;
+    box-shadow:0 2px 8px rgba(15,23,42,.18);}
+  .apop-arw.l{left:10px;} .apop-arw.r{right:10px;}
+  .apop-dots{position:absolute; left:0; right:0; bottom:9px; display:flex; justify-content:center; gap:5px;}
+  .apop-dots i{width:6px; height:6px; border-radius:999px; background:rgba(255,255,255,.55);}
+  .apop-dots i.on{width:14px; background:#fff;}
+  .apop-bar{display:flex; border-top:1px solid var(--line); background:#fff;}
+  .apop-bar button{flex:1; height:42px; background:none; border:none; font:inherit;
+    font-size:13px; font-weight:700; color:var(--sub); cursor:pointer;}
+  .apop-bar button + button{border-left:1px solid var(--line);}
+  .apop-dim{position:fixed; inset:0; z-index:54; background:rgba(15,23,42,.45);}
+  .apop-dim[hidden]{display:none;}
+  @media(min-width:1280px){
+    .apop{top:24px; left:auto; right:calc(50% + 254px); transform:none; width:340px;
+      box-shadow:0 10px 28px rgba(15,23,42,.14);}
+    .apop-bar{display:none;}
+    .apop-dim{display:none;}
+  }
+  .uspband .aup{flex:0 0 min(480px, 100vw); margin-right:0; border-radius:0; padding:24px 26px; min-height:0;}
+  .uspband .aup h3{margin-top:13px; font-size:22px; line-height:1.3;}
+  .uspband .aup p{margin-top:11px; font-size:14.5px; line-height:1.7; margin-right:118px;}
+  .uspband .aup img{right:26px; bottom:auto; top:50%; transform:translateY(-50%);
+    max-width:92px; max-height:106px;}
+  .aband{margin-top:0; overflow-x:clip; overflow-y:visible; touch-action:pan-y; cursor:grab;}
+  .atrack{display:flex; width:max-content; will-change:transform;}
+  .aup{flex:0 0 min(392px, calc(100vw - 48px)); margin-right:12px; background:var(--primary-50); border-radius:8px;
+    padding:24px 22px; position:relative; min-height:196px;}
+  .aup .no{display:inline-block; padding:5px 12px; border-radius:999px; background:var(--primary);
+    color:#fff; font-size:12px; font-weight:700;}
+  .aup h3{margin-top:11px; font-size:19px; font-weight:800; letter-spacing:-.4px;}
+  .aup p{margin-top:9px; font-size:13.5px; line-height:1.7; color:var(--sub);}
+  .aup img{position:absolute; right:20px; bottom:16px; max-width:58px; max-height:66px; width:auto; height:auto;}
+
+  /* 핵심 안내 — 2×3 버튼 격자 */
+  .ggrid{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:0;}
+  .gbtn{display:flex; flex-direction:column; align-items:flex-start; justify-content:space-between;
+    min-height:92px; background:#F4F6F9; border-radius:8px; padding:16px;
+    font-size:14.5px; font-weight:700; color:var(--ink); letter-spacing:-.3px; line-height:1.4;}
+  .gbtn i{font-style:normal; color:var(--icon-off); font-size:17px; align-self:flex-end;}
+  /* 아래 4개 — 아이콘 · 설명 · 화살표 한 줄 행 */
+  .gbtn.grow{grid-column:1 / 3; flex-direction:row; align-items:center; gap:12px;
+    min-height:0; padding:11px 14px; background:#fff; box-shadow:0 2px 8px rgba(0,0,0,.06);}
+  .grow .ic{flex:0 0 auto; width:34px; height:34px; border-radius:999px; background:var(--primary-50);
+    display:flex; align-items:center; justify-content:center; color:var(--primary);}
+  .grow .ic iconify-icon{font-size:17px;}
+  .grow .tx{flex:1; min-width:0;}
+  .grow i{align-self:center;}
+  /* 강조 카드 두 개 — 레퍼런스 비율 · 라벨 + 큰 글씨 + 설명 */
+  .gbtn.gpick{grid-column:1 / 3; align-items:stretch; justify-content:flex-start;
+    min-height:180px; padding:18px;
+    background:var(--primary-50); color:var(--ink);}
+  .gpick .gtop{display:flex; align-items:center; justify-content:space-between;
+    font-size:14px; font-weight:700; color:var(--primary-600);}
+  .gpick .gbig{margin-top:auto; font-size:26px; font-weight:800; letter-spacing:-.5px;}
+  .gpick .gdesc{margin-top:7px; font-size:13px; font-weight:500; line-height:1.5;
+    color:var(--sub); letter-spacing:-.2px;}
+  .garw{flex:0 0 auto; width:30px; height:30px; border-radius:999px;
+    background:var(--primary); background:var(--grad); display:flex; align-items:center; justify-content:center;}
+  .garw svg{width:13px; height:13px; stroke:#fff; fill:none;}
+
+  /* 이벤트 배너 카드 */
+  .evc{flex:0 0 min(480px, 100vw); margin-right:0; aspect-ratio:1000/600; height:auto; overflow:hidden;}
+  .evdots{display:flex; justify-content:center; gap:6px; margin-top:10px;}
+  .evdots i{width:6px; height:6px; border-radius:999px; background:var(--line); transition:.2s;}
+  .evdots i.on{width:16px; background:var(--primary);}
+  .evc img{width:100%; height:100%; object-fit:cover; display:block;}
+
+  /* 큰 시작 버튼 */
+  .ago{display:flex; align-items:center; justify-content:center; gap:8px; margin:26px 16px 30px;
+    height:54px; border-radius:8px; background:var(--primary); background:var(--grad);
+    color:#fff; font-size:16px; font-weight:700; box-shadow:var(--btn-shadow);}
+  .ago img{height:18px;}
+
+  /* 전체메뉴 — 프로필 + 아이콘 없는 목록 */
+  .mhead{display:flex; align-items:center; gap:10px; padding:18px 16px 16px; border-bottom:1px solid var(--line);}
+  .mp{flex:1; min-width:0;}
+  .mp b{display:block; font-size:17px; font-weight:800; letter-spacing:-.3px;}
+  .mp span{display:block; margin-top:2px; font-size:12px; color:var(--placeholder);}
+  .mout{flex:0 0 auto; border:1px solid var(--line); background:#fff; border-radius:8px;
+    padding:7px 12px; font:inherit; font-size:12.5px; font-weight:700; color:var(--sub); cursor:pointer;}
+  .mhead .x{flex:0 0 auto; border:none; background:none; padding:8px; font-size:16px; color:var(--sub); cursor:pointer;}
+  .mlist{padding:2px 16px 24px;}
+  .mrow{display:flex; align-items:center; justify-content:space-between; gap:10px;
+    padding:15px 4px; border-bottom:1px solid var(--line); font-size:15px; font-weight:600; color:var(--ink);}
+  .mrow i{font-style:normal; color:var(--icon-off); font-size:17px;}
+  .mgap{height:10px; margin:0 -16px; background:#F4F6F9;}
+  .msns{display:flex; gap:10px; margin-top:20px;}
+  .msns a{flex:1; height:46px; display:flex; align-items:center; justify-content:center; gap:7px;
+    background:#F4F6F9; border-radius:8px; font-size:13.5px; font-weight:700; color:var(--ink);}
+  .msns img{height:16px; width:auto;}
+
+  /* 하단 탭바 */
+  .atab{position:fixed; left:50%; transform:translateX(-50%); bottom:0; z-index:60;
+    width:100%; max-width:480px; display:flex; background:rgba(255,255,255,.96);
+    backdrop-filter:blur(8px); border-top:1px solid var(--line);
+    padding:12px 0 calc(24px + var(--safe));}
+  .atab a,.atab button{flex:1; display:flex; flex-direction:column; align-items:center; gap:6px;
+    font-size:11.5px; font-weight:700; color:var(--placeholder); background:none; border:none; cursor:pointer;}
+  .atab iconify-icon{font-size:24px;}
+  .atab .on{color:var(--primary);}
+</style>
+</head>
+<body>
+
+<div class="apop-dim" id="apopdim" hidden></div>
+<div class="apop" id="apop" hidden>
+  <div class="apop-view" id="apopview">
+    <div class="apop-track" id="apoptrack">
+      <img src="img/이벤트/p00.jpg" alt="앱 사용하고 모바일 상품권 100만원">
+      <img src="img/이벤트/p01.jpg" alt="이벤트 1">
+      <img src="img/이벤트/p02.jpg" alt="이벤트 2">
+      <img src="img/이벤트/p03.jpg" alt="이벤트 3">
+      <img src="img/이벤트/p04.jpg" alt="이벤트 4">
+      <img src="img/이벤트/p05.jpg" alt="이벤트 5">
+    </div>
+    <button type="button" class="apop-arw l" id="apop-prev" aria-label="이전">‹</button>
+    <button type="button" class="apop-arw r" id="apop-next" aria-label="다음">›</button>
+    <div class="apop-dots" id="apopdots"><i class="on"></i><i></i><i></i><i></i><i></i><i></i></div>
+  </div>
+  <div class="apop-bar">
+    <button type="button" id="apop-today">오늘 하루 보지 않기</button>
+    <button type="button" id="apop-close">닫기</button>
+  </div>
+</div>
+
+<div class="apphull">
+  <header class="atop">
+    <a class="lg" href="app.html"><img src="img/logo3.png" alt=""><img src="img/logo-text.png" alt="랜선페이"></a>
+    <a class="me" href="화면/마이페이지.html" aria-label="내 정보"><iconify-icon icon="mingcute:user-3-fill"></iconify-icon></a>
+  </header>
+  <div class="aband uspband">
+    <div class="atrack" id="usptrack">
+      <div class="aup" aria-hidden="true"><span class="no">01</span><h3>임대인 동의 불필요</h3><p>집주인 동의나 가입 없이<br>계좌로 현금이 바로 입금돼요</p><img src="img/usp3d/01.png" alt=""></div>
+      <div class="aup" aria-hidden="true"><span class="no">02</span><h3>최대 24개월 할부<br>7개월 무이자 할부</h3><p>큰 금액도 할부로 가볍게<br>부담을 나눠서 낼 수 있어요</p><img src="img/usp3d/02.png" alt=""></div>
+      <div class="aup" aria-hidden="true"><span class="no">03</span><h3>소득 · 세액공제 환급</h3><p>소득공제는 자동으로 챙기고<br>월세는 최대 17%를 돌려받아요</p><img src="img/usp3d/03.png" alt=""></div>
+      <div class="aup" aria-hidden="true"><span class="no">04</span><h3>카드사 포인트 적립</h3><p>정상 결제와 똑같이 처리돼<br>실적과 포인트가 그대로 쌓여요</p><img src="img/usp3d/04.png" alt=""></div>
+      <div class="aup" aria-hidden="true"><span class="no">05</span><h3>필요할 때 바로 즉시송금</h3><p>주말 · 공휴일에도 결제하면<br>평균 5분 안에 입금돼요</p><img src="img/usp3d/05.png" alt=""></div>
+      <div class="aup" aria-hidden="true"><span class="no">06</span><h3>지정한 날짜에 맞춰 예약송금</h3><p>날짜를 정해두면 매달 알아서 나가요<br>연체 걱정이 없어요</p><img src="img/usp3d/06.png" alt=""></div>
+      <div class="aup" aria-hidden="true"><span class="no">07</span><h3>여러 카드로 분할결제</h3><p>한 번의 결제를 여러 카드로 나눠<br>한도 걱정 없이 낼 수 있어요</p><img src="img/usp3d/07.png" alt=""></div>
+      <div class="aup"><span class="no">01</span><h3>임대인 동의 불필요</h3><p>집주인 동의나 가입 없이<br>계좌로 현금이 바로 입금돼요</p><img src="img/usp3d/01.png" alt=""></div>
+      <div class="aup"><span class="no">02</span><h3>최대 24개월 할부<br>7개월 무이자 할부</h3><p>큰 금액도 할부로 가볍게<br>부담을 나눠서 낼 수 있어요</p><img src="img/usp3d/02.png" alt=""></div>
+      <div class="aup"><span class="no">03</span><h3>소득 · 세액공제 환급</h3><p>소득공제는 자동으로 챙기고<br>월세는 최대 17%를 돌려받아요</p><img src="img/usp3d/03.png" alt=""></div>
+      <div class="aup"><span class="no">04</span><h3>카드사 포인트 적립</h3><p>정상 결제와 똑같이 처리돼<br>실적과 포인트가 그대로 쌓여요</p><img src="img/usp3d/04.png" alt=""></div>
+      <div class="aup"><span class="no">05</span><h3>필요할 때 바로 즉시송금</h3><p>주말 · 공휴일에도 결제하면<br>평균 5분 안에 입금돼요</p><img src="img/usp3d/05.png" alt=""></div>
+      <div class="aup"><span class="no">06</span><h3>지정한 날짜에 맞춰 예약송금</h3><p>날짜를 정해두면 매달 알아서 나가요<br>연체 걱정이 없어요</p><img src="img/usp3d/06.png" alt=""></div>
+      <div class="aup"><span class="no">07</span><h3>여러 카드로 분할결제</h3><p>한 번의 결제를 여러 카드로 나눠<br>한도 걱정 없이 낼 수 있어요</p><img src="img/usp3d/07.png" alt=""></div>
+      <div class="aup" aria-hidden="true"><span class="no">01</span><h3>임대인 동의 불필요</h3><p>집주인 동의나 가입 없이<br>계좌로 현금이 바로 입금돼요</p><img src="img/usp3d/01.png" alt=""></div>
+      <div class="aup" aria-hidden="true"><span class="no">02</span><h3>최대 24개월 할부<br>7개월 무이자 할부</h3><p>큰 금액도 할부로 가볍게<br>부담을 나눠서 낼 수 있어요</p><img src="img/usp3d/02.png" alt=""></div>
+      <div class="aup" aria-hidden="true"><span class="no">03</span><h3>소득 · 세액공제 환급</h3><p>소득공제는 자동으로 챙기고<br>월세는 최대 17%를 돌려받아요</p><img src="img/usp3d/03.png" alt=""></div>
+      <div class="aup" aria-hidden="true"><span class="no">04</span><h3>카드사 포인트 적립</h3><p>정상 결제와 똑같이 처리돼<br>실적과 포인트가 그대로 쌓여요</p><img src="img/usp3d/04.png" alt=""></div>
+      <div class="aup" aria-hidden="true"><span class="no">05</span><h3>필요할 때 바로 즉시송금</h3><p>주말 · 공휴일에도 결제하면<br>평균 5분 안에 입금돼요</p><img src="img/usp3d/05.png" alt=""></div>
+      <div class="aup" aria-hidden="true"><span class="no">06</span><h3>지정한 날짜에 맞춰 예약송금</h3><p>날짜를 정해두면 매달 알아서 나가요<br>연체 걱정이 없어요</p><img src="img/usp3d/06.png" alt=""></div>
+      <div class="aup" aria-hidden="true"><span class="no">07</span><h3>여러 카드로 분할결제</h3><p>한 번의 결제를 여러 카드로 나눠<br>한도 걱정 없이 낼 수 있어요</p><img src="img/usp3d/07.png" alt=""></div>
+    </div>
+  </div>
+  <div class="evdots" id="uspdots"><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+
+
+
+
+
+
+
+  <div class="asec">
+    <b>어떤 항목을 결제할까요?</b>
+    <div class="agrid">
+      <a class="ait" data-n="월세" href="#"><img src="img/item3d/01.png" alt=""><img src="img/item3d/w01.png" alt="" class="w"><b>월세</b></a>
+      <a class="ait" data-n="관리비" href="#"><img src="img/item3d/02.png" alt=""><img src="img/item3d/w02.png" alt="" class="w"><b>관리비</b></a>
+      <a class="ait" data-n="인건비" href="#"><img src="img/item3d/03.png" alt=""><img src="img/item3d/w03.png" alt="" class="w"><b>인건비</b></a>
+      <a class="ait" data-n="보증금" href="#"><img src="img/item3d/04.png" alt=""><img src="img/item3d/w04.png" alt="" class="w"><b>보증금</b></a>
+      <a class="ait" data-n="매입대금" href="#"><img src="img/item3d/05.png" alt=""><img src="img/item3d/w05.png" alt="" class="w"><b>매입대금</b></a>
+      <a class="ait" data-n="학원비" href="#"><img src="img/item3d/06.png" alt=""><img src="img/item3d/w06.png" alt="" class="w"><b>학원비</b></a>
+      <a class="ait" data-n="학교공과금" href="#"><img src="img/item3d/07.png" alt=""><img src="img/item3d/w07.png" alt="" class="w"><b>학교공과금</b></a>
+      <a class="ait" data-n="인테리어" href="#"><img src="img/item3d/08.png" alt=""><img src="img/item3d/w08.png" alt="" class="w"><b>인테리어</b></a>
+      <a class="ait" data-n="이사" href="#"><img src="img/item3d/09.png" alt=""><img src="img/item3d/w09.png" alt="" class="w"><b>이사</b></a>
+      <a class="ait" data-n="청소비" href="#"><img src="img/item3d/10.png" alt=""><img src="img/item3d/w10.png" alt="" class="w"><b>청소비</b></a>
+      <a class="ait" data-n="중개수수료" href="#"><img src="img/item3d/11.png" alt=""><img src="img/item3d/w11.png" alt="" class="w"><b>중개수수료</b></a>
+      <a class="ait" data-n="기타" href="#"><img src="img/item3d/12.png" alt=""><img src="img/item3d/w12.png" alt="" class="w"><b>기타</b></a>
+    </div>
+    <div class="apanel">
+      <b id="ap-t">월세 필요 서류</b>
+      <div id="ap-docs"></div>
+      <a class="apgo" id="ap-go" href="#"><img src="img/logo3-white.png" alt=""><span id="ap-go-t">월세 결제하기</span></a>
+    </div>
+  </div>
+
+
+
+
+  <div class="asec">
+    <div class="ggrid">
+      <a class="gbtn gpick" href="화면/안내.html">
+        <span class="gtop">처음이신가요?<span class="garw"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M3.2 10.8 10.8 3.2M4.6 3.2h6.2v6.2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span>
+        <span class="gbig">종합 이용 가이드</span>
+        <span class="gdesc">가입부터 송금까지 하나씩 따라 하면 어렵지 않아요</span>
+      </a>
+      <a class="gbtn gpick" href="화면/공지.html#n9">
+        <span class="gtop">더 편한 송금<span class="garw"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M3.2 10.8 10.8 3.2M4.6 3.2h6.2v6.2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span>
+        <span class="gbig">예약송금 · 분할송금</span>
+        <span class="gdesc">날짜를 정해두면 알아서 나가고 여러 카드로 나눠 낼 수 있어요</span>
+      </a>
+      <a class="gbtn grow" href="화면/공지.html#n7"><span class="ic"><iconify-icon icon="mingcute:gift-fill"></iconify-icon></span><span class="tx">무이자 행사 보기</span><i>›</i></a>
+      <a class="gbtn grow" href="화면/공지.html#n8"><span class="ic"><iconify-icon icon="mingcute:file-check-fill"></iconify-icon></span><span class="tx">유형별 필요서류</span><i>›</i></a>
+      <a class="gbtn grow" href="화면/공지.html#n5"><span class="ic"><iconify-icon icon="mingcute:coin-2-fill"></iconify-icon></span><span class="tx">연말정산 공제 안내</span><i>›</i></a>
+      <a class="gbtn grow" href="화면/공지.html#n6"><span class="ic"><iconify-icon icon="mingcute:counter-2-fill"></iconify-icon></span><span class="tx">부가세 · 계산서 안내</span><i>›</i></a>
+    </div>
+  </div>
+
+
+
+  <nav class="atab">
+    <a href="app.html" class="on"><iconify-icon icon="mingcute:home-4-fill"></iconify-icon>홈</a>
+    <a href="화면/10_1_유형선택.html"><iconify-icon icon="mingcute:bank-card-fill"></iconify-icon>결제하기</a>
+    <a href="화면/안내.html"><iconify-icon icon="mingcute:book-2-fill"></iconify-icon>이용안내</a>
+    <button type="button" onclick="drawer(true)"><iconify-icon icon="mingcute:menu-fill"></iconify-icon>전체메뉴</button>
+  </nav>
+</div>
+
+<!-- 전체메뉴 서랍 -->
+<div class="dim" id="dim" onclick="drawer(false)"></div>
+<aside class="drawer" id="drawer">
+  <div class="mhead">
+    <div class="mp"><b>김미역</b><span>일반회원 · 010-1234-5678</span></div>
+    <button class="mout" type="button">로그아웃</button>
+    <button class="x" onclick="drawer(false)" aria-label="닫기">✕</button>
+  </div>
+  <div class="drawer-body mlist">
+    <a class="mrow" href="화면/마이페이지.html">마이페이지<i>›</i></a>
+    <a class="mrow" href="화면/결제관리.html">결제 관리<i>›</i></a>
+    <a class="mrow" href="화면/내역.html">결제 · 송금내역 조회<i>›</i></a>
+    <div class="mgap"></div>
+    <a class="mrow" href="화면/공지.html">공지사항<i>›</i></a>
+    <a class="mrow" href="화면/질문.html">자주 묻는 질문<i>›</i></a>
+    <a class="mrow" href="화면/안내.html">이용안내<i>›</i></a>
+    <a class="mrow" href="화면/고객센터.html">고객센터 문의하기<i>›</i></a>
+    <div class="mgap"></div>
+    <a class="mrow" href="화면/회사소개.html">회사소개<i>›</i></a>
+    <a class="mrow" href="화면/약관.html#terms">서비스 이용약관<i>›</i></a>
+    <a class="mrow" href="화면/약관.html#privacy">개인정보 처리방침<i>›</i></a>
+    <a class="mrow" href="화면/약관.html#thirdparty">개인정보 3자 제공 고지<i>›</i></a>
+    <div class="msns">
+      <a href="https://www.instagram.com" target="_blank" rel="noopener"><img src="img/sns-insta.png" alt="">인스타그램</a>
+      <a href="https://www.youtube.com" target="_blank" rel="noopener"><img src="img/sns-youtube.png" alt="">유튜브</a>
+    </div>
+  </div>
+</aside>
+
+<script>
+/* 롤링 띠 공용 — 자동(4.5초) + 드래그로 넘기기 */
+(function () {
+  ['usptrack'].forEach(function (아이디) {
+    var tk = document.getElementById(아이디);
+    if (!tk) return;
+    var band = tk.parentElement;
+    var 한벌 = tk.children.length / 3;
+    var i = 한벌, 멈춤 = false;
+    function 폭() {
+      var c = tk.children[0];
+      return c.getBoundingClientRect().width + parseFloat(getComputedStyle(c).marginRight);
+    }
+    var 점들 = document.getElementById(아이디 === 'usptrack' ? 'uspdots' : '없음');
+    function 놓기() {
+      var w = tk.children[0].getBoundingClientRect().width;
+      tk.style.transform = 'translateX(' + ((band.clientWidth / 2) - (w / 2) - i * 폭()) + 'px)';
+      if (점들) {
+        var k = ((i % 한벌) + 한벌) % 한벌;
+        [].forEach.call(점들.children, function (el, ix) { el.classList.toggle('on', ix === k); });
+      }
+    }
+    function 경계(늦게) {
+      if (i >= 한벌 * 2 || i < 한벌) {
+        setTimeout(function () { tk.style.transition = 'none'; i += (i < 한벌 ? 한벌 : -한벌); 놓기(); }, 늦게);
+      }
+    }
+    function 다음() {
+      if (멈춤 || document.hidden) return;
+      i++;
+      tk.style.transition = 'transform 2.6s cubic-bezier(.3,.6,.25,1)';
+      놓기(); 경계(2700);
+    }
+    var 끌기 = false, 시작X = 0, 시작TX = 0;
+    function 지금TX() { var m = /-?[\d.]+/.exec(tk.style.transform); return m ? parseFloat(m[0]) : 0; }
+    band.addEventListener('pointerdown', function (e) {
+      끌기 = true; 멈춤 = true; 시작X = e.clientX; 시작TX = 지금TX();
+      tk.style.transition = 'none';
+    });
+    window.addEventListener('pointermove', function (e) {
+      if (!끌기) return;
+      tk.style.transform = 'translateX(' + (시작TX + (e.clientX - 시작X)) + 'px)';
+    });
+    window.addEventListener('pointerup', function (e) {
+      if (!끌기) return;
+      끌기 = false;
+      var 델타 = e.clientX - 시작X;
+      if (델타 < -40) i++; else if (델타 > 40) i--;
+      tk.style.transition = 'transform .45s cubic-bezier(.3,.6,.25,1)';
+      놓기(); 경계(470);
+      setTimeout(function () { 멈춤 = false; }, 800);
+    });
+    tk.style.transition = 'none';
+    놓기();
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    setInterval(다음, 4500);
+    window.addEventListener('resize', function () { tk.style.transition = 'none'; 놓기(); });
+  });
+})();
+</script>
+<script>
+/* 항목 선택 → 필요 서류 안내 + 「N 결제하기」 → STEP 2 로 */
+(function () {
+  var 서류 = {
+    '월세': ['<b>정식 임대차계약서</b>면 바로 돼요','확정일자 없으면 <b>입금내역 2~3회</b>','분실 시 <b>건축물대장등본</b>이면 돼요'],
+    '관리비': ['관리비는 <b>최근 고지서</b> 한 장','공과금은 <b>기관 고지서 · 납부서</b>','분실 시 <b>관리사무소 확인 내역</b>'],
+    '인건비': ['급여는 <b>근로계약서 + 명세서</b>','알바는 <b>근무 확인 내역</b>이면 돼요','용역비는 <b>용역계약서 + 지급 내역</b>'],
+    '보증금': ['보증금은 <b>계약서 촬영본</b> 한 장','상가는 <b>상가 임대차계약서</b>','가계약금은 <b>확인 문자 + 계좌</b>'],
+    '매입대금': ['<b>전자세금계산서</b> 한 장이면 돼요','발행 전엔 <b>거래명세서 + 발주서</b>','정기 납품은 <b>계약서 + 거래 내역</b>'],
+    '학원비': ['<b>수강증 · 등록 안내문</b>이면 돼요','과외는 <b>계약서나 안내 문자</b>','인강은 <b>수강 신청 내역</b>이면 돼요'],
+    '학교공과금': ['등록금은 <b>등록금 고지서</b> 한 장','기숙사비는 <b>납부 안내문</b>','그 외는 <b>학교 발행 고지서</b>'],
+    '인테리어': ['시공은 <b>공사 계약서 + 견적서</b>','설치는 <b>견적서나 결제 안내</b>','자재는 <b>구매 내역 + 판매자 계좌</b>'],
+    '이사': ['포장이사는 <b>업체 견적서</b> 한 장','용달은 <b>예약 내역 · 안내 문자</b>','보관 이사는 <b>보관 계약서</b>'],
+    '청소비': ['입주 청소는 <b>견적서 · 예약 내역</b>','정기 청소는 <b>용역 계약서</b>','특수 청소는 <b>견적서 + 계좌 정보</b>'],
+    '중개수수료': ['매매 · 전세는 <b>부동산 계약서</b>','월세 복비는 <b>임대차계약서</b>','<b>중개보수 영수증</b> 있으면 더 빨라요'],
+    '기타': ['개인 거래는 <b>계약서 · 거래 내역</b>','경조사비 등은 <b>청구서 · 안내문</b>','증빙 + <b>받는 분 계좌</b>면 검토돼요']
+  };
+  var 들 = document.querySelectorAll('.ait');
+  var 제목 = document.getElementById('ap-t'), 목록 = document.getElementById('ap-docs');
+  var 가기 = document.getElementById('ap-go'), 가기글 = document.getElementById('ap-go-t');
+  var 현재 = '월세';
+  function 선택(b) {
+    현재 = b.dataset.n;
+    들.forEach(function (x) { x.classList.toggle('on', x === b); });
+    제목.textContent = 현재 + ' 필요 서류';
+    목록.innerHTML = (서류[현재] || []).map(function (t) { return '<div class="dr"><i>✓</i><span>' + t + '</span></div>'; }).join('');
+    가기글.textContent = 현재 + ' 결제하기';
+  }
+  들.forEach(function (b) {
+    b.addEventListener('click', function (e) { e.preventDefault(); 선택(b); });
+  });
+  가기.addEventListener('click', function (e) {
+    e.preventDefault();
+    try { var r = JSON.parse(sessionStorage.getItem('lp_reg') || '{}'); r.유형 = 현재; sessionStorage.setItem('lp_reg', JSON.stringify(r)); } catch (err) {}
+    location.href = '화면/등록2_정보.html';
+  });
+  선택(들[0]);
+})();
+if (location.hash === '#menu') { drawer(true); history.replaceState(null, '', location.pathname); }
+</script>
+<script>
+/* 이벤트 카드 — PC 는 상시 · 휴대폰은 하루 한 번 (evpop=1 붙이면 강제로 보임) */
+(function () {
+  var 팝 = document.getElementById('apop'), 딤 = document.getElementById('apopdim');
+  if (!팝) return;
+  var PC = matchMedia('(min-width:1280px)').matches;
+  var 강제 = location.search.indexOf('evpop=1') > -1;
+  if (!PC) {
+    try { if (!강제 && localStorage.getItem('lp_apop') === new Date().toDateString()) return; } catch (e) {}
+    딤.hidden = false;
+  }
+  팝.hidden = false;
+  var i = 0, n = 6, tk = document.getElementById('apoptrack');
+  var 점들 = document.getElementById('apopdots').children;
+  function 놓기() {
+    tk.style.transform = 'translateX(-' + (i * 100 / n) + '%)';
+    [].forEach.call(점들, function (el, ix) { el.classList.toggle('on', ix === i); });
+  }
+  function 이동(d) { i = (i + d + n) % n; 놓기(); }
+  document.getElementById('apop-prev').addEventListener('click', function () { 이동(-1); });
+  document.getElementById('apop-next').addEventListener('click', function () { 이동(1); });
+  var 손 = null;
+  var 뷰 = document.getElementById('apopview');
+  뷰.addEventListener('pointerdown', function (e) { if (e.target.closest('.apop-arw')) return; 손 = e.clientX; });
+  window.addEventListener('pointerup', function (e) {
+    if (손 === null) return;
+    var d = e.clientX - 손; 손 = null;
+    if (d < -40) 이동(1); else if (d > 40) 이동(-1);
+  });
+  setInterval(function () { if (!팝.hidden) 이동(1); }, 4500);
+  function 닫기() { 팝.hidden = true; 딤.hidden = true; }
+  document.getElementById('apop-close').addEventListener('click', 닫기);
+  document.getElementById('apop-today').addEventListener('click', function () {
+    try { localStorage.setItem('lp_apop', new Date().toDateString()); } catch (e) {}
+    닫기();
+  });
+  딤.addEventListener('click', 닫기);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>결제 등록 · 결제와 확인</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+<style>
+  :root{--primary:#2563EB; --primary-dark:#1D4ED8; --primary-50:#EFF4FF; --line:#ECEEF1;
+    --sub:#4E5968; --ink:#191F28; --placeholder:#8B95A1; --danger:#DC2626;
+    --grad:linear-gradient(180deg, color-mix(in srgb, var(--primary) 82%, #ffffff), var(--primary));}
+  *{box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent;}
+  html,body{scrollbar-width:none;} body::-webkit-scrollbar{display:none;}
+  body{font-family:'Pretendard',sans-serif; color:var(--ink); background:#EDF0F4;
+    word-break:keep-all; line-height:1.5; -webkit-font-smoothing:antialiased;}
+  .phone{width:100%; max-width:480px; min-height:100svh; margin:0 auto; background:#fff;
+    box-shadow:0 0 44px rgba(15,23,42,.10); display:flex; flex-direction:column;}
+  .topbar{height:52px; position:sticky; top:0; z-index:50; background:#fff; display:flex; align-items:center; padding:0 10px;}
+  .back{width:40px; height:40px; display:flex; align-items:center; justify-content:center; font-size:24px; cursor:pointer;}
+  .topbar .ttl{flex:1; text-align:center; font-size:16px; font-weight:700; margin-right:40px;}
+  .prog4{display:flex; gap:6px; margin:2px 20px 8px;}
+  .prog4 i{flex:1; height:4px; border-radius:2px; background:var(--line);}
+  .prog4 i.on{background:var(--primary);}
+  .stepcap{margin:0 20px; font-size:12.5px; font-weight:700; color:var(--placeholder);}
+  .body{flex:1; padding:10px 20px 30px;}
+  .q{font-size:21px; font-weight:800; letter-spacing:-.3px; margin:6px 0 18px;}
+  .fld{margin-bottom:18px;}
+  .fld > label{display:block; font-size:13.5px; font-weight:700; margin-bottom:8px;}
+  .cardrow{display:flex; align-items:center; gap:12px; border:1px solid var(--line); border-radius:8px;
+    padding:14px 14px; margin-bottom:8px; cursor:pointer;}
+  .cardrow.on{border-color:var(--primary); background:var(--primary-50);}
+  .cardrow .chip{width:44px; height:30px; border-radius:7px; flex:0 0 auto;}
+  .chip.a{background:linear-gradient(135deg,#22375f,#0e1a30);}
+  .chip.b{background:linear-gradient(135deg,#1596a6,#0a3f70);}
+  .chip.plus{background:#F1F3F6; display:flex; align-items:center; justify-content:center; color:var(--placeholder); font-size:18px;}
+  .cardrow .t{flex:1; min-width:0; font-size:15px; font-weight:700;}
+  .cardrow .t small{display:block; font-size:12px; font-weight:500; color:var(--placeholder);}
+  .cardrow iconify-icon{color:var(--primary); font-size:20px; opacity:0;}
+  .cardrow.on iconify-icon{opacity:1;}
+  select.in{width:100%; height:50px; border:1px solid var(--line); border-radius:8px;
+    padding:0 14px; font:inherit; font-size:15.5px; background:#fff; outline:none;}
+  .seg2{display:flex; gap:8px;}
+  .seg2 button{flex:1; height:48px; border-radius:8px; border:1px solid var(--line); background:#fff;
+    font:inherit; font-size:14.5px; font-weight:700; color:var(--sub); cursor:pointer;}
+  .seg2 button.on{border-color:var(--primary); background:var(--primary-50); color:var(--primary-dark);}
+  .datebtn{text-align:left; color:var(--placeholder); cursor:pointer;}
+  .datebtn.set{color:var(--ink); font-weight:700;}
+  .ddim{position:fixed; inset:0; z-index:110; background:rgba(15,23,42,.45); display:none;}
+  .ddim.on{display:block;}
+  .dsheet{position:fixed; left:50%; bottom:0; transform:translateX(-50%) translateY(102%); z-index:120;
+    width:100%; max-width:480px; background:#fff; border-radius:24px 24px 0 0;
+    padding:14px 20px 30px; transition:transform .3s ease;}
+  .dsheet.on{transform:translateX(-50%) translateY(0);}
+  .dsheet .handle{width:44px; height:4px; border-radius:3px; background:#DDE2E8; margin:0 auto 14px;}
+  .dhead{display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;}
+  .dhead b{font-size:16px;}
+  .dhead button{width:36px; height:36px; border:none; background:#F7F8FA; border-radius:8px;
+    font-size:16px; color:var(--ink); cursor:pointer;}
+  .dhead button:disabled{color:#C6CDD6; cursor:default;}
+  .dgrid{display:grid; grid-template-columns:repeat(7,1fr); gap:2px; text-align:center;}
+  .dgrid .wd{font-size:12px; color:var(--placeholder); padding:6px 0;}
+  .dgrid button{height:40px; border:none; background:none; border-radius:999px; font:inherit;
+    font-size:14.5px; color:var(--ink); cursor:pointer;}
+  .dgrid button:disabled{color:#C6CDD6; cursor:default;}
+  .dgrid button.pick{background:var(--primary); background:var(--grad); color:#fff; font-weight:700;}
+  .mmcap{margin:16px 2px 8px; font-size:13.5px; font-weight:700; color:var(--sub);}
+  .drep{display:flex; gap:8px; margin-top:16px;}
+  .drep button{flex:1; height:44px; border-radius:8px; border:1px solid var(--line); background:#fff;
+    font:inherit; font-size:14px; font-weight:700; color:var(--sub); cursor:pointer;}
+  .drep button.on{border-color:var(--primary); background:var(--primary-50); color:var(--primary-dark);}
+  .dok{width:100%; height:50px; margin-top:10px; border:none; border-radius:8px; font:inherit;
+    font-size:15.5px; font-weight:700; color:#fff; cursor:pointer;
+    background:var(--primary); background:var(--grad);}
+  .dok:disabled{opacity:.45; cursor:default;}
+  .appgrid{display:grid; grid-template-columns:repeat(3,1fr); gap:8px;}
+  .appc{display:flex; flex-direction:column; align-items:center; gap:7px; padding:14px 4px 12px;
+    border:1px solid var(--line); border-radius:8px; background:#fff; font:inherit;
+    font-size:12.5px; font-weight:700; color:var(--ink); cursor:pointer;}
+  .appc.on{border-color:var(--primary); background:var(--primary-50);}
+  .appc img{height:26px; max-width:64px; object-fit:contain;}
+  .c4{display:flex; gap:8px;}
+  .c4 .in{min-width:0; padding:0; text-align:center;}
+  .two{display:flex; gap:10px;}
+  .two > div{flex:1;}
+  .two label{display:block; font-size:13.5px; font-weight:700; margin-bottom:7px;}
+  #새카드폼{margin-top:14px; border-top:1px dashed var(--line); padding-top:14px;}
+  #새카드폼 .sub{display:block; font-size:13.5px; font-weight:700; margin-bottom:7px;}
+  .in{width:100%; height:50px; border:1px solid var(--line); border-radius:8px; padding:0 14px;
+    font:inherit; font-size:15.5px; outline:none;}
+  .hint{margin-top:6px; font-size:12px; color:var(--placeholder);}
+  .hint.err{color:var(--danger); font-weight:700;}
+  .sum{margin-top:20px; border:1px solid var(--line); border-radius:8px; padding:15px 16px;}
+  .sum b{display:block; font-size:13.5px; margin-bottom:9px;}
+  .sr{display:flex; justify-content:space-between; font-size:13.5px; margin-bottom:6px;}
+  .sr span{color:var(--placeholder);}
+  .sr em{font-style:normal; font-weight:700; text-align:right;}
+  .hint{margin-top:10px; font-size:12px; color:var(--placeholder);}
+  .navs{display:flex; gap:10px; margin-top:22px;}
+  .navs button{flex:1; height:52px; border-radius:8px; font:inherit; font-size:15.5px; font-weight:700; cursor:pointer;}
+  .prev{border:1px solid var(--line); background:#fff; color:var(--ink);}
+  .next{border:none; color:#fff; background:var(--primary); background:var(--grad);
+    box-shadow:0 4px 12px color-mix(in srgb, var(--primary) 32%, transparent);}
+</style>
+</head>
+<body>
+<div class="phone">
+  <div class="topbar"><div class="back" onclick="location.href='등록2_정보.html'">‹</div><div class="ttl">결제 등록</div></div>
+  <div class="prog4"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div>
+  <div class="stepcap">STEP 3 / 4</div>
+
+  <div class="body">
+    <div class="q">어떻게 결제할까요?</div>
+
+    <div class="fld"><label>결제 수단</label>
+      <div class="seg2">
+        <button type="button" id="수단신용" class="on">신용카드</button>
+        <button type="button" id="수단앱">앱카드</button>
+      </div>
+    </div>
+
+    <div id="탭신용">
+    <div class="fld"><label>카드 선택</label>
+      <div class="cardrow on" data-v="신한카드 1479"><span class="chip b"></span><span class="t">신한카드 <small>**** 1479 · 개인</small></span><iconify-icon icon="mingcute:check-circle-fill"></iconify-icon></div>
+      <div class="cardrow" data-v="삼성카드 0552"><span class="chip a"></span><span class="t">삼성카드 <small>**** 0552 · 개인</small></span><iconify-icon icon="mingcute:check-circle-fill"></iconify-icon></div>
+      <div class="cardrow" data-v="새 카드"><span class="chip plus">＋</span><span class="t">새 카드 등록</span><iconify-icon icon="mingcute:check-circle-fill"></iconify-icon></div>
+      <div id="새카드폼" style="display:none">
+        <span class="sub">카드 번호</span>
+        <div class="c4">
+          <input class="in" id="cno1" inputmode="numeric" maxlength="4" placeholder="0000">
+          <input class="in" id="cno2" inputmode="numeric" maxlength="4" placeholder="0000">
+          <input class="in" id="cno3" inputmode="numeric" maxlength="4" placeholder="0000">
+          <input class="in" id="cno4" inputmode="numeric" maxlength="4" placeholder="0000">
+        </div>
+        <div class="two" style="margin-top:14px">
+          <div><label>유효기간</label><input class="in" id="cexp" placeholder="MM / YY" maxlength="7"></div>
+          <div><label>CVC</label><input class="in" id="ccvc" inputmode="numeric" type="password" maxlength="3" placeholder="뒷면 3자리"></div>
+        </div>
+        <div style="margin-top:14px">
+          <span class="sub">카드 비밀번호 앞 2자리</span>
+          <input class="in" id="cpw" inputmode="numeric" type="password" maxlength="2" placeholder="●●" style="max-width:120px; letter-spacing:4px">
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <div id="탭앱" style="display:none">
+      <div class="fld"><label>카드사 선택</label>
+        <div class="appgrid">
+          <button type="button" class="appc on" data-v="신한 앱카드"><img src="../img/카드사/icon/shinhan.svg" alt=""><span>신한카드</span></button>
+          <button type="button" class="appc" data-v="삼성 앱카드"><img src="../img/카드사/samsung.svg" alt=""><span>삼성카드</span></button>
+          <button type="button" class="appc" data-v="현대 앱카드"><img src="../img/카드사/hyundai.svg" alt=""><span>현대카드</span></button>
+          <button type="button" class="appc" data-v="KB국민 앱카드"><img src="../img/카드사/icon/kb.svg" alt=""><span>국민카드</span></button>
+          <button type="button" class="appc" data-v="롯데 앱카드"><img src="../img/카드사/icon/lotte.svg" alt=""><span>롯데카드</span></button>
+          <button type="button" class="appc" data-v="하나 앱카드"><img src="../img/카드사/icon/hana.svg" alt=""><span>하나카드</span></button>
+          <button type="button" class="appc" data-v="BC 앱카드"><img src="../img/카드사/icon/bc.svg" alt=""><span>BC카드</span></button>
+          <button type="button" class="appc" data-v="NH농협 앱카드"><img src="../img/카드사/icon/nh.svg" alt=""><span>농협카드</span></button>
+          <button type="button" class="appc" data-v="우리 앱카드"><img src="../img/카드사/icon/woori.svg" alt=""><span>우리카드</span></button>
+        </div>
+        <div class="hint">결제 단계에서 고른 카드사 앱으로 승인해요.</div>
+      </div>
+    </div>
+
+    <div class="fld"><label>할부</label>
+      <select class="in" id="할부">
+        <option>일시불</option><option>2개월</option><option>3개월 (무이자)</option><option>4개월 (무이자)</option>
+        <option>5개월 (무이자)</option><option>6개월 (무이자)</option><option>7개월 (무이자)</option>
+        <option>10개월</option><option>12개월</option><option>18개월</option><option>24개월</option>
+      </select>
+    </div>
+
+    <div class="fld"><label>송금 시점</label>
+      <div class="seg2">
+        <button type="button" id="즉시" class="on">즉시 송금</button>
+        <button type="button" id="예약">예약 송금</button>
+      </div>
+      <input type="hidden" id="예약일">
+      <button class="in datebtn" type="button" id="예약일버튼" style="margin-top:8px; display:none">날짜 선택</button>
+      <div class="hint" id="시점힌트">검토가 끝나면 바로 송금됩니다.</div>
+    </div>
+
+    <div class="hint err" id="오류" style="display:none"></div>
+
+    <div class="navs">
+      <button class="prev" type="button" onclick="location.href='등록2_정보.html'">이전</button>
+      <button class="next" type="button" id="다음">다음</button>
+    </div>
+  </div>
+</div>
+
+<div class="ddim" id="ddim"></div>
+<div class="dsheet" id="dsheet">
+  <div class="handle"></div>
+  <div class="drep" style="margin-top:2px">
+    <button type="button" id="rep한번" class="on">이번 달만</button>
+    <button type="button" id="rep매달">매달</button>
+  </div>
+  <div id="한번모드">
+    <div class="dhead" style="margin-top:14px">
+      <button type="button" id="d이전">‹</button>
+      <b id="d제목">2026년 8월</b>
+      <button type="button" id="d다음">›</button>
+    </div>
+    <div class="dgrid" id="dgrid"></div>
+  </div>
+  <div id="매달모드" style="display:none">
+    <div class="mmcap">매달 며칠에 보낼까요?</div>
+    <div class="dgrid" id="mgrid"></div>
+  </div>
+  <button type="button" class="dok" id="d확인" disabled>확인</button>
+</div>
+
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var 저장 = {};
+  try { 저장 = JSON.parse(sessionStorage.getItem('lp_reg') || '{}'); } catch (e) {}
+
+  function 수단(앱임) {
+    $('수단신용').classList.toggle('on', !앱임);
+    $('수단앱').classList.toggle('on', 앱임);
+    document.getElementById('탭신용').style.display = 앱임 ? 'none' : '';
+    document.getElementById('탭앱').style.display = 앱임 ? '' : 'none';
+  }
+  $('수단신용').addEventListener('click', function () { 수단(false); });
+  $('수단앱').addEventListener('click', function () { 수단(true); });
+  document.querySelectorAll('.appc').forEach(function (r) {
+    r.addEventListener('click', function () {
+      document.querySelectorAll('.appc').forEach(function (x) { x.classList.toggle('on', x === r); });
+    });
+  });
+  if (저장.수단 === '앱카드') {
+    수단(true);
+    document.querySelectorAll('.appc').forEach(function (x) { x.classList.toggle('on', x.dataset.v === 저장.카드); });
+  }
+
+  document.querySelectorAll('.cardrow').forEach(function (r) {
+    r.addEventListener('click', function () {
+      document.querySelectorAll('.cardrow').forEach(function (x) { x.classList.toggle('on', x === r); });
+      $('새카드폼').style.display = r.dataset.v === '새 카드' ? '' : 'none';
+    });
+  });
+  if (저장.할부) $('할부').value = 저장.할부;
+
+  function 시점(예약임) {
+    $('즉시').classList.toggle('on', !예약임);
+    $('예약').classList.toggle('on', 예약임);
+    $('예약일버튼').style.display = 예약임 ? 'block' : 'none';
+    $('시점힌트').textContent = 예약임 ? '정한 날짜에 맞춰 자동으로 송금됩니다. 전날까지 취소할 수 있어요.' : '검토가 끝나면 바로 송금됩니다.';
+  }
+  $('즉시').addEventListener('click', function () { 시점(false); });
+  $('예약').addEventListener('click', function () { 시점(true); });
+  if (저장.시점 === '예약') { 시점(true); if (저장.예약일) 날짜적용(저장.예약일, 저장.반복 === '매달'); }
+
+  /* 하단 달력 시트 */
+  var 보임 = new Date(); 보임.setDate(1);
+  var 오늘 = new Date(); 오늘.setHours(0,0,0,0);
+  function 두자리(n){ return (n < 10 ? '0' : '') + n; }
+  var 고른날 = '', 매달임 = false;
+  function 날짜적용(v, 매달) {
+    $('예약일').value = v;
+    매달임 = !!매달;
+    var 표기 = v.replace(/-/g, '.');
+    $('예약일버튼').textContent = 매달 ? '매달 ' + Number(v.slice(8)) + '일 · ' + 표기 + ' 첫 송금' : 표기;
+    $('예약일버튼').classList.add('set');
+  }
+  function 달그리기() {
+    $('d제목').textContent = 보임.getFullYear() + '년 ' + (보임.getMonth() + 1) + '월';
+    var 이번달 = new Date(오늘.getFullYear(), 오늘.getMonth(), 1);
+    $('d이전').disabled = 보임 <= 이번달;
+    var g = $('dgrid'); g.innerHTML = '';
+    ['일','월','화','수','목','금','토'].forEach(function (w) {
+      var el = document.createElement('span'); el.className = 'wd'; el.textContent = w; g.appendChild(el);
+    });
+    for (var i = 0; i < 보임.getDay(); i++) g.appendChild(document.createElement('span'));
+    var 끝 = new Date(보임.getFullYear(), 보임.getMonth() + 1, 0).getDate();
+    for (var d = 1; d <= 끝; d++) {
+      (function (d) {
+        var 날 = new Date(보임.getFullYear(), 보임.getMonth(), d);
+        var v = 날.getFullYear() + '-' + 두자리(날.getMonth() + 1) + '-' + 두자리(d);
+        var bt = document.createElement('button'); bt.type = 'button'; bt.textContent = d;
+        if (날 <= 오늘) bt.disabled = true;
+        if (고른날 === v) bt.classList.add('pick');
+        bt.addEventListener('click', function () {
+          고른날 = v; 달그리기();
+        });
+        g.appendChild(bt);
+      })(d);
+    }
+  }
+  function 시트열기(열림) {
+    if (열림) {
+      고른날 = $('예약일').value || '';
+      if (매달임 && 고른날) 고른일 = Number(고른날.slice(8));
+      모드보기(매달임);
+    }
+    document.getElementById('ddim').classList.toggle('on', 열림);
+    document.getElementById('dsheet').classList.toggle('on', 열림);
+    if (열림) 달그리기();
+    $('d확인').disabled = !고른날;
+  }
+  var 고른일 = 0;
+  function 확인상태() {
+    var 매달모드 = $('rep매달').classList.contains('on');
+    $('d확인').disabled = 매달모드 ? !고른일 : !고른날;
+  }
+  var 원래달그리기 = 달그리기;
+  달그리기 = function () { 원래달그리기(); 확인상태(); };
+  function 매달그리기() {
+    var g = $('mgrid'); g.innerHTML = '';
+    for (var d = 1; d <= 32; d++) {
+      (function (d) {
+        var bt = document.createElement('button'); bt.type = 'button';
+        bt.textContent = d === 32 ? '말일' : d;
+        if (d === 32) bt.style.fontSize = '12.5px';
+        if (고른일 === d) bt.classList.add('pick');
+        bt.addEventListener('click', function () { 고른일 = d; 매달그리기(); });
+        g.appendChild(bt);
+      })(d);
+    }
+    확인상태();
+  }
+  function 모드보기(매달모드) {
+    $('rep매달').classList.toggle('on', 매달모드);
+    $('rep한번').classList.toggle('on', !매달모드);
+    document.getElementById('한번모드').style.display = 매달모드 ? 'none' : '';
+    document.getElementById('매달모드').style.display = 매달모드 ? '' : 'none';
+    if (매달모드) 매달그리기(); else 달그리기();
+  }
+  $('rep한번').addEventListener('click', function () { 모드보기(false); });
+  $('rep매달').addEventListener('click', function () { 모드보기(true); });
+  $('d확인').addEventListener('click', function () {
+    var 매달모드 = $('rep매달').classList.contains('on');
+    if (매달모드) {
+      if (!고른일) return;
+      var 오늘일 = 28;                      /* 2026-08-28 기준 */
+      var 말일임 = 고른일 === 32;
+      var y = 2026, m = (말일임 || 고른일 > 오늘일) ? 8 : 9;
+      var 끝 = new Date(y, m, 0).getDate();
+      var d = 말일임 ? 끝 : Math.min(고른일, 끝);
+      var v = y + '-' + (m < 10 ? '0' : '') + m + '-' + (d < 10 ? '0' : '') + d;
+      날짜적용(v, true);
+      if (말일임) {
+        $('예약일버튼').textContent = '매달 말일 · ' + v.replace(/-/g, '.') + ' 첫 송금';
+      }
+    } else {
+      if (!고른날) return;
+      날짜적용(고른날, false);
+    }
+    시트열기(false);
+  });
+  $('예약일버튼').addEventListener('click', function () { 시트열기(true); });
+  document.getElementById('ddim').addEventListener('click', function () { 시트열기(false); });
+  $('d이전').addEventListener('click', function () { 보임.setMonth(보임.getMonth() - 1); 달그리기(); });
+  $('d다음').addEventListener('click', function () { 보임.setMonth(보임.getMonth() + 1); 달그리기(); });
+
+  $('다음').addEventListener('click', function () {
+    var 예약임 = $('예약').classList.contains('on');
+    if (예약임 && !$('예약일').value) {
+      $('오류').style.display = 'block'; $('오류').textContent = '예약 송금 날짜를 골라주세요.'; return;
+    }
+    var 앱임 = $('수단앱').classList.contains('on');
+    저장.수단 = 앱임 ? '앱카드' : '신용카드';
+    저장.카드 = 앱임 ? document.querySelector('.appc.on').dataset.v
+                     : document.querySelector('.cardrow.on').dataset.v;
+    if (!앱임 && 저장.카드 === '새 카드') {
+      var 번호다 = ['cno1','cno2','cno3','cno4'].every(function (k) { return $(k).value.length === 4; });
+      if (!번호다 || !$('cexp').value || $('ccvc').value.length !== 3 || $('cpw').value.length !== 2) {
+        $('오류').style.display = 'block'; $('오류').textContent = '새 카드 정보를 모두 입력해주세요.'; return;
+      }
+      저장.카드 = '새 카드 ' + $('cno4').value;
+    }
+    저장.할부 = $('할부').value;
+    저장.시점 = 예약임 ? '예약' : '즉시';
+    저장.예약일 = 예약임 ? $('예약일').value : '';
+    저장.반복 = (예약임 && 매달임) ? '매달' : '한번';
+    sessionStorage.setItem('lp_reg', JSON.stringify(저장));
+    location.href = '등록4_서류.html';
+  });
+})();
+</script>
+</body>
+</html>

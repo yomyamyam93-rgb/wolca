@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>랜선페이 — 결제 관리</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="../style.css?v=15">
+<style>
+  body{background:#EDF0F4;}
+  .apphull{width:100%; max-width:480px; min-height:100svh; margin:0 auto; background:#fff;
+    box-shadow:0 0 44px rgba(15,23,42,.10); display:flex; flex-direction:column; padding-bottom:40px;}
+  .topbar{height:52px; position:sticky; top:0; z-index:50; background:#fff; display:flex; align-items:center; padding:0 10px; flex:0 0 auto;}
+  .back{width:40px; height:40px; display:flex; align-items:center; justify-content:center;
+    font-size:24px; color:var(--ink); cursor:pointer;}
+  .topbar .ttl{flex:1; text-align:center; font-size:16px; font-weight:700; margin-right:40px;}
+  .abody{flex:1; padding:0 20px 30px;}
+
+  .mtabs{display:flex; margin:0 -20px 20px; border-bottom:1px solid var(--line);
+    position:sticky; top:52px; z-index:40; background:#fff;}
+  .mtabs button{flex:1; height:46px; border:none; background:none; font:inherit; font-size:14.5px;
+    font-weight:700; color:var(--sub); cursor:pointer; position:relative;}
+  .mtabs button.on{color:var(--primary-600);}
+  .mtabs button.on:after{content:''; position:absolute; left:14px; right:14px; bottom:-1px;
+    height:2px; background:var(--primary);}
+  .pane{display:none;}
+  .pane.on{display:block;}
+
+  .gcard{background:#fff; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,.06); padding:2px 16px; margin-top:14px;}
+  .grow{display:flex; align-items:center; justify-content:space-between; gap:12px; padding:15px 0;
+    border-bottom:1px solid var(--line); color:var(--ink);}
+  .gcard .grow:last-child{border-bottom:none;}
+  .grow .tx b{display:block; font-size:15px; font-weight:700; letter-spacing:-.2px;}
+  .grow .tx span{display:block; margin-top:3px; font-size:12.5px; color:var(--sub);}
+  .grow em{flex:0 0 auto; font-style:normal; font-size:11.5px; font-weight:700; padding:3px 8px;
+    border-radius:999px; background:var(--primary-50); color:var(--primary-600);}
+  .grow em.off{background:#F4F6F9; color:var(--sub);}
+
+  .glabel{margin:22px 2px 0; font-size:13px; font-weight:700; color:var(--placeholder);}
+  .addbtn{display:flex; align-items:center; justify-content:center; gap:6px; height:50px;
+    border-radius:8px; background:var(--primary); background:var(--grad); color:#fff;
+    font-size:15px; font-weight:700; box-shadow:var(--btn-shadow);}
+
+  .crow{display:flex; align-items:center; gap:12px; padding:13px 0; border-bottom:1px solid var(--line);}
+  .gcard .crow:last-child{border-bottom:none;}
+  .crow .chip{width:40px; height:27px; border-radius:6px; flex:0 0 auto;}
+  .chip.a{background:linear-gradient(135deg,#22375f,#0e1a30);}
+  .chip.b{background:linear-gradient(135deg,#1596a6,#0a3f70);}
+  .chip.plus{background:#F1F3F6; display:flex; align-items:center; justify-content:center;
+    color:var(--placeholder); font-size:17px;}
+  .crow .tx{flex:1; min-width:0;}
+  .crow .tx b{display:block; font-size:14.5px; font-weight:700;}
+  .crow .tx span{display:block; margin-top:2px; font-size:12px; color:var(--placeholder);}
+  .crow i{font-style:normal; color:var(--icon-off); font-size:17px;}
+
+  /* 정기결제 관리 시트 */
+  .ddim{position:fixed; inset:0; z-index:110; background:rgba(15,23,42,.45); display:none;}
+  .ddim.on{display:block;}
+  .dsheet{position:fixed; left:50%; bottom:0; transform:translateX(-50%) translateY(102%); z-index:120;
+    width:100%; max-width:480px; background:#fff; border-radius:24px 24px 0 0;
+    padding:14px 20px 30px; transition:transform .3s ease;}
+  .dsheet.on{transform:translateX(-50%) translateY(0);}
+  .dsheet .handle{width:44px; height:4px; border-radius:3px; background:#DDE2E8; margin:0 auto 14px;}
+  .dsheet h3{font-size:17px; font-weight:800; letter-spacing:-.3px;}
+  .dsheet .sub{margin-top:5px; font-size:13px; color:var(--sub);}
+  .act{display:flex; align-items:center; gap:10px; padding:16px 2px; font-size:15px; font-weight:700;
+    border-top:1px solid var(--line); cursor:pointer; color:var(--ink);}
+  .act:first-of-type{margin-top:16px;}
+  .act.danger{color:#DC2626;}
+
+  .dhead{display:flex; align-items:center; justify-content:space-between; margin:14px 0 10px;}
+  .dhead b{font-size:16px;}
+  .dhead button{width:36px; height:36px; border:none; background:#F7F8FA; border-radius:8px;
+    font-size:16px; color:var(--ink); cursor:pointer;}
+  .dgrid{display:grid; grid-template-columns:repeat(7,1fr); gap:2px; text-align:center;}
+  .dgrid .wd{font-size:12px; color:var(--placeholder); padding:6px 0;}
+  .dgrid button{height:40px; border:none; background:none; border-radius:999px; font:inherit;
+    font-size:14.5px; color:var(--ink); cursor:pointer;}
+  .dgrid button:disabled{color:#C6CDD6; cursor:default;}
+  .dgrid button.pick{background:var(--primary); background:var(--grad); color:#fff; font-weight:700;}
+  .dok{width:100%; height:50px; margin-top:16px; border:none; border-radius:8px; font:inherit;
+    font-size:15.5px; font-weight:700; color:#fff; cursor:pointer;
+    background:var(--primary); background:var(--grad);}
+  .dok:disabled{opacity:.45; cursor:default;}
+  .dout{width:100%; height:50px; margin-top:16px; border:none; border-radius:8px; font:inherit;
+    font-size:15.5px; font-weight:700; color:#fff; cursor:pointer; background:#DC2626;}
+  .empty2{padding:22px 0; text-align:center; font-size:13.5px; color:var(--placeholder);}
+
+  /* 정기결제 등록 시트 */
+  .fld{margin-bottom:14px;}
+  .fld > label{display:block; font-size:13px; font-weight:700; margin-bottom:6px;}
+  .fld > label small{font-weight:500; color:var(--placeholder);}
+  .in, select.in{width:100%; height:48px; border:1px solid var(--line); border-radius:8px;
+    padding:0 13px; font:inherit; font-size:14.5px; background:#fff; color:var(--ink); outline:none;}
+  .in:focus{border-color:var(--primary);}
+  .agree{display:flex; gap:9px; align-items:flex-start; margin-top:16px; font-size:12.5px;
+    line-height:1.6; color:var(--sub); cursor:pointer;}
+  .agree input{margin-top:3px; accent-color:var(--primary);}
+  .agree i{font-style:normal; color:#DC2626; font-weight:700;}
+  .shbtns{display:flex; gap:10px; margin-top:18px;}
+  .shbtns button{flex:1; height:50px; border-radius:8px; font:inherit; font-size:15px; font-weight:700; cursor:pointer;}
+  .sh취소{border:1px solid var(--line); background:#fff; color:var(--ink);}
+  .sh등록{border:none; color:#fff; background:var(--primary); background:var(--grad);}
+  .sh등록:disabled{opacity:.45; cursor:default;}
+</style>
+</head>
+<body>
+<div class="apphull">
+  <div class="topbar"><div class="back" onclick="history.length>1?history.back():location.href='../app.html'">‹</div><div class="ttl">결제 관리</div></div>
+
+  <div class="abody">
+    <div class="mtabs" id="mtabs">
+      <button type="button" class="on" data-p="계약">내 계약</button>
+      <button type="button" data-p="정기">정기결제</button>
+      <button type="button" data-p="카드">카드 관리</button>
+    </div>
+
+    <!-- 내 계약 -->
+    <div class="pane on" id="p계약">
+      <a class="addbtn" href="10_1_유형선택.html">＋ 계약 등록하기</a>
+      <div class="gcard">
+        <a class="grow" href="#"><span class="tx"><b>월세 · 김집주</b><span>신한 123456-78-901234 · 700,000원</span></span><em>이용중</em></a>
+        <a class="grow" href="#"><span class="tx"><b>관리비 · 행복아파트 관리사무소</b><span>KB국민 555-01-777888 · 매달 다름</span></span><em>이용중</em></a>
+      </div>
+    </div>
+
+    <!-- 정기결제 -->
+    <div class="pane" id="p정기">
+      <a class="addbtn" href="#" id="정기등록열기">＋ 정기결제 등록</a>
+      <div class="gcard" id="정기목록">
+        <a class="grow" href="#" data-r="월세" data-day="5"><span class="tx"><b>월세 · 매달 5일</b><span>다음 송금 2026.09.05 · 신한카드 · 700,000원</span></span><em>예약중</em></a>
+        <a class="grow" href="#" data-r="학원비" data-day="10"><span class="tx"><b>학원비 · 이번 달만</b><span>2026.09.10 예정 · 삼성카드 · 450,000원</span></span><em class="off">1회</em></a>
+      </div>
+    </div>
+
+    <!-- 카드 관리 -->
+    <div class="pane" id="p카드">
+      <div class="gcard">
+        <div class="crow"><span class="chip b"></span><span class="tx"><b>신한카드</b><span>**** 1479 · 개인 · 기본 카드</span></span><i>›</i></div>
+        <div class="crow"><span class="chip a"></span><span class="tx"><b>삼성카드</b><span>**** 0552 · 개인</span></span><i>›</i></div>
+        <div class="crow"><span class="chip plus">＋</span><span class="tx"><b>새 카드 등록</b></span><i>›</i></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ddim" id="ddim"></div>
+<div class="dsheet" id="등록시트">
+  <div class="handle"></div>
+  <h3>정기결제 등록</h3>
+  <div style="margin-top:16px">
+    <div class="fld"><label>계약 선택</label>
+      <select class="in" id="r계약">
+        <option value="월세|700000">월세 · 김집주 · 700,000원</option>
+        <option value="관리비|">관리비 · 행복아파트 관리사무소</option>
+      </select>
+    </div>
+    <div class="fld"><label>결제카드 선택</label>
+      <select class="in" id="r카드">
+        <option>신한카드 **** 1479</option>
+        <option>삼성카드 **** 0552</option>
+      </select>
+    </div>
+    <div class="fld"><label>송금금액 <small>(원)</small></label>
+      <input class="in" id="r금액" inputmode="numeric" placeholder="금액을 입력하세요">
+    </div>
+    <div class="fld"><label>결제일</label>
+      <select class="in" id="r결제일"><option>매월 1일</option><option>매월 2일</option><option>매월 3일</option><option>매월 4일</option><option>매월 5일</option><option>매월 6일</option><option>매월 7일</option><option>매월 8일</option><option>매월 9일</option><option>매월 10일</option><option>매월 11일</option><option>매월 12일</option><option>매월 13일</option><option>매월 14일</option><option>매월 15일</option><option>매월 16일</option><option>매월 17일</option><option>매월 18일</option><option>매월 19일</option><option>매월 20일</option><option>매월 21일</option><option>매월 22일</option><option>매월 23일</option><option>매월 24일</option><option>매월 25일</option><option>매월 26일</option><option>매월 27일</option><option>매월 28일</option><option>매월 29일</option><option>매월 30일</option><option>매월 31일</option><option>매월 말일</option></select>
+    </div>
+    <div class="fld"><label>종료 <small>(선택)</small></label>
+      <select class="in" id="r종료">
+        <option>해지 전까지 계속</option><option>6개월 뒤 종료</option><option>12개월 뒤 종료</option>
+      </select>
+    </div>
+    <label class="agree"><input type="checkbox" id="r동의">
+      <span>송금 이후에는 취소할 수 없어요. 신용카드를 이용한 불법 현금융통 목적으로 이용하지 않습니다. <i>(필수)</i></span></label>
+    <div class="shbtns">
+      <button type="button" class="sh취소" id="r취소">취소</button>
+      <button type="button" class="sh등록" id="r등록" disabled>등록</button>
+    </div>
+  </div>
+</div>
+<div class="dsheet" id="관리시트">
+  <div class="handle"></div>
+  <h3 id="시트제목"></h3>
+  <div class="sub" id="시트부제"></div>
+  <div id="시트메뉴">
+    <div class="act" id="날짜변경">결제일 변경</div>
+    <div class="act danger" id="해지열기">정기결제 해지</div>
+  </div>
+  <div id="시트달력" style="display:none">
+    <div class="dhead">
+      <button type="button" id="d이전">‹</button>
+      <b id="d제목"></b>
+      <button type="button" id="d다음">›</button>
+    </div>
+    <div class="dgrid" id="dgrid"></div>
+    <button type="button" class="dok" id="d확인" disabled>확인</button>
+  </div>
+  <div id="시트해지" style="display:none">
+    <div class="sub" style="margin-top:14px">다음 송금부터 나가지 않아요. 지나간 결제는 그대로 유지됩니다.</div>
+    <button type="button" class="dout" id="해지확정">해지하기</button>
+  </div>
+</div>
+
+<script>
+(function () {
+  function 탭열기(k) {
+    document.querySelectorAll('#mtabs button').forEach(function (b) { b.classList.toggle('on', b.dataset.p === k); });
+    document.querySelectorAll('.pane').forEach(function (p) { p.classList.toggle('on', p.id === 'p' + k); });
+  }
+  document.getElementById('mtabs').addEventListener('click', function (e) {
+    var bt = e.target.closest('button'); if (bt) 탭열기(bt.dataset.p);
+  });
+  var 시작탭 = decodeURIComponent(location.hash.replace('#', ''));
+  if (['계약', '정기', '카드'].indexOf(시작탭) > -1) 탭열기(시작탭);
+
+  /* ── 정기결제 관리 시트 ── */
+  function $(id) { return document.getElementById(id); }
+  var 현재행 = null;
+  function 시트(열림) {
+    $('ddim').classList.toggle('on', 열림);
+    $('관리시트').classList.toggle('on', 열림);
+    if (열림) { $('시트메뉴').style.display = ''; $('시트달력').style.display = 'none'; $('시트해지').style.display = 'none'; }
+  }
+  document.getElementById('정기목록').addEventListener('click', function (e) {
+    var 행 = e.target.closest('.grow'); if (!행) return;
+    e.preventDefault();
+    현재행 = 행;
+    $('시트제목').textContent = 행.querySelector('b').textContent;
+    $('시트부제').textContent = 행.querySelector('.tx span').textContent;
+    시트(true);
+  });
+  $('ddim').addEventListener('click', function () { 시트(false); 등록시트(false); });
+  $('해지열기').addEventListener('click', function () {
+    $('시트메뉴').style.display = 'none'; $('시트해지').style.display = '';
+  });
+  $('해지확정').addEventListener('click', function () {
+    if (현재행) 현재행.remove();
+    var 판 = document.getElementById('정기목록');
+    if (!판.querySelector('.grow')) {
+      var e = document.createElement('div'); e.className = 'empty2';
+      e.textContent = '등록된 정기결제가 없어요';
+      판.appendChild(e);
+    }
+    시트(false);
+  });
+
+  /* ── 정기결제 등록 시트 ── */
+  function 등록시트(열림) {
+    $('ddim').classList.toggle('on', 열림);
+    $('등록시트').classList.toggle('on', 열림);
+  }
+  $('정기등록열기').addEventListener('click', function (e) {
+    e.preventDefault();
+    등록시트(true);
+  });
+  function 금액채우기() {
+    var v = $('r계약').value.split('|');
+    if (v[1]) { $('r금액').value = Number(v[1]).toLocaleString('ko-KR'); }
+    else { $('r금액').value = ''; }
+  }
+  $('r계약').addEventListener('change', 금액채우기);
+  $('r금액').addEventListener('input', function () {
+    var n = Number(this.value.replace(/[^0-9]/g, '')) || 0;
+    this.value = n ? n.toLocaleString('ko-KR') : '';
+  });
+  $('r동의').addEventListener('change', function () { $('r등록').disabled = !this.checked; });
+  $('r취소').addEventListener('click', function () { 등록시트(false); });
+  $('r등록').addEventListener('click', function () {
+    var 항목 = $('r계약').value.split('|')[0];
+    var 금액 = $('r금액').value;
+    if (!금액) { $('r금액').focus(); $('r금액').style.borderColor = '#DC2626'; return; }
+    var 일 = $('r결제일').value.replace('매월 ', '').replace('일', '');
+    var 카드 = $('r카드').value.split(' ')[0];
+    var 판 = document.getElementById('정기목록');
+    var 빈 = 판.querySelector('.empty2'); if (빈) 빈.remove();
+    var 행 = document.createElement('a');
+    행.className = 'grow'; 행.href = '#'; 행.dataset.r = 항목;
+    행.innerHTML = '<span class="tx"><b>' + 항목 + ' · 매월 ' + 일 + (일 === '말' ? '' : '일') + '</b>'
+      + '<span>' + 카드 + ' · ' + 금액 + '원 · ' + $('r종료').value + '</span></span><em>예약중</em>';
+    판.appendChild(행);
+    $('r동의').checked = false; $('r등록').disabled = true;
+    등록시트(false);
+  });
+
+  /* 결제일 변경 — 달력 */
+  var 보임 = new Date('2026-09-01');
+  var 고른값 = '';
+  function 두자리(n) { return (n < 10 ? '0' : '') + n; }
+  function 달그리기() {
+    $('d제목').textContent = 보임.getFullYear() + '년 ' + (보임.getMonth() + 1) + '월';
+    var 오늘 = new Date('2026-08-28');
+    var g = $('dgrid'); g.innerHTML = '';
+    ['일','월','화','수','목','금','토'].forEach(function (w) {
+      var el = document.createElement('span'); el.className = 'wd'; el.textContent = w; g.appendChild(el);
+    });
+    for (var i = 0; i < 보임.getDay(); i++) g.appendChild(document.createElement('span'));
+    var 끝날 = new Date(보임.getFullYear(), 보임.getMonth() + 1, 0).getDate();
+    for (var d = 1; d <= 끝날; d++) {
+      (function (d) {
+        var 날 = new Date(보임.getFullYear(), 보임.getMonth(), d);
+        var v = 날.getFullYear() + '-' + 두자리(날.getMonth() + 1) + '-' + 두자리(d);
+        var bt = document.createElement('button'); bt.type = 'button'; bt.textContent = d;
+        if (날 <= 오늘) bt.disabled = true;
+        if (고른값 === v) bt.classList.add('pick');
+        bt.addEventListener('click', function () { 고른값 = v; 달그리기(); });
+        g.appendChild(bt);
+      })(d);
+    }
+    $('d확인').disabled = !고른값;
+  }
+  $('날짜변경').addEventListener('click', function () {
+    고른값 = '';
+    $('시트메뉴').style.display = 'none'; $('시트달력').style.display = '';
+    달그리기();
+  });
+  $('d이전').addEventListener('click', function () { 보임.setMonth(보임.getMonth() - 1); 달그리기(); });
+  $('d다음').addEventListener('click', function () { 보임.setMonth(보임.getMonth() + 1); 달그리기(); });
+  $('d확인').addEventListener('click', function () {
+    if (!고른값 || !현재행) return;
+    var 일 = Number(고른값.slice(8));
+    var 매달 = 현재행.querySelector('em').textContent === '예약중';
+    현재행.querySelector('b').textContent = 현재행.dataset.r + (매달 ? ' · 매달 ' + 일 + '일' : ' · 이번 달만');
+    var 부 = 현재행.querySelector('.tx span');
+    부.textContent = 부.textContent.replace(/(다음 송금|예정)[^·]*·|^[^·]*·/, '')
+    부.textContent = (매달 ? '다음 송금 ' : '') + 고른값.replace(/-/g, '.') + (매달 ? '' : ' 예정') + ' ·' + 부.textContent;
+    시트(false);
+  });
+})();
+</script>
+</body>
+</html>

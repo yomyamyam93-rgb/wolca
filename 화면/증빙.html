@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>랜선페이 — 증빙 발급</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="../style.css?v=15">
+<style>
+  body{background:#EDF0F4;}
+  .apphull{width:100%; max-width:480px; min-height:100svh; margin:0 auto; background:#fff;
+    box-shadow:0 0 44px rgba(15,23,42,.10); display:flex; flex-direction:column; padding-bottom:40px;}
+  .topbar{height:52px; position:sticky; top:0; z-index:50; background:#fff; display:flex; align-items:center; padding:0 10px; flex:0 0 auto;}
+  .back{width:40px; height:40px; display:flex; align-items:center; justify-content:center;
+    font-size:24px; color:var(--ink); cursor:pointer;}
+  .topbar .ttl{flex:1; text-align:center; font-size:16px; font-weight:700; margin-right:40px;}
+  .abody{flex:1; padding:10px 20px 30px;}
+
+  .lead{background:var(--primary-50); border-radius:8px; padding:15px 16px; font-size:13.5px;
+    line-height:1.7; color:var(--sub); margin-bottom:20px;}
+  .lead b{color:var(--ink);}
+
+  .fld{margin-bottom:16px;}
+  .fld > label{display:block; font-size:13.5px; font-weight:700; margin-bottom:7px;}
+  .in, select.in{width:100%; height:50px; border:1px solid var(--line); border-radius:8px;
+    padding:0 14px; font:inherit; font-size:15px; background:#fff; color:var(--ink); outline:none;}
+  .in:focus{border-color:var(--primary);}
+  .gobtn{width:100%; height:52px; margin-top:10px; border:none; border-radius:8px; font:inherit;
+    font-size:15.5px; font-weight:700; color:#fff; cursor:pointer;
+    background:var(--primary); background:var(--grad); box-shadow:var(--btn-shadow);}
+
+  /* 접수 완료 */
+  .done{display:none; text-align:center; padding-top:46px;}
+  .done.on{display:block;}
+  .done .chk{width:64px; height:64px; margin:0 auto; border-radius:999px; color:#fff; font-size:28px;
+    background:var(--primary); background:var(--grad); display:flex; align-items:center; justify-content:center;}
+  .done b{display:block; margin-top:18px; font-size:19px; font-weight:800; letter-spacing:-.3px;}
+  .done p{margin-top:8px; font-size:13.5px; color:var(--sub); line-height:1.7;}
+  .done .gobtn{margin-top:28px;}
+</style>
+</head>
+<body>
+<div class="apphull">
+  <div class="topbar"><div class="back" onclick="history.length>1?history.back():location.href='../app.html'">‹</div><div class="ttl" id="제목">증빙 발급</div></div>
+
+  <div class="abody">
+    <div id="폼">
+      <div class="lead" id="설명"></div>
+      <div id="칸들"></div>
+      <button type="button" class="gobtn" id="신청">발급 신청하기</button>
+    </div>
+
+    <div class="done" id="완료">
+      <div class="chk">✓</div>
+      <b>신청이 접수됐어요</b>
+      <p>서류가 준비되면 문자와 메일로 보내드려요.<br>보통 10분 안에 도착합니다.</p>
+      <button type="button" class="gobtn" onclick="history.length>1?history.back():location.href='../app.html'">확인</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var 종류들 = {
+    '세액공제': {
+      제목: '월세 세액공제 증빙 발급',
+      설명: '연말정산에 낼 <b>월세 납입 증명서</b>를 발급해드려요. 회사나 홈택스에 그대로 제출하면 됩니다.',
+      칸: [
+        ['대상 계약', ['월세 · 김집주 · 700,000원', '관리비 · 행복아파트 관리사무소']],
+        ['대상 연도', ['2026년', '2025년']],
+        ['받을 방법', ['메일 (miyeok@naver.com)', '문자 (010-1234-5678)']]
+      ]
+    },
+    '입금확인서': {
+      제목: '무통장 입금 확인서 발급',
+      설명: '송금이 <b>상대 계좌에 입금됐다는 확인서</b>를 발급해드려요. 입금 증빙이 필요할 때 쓰면 됩니다.',
+      칸: [
+        ['대상 내역', ['2026.08.05 · 월세 · 700,000원', '2026.08.05 · 관리비 · 184,000원', '2026.08.12 · 학원비 · 450,000원']],
+        ['받을 방법', ['메일 (miyeok@naver.com)', '문자 (010-1234-5678)']]
+      ]
+    },
+    '부가세': {
+      제목: '부가세 신고용 참고자료',
+      설명: '부가세 신고에 쓸 <b>거래 내역 자료</b>를 만들어드려요. 임차료 · 매입대금을 경비로 정리할 때 쓰입니다.',
+      칸: [
+        ['대상 기간', ['2026년 상반기 (1~6월)', '2025년 하반기 (7~12월)']],
+        ['받을 방법', ['메일 (miyeok@naver.com)']]
+      ]
+    },
+    '세금계산서': {
+      제목: '세금계산서 발행 신청',
+      설명: '랜선페이 이용 <b>수수료에 대한 세금계산서</b>를 발행해드려요. 사업 경비 처리에 쓰면 됩니다.',
+      칸: [
+        ['사업자등록번호', null],
+        ['대상 기간', ['2026년 8월', '2026년 7월', '2026년 6월']],
+        ['받을 방법', ['메일 (miyeok@naver.com)']]
+      ]
+    }
+  };
+  var k = decodeURIComponent(location.hash.replace('#', ''));
+  var 자료 = 종류들[k] || 종류들['세액공제'];
+  document.getElementById('제목').textContent = 자료.제목;
+  document.getElementById('설명').innerHTML = 자료.설명;
+  var 판 = document.getElementById('칸들');
+  자료.칸.forEach(function (c) {
+    var d = document.createElement('div'); d.className = 'fld';
+    if (c[1]) {
+      d.innerHTML = '<label>' + c[0] + '</label><select class="in">' +
+        c[1].map(function (o) { return '<option>' + o + '</option>'; }).join('') + '</select>';
+    } else {
+      d.innerHTML = '<label>' + c[0] + '</label><input class="in" inputmode="numeric" placeholder="- 없이 숫자만">';
+    }
+    판.appendChild(d);
+  });
+  document.getElementById('신청').addEventListener('click', function () {
+    var 빈입력 = document.querySelector('#칸들 input');
+    if (빈입력 && !빈입력.value) { 빈입력.focus(); 빈입력.style.borderColor = 'var(--danger, #DC2626)'; return; }
+    document.getElementById('폼').style.display = 'none';
+    document.getElementById('완료').classList.add('on');
+    window.scrollTo(0, 0);
+  });
+})();
+</script>
+</body>
+</html>

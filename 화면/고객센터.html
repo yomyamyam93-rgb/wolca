@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>랜선페이 — 고객센터</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="../style.css?v=15">
+<style>
+  body{background:#EDF0F4;}
+  .apphull{width:100%; max-width:480px; min-height:100svh; margin:0 auto; background:#fff;
+    box-shadow:0 0 44px rgba(15,23,42,.10); display:flex; flex-direction:column; padding-bottom:40px;}
+  .topbar{height:52px; position:sticky; top:0; z-index:50; background:#fff; display:flex; align-items:center; padding:0 10px; flex:0 0 auto;}
+  .back{width:40px; height:40px; display:flex; align-items:center; justify-content:center;
+    font-size:24px; color:var(--ink); cursor:pointer;}
+  .topbar .ttl{flex:1; text-align:center; font-size:16px; font-weight:700; margin-right:40px;}
+  .abody{flex:1; padding:6px 20px 30px;}
+
+  .ghead{background:var(--primary); background:var(--grad); color:#fff; border-radius:8px;
+    padding:22px 20px; margin-bottom:22px;}
+  .ghead b{display:block; font-size:19px; font-weight:800; letter-spacing:-.4px;}
+  .ghead span{display:block; margin-top:6px; font-size:13px; color:rgba(255,255,255,.85);}
+
+  /* 전화 카드 */
+  .tel{background:var(--primary-50); border-radius:8px; padding:22px; text-align:center;}
+  .tel b{display:block; font-size:27px; font-weight:800; letter-spacing:-.5px; color:var(--primary-600);}
+  .tel span{display:block; margin-top:6px; font-size:12.5px; color:var(--sub);}
+
+  /* 묶음 */
+  .glabel{margin:26px 2px 8px; font-size:13px; font-weight:700; color:var(--placeholder);}
+  .gcard{background:#fff; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,.06); padding:2px 16px;}
+  .grow{display:flex; align-items:center; justify-content:space-between; gap:10px; padding:15px 0;
+    border-bottom:1px solid var(--line); color:var(--ink);}
+  .gcard .grow:last-child{border-bottom:none;}
+  .grow .tx b{display:block; font-size:15px; font-weight:700;}
+  .grow .tx span{display:block; margin-top:2px; font-size:12.5px; color:var(--sub);}
+  .grow i{font-style:normal; color:var(--icon-off); font-size:17px;}
+</style>
+</head>
+<body>
+<div class="apphull">
+  <div class="topbar"><div class="back" onclick="history.length>1?history.back():location.href='../app.html'">‹</div><div class="ttl">고객센터</div></div>
+
+  <div class="abody">
+    <div class="ghead">
+      <b>무엇을 도와드릴까요?</b>
+      <span>막히는 곳이 있으면 편한 방법으로 물어보세요</span>
+    </div>
+
+    <div class="tel">
+      <b>1577-6369</b>
+      <span>평일 09:00~18:00 (점심 12:00~13:00)</span>
+    </div>
+
+    <div class="glabel">문의하기</div>
+    <div class="gcard">
+      <a class="grow" href="#"><span class="tx"><b>채팅 상담</b><span>365일 24시간</span></span><i>›</i></a>
+      <a class="grow" href="#"><span class="tx"><b>카카오톡 1:1 상담</b><span>평일 09:00~18:00</span></span><i>›</i></a>
+      <a class="grow" href="mailto:help@lanseonpay.co.kr"><span class="tx"><b>메일 문의</b><span>help@lanseonpay.co.kr</span></span><i>›</i></a>
+    </div>
+
+    <div class="glabel">궁금한 것 먼저 찾아보기</div>
+    <div class="gcard">
+      <a class="grow" href="질문.html"><span class="tx"><b>자주 묻는 질문</b><span>수수료 · 세액공제 · 취소</span></span><i>›</i></a>
+      <a class="grow" href="안내.html"><span class="tx"><b>이용안내</b><span>가입부터 송금까지 5단계</span></span><i>›</i></a>
+      <a class="grow" href="공지.html#n8"><span class="tx"><b>필요 서류</b><span>유형별로 무엇이 필요한지</span></span><i>›</i></a>
+    </div>
+
+    <div class="glabel">약관 · 정책</div>
+    <div class="gcard">
+      <a class="grow" href="약관.html#terms"><span class="tx"><b>서비스 이용약관</b></span><i>›</i></a>
+      <a class="grow" href="약관.html#privacy"><span class="tx"><b>개인정보 처리방침</b></span><i>›</i></a>
+      <a class="grow" href="약관.html#thirdparty"><span class="tx"><b>개인정보 3자 제공 고지</b></span><i>›</i></a>
+    </div>
+  </div>
+</div>
+</body>
+</html>

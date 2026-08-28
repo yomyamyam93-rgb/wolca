@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>결제 등록 · 서류 등록</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+<style>
+  :root{--primary:#2563EB; --primary-dark:#1D4ED8; --primary-50:#EFF4FF; --line:#ECEEF1;
+    --sub:#4E5968; --ink:#191F28; --placeholder:#8B95A1; --danger:#DC2626; --ok:#059669;
+    --grad:linear-gradient(180deg, color-mix(in srgb, var(--primary) 82%, #ffffff), var(--primary));}
+  *{box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent;}
+  html,body{scrollbar-width:none;} body::-webkit-scrollbar{display:none;}
+  body{font-family:'Pretendard',sans-serif; color:var(--ink); background:#EDF0F4;
+    word-break:keep-all; line-height:1.5; -webkit-font-smoothing:antialiased;}
+  .phone{width:100%; max-width:480px; min-height:100svh; margin:0 auto; background:#fff;
+    box-shadow:0 0 44px rgba(15,23,42,.10); display:flex; flex-direction:column;}
+  .topbar{height:52px; position:sticky; top:0; z-index:50; background:#fff; display:flex; align-items:center; padding:0 10px;}
+  .back{width:40px; height:40px; display:flex; align-items:center; justify-content:center; font-size:24px; cursor:pointer;}
+  .topbar .ttl{flex:1; text-align:center; font-size:16px; font-weight:700; margin-right:40px;}
+  .prog4{display:flex; gap:6px; margin:2px 20px 8px;}
+  .prog4 i{flex:1; height:4px; border-radius:2px; background:var(--line);}
+  .prog4 i.on{background:var(--primary);}
+  .stepcap{margin:0 20px; font-size:12.5px; font-weight:700; color:var(--placeholder);}
+  .body{flex:1; padding:10px 20px 30px;}
+  .q{font-size:21px; font-weight:800; letter-spacing:-.3px; margin:6px 0 16px;}
+  .docs{background:var(--primary-50); border-radius:8px; padding:15px 16px; margin-bottom:16px;}
+  .docs b{display:block; font-size:13.5px; margin-bottom:8px;}
+  .docs .dr{display:flex; gap:8px; font-size:13px; color:var(--sub); margin-bottom:5px; line-height:1.55;}
+  .docs .dr:last-child{margin-bottom:0;}
+  .docs .dr i{font-style:normal; color:var(--primary); font-weight:800;}
+  .up{border:1.5px dashed var(--line); border-radius:8px; padding:22px 16px; text-align:center; cursor:pointer;}
+  .up iconify-icon{font-size:26px; color:var(--primary);}
+  .up p{margin-top:6px; font-size:13.5px; font-weight:700;}
+  .up small{display:block; margin-top:3px; font-size:11.5px; color:var(--placeholder);}
+  .files{margin-top:10px;}
+  .frow{display:flex; align-items:center; gap:8px; font-size:13px; color:var(--sub);
+    padding:9px 12px; background:#F7F8FA; border-radius:8px; margin-bottom:6px;}
+  .frow iconify-icon{color:var(--ok);}
+  .sum{margin-top:20px; border:1px solid var(--line); border-radius:8px; padding:15px 16px;}
+  .sum b{display:block; font-size:13.5px; margin-bottom:9px;}
+  .sr{display:flex; justify-content:space-between; font-size:13.5px; margin-bottom:6px;}
+  .sr span{color:var(--placeholder);}
+  .sr em{font-style:normal; font-weight:700; text-align:right;}
+  .hint{margin-top:8px; font-size:12px; color:var(--placeholder);}
+  .hint.err{color:var(--danger); font-weight:700;}
+  .navs{display:flex; gap:10px; margin-top:24px;}
+  .navs button{flex:1; height:52px; border-radius:8px; font:inherit; font-size:15.5px; font-weight:700; cursor:pointer;}
+  .prev{border:1px solid var(--line); background:#fff; color:var(--ink);}
+  .next{border:none; color:#fff; background:var(--primary); background:var(--grad);
+    box-shadow:0 4px 12px color-mix(in srgb, var(--primary) 32%, transparent);}
+</style>
+</head>
+<body>
+<div class="phone">
+  <div class="topbar"><div class="back" onclick="location.href='등록3_결제.html'">‹</div><div class="ttl">결제 등록</div></div>
+  <div class="prog4"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div>
+  <div class="stepcap">STEP 4 / 4</div>
+
+  <div class="body">
+    <div class="q">서류를 올리고 확인하세요</div>
+
+    <div class="docs" id="서류안내">
+      <b id="서류제목">필요 서류</b>
+      <div id="서류목록"></div>
+    </div>
+
+    <div class="up" onclick="document.getElementById('파일').click()">
+      <iconify-icon icon="mingcute:camera-2-fill"></iconify-icon>
+      <p>서류 촬영 또는 파일 올리기</p>
+      <small>PDF · 사진 · 문서 파일 최대 5개</small>
+      <input type="file" id="파일" accept="image/*,.pdf" multiple hidden>
+    </div>
+    <div class="files" id="파일들"></div>
+
+
+    
+    <div class="sum">
+      <b>입력 내용 확인</b>
+      <div class="sr"><span>항목</span><em id="요약유형">-</em></div>
+      <div class="sr"><span>받는 분</span><em id="요약받는분">-</em></div>
+      <div class="sr"><span>송금액</span><em id="요약금액">-</em></div>
+      <div class="sr"><span>결제</span><em id="요약결제">-</em></div>
+      <div class="sr"><span>송금 시점</span><em id="요약시점">-</em></div>
+    </div>
+    <div class="hint">등록하면 연중무휴로 검토가 시작되고 보통 10분 안에 결과를 알려드려요.</div>
+    <div class="hint err" id="오류" style="display:none"></div>
+
+    <div class="navs">
+      <button class="prev" type="button" onclick="location.href='등록3_결제.html'">이전</button>
+      <button class="next" type="button" id="완료">등록 완료</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var 저장 = {};
+  try { 저장 = JSON.parse(sessionStorage.getItem('lp_reg') || '{}'); } catch (e) {}
+
+  var 서류 = {
+    '월세': ['정식 임대차계약서면 바로 돼요','확정일자 없으면 입금내역 2~3회','분실 시 건축물대장등본이면 돼요'],
+    '관리비': ['최근 관리비 고지서 한 장','공과금은 기관 고지서나 납부서','분실 시 관리사무소 확인 내역'],
+    '인건비': ['급여는 근로계약서 + 명세서','알바는 근무 확인 내역','용역비는 용역계약서 + 지급 내역'],
+    '보증금': ['임대차계약서 촬영본 한 장','상가는 상가 임대차계약서','가계약금은 확인 문자 + 계좌'],
+    '매입대금': ['전자세금계산서 한 장','발행 전엔 거래명세서 + 발주서','정기 납품은 계약서 + 거래 내역'],
+    '학원비': ['수강증이나 등록 안내문','과외는 계약서나 안내 문자','인강은 수강 신청 내역'],
+    '학교공과금': ['등록금 고지서 한 장','기숙사비는 납부 안내문','그 외는 학교 발행 고지서'],
+    '인테리어': ['공사 계약서 + 견적서','설치는 견적서나 결제 안내','자재는 구매 내역 + 판매자 계좌'],
+    '이사': ['이사업체 견적서 한 장','용달은 예약 내역이나 안내 문자','보관 이사는 보관 계약서'],
+    '청소비': ['견적서나 예약 내역','정기 청소는 용역 계약서','특수 청소는 견적서 + 계좌 정보'],
+    '중개수수료': ['부동산 계약서','월세 복비는 임대차계약서','영수증 있으면 더 빨라요'],
+    '기타': ['계약서나 거래 확인 내역','청구서나 안내문','증빙 + 받는 분 계좌 정보']
+  };
+  var 유형 = 저장.유형 || '기타';
+  document.getElementById('요약유형').textContent = 유형;
+  document.getElementById('요약받는분').textContent = 저장.예금주 ? 저장.예금주 + ' · ' + (저장.은행||'') + ' ' + (저장.계좌||'') : '-';
+  document.getElementById('요약금액').textContent = 저장.금액 ? Number(저장.금액).toLocaleString('ko-KR') + '원' : '-';
+  document.getElementById('요약결제').textContent = (저장.카드 || '-') + (저장.할부 ? ' · ' + 저장.할부 : '');
+  document.getElementById('요약시점').textContent = 저장.시점 === '예약' ? ((저장.반복 === '매달' ? '매달 예약 · 첫 송금 ' : '예약 송금 · ') + (저장.예약일 || '')) : '즉시 송금';
+  $('서류제목').textContent = 유형 + ' 필요 서류';
+  $('서류목록').innerHTML = (서류[유형] || 서류['기타']).map(function (t) {
+    return '<div class="dr"><i>✓</i>' + t + '</div>';
+  }).join('');
+
+  var 올린수 = 0;
+  $('파일').addEventListener('change', function () {
+    var 칸 = $('파일들');
+    [].forEach.call(this.files, function (f) {
+      if (올린수 >= 5) return;
+      올린수++;
+      var d = document.createElement('div');
+      d.className = 'frow';
+      d.innerHTML = '<iconify-icon icon="mingcute:check-circle-fill"></iconify-icon>' + f.name;
+      칸.appendChild(d);
+    });
+  });
+
+
+  $('완료').addEventListener('click', function () {
+    if (!올린수) { $('오류').style.display = 'block'; $('오류').textContent = '서류를 한 장 이상 올려주세요.'; return; }
+    저장.첨부 = 올린수;
+    sessionStorage.setItem('lp_reg', JSON.stringify(저장));
+    location.href = '14_완료.html';
+  });
+})();
+</script>
+</body>
+</html>

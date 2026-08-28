@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>랜선페이 — 결제 · 송금내역</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="../style.css?v=15">
+<style>
+  body{background:#EDF0F4;}
+  .apphull{width:100%; max-width:480px; min-height:100svh; margin:0 auto; background:#fff;
+    box-shadow:0 0 44px rgba(15,23,42,.10); display:flex; flex-direction:column; padding-bottom:40px;}
+  .topbar{height:52px; position:sticky; top:0; z-index:50; background:#fff; display:flex; align-items:center; padding:0 10px; flex:0 0 auto;}
+  .back{width:40px; height:40px; display:flex; align-items:center; justify-content:center;
+    font-size:24px; color:var(--ink); cursor:pointer;}
+  .topbar .ttl{flex:1; text-align:center; font-size:16px; font-weight:700; margin-right:40px;}
+  .abody{flex:1; padding:6px 20px 30px;}
+
+  /* 종류 선택 */
+  .seg3{display:flex; gap:8px;}
+  .seg3 button{flex:1; height:44px; border-radius:8px; border:1px solid var(--line); background:#fff;
+    font:inherit; font-size:14px; font-weight:700; color:var(--sub); cursor:pointer;}
+  .seg3 button.on{border-color:var(--primary); background:var(--primary-50); color:var(--primary-600);}
+
+  /* 기간 직접 지정 */
+  .drange{display:flex; align-items:center; gap:8px; margin-top:12px;}
+  .drange i{font-style:normal; color:var(--placeholder);}
+  .drange button{flex:1; height:44px; border-radius:8px; border:1px solid var(--line); background:#fff;
+    font:inherit; font-size:14px; font-weight:700; color:var(--placeholder); cursor:pointer;}
+  .drange button.set{color:var(--ink);}
+  .drange button.open{border-color:var(--primary);}
+  .xlbtn{width:100%; height:44px; margin-top:12px; border:1px solid var(--line); border-radius:8px;
+    background:#fff; font:inherit; font-size:14px; font-weight:700; color:var(--primary-600); cursor:pointer;}
+
+  .ddim{position:fixed; inset:0; z-index:110; background:rgba(15,23,42,.45); display:none;}
+  .ddim.on{display:block;}
+  .dsheet{position:fixed; left:50%; bottom:0; transform:translateX(-50%) translateY(102%); z-index:120;
+    width:100%; max-width:480px; background:#fff; border-radius:24px 24px 0 0;
+    padding:14px 20px 30px; transition:transform .3s ease;}
+  .dsheet.on{transform:translateX(-50%) translateY(0);}
+  .dsheet .handle{width:44px; height:4px; border-radius:3px; background:#DDE2E8; margin:0 auto 14px;}
+  .dhead{display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;}
+  .dhead b{font-size:16px;}
+  .dhead button{width:36px; height:36px; border:none; background:#F7F8FA; border-radius:8px;
+    font-size:16px; color:var(--ink); cursor:pointer;}
+  .dgrid{display:grid; grid-template-columns:repeat(7,1fr); gap:2px; text-align:center;}
+  .dgrid .wd{font-size:12px; color:var(--placeholder); padding:6px 0;}
+  .dgrid button{height:40px; border:none; background:none; border-radius:999px; font:inherit;
+    font-size:14.5px; color:var(--ink); cursor:pointer;}
+  .dgrid button.pick{background:var(--primary); background:var(--grad); color:#fff; font-weight:700;}
+  .dok{width:100%; height:50px; margin-top:16px; border:none; border-radius:8px; font:inherit;
+    font-size:15.5px; font-weight:700; color:#fff; cursor:pointer;
+    background:var(--primary); background:var(--grad);}
+  .dok:disabled{opacity:.45; cursor:default;}
+
+  /* 목록 */
+  .dlabel{margin:24px 2px 4px; font-size:12.5px; font-weight:700; color:var(--placeholder);}
+  .hrow{display:flex; align-items:center; justify-content:space-between; gap:12px;
+    padding:14px 2px; border-bottom:1px solid var(--line);}
+  .hrow:last-child{border-bottom:none;}
+  .hrow .tx b{display:block; font-size:15px; font-weight:700; letter-spacing:-.2px;}
+  .hrow .tx span{display:block; margin-top:3px; font-size:12.5px; color:var(--sub);}
+  .hrow .amt{text-align:right;}
+  .hrow .amt b{display:block; font-size:15.5px; font-weight:800; letter-spacing:-.3px; white-space:nowrap;}
+  .hrow .amt em{display:inline-block; margin-top:4px; font-style:normal; font-size:11.5px; font-weight:700;
+    padding:3px 8px; border-radius:999px; background:var(--primary-50); color:var(--primary-600);}
+  .hrow .amt em.wait{background:#FFF4E5; color:#B45309;}
+  .hrow .amt em.plan{background:#F4F6F9; color:var(--sub);}
+  .empty{margin-top:56px; text-align:center; font-size:14px; color:var(--placeholder);}
+</style>
+</head>
+<body>
+<div class="apphull">
+  <div class="topbar"><div class="back" onclick="history.length>1?history.back():location.href='../app.html'">‹</div><div class="ttl">결제 · 송금내역 조회</div></div>
+
+  <div class="abody">
+    <div class="seg3" id="종류">
+      <button type="button" class="on" data-k="전체">전체</button>
+      <button type="button" data-k="일반">일반결제</button>
+      <button type="button" data-k="예약">예약결제</button>
+    </div>
+    <div class="drange">
+      <button type="button" id="시작버튼">시작일</button>
+      <i>~</i>
+      <button type="button" id="끝버튼">종료일</button>
+    </div>
+    <button type="button" class="xlbtn" id="엑셀">엑셀 다운로드</button>
+
+    <div id="목록"></div>
+  </div>
+</div>
+
+<div class="ddim" id="ddim"></div>
+<div class="dsheet" id="dsheet">
+  <div class="handle"></div>
+  <div class="dhead">
+    <button type="button" id="d이전">‹</button>
+    <b id="d제목"></b>
+    <button type="button" id="d다음">›</button>
+  </div>
+  <div class="dgrid" id="dgrid"></div>
+  <button type="button" class="dok" id="d확인" disabled>확인</button>
+</div>
+
+<script>
+(function () {
+  /* 보기용 예시 내역 */
+  var 내역 = [
+    { d:'2026-09-01', 항목:'월세', 부제:'김집주 · 신한카드 · 매달 예약', 금액:700000, 상태:'예약', 종류:'예약' },
+    { d:'2026-08-28', 항목:'매입대금', 부제:'(주)한결유통 · KB국민 앱카드', 금액:2300000, 상태:'검토중', 종류:'일반' },
+    { d:'2026-08-12', 항목:'학원비', 부제:'스터디온 어학원 · 삼성카드 3개월', 금액:450000, 상태:'입금완료', 종류:'일반' },
+    { d:'2026-08-05', 항목:'월세', 부제:'김집주 · 신한카드 · 매달 예약', 금액:700000, 상태:'입금완료', 종류:'예약' },
+    { d:'2026-08-05', 항목:'관리비', 부제:'행복아파트 관리사무소 · 신한카드', 금액:184000, 상태:'입금완료', 종류:'일반' },
+    { d:'2026-07-05', 항목:'월세', 부제:'김집주 · 신한카드 · 매달 예약', 금액:700000, 상태:'입금완료', 종류:'예약' },
+    { d:'2026-06-20', 항목:'이사', 부제:'한번에익스프레스 · 삼성카드', 금액:380000, 상태:'입금완료', 종류:'일반' },
+    { d:'2026-06-05', 항목:'월세', 부제:'김집주 · 신한카드 · 매달 예약', 금액:700000, 상태:'입금완료', 종류:'예약' },
+    { d:'2026-03-05', 항목:'월세', 부제:'김집주 · 신한카드', 금액:700000, 상태:'입금완료', 종류:'예약' }
+  ];
+  var 종류필터 = '전체', 시작값 = '2026-06-01', 끝값 = '';   /* 처음엔 최근 3개월 */
+
+  function 그리기() {
+    var 판 = document.getElementById('목록');
+    판.innerHTML = '';
+    var 달라벨 = '';
+    var 개수 = 0;
+    내역.forEach(function (r) {
+      if (종류필터 !== '전체' && r.종류 !== 종류필터) return;
+      if (시작값 && r.d < 시작값) return;
+      if (끝값 && r.d > 끝값) return;
+      개수++;
+      var 달 = r.d.slice(0, 7).replace('-', '년 ') + '월';
+      if (달 !== 달라벨) {
+        달라벨 = 달;
+        var lb = document.createElement('div'); lb.className = 'dlabel'; lb.textContent = 달;
+        판.appendChild(lb);
+      }
+      var 행 = document.createElement('div'); 행.className = 'hrow';
+      var 배지 = r.상태 === '입금완료' ? '' : (r.상태 === '검토중' ? ' class="wait"' : ' class="plan"');
+      행.innerHTML = '<span class="tx"><b>' + r.항목 + '</b><span>' + r.d.slice(5).replace('-', '.') + ' · ' + r.부제 + '</span></span>'
+        + '<span class="amt"><b>' + r.금액.toLocaleString('ko-KR') + '원</b><em' + 배지 + '>' + r.상태 + '</em></span>';
+      판.appendChild(행);
+    });
+    if (!개수) {
+      var e = document.createElement('div'); e.className = 'empty';
+      e.textContent = '이 조건의 내역이 없어요';
+      판.appendChild(e);
+    }
+  }
+  document.getElementById('엑셀').addEventListener('click', function () {
+    var 줄들 = [];
+    내역.forEach(function (r) {
+      if (종류필터 !== '전체' && r.종류 !== 종류필터) return;
+      if (시작값 && r.d < 시작값) return;
+      if (끝값 && r.d > 끝값) return;
+      줄들.push([r.d, r.항목, '"' + r.부제 + '"', r.금액, r.상태, r.종류].join(','));
+    });
+    var csv = '﻿날짜,항목,상대,금액,상태,종류\n' + 줄들.join('\n');
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' }));
+    a.download = '랜선페이_결제내역.csv';
+    a.click();
+    URL.revokeObjectURL(a.href);
+  });
+  document.getElementById('종류').addEventListener('click', function (e) {
+    var bt = e.target.closest('button'); if (!bt) return;
+    종류필터 = bt.dataset.k;
+    this.querySelectorAll('button').forEach(function (x) { x.classList.toggle('on', x === bt); });
+    그리기();
+  });
+  /* 날짜 범위 — 하단 달력 시트 */
+  var 보임 = new Date('2026-08-01');
+  var 편집 = null, 고른값 = '';
+  function $(id) { return document.getElementById(id); }
+  function 두자리(n) { return (n < 10 ? '0' : '') + n; }
+  function 달그리기() {
+    $('d제목').textContent = 보임.getFullYear() + '년 ' + (보임.getMonth() + 1) + '월';
+    var g = $('dgrid'); g.innerHTML = '';
+    ['일','월','화','수','목','금','토'].forEach(function (w) {
+      var el = document.createElement('span'); el.className = 'wd'; el.textContent = w; g.appendChild(el);
+    });
+    for (var i = 0; i < 보임.getDay(); i++) g.appendChild(document.createElement('span'));
+    var 끝날 = new Date(보임.getFullYear(), 보임.getMonth() + 1, 0).getDate();
+    for (var d = 1; d <= 끝날; d++) {
+      (function (d) {
+        var v = 보임.getFullYear() + '-' + 두자리(보임.getMonth() + 1) + '-' + 두자리(d);
+        var bt = document.createElement('button'); bt.type = 'button'; bt.textContent = d;
+        if (고른값 === v) bt.classList.add('pick');
+        bt.addEventListener('click', function () {
+          고른값 = v; 달그리기();
+        });
+        g.appendChild(bt);
+      })(d);
+    }
+    $('d확인').disabled = !고른값;
+  }
+  function 표기() {
+    $('시작버튼').textContent = 시작값 ? 시작값.replace(/-/g, '.') : '시작일';
+    $('끝버튼').textContent = 끝값 ? 끝값.replace(/-/g, '.') : '종료일';
+    $('시작버튼').classList.toggle('set', !!시작값);
+    $('끝버튼').classList.toggle('set', !!끝값);
+  }
+  function 시트(열림) {
+    if (열림) { 고른값 = 편집 === '시작' ? 시작값 : 끝값; }
+    $('ddim').classList.toggle('on', 열림);
+    $('dsheet').classList.toggle('on', 열림);
+    $('시작버튼').classList.toggle('open', 열림 && 편집 === '시작');
+    $('끝버튼').classList.toggle('open', 열림 && 편집 === '끝');
+    if (열림) 달그리기();
+  }
+  $('d확인').addEventListener('click', function () {
+    if (!고른값) return;
+    if (편집 === '시작') { 시작값 = 고른값; if (끝값 && 끝값 < 시작값) 끝값 = ''; }
+    else { 끝값 = 고른값; if (시작값 && 시작값 > 끝값) 시작값 = ''; }
+    표기(); 시트(false); 그리기();
+  });
+  $('시작버튼').addEventListener('click', function () { 편집 = '시작'; 시트(true); });
+  $('끝버튼').addEventListener('click', function () { 편집 = '끝'; 시트(true); });
+  $('ddim').addEventListener('click', function () { 시트(false); });
+  $('d이전').addEventListener('click', function () { 보임.setMonth(보임.getMonth() - 1); 달그리기(); });
+  $('d다음').addEventListener('click', function () { 보임.setMonth(보임.getMonth() + 1); 달그리기(); });
+  표기();
+  그리기();
+})();
+</script>
+</body>
+</html>
