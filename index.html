@@ -505,13 +505,14 @@
   #itemsec .doc .ck{color:#fff;}
   #itemsec .itr{background:none; border:none; box-shadow:none; border-radius:0; padding:0; gap:0;}
   @media(max-width:999px){
-    /* 모바일에서도 신용카드 비율로 */
-    #itemsec .itr-card{aspect-ratio:1.586/1; padding:15px 20px;}
-    #itemsec .itr-tt{font-size:15px;}
-    #itemsec .doc{padding:5px 2px;}
-    #itemsec .itr{margin-top:12px;}
-    #itemsec .doc p{font-size:12.5px;}
-    #itemsec .itr-card .btn{margin-top:auto; height:42px; font-size:14px;}
+    /* 신용카드 비율 — 가로는 100% 고정이라 절대 안 잘린다 */
+    #itemsec .itr-card{width:100%; aspect-ratio:1.586/1; padding:14px 18px;}
+    #itemsec .itr-tt{font-size:14px;}
+    #itemsec .doc{padding:4px 2px;}
+    #itemsec .itr{margin-top:10px;}
+    #itemsec .doc p{font-size:12px;}
+    #itemsec .doc .ck{font-size:13px;}
+    #itemsec .itr-card .btn{margin-top:auto; height:40px; font-size:13.5px;}
   }
   #itemsec .doc{border:none; box-shadow:none; background:none; border-radius:0;
     padding:10px 2px; border-bottom:1px solid rgba(255,255,255,.24);}
