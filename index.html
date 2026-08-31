@@ -101,7 +101,6 @@
   .uc .uarw svg{width:22px; height:22px;}
   .uc.blue .uarw{color:#fff;}
   /* 두 줄 같은 크기 — 굵기만 차이 */
-  #whysec .h-sec{font-size:min(4.6vw, 46px);}
   #whysec .h-sec br{display:none;}
   #whysec .h-sec .soft{display:block; margin-bottom:6px; font-weight:400;
     letter-spacing:-.4px; white-space:nowrap;}
@@ -164,7 +163,6 @@
       padding:36px 38px; margin-top:52px; align-content:center;}
   }
   /* 이용 방법 제목 — 두 줄 같은 크기 */
-  #howto .h-sec{font-size:min(7.6vw, 48px);}
   #howto .h-sec br{display:none;}
   #howto .h-sec .soft{display:block; margin-bottom:6px; font-weight:400;
     letter-spacing:-.4px; white-space:nowrap;}
@@ -174,7 +172,6 @@
   #featsec .h-sec .hl{color:#fff;}
   #featsec .morelink{color:rgba(255,255,255,.9);}
   /* 두 줄 같은 크기 — 굵기만 차이 */
-  #featsec .h-sec{font-size:min(5.6vw, 48px);}
   #featsec .h-sec br{display:none;}
   #featsec .h-sec .soft{display:block; margin-bottom:6px; font-weight:400;
     letter-spacing:-.4px; white-space:nowrap;}
@@ -185,7 +182,6 @@
     box-shadow:0 14px 30px rgba(15,23,42,.08), 0 3px 8px rgba(15,23,42,.04);}
   #itemsec .doc{background:#fff; border:1px solid #ECEFF5; box-shadow:0 6px 14px rgba(15,23,42,.05);}
   /* 두 줄 같은 크기 — 굵기만 차이 */
-  #itemsec .h-sec{font-size:min(5.4vw, 48px);}
   #itemsec .h-sec br{display:none;}
   #itemsec .h-sec .soft{display:block; margin-bottom:6px; font-weight:400;
     letter-spacing:-.4px; white-space:nowrap;}
@@ -482,12 +478,10 @@
   .gd.dark{background:linear-gradient(140deg,#0D2E9C 0%,#051643 52%,#01113F 100%);
     box-shadow:0 16px 34px rgba(2,10,40,.30), 0 3px 8px rgba(2,10,40,.18);}
   /* 신뢰 · 후기 제목 — 두 줄 같은 크기 */
-  #trustsec .h-sec{font-size:min(6.8vw, 48px);}
   #trustsec .h-sec br{display:none;}
   #trustsec .h-sec .soft,
   #rvsec .h-sec .soft{display:block; margin-bottom:6px; font-weight:400;
     letter-spacing:-.4px; white-space:nowrap;}
-  #rvsec .h-sec{font-size:min(6.6vw, 48px);}
   #rvsec{background:#F7F8FA;}
   /* 모바일 — 후기 단락은 내용만큼만 */
   @media(max-width:767px){
@@ -535,6 +529,10 @@
   /* 달력 · 시계 아이콘은 오른쪽으로 조금 더 */
   @media(min-width:900px){ .rz.alt .fig, .rzgrid .rz:last-child .fig{right:-18px;} }
   @media(max-width:899px){ .rz.alt .fig, .rzgrid .rz:last-child .fig{right:2px;} }
+  /* ===== 단락 제목 크기 표준 — 전 단락 동일 ===== */
+  #whysec .h-sec, #itemsec .h-sec, #featsec .h-sec,
+  #howto .h-sec, #trustsec .h-sec, #rvsec .h-sec, #endcta .h-sec{
+    font-size:min(5.5vw, 48px);}
 </style>
 </head>
 <body>
@@ -580,7 +578,7 @@
   <section class="sec tight" id="whysec">
     <div class="wrap">
       <div class="head">
-        <h2 class="h-sec"><span class="soft">불편한 현금거래 때문에 고민이신가요?</span><br>이제 <span class="hl">랜선페이</span>에게 맡겨보세요</h2>
+        <h2 class="h-sec"><span class="soft">불편한 현금거래가 고민이신가요?</span><br>이제 <span class="hl">랜선페이</span>에게 맡겨보세요</h2>
       </div>
       <div class="whygrid">
         <div class="uc">
