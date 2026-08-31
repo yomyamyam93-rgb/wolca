@@ -359,19 +359,23 @@
   .srow h4 em{font-style:normal; color:var(--primary);}
   .srow p{margin-top:10px; font-size:15.5px; line-height:1.8; color:var(--sub);}
 
-  /* ⑧ 마무리 — 파란 바탕에 흰 글 · 흰 버튼 */
-  #endcta{background:var(--primary); background:var(--grad);}
-  #endcta .eyebrow{color:rgba(255,255,255,.8);}
-  #endcta .h-sec{color:#fff;}
-  #endcta .h-sec .hl{color:#fff;}
-  #endcta .head p{color:rgba(255,255,255,.88);}
+  /* ⑧ 마무리 — 밝은 카드 이미지 배경 · 어두운 글 */
+  #endcta{background-color:#F2F3F8;
+    background-image:url('img/cta-bg.jpg');
+    background-size:cover; background-position:center 72%; background-repeat:no-repeat;
+    justify-content:flex-start; padding-top:120px;}
+  #endcta .eyebrow{color:var(--primary-600);}
+  #endcta .h-sec{color:var(--ink);}
+  #endcta .h-sec .hl{color:var(--primary);}
+  #endcta .head p{color:var(--sub);}
   .ctaend{display:flex; justify-content:center; gap:10px; flex-wrap:nowrap;}
   @media(max-width:639px){ .ctaend .btn{flex:1; max-width:220px; padding:0 8px; font-size:14.5px; height:48px;} }
   .btn-ghostw{background:transparent; border:1px solid rgba(255,255,255,.6); color:#fff;}
   #endcta .head + *{margin-top:28px;}
   @media(min-width:768px){ #endcta .head + *{margin-top:36px;} }
-  #endcta .btn.btn-primary{background:#fff; color:var(--primary-600);
-    box-shadow:0 10px 26px rgba(5,12,24,.22);}
+  #endcta .btn.btn-primary{background:var(--primary); background:var(--grad); color:#fff;
+    box-shadow:0 10px 26px rgba(21,111,249,.32);}
+  #endcta .btn-ghostw{background:#fff; border:1px solid var(--line); color:var(--ink);}
 
   /* ⑦ 후기 — 두 줄이 한 칸씩 자동으로 밀린다 (아랫줄은 반대 방향 · 올리면 멈춤) */
   .rvband{margin-top:56px; overflow-x:clip; overflow-y:visible;}
