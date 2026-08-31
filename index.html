@@ -522,8 +522,8 @@
     .rzgrid{display:flex; gap:12px; overflow-x:auto; scroll-snap-type:x mandatory;
       -webkit-overflow-scrolling:touch; scrollbar-width:none; padding-bottom:6px;}
     .rzgrid::-webkit-scrollbar{display:none;}
-    .rz{flex:0 0 100%; scroll-snap-align:start; position:relative; overflow:hidden;
-      padding:26px 22px 185px;}
+    .rz{flex:0 0 100%; scroll-snap-align:start; scroll-snap-stop:always;
+      position:relative; overflow:hidden; padding:26px 22px 185px;}
     .rz .fig{display:block; position:absolute; right:8px; bottom:10px;
       max-width:165px; max-height:165px; width:auto; height:auto;}
     .plus{display:none;}
@@ -1111,6 +1111,33 @@
     닫기();
   });
   딤.addEventListener('click', 닫기);
+})();
+</script>
+<script>
+/* 기능 카드 — 마우스 드래그로도 넘기기 (놓으면 한 장에 딱 맞게 스냅) */
+(function(){
+  var 판=document.querySelector('.rzgrid');
+  if(!판) return;
+  var 눌림=false, 시작X=0, 시작S=0, 움직임=false;
+  판.addEventListener('pointerdown', function(e){
+    if(e.pointerType!=='mouse') return;
+    눌림=true; 움직임=false; 시작X=e.clientX; 시작S=판.scrollLeft;
+    판.style.scrollSnapType='none'; 판.style.scrollBehavior='auto';
+  });
+  window.addEventListener('pointermove', function(e){
+    if(!눌림) return;
+    if(Math.abs(e.clientX-시작X)>4) 움직임=true;
+    판.scrollLeft=시작S-(e.clientX-시작X);
+  });
+  window.addEventListener('pointerup', function(){
+    if(!눌림) return;
+    눌림=false;
+    var 폭=판.clientWidth+12;
+    var i=Math.round(판.scrollLeft/폭);
+    판.style.scrollBehavior='smooth';
+    판.scrollLeft=i*폭;
+    setTimeout(function(){ 판.style.scrollSnapType=''; 판.style.scrollBehavior=''; }, 350);
+  });
 })();
 </script>
 </body>
