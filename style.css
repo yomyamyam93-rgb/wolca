@@ -8,7 +8,6 @@
   /* 브랜드색 — 사장님 색으로 바꾸려면 여기만 (가이드 2장) */
   --primary:#2563EB; --primary-600:#1D4ED8; --primary-700:#1E40AF;
   --primary-50:#EFF4FF; --primary-100:#DBE7FF;
-  --mint:#00C471; --mint-600:#00A45E;   /* 민트 포인트 */
 
   /* 회색 (가이드 2장) */
   --bg:#F4F5F6; --card:#FFFFFF; --line:#ECEEF1; --border:#B1B8BE;
