@@ -31,9 +31,9 @@
   .hero .lead b{color:var(--ink);}
   /* 버튼은 알약형 — 레퍼런스와 같은 꼴 */
   .hero .btn{margin-top:34px; height:56px; font-size:17px; padding:0 34px; border-radius:8px;}
-  @media(min-width:768px){ .hero{padding:7vw 0 38vw;} .hero .lead{font-size:20px;} }
+  @media(min-width:768px){ .hero{padding:7vw 0 31vw;} .hero .lead{font-size:20px;} }
   /* 스크롤 유도 — 마우스 모양 + 문구 */
-  .sdown{position:absolute; left:50%; bottom:14px; transform:translateX(-50%);
+  .sdown{position:absolute; left:50%; bottom:36px; transform:translateX(-50%);
     display:flex; flex-direction:column; align-items:center; gap:7px; pointer-events:none;}
   .sdown .mouse{width:24px; height:38px; border:2px solid var(--primary); border-radius:14px;
     display:flex; justify-content:center; opacity:.75;}
@@ -46,8 +46,8 @@
   /* 모바일 — 이미지 크게 · 가운데 정렬 */
   @media(max-width:767px){
     .hero{background-color:#FDFDFE; background-image:url('img/hero-bg10-m.jpg?v=5');
-      background-size:100% auto; background-position:center bottom;
-      padding:96px 0 96vw;}
+      background-size:116% auto; background-position:center bottom;
+      padding:88px 0 100vw;}
     .hero .hero2{text-align:center;}
     .hero .hleft{display:block;}
     .hero .hero2 .hbtns{justify-content:center; margin-top:22px; flex-wrap:nowrap;}
@@ -573,6 +573,7 @@
   }
   /* ===== 히어로 배치 고정 — 900px 미만은 전부 같은 규칙 (옛 순서 규칙 무효화) ===== */
   @media(max-width:899px){
+    .hero{min-height:0 !important;}
     .hero .hleft{display:block !important;}
     .hero .hero2{text-align:center !important;}
     .hero .hero2 .hbtns{justify-content:center !important; flex-wrap:nowrap;}
