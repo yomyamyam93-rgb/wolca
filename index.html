@@ -20,15 +20,22 @@
   .sec > .wrap{width:100%; min-width:0;}
 
   /* ① 히어로 — 가운데 한 마디 + 한 장씩 넘어가는 대화 카드 (레퍼런스 방식) */
-  .hero{background:var(--card); padding:88px 0 96px; overflow:clip;
+  .hero{position:relative; color:#fff; padding:96px 0 46vw; overflow:clip;
+    background-color:#000; background-image:url('img/hero-bg6.jpg?v=2');
+    background-size:100% auto; background-position:center bottom; background-repeat:no-repeat;
     min-height:calc(100vh - var(--appbar)); min-height:calc(100svh - var(--appbar));
-    display:flex; flex-direction:column; justify-content:center;}
+    display:flex; flex-direction:column; justify-content:flex-start;}
+  /* 텍스트는 위쪽 — 아래 이미지(카드 자리)와 안 겹치게 */
+  .hero .h-hero{color:#fff;}
+  .hero .h-hero .hl{color:#FFD34D;}
+  .hero .hlead{color:rgba(255,255,255,.85);}
+  .hero .hlead b{color:#fff;}
   .hero-top{text-align:center;}
   .hero .lead{margin-top:22px; font-size:17px; line-height:1.8; color:var(--sub);}
   .hero .lead b{color:var(--ink);}
   /* 버튼은 알약형 — 레퍼런스와 같은 꼴 */
   .hero .btn{margin-top:34px; height:56px; font-size:17px; padding:0 34px; border-radius:8px;}
-  @media(min-width:768px){ .hero{padding:128px 0 140px;} .hero .lead{font-size:20px;} }
+  @media(min-width:768px){ .hero{padding:120px 0 40vw;} .hero .lead{font-size:20px;} }
   /* 처음 열릴 때 위로 떠오르며 등장 (한 번만) */
   .hero-top > *{animation:heroUp .7s cubic-bezier(.22,.8,.3,1) both;}
   .hero-top > :nth-child(2){animation-delay:.08s;}
