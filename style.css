@@ -8,6 +8,7 @@
   /* 브랜드색 — 사장님 색으로 바꾸려면 여기만 (가이드 2장) */
   --primary:#2563EB; --primary-600:#1D4ED8; --primary-700:#1E40AF;
   --primary-50:#EFF4FF; --primary-100:#DBE7FF;
+  --point:#FF6B35; --point-600:#E4560F; --point-50:#FFF1EA;   /* 주황 포인트 — 혜택 · 강조 전용 */
 
   /* 회색 (가이드 2장) */
   --bg:#F4F5F6; --card:#FFFFFF; --line:#ECEEF1; --border:#B1B8BE;
@@ -71,6 +72,7 @@ img{max-width:100%;}
 /* ★★강조 세 가지 — 「이 단락에서 뭘 봐야 하나」를 눈에 박히게 */
 /* ① 파란 글자 — 제목 안에서 핵심 낱말만 */
 .hl{color:var(--primary);}
+.hlo{color:var(--point);}
 /* ③ 큰 숫자 — 단락의 결론이 숫자일 때 */
 .big{font-size:40px; font-weight:800; line-height:1.1; letter-spacing:-1.4px; color:var(--primary);}
 @media(min-width:768px){ .big{font-size:56px; letter-spacing:-2px;} }
@@ -169,7 +171,7 @@ main{flex:1 0 auto;}
    섹션 — 단락마다 「무엇을 강조하나」가 한눈에 보이게
    ============================================================ */
 .sec{padding:72px 0;}
-.sec.tint{background:#F7F8FA;}   /* 카드 그리드 구간만 — 흰 카드가 떠 보이게 */
+.sec.tint{background:#F4F8FF;}   /* 카드 그리드 구간만 — 흰 카드가 떠 보이게 */
 .sec.dark{background:var(--dark); color:#fff;}
 .sec.blue{background:var(--primary); color:#fff;}
 .sec.tight{padding:56px 0;}
