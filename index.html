@@ -571,6 +571,19 @@
   @media(max-width:767px){
     .hero .h-hero{font-size:min(7.7vw, 34px); white-space:nowrap; line-height:1.35;}
   }
+  /* ===== 히어로 배치 고정 — 900px 미만은 전부 같은 규칙 (옛 순서 규칙 무효화) ===== */
+  @media(max-width:899px){
+    .hero .hleft{display:block !important;}
+    .hero .hero2{text-align:center !important;}
+    .hero .hero2 .hbtns{justify-content:center !important; flex-wrap:nowrap;}
+    .hero .hbtns .btn{flex:0 0 auto !important; padding:0 22px;}
+  }
+  /* 중간 폭(태블릿) — 이미지가 아래 붙고 위 공백 없게 */
+  @media(min-width:768px) and (max-width:899px){
+    .hero{padding:88px 0 48vw;
+      background-image:url('img/hero-bg10.jpg?v=5');
+      background-size:130% auto; background-position:center bottom;}
+  }
 </style>
 </head>
 <body>
