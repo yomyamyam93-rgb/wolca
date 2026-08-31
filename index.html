@@ -55,8 +55,8 @@
 
   /* 1~7 USP 카드 — 파스텔 색 · 번호 · 쪽수 (레퍼런스 방식)
      화살표로 넘기고, 가만두면 자동으로 한 장씩 넘어간다 */
-  .ucband{margin-top:40px; overflow-x:clip; overflow-y:visible;}
-  @media(min-width:768px){ .ucband{margin-top:56px;} }
+  .ucband{margin-top:56px; overflow-x:clip; overflow-y:visible;}
+  @media(min-width:768px){ .ucband{margin-top:88px;} }
   .uctrack{display:flex; width:max-content; will-change:transform;}
   .uc{position:relative; width:min(86vw, 380px); min-height:260px; flex:0 0 auto; margin-right:16px;
     border-radius:8px; padding:26px; text-align:left;}
@@ -114,7 +114,7 @@
   .doc p{font-size:13.5px; line-height:1.6; color:var(--ink); white-space:nowrap;}
   @media(min-width:900px){ .doc p{font-size:15px;} }
   .doc p b{font-weight:700; color:var(--primary-600);}
-  .cocap{margin:36px 0 0; text-align:center; font-size:14.5px; font-weight:700; color:var(--sub);}
+  .cocap{margin:48px 0 0; text-align:center; font-size:14.5px; font-weight:700; color:var(--sub);}
   @media(min-width:768px){ .cocap{margin-top:36px; font-size:16.5px;} }
   .cocap b{color:var(--ink);}
   .cosec{padding:64px 0 72px; overflow:clip; background:#F7F8FA;}
@@ -155,8 +155,8 @@
     transition:width 2.6s cubic-bezier(.3,.6,.25,1);}
 
   /* ③ 카드사 — 로고가 끊김 없이 천천히 흐른다 (아래 줄은 반대 방향 · 올리면 멈춤) */
-  .cobelt{margin-top:48px; overflow:clip;}
-  @media(min-width:768px){ .cobelt{margin-top:64px;} }
+  .cobelt{margin-top:64px; overflow:clip;}
+  @media(min-width:768px){ .cobelt{margin-top:96px;} }
   .corow{display:flex; align-items:center; width:max-content; animation:coRoll 46s linear infinite;}
   @keyframes coRoll{to{transform:translateX(-50%);}}
   .corow img{height:30px; width:auto; object-fit:contain; margin:0 44px; -webkit-user-drag:none;}
@@ -270,8 +270,8 @@
     box-shadow:0 10px 26px rgba(5,12,24,.22);}
 
   /* ⑦ 후기 — 두 줄이 한 칸씩 자동으로 밀린다 (아랫줄은 반대 방향 · 올리면 멈춤) */
-  .rvband{margin-top:40px; overflow-x:clip; overflow-y:visible;}
-  @media(min-width:768px){ .rvband{margin-top:56px;} }
+  .rvband{margin-top:56px; overflow-x:clip; overflow-y:visible;}
+  @media(min-width:768px){ .rvband{margin-top:80px;} }
   .rvrow{display:flex; width:max-content; will-change:transform;}
   .rvrow + .rvrow{margin-top:24px;}
   /* 모바일에선 후기 한 줄만 */
