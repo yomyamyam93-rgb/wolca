@@ -37,8 +37,8 @@
     display:flex; flex-direction:column; align-items:center; gap:7px; pointer-events:none;}
   .sdown .mouse{width:24px; height:38px; border:2px solid var(--primary); border-radius:14px;
     display:flex; justify-content:center; opacity:.75;}
-  .sdown .mouse i{width:4px; height:8px; border-radius:4px; background:var(--primary);
-    margin-top:6px; animation:swheel 1.7s ease-in-out infinite;}
+  .sdown .mouse iconify-icon{font-size:15px; color:var(--primary);
+    margin-top:7px; animation:swheel 1.7s ease-in-out infinite;}
   @keyframes swheel{0%{transform:translateY(0); opacity:1;} 70%{transform:translateY(13px); opacity:0;} 100%{opacity:0;}}
   .sdown b{font-size:10.5px; font-weight:700; letter-spacing:2.5px; color:var(--primary); opacity:.7;}
 
@@ -402,7 +402,7 @@
       </div>
     </div>
 
-    <div class="sdown" aria-hidden="true"><span class="mouse"><i></i></span><b>SCROLL DOWN</b></div>
+    <div class="sdown" aria-hidden="true"><span class="mouse"><iconify-icon icon="mingcute:arrow-down-line"></iconify-icon></span><b>SCROLL DOWN</b></div>
   </section>
 
   <!-- ===== 랜선페이를 써야 하는 이유 — 1~7 펼침 ===== -->
