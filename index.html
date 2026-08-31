@@ -153,6 +153,14 @@
       align-content:center;}
     #itemsec .itgrid{margin-top:52px;}
   }
+  /* 기능 단락 제목 — 얇은 1줄 + 굵은 1줄 */
+  #featsec .h-sec br{display:none;}
+  #featsec .h-sec .soft{display:block; margin-bottom:8px; font-weight:400;
+    letter-spacing:-.4px; font-size:min(2.2vw, 30px); white-space:nowrap;}
+  @media(max-width:767px){
+    #featsec .h-sec{font-size:min(6vw, 23px);}
+    #featsec .h-sec .soft{font-size:min(3.9vw, 15px);}
+  }
   /* 설명 패널 — 위아래 호흡 · 3D 느낌 */
   #itemsec .itl p{margin-top:14px;}
   #itemsec .itl .btn{margin-top:28px;}
@@ -524,8 +532,7 @@
   <section class="sec tint" id="featsec">
     <div class="wrap">
       <div class="head">
-        <span class="eyebrow">랜선페이만의 기능 3가지</span>
-        <h2 class="h-sec">어떤 결제든<br><span class="hl">해결할 수 있어요</span></h2>
+        <h2 class="h-sec"><span class="soft">분할결제 · 예약결제 · 24시간 송금 기능까지</span><br>어떤 결제든 <span class="hl">해결</span>할 수 있어요</h2>
         <p>여러 카드로 나눠 내고 원하는 날짜에 맞춰<br>365일 언제든 보낼 수 있어요</p>
       </div>
 
