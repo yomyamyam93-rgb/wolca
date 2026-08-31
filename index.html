@@ -567,6 +567,10 @@
   #endcta .h-sec br{display:none;}
   #endcta .h-sec .soft{display:block; margin-bottom:6px; font-weight:400;
     letter-spacing:-.4px; white-space:nowrap;}
+  /* 히어로 제목 — 모바일에서 딱 2줄에 맞게 크기 자동 */
+  @media(max-width:767px){
+    .hero .h-hero{font-size:min(7.7vw, 34px); white-space:nowrap; line-height:1.35;}
+  }
 </style>
 </head>
 <body>
