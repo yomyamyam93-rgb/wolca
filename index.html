@@ -476,6 +476,17 @@
     box-shadow:0 14px 30px rgba(15,23,42,.08), 0 3px 8px rgba(15,23,42,.04);}
   .gd.dark{background:linear-gradient(140deg,#0D2E9C 0%,#051643 52%,#01113F 100%);
     box-shadow:0 16px 34px rgba(2,10,40,.30), 0 3px 8px rgba(2,10,40,.18);}
+  /* 신뢰 · 후기 제목 — 두 줄 같은 크기 */
+  #trustsec .h-sec{font-size:min(4.6vw, 48px);}
+  #trustsec .h-sec br{display:none;}
+  #trustsec .h-sec .soft,
+  #rvsec .h-sec .soft{display:block; margin-bottom:6px; font-weight:400;
+    letter-spacing:-.4px; white-space:nowrap;}
+  #rvsec .h-sec{font-size:min(4.8vw, 48px);}
+  #rvsec .h-sec br{display:none;}
+  /* 신뢰 카드 4장 — 3D 느낌 */
+  .srow{background:linear-gradient(180deg,#FFFFFF,#F8FAFE);
+    box-shadow:0 14px 30px rgba(15,23,42,.08), 0 3px 8px rgba(15,23,42,.04);}
 </style>
 </head>
 <body>
@@ -710,7 +721,7 @@
     <div class="wrap">
       <div class="head">
         <span class="eyebrow">금융위원회 등록 정식 PG</span>
-        <h2 class="h-sec"><span class="hl">믿고 맡길 수 있는 전문가</span><br>아무 걱정하실 필요 없어요</h2>
+        <h2 class="h-sec"><span class="soft">믿고 맡길 수 있는 전문가</span><br>아무 <span class="hl">걱정</span>하실 필요 없어요</h2>
       </div>
 
       <div class="sboard">
@@ -744,11 +755,10 @@
   </section>
 
   <!-- ===== ⑦ 후기 — 두 줄 자동 롤링 ===== -->
-  <section class="sec tint">
+  <section class="sec tint" id="rvsec">
     <div class="wrap">
       <div class="head">
-        <span class="eyebrow">실제 이용후기</span>
-        <h2 class="h-sec">평균 평점 <span class="hl">4.8점</span><br>찐 후기를 공개합니다</h2>
+        <h2 class="h-sec"><span class="soft">이미 42,000명이 선택했어요</span><br>평균 평점 <span class="hl">4.8점</span> 찐 후기</h2>
       </div>
     </div>
     <div class="rvband">
