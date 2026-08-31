@@ -242,8 +242,10 @@
   @media(min-width:900px){ .sboard h3{font-size:31px;} }
   .sboard .d{margin-top:14px; font-size:15.5px; line-height:1.85; color:rgba(255,255,255,.88); max-width:420px;}
   /* 결제 현황 — 3D 그림 한 장 (자물쇠 방패가 왼쪽에 겹쳐진 카드) */
-  .simg{align-self:center; font-size:140px; line-height:1; color:rgba(255,255,255,.30);}
-  @media(min-width:900px){ .simg{position:absolute; right:96px; bottom:20px; font-size:220px;} }
+  .simg{width:100%; max-width:340px; height:auto; align-self:center;
+    filter:drop-shadow(0 14px 28px rgba(5,12,24,.22));}
+  @media(min-width:900px){ .simg{position:absolute; right:64px; bottom:-52px;
+    width:396px; max-width:none; align-self:auto;} }
 
   /* 아래 : 흰 카드 4장 (2×2) — 제목이 주인공 · 설명은 짧게 */
   .srows{display:grid; gap:24px; margin-top:24px;}
@@ -585,7 +587,7 @@
           <h3>전자금융거래법 준수<br>정식 등록 결제대행사</h3>
           <p class="d">결제 대금은 이용자가 지정한 계좌로만 송금됩니다. 대출이나 현금서비스가 아닌 정식 결제 서비스예요.</p>
         </div>
-        <iconify-icon class="simg" icon="mingcute:safe-shield-fill" aria-hidden="true"></iconify-icon>
+        <img class="simg" src="img/status3d.png" alt="">
       </div>
 
       <div class="srows">
