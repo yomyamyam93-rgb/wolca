@@ -27,7 +27,7 @@
   --safe:env(safe-area-inset-bottom, 0px);
 
   /* 파란 버튼만 예외로 입체감 허용 (가이드 5장) */
-  --grad:linear-gradient(180deg, color-mix(in srgb, var(--primary) 84%, #fff), var(--primary));
+  --grad:linear-gradient(140deg, #4A8CFF 0%, #156FF9 42%, #0B2BC4 100%);   /* 카드 메탈 느낌 대각선 */
   --btn-shadow:0 4px 12px color-mix(in srgb, var(--primary) 28%, transparent), inset 0 1px 0 rgba(255,255,255,.18);
   --soft:0 2px 8px rgba(0,0,0,.06);   /* 가이드 5장 — 최대 그림자 */
 }
