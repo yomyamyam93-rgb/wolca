@@ -508,8 +508,11 @@
   #itemsec .itr-card{cursor:pointer; display:block;}
   #itemsec .itr-card:hover{transform:translateY(-3px); transition:transform .18s;}
   #itemsec .itpanel{position:relative;}
-  #itemsec .itpanel .parw{position:absolute; top:18px; right:20px; color:var(--primary);
-    display:flex; align-items:center; gap:5px; font-size:13.5px; font-weight:700; z-index:2;}
+  #itemsec .itpanel .parw{position:absolute; top:16px; right:16px; color:var(--primary-600);
+    display:flex; align-items:center; gap:5px; font-size:13.5px; font-weight:700; z-index:2;
+    background:var(--primary-50); border-radius:999px; padding:9px 15px;
+    transition:background .15s;}
+  #itemsec .itpanel .parw:hover{background:var(--primary-100);}
   #itemsec .itpanel .parw svg{width:15px; height:15px;}
   /* 모바일 — 패널 텍스트 좌측 정렬 */
   @media(max-width:899px){
