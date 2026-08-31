@@ -148,10 +148,13 @@
   @media(min-width:768px){ #itemsec{padding-top:104px; padding-bottom:104px;} #itemsec .head + *{margin-top:52px;} }
   /* PC — 좌측 항목 타일 · 우측 설명 패널 */
   @media(min-width:1000px){
-    #itemsec .wrap{display:grid; grid-template-columns:1fr 1fr; gap:0 32px; align-items:start;}
+    #itemsec .wrap{display:grid; grid-template-columns:1fr 1fr; gap:0 28px; align-items:stretch;}
+    #itemsec .wrap > *{min-width:0;}
     #itemsec .head{grid-column:1/-1;}
-    #itemsec .itgrid{grid-template-columns:repeat(4,1fr); gap:14px;}
-    #itemsec .itpanel{grid-template-columns:1fr; gap:26px; padding:34px 36px; margin-top:52px;}
+    #itemsec .itgrid{grid-template-columns:repeat(3,1fr); gap:14px; align-content:stretch;}
+    #itemsec .itpanel{grid-template-columns:1fr; gap:26px; padding:36px 38px; margin-top:52px;
+      align-content:center;}
+    #itemsec .itgrid{margin-top:52px;}
   }
   /* 얇은 안내 1줄 + 굵은 제목 1줄 */
   #itemsec .h-sec br{display:none;}
