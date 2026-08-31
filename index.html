@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>랜선페이 — 현금으로 내던 돈 이제 카드로</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
-<link rel="stylesheet" href="style.css?v=20">
+<link rel="stylesheet" href="style.css?v=21">
 <link rel="icon" type="image/png" href="img/logo3.png">
 <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 <script src="app.js?v=15"></script>
@@ -17,7 +17,7 @@
     padding:124px 0 calc(40px + 9vw); overflow:clip;}
   /* 어두운 배경 위 글씨는 흰색으로 */
   .hero .h-hero{color:#fff;}
-  .hero .h-hero .hl{color:var(--accent);}
+  .hero .h-hero .hl{color:#CCD0D8;}
   .hero .hlead{color:rgba(255,255,255,.85);}
   .hero .hlead b{color:#fff;}
   /* 아랫단 원호 — 화면 폭에 비례해 어디서나 같은 곡률 */
@@ -77,7 +77,7 @@
   @media(min-width:1000px){ .uc h3{font-size:22px;} }
   .uc p{margin-top:10px; font-size:14.5px; line-height:1.75; color:var(--sub);}
   @media(min-width:1000px){ .uc p{font-size:15px;} }
-  .uc .art{position:absolute; right:24px; bottom:24px; font-size:42px; line-height:1; color:var(--accent);}
+  .uc .art{position:absolute; right:24px; bottom:24px; font-size:42px; line-height:1; color:var(--primary);}
   @media(min-width:1000px){ .uc .art{font-size:52px; right:30px; bottom:30px;} }
 
   /* ② 항목 카드 — 설명과 핵심이 카드 안에 다 보인다 (레퍼런스식) */
@@ -139,7 +139,7 @@
   .it:hover{transform:translateY(-4px); box-shadow:0 10px 22px rgba(15,23,42,.10);}
   .it .tile{display:block; line-height:1;}
   .it .tile img{max-width:40px; max-height:40px; width:auto; height:auto;}
-  .it .tile iconify-icon{font-size:32px;}
+  .it .tile iconify-icon{font-size:32px; color:var(--primary);}
   .it.on .tile iconify-icon{color:#fff !important;}
   @media(max-width:767px){ .it .tile iconify-icon{font-size:26px;} }
   @media(min-width:768px){ .it .tile img{max-width:46px; max-height:46px;} }
@@ -429,18 +429,18 @@
       </div>
 
       <div class="itgrid">
-      <button class="it" type="button" data-n="월세"><span class="tile"><iconify-icon icon="mingcute:home-4-fill" style="color:#1D4ED8" aria-hidden="true"></iconify-icon></span><b>월세</b></button>
-      <button class="it" type="button" data-n="관리비"><span class="tile"><iconify-icon icon="mingcute:building-2-fill" style="color:#12B5A5" aria-hidden="true"></iconify-icon></span><b>관리비</b></button>
-      <button class="it" type="button" data-n="인건비"><span class="tile"><iconify-icon icon="mingcute:group-2-fill" style="color:#8B5CF6" aria-hidden="true"></iconify-icon></span><b>인건비</b></button>
-      <button class="it" type="button" data-n="보증금"><span class="tile"><iconify-icon icon="mingcute:safe-lock-fill" style="color:#22A45D" aria-hidden="true"></iconify-icon></span><b>보증금</b></button>
-      <button class="it" type="button" data-n="매입대금"><span class="tile"><iconify-icon icon="mingcute:box-2-fill" style="color:#F0A03C" aria-hidden="true"></iconify-icon></span><b>매입대금</b></button>
-      <button class="it" type="button" data-n="학원비"><span class="tile"><iconify-icon icon="mingcute:book-2-fill" style="color:#E85D75" aria-hidden="true"></iconify-icon></span><b>학원비</b></button>
-      <button class="it" type="button" data-n="학교공과금"><span class="tile"><iconify-icon icon="mingcute:mortarboard-fill" style="color:#5B8DEF" aria-hidden="true"></iconify-icon></span><b>학교공과금</b></button>
-      <button class="it" type="button" data-n="인테리어"><span class="tile"><iconify-icon icon="mingcute:paint-brush-fill" style="color:#EF6C4B" aria-hidden="true"></iconify-icon></span><b>인테리어</b></button>
-      <button class="it" type="button" data-n="이사"><span class="tile"><iconify-icon icon="mingcute:truck-fill" style="color:#0EA5B7" aria-hidden="true"></iconify-icon></span><b>이사</b></button>
-      <button class="it" type="button" data-n="청소비"><span class="tile"><iconify-icon icon="mingcute:broom-fill" style="color:#7CB342" aria-hidden="true"></iconify-icon></span><b>청소비</b></button>
-      <button class="it" type="button" data-n="중개수수료"><span class="tile"><iconify-icon icon="mingcute:key-2-fill" style="color:#A855F7" aria-hidden="true"></iconify-icon></span><b>중개수수료</b></button>
-      <button class="it" type="button" data-n="기타"><span class="tile"><iconify-icon icon="mingcute:more-2-fill" style="color:#64748B" aria-hidden="true"></iconify-icon></span><b>기타</b></button>
+      <button class="it" type="button" data-n="월세"><span class="tile"><iconify-icon icon="mingcute:home-4-fill" aria-hidden="true"></iconify-icon></span><b>월세</b></button>
+      <button class="it" type="button" data-n="관리비"><span class="tile"><iconify-icon icon="mingcute:building-2-fill" aria-hidden="true"></iconify-icon></span><b>관리비</b></button>
+      <button class="it" type="button" data-n="인건비"><span class="tile"><iconify-icon icon="mingcute:group-2-fill" aria-hidden="true"></iconify-icon></span><b>인건비</b></button>
+      <button class="it" type="button" data-n="보증금"><span class="tile"><iconify-icon icon="mingcute:safe-lock-fill" aria-hidden="true"></iconify-icon></span><b>보증금</b></button>
+      <button class="it" type="button" data-n="매입대금"><span class="tile"><iconify-icon icon="mingcute:box-2-fill" aria-hidden="true"></iconify-icon></span><b>매입대금</b></button>
+      <button class="it" type="button" data-n="학원비"><span class="tile"><iconify-icon icon="mingcute:book-2-fill" aria-hidden="true"></iconify-icon></span><b>학원비</b></button>
+      <button class="it" type="button" data-n="학교공과금"><span class="tile"><iconify-icon icon="mingcute:mortarboard-fill" aria-hidden="true"></iconify-icon></span><b>학교공과금</b></button>
+      <button class="it" type="button" data-n="인테리어"><span class="tile"><iconify-icon icon="mingcute:paint-brush-fill" aria-hidden="true"></iconify-icon></span><b>인테리어</b></button>
+      <button class="it" type="button" data-n="이사"><span class="tile"><iconify-icon icon="mingcute:truck-fill" aria-hidden="true"></iconify-icon></span><b>이사</b></button>
+      <button class="it" type="button" data-n="청소비"><span class="tile"><iconify-icon icon="mingcute:broom-fill" aria-hidden="true"></iconify-icon></span><b>청소비</b></button>
+      <button class="it" type="button" data-n="중개수수료"><span class="tile"><iconify-icon icon="mingcute:key-2-fill" aria-hidden="true"></iconify-icon></span><b>중개수수료</b></button>
+      <button class="it" type="button" data-n="기타"><span class="tile"><iconify-icon icon="mingcute:more-2-fill" aria-hidden="true"></iconify-icon></span><b>기타</b></button>
       </div>
 
       <div class="itpanel">
