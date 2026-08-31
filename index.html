@@ -367,6 +367,11 @@
   #endcta:before{content:''; position:absolute; left:0; right:0; top:0; height:200px;
     background:linear-gradient(180deg, #F7F8FA 0%, rgba(247,248,250,0) 100%); pointer-events:none;}
   #endcta .wrap{position:relative; z-index:1;}
+  /* 모바일 — 글은 위로 · 이미지는 아래 전용 구역으로 분리 */
+  @media(max-width:767px){
+    #endcta{min-height:0; padding-top:76px; padding-bottom:96vw;
+      background-size:170% auto; background-position:center bottom;}
+  }
   #endcta .eyebrow{color:var(--primary-600);}
   #endcta .h-sec{color:var(--ink);}
   #endcta .h-sec .hl{color:var(--primary);}
