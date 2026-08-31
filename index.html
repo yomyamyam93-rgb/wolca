@@ -466,9 +466,9 @@
   /* 밴드 우측 3D 아이콘 */
   .rz .fig{display:none;}
   @media(min-width:900px){
-    .rz .fig{display:block; grid-column:2; grid-row:1 / span 4;
-      align-self:center; justify-self:center;
-      max-width:190px; max-height:185px; width:auto; height:auto;}
+    .rz{position:relative; overflow:hidden;}
+    .rz .fig{display:block; position:absolute; right:-30px; bottom:-45px;
+      max-width:265px; max-height:265px; width:auto; height:auto;}
   }
   /* 이용 방법 카드 — 3D 느낌 */
   .gd{background:linear-gradient(180deg,#FFFFFF,#F8FAFE);
