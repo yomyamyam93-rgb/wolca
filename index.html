@@ -16,13 +16,17 @@
   .hero{position:relative; background-color:#0C1E8F;
     background-image:linear-gradient(rgba(3,10,46,.38), rgba(3,10,46,.52)), url('img/hero-bg4.jpg');
     background-size:cover; background-position:center;
-    padding:124px 0 calc(40px + 5vw); overflow:clip;}
+    padding:158px 0 calc(84px + 5vw); overflow:clip;}
   /* 어두운 배경 위 글씨는 흰색으로 */
   .hero .h-hero{color:#fff;}
   .hero .h-hero br{display:none;}
   @media(max-width:899px){
     .hero .hero2{text-align:center;}
     .hero .hero2 .hbtns{justify-content:center;}
+  }
+  /* 모바일 — 세로 화면용으로 따로 자른 배경 (가로 눌림 방지) */
+  @media(max-width:767px){
+    .hero{background-image:linear-gradient(rgba(3,10,46,.38), rgba(3,10,46,.52)), url('img/hero-bg4-m.jpg');}
   }
   .hero .h-hero .soft{display:block; margin-bottom:4px; font-weight:400;
     letter-spacing:-.4px; font-size:.94em;}
