@@ -519,11 +519,10 @@
   #itemsec .itr-card .btn{width:100%; margin-top:auto; background:#fff; color:var(--primary-600); box-shadow:0 6px 16px rgba(5,12,24,.18);}
   /* 기능 카드 — 모바일: 가로 스와이프 + 아이콘 표시 */
   @media(max-width:899px){
-    .rzgrid{display:flex; gap:12px; overflow-x:auto; scroll-snap-type:x mandatory;
-      -webkit-overflow-scrolling:touch; scrollbar-width:none; padding-bottom:6px;}
-    .rzgrid::-webkit-scrollbar{display:none;}
-    .rz{flex:0 0 100%; scroll-snap-align:start; scroll-snap-stop:always;
-      position:relative; overflow:hidden; padding:26px 22px 185px;}
+    #featsec .wrap{overflow:clip;}
+    .rzgrid{display:flex; gap:0; touch-action:pan-y; will-change:transform;}
+    .rz{flex:0 0 100%; position:relative; overflow:hidden; padding:26px 22px 185px;
+      margin-right:0;}
     .rz .fig{display:block; position:absolute; right:8px; bottom:10px;
       max-width:165px; max-height:165px; width:auto; height:auto;}
     .plus{display:none;}
@@ -1123,41 +1122,47 @@
 })();
 </script>
 <script>
-/* 기능 카드 — 스크롤이 멈추면 무조건 가장 가까운 카드에 딱 붙인다 (터치 · 마우스 공통) */
+/* 기능 카드 — 모바일 슬라이더: 트랙을 통째로 밀어서 항상 한 장이 꽉 찬다 */
 (function(){
   var 판=document.querySelector('.rzgrid');
   if(!판) return;
-  var 카드들=판.querySelectorAll('.rz');
-  var 눌림=false, 시작X=0, 시작S=0, 타이머=null, 붙는중=false;
-  function 붙이기(){
-    if(눌림) return;
-    var 지금=판.scrollLeft, 최소=1e9, 목표=0;
-    카드들.forEach(function(c){
-      var d=Math.abs(c.offsetLeft-지금);
-      if(d<최소){최소=d; 목표=c.offsetLeft;}
-    });
-    if(Math.abs(목표-지금)<2) return;
-    붙는중=true;
-    판.scrollTo({left:목표, behavior:'smooth'});
-    setTimeout(function(){붙는중=false;}, 420);
+  var N=판.querySelectorAll('.rz').length, i=0;
+  var 모바일=window.matchMedia('(max-width:899px)');
+  function 이동(부드럽게){
+    판.style.transition=부드럽게?'transform .35s cubic-bezier(.3,.6,.25,1)':'none';
+    판.style.transform='translateX('+(-i*100)+'%)';
   }
-  판.addEventListener('scroll', function(){
-    if(붙는중) return;
-    clearTimeout(타이머);
-    타이머=setTimeout(붙이기, 130);
-  }, {passive:true});
+  var 눌림=false, 시작X=0, 시작Y=0, 가로중=null;
   판.addEventListener('pointerdown', function(e){
-    if(e.pointerType!=='mouse') return;
-    눌림=true; 시작X=e.clientX; 시작S=판.scrollLeft;
+    if(!모바일.matches) return;
+    눌림=true; 가로중=null; 시작X=e.clientX; 시작Y=e.clientY;
+    판.style.transition='none';
   });
-  window.addEventListener('pointermove', function(e){
+  판.addEventListener('pointermove', function(e){
+    if(!눌림||!모바일.matches) return;
+    var dx=e.clientX-시작X, dy=e.clientY-시작Y;
+    if(가로중===null && (Math.abs(dx)>6||Math.abs(dy)>6)) 가로중=Math.abs(dx)>Math.abs(dy);
+    if(!가로중) return;
+    e.preventDefault();
+    판.style.transform='translateX(calc('+(-i*100)+'% + '+dx+'px))';
+  });
+  function 끝내기(e){
     if(!눌림) return;
-    판.scrollLeft=시작S-(e.clientX-시작X);
-  });
-  window.addEventListener('pointerup', function(){
-    if(!눌림) return;
-    눌림=false; 붙이기();
-  });
+    눌림=false;
+    if(!모바일.matches) return;
+    var dx=e.clientX-시작X;
+    if(가로중 && Math.abs(dx)>50) i+= dx<0?1:-1;
+    i=Math.max(0, Math.min(N-1, i));
+    이동(true);
+  }
+  판.addEventListener('pointerup', 끝내기);
+  판.addEventListener('pointercancel', 끝내기);
+  function 맞춤(){
+    if(모바일.matches){ 이동(false); }
+    else { 판.style.transition='none'; 판.style.transform='none'; i=0; }
+  }
+  모바일.addEventListener('change', 맞춤);
+  맞춤();
 })();
 </script>
 </body>
