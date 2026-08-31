@@ -540,18 +540,6 @@
   #endcta .h-sec br{display:none;}
   #endcta .h-sec .soft{display:block; margin-bottom:6px; font-weight:400;
     letter-spacing:-.4px; white-space:nowrap;}
-  #endcta .head{position:relative;}
-  .endeco{position:absolute; z-index:1; background:#fff; color:var(--primary-600);
-    padding:9px 16px; border-radius:999px; font-size:13.5px; font-weight:700; letter-spacing:-.2px;
-    box-shadow:0 8px 20px rgba(15,23,42,.14); animation:edFloat 3.8s ease-in-out infinite alternate;}
-  .ed1{left:4%; top:-16px; transform:rotate(-7deg);}
-  .ed2{right:4%; top:42px; transform:rotate(6deg); animation-delay:1.4s;}
-  @keyframes edFloat{from{margin-top:0;} to{margin-top:10px;}}
-  @media(max-width:767px){
-    .endeco{font-size:11.5px; padding:7px 12px;}
-    .ed1{left:0; top:-34px;}
-    .ed2{right:0; top:auto; bottom:-40px;}
-  }
 </style>
 </head>
 <body>
@@ -877,9 +865,12 @@
   <section class="sec" id="endcta">
     <div class="wrap">
       <div class="head">
-        <span class="endeco ed1" aria-hidden="true">평균 5분 송금</span>
-        <span class="endeco ed2" aria-hidden="true">무이자 최대 7개월</span>
         <h2 class="h-sec"><span class="soft">준비물은 카드 한 장</span><br>지금 바로 <span class="hl">시작</span>하세요</h2>
+        <ul class="hchecks">
+          <li><i>✓</i>가입부터 송금까지 10분이면 충분</li>
+          <li><i>✓</i>평균 5분 안에 입금 완료</li>
+          <li><i>✓</i>송금 전이라면 100% 취소 가능</li>
+        </ul>
       </div>
       <div class="ctaend">
         <a class="btn btn-primary" href="app.html"><img class="btn-logo" src="img/logo3-white.png" alt="">바로 송금하기</a>
