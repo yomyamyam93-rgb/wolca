@@ -13,8 +13,7 @@
   /* ===== 이 페이지에만 쓰는 것 ===== */
 
   /* ① 히어로 — 가운데 한 마디 + 한 장씩 넘어가는 대화 카드 (레퍼런스 방식) */
-  .hero{position:relative; color:var(--ink); padding:112px 0 132px; overflow:clip;
-    clip-path:polygon(0 0, 100% 0, 100% calc(100% - 5vw), 50% 100%, 0 calc(100% - 5vw));
+  .hero{position:relative; color:var(--ink); padding:104px 0 96px; overflow:clip;
     background:#E9EDF9;}
   .hero .wrap{position:relative; z-index:1;}
   .hero .h-hero{color:var(--ink);}
@@ -24,7 +23,7 @@
   .hero .lead b{color:var(--ink);}
   /* 버튼은 알약형 — 레퍼런스와 같은 꼴 */
   .hero .btn{margin-top:34px; height:56px; font-size:17px; padding:0 34px; border-radius:8px;}
-  @media(min-width:768px){ .hero{padding:180px 0 210px;} .hero .lead{font-size:20px;} }
+  @media(min-width:768px){ .hero{padding:140px 0 150px;} .hero .lead{font-size:20px;} }
   /* 처음 열릴 때 위로 떠오르며 등장 (한 번만) */
   .hero-top > *{animation:heroUp .7s cubic-bezier(.22,.8,.3,1) both;}
   .hero-top > :nth-child(2){animation-delay:.08s;}
@@ -61,20 +60,7 @@
   @media(min-width:768px){ .heye{font-size:16px; padding:10px 20px; margin-bottom:24px;} }
 
 
-  /* 가운데 원형 CTA — 헤더 경계에 반쯤 걸친다 */
-  .hctaw{position:relative; z-index:5; display:flex; justify-content:center; margin-top:-79px;}
-  .hcta{width:158px; height:158px; border-radius:999px; border:3px solid #fff;
-    background:var(--primary); background:var(--grad); color:#fff;
-    display:flex; flex-direction:column; align-items:center; justify-content:center;
-    font-size:17.5px; font-weight:800; line-height:1.4; text-align:center; letter-spacing:-.3px;
-    box-shadow:0 18px 40px rgba(37,99,235,.35); transition:transform .2s;}
-  .hcta:hover{transform:scale(1.05);}
-  .hcta iconify-icon{font-size:23px; margin-top:5px;}
-  @media(max-width:767px){
-    .hctaw{margin-top:-67px;}
-    .hcta{width:134px; height:134px; font-size:15.5px;}
-    .hcta iconify-icon{font-size:20px;}
-  }
+  .hero .hbtns{justify-content:center;}
   .btn-line{background:#fff; border:1px solid var(--line); color:var(--ink);}
   /* 영상 틀 — 원본의 흰 여백을 잘라내고 내용물을 크게 */
   .hvid{overflow:hidden; border-radius:8px;}
@@ -390,15 +376,14 @@
         <p class="heye">월세 · 관리비 · 보증금 · 매입대금까지</p>
         <h1 class="h-hero">현금으로만 내던 돈<br>이제 <span class="hl">카드로 결제</span>하세요</h1>
         <p class="hlead"><b>카드로 결제하면 상대방 계좌로</b><br><b>현금이 입금되는 서비스</b>입니다</p>
+        <div class="hbtns">
+          <a class="btn btn-primary" href="app.html"><img class="btn-logo" src="img/logo3-white.png" alt="">바로 송금하기</a>
+          <a class="btn btn-line" href="guide.html">이용방법 보기</a>
+        </div>
       </div>
     </div>
 
   </section>
-
-  <!-- 가운데 원형 CTA — 헤더에 반쯤 걸친다 -->
-  <div class="hctaw">
-    <a class="hcta" href="app.html">바로<br>송금하기<iconify-icon icon="mingcute:arrow-right-line" aria-hidden="true"></iconify-icon></a>
-  </div>
 
   <!-- ===== 랜선페이를 써야 하는 이유 — 1~7 펼침 ===== -->
   <section class="sec tight" id="whysec">
