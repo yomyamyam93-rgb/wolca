@@ -21,7 +21,7 @@
 
   /* ① 히어로 — 가운데 한 마디 + 한 장씩 넘어가는 대화 카드 (레퍼런스 방식) */
   .hero{position:relative; color:var(--ink); padding:88px 0 42vw; overflow:clip;
-    background-color:#F6F7FB; background-image:url('img/hero-bg10.jpg?v=2');
+    background-color:#F6F7FB; background-image:url('img/hero-bg10.jpg?v=4');
     background-size:122% auto; background-position:center calc(100% + 2.5vw); background-repeat:no-repeat;
     min-height:calc(100vh - var(--appbar)); min-height:calc(100svh - var(--appbar));
     display:flex; flex-direction:column; justify-content:flex-start;}
@@ -45,7 +45,7 @@
 
   /* 모바일 — 이미지 크게 · 가운데 정렬 */
   @media(max-width:767px){
-    .hero{background-color:#FDFDFE; background-image:url('img/hero-bg10-m.jpg');
+    .hero{background-color:#FDFDFE; background-image:url('img/hero-bg10-m.jpg?v=4');
       background-size:100% auto; background-position:center bottom;
       padding:96px 0 96vw;}
     .hero .hero2{text-align:center;}
@@ -498,7 +498,7 @@
   .srow{background:linear-gradient(180deg,#FFFFFF,#F8FAFE);
     box-shadow:0 14px 30px rgba(15,23,42,.08), 0 3px 8px rgba(15,23,42,.04);}
   /* 서류 3줄 + 버튼 = 신용카드 한 장 */
-  #itemsec .itr-card{background:transparent url('img/card-face.png') center/100% 100% no-repeat;
+  #itemsec .itr-card{background:transparent url('img/card-face.png?v=2') center/100% 100% no-repeat;
     border:none; border-radius:0; aspect-ratio:1.492/1; padding:24px 28px;
     display:flex; flex-direction:column; justify-content:flex-end;
     filter:drop-shadow(0 16px 26px rgba(10,14,26,.38));}
