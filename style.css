@@ -6,14 +6,14 @@
 
 :root{
   /* 브랜드색 — 사장님 색으로 바꾸려면 여기만 (가이드 2장) */
-  --primary:#003366; --primary-600:#002850; --primary-700:#001F3F;
-  --accent:#00B4D8; --accent-2:#40E0D0;   /* 시안 · 터쿼이즈 포인트 */
-  --primary-50:#F0F8FF; --primary-100:#DCEEFB;
+  --primary:#1463F3; --primary-600:#0E4FC7; --primary-700:#0B3E9E;
+  --accent:#84A4FC;   /* 말리부 — 부드러운 포인트 */
+  --primary-50:#EEF3FF; --primary-100:#DCE6FE;
 
   /* 회색 (가이드 2장) */
-  --bg:#F4F5F6; --card:#FFFFFF; --line:#ECEEF1; --border:#B1B8BE;
-  --sub:#464C53; --ink:#001F3F; --placeholder:#8A9099; --icon-off:#9AA1AC;
-  --dark:#001F3F;                     /* 어두운 섹션 · 푸터 */
+  --bg:#F4F5F6; --card:#FFFFFF; --line:#ECEEF1; --border:#CCD0D8;
+  --sub:#464C53; --ink:#1D2023; --placeholder:#8A9099; --icon-off:#9AA1AC;
+  --dark:#1D2023;                     /* 어두운 섹션 · 푸터 */
 
   /* 의미색 (가이드 2장) — 뜻이 있을 때만 쓴다 */
   --success:#059669; --success-bg:#ECFDF3;
@@ -71,7 +71,7 @@ img{max-width:100%;}
 
 /* ★★강조 세 가지 — 「이 단락에서 뭘 봐야 하나」를 눈에 박히게 */
 /* ① 파란 글자 — 제목 안에서 핵심 낱말만 */
-.hl{color:var(--accent);}
+.hl{color:var(--primary);}
 /* ③ 큰 숫자 — 단락의 결론이 숫자일 때 */
 .big{font-size:40px; font-weight:800; line-height:1.1; letter-spacing:-1.4px; color:var(--primary);}
 @media(min-width:768px){ .big{font-size:56px; letter-spacing:-2px;} }

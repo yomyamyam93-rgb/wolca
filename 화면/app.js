@@ -166,7 +166,7 @@
     + '.ask-b button{flex:1; height:54px; border:none; border-radius:15px; font-family:inherit;'
     + ' font-size:15.5px; font-weight:700; cursor:pointer;}'
     + '.ask-no{background:#EEF1F4; color:#4E5968;}'
-    + '.ask-ok{background:#003366; color:#fff;}';
+    + '.ask-ok{background:#1463F3; color:#fff;}';
   var st = document.createElement('style'); st.textContent = CSS;
   document.head.appendChild(st);
 
