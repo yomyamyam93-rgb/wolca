@@ -441,7 +441,11 @@
   @media(min-width:900px){
     /* 레퍼런스식 — 좁은 박스 가운데 · 제목 위 설명 아래 */
     .rzgrid{grid-template-columns:1fr; gap:8px; max-width:880px; margin-left:auto; margin-right:auto;}
-    .rz{display:block; padding:46px 68px 50px; text-align:left;}
+    .rz{display:grid; grid-template-columns:1.35fr 1fr; column-gap:44px;
+      padding:46px 68px 50px; text-align:left;}
+    /* 왼쪽 열 = 텍스트 · 오른쪽 열 = 이미지 자리(현재 비움) */
+    .rz > *{grid-column:1;}
+    .rz .tab{grid-column:auto;}
     .rz .in{font-size:16px; margin-bottom:8px;}
     .rz h3{font-size:26px;}
     /* 제목 아래 포인트 밑줄 */
