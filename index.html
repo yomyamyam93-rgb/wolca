@@ -86,10 +86,13 @@
     font-size:15px; font-weight:600; color:var(--sub); letter-spacing:-.2px;}
   .hchecks i{font-style:normal; font-weight:800; color:var(--primary);}
   @media(min-width:768px){ .hchecks li{font-size:17px;} }
-  /* 메인 CTA — 그린 그라데이션 포인트 */
-  .hero .btn-primary{background:linear-gradient(140deg,#8CFFC2 0%,#4BEBA6 45%,#12C97F 100%);
-    color:#04382A; box-shadow:0 10px 24px rgba(18,201,127,.38);}
-  .hero .btn-primary .btn-logo{filter:brightness(0); opacity:.85;}
+  /* 메인 CTA — 그린 그라데이션 (윤기 + 깊이) */
+  .hero .btn-primary{background:linear-gradient(160deg,#43E695 0%,#16C97C 48%,#0A9E60 100%);
+    color:#fff; font-weight:800;
+    box-shadow:0 12px 26px rgba(14,180,106,.42), inset 0 1px 0 rgba(255,255,255,.38);
+    transition:transform .18s, box-shadow .18s;}
+  .hero .btn-primary:hover{transform:translateY(-2px);
+    box-shadow:0 16px 32px rgba(14,180,106,.5), inset 0 1px 0 rgba(255,255,255,.38);}
   .hbtns{display:flex; flex-wrap:wrap; gap:10px; margin-top:26px;}
   .hbtns .btn{margin-top:0;}
   .btn-line{background:#fff; border:1px solid var(--line); color:var(--ink);}
