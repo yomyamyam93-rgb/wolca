@@ -74,6 +74,14 @@
     filter:brightness(1.012); display:block;}
 
   /* 랜선페이를 써야 하는 이유 — 1~7 펼침 (파랑 3톤) */
+  /* 질문 1줄(얇게) + 제목 1줄 = 어떤 폭에서도 딱 2줄 */
+  #whysec .h-sec br{display:none;}
+  #whysec .h-sec .soft{display:block; margin-bottom:8px; font-weight:400;
+    letter-spacing:-.4px; font-size:min(2.2vw, 30px); white-space:nowrap;}
+  @media(max-width:767px){
+    #whysec .h-sec{font-size:min(6vw, 23px);}
+    #whysec .h-sec .soft{font-size:min(3.9vw, 15px);}
+  }
   .whygrid{display:grid; gap:14px;}
   @media(min-width:640px){ .whygrid{grid-template-columns:1fr 1fr; gap:18px;} }
   @media(min-width:1000px){ .whygrid{grid-template-columns:repeat(3,1fr); gap:20px;}
@@ -383,8 +391,7 @@
   <section class="sec tight" id="whysec">
     <div class="wrap">
       <div class="head">
-        <span class="eyebrow">이런 점이 다릅니다</span>
-        <h2 class="h-sec">랜선페이를 <span class="hl">써야 하는 이유</span></h2>
+        <h2 class="h-sec"><span class="soft">불편한 현금거래 · 계좌이체 때문에 고민이신가요?</span><br>이제 <span class="hl">랜선페이</span>에게 맡겨보세요</h2>
       </div>
       <div class="whygrid">
         <div class="uc uc-b">
