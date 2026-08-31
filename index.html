@@ -133,9 +133,11 @@
     mask-image:linear-gradient(90deg,transparent,#000 22%);}
   @media(max-width:767px){
     .uc.blue{min-height:230px;}
-    /* 넓은 원본을 오른쪽 절반 상자에 맞춰 잘라 넣는다 — 왼쪽 침범 방지 */
-    .uc.blue .coins{top:0; bottom:0; right:0; height:100%; width:54%;
-      transform:none; object-fit:cover; object-position:62% center;}
+    /* 동전 무리를 우측 하단에 — 흐림은 가장자리에만 살짝 */
+    .uc.blue .coins{top:auto; bottom:0; right:0; height:90%; width:56%;
+      transform:none; object-fit:cover; object-position:50% 100%;
+      -webkit-mask-image:linear-gradient(90deg,transparent,#000 13%);
+      mask-image:linear-gradient(90deg,transparent,#000 13%);}
   }
   .uc.blue h3{color:#fff;}
   .uc.blue p{color:rgba(255,255,255,.88);}
