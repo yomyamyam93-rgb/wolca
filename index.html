@@ -80,19 +80,13 @@
     filter:brightness(1.012); display:block;}
 
   /* 랜선페이를 써야 하는 이유 — 1~7 펼침 (파랑 3톤 + 주황 번호) */
-  #whysec .h-sec .soft{font-weight:400; letter-spacing:-.4px;}
-  /* 좁은 화면 — 질문 1줄 + 제목 1줄 = 딱 2줄 */
-  @media(max-width:1099px){
-    #whysec .h-sec br{display:none;}
-    #whysec .h-sec .soft{display:block; margin-bottom:8px;}
-  }
-  @media(min-width:768px) and (max-width:1099px){
-    #whysec .h-sec{font-size:38px;}
-    #whysec .h-sec .soft{font-size:24px;}
-  }
+  /* 질문 1줄 + 제목 1줄 = 어떤 폭에서도 딱 2줄 (글자가 폭에 맞춰 줄어든다) */
+  #whysec .h-sec br{display:none;}
+  #whysec .h-sec .soft{display:block; margin-bottom:8px; font-weight:400;
+    letter-spacing:-.4px; font-size:min(2.2vw, 30px); white-space:nowrap;}
   @media(max-width:767px){
-    #whysec .h-sec{font-size:23px;}
-    #whysec .h-sec .soft{font-size:15px;}
+    #whysec .h-sec{font-size:min(6vw, 23px);}
+    #whysec .h-sec .soft{font-size:min(3.9vw, 15px);}
   }
   .whygrid{display:grid; gap:14px;}
   @media(min-width:640px){ .whygrid{grid-template-columns:1fr 1fr; gap:18px;} }
