@@ -32,16 +32,20 @@
   /* 버튼은 알약형 — 레퍼런스와 같은 꼴 */
   .hero .btn{margin-top:34px; height:56px; font-size:17px; padding:0 34px; border-radius:8px;}
   @media(min-width:768px){ .hero{padding:7vw 0 38vw;} .hero .lead{font-size:20px;} }
-  /* 아래로 스크롤 유도 화살표 */
-  .sdown{position:absolute; left:50%; bottom:16px; transform:translateX(-50%);
-    font-size:30px; line-height:1; color:var(--primary); opacity:.7;
-    animation:sdb 1.6s ease-in-out infinite; pointer-events:none;}
-  @keyframes sdb{0%,100%{transform:translate(-50%,0);} 50%{transform:translate(-50%,10px);}}
+  /* 스크롤 유도 — 마우스 모양 + 문구 */
+  .sdown{position:absolute; left:50%; bottom:14px; transform:translateX(-50%);
+    display:flex; flex-direction:column; align-items:center; gap:7px; pointer-events:none;}
+  .sdown .mouse{width:24px; height:38px; border:2px solid var(--primary); border-radius:14px;
+    display:flex; justify-content:center; opacity:.75;}
+  .sdown .mouse i{width:4px; height:8px; border-radius:4px; background:var(--primary);
+    margin-top:6px; animation:swheel 1.7s ease-in-out infinite;}
+  @keyframes swheel{0%{transform:translateY(0); opacity:1;} 70%{transform:translateY(13px); opacity:0;} 100%{opacity:0;}}
+  .sdown b{font-size:10.5px; font-weight:700; letter-spacing:2.5px; color:var(--primary); opacity:.7;}
 
   /* 모바일 — 이미지 크게 · 가운데 정렬 */
   @media(max-width:767px){
-    .hero{background-size:245% auto; background-position:center calc(100% + 3vw);
-      padding:48px 0 88vw;}
+    .hero{background-size:245% auto; background-position:center calc(100% - 5vw);
+      padding:96px 0 80vw;}
     .hero .hero2{text-align:center;}
     .hero .hleft{display:block;}
     .hero .hero2 .hbtns{justify-content:center; margin-top:22px; flex-wrap:nowrap;}
@@ -398,7 +402,7 @@
       </div>
     </div>
 
-    <iconify-icon class="sdown" icon="mingcute:down-line" aria-hidden="true"></iconify-icon>
+    <div class="sdown" aria-hidden="true"><span class="mouse"><i></i></span><b>SCROLL DOWN</b></div>
   </section>
 
   <!-- ===== 랜선페이를 써야 하는 이유 — 1~7 펼침 ===== -->
