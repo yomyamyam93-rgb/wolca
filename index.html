@@ -437,7 +437,9 @@
     background:var(--primary); background:var(--grad); color:#fff;
     font-size:24px; font-weight:700; line-height:1;
     box-shadow:0 6px 16px rgba(5,12,24,.3);}
-  .rz.alt{background:var(--primary-100);}
+  .rz{background:linear-gradient(180deg,#FFFFFF,#F6F9FE);
+    box-shadow:0 16px 34px rgba(2,10,40,.38), 0 3px 8px rgba(2,10,40,.22);}
+  .rz.alt{background:linear-gradient(180deg,#E9F0FF,#DCE6FE);}
   .rz.alt li:before{color:var(--primary);}
   @media(min-width:900px){
     /* 레퍼런스식 — 좁은 박스 가운데 · 제목 위 설명 아래 */
@@ -578,7 +580,6 @@
 
       <div class="rzgrid">
         <div class="rz">
-          <span class="tab">분할결제</span>
           <div class="in">한도가 부족하다면?</div>
           <h3>여러 카드 분할결제</h3>
           <div class="dash"></div>
@@ -590,7 +591,6 @@
         </div>
         <div class="plus" aria-hidden="true">+</div>
         <div class="rz alt">
-          <span class="tab">송금 방식</span>
           <div class="in">원하는 시간에 알아서</div>
           <h3>예약결제 · 정기결제</h3>
           <div class="dash"></div>
@@ -602,7 +602,6 @@
         </div>
         <div class="plus" aria-hidden="true">+</div>
         <div class="rz">
-          <span class="tab">연중무휴</span>
           <div class="in">연중무휴</div>
           <h3>365일 24시간 송금</h3>
           <div class="dash"></div>
