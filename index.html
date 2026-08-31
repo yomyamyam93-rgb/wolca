@@ -55,10 +55,11 @@
   /* 히어로 정렬 — 늘 가운데 */
   .hero .hero2{text-align:center; justify-items:center;}
   @media(max-width:899px){ .hero .hero2{text-align:center;} .hero .hleft{display:block;} }
-  .heye{display:inline-block; background:#fff; color:var(--primary-600); border-radius:8px;
-    padding:9px 16px; font-size:14px; font-weight:700; letter-spacing:-.2px; margin-bottom:18px;
+  .heyes{display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-bottom:20px;}
+  .heyes span{display:inline-block; background:#fff; color:var(--primary-600); border-radius:999px;
+    padding:8px 16px; font-size:14px; font-weight:700; letter-spacing:-.2px;
     box-shadow:0 6px 16px rgba(5,12,24,.22);}
-  @media(min-width:768px){ .heye{font-size:16px; padding:10px 20px; margin-bottom:24px;} }
+  @media(min-width:768px){ .heyes{gap:10px; margin-bottom:26px;} .heyes span{font-size:16px; padding:10px 20px;} }
 
 
   /* 가운데 원형 CTA — 헤더 경계에 반쯤 걸친다 */
@@ -382,7 +383,7 @@
   <section class="hero">
     <div class="wrap hero2">
       <div class="hleft">
-        <p class="heye">월세 · 관리비 · 보증금 · 매입대금까지</p>
+        <div class="heyes"><span>월세</span><span>관리비</span><span>보증금</span><span>매입대금까지</span></div>
         <h1 class="h-hero">현금으로만 내던 돈<br>이제 <span class="hl">카드로 결제</span>하세요</h1>
         <p class="hlead"><b>카드로 결제하면 상대방 계좌로</b><br><b>현금이 입금되는 서비스</b>입니다</p>
       </div>
