@@ -23,6 +23,8 @@
   @media(max-width:899px){
     .hero .hero2{text-align:center;}
     .hero .hero2 .hbtns{justify-content:center;}
+    /* 순서 고정: 칩 → 제목 → 체크 → 버튼 */
+    .hero .hleft{display:block;}
   }
   /* 모바일 — 세로 화면용으로 따로 자른 배경 (가로 눌림 방지) */
   @media(max-width:767px){
@@ -30,6 +32,8 @@
       min-height:calc(100svh - var(--appbar));
       display:flex; flex-direction:column; justify-content:center;
       padding:40px 0 calc(60px + 8vw);}
+    .hpoints{gap:8px 12px; margin-top:18px;}
+    .hpoints span{font-size:12.5px;}
   }
   .hero .h-hero .soft{display:block; margin-bottom:2px;}
   .hero .h-hero .hl{color:#FF8A3D;}
