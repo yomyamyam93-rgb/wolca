@@ -83,14 +83,13 @@
     #whysec .h-sec .soft{font-size:min(3.9vw, 15px);}
   }
   .whygrid{display:grid; gap:14px;}
-  @media(min-width:640px){ .whygrid{grid-template-columns:1fr 1fr; gap:18px;} }
-  @media(min-width:1000px){ .whygrid{grid-template-columns:repeat(3,1fr); gap:20px;}
+  @media(min-width:640px){ .whygrid{grid-template-columns:1fr 1fr; gap:18px;}
     .whygrid .uc:last-child{grid-column:1/-1;} }
-  .uc{position:relative; border-radius:8px; padding:26px; text-align:left; min-height:225px;}
-  @media(min-width:1000px){ .uc{padding:30px; min-height:270px;} }
-  .uc-b{background:var(--primary-50);}
-  .uc-g{background:#E2ECFF;}
-  .uc-y{background:#D7E5FF;}
+  @media(min-width:1000px){ .whygrid{grid-template-columns:repeat(3,1fr); gap:20px;} }
+  /* 흰 카드 + 얇은 테두리 */
+  .uc{position:relative; border-radius:8px; padding:26px; text-align:left; min-height:210px;
+    background:#fff; border:1px solid var(--line);}
+  @media(min-width:1000px){ .uc{padding:30px; min-height:250px;} }
   .uc .no{display:inline-block; padding:6px 14px; border-radius:999px; color:#fff;
     font-size:13.5px; font-weight:700; letter-spacing:.5px; background:var(--primary-600);}
   .uc h3{margin-top:14px; font-size:20px; font-weight:800; letter-spacing:-.5px; line-height:1.35;}
@@ -99,6 +98,12 @@
   @media(min-width:1000px){ .uc p{font-size:15px;} }
   .uc .art{position:absolute; right:24px; bottom:24px; font-size:42px; line-height:1; color:var(--primary);}
   @media(min-width:1000px){ .uc .art{font-size:52px; right:30px; bottom:30px;} }
+  /* 파란 강조 카드 — 임대인 동의 불필요 */
+  .uc.blue{background:var(--primary); background:var(--grad); border-color:transparent;}
+  .uc.blue h3{color:#fff;}
+  .uc.blue p{color:rgba(255,255,255,.88);}
+  .uc.blue .no{background:#fff; color:var(--primary-600);}
+  .uc.blue .art{color:rgba(255,255,255,.95);}
 
   /* ② 항목 카드 — 설명과 핵심이 카드 안에 다 보인다 (레퍼런스식) */
   /* ② 결제 항목 — 아이콘 타일 나열 · 누르면 그 항목으로 결제 화면 이동
@@ -394,47 +399,29 @@
         <h2 class="h-sec"><span class="soft">불편한 현금거래 · 계좌이체 때문에 고민이신가요?</span><br>이제 <span class="hl">랜선페이</span>에게 맡겨보세요</h2>
       </div>
       <div class="whygrid">
-        <div class="uc uc-b">
+        <div class="uc">
           <span class="no">01</span>
-          <h3>임대인 동의 불필요</h3>
-          <p>집주인 동의나 가입 없이<br>보내는 분 이름 그대로<br>계좌에 현금이 입금돼요</p>
-          <iconify-icon class="art" icon="mingcute:user-x-fill" aria-hidden="true"></iconify-icon>
-        </div>
-        <div class="uc uc-g">
-          <span class="no">02</span>
           <h3>최대 24개월 할부<br>7개월 무이자 할부</h3>
           <p>큰 금액도 할부로 가볍게<br>무이자는 최대 7개월<br>부담을 나눠서 내세요</p>
           <iconify-icon class="art" icon="mingcute:bank-card-fill" aria-hidden="true"></iconify-icon>
         </div>
-        <div class="uc uc-y">
-          <span class="no">03</span>
+        <div class="uc">
+          <span class="no">02</span>
           <h3>소득 · 세액공제 환급</h3>
           <p>소득공제는 자동 환급<br>세액공제로 월세 납부액의<br>최대 17%를 돌려받아요</p>
           <iconify-icon class="art" icon="mingcute:coin-2-fill" aria-hidden="true"></iconify-icon>
         </div>
-        <div class="uc uc-b">
-          <span class="no">04</span>
+        <div class="uc">
+          <span class="no">03</span>
           <h3>카드사 포인트 적립</h3>
           <p>정상 결제와 똑같이 처리돼<br>카드 실적 인정은 물론<br>포인트도 차곡차곡 쌓여요</p>
           <iconify-icon class="art" icon="mingcute:gift-fill" aria-hidden="true"></iconify-icon>
         </div>
-        <div class="uc uc-g">
-          <span class="no">05</span>
-          <h3>필요할 때 바로 즉시송금</h3>
-          <p>주말 · 공휴일에도<br>결제하면 바로 송금되고<br>평균 5분 안에 입금돼요</p>
-          <iconify-icon class="art" icon="mingcute:flash-fill" aria-hidden="true"></iconify-icon>
-        </div>
-        <div class="uc uc-y">
-          <span class="no">06</span>
-          <h3>지정한 날짜에 맞춰 예약송금</h3>
-          <p>날짜를 정해두면<br>매달 알아서 나가니까<br>연체 걱정이 없어요</p>
-          <iconify-icon class="art" icon="mingcute:calendar-2-fill" aria-hidden="true"></iconify-icon>
-        </div>
-        <div class="uc uc-b">
-          <span class="no">07</span>
-          <h3>여러 카드로 분할결제</h3>
-          <p>한 번의 결제를<br>여러 장의 카드로 나눠<br>한도 걱정 없이 낼 수 있어요</p>
-          <iconify-icon class="art" icon="mingcute:copy-2-fill" aria-hidden="true"></iconify-icon>
+        <div class="uc blue">
+          <span class="no">04</span>
+          <h3>임대인 동의 불필요</h3>
+          <p>집주인 동의나 가입 없이<br>보내는 분 이름 그대로<br>계좌에 현금이 입금돼요</p>
+          <iconify-icon class="art" icon="mingcute:user-x-fill" aria-hidden="true"></iconify-icon>
         </div>
       </div>
     </div>
