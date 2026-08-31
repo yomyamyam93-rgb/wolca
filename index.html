@@ -121,8 +121,13 @@
   .uc .art{position:absolute; right:24px; bottom:24px; font-size:42px; line-height:1; color:var(--primary);}
   @media(min-width:1000px){ .uc .art{font-size:52px; right:30px; bottom:30px;} }
   /* 파란 강조 카드 — 임대인 동의 불필요 */
-  .uc.blue{background:var(--primary); background:var(--grad); border-color:transparent;
+  .uc.blue{background:var(--primary); overflow:hidden;
+    background:linear-gradient(140deg,#4A8CFF 0%,#156FF9 38%,#0A1638 100%); border-color:transparent;
     box-shadow:0 18px 36px rgba(21,111,249,.30);}
+  .uc.blue .no,.uc.blue h3,.uc.blue p{position:relative; z-index:1;}
+  .uc.blue .coins{position:absolute; top:0; right:0; height:100%; width:auto; z-index:0;
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 48%);
+    mask-image:linear-gradient(90deg,transparent,#000 48%);}
   .uc.blue h3{color:#fff;}
   .uc.blue p{color:rgba(255,255,255,.88);}
   .uc.blue .no{background:#fff; color:var(--primary-600);}
@@ -454,6 +459,7 @@
           <span class="no">04</span>
           <h3>카드 실적은 물론<br>포인트도 받을 수 있어요</h3>
           <p>정상 결제와 똑같이 처리돼<br>혜택이 그대로 쌓여요</p>
+          <img class="coins" src="img/coins.jpg" alt="">
         </div>
       </div>
     </div>
