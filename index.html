@@ -13,8 +13,8 @@
   /* ===== 이 페이지에만 쓰는 것 ===== */
 
   /* ① 히어로 — 가운데 한 마디 + 한 장씩 넘어가는 대화 카드 (레퍼런스 방식) */
-  .hero{position:relative; color:#fff; padding:88px 0 150px; overflow:clip;
-    clip-path:polygon(0 0, 100% 0, 100% calc(100% - 42px), 50% 100%, 0 calc(100% - 42px));
+  .hero{position:relative; color:#fff; padding:88px 0 172px; overflow:clip;
+    clip-path:polygon(0 0, 100% 0, 100% calc(100% - 96px), 50% 100%, 0 calc(100% - 96px));
     background:var(--primary); background:linear-gradient(155deg,#3B82F6 0%,#2563EB 55%,#1D4ED8 100%);}
   .hero .wrap{position:relative; z-index:1;}
   .hero .h-hero{color:#fff;}
@@ -24,7 +24,7 @@
   .hero .lead b{color:var(--ink);}
   /* 버튼은 알약형 — 레퍼런스와 같은 꼴 */
   .hero .btn{margin-top:34px; height:56px; font-size:17px; padding:0 34px; border-radius:8px;}
-  @media(min-width:768px){ .hero{padding:130px 0 210px;} .hero .lead{font-size:20px;} }
+  @media(min-width:768px){ .hero{padding:130px 0 240px;} .hero .lead{font-size:20px;} }
   /* 처음 열릴 때 위로 떠오르며 등장 (한 번만) */
   .hero-top > *{animation:heroUp .7s cubic-bezier(.22,.8,.3,1) both;}
   .hero-top > :nth-child(2){animation-delay:.08s;}
