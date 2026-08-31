@@ -1124,29 +1124,40 @@
 })();
 </script>
 <script>
-/* 기능 카드 — 마우스 드래그로도 넘기기 (놓으면 한 장에 딱 맞게 스냅) */
+/* 기능 카드 — 스크롤이 멈추면 무조건 가장 가까운 카드에 딱 붙인다 (터치 · 마우스 공통) */
 (function(){
   var 판=document.querySelector('.rzgrid');
   if(!판) return;
-  var 눌림=false, 시작X=0, 시작S=0, 움직임=false;
+  var 카드들=판.querySelectorAll('.rz');
+  var 눌림=false, 시작X=0, 시작S=0, 타이머=null, 붙는중=false;
+  function 붙이기(){
+    if(눌림) return;
+    var 지금=판.scrollLeft, 최소=1e9, 목표=0;
+    카드들.forEach(function(c){
+      var d=Math.abs(c.offsetLeft-지금);
+      if(d<최소){최소=d; 목표=c.offsetLeft;}
+    });
+    if(Math.abs(목표-지금)<2) return;
+    붙는중=true;
+    판.scrollTo({left:목표, behavior:'smooth'});
+    setTimeout(function(){붙는중=false;}, 420);
+  }
+  판.addEventListener('scroll', function(){
+    if(붙는중) return;
+    clearTimeout(타이머);
+    타이머=setTimeout(붙이기, 130);
+  }, {passive:true});
   판.addEventListener('pointerdown', function(e){
     if(e.pointerType!=='mouse') return;
-    눌림=true; 움직임=false; 시작X=e.clientX; 시작S=판.scrollLeft;
-    판.style.scrollSnapType='none'; 판.style.scrollBehavior='auto';
+    눌림=true; 시작X=e.clientX; 시작S=판.scrollLeft;
   });
   window.addEventListener('pointermove', function(e){
     if(!눌림) return;
-    if(Math.abs(e.clientX-시작X)>4) 움직임=true;
     판.scrollLeft=시작S-(e.clientX-시작X);
   });
   window.addEventListener('pointerup', function(){
     if(!눌림) return;
-    눌림=false;
-    var 폭=판.clientWidth+12;
-    var i=Math.round(판.scrollLeft/폭);
-    판.style.scrollBehavior='smooth';
-    판.scrollLeft=i*폭;
-    setTimeout(function(){ 판.style.scrollSnapType=''; 판.style.scrollBehavior=''; }, 350);
+    눌림=false; 붙이기();
   });
 })();
 </script>
