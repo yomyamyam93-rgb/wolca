@@ -12,8 +12,17 @@
 <style>
   /* ===== 이 페이지에만 쓰는 것 ===== */
 
+  /* ===== 모든 단락 상하 크기 통일 — 한 단락 = 한 화면 =====
+     내용이 적으면 세로 가운데로, 많으면 자연스럽게 늘어난다 */
+  .sec{min-height:calc(100vh - var(--appbar)); min-height:calc(100svh - var(--appbar));
+    display:flex; flex-direction:column; justify-content:center;}
+  /* flex 자식은 내용 폭만큼 늘어나려 한다 — 가로 스크롤 줄(후기)이 밀어내지 않게 */
+  .sec > .wrap{width:100%; min-width:0;}
+
   /* ① 히어로 — 가운데 한 마디 + 한 장씩 넘어가는 대화 카드 (레퍼런스 방식) */
-  .hero{background:var(--card); padding:88px 0 96px; overflow:clip;}
+  .hero{background:var(--card); padding:88px 0 96px; overflow:clip;
+    min-height:calc(100vh - var(--appbar)); min-height:calc(100svh - var(--appbar));
+    display:flex; flex-direction:column; justify-content:center;}
   .hero-top{text-align:center;}
   .hero .lead{margin-top:22px; font-size:17px; line-height:1.8; color:var(--sub);}
   .hero .lead b{color:var(--ink);}
