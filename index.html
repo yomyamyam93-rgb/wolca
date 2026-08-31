@@ -96,9 +96,9 @@
 
   /* 랜선페이를 써야 하는 이유 — 1~7 펼침 (파랑 3톤) */
   /* 카드 우상단 ↗ 화살표 */
-  .uc .uarw{position:absolute; top:22px; right:22px; z-index:1;
+  .uc .uarw, .rz .uarw{position:absolute; top:22px; right:22px; z-index:1;
     display:flex; color:var(--primary);}
-  .uc .uarw svg{width:22px; height:22px;}
+  .uc .uarw svg, .rz .uarw svg{width:22px; height:22px;}
   .uc.blue .uarw{color:#fff;}
   /* 두 줄 같은 크기 — 굵기만 차이 */
   #whysec .h-sec br{display:none;}
@@ -665,6 +665,7 @@
 
       <div class="rzgrid">
         <div class="rz">
+          <span class="uarw" aria-hidden="true"><svg viewBox="0 0 22 22"><path d="M5 17 17 5M8 5h9v9" stroke="currentColor" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           <div class="in">한도가 부족하다면?</div>
           <h3>여러 카드 분할결제</h3>
           <div class="dash"></div>
@@ -677,6 +678,7 @@
         </div>
         <div class="plus" aria-hidden="true">+</div>
         <div class="rz alt">
+          <span class="uarw" aria-hidden="true"><svg viewBox="0 0 22 22"><path d="M5 17 17 5M8 5h9v9" stroke="currentColor" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           <div class="in">원하는 시간에 알아서</div>
           <h3>예약결제 · 정기결제</h3>
           <div class="dash"></div>
@@ -689,6 +691,7 @@
         </div>
         <div class="plus" aria-hidden="true">+</div>
         <div class="rz">
+          <span class="uarw" aria-hidden="true"><svg viewBox="0 0 22 22"><path d="M5 17 17 5M8 5h9v9" stroke="currentColor" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           <div class="in">연중무휴</div>
           <h3>365일 24시간 송금</h3>
           <div class="dash"></div>
