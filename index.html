@@ -14,7 +14,7 @@
 
   /* ① 히어로 — 가운데 한 마디 + 한 장씩 넘어가는 대화 카드 (레퍼런스 방식) */
   .hero{position:relative; background-color:#0C1E8F;
-    background-image:linear-gradient(rgba(3,10,46,.38), rgba(3,10,46,.52)), url('img/hero-bg4.jpg');
+    background-image:url('img/hero-bg4.jpg');
     background-size:cover; background-position:center;
     padding:158px 0 calc(84px + 5vw); overflow:clip;}
   /* 어두운 배경 위 글씨는 흰색으로 */
@@ -26,7 +26,10 @@
   }
   /* 모바일 — 세로 화면용으로 따로 자른 배경 (가로 눌림 방지) */
   @media(max-width:767px){
-    .hero{background-image:linear-gradient(rgba(3,10,46,.38), rgba(3,10,46,.52)), url('img/hero-bg4-m.jpg');}
+    .hero{background-image:url('img/hero-bg4-m.jpg');
+      min-height:calc(100svh - var(--appbar));
+      display:flex; flex-direction:column; justify-content:center;
+      padding:40px 0 calc(60px + 8vw);}
   }
   .hero .h-hero .soft{display:block; margin-bottom:4px; font-weight:400;
     letter-spacing:-.4px; font-size:.94em;}
