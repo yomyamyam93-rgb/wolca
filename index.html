@@ -495,27 +495,26 @@
   /* 서류 3줄 + 버튼 = 신용카드 한 장 */
   #itemsec .itr-card{background:transparent url('img/card-face.png') center/100% 100% no-repeat;
     border:none; border-radius:16px; aspect-ratio:1.492/1; padding:24px 28px;
-    display:flex; flex-direction:column; justify-content:flex-start;
+    display:flex; flex-direction:column; justify-content:flex-end;
     box-shadow:0 18px 36px rgba(21,111,249,.35), 0 3px 8px rgba(15,23,42,.10);}
-  #itemsec .itr{margin-top:20px;}
+  #itemsec .itl .itr{margin-top:6px; width:100%;}
   #itemsec .itr-card{position:relative;}
-  #itemsec .itr-tt{display:block; color:#fff; font-size:17px; font-weight:800; letter-spacing:-.3px;}
-  #itemsec .doc p{color:rgba(255,255,255,.92);}
-  #itemsec .doc p b{color:#fff;}
-  #itemsec .doc .ck{color:#fff;}
+  #itemsec .itr-tt{display:block; margin-top:22px; color:var(--ink); font-size:15px; font-weight:800; letter-spacing:-.3px;}
+  #itemsec .doc p{color:var(--ink);}
+  #itemsec .doc p b{color:var(--primary-600);}
+  #itemsec .doc .ck{color:var(--primary);}
+  #itemsec .itl .itr-tt, #itemsec .itl .itr{align-self:stretch; text-align:left;}
   #itemsec .itr{background:none; border:none; box-shadow:none; border-radius:0; padding:0; gap:0;}
   @media(max-width:999px){
     /* 신용카드 비율 — 가로는 100% 고정이라 절대 안 잘린다 */
     #itemsec .itr-card{width:100%; aspect-ratio:1.492/1; padding:14px 18px; border-radius:12px;}
-    #itemsec .itr-tt{font-size:14px;}
-    #itemsec .doc{padding:4px 2px;}
-    #itemsec .itr{margin-top:10px;}
-    #itemsec .doc p{font-size:12px;}
-    #itemsec .doc .ck{font-size:13px;}
-    #itemsec .itr-card .btn{margin-top:auto; height:40px; font-size:13.5px;}
+    #itemsec .itr-tt{font-size:14px; margin-top:16px;}
+    #itemsec .doc{padding:6px 2px;}
+    #itemsec .doc p{font-size:13px;}
+    #itemsec .itr-card .btn{height:44px; font-size:14px;}
   }
   #itemsec .doc{border:none; box-shadow:none; background:none; border-radius:0;
-    padding:10px 2px; border-bottom:1px solid rgba(255,255,255,.24);}
+    padding:9px 2px; border-bottom:1px solid var(--line);}
   #itemsec .doc:last-child{border-bottom:none;}
   #itemsec .itr-card .btn{width:100%; margin-top:auto; background:#fff; color:var(--primary-600); box-shadow:0 6px 16px rgba(5,12,24,.18);}
   /* 기능 카드 — 모바일: 가로 스와이프 + 아이콘 표시 */
@@ -645,10 +644,10 @@
         <div class="itl">
           <h3 id="itp-h"></h3>
           <p id="itdesc-p"></p>
-        </div>
-        <div class="itr-card">
           <b class="itr-tt" id="itr-tt">필요 서류</b>
           <div class="itr" id="itp-docs"></div>
+        </div>
+        <div class="itr-card">
           <a class="btn btn-primary" id="itgo" href="화면/10_1_유형선택.html"><img class="btn-logo" src="img/logo3.png" alt=""><span id="itgo-t">월세 결제하기</span></a>
         </div>
       </div>
