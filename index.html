@@ -33,9 +33,16 @@
   }
   .hero .h-hero .soft{display:block; margin-bottom:4px; font-weight:400;
     letter-spacing:-.4px; font-size:.94em;}
-  .hero .h-hero .hl{color:#CCD0D8;}
-  .hero .hlead{color:rgba(255,255,255,.85);}
-  .hero .hlead b{color:#fff;}
+  .hero .h-hero .hl{color:#FF8A3D;}
+  .hchips{display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-bottom:22px;}
+  .hchips span{padding:7px 14px; border-radius:999px; background:rgba(255,255,255,.13);
+    border:1px solid rgba(255,255,255,.32); color:#fff; font-size:13.5px; font-weight:700;}
+  @media(min-width:768px){ .hchips span{font-size:14.5px; padding:8px 16px;} }
+  .hpoints{display:flex; flex-wrap:wrap; gap:10px 20px; justify-content:center; margin-top:24px;}
+  .hpoints span{display:inline-flex; align-items:center; gap:7px;
+    color:rgba(255,255,255,.92); font-size:14px; font-weight:600;}
+  .hpoints i{font-style:normal; font-weight:800; color:#FF8A3D;}
+  @media(min-width:768px){ .hpoints span{font-size:15.5px;} }
   /* 아랫단 원호 — 화면 폭에 비례해 어디서나 같은 곡률 */
   .hcap{position:absolute; left:0; bottom:-1px; width:100%; height:auto; display:block; pointer-events:none;}
   .hero-top{text-align:center;}
@@ -385,8 +392,13 @@
   <section class="hero">
     <div class="wrap hero2">
       <div class="hleft">
+        <div class="hchips"><span>월세</span><span>관리비</span><span>보증금</span><span>매입대금</span></div>
         <h1 class="h-hero"><span class="soft">현금으로만 내던 돈</span><br>이제 <span class="hl">카드로 결제</span>하세요</h1>
-        <p class="hlead">월세 · 관리비 · 보증금 · 매입대금처럼<br><b>계좌로 보내야 하는 비용을 카드로 결제하고</b><br><b>상대방 계좌로 송금하는 서비스</b>입니다</p>
+        <div class="hpoints">
+          <span><i>✓</i>상대 계좌로 현금 입금</span>
+          <span><i>✓</i>평균 5분 송금</span>
+          <span><i>✓</i>365일 24시간</span>
+        </div>
         <div class="hbtns">
           <a class="btn btn-primary" href="app.html"><img class="btn-logo" src="img/logo3-white.png" alt="">바로 송금하기</a>
           <a class="btn btn-line" href="guide.html">어떻게 이용하나요?</a>
