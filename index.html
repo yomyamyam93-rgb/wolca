@@ -95,6 +95,12 @@
     filter:brightness(1.012); display:block;}
 
   /* 랜선페이를 써야 하는 이유 — 1~7 펼침 (파랑 3톤) */
+  /* 카드 우상단 ↗ 화살표 */
+  .uc .uarw{position:absolute; top:20px; right:20px; width:34px; height:34px; border-radius:999px;
+    display:flex; align-items:center; justify-content:center;
+    background:var(--primary-50); color:var(--primary);}
+  .uc .uarw svg{width:14px; height:14px;}
+  .uc.blue .uarw{background:rgba(255,255,255,.16); color:#fff;}
   /* 두 줄 같은 크기 — 굵기만 차이 */
   #whysec .h-sec{font-size:min(3.8vw, 46px);}
   #whysec .h-sec br{display:none;}
@@ -462,21 +468,25 @@
       <div class="whygrid">
         <div class="uc">
           <span class="no">01</span>
+          <span class="uarw" aria-hidden="true"><svg viewBox="0 0 14 14"><path d="M3.2 10.8 10.8 3.2M4.6 3.2h6.2v6.2" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           <h3>큰 금액도 할부로<br>나눠낼 수 있어요</h3>
           <p>최대 24개월 할부<br>무이자는 최대 7개월</p>
         </div>
         <div class="uc">
           <span class="no">02</span>
+          <span class="uarw" aria-hidden="true"><svg viewBox="0 0 14 14"><path d="M3.2 10.8 10.8 3.2M4.6 3.2h6.2v6.2" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           <h3>월세 납부액의<br>최대 17% 돌려받아요</h3>
           <p>소득공제는 자동 환급<br>세액공제까지 챙겨드려요</p>
         </div>
         <div class="uc">
           <span class="no">03</span>
+          <span class="uarw" aria-hidden="true"><svg viewBox="0 0 14 14"><path d="M3.2 10.8 10.8 3.2M4.6 3.2h6.2v6.2" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           <h3>임대인 동의 없이<br>계좌로 입금돼요</h3>
           <p>가입 요청 없이<br>보내는 분 이름 그대로 입금</p>
         </div>
         <div class="uc blue">
           <span class="no">04</span>
+          <span class="uarw" aria-hidden="true"><svg viewBox="0 0 14 14"><path d="M3.2 10.8 10.8 3.2M4.6 3.2h6.2v6.2" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           <h3>카드 실적은 물론<br>포인트도 받을 수 있어요</h3>
           <p>정상 결제와 똑같이 처리돼<br>혜택이 그대로 쌓여요</p>
           <img class="coins" src="img/coins2.jpg" alt="">
