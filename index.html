@@ -496,6 +496,7 @@
     display:flex; flex-direction:column; justify-content:space-between;
     box-shadow:0 18px 36px rgba(21,111,249,.35), 0 3px 8px rgba(15,23,42,.10);}
   #itemsec .itr-card{position:relative;}
+  #itemsec .itr-tt{display:block; color:#fff; font-size:17px; font-weight:800; letter-spacing:-.3px;}
   #itemsec .doc p{color:rgba(255,255,255,.92);}
   #itemsec .doc p b{color:#fff;}
   #itemsec .doc .ck{color:#fff;}
@@ -612,6 +613,7 @@
           <p id="itdesc-p"></p>
         </div>
         <div class="itr-card">
+          <b class="itr-tt" id="itr-tt">필요 서류</b>
           <div class="itr" id="itp-docs"></div>
           <a class="btn btn-primary" id="itgo" href="화면/10_1_유형선택.html"><img class="btn-logo" src="img/logo3.png" alt=""><span id="itgo-t">월세 결제하기</span></a>
         </div>
@@ -1000,6 +1002,8 @@
   function 채우기(b) {
     var n = b.dataset.n, 정보 = 자료[n];
     큰제목.textContent = 정보.t;
+    var 카드제목 = document.getElementById('itr-tt');
+    if (카드제목) 카드제목.textContent = n + ' 필요 서류';
     글.innerHTML = 정보.d;
     서류칸.innerHTML = 정보.docs.map(function (d) {
       return '<div class="doc"><span class="ck">✓</span><p>' + d + '</p></div>';
