@@ -13,11 +13,11 @@
   /* ===== 이 페이지에만 쓰는 것 ===== */
 
   /* ① 히어로 — 가운데 한 마디 + 한 장씩 넘어가는 대화 카드 (레퍼런스 방식) */
-  .hero{position:relative; background-color:#000205;
-    background-image:url('img/hero-bg5.jpg'); background-repeat:no-repeat;
+  .hero{position:relative; background-color:#000000;
+    background-image:url('img/hero-bg6.jpg'); background-repeat:no-repeat;
     background-size:100% auto; background-position:center top;
     padding:158px 0 96px; overflow:clip;
-    min-height:56.3vw; display:flex; flex-direction:column; justify-content:center;}
+    min-height:51vw; display:flex; flex-direction:column; justify-content:center;}
   /* 어두운 배경 위 글씨는 흰색으로 */
   .hero .h-hero{color:#fff;}
   .hero .h-hero br{display:none;}
@@ -29,7 +29,7 @@
   }
   /* 모바일 — 세로 화면용으로 따로 자른 배경 (가로 눌림 방지) */
   @media(max-width:767px){
-    .hero{background-image:url('img/hero-bg5-m.jpg');
+    .hero{background-image:url('img/hero-bg6-m.jpg');
       min-height:calc(100svh - var(--appbar));
       display:flex; flex-direction:column; justify-content:center;
       padding:40px 0 calc(60px + 8vw);}
@@ -54,7 +54,7 @@
   .hero .lead b{color:var(--ink);}
   /* 버튼은 알약형 — 레퍼런스와 같은 꼴 */
   .hero .btn{margin-top:34px; height:56px; font-size:17px; padding:0 34px; border-radius:8px;}
-  @media(min-width:768px){ .hero{padding:150px 0 110px;} .hero .lead{font-size:20px;} }
+  @media(min-width:768px){ .hero{padding:80px 0 200px;} .hero .lead{font-size:20px;} }
   /* 처음 열릴 때 위로 떠오르며 등장 (한 번만) */
   .hero-top > *{animation:heroUp .7s cubic-bezier(.22,.8,.3,1) both;}
   .hero-top > :nth-child(2){animation-delay:.08s;}
@@ -90,7 +90,7 @@
 
   /* 랜선페이를 써야 하는 이유 — 1~7 펼침 (파랑 3톤) */
   /* 헤더의 어두운 배경이 그대로 이어진다 */
-  #whysec{background:#000205; position:relative; padding-bottom:calc(88px + 6vw);}
+  #whysec{background:#000000; position:relative; padding-bottom:calc(88px + 6vw);}
   .hcap2{position:absolute; left:0; bottom:-1px; width:100%; height:auto; display:block; pointer-events:none;}
   #whysec .h-sec{color:#fff;}
   #whysec .h-sec .hl{color:#FFD34D;}
