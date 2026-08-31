@@ -32,13 +32,21 @@
   /* 버튼은 알약형 — 레퍼런스와 같은 꼴 */
   .hero .btn{margin-top:34px; height:56px; font-size:17px; padding:0 34px; border-radius:8px;}
   @media(min-width:768px){ .hero{padding:7vw 0 38vw;} .hero .lead{font-size:20px;} }
+  /* 아래로 스크롤 유도 화살표 */
+  .sdown{position:absolute; left:50%; bottom:16px; transform:translateX(-50%);
+    font-size:30px; line-height:1; color:var(--primary); opacity:.7;
+    animation:sdb 1.6s ease-in-out infinite; pointer-events:none;}
+  @keyframes sdb{0%,100%{transform:translate(-50%,0);} 50%{transform:translate(-50%,10px);}}
+
   /* 모바일 — 이미지 크게 · 가운데 정렬 */
   @media(max-width:767px){
-    .hero{background-size:225% auto; background-position:center calc(100% + 2vw);
-      padding:56px 0 80vw;}
+    .hero{background-size:245% auto; background-position:center calc(100% + 3vw);
+      padding:48px 0 88vw;}
     .hero .hero2{text-align:center;}
     .hero .hleft{display:block;}
-    .hero .hero2 .hbtns{justify-content:center;}
+    .hero .hero2 .hbtns{justify-content:center; margin-top:22px; flex-wrap:nowrap;}
+    .hero .hbtns .btn{flex:0 0 auto; height:52px; padding:0 20px; font-size:15px;}
+    .hero .hlead{font-size:14px;}
   }
   /* 처음 열릴 때 위로 떠오르며 등장 (한 번만) */
   .hero-top > *{animation:heroUp .7s cubic-bezier(.22,.8,.3,1) both;}
@@ -390,6 +398,7 @@
       </div>
     </div>
 
+    <iconify-icon class="sdown" icon="mingcute:down-line" aria-hidden="true"></iconify-icon>
   </section>
 
   <!-- ===== 랜선페이를 써야 하는 이유 — 1~7 펼침 ===== -->
