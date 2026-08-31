@@ -168,12 +168,12 @@ main{flex:1 0 auto;}
 /* ============================================================
    섹션 — 단락마다 「무엇을 강조하나」가 한눈에 보이게
    ============================================================ */
-.sec{padding:72px 0;}
+.sec{padding:88px 0;}
 .sec.tint{background:#F7F8FA;}   /* 카드 그리드 구간만 — 흰 카드가 떠 보이게 */
 .sec.dark{background:var(--dark); color:#fff;}
 .sec.blue{background:var(--primary); color:#fff;}
 .sec.tight{padding:56px 0;}
-@media(min-width:768px){ .sec{padding:120px 0;} .sec.tight{padding:84px 0;} }
+@media(min-width:768px){ .sec{padding:136px 0;} .sec.tight{padding:104px 0;} }
 
 /* 섹션 머리 — 뱃지 + 제목 + 설명 */
 .head{text-align:center;}
