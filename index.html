@@ -159,25 +159,6 @@
     #itemsec .itpanel{grid-column:3; grid-row:2; grid-template-columns:1fr; gap:26px;
       padding:36px 38px; margin-top:52px; align-content:center;}
   }
-  /* 기능 3단 — 가로로 긴 밴드 3장 + 사이 + 원 (레퍼런스 방식) */
-  .plus{width:42px; height:42px; border-radius:999px; margin:-21px auto;
-    position:relative; z-index:2; display:flex; align-items:center; justify-content:center;
-    background:var(--primary); background:var(--grad); color:#fff;
-    font-size:24px; font-weight:700; line-height:1;
-    box-shadow:0 6px 16px rgba(5,12,24,.3);}
-  @media(min-width:900px){
-    .rzgrid{grid-template-columns:1fr !important; gap:0 !important;}
-    .rz{display:grid; grid-template-columns:5fr 7fr; column-gap:56px; align-items:center;
-      padding:44px 56px;}
-    .rz .in{grid-column:1;}
-    .rz h3{grid-column:1;}
-    .rz .dash{display:none;}
-    .rz ul{grid-column:2; grid-row:1 / span 2; margin-top:0;
-      display:grid; grid-template-columns:1fr 1fr; gap:12px 28px; align-content:center;}
-    .rz li{margin-bottom:0;}
-  }
-  .rz.alt{background:var(--primary-100);}
-  .rz.alt li:before{color:var(--primary);}
   /* 기능 단락 — 어두운 그라데이션 배경 */
   #featsec{background:linear-gradient(140deg,#0D2E9C 0%,#051643 52%,#01113F 100%);}
   #featsec .h-sec{color:#fff;}
@@ -444,6 +425,25 @@
   .evpop-dim{position:fixed; inset:0; z-index:110; background:rgba(15,23,42,.45);}
   .evpop-dim[hidden]{display:none;}
 
+  /* ===== 기능 3단 — 가로 밴드 3장 + 사이 + 원 (맨 끝에 둬서 우선 적용) ===== */
+  .plus{width:42px; height:42px; border-radius:999px; margin:-21px auto;
+    position:relative; z-index:2; display:flex; align-items:center; justify-content:center;
+    background:var(--primary); background:var(--grad); color:#fff;
+    font-size:24px; font-weight:700; line-height:1;
+    box-shadow:0 6px 16px rgba(5,12,24,.3);}
+  .rz.alt{background:var(--primary-100);}
+  .rz.alt li:before{color:var(--primary);}
+  @media(min-width:900px){
+    .rzgrid{grid-template-columns:1fr; gap:0;}
+    .rz{display:grid; grid-template-columns:5fr 7fr; column-gap:56px; align-items:center;
+      padding:44px 56px; text-align:left;}
+    .rz .in{grid-column:1; grid-row:1; align-self:end;}
+    .rz h3{grid-column:1; grid-row:2; align-self:start;}
+    .rz .dash{display:none;}
+    .rz ul{grid-column:2; grid-row:1 / span 2; margin-top:0;
+      display:grid; grid-template-columns:1fr 1fr; gap:12px 28px; align-content:center;}
+    .rz li{margin-bottom:0;}
+  }
 </style>
 </head>
 <body>
