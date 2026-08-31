@@ -47,7 +47,9 @@
   .hpoints i{font-style:normal; font-weight:800; color:#FFD34D;}
   @media(min-width:768px){ .hpoints span{font-size:15.5px;} }
   /* 아랫단 원호 — 화면 폭에 비례해 어디서나 같은 곡률 */
-  .hcap{position:absolute; left:0; bottom:-1px; width:100%; height:auto; display:block; pointer-events:none;}
+  .hero:after{content:''; position:absolute; left:0; right:0; bottom:0; height:200px;
+    background:linear-gradient(rgba(7,18,38,0), #071226); pointer-events:none;}
+  .hero .wrap{position:relative; z-index:1;}
   .hero-top{text-align:center;}
   .hero .lead{margin-top:22px; font-size:17px; line-height:1.8; color:var(--sub);}
   .hero .lead b{color:var(--ink);}
@@ -89,7 +91,8 @@
 
   /* 랜선페이를 써야 하는 이유 — 1~7 펼침 (파랑 3톤) */
   /* 헤더의 어두운 배경이 그대로 이어진다 */
-  #whysec{background:#071226;}
+  #whysec{background:#071226; position:relative; padding-bottom:calc(88px + 6vw);}
+  .hcap2{position:absolute; left:0; bottom:-1px; width:100%; height:auto; display:block; pointer-events:none;}
   #whysec .h-sec{color:#fff;}
   #whysec .h-sec .hl{color:#FFD34D;}
   #whysec .h-sec .soft{color:rgba(255,255,255,.82);}
@@ -407,7 +410,6 @@
       </div>
     </div>
 
-    <svg class="hcap" viewBox="0 0 1440 64" aria-hidden="true"><path d="M0,0 Q720,128 1440,0 L1440,64 L0,64 Z" fill="#071226"/></svg>
   </section>
 
   <!-- ===== 랜선페이를 써야 하는 이유 — 1~7 펼침 ===== -->
@@ -461,6 +463,7 @@
         </div>
       </div>
     </div>
+    <svg class="hcap2" viewBox="0 0 1440 64" aria-hidden="true"><path d="M0,0 Q720,128 1440,0 L1440,64 L0,64 Z" fill="#fff"/></svg>
   </section>
 
   <!-- ===== ② 결제 항목 + 카드사 로고 — 한 화면 ===== -->
