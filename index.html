@@ -13,10 +13,11 @@
   /* ===== 이 페이지에만 쓰는 것 ===== */
 
   /* ① 히어로 — 가운데 한 마디 + 한 장씩 넘어가는 대화 카드 (레퍼런스 방식) */
-  .hero{position:relative; background-color:#071226;
+  .hero{position:relative; background-color:#000205;
     background-image:url('img/hero-bg5.jpg'); background-repeat:no-repeat;
-    background-size:cover; background-position:center;
-    padding:158px 0 calc(84px + 5vw); overflow:clip;}
+    background-size:100% auto; background-position:center top;
+    padding:158px 0 96px; overflow:clip;
+    min-height:56.3vw; display:flex; flex-direction:column; justify-content:center;}
   /* 어두운 배경 위 글씨는 흰색으로 */
   .hero .h-hero{color:#fff;}
   .hero .h-hero br{display:none;}
@@ -47,15 +48,13 @@
   .hpoints i{font-style:normal; font-weight:800; color:#FFD34D;}
   @media(min-width:768px){ .hpoints span{font-size:15.5px;} }
   /* 아랫단 원호 — 화면 폭에 비례해 어디서나 같은 곡률 */
-  .hero:after{content:''; position:absolute; left:0; right:0; bottom:0; height:200px;
-    background:linear-gradient(rgba(7,18,38,0), #071226); pointer-events:none;}
   .hero .wrap{position:relative; z-index:1;}
   .hero-top{text-align:center;}
   .hero .lead{margin-top:22px; font-size:17px; line-height:1.8; color:var(--sub);}
   .hero .lead b{color:var(--ink);}
   /* 버튼은 알약형 — 레퍼런스와 같은 꼴 */
   .hero .btn{margin-top:34px; height:56px; font-size:17px; padding:0 34px; border-radius:8px;}
-  @media(min-width:768px){ .hero{padding:190px 0 calc(48px + 5vw);} .hero .lead{font-size:20px;} }
+  @media(min-width:768px){ .hero{padding:150px 0 110px;} .hero .lead{font-size:20px;} }
   /* 처음 열릴 때 위로 떠오르며 등장 (한 번만) */
   .hero-top > *{animation:heroUp .7s cubic-bezier(.22,.8,.3,1) both;}
   .hero-top > :nth-child(2){animation-delay:.08s;}
@@ -91,7 +90,7 @@
 
   /* 랜선페이를 써야 하는 이유 — 1~7 펼침 (파랑 3톤) */
   /* 헤더의 어두운 배경이 그대로 이어진다 */
-  #whysec{background:#071226; position:relative; padding-bottom:calc(88px + 6vw);}
+  #whysec{background:#000205; position:relative; padding-bottom:calc(88px + 6vw);}
   .hcap2{position:absolute; left:0; bottom:-1px; width:100%; height:auto; display:block; pointer-events:none;}
   #whysec .h-sec{color:#fff;}
   #whysec .h-sec .hl{color:#FFD34D;}
