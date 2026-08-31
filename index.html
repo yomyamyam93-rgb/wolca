@@ -489,6 +489,11 @@
     letter-spacing:-.4px; white-space:nowrap;}
   #rvsec .h-sec{font-size:min(6.6vw, 48px);}
   #rvsec{background:#F7F8FA;}
+  /* 모바일 — 후기 단락은 내용만큼만 */
+  @media(max-width:767px){
+    #rvsec{min-height:0; padding:64px 0;}
+    .rvband{margin-top:36px;}
+  }
   #rvsec .h-sec br{display:none;}
   /* 신뢰 카드 4장 — 3D 느낌 */
   .srow{background:linear-gradient(180deg,#FFFFFF,#F8FAFE);
