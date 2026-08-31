@@ -500,7 +500,9 @@
   #itemsec .itl .itr{margin-top:14px; width:100%; gap:0;}
   #itemsec .itr-card{cursor:pointer; display:block;}
   #itemsec .itr-card:hover{transform:translateY(-3px); transition:transform .18s;}
-  #itemsec .itpanel{position:relative;}
+  #itemsec .itpanel{position:relative; cursor:pointer; transition:transform .18s, box-shadow .18s;}
+  #itemsec .itpanel:hover{transform:translateY(-4px);
+    box-shadow:0 20px 40px rgba(15,23,42,.12), 0 4px 10px rgba(15,23,42,.06);}
   #itemsec .itpanel .parw{position:absolute; top:20px; right:22px; color:var(--primary); display:flex;}
   #itemsec .itpanel .parw svg{width:22px; height:22px;}
   #itemsec .doc{display:flex; align-items:center; gap:8px; min-height:0;
@@ -1043,6 +1045,7 @@
   };
   var 들 = document.querySelectorAll('.itgrid .it');
   var 패널 = document.querySelector('.itpanel');
+  if (패널) 패널.addEventListener('click', function(){ location.href='화면/10_1_유형선택.html'; });
   function 채우기(b) {
     var n = b.dataset.n, 정보 = 자료[n];
     큰제목.textContent = 정보.t;
