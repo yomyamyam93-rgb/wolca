@@ -58,20 +58,6 @@
   .heye{font-size:14.5px; font-weight:700; color:rgba(255,255,255,.78); margin-bottom:14px; letter-spacing:-.2px;}
   @media(min-width:768px){ .heye{font-size:17px; margin-bottom:18px;} }
 
-  /* 떠 있는 3D 아이콘 */
-  .hart{position:absolute; width:auto; height:auto; pointer-events:none;
-    filter:drop-shadow(0 10px 20px rgba(4,20,50,.35));
-    animation:hfloat 5.2s ease-in-out infinite alternate;}
-  .a1{max-width:92px; left:9%; top:26%;}
-  .a2{max-width:108px; right:9%; top:20%; animation-delay:1.2s;}
-  .a3{max-width:80px; left:17%; bottom:24%; animation-delay:2.1s;}
-  .a4{max-width:88px; right:16%; bottom:20%; animation-delay:.6s;}
-  @keyframes hfloat{from{transform:translateY(-8px);} to{transform:translateY(10px);}}
-  @media(max-width:767px){
-    .a1{max-width:54px; left:5%; top:auto; bottom:13%;}
-    .a2{max-width:60px; right:5%; top:auto; bottom:15%;}
-    .a3,.a4{display:none;}
-  }
 
   /* 가운데 원형 CTA — 헤더 경계에 반쯤 걸친다 */
   .hctaw{position:relative; z-index:5; display:flex; justify-content:center; margin-top:-79px;}
@@ -392,10 +378,6 @@
       </div>
     </div>
 
-    <img class="hart a1" src="img/usp3d/02.png" alt="" aria-hidden="true">
-    <img class="hart a2" src="img/usp3d/03.png" alt="" aria-hidden="true">
-    <img class="hart a3" src="img/usp3d/05.png" alt="" aria-hidden="true">
-    <img class="hart a4" src="img/usp3d/07.png" alt="" aria-hidden="true">
   </section>
 
   <!-- 가운데 원형 CTA — 헤더에 반쯤 걸친다 -->
