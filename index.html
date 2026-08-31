@@ -13,12 +13,12 @@
   /* ===== 이 페이지에만 쓰는 것 ===== */
 
   /* ① 히어로 — 가운데 한 마디 + 한 장씩 넘어가는 대화 카드 (레퍼런스 방식) */
-  .hero{position:relative; color:#fff; padding:112px 0 132px; overflow:clip;
+  .hero{position:relative; color:var(--ink); padding:112px 0 132px; overflow:clip;
     clip-path:polygon(0 0, 100% 0, 100% calc(100% - 5vw), 50% 100%, 0 calc(100% - 5vw));
-    background:#1631B4 url('img/hero-bg.jpg') center bottom/cover no-repeat;}
+    background:#E9EDF9;}
   .hero .wrap{position:relative; z-index:1;}
-  .hero .h-hero{color:#fff;}
-  .hero .h-hero .hl{color:#A6C8FF;}
+  .hero .h-hero{color:var(--ink);}
+  .hero .h-hero .hl{color:var(--primary);}
   .hero-top{text-align:center;}
   .hero .lead{margin-top:22px; font-size:17px; line-height:1.8; color:var(--sub);}
   .hero .lead b{color:var(--ink);}
@@ -47,9 +47,9 @@
     .hero2{grid-template-columns:1fr; text-align:center; justify-items:center;}
     .hero2 .hbtns{justify-content:center;}
   }
-  .hlead{margin-top:18px; font-size:15.5px; line-height:1.8; color:rgba(255,255,255,.85);}
+  .hlead{margin-top:18px; font-size:15.5px; line-height:1.8; color:var(--sub);}
   @media(min-width:900px){ .hlead{font-size:17px;} }
-  .hlead b{color:#fff; font-weight:700;}
+  .hlead b{color:var(--ink); font-weight:700;}
   .hbtns{display:flex; flex-wrap:wrap; gap:10px; margin-top:26px;}
   .hbtns .btn{margin-top:0;}
   /* 히어로 정렬 — 늘 가운데 */
@@ -96,11 +96,16 @@
     .whygrid .uc:last-child{grid-column:1/-1;} }
   .uc{position:relative; border-radius:8px; padding:26px; text-align:left; min-height:225px;}
   @media(min-width:1000px){ .uc{padding:30px; min-height:270px;} }
-  .uc-b{background:var(--primary-50);}
-  .uc-g{background:#E2ECFF;}
-  .uc-y{background:#D7E5FF;}
+  .uc-b{background:#2E6BEA;}
+  .uc-g{background:#1FA566;}
+  .uc-y{background:#3A47A8;}
+  .whygrid .uc:last-child{background:#2F8E9C;}
+  .uc h3{color:#fff;}
+  .uc p{color:rgba(255,255,255,.88) !important;}
   .uc .no{display:inline-block; padding:6px 14px; border-radius:999px; color:#fff;
-    font-size:13.5px; font-weight:700; letter-spacing:.5px; background:var(--primary-600);}
+    font-size:13.5px; font-weight:700; letter-spacing:.5px; background:#fff;}
+  .uc-b .no{color:#2E6BEA;} .uc-g .no{color:#188A54;} .uc-y .no{color:#3A47A8;}
+  .whygrid .uc:last-child .no{color:#2F8E9C;}
   .uc h3{margin-top:14px; font-size:20px; font-weight:800; letter-spacing:-.5px; line-height:1.35;}
   @media(min-width:1000px){ .uc h3{font-size:22px;} }
   .uc p{margin-top:10px; font-size:14.5px; line-height:1.75; color:var(--sub);}
