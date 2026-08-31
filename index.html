@@ -159,6 +159,11 @@
     #itemsec .itpanel{grid-column:3; grid-row:2; grid-template-columns:1fr; gap:26px;
       padding:36px 38px; margin-top:52px; align-content:center;}
   }
+  /* 이용 방법 제목 — 두 줄 같은 크기 */
+  #howto .h-sec{font-size:min(4.6vw, 48px);}
+  #howto .h-sec br{display:none;}
+  #howto .h-sec .soft{display:block; margin-bottom:6px; font-weight:400;
+    letter-spacing:-.4px; white-space:nowrap;}
   /* 기능 단락 — 어두운 그라데이션 배경 */
   #featsec{background:linear-gradient(140deg,#0D2E9C 0%,#051643 52%,#01113F 100%);}
   #featsec .h-sec{color:#fff;}
@@ -613,9 +618,7 @@
   <section class="sec tint" id="howto">
     <div class="wrap">
       <div class="head">
-        <span class="eyebrow">이용 방법</span>
-        <h2 class="h-sec"><span class="hl">쉽고 빠른</span> 결제 시스템</h2>
-        <p>한 번의 등록으로 모든 계약을 한눈에 보고<br>체계적이고 편리하게 관리하세요</p>
+        <h2 class="h-sec"><span class="soft">한 번의 등록으로 계약을 한눈에 관리</span><br><span class="hl">쉽고 빠른</span> 결제 시스템</h2>
         <a class="morelink" href="guide.html">자세한 이용가이드 보기<svg viewBox="0 0 24 16" aria-hidden="true"><path d="M1.5 5.8h11V1.6L22.6 8l-10.1 6.4v-4.2h-11z" fill="currentColor" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></a>
       </div>
 
