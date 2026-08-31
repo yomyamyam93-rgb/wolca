@@ -510,9 +510,12 @@
   #itemsec .doc .ck{color:#fff;}
   #itemsec .itr{background:none; border:none; box-shadow:none; border-radius:0; padding:0; gap:0;}
   @media(max-width:999px){
-    #itemsec .itr-card{aspect-ratio:auto; padding:20px 22px;}
-    #itemsec .doc{padding:9px 2px;}
-    #itemsec .itr-card .btn{margin-top:12px;}
+    /* 모바일에서도 신용카드 비율로 */
+    #itemsec .itr-card{aspect-ratio:1.586/1; padding:15px 20px;}
+    #itemsec .itr-tt{font-size:15px;}
+    #itemsec .doc{padding:5px 2px;}
+    #itemsec .doc p{font-size:12.5px;}
+    #itemsec .itr-card .btn{margin-top:8px; height:42px; font-size:14px;}
   }
   #itemsec .doc{border:none; box-shadow:none; background:none; border-radius:0;
     padding:14px 2px; border-bottom:1px solid rgba(255,255,255,.24);}
