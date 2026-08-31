@@ -60,13 +60,15 @@
   @media(min-width:768px){ .heye{font-size:16px; padding:10px 20px; margin-bottom:24px;} }
 
 
-  /* 히어로 CTA — 큼직하고 확실하게 */
-  .hero .hbtns{justify-content:center; gap:12px; margin-top:34px;}
-  .hero .hbtns .btn{height:62px; font-size:17.5px; padding:0 40px; font-weight:800;}
-  .hero .btn-primary{box-shadow:0 12px 26px rgba(37,99,235,.38);}
-  .hero .btn-line{background:#fff;}
+  /* CTA 두 개 — 헤더와 다음 단락의 경계선에 반쯤 걸친다 */
+  .hbtnw{position:relative; z-index:5; display:flex; justify-content:center; gap:12px;
+    margin-top:-32px; padding:0 20px;}
+  .hbtnw .btn{height:64px; font-size:17.5px; padding:0 40px; font-weight:800; border:3px solid #fff;}
+  .hbtnw .btn-primary{box-shadow:0 12px 26px rgba(37,99,235,.38);}
+  .hbtnw .btn-line{background:#fff; box-shadow:0 10px 22px rgba(15,23,42,.16);}
   @media(max-width:899px){
-    .hero .hbtns .btn{height:54px; font-size:16px; padding:0 10px; flex:1;}
+    .hbtnw{margin-top:-28px;}
+    .hbtnw .btn{height:56px; font-size:16px; padding:0 10px; flex:1; max-width:230px;}
   }
   .btn-line{background:#fff; border:1px solid var(--line); color:var(--ink);}
   /* 영상 틀 — 원본의 흰 여백을 잘라내고 내용물을 크게 */
@@ -373,14 +375,16 @@
         <p class="heye">월세 · 관리비 · 보증금 · 매입대금까지</p>
         <h1 class="h-hero">현금으로만 내던 돈<br>이제 <span class="hl">카드로 결제</span>하세요</h1>
         <p class="hlead"><b>카드로 결제하면 상대방 계좌로</b><br><b>현금이 입금되는 서비스</b>입니다</p>
-        <div class="hbtns">
-          <a class="btn btn-primary" href="app.html"><img class="btn-logo" src="img/logo3-white.png" alt="">바로 송금하기</a>
-          <a class="btn btn-line" href="guide.html">이용방법 보기</a>
-        </div>
       </div>
     </div>
 
   </section>
+
+  <!-- 경계 걸침 CTA -->
+  <div class="hbtnw">
+    <a class="btn btn-primary" href="app.html"><img class="btn-logo" src="img/logo3-white.png" alt="">바로 송금하기</a>
+    <a class="btn btn-line" href="guide.html">이용방법 보기</a>
+  </div>
 
   <!-- ===== 랜선페이를 써야 하는 이유 — 1~7 펼침 ===== -->
   <section class="sec tight" id="whysec">
