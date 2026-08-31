@@ -507,11 +507,14 @@
   #itemsec .itl .itr{margin-top:14px; width:100%; gap:0;}
   #itemsec .itr-card{cursor:pointer; display:block;}
   #itemsec .itr-card:hover{transform:translateY(-3px); transition:transform .18s;}
-  #itemsec .itpanel{position:relative; cursor:pointer; transition:transform .18s, box-shadow .18s;}
-  #itemsec .itpanel:hover{transform:translateY(-4px);
-    box-shadow:0 20px 40px rgba(15,23,42,.12), 0 4px 10px rgba(15,23,42,.06);}
-  #itemsec .itpanel .parw{position:absolute; top:20px; right:22px; color:var(--primary); display:flex;}
-  #itemsec .itpanel .parw svg{width:22px; height:22px;}
+  #itemsec .itpanel{position:relative;}
+  #itemsec .itpanel .parw{position:absolute; top:18px; right:20px; color:var(--primary);
+    display:flex; align-items:center; gap:5px; font-size:13.5px; font-weight:700; z-index:2;}
+  #itemsec .itpanel .parw svg{width:15px; height:15px;}
+  /* 모바일 — 패널 텍스트 좌측 정렬 */
+  @media(max-width:899px){
+    #itemsec .itl{align-items:flex-start; text-align:left;}
+  }
   #itemsec .doc{display:flex; align-items:center; gap:8px; min-height:0;
     padding:0; margin:0 0 8px;}
   #itemsec .doc:last-child{margin-bottom:0;}
@@ -663,7 +666,7 @@
       <div class="itarw" aria-hidden="true"><svg viewBox="0 0 22 22" aria-hidden="true"><path d="M4 11h13M11 4l7 7-7 7" stroke="currentColor" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
 
       <div class="itpanel">
-        <span class="uarw parw" aria-hidden="true"><svg viewBox="0 0 22 22"><path d="M5 17 17 5M8 5h9v9" stroke="currentColor" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <a class="parw" href="화면/10_1_유형선택.html">바로가기<svg viewBox="0 0 22 22" aria-hidden="true"><path d="M5 17 17 5M8 5h9v9" stroke="currentColor" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         <div class="itl">
           <h3 id="itp-h"></h3>
           <div class="itr" id="itp-docs"></div>
@@ -1057,7 +1060,6 @@
   };
   var 들 = document.querySelectorAll('.itgrid .it');
   var 패널 = document.querySelector('.itpanel');
-  if (패널) 패널.addEventListener('click', function(){ location.href='화면/10_1_유형선택.html'; });
   function 채우기(b) {
     var n = b.dataset.n, 정보 = 자료[n];
     큰제목.textContent = 정보.t;
