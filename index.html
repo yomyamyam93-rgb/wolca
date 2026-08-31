@@ -13,8 +13,13 @@
   /* ===== 이 페이지에만 쓰는 것 ===== */
 
   /* ① 히어로 — 가운데 한 마디 + 한 장씩 넘어가는 대화 카드 (레퍼런스 방식) */
-  .hero{position:relative; background:#F2F5FB url('img/hero-bg3.jpg?v=3') center/cover no-repeat;
+  .hero{position:relative; background:#0C1E8F url('img/hero-bg4.jpg') center/cover no-repeat;
     padding:88px 0 calc(48px + 9vw); overflow:clip;}
+  /* 어두운 배경 위 글씨는 흰색으로 */
+  .hero .h-hero{color:#fff;}
+  .hero .h-hero .hl{color:var(--accent);}
+  .hero .hlead{color:rgba(255,255,255,.85);}
+  .hero .hlead b{color:#fff;}
   /* 아랫단 원호 — 화면 폭에 비례해 어디서나 같은 곡률 */
   .hcap{position:absolute; left:0; bottom:-1px; width:100%; height:auto; display:block; pointer-events:none;}
   .hero-top{text-align:center;}
