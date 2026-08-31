@@ -13,13 +13,19 @@
   /* ===== 이 페이지에만 쓰는 것 ===== */
 
   /* ① 히어로 — 가운데 한 마디 + 한 장씩 넘어가는 대화 카드 (레퍼런스 방식) */
-  .hero{position:relative; background:#0C1E8F url('img/hero-bg4.jpg') center/cover no-repeat;
+  .hero{position:relative; background-color:#0C1E8F;
+    background-image:linear-gradient(rgba(3,10,46,.38), rgba(3,10,46,.52)), url('img/hero-bg4.jpg');
+    background-size:cover; background-position:center;
     padding:124px 0 calc(40px + 5vw); overflow:clip;}
   /* 어두운 배경 위 글씨는 흰색으로 */
   .hero .h-hero{color:#fff;}
   .hero .h-hero br{display:none;}
-  .hero .h-hero .soft{display:block; margin-bottom:6px; font-weight:400;
-    letter-spacing:-.4px; font-size:clamp(17px, 2.4vw, 32px);}
+  @media(max-width:899px){
+    .hero .hero2{text-align:center;}
+    .hero .hero2 .hbtns{justify-content:center;}
+  }
+  .hero .h-hero .soft{display:block; margin-bottom:4px; font-weight:400;
+    letter-spacing:-.4px; font-size:.94em;}
   .hero .h-hero .hl{color:#CCD0D8;}
   .hero .hlead{color:rgba(255,255,255,.85);}
   .hero .hlead b{color:#fff;}
