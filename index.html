@@ -485,13 +485,16 @@
   /* 신뢰 카드 4장 — 3D 느낌 */
   .srow{background:linear-gradient(180deg,#FFFFFF,#F8FAFE);
     box-shadow:0 14px 30px rgba(15,23,42,.08), 0 3px 8px rgba(15,23,42,.04);}
-  /* 서류 안내 3줄 → 카드 비율 상자 하나로 */
-  #itemsec .itr{background:linear-gradient(180deg,#FFFFFF,#F8FAFE); border:1px solid #ECEFF5;
-    border-radius:12px; aspect-ratio:1.586/1; padding:20px 30px; gap:0; justify-content:center;
+  /* 서류 3줄 + 버튼 = 신용카드 한 장 */
+  #itemsec .itr-card{background:linear-gradient(180deg,#FFFFFF,#F8FAFE); border:1px solid #ECEFF5;
+    border-radius:14px; aspect-ratio:1.586/1; padding:24px 28px;
+    display:flex; flex-direction:column; justify-content:space-between;
     box-shadow:0 14px 30px rgba(15,23,42,.08), 0 3px 8px rgba(15,23,42,.04);}
+  #itemsec .itr{background:none; border:none; box-shadow:none; border-radius:0; padding:0; gap:0;}
   #itemsec .doc{border:none; box-shadow:none; background:none; border-radius:0;
-    padding:16px 2px; border-bottom:1px solid var(--line);}
+    padding:14px 2px; border-bottom:1px solid var(--line);}
   #itemsec .doc:last-child{border-bottom:none;}
+  #itemsec .itr-card .btn{width:100%; margin-top:16px;}
 </style>
 </head>
 <body>
@@ -597,9 +600,11 @@
         <div class="itl">
           <h3 id="itp-h"></h3>
           <p id="itdesc-p"></p>
+        </div>
+        <div class="itr-card">
+          <div class="itr" id="itp-docs"></div>
           <a class="btn btn-primary" id="itgo" href="화면/10_1_유형선택.html"><img class="btn-logo" src="img/logo3-white.png" alt=""><span id="itgo-t">월세 결제하기</span></a>
         </div>
-        <div class="itr" id="itp-docs"></div>
       </div>
     </div>
 
