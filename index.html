@@ -506,6 +506,17 @@
     padding:14px 2px; border-bottom:1px solid rgba(255,255,255,.24);}
   #itemsec .doc:last-child{border-bottom:none;}
   #itemsec .itr-card .btn{width:100%; margin-top:16px; background:#fff; color:var(--primary-600); box-shadow:0 6px 16px rgba(5,12,24,.18);}
+  /* 기능 카드 — 모바일: 가로 스와이프 + 아이콘 표시 */
+  @media(max-width:899px){
+    .rzgrid{display:flex; gap:12px; overflow-x:auto; scroll-snap-type:x mandatory;
+      -webkit-overflow-scrolling:touch; scrollbar-width:none; padding-bottom:6px;}
+    .rzgrid::-webkit-scrollbar{display:none;}
+    .rz{flex:0 0 84%; scroll-snap-align:center; position:relative; overflow:hidden;
+      padding:26px 22px 185px;}
+    .rz .fig{display:block; position:absolute; right:8px; bottom:10px;
+      max-width:165px; max-height:165px; width:auto; height:auto;}
+    .plus{display:none;}
+  }
 </style>
 </head>
 <body>
