@@ -505,8 +505,7 @@
     display:flex; flex-direction:column; justify-content:flex-end;
     filter:drop-shadow(0 16px 26px rgba(10,14,26,.38));}
   #itemsec .itl .itr{margin-top:14px; width:100%; gap:0;}
-  #itemsec .itr-card{cursor:pointer; display:block;}
-  #itemsec .itr-card:hover{transform:translateY(-3px); transition:transform .18s;}
+  #itemsec .itr-card{display:block;}
   #itemsec .itpanel{position:relative;}
   #itemsec .itpanel .parw{position:absolute; top:16px; right:16px; color:var(--primary-600);
     display:flex; align-items:center; gap:5px; font-size:13.5px; font-weight:700; z-index:2;
@@ -692,7 +691,7 @@
           <h3 id="itp-h"></h3>
           <div class="itr" id="itp-docs"></div>
         </div>
-        <a class="itr-card" href="화면/10_1_유형선택.html" aria-label="결제하러 가기"></a>
+        <div class="itr-card" aria-hidden="true"></div>
       </div>
     </div>
 
