@@ -13,13 +13,18 @@
   /* ===== 이 페이지에만 쓰는 것 ===== */
 
   /* ① 히어로 — 가운데 한 마디 + 한 장씩 넘어가는 대화 카드 (레퍼런스 방식) */
-  .hero{background:var(--card); padding:56px 0 64px; overflow:clip;}
+  .hero{position:relative; color:#fff; padding:112px 0 132px; overflow:clip;
+    clip-path:polygon(0 0, 100% 0, 100% calc(100% - 5vw), 50% 100%, 0 calc(100% - 5vw));
+    background:#1631B4 url('img/hero-bg.jpg') center bottom/cover no-repeat;}
+  .hero .wrap{position:relative; z-index:1;}
+  .hero .h-hero{color:#fff;}
+  .hero .h-hero .hl{color:#A6C8FF;}
   .hero-top{text-align:center;}
   .hero .lead{margin-top:22px; font-size:17px; line-height:1.8; color:var(--sub);}
   .hero .lead b{color:var(--ink);}
   /* 버튼은 알약형 — 레퍼런스와 같은 꼴 */
   .hero .btn{margin-top:34px; height:56px; font-size:17px; padding:0 34px; border-radius:8px;}
-  @media(min-width:768px){ .hero{padding:64px 0;} .hero .lead{font-size:20px;} }
+  @media(min-width:768px){ .hero{padding:180px 0 210px;} .hero .lead{font-size:20px;} }
   /* 처음 열릴 때 위로 떠오르며 등장 (한 번만) */
   .hero-top > *{animation:heroUp .7s cubic-bezier(.22,.8,.3,1) both;}
   .hero-top > :nth-child(2){animation-delay:.08s;}
@@ -42,42 +47,67 @@
     .hero2{grid-template-columns:1fr; text-align:center; justify-items:center;}
     .hero2 .hbtns{justify-content:center;}
   }
-  .hlead{margin-top:18px; font-size:15.5px; line-height:1.8; color:var(--sub);}
+  .hlead{margin-top:18px; font-size:15.5px; line-height:1.8; color:rgba(255,255,255,.85);}
   @media(min-width:900px){ .hlead{font-size:17px;} }
-  .hlead b{color:var(--ink); font-weight:700;}
+  .hlead b{color:#fff; font-weight:700;}
   .hbtns{display:flex; flex-wrap:wrap; gap:10px; margin-top:26px;}
   .hbtns .btn{margin-top:0;}
+  /* 히어로 정렬 — 늘 가운데 */
+  .hero .hero2{text-align:center; justify-items:center;}
+  @media(max-width:899px){ .hero .hero2{text-align:center;} .hero .hleft{display:block;} }
+  .heye{display:inline-block; background:#fff; color:var(--primary-600); border-radius:8px;
+    padding:9px 16px; font-size:14px; font-weight:700; letter-spacing:-.2px; margin-bottom:18px;
+    box-shadow:0 6px 16px rgba(5,12,24,.22);}
+  @media(min-width:768px){ .heye{font-size:16px; padding:10px 20px; margin-bottom:24px;} }
+
+
+  /* 가운데 원형 CTA — 헤더 경계에 반쯤 걸친다 */
+  .hctaw{position:relative; z-index:5; display:flex; justify-content:center; margin-top:-79px;}
+  .hcta{width:158px; height:158px; border-radius:999px; border:3px solid #fff;
+    background:var(--primary); background:var(--grad); color:#fff;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    font-size:17.5px; font-weight:800; line-height:1.4; text-align:center; letter-spacing:-.3px;
+    box-shadow:0 18px 40px rgba(37,99,235,.35); transition:transform .2s;}
+  .hcta:hover{transform:scale(1.05);}
+  .hcta iconify-icon{font-size:23px; margin-top:5px;}
+  @media(max-width:767px){
+    .hctaw{margin-top:-67px;}
+    .hcta{width:134px; height:134px; font-size:15.5px;}
+    .hcta iconify-icon{font-size:20px;}
+  }
   .btn-line{background:#fff; border:1px solid var(--line); color:var(--ink);}
   /* 영상 틀 — 원본의 흰 여백을 잘라내고 내용물을 크게 */
   .hvid{overflow:hidden; border-radius:8px;}
   .himg{width:134%; height:auto; margin:-23.2% -15.9% -27.5% -17.8%;
     filter:brightness(1.012); display:block;}
 
-  /* 1~7 USP 카드 — 파스텔 색 · 번호 · 쪽수 (레퍼런스 방식)
-     화살표로 넘기고, 가만두면 자동으로 한 장씩 넘어간다 */
-  .ucband{margin-top:56px; overflow-x:clip; overflow-y:visible;}
-  @media(min-width:768px){ .ucband{margin-top:88px;} }
-  .uctrack{display:flex; width:max-content; will-change:transform;}
-  .uc{position:relative; width:min(86vw, 380px); min-height:260px; flex:0 0 auto; margin-right:16px;
-    border-radius:8px; padding:26px; text-align:left;}
-  @media(min-width:768px){ .uc{width:440px; min-height:300px; margin-right:24px; padding:32px;} }
-  .uc-b,.uc-g,.uc-y{background:var(--primary-50);}
+  /* 랜선페이를 써야 하는 이유 — 1~7 펼침 (파랑 3톤 + 주황 번호) */
+  /* 질문 1줄 + 제목 1줄 = 어떤 폭에서도 딱 2줄 (글자가 폭에 맞춰 줄어든다) */
+  #whysec .h-sec br{display:none;}
+  #whysec .h-sec .soft{display:block; margin-bottom:8px; font-weight:400;
+    letter-spacing:-.4px; font-size:min(2.2vw, 30px); white-space:nowrap;}
+  @media(max-width:767px){
+    #whysec .h-sec{font-size:min(6vw, 23px);}
+    #whysec .h-sec .soft{font-size:min(3.9vw, 15px);}
+  }
+  .whygrid{display:grid; gap:14px;}
+  @media(min-width:640px){ .whygrid{grid-template-columns:1fr 1fr; gap:18px;} }
+  @media(min-width:1000px){ .whygrid{grid-template-columns:repeat(3,1fr); gap:20px;}
+    .whygrid .uc:last-child{grid-column:1/-1;} }
+  .uc{position:relative; border-radius:8px; padding:26px; text-align:left; min-height:225px;}
+  @media(min-width:1000px){ .uc{padding:30px; min-height:270px;} }
+  .uc-b{background:var(--primary-50);}
+  .uc-g{background:#E2ECFF;}
+  .uc-y{background:#D7E5FF;}
   .uc .no{display:inline-block; padding:6px 14px; border-radius:999px; color:#fff;
-    font-size:13.5px; font-weight:700; letter-spacing:.5px;}
-  .uc-b .no,.uc-g .no,.uc-y .no{background:var(--primary);}
-  .uc h3{margin-top:16px; font-size:22px; font-weight:800; letter-spacing:-.6px; line-height:1.35;}
-  @media(min-width:768px){ .uc h3{font-size:25px;} }
-  .uc p{margin-top:12px; font-size:14.5px; line-height:1.75; color:var(--sub);}
-  @media(min-width:768px){ .uc p{font-size:15.5px;} }
-  /* 3D 그림 — 번호가 왼쪽 위에서 띄운 만큼(카드 안쪽 여백) 오른쪽 아래도 똑같이 */
-  .uc .art{position:absolute; right:26px; bottom:26px; max-width:60px; max-height:70px;
+    font-size:13.5px; font-weight:700; letter-spacing:.5px; background:var(--primary-600);}
+  .uc h3{margin-top:14px; font-size:20px; font-weight:800; letter-spacing:-.5px; line-height:1.35;}
+  @media(min-width:1000px){ .uc h3{font-size:22px;} }
+  .uc p{margin-top:10px; font-size:14.5px; line-height:1.75; color:var(--sub);}
+  @media(min-width:1000px){ .uc p{font-size:15px;} }
+  .uc .art{position:absolute; right:24px; bottom:24px; max-width:56px; max-height:66px;
     width:auto; height:auto; filter:drop-shadow(0 6px 12px rgba(37,99,235,.18));}
-  @media(min-width:768px){ .uc .art{max-width:74px; max-height:86px; right:32px; bottom:32px;} }
-  .ucnav{display:flex; gap:10px; margin-top:20px; justify-content:center;}
-  .ucbtn{width:44px; height:44px; border-radius:8px; background:#fff; border:1px solid var(--line);
-    display:flex; align-items:center; justify-content:center; font-size:19px; color:var(--ink);
-    cursor:pointer; transition:border-color .15s, color .15s;}
-  .ucbtn:hover{border-color:var(--primary); color:var(--primary-600);}
+  @media(min-width:1000px){ .uc .art{max-width:70px; max-height:82px; right:30px; bottom:30px;} }
 
   /* ② 항목 카드 — 설명과 핵심이 카드 안에 다 보인다 (레퍼런스식) */
   /* ② 결제 항목 — 아이콘 타일 나열 · 누르면 그 항목으로 결제 화면 이동
@@ -352,148 +382,68 @@
   <section class="hero">
     <div class="wrap hero2">
       <div class="hleft">
+        <p class="heye">월세 · 관리비 · 보증금 · 매입대금까지</p>
         <h1 class="h-hero">현금으로만 내던 돈<br>이제 <span class="hl">카드로 결제</span>하세요</h1>
-        <p class="hlead">월세 · 관리비 · 보증금 · 매입대금처럼<br><b>계좌로 보내야 하는 비용을 카드로 결제하고</b><br><b>상대방 계좌로 송금하는 서비스</b>입니다</p>
-        <div class="hbtns">
-          <a class="btn btn-primary" href="app.html"><img class="btn-logo" src="img/logo3-white.png" alt="">바로 송금하기</a>
-          <a class="btn btn-line" href="guide.html">어떻게 이용하나요?</a>
-        </div>
+        <p class="hlead"><b>카드로 결제하면 상대방 계좌로</b><br><b>현금이 입금되는 서비스</b>입니다</p>
       </div>
     </div>
 
-    <!-- 1~7 USP — 화살표로 넘기고 가만두면 자동으로 넘어간다 -->
-    <div class="ucband">
-      <div class="uctrack" id="uctrack">
-        <div class="uc uc-b" aria-hidden="true">
-          <span class="no">01</span>
-          <h3>임대인 동의 불필요</h3>
-          <p>집주인 동의나 가입 없이<br>보내는 분 이름 그대로<br>계좌에 현금이 입금돼요</p>
-          <img class="art" src="img/usp3d/01.png" alt="">
-        </div>
-        <div class="uc uc-g" aria-hidden="true">
-          <span class="no">02</span>
-          <h3>최대 24개월 할부<br>7개월 무이자 할부</h3>
-          <p>큰 금액도 할부로 가볍게<br>무이자는 최대 7개월<br>부담을 나눠서 내세요</p>
-          <img class="art" src="img/usp3d/02.png" alt="">
-        </div>
-        <div class="uc uc-y" aria-hidden="true">
-          <span class="no">03</span>
-          <h3>소득 · 세액공제 환급</h3>
-          <p>소득공제는 자동 환급<br>세액공제로 월세 납부액의<br>최대 17%를 돌려받아요</p>
-          <img class="art" src="img/usp3d/03.png" alt="">
-        </div>
-        <div class="uc uc-b" aria-hidden="true">
-          <span class="no">04</span>
-          <h3>카드사 포인트 적립</h3>
-          <p>정상 결제와 똑같이 처리돼<br>카드 실적 인정은 물론<br>포인트도 차곡차곡 쌓여요</p>
-          <img class="art" src="img/usp3d/04.png" alt="">
-        </div>
-        <div class="uc uc-g" aria-hidden="true">
-          <span class="no">05</span>
-          <h3>필요할 때 바로 즉시송금</h3>
-          <p>주말 · 공휴일에도<br>결제하면 바로 송금되고<br>평균 5분 안에 입금돼요</p>
-          <img class="art" src="img/usp3d/05.png" alt="">
-        </div>
-        <div class="uc uc-y" aria-hidden="true">
-          <span class="no">06</span>
-          <h3>지정한 날짜에 맞춰 예약송금</h3>
-          <p>날짜를 정해두면<br>매달 알아서 나가니까<br>연체 걱정이 없어요</p>
-          <img class="art" src="img/usp3d/06.png" alt="">
-        </div>
-        <div class="uc uc-b" aria-hidden="true">
-          <span class="no">07</span>
-          <h3>여러 카드로 분할결제</h3>
-          <p>한 번의 결제를<br>여러 장의 카드로 나눠<br>한도 걱정 없이 낼 수 있어요</p>
-          <img class="art" src="img/usp3d/07.png" alt="">
-        </div>
-        <div class="uc uc-b">
-          <span class="no">01</span>
-          <h3>임대인 동의 불필요</h3>
-          <p>집주인 동의나 가입 없이<br>보내는 분 이름 그대로<br>계좌에 현금이 입금돼요</p>
-          <img class="art" src="img/usp3d/01.png" alt="">
-        </div>
-        <div class="uc uc-g">
-          <span class="no">02</span>
-          <h3>최대 24개월 할부<br>7개월 무이자 할부</h3>
-          <p>큰 금액도 할부로 가볍게<br>무이자는 최대 7개월<br>부담을 나눠서 내세요</p>
-          <img class="art" src="img/usp3d/02.png" alt="">
-        </div>
-        <div class="uc uc-y">
-          <span class="no">03</span>
-          <h3>소득 · 세액공제 환급</h3>
-          <p>소득공제는 자동 환급<br>세액공제로 월세 납부액의<br>최대 17%를 돌려받아요</p>
-          <img class="art" src="img/usp3d/03.png" alt="">
-        </div>
-        <div class="uc uc-b">
-          <span class="no">04</span>
-          <h3>카드사 포인트 적립</h3>
-          <p>정상 결제와 똑같이 처리돼<br>카드 실적 인정은 물론<br>포인트도 차곡차곡 쌓여요</p>
-          <img class="art" src="img/usp3d/04.png" alt="">
-        </div>
-        <div class="uc uc-g">
-          <span class="no">05</span>
-          <h3>필요할 때 바로 즉시송금</h3>
-          <p>주말 · 공휴일에도<br>결제하면 바로 송금되고<br>평균 5분 안에 입금돼요</p>
-          <img class="art" src="img/usp3d/05.png" alt="">
-        </div>
-        <div class="uc uc-y">
-          <span class="no">06</span>
-          <h3>지정한 날짜에 맞춰 예약송금</h3>
-          <p>날짜를 정해두면<br>매달 알아서 나가니까<br>연체 걱정이 없어요</p>
-          <img class="art" src="img/usp3d/06.png" alt="">
-        </div>
-        <div class="uc uc-b">
-          <span class="no">07</span>
-          <h3>여러 카드로 분할결제</h3>
-          <p>한 번의 결제를<br>여러 장의 카드로 나눠<br>한도 걱정 없이 낼 수 있어요</p>
-          <img class="art" src="img/usp3d/07.png" alt="">
-        </div>
-        <div class="uc uc-b" aria-hidden="true">
-          <span class="no">01</span>
-          <h3>임대인 동의 불필요</h3>
-          <p>집주인 동의나 가입 없이<br>보내는 분 이름 그대로<br>계좌에 현금이 입금돼요</p>
-          <img class="art" src="img/usp3d/01.png" alt="">
-        </div>
-        <div class="uc uc-g" aria-hidden="true">
-          <span class="no">02</span>
-          <h3>최대 24개월 할부<br>7개월 무이자 할부</h3>
-          <p>큰 금액도 할부로 가볍게<br>무이자는 최대 7개월<br>부담을 나눠서 내세요</p>
-          <img class="art" src="img/usp3d/02.png" alt="">
-        </div>
-        <div class="uc uc-y" aria-hidden="true">
-          <span class="no">03</span>
-          <h3>소득 · 세액공제 환급</h3>
-          <p>소득공제는 자동 환급<br>세액공제로 월세 납부액의<br>최대 17%를 돌려받아요</p>
-          <img class="art" src="img/usp3d/03.png" alt="">
-        </div>
-        <div class="uc uc-b" aria-hidden="true">
-          <span class="no">04</span>
-          <h3>카드사 포인트 적립</h3>
-          <p>정상 결제와 똑같이 처리돼<br>카드 실적 인정은 물론<br>포인트도 차곡차곡 쌓여요</p>
-          <img class="art" src="img/usp3d/04.png" alt="">
-        </div>
-        <div class="uc uc-g" aria-hidden="true">
-          <span class="no">05</span>
-          <h3>필요할 때 바로 즉시송금</h3>
-          <p>주말 · 공휴일에도<br>결제하면 바로 송금되고<br>평균 5분 안에 입금돼요</p>
-          <img class="art" src="img/usp3d/05.png" alt="">
-        </div>
-        <div class="uc uc-y" aria-hidden="true">
-          <span class="no">06</span>
-          <h3>지정한 날짜에 맞춰 예약송금</h3>
-          <p>날짜를 정해두면<br>매달 알아서 나가니까<br>연체 걱정이 없어요</p>
-          <img class="art" src="img/usp3d/06.png" alt="">
-        </div>
-        <div class="uc uc-b" aria-hidden="true">
-          <span class="no">07</span>
-          <h3>여러 카드로 분할결제</h3>
-          <p>한 번의 결제를<br>여러 장의 카드로 나눠<br>한도 걱정 없이 낼 수 있어요</p>
-          <img class="art" src="img/usp3d/07.png" alt="">
-        </div>
+  </section>
+
+  <!-- 가운데 원형 CTA — 헤더에 반쯤 걸친다 -->
+  <div class="hctaw">
+    <a class="hcta" href="app.html">바로<br>송금하기<iconify-icon icon="mingcute:arrow-right-line" aria-hidden="true"></iconify-icon></a>
+  </div>
+
+  <!-- ===== 랜선페이를 써야 하는 이유 — 1~7 펼침 ===== -->
+  <section class="sec tight" id="whysec">
+    <div class="wrap">
+      <div class="head">
+        <h2 class="h-sec"><span class="soft">불편한 현금거래 · 계좌이체 때문에 고민이신가요?</span><br>이제 <span class="hl">랜선페이</span>에게 맡겨보세요</h2>
       </div>
-      <div class="ucnav">
-        <button class="ucbtn" id="ucprev" aria-label="이전 카드"><iconify-icon icon="mingcute:left-line"></iconify-icon></button>
-        <button class="ucbtn" id="ucnext" aria-label="다음 카드"><iconify-icon icon="mingcute:right-line"></iconify-icon></button>
+      <div class="whygrid">
+        <div class="uc uc-b">
+          <span class="no">01</span>
+          <h3>임대인 동의 불필요</h3>
+          <p>집주인 동의나 가입 없이<br>보내는 분 이름 그대로<br>계좌에 현금이 입금돼요</p>
+          <img class="art" src="img/usp3d/01.png" alt="">
+        </div>
+        <div class="uc uc-g">
+          <span class="no">02</span>
+          <h3>최대 24개월 할부<br>7개월 무이자 할부</h3>
+          <p>큰 금액도 할부로 가볍게<br>무이자는 최대 7개월<br>부담을 나눠서 내세요</p>
+          <img class="art" src="img/usp3d/02.png" alt="">
+        </div>
+        <div class="uc uc-y">
+          <span class="no">03</span>
+          <h3>소득 · 세액공제 환급</h3>
+          <p>소득공제는 자동 환급<br>세액공제로 월세 납부액의<br>최대 17%를 돌려받아요</p>
+          <img class="art" src="img/usp3d/03.png" alt="">
+        </div>
+        <div class="uc uc-b">
+          <span class="no">04</span>
+          <h3>카드사 포인트 적립</h3>
+          <p>정상 결제와 똑같이 처리돼<br>카드 실적 인정은 물론<br>포인트도 차곡차곡 쌓여요</p>
+          <img class="art" src="img/usp3d/04.png" alt="">
+        </div>
+        <div class="uc uc-g">
+          <span class="no">05</span>
+          <h3>필요할 때 바로 즉시송금</h3>
+          <p>주말 · 공휴일에도<br>결제하면 바로 송금되고<br>평균 5분 안에 입금돼요</p>
+          <img class="art" src="img/usp3d/05.png" alt="">
+        </div>
+        <div class="uc uc-y">
+          <span class="no">06</span>
+          <h3>지정한 날짜에 맞춰 예약송금</h3>
+          <p>날짜를 정해두면<br>매달 알아서 나가니까<br>연체 걱정이 없어요</p>
+          <img class="art" src="img/usp3d/06.png" alt="">
+        </div>
+        <div class="uc uc-b">
+          <span class="no">07</span>
+          <h3>여러 카드로 분할결제</h3>
+          <p>한 번의 결제를<br>여러 장의 카드로 나눠<br>한도 걱정 없이 낼 수 있어요</p>
+          <img class="art" src="img/usp3d/07.png" alt="">
+        </div>
       </div>
     </div>
   </section>
@@ -801,53 +751,6 @@
 
 <!-- 늘 따라다니는 시작 버튼 -->
 <a class="fab" href="app.html"><img class="btn-logo" src="img/logo3-white.png" alt="">바로 송금하기</a>
-<script>
-/* 1~7 USP — 화살표로 넘기고, 가만두면 2.8초마다 자동으로 넘어간다.
-   같은 7장을 3벌 이어붙였으므로 끝에 닿으면 소리 없이 가운데 벌로 돌아온다 */
-(function () {
-  var band = document.querySelector('.ucband');
-  var tk = document.getElementById('uctrack');
-  if (!band || !tk) return;
-  var 한벌 = tk.children.length / 3;
-  var i = 한벌, 멈춤 = false, 시계 = null, 조정중 = false;
-  function 폭() {
-    var c = tk.children[0];
-    return c.getBoundingClientRect().width + parseFloat(getComputedStyle(c).marginRight);
-  }
-  function 놓기() {   /* i 번째 카드가 화면 정중앙에 서도록 */
-    var w = tk.children[0].getBoundingClientRect().width;
-    tk.style.transform = 'translateX(' + ((band.clientWidth / 2) - (w / 2) - i * 폭()) + 'px)';
-  }
-  function 이동(걸음, 빠르게) {
-    i += 걸음;
-    tk.style.transition = 'transform ' + (빠르게 ? '.6s' : '2.6s') + ' cubic-bezier(.3,.6,.25,1)';
-    놓기();
-    if ((i >= 한벌 * 2 || i < 한벌) && !조정중) {
-      조정중 = true;
-      setTimeout(function () {
-        tk.style.transition = 'none';
-        i += (i < 한벌 ? 한벌 : -한벌);
-        놓기();
-        조정중 = false;
-      }, 빠르게 ? 620 : 2700);
-    }
-  }
-  function 시계다시() {
-    clearInterval(시계);
-    시계 = setInterval(function () { if (!멈춤 && !document.hidden) 이동(1); }, 2800);
-  }
-  tk.style.transition = 'none';
-  놓기();
-  document.getElementById('ucnext').addEventListener('click', function () { 이동(1, true); 시계다시(); });
-  document.getElementById('ucprev').addEventListener('click', function () { 이동(-1, true); 시계다시(); });
-  window.addEventListener('resize', function () { tk.style.transition = 'none'; 놓기(); });
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  if (window.self !== window.top) return;   /* 가이드 미리보기에선 정지 화면 */
-  시계다시();
-  band.addEventListener('mouseenter', function () { 멈춤 = true; });
-  band.addEventListener('mouseleave', function () { 멈춤 = false; });
-})();
-</script>
 <script>
 /* 후기 두 줄 — 한 칸씩 밀린다. 아랫줄(data-dir=-1)은 반대 방향 */
 (function () {
