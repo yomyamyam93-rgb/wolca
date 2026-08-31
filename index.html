@@ -95,14 +95,11 @@
     filter:brightness(1.012); display:block;}
 
   /* 랜선페이를 써야 하는 이유 — 1~7 펼침 (파랑 3톤) */
-  /* 질문 1줄(얇게) + 제목 1줄 = 어떤 폭에서도 딱 2줄 */
+  /* 두 줄 같은 크기 — 굵기만 차이 */
+  #whysec .h-sec{font-size:min(3.8vw, 46px);}
   #whysec .h-sec br{display:none;}
-  #whysec .h-sec .soft{display:block; margin-bottom:8px; font-weight:400;
-    letter-spacing:-.4px; font-size:min(2.2vw, 30px); white-space:nowrap;}
-  @media(max-width:767px){
-    #whysec .h-sec{font-size:min(6vw, 23px);}
-    #whysec .h-sec .soft{font-size:min(3.9vw, 15px);}
-  }
+  #whysec .h-sec .soft{display:block; margin-bottom:6px; font-weight:400;
+    letter-spacing:-.4px; white-space:nowrap;}
   .whygrid{display:grid; gap:14px;}
   @media(min-width:640px){ .whygrid{grid-template-columns:1fr 1fr; gap:18px;}
     .whygrid .uc:last-child{grid-column:1/-1;} }
@@ -153,28 +150,22 @@
       align-content:center;}
     #itemsec .itgrid{margin-top:52px;}
   }
-  /* 기능 단락 제목 — 얇은 1줄 + 굵은 1줄 */
+  /* 두 줄 같은 크기 — 굵기만 차이 */
+  #featsec .h-sec{font-size:min(4.4vw, 48px);}
   #featsec .h-sec br{display:none;}
-  #featsec .h-sec .soft{display:block; margin-bottom:8px; font-weight:400;
-    letter-spacing:-.4px; font-size:min(2.2vw, 30px); white-space:nowrap;}
-  @media(max-width:767px){
-    #featsec .h-sec{font-size:min(6vw, 23px);}
-    #featsec .h-sec .soft{font-size:min(3.9vw, 15px);}
-  }
+  #featsec .h-sec .soft{display:block; margin-bottom:6px; font-weight:400;
+    letter-spacing:-.4px; white-space:nowrap;}
   /* 설명 패널 — 위아래 호흡 · 3D 느낌 */
   #itemsec .itl p{margin-top:14px;}
   #itemsec .itl .btn{margin-top:28px;}
   #itemsec .itpanel{background:linear-gradient(180deg,#FFFFFF,#F8FAFE); border:1px solid #ECEFF5;
     box-shadow:0 14px 30px rgba(15,23,42,.08), 0 3px 8px rgba(15,23,42,.04);}
   #itemsec .doc{background:#fff; border:1px solid #ECEFF5; box-shadow:0 6px 14px rgba(15,23,42,.05);}
-  /* 얇은 안내 1줄 + 굵은 제목 1줄 */
+  /* 두 줄 같은 크기 — 굵기만 차이 */
+  #itemsec .h-sec{font-size:min(5.4vw, 48px);}
   #itemsec .h-sec br{display:none;}
-  #itemsec .h-sec .soft{display:block; margin-bottom:8px; font-weight:400;
-    letter-spacing:-.4px; font-size:min(2.2vw, 30px); white-space:nowrap;}
-  @media(max-width:767px){
-    #itemsec .h-sec{font-size:min(6vw, 23px);}
-    #itemsec .h-sec .soft{font-size:min(3.9vw, 15px);}
-  }
+  #itemsec .h-sec .soft{display:block; margin-bottom:6px; font-weight:400;
+    letter-spacing:-.4px; white-space:nowrap;}
   /* 항목 상세 패널 — 왼쪽 설명 · 오른쪽 필요 서류 (레퍼런스식) */
   .itpanel{display:grid; gap:26px; margin-top:20px; background:#fff; border-radius:8px;
     padding:28px 22px; text-align:left;
