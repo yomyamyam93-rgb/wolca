@@ -82,8 +82,9 @@ img{max-width:100%;}
 
 /* ---------- 상단바 (가이드 6장 · 56px) ---------- */
 .appbar{position:sticky; top:0; z-index:40; height:var(--appbar);
-  background:rgba(255,255,255,.92); backdrop-filter:blur(10px);
-  border-bottom:1px solid var(--line);}
+  background:rgba(7,22,58,.95); backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(255,255,255,.08);}
+.appbar .logo img{filter:brightness(0) invert(1);}   /* 어두운 바 위에서 로고는 흰색 */
 .appbar-in{max-width:var(--maxw); margin:0 auto; height:100%;
   padding:0 var(--pad); display:flex; align-items:center; gap:8px;}
 .appbar .logo{display:flex; align-items:center; gap:7px; min-height:48px;}
@@ -110,12 +111,12 @@ img{max-width:100%;}
 /* ---------- 우상단 메뉴 (PC) · 햄버거(모바일) ---------- */
 .gnb{margin-left:auto; display:none; align-items:center; gap:2px;}
 .gnb a{display:inline-flex; align-items:center; min-height:44px; padding:0 14px;
-  font-size:15px; font-weight:700; color:var(--sub); border-radius:10px;}
-.gnb a:hover{background:var(--bg); color:var(--ink);}
-.gnb a.on{color:var(--primary-600);}
+  font-size:15px; font-weight:700; color:rgba(255,255,255,.75); border-radius:10px;}
+.gnb a:hover{background:rgba(255,255,255,.1); color:#fff;}
+.gnb a.on{color:#fff;}
 .burger{margin-left:auto; width:48px; height:48px; border-radius:12px;
-  display:flex; align-items:center; justify-content:center; font-size:24px; color:var(--sub);}
-.burger:hover{background:var(--bg);}
+  display:flex; align-items:center; justify-content:center; font-size:24px; color:#fff;}
+.burger:hover{background:rgba(255,255,255,.1);}
 @media(min-width:1024px){ .gnb{display:flex;} .burger{display:none;} }
 
 /* ---------- 늘 따라다니는 시작 버튼 ---------- */
