@@ -442,17 +442,16 @@
     /* 레퍼런스식 — 좁은 박스 가운데 · 제목 위 설명 아래 */
     .rzgrid{grid-template-columns:1fr; gap:8px; max-width:880px; margin-left:auto; margin-right:auto;}
     .rz{display:grid; grid-template-columns:1.35fr 1fr; column-gap:44px;
-      padding:46px 68px 50px; text-align:left;}
+      padding:34px 60px 38px; text-align:left;}
     /* 왼쪽 열 = 텍스트 · 오른쪽 열 = 이미지 자리(현재 비움) */
     .rz > *{grid-column:1;}
     .rz .tab{grid-column:auto;}
     .rz .in{font-size:16px; margin-bottom:8px;}
     .rz h3{font-size:26px;}
-    /* 제목 아래 포인트 밑줄 */
-    .rz .dash{display:block; width:46px; height:3px; border-bottom:none;
-      background:var(--primary); border-radius:2px; margin-top:16px;}
-    .rz ul{margin-top:22px; display:block;}
-    .rz li{margin-bottom:9px; font-size:15.5px;}
+    .rz .dash{display:none;}
+    .rz ul{margin-top:16px; display:block;}
+    .rz li{margin-bottom:7px; font-size:15px;}
+    .rz h3{font-size:24px;}
     .plus{margin:-21px auto;}
   }
 </style>
@@ -583,10 +582,9 @@
           <h3>여러 카드 분할결제</h3>
           <div class="dash"></div>
           <ul>
-            <li>법인 · 개인 카드를 조합해 결제</li>
-            <li>결제 금액을 여러 카드로 나누기</li>
+            <li>법인 · 개인 카드 조합 결제</li>
+            <li>금액을 여러 카드로 나누기</li>
             <li>무이자 할부 혜택 그대로</li>
-            <li>고액 대금도 부담 없이</li>
           </ul>
         </div>
         <div class="plus" aria-hidden="true">+</div>
@@ -596,10 +594,9 @@
           <h3>예약결제 · 정기결제</h3>
           <div class="dash"></div>
           <ul>
-            <li>정해진 날짜에 맞춰 자동 예약송금</li>
-            <li>매달 같은 날 나가는 정기결제</li>
+            <li>정해진 날짜에 자동 예약송금</li>
+            <li>매달 같은 날 정기결제</li>
             <li>급여일 · 납부일에 맞춰 예약</li>
-            <li>마감일 연체 걱정 끝</li>
           </ul>
         </div>
         <div class="plus" aria-hidden="true">+</div>
