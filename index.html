@@ -78,6 +78,13 @@
   .hlead{margin-top:18px; font-size:15.5px; line-height:1.8; color:var(--sub);}
   @media(min-width:900px){ .hlead{font-size:17px;} }
   .hlead b{color:var(--ink); font-weight:700;}
+  /* 체크 3줄 */
+  .hchecks{margin-top:20px; list-style:none; display:flex; flex-direction:column;
+    gap:9px; align-items:center;}
+  .hchecks li{display:flex; align-items:center; gap:8px;
+    font-size:15px; font-weight:600; color:var(--sub); letter-spacing:-.2px;}
+  .hchecks i{font-style:normal; font-weight:800; color:var(--primary);}
+  @media(min-width:768px){ .hchecks li{font-size:17px;} }
   .hbtns{display:flex; flex-wrap:wrap; gap:10px; margin-top:26px;}
   .hbtns .btn{margin-top:0;}
   .btn-line{background:#fff; border:1px solid var(--line); color:var(--ink);}
@@ -395,7 +402,11 @@
     <div class="wrap hero2">
       <div class="hleft">
         <h1 class="h-hero">현금으로만 내던 돈<br>이제 <span class="hl">카드로 결제</span>하세요</h1>
-        <p class="hlead">월세 · 관리비 · 보증금 · 매입대금처럼<br><b>계좌로 보내야 하는 비용을 카드로 결제하고</b><br><b>상대방 계좌로 송금하는 서비스</b>입니다</p>
+        <ul class="hchecks">
+          <li><i>✓</i>월세 · 관리비 · 사업대금 등 다양한 결제처</li>
+          <li><i>✓</i>신용카드 하나로 해결 가능</li>
+          <li><i>✓</i>상대방 계좌로 안심 송금 서비스</li>
+        </ul>
         <div class="hbtns">
           <a class="btn btn-primary" href="app.html"><img class="btn-logo" src="img/logo3-white.png" alt="">바로 송금하기</a>
           <a class="btn btn-line" href="guide.html">어떻게 이용하나요?</a>
