@@ -495,8 +495,9 @@
   /* 서류 3줄 + 버튼 = 신용카드 한 장 */
   #itemsec .itr-card{background:var(--primary); background:var(--grad); border:none;
     border-radius:14px; aspect-ratio:1.586/1; padding:24px 28px;
-    display:flex; flex-direction:column; justify-content:space-between;
+    display:flex; flex-direction:column; justify-content:flex-start;
     box-shadow:0 18px 36px rgba(21,111,249,.35), 0 3px 8px rgba(15,23,42,.10);}
+  #itemsec .itr{margin-top:20px;}
   #itemsec .itr-card{position:relative;}
   #itemsec .itr-tt{display:block; color:#fff; font-size:17px; font-weight:800; letter-spacing:-.3px;}
   #itemsec .doc p{color:rgba(255,255,255,.92);}
@@ -508,13 +509,14 @@
     #itemsec .itr-card{aspect-ratio:1.586/1; padding:15px 20px;}
     #itemsec .itr-tt{font-size:15px;}
     #itemsec .doc{padding:5px 2px;}
+    #itemsec .itr{margin-top:12px;}
     #itemsec .doc p{font-size:12.5px;}
-    #itemsec .itr-card .btn{margin-top:8px; height:42px; font-size:14px;}
+    #itemsec .itr-card .btn{margin-top:auto; height:42px; font-size:14px;}
   }
   #itemsec .doc{border:none; box-shadow:none; background:none; border-radius:0;
-    padding:14px 2px; border-bottom:1px solid rgba(255,255,255,.24);}
+    padding:10px 2px; border-bottom:1px solid rgba(255,255,255,.24);}
   #itemsec .doc:last-child{border-bottom:none;}
-  #itemsec .itr-card .btn{width:100%; margin-top:16px; background:#fff; color:var(--primary-600); box-shadow:0 6px 16px rgba(5,12,24,.18);}
+  #itemsec .itr-card .btn{width:100%; margin-top:auto; background:#fff; color:var(--primary-600); box-shadow:0 6px 16px rgba(5,12,24,.18);}
   /* 기능 카드 — 모바일: 가로 스와이프 + 아이콘 표시 */
   @media(max-width:899px){
     .rzgrid{display:flex; gap:12px; overflow-x:auto; scroll-snap-type:x mandatory;
