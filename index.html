@@ -59,16 +59,17 @@
   .heyes span{display:inline-block; background:#fff; color:var(--primary-600); border-radius:999px;
     padding:8px 16px; font-size:14px; font-weight:700; letter-spacing:-.2px;
     box-shadow:0 6px 16px rgba(5,12,24,.22);}
-  @media(min-width:768px){ .heyes{gap:10px; margin-bottom:26px;} .heyes span{font-size:16px; padding:10px 20px;} }
+  @media(min-width:768px){ .heyes{gap:10px; margin-bottom:26px; max-width:820px; margin-left:auto; margin-right:auto;} .heyes span{font-size:15px; padding:9px 18px;} }
+  @media(max-width:767px){ .heyes{gap:6px;} .heyes span{font-size:12.5px; padding:6px 12px;} }
 
 
   /* 가운데 원형 CTA — 헤더 경계에 반쯤 걸친다 */
   .hctaw{position:relative; z-index:5; display:flex; justify-content:center; margin-top:-79px;}
   .hcta{width:158px; height:158px; border-radius:999px; border:3px solid #fff;
-    background:var(--primary); background:var(--grad); color:#fff;
+    background:#0D1590; background:linear-gradient(150deg,#0A0F7A 0%,#1B27BE 100%); color:#fff;
     display:flex; flex-direction:column; align-items:center; justify-content:center;
     font-size:17.5px; font-weight:800; line-height:1.4; text-align:center; letter-spacing:-.3px;
-    box-shadow:0 18px 40px rgba(37,99,235,.35); transition:transform .2s;}
+    box-shadow:0 18px 40px rgba(8,14,110,.42); transition:transform .2s;}
   .hcta:hover{transform:scale(1.05);}
   .hcta iconify-icon{font-size:23px; margin-top:5px;}
   @media(max-width:767px){
@@ -383,7 +384,7 @@
   <section class="hero">
     <div class="wrap hero2">
       <div class="hleft">
-        <div class="heyes"><span>월세</span><span>관리비</span><span>보증금</span><span>매입대금까지</span></div>
+        <div class="heyes"><span>월세</span><span>관리비</span><span>보증금</span><span>매입대금</span><span>인건비</span><span>학원비</span><span>학교공과금</span><span>인테리어</span><span>이사</span><span>청소비</span><span>중개수수료</span><span>기타</span></div>
         <h1 class="h-hero">현금으로만 내던 돈<br>이제 <span class="hl">카드로 결제</span>하세요</h1>
         <p class="hlead"><b>카드로 결제하면 상대방 계좌로</b><br><b>현금이 입금되는 서비스</b>입니다</p>
       </div>
