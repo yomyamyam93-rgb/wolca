@@ -6,13 +6,13 @@
 
 :root{
   /* 브랜드색 — 사장님 색으로 바꾸려면 여기만 (가이드 2장) */
-  --primary:#1D4ED8; --primary-600:#1E40AF; --primary-700:#1E3A8A;
+  --primary:#001BDD; --primary-600:#0015B0; --primary-700:#001085;
   --primary-50:#EFF4FF; --primary-100:#DBE7FF;
 
   /* 회색 (가이드 2장) */
   --bg:#F4F5F6; --card:#FFFFFF; --line:#ECEEF1; --border:#B1B8BE;
-  --sub:#464C53; --ink:#1E2124; --placeholder:#8A9099; --icon-off:#9AA1AC;
-  --dark:#141A22;                     /* 어두운 섹션 · 푸터 */
+  --sub:#464C53; --ink:#001028; --placeholder:#8A9099; --icon-off:#9AA1AC;
+  --dark:#001028;                     /* 어두운 섹션 · 푸터 */
 
   /* 의미색 (가이드 2장) — 뜻이 있을 때만 쓴다 */
   --success:#059669; --success-bg:#ECFDF3;
