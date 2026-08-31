@@ -13,12 +13,9 @@
   /* ===== 이 페이지에만 쓰는 것 ===== */
 
   /* ① 히어로 — 가운데 한 마디 + 한 장씩 넘어가는 대화 카드 (레퍼런스 방식) */
-  .hero{position:relative; color:#fff; padding:88px 0 100px; overflow:clip;
+  .hero{position:relative; color:#fff; padding:88px 0 150px; overflow:clip;
+    clip-path:polygon(0 0, 100% 0, 100% calc(100% - 42px), 50% 100%, 0 calc(100% - 42px));
     background:var(--primary); background:linear-gradient(155deg,#3B82F6 0%,#2563EB 55%,#1D4ED8 100%);}
-  /* 배경 장식 — 같은 파랑의 밝은 원 두 개 */
-  .hero:before,.hero:after{content:''; position:absolute; border-radius:999px; background:rgba(255,255,255,.07);}
-  .hero:before{width:560px; height:560px; top:-210px; right:-150px;}
-  .hero:after{width:320px; height:320px; bottom:-140px; left:-100px;}
   .hero .wrap{position:relative; z-index:1;}
   .hero .h-hero{color:#fff;}
   .hero .h-hero .hl{color:#A6C8FF;}
@@ -27,7 +24,7 @@
   .hero .lead b{color:var(--ink);}
   /* 버튼은 알약형 — 레퍼런스와 같은 꼴 */
   .hero .btn{margin-top:34px; height:56px; font-size:17px; padding:0 34px; border-radius:8px;}
-  @media(min-width:768px){ .hero{padding:150px 0 160px;} .hero .lead{font-size:20px;} }
+  @media(min-width:768px){ .hero{padding:130px 0 210px;} .hero .lead{font-size:20px;} }
   /* 처음 열릴 때 위로 떠오르며 등장 (한 번만) */
   .hero-top > *{animation:heroUp .7s cubic-bezier(.22,.8,.3,1) both;}
   .hero-top > :nth-child(2){animation-delay:.08s;}
@@ -55,15 +52,40 @@
   .hlead b{color:#fff; font-weight:700;}
   .hbtns{display:flex; flex-wrap:wrap; gap:10px; margin-top:26px;}
   .hbtns .btn{margin-top:0;}
-  /* 메인 CTA — 주황 포인트 · 확실하게 */
-  .hero .btn-primary{background:#fff; color:var(--primary-600); box-shadow:0 12px 26px rgba(5,12,24,.28);
-    height:60px; font-size:17.5px; padding:0 38px;}
-  .hero .btn-primary:hover{background:var(--primary-50);}
-  .hero .btn-line{background:transparent; border:1px solid rgba(255,255,255,.55); color:#fff;}
-  @media(max-width:899px){
-    .hero .btn-primary{flex:1 1 100%; height:56px; font-size:16.5px;}
-    .hero .btn-line{height:48px;}
-    .hero2 .hbtns{flex-wrap:wrap;}
+  /* 히어로 정렬 — 늘 가운데 */
+  .hero .hero2{text-align:center; justify-items:center;}
+  @media(max-width:899px){ .hero .hero2{text-align:center;} .hero .hleft{display:block;} }
+  .heye{font-size:14.5px; font-weight:700; color:rgba(255,255,255,.78); margin-bottom:14px; letter-spacing:-.2px;}
+  @media(min-width:768px){ .heye{font-size:17px; margin-bottom:18px;} }
+
+  /* 떠 있는 3D 아이콘 */
+  .hart{position:absolute; width:auto; height:auto; pointer-events:none;
+    filter:drop-shadow(0 10px 20px rgba(4,20,50,.35));
+    animation:hfloat 5.2s ease-in-out infinite alternate;}
+  .a1{max-width:92px; left:9%; top:26%;}
+  .a2{max-width:108px; right:9%; top:20%; animation-delay:1.2s;}
+  .a3{max-width:80px; left:17%; bottom:24%; animation-delay:2.1s;}
+  .a4{max-width:88px; right:16%; bottom:20%; animation-delay:.6s;}
+  @keyframes hfloat{from{transform:translateY(-8px);} to{transform:translateY(10px);}}
+  @media(max-width:767px){
+    .a1{max-width:54px; left:5%; top:auto; bottom:13%;}
+    .a2{max-width:60px; right:5%; top:auto; bottom:15%;}
+    .a3,.a4{display:none;}
+  }
+
+  /* 가운데 원형 CTA — 헤더 경계에 반쯤 걸친다 */
+  .hctaw{position:relative; z-index:5; display:flex; justify-content:center; margin-top:-79px;}
+  .hcta{width:158px; height:158px; border-radius:999px; border:7px solid #fff;
+    background:var(--primary); background:var(--grad); color:#fff;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    font-size:17.5px; font-weight:800; line-height:1.4; text-align:center; letter-spacing:-.3px;
+    box-shadow:0 18px 40px rgba(37,99,235,.35); transition:transform .2s;}
+  .hcta:hover{transform:scale(1.06);}
+  .hcta iconify-icon{font-size:23px; margin-top:5px;}
+  @media(max-width:767px){
+    .hctaw{margin-top:-67px;}
+    .hcta{width:134px; height:134px; font-size:15.5px; border-width:6px;}
+    .hcta iconify-icon{font-size:20px;}
   }
   .btn-line{background:#fff; border:1px solid var(--line); color:var(--ink);}
   /* 영상 틀 — 원본의 흰 여백을 잘라내고 내용물을 크게 */
@@ -364,23 +386,29 @@
   <section class="hero">
     <div class="wrap hero2">
       <div class="hleft">
+        <p class="heye">월세 · 관리비 · 보증금 · 매입대금까지</p>
         <h1 class="h-hero">현금으로만 내던 돈<br>이제 <span class="hl">카드로 결제</span>하세요</h1>
-        <p class="hlead">월세 · 관리비 · 보증금 · 매입대금처럼<br><b>계좌로 보내야 하는 비용을 카드로 결제하고</b><br><b>상대방 계좌로 송금하는 서비스</b>입니다</p>
-        <div class="hbtns">
-          <a class="btn btn-primary" href="app.html"><img class="btn-logo" src="img/logo3.png" alt="">바로 송금하기<iconify-icon icon="mingcute:arrow-right-line"></iconify-icon></a>
-          <a class="btn btn-line" href="guide.html">어떻게 이용하나요?</a>
-        </div>
+        <p class="hlead"><b>카드로 결제하면 상대방 계좌로</b><br><b>현금이 입금되는 서비스</b>입니다</p>
       </div>
     </div>
 
+    <img class="hart a1" src="img/usp3d/02.png" alt="" aria-hidden="true">
+    <img class="hart a2" src="img/usp3d/03.png" alt="" aria-hidden="true">
+    <img class="hart a3" src="img/usp3d/05.png" alt="" aria-hidden="true">
+    <img class="hart a4" src="img/usp3d/07.png" alt="" aria-hidden="true">
   </section>
+
+  <!-- 가운데 원형 CTA — 헤더에 반쯤 걸친다 -->
+  <div class="hctaw">
+    <a class="hcta" href="app.html">바로<br>송금하기<iconify-icon icon="mingcute:arrow-right-line" aria-hidden="true"></iconify-icon></a>
+  </div>
 
   <!-- ===== 랜선페이를 써야 하는 이유 — 1~7 펼침 ===== -->
   <section class="sec tight" id="whysec">
     <div class="wrap">
       <div class="head">
-        <span class="eyebrow">이런 점이 다릅니다</span>
-        <h2 class="h-sec">랜선페이를 <span class="hl">써야 하는 이유</span></h2>
+        <span class="eyebrow">불편한 현금거래 · 계좌이체 때문에 고민이신가요?</span>
+        <h2 class="h-sec">이제 <span class="hl">랜선페이</span>에게 맡겨보세요</h2>
       </div>
       <div class="whygrid">
         <div class="uc uc-b">
