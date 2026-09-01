@@ -183,6 +183,9 @@
     font-size:11.5px; font-weight:700; color:var(--placeholder); background:none; border:none; cursor:pointer;}
   .atab iconify-icon{font-size:24px;}
   .atab .on{color:var(--primary);}
+  /* 홈과 같은 2D 아이콘 · 선택 시 흰색 */
+  .ait iconify-icon{font-size:30px; color:var(--primary); line-height:1;}
+  .ait.on iconify-icon{color:#fff;}
 </style>
 </head>
 <body>
@@ -249,18 +252,18 @@
   <div class="asec">
     <b>어떤 항목을 결제할까요?</b>
     <div class="agrid">
-      <a class="ait" data-n="월세" href="#"><img src="img/item3d/01.png" alt=""><img src="img/item3d/w01.png" alt="" class="w"><b>월세</b></a>
-      <a class="ait" data-n="관리비" href="#"><img src="img/item3d/02.png" alt=""><img src="img/item3d/w02.png" alt="" class="w"><b>관리비</b></a>
-      <a class="ait" data-n="인건비" href="#"><img src="img/item3d/03.png" alt=""><img src="img/item3d/w03.png" alt="" class="w"><b>인건비</b></a>
-      <a class="ait" data-n="보증금" href="#"><img src="img/item3d/04.png" alt=""><img src="img/item3d/w04.png" alt="" class="w"><b>보증금</b></a>
-      <a class="ait" data-n="매입대금" href="#"><img src="img/item3d/05.png" alt=""><img src="img/item3d/w05.png" alt="" class="w"><b>매입대금</b></a>
-      <a class="ait" data-n="학원비" href="#"><img src="img/item3d/06.png" alt=""><img src="img/item3d/w06.png" alt="" class="w"><b>학원비</b></a>
-      <a class="ait" data-n="학교공과금" href="#"><img src="img/item3d/07.png" alt=""><img src="img/item3d/w07.png" alt="" class="w"><b>학교공과금</b></a>
-      <a class="ait" data-n="인테리어" href="#"><img src="img/item3d/08.png" alt=""><img src="img/item3d/w08.png" alt="" class="w"><b>인테리어</b></a>
-      <a class="ait" data-n="이사" href="#"><img src="img/item3d/09.png" alt=""><img src="img/item3d/w09.png" alt="" class="w"><b>이사</b></a>
-      <a class="ait" data-n="청소비" href="#"><img src="img/item3d/10.png" alt=""><img src="img/item3d/w10.png" alt="" class="w"><b>청소비</b></a>
-      <a class="ait" data-n="중개수수료" href="#"><img src="img/item3d/11.png" alt=""><img src="img/item3d/w11.png" alt="" class="w"><b>중개수수료</b></a>
-      <a class="ait" data-n="기타" href="#"><img src="img/item3d/12.png" alt=""><img src="img/item3d/w12.png" alt="" class="w"><b>기타</b></a>
+      <a class="ait" data-n="월세" href="#"><iconify-icon icon="mingcute:home-4-fill" aria-hidden="true"></iconify-icon><b>월세</b></a>
+      <a class="ait" data-n="관리비" href="#"><iconify-icon icon="mingcute:building-2-fill" aria-hidden="true"></iconify-icon><b>관리비</b></a>
+      <a class="ait" data-n="인건비" href="#"><iconify-icon icon="mingcute:group-2-fill" aria-hidden="true"></iconify-icon><b>인건비</b></a>
+      <a class="ait" data-n="보증금" href="#"><iconify-icon icon="mingcute:safe-lock-fill" aria-hidden="true"></iconify-icon><b>보증금</b></a>
+      <a class="ait" data-n="매입대금" href="#"><iconify-icon icon="mingcute:box-2-fill" aria-hidden="true"></iconify-icon><b>매입대금</b></a>
+      <a class="ait" data-n="학원비" href="#"><iconify-icon icon="mingcute:book-2-fill" aria-hidden="true"></iconify-icon><b>학원비</b></a>
+      <a class="ait" data-n="학교공과금" href="#"><iconify-icon icon="mingcute:mortarboard-fill" aria-hidden="true"></iconify-icon><b>학교공과금</b></a>
+      <a class="ait" data-n="인테리어" href="#"><iconify-icon icon="mingcute:paint-brush-fill" aria-hidden="true"></iconify-icon><b>인테리어</b></a>
+      <a class="ait" data-n="이사" href="#"><iconify-icon icon="mingcute:truck-fill" aria-hidden="true"></iconify-icon><b>이사</b></a>
+      <a class="ait" data-n="청소비" href="#"><iconify-icon icon="mingcute:broom-fill" aria-hidden="true"></iconify-icon><b>청소비</b></a>
+      <a class="ait" data-n="중개수수료" href="#"><iconify-icon icon="mingcute:key-2-fill" aria-hidden="true"></iconify-icon><b>중개수수료</b></a>
+      <a class="ait" data-n="기타" href="#"><iconify-icon icon="mingcute:more-2-fill" aria-hidden="true"></iconify-icon><b>기타</b></a>
     </div>
     <div class="apanel">
       <b id="ap-t">월세 필요 서류</b>
@@ -402,7 +405,7 @@
 /* 항목 선택 → 필요 서류 안내 + 「N 결제하기」 → STEP 2 로 */
 (function () {
   var 서류 = {
-    '월세': ['<b>정식 임대차계약서</b>면 바로 돼요','확정일자 없으면 <b>입금내역 2~3회</b>','분실 시 <b>건축물대장등본</b>이면 돼요'],
+    '월세': ['<b>정식 임대차계약서</b>면 바로 돼요','<b>입금내역 2~3회</b>','<b>건축물대장등본</b>'],
     '관리비': ['관리비는 <b>최근 고지서</b> 한 장','공과금은 <b>기관 고지서 · 납부서</b>','분실 시 <b>관리사무소 확인 내역</b>'],
     '인건비': ['급여는 <b>근로계약서 + 명세서</b>','알바는 <b>근무 확인 내역</b>이면 돼요','용역비는 <b>용역계약서 + 지급 내역</b>'],
     '보증금': ['보증금은 <b>계약서 촬영본</b> 한 장','상가는 <b>상가 임대차계약서</b>','가계약금은 <b>확인 문자 + 계좌</b>'],
