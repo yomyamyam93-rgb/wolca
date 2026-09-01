@@ -22,7 +22,7 @@
   /* ① 히어로 — 가운데 한 마디 + 한 장씩 넘어가는 대화 카드 (레퍼런스 방식) */
   .hero{position:relative; color:var(--ink); padding:88px 0 42vw; overflow:clip;
     background-color:#F6F7FB; background-image:url('img/hero-bg10.jpg?v=5');
-    background-size:122% auto; background-position:center calc(100% + 2.5vw); background-repeat:no-repeat;
+    background-size:92% auto; background-position:center bottom; background-repeat:no-repeat;
     min-height:calc(100vh - var(--appbar)); min-height:calc(100svh - var(--appbar));
     display:flex; flex-direction:column; justify-content:flex-start;}
   /* 텍스트는 위쪽 — 아래 카드 이미지와 안 겹치게 */
@@ -31,7 +31,7 @@
   .hero .lead b{color:var(--ink);}
   /* 버튼은 알약형 — 레퍼런스와 같은 꼴 */
   .hero .btn{margin-top:34px; height:56px; font-size:17px; padding:0 34px; border-radius:8px;}
-  @media(min-width:768px){ .hero{padding:7vw 0 31vw;} .hero .lead{font-size:20px;} }
+  @media(min-width:768px){ .hero{padding:7vw 0 48vw;} .hero .lead{font-size:20px;} }
   /* 스크롤 유도 — 마우스 모양 + 문구 */
   .sdown{position:absolute; left:50%; bottom:36px; transform:translateX(-50%);
     display:flex; flex-direction:column; align-items:center; gap:7px; pointer-events:none;}
@@ -45,9 +45,9 @@
 
   /* 모바일 — 이미지 크게 · 가운데 정렬 */
   @media(max-width:767px){
-    .hero{background-color:#FDFDFE; background-image:url('img/hero-bg10-m.jpg?v=5');
-      background-size:116% auto; background-position:center bottom;
-      padding:88px 0 100vw;}
+    .hero{background-color:#EFF2FB; background-image:url('img/hero-bg10-m.jpg?v=6');
+      background-size:100% auto; background-position:center bottom;
+      padding:88px 0 58vw;}
     .hero .hero2{text-align:center;}
     .hero .hleft{display:block;}
     .hero .hero2 .hbtns{justify-content:center; margin-top:22px; flex-wrap:nowrap;}
@@ -371,9 +371,11 @@
   #endcta .wrap{position:relative; z-index:1;}
   /* 모바일 — 글은 위로 · 이미지는 아래 전용 구역으로 분리 */
   @media(max-width:767px){
-    #endcta{min-height:0; padding-top:72px; padding-bottom:70vw;
-      background-image:url('img/cta-bg-m.jpg');
+    #endcta{min-height:0; padding-top:72px; padding-bottom:48vw;
+      background-color:#F9F8FC;
+      background-image:url('img/cta-bg-m.jpg?v=2');
       background-size:100% auto; background-position:center bottom;}
+    #endcta:before{background:linear-gradient(180deg, #F7F8FA 0%, rgba(249,248,252,0) 100%);}
   }
   #endcta .eyebrow{color:var(--primary-600);}
   #endcta .h-sec{color:var(--ink);}
