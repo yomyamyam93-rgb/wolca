@@ -50,6 +50,33 @@
   .prev{border:1px solid var(--line); background:#fff; color:var(--ink);}
   .next{border:none; color:#fff; background:var(--primary); background:var(--grad);
     box-shadow:0 4px 12px color-mix(in srgb, var(--primary) 32%, transparent);}
+  /* 서류 준비 안내 버튼 · 시트 */
+  .gbtn2{width:100%; height:46px; margin:-6px 0 16px; border:1px solid var(--line);
+    border-radius:8px; background:#fff; font:inherit; font-size:14px; font-weight:700;
+    color:var(--primary-dark); display:flex; align-items:center; justify-content:center; gap:6px; cursor:pointer;}
+  .gbtn2 iconify-icon{font-size:17px;}
+  .gdim{position:fixed; inset:0; z-index:110; background:rgba(15,23,42,.45); display:none;}
+  .gdim.on{display:block;}
+  .gsheet{position:fixed; left:50%; bottom:0; transform:translateX(-50%) translateY(102%);
+    z-index:120; width:100%; max-width:480px; max-height:86svh; background:#fff;
+    border-radius:16px 16px 0 0; transition:transform .28s cubic-bezier(.3,.7,.3,1);
+    display:flex; flex-direction:column;}
+  .gsheet.on{transform:translateX(-50%) translateY(0);}
+  .gsheet .gh{flex:0 0 auto; padding:16px 20px 12px; border-bottom:1px solid var(--line);
+    display:flex; align-items:center; justify-content:space-between;}
+  .gsheet .gh b{font-size:16.5px; font-weight:800; letter-spacing:-.3px;}
+  .gsheet .gh button{border:none; background:none; font-size:22px; color:var(--sub); cursor:pointer;}
+  .gbody{flex:1 1 auto; overflow-y:auto; padding:18px 20px calc(24px + var(--safe));}
+  .gbody h4{font-size:14px; font-weight:800; margin:18px 0 8px; letter-spacing:-.3px;}
+  .gbody h4:first-child{margin-top:0;}
+  .gbody p{font-size:13.5px; line-height:1.75; color:var(--sub); margin-bottom:8px;}
+  .gbody ol{margin:0 0 10px; padding-left:2px; list-style:none;}
+  .gbody ol li{font-size:13.5px; line-height:1.7; color:var(--ink); margin-bottom:6px;
+    padding-left:20px; text-indent:-20px;}
+  .gbody .warn{background:var(--primary-50); border-radius:8px; padding:12px 14px; margin:12px 0;
+    font-size:13px; line-height:1.7; color:var(--sub);}
+  .gbody .warn b{color:var(--ink);}
+  .gbody a{color:var(--primary-dark); font-weight:700; text-decoration:underline;}
 </style>
 </head>
 <body>
@@ -65,6 +92,10 @@
       <b id="서류제목">필요 서류</b>
       <div id="서류목록"></div>
     </div>
+
+    <button class="gbtn2" type="button" id="안내열기">
+      <iconify-icon icon="mingcute:document-2-fill"></iconify-icon>이렇게 서류를 준비해주세요
+    </button>
 
     <div class="up" onclick="document.getElementById('파일').click()">
       <iconify-icon icon="mingcute:camera-2-fill"></iconify-icon>
@@ -94,6 +125,11 @@
   </div>
 </div>
 
+<div class="gdim" id="안내딤"></div>
+<div class="gsheet" id="안내시트">
+  <div class="gh"><b id="안내제목">확인서류 첨부 안내</b><button type="button" id="안내닫기">×</button></div>
+  <div class="gbody" id="안내내용"></div>
+</div>
 <script>
 (function () {
   var $ = function (id) { return document.getElementById(id); };
@@ -124,6 +160,18 @@
   $('서류목록').innerHTML = (서류[유형] || 서류['기타']).map(function (t) {
     return '<div class="dr"><i>✓</i>' + t + '</div>';
   }).join('');
+
+  /* ── 항목별 확인서류 첨부 안내 ── */
+  var 안내글 = {"월세": "<h4>1. 계좌 예금주 확인</h4>\n<p>등록한 계좌의 예금주와 임대인이 일치하는 경우에만 진행됩니다.</p>\n<h4>2. 중개사 확인 또는 확정일자가 있는 계약</h4>\n<p>중개사 정보 · 날인이 확인되는 정식 계약서나 확정일자 도장이 찍힌 계약서라면 <b>계약서</b>만 첨부하세요.</p>\n<h4>3. 중개사 확인도 확정일자도 없는 계약</h4>\n<ol><li>① <b>계약서</b></li><li>② 일정한 월세 금액으로 입금했던 <b>입금내역 2~3회분</b></li></ol>\n<p>두 가지를 함께 첨부해주세요.</p>\n<h4>4. 계약서를 분실한 경우</h4>\n<p>재발급이 어렵다면 아래 두 가지를 함께 첨부해주세요.</p>\n<ol><li>① <b>건축물대장등본</b> — <a href=\"https://www.gov.kr/mw/AA020InfoCappView.do?HighCtgCD=A09005&CappBizCD=15000000098&tp_seq=03\" target=\"_blank\" rel=\"noopener\">무료로 발급받기 (PC에서 가능)</a></li><li>② 일정한 월세 금액으로 입금했던 <b>입금내역 2~3회분</b></li></ol>\n<div class=\"warn\"><b>유의사항</b><br>계약서에서 소재지 · 보증금 · 월세 · 관리비 · 납입일 · 입금계좌를 확인할 수 있어야 합니다.<br><br>임대차 계약서를 첨부할 때는 임대인 · 임차인의 개인정보를 반드시 가려주세요. 거주지 주소 · 주민번호 · 휴대폰번호가 대상이며 사업자번호는 가리지 않아도 됩니다.<br><br>확인이 어려운 내용이 있거나 날인이 없으면 서류 보완을 요청드립니다. 등본상 명의와 임대인 명의가 다르거나 공인중개사 확인이 없는 직거래 계약은 검토 과정에서 추가 증빙을 요청드릴 수 있습니다.</div>", "보증금": "<h4>1. 계좌 예금주 확인</h4>\n<p>등록한 계좌의 예금주와 임대인이 일치하는 경우에만 진행됩니다.</p>\n<h4>2. 중개사 확인 또는 확정일자가 있는 계약</h4>\n<p>중개사 정보 · 날인이 확인되는 정식 계약서나 확정일자 도장이 찍힌 계약서라면 <b>계약서</b>만 첨부하세요.</p>\n<h4>3. 중개사 확인도 확정일자도 없는 계약</h4>\n<ol><li>① <b>계약서</b></li><li>② 일정한 월세 금액으로 입금했던 <b>입금내역 2~3회분</b></li></ol>\n<p>두 가지를 함께 첨부해주세요.</p>\n<h4>4. 계약서를 분실한 경우</h4>\n<p>재발급이 어렵다면 아래 두 가지를 함께 첨부해주세요.</p>\n<ol><li>① <b>건축물대장등본</b> — <a href=\"https://www.gov.kr/mw/AA020InfoCappView.do?HighCtgCD=A09005&CappBizCD=15000000098&tp_seq=03\" target=\"_blank\" rel=\"noopener\">무료로 발급받기 (PC에서 가능)</a></li><li>② 일정한 월세 금액으로 입금했던 <b>입금내역 2~3회분</b></li></ol>\n<div class=\"warn\"><b>유의사항</b><br>계약서에서 소재지 · 보증금 · 월세 · 관리비 · 납입일 · 입금계좌를 확인할 수 있어야 합니다.<br><br>임대차 계약서를 첨부할 때는 임대인 · 임차인의 개인정보를 반드시 가려주세요. 거주지 주소 · 주민번호 · 휴대폰번호가 대상이며 사업자번호는 가리지 않아도 됩니다.<br><br>확인이 어려운 내용이 있거나 날인이 없으면 서류 보완을 요청드립니다. 등본상 명의와 임대인 명의가 다르거나 공인중개사 확인이 없는 직거래 계약은 검토 과정에서 추가 증빙을 요청드릴 수 있습니다.</div>", "관리비": "<p>다음 서류 중 하나를 첨부해주세요.</p>\n<ol><li>① <b>관리비 고지서(청구서)</b></li><li>② <b>알림톡 캡쳐본</b></li><li>③ <b>관리비 영수증</b></li><li>④ <b>세금계산서</b></li></ol>\n<div class=\"warn\">증빙에서 관리비 금액과 납부계좌를 확인할 수 있어야 합니다.<br><br>알림톡은 내용을 자르거나 복사하지 마시고 발신자와 메시지 내용이 모두 보이게 한 화면으로 캡쳐해주세요.</div>", "인테리어": "<p>다음 서류 중 하나를 첨부해주세요.</p>\n<ol><li>① <b>세금계산서</b></li><li>② <b>계약서</b></li><li>③ <b>견적서</b></li><li>④ <b>거래명세서</b></li></ol>\n<div class=\"warn\">증빙에서 금액과 계좌정보, 업체 사업자정보를 반드시 확인할 수 있어야 합니다. 사업자 정보가 확인되지 않으면 추가로 요청드립니다.<br><br>수기로 작성된 약식 증빙만으로는 진행이 어려운 점 양해 부탁드립니다.</div>", "중개수수료": "<p>다음 서류 중 하나를 첨부해주세요.</p>\n<ol><li>① <b>중개보수가 포함된 계약서</b></li><li>② <b>중개보수 영수증</b></li></ol>\n<div class=\"warn\">증빙에서 금액과 계좌정보를 확인할 수 있어야 합니다.<br><br>첨부한 증빙에 납부계좌 정보가 없으면 계좌정보가 나오는 부동산 명함사진이 추가로 필요합니다. 예금주가 중개사 사업자 계좌로 확인되면 생략할 수 있습니다.</div>", "이사": "<p>다음 서류 중 하나를 첨부해주세요.</p>\n<ol><li>① 이사앱 등의 <b>주문내역 캡처본</b></li><li>② <b>이사비 견적서</b></li><li>③ <b>계약서</b></li><li>④ <b>문자/카톡 내역</b> (업자 명함 포함 필수)</li></ol>\n<div class=\"warn\">증빙에서 금액과 계좌정보를 확인할 수 있어야 합니다.<br><br>100만원 이상 거래는 업체 <b>사업자등록증</b>을 추가로 요청드립니다. 납부계좌가 사업자계좌로 확인되면 생략할 수 있습니다.</div>", "청소비": "<p>다음 서류 중 하나를 첨부해주세요.</p>\n<ol><li>① 청소앱 등의 <b>주문내역 캡처본</b></li><li>② <b>청소비 견적서</b></li><li>③ <b>계약서</b></li><li>④ <b>문자/카톡 내역</b> (업자 명함 포함 필수)</li></ol>\n<div class=\"warn\">증빙에서 금액과 계좌정보를 확인할 수 있어야 합니다.<br><br>50만원 이상 거래는 업체 <b>사업자등록증</b>을 추가로 요청드립니다. 납부계좌가 사업자계좌로 확인되면 생략할 수 있습니다.</div>", "매입대금": "<p>B2B 매입 거래는 ① 매입처 사업자 계좌 ② 매입처 대표 개인계좌 ③ 전용 가상계좌로 송금할 때만 진행됩니다. 유형별 첨부서류는 다음과 같습니다.</p>\n<h4>1. 사업자계좌로 송금</h4>\n<p><b>세금계산서</b>, <b>거래명세서</b>, <b>영수증</b>, <b>계약서</b> 중 하나 첨부</p>\n<h4>2. 대표 개인계좌로 송금</h4>\n<p><b>세금계산서</b>, <b>거래명세서</b>, <b>영수증</b>, <b>계약서</b> 중 하나 + 거래처 <b>사업자등록증</b> 사본</p>\n<h4>3. 매입거래 전용 가상계좌로 송금</h4>\n<p>주문내역과 입금계좌가 확인되는 발주용 전산 프로그램 <b>화면 캡처본</b> + 거래처 <b>사업자등록증</b> 사본</p>\n<div class=\"warn\"><b>사업자등록증을 생략할 수 있는 경우</b><br>승인번호가 나온 전자세금계산서, POS식으로 출력된 전자영수증, 명판이 찍히거나 인쇄된 영수증<br><br><b>간이영수증 제출 시</b><br>공급자정보와 계좌정보가 명판으로 찍혀 있거나 인쇄되어 있어야 합니다. 수기로만 작성된 증빙은 진행이 어렵습니다.<br><br><b>이용한도</b><br>계약 승인 시 증빙에서 확인되는 금액으로 이용 한도를 설정해드리며, 이후 같은 거래는 다시 등록하지 않아도 승인한도 내에서 매월 재결제할 수 있습니다. 한도 증액이 필요하면 고객센터로 문의주세요. 거래 규모를 확인할 수 있는 적격증빙(세금계산서 등)으로 한도를 늘려드립니다.</div>", "인건비": "<h4>1. 정규직 급여</h4>\n<ol><li>① <b>근로계약서</b> 날인본</li><li>② <b>4대보험 가입자 명부</b> (4대보험 연계센터 출력본)</li><li>③ <b>급여이체내역</b></li></ol>\n<h4>2. 알바비 (일용직 · 단기)</h4>\n<ol><li>① <b>근로계약서</b> 날인본</li><li>② <b>일용근로소득 지급명세서</b> (정상자료 상세내역)</li></ol>\n<h4>3. 용역비 — 비사업자 (프리랜서, 3.3%)</h4>\n<ol><li>① <b>용역계약서</b> 날인본</li><li>② <b>간이지급명세서</b> (거주자의 사업소득 · 정상자료 상세내역)</li></ol>\n<h4>4. 용역비 — 사업자</h4>\n<ol><li>① <b>전자세금계산서</b> (홈택스 발급본)</li></ol>\n<div class=\"warn\">반드시 수급자(근로자 · 프리랜서) 본인 명의 계좌로만 송금됩니다.<br><br>계약 유형별 증빙서류를 모두 제출해주세요. 2 · 3번은 직접 신고인지 세무사무소 대행인지에 따라 조회 경로가 다릅니다. <a href=\"https://drive.google.com/file/d/15_9ToBEL2QktS1UCcxQpQMDrZhUn1LRH/view?usp=sharing\" target=\"_blank\" rel=\"noopener\">발급방법 보기</a><br><br>원천징수영수증은 국세청 제출 사실 확인이 어려워 증빙으로 채택되지 않으며, 퇴직금은 진행이 어렵습니다.</div>", "학원비": "<h4>1. 학원비 · 수강료 · 등록금</h4>\n<p>다음 서류 중 하나를 첨부해주세요.</p>\n<ol><li>① <b>고지서</b> (납부통지서 · 청구서)</li><li>② <b>알림톡 또는 납부안내 메일 캡처본</b></li><li>③ <b>온라인 공지문 캡처본</b></li><li>④ 교육기관에 게시된 <b>수강비 안내문 · 공지사항</b></li></ol>\n<h4>2. 과외비 · 레슨비</h4>\n<p>강사 자격증빙과 거래증빙을 함께 첨부해주세요.</p>\n<p><b>[1] 강사 자격증빙</b> — 아래 A 또는 B 중 하나</p>\n<ol><li>A. 공식 자격증빙 : ① <b>개인과외교습자신고필증</b> ② <b>강사 등록 확인서</b> 중 하나</li><li>B. 간접 증빙 : ① <b>학생증</b> ② <b>자격증</b> ③ 각종 플랫폼 <b>강사 프로필 화면 캡처본</b> 중 하나</li></ol>\n<p><b>[2] 거래증빙</b></p>\n<ol><li>① <b>과외 계약서</b> ② <b>영수증</b> ③ 전문 사이트 <b>주문서 캡쳐본</b> ④ <b>문자나 카톡 대화 내역 캡쳐본</b> 중 하나</li></ol>\n<div class=\"warn\">증빙에서 계좌와 금액을 확인할 수 있어야 합니다.<br><br>문자 · 카톡 증빙은 수업일정 · 납부계좌 · 납부금액이 확인되어야 하며, 특정 문자만 자르거나 당일 소통 하나만 보이는 화면은 진행이 어렵습니다. 이전 내역이 어느 정도 확인되는 수준으로 부탁드립니다.</div>", "학교공과금": "<h4>1. 학원비 · 수강료 · 등록금</h4>\n<p>다음 서류 중 하나를 첨부해주세요.</p>\n<ol><li>① <b>고지서</b> (납부통지서 · 청구서)</li><li>② <b>알림톡 또는 납부안내 메일 캡처본</b></li><li>③ <b>온라인 공지문 캡처본</b></li><li>④ 교육기관에 게시된 <b>수강비 안내문 · 공지사항</b></li></ol>\n<h4>2. 과외비 · 레슨비</h4>\n<p>강사 자격증빙과 거래증빙을 함께 첨부해주세요.</p>\n<p><b>[1] 강사 자격증빙</b> — 아래 A 또는 B 중 하나</p>\n<ol><li>A. 공식 자격증빙 : ① <b>개인과외교습자신고필증</b> ② <b>강사 등록 확인서</b> 중 하나</li><li>B. 간접 증빙 : ① <b>학생증</b> ② <b>자격증</b> ③ 각종 플랫폼 <b>강사 프로필 화면 캡처본</b> 중 하나</li></ol>\n<p><b>[2] 거래증빙</b></p>\n<ol><li>① <b>과외 계약서</b> ② <b>영수증</b> ③ 전문 사이트 <b>주문서 캡쳐본</b> ④ <b>문자나 카톡 대화 내역 캡쳐본</b> 중 하나</li></ol>\n<div class=\"warn\">증빙에서 계좌와 금액을 확인할 수 있어야 합니다.<br><br>문자 · 카톡 증빙은 수업일정 · 납부계좌 · 납부금액이 확인되어야 하며, 특정 문자만 자르거나 당일 소통 하나만 보이는 화면은 진행이 어렵습니다. 이전 내역이 어느 정도 확인되는 수준으로 부탁드립니다.</div>", "기타": "<p>서비스 불가 거래를 제외한 모든 상거래 결제에 이용할 수 있습니다.</p>\n<p>상품명 · 거래금액 · 납부계좌를 확인할 수 있는 객관적인 증빙을 첨부해주세요.</p>\n<div class=\"warn\">개인 간 거래에서 수기로 작성된 약식 증빙은 진행이 어려운 점 양해 부탁드립니다.<br><br>진행에 어려움이 있으면 언제든 고객센터로 문의주세요.</div>"};
+  function 안내표시(열기) {
+    $('안내딤').classList.toggle('on', 열기);
+    $('안내시트').classList.toggle('on', 열기);
+  }
+  $('안내제목').textContent = 유형 + ' 확인서류 첨부 안내';
+  $('안내내용').innerHTML = 안내글[유형] || 안내글['기타'];
+  $('안내열기').addEventListener('click', function () { 안내표시(true); });
+  $('안내닫기').addEventListener('click', function () { 안내표시(false); });
+  $('안내딤').addEventListener('click', function () { 안내표시(false); });
 
   var 올린수 = 0;
   $('파일').addEventListener('change', function () {
