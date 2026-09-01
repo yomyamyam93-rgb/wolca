@@ -725,8 +725,9 @@
     .figwrap{display:flex; position:relative; flex:1 1 0; min-height:170px; width:100%;
       align-items:center; justify-content:center; margin:12px auto 0; overflow:hidden;}
     /* 좌우 덜 잘리게 — 폭을 우선 맞추고 세로는 상자에 맞춤 */
-    .figwrap .hfig{flex:none; width:112%; max-width:none; height:auto; min-height:100%;
-      aspect-ratio:auto; object-fit:cover; object-position:center; margin:0;}
+    /* 좌우 안 잘리게 — 폭 100% 안에서 전체 보이기 */
+    .figwrap .hfig{flex:none; width:100%; max-width:100%; height:auto; min-height:0;
+      aspect-ratio:auto; object-fit:contain; object-position:center bottom; margin:0;}
     /* 카드 상자 대비 위치 · 크기 (화면이 바뀌어도 카드와 함께 움직임) */
     .em1{height:13.2%; left:77.4%; right:auto; top:72.8%;}
     .em2{height:26.1%; left:4.9%;  right:auto; top:53.1%;}
