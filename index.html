@@ -35,7 +35,7 @@
     .hero{min-height:calc(100svh - var(--appbar));
       display:flex; flex-direction:column; justify-content:flex-start;
       background-color:#EFF2FB; background-image:none;
-      padding:11svh 0 90px;}
+      padding:7svh 0 60px;}
     .hero .hero2{margin:0 auto;}
 
     .hero .lead{font-size:20px;}
@@ -639,9 +639,9 @@
   }
   #itemsec .itpanel .parw{position:static; display:inline-flex; margin-top:18px; align-self:flex-start;}
   /* 배경 이미지 = 남는 세로 공간을 채우는 흐름 요소 (화면이 길수록 커진다) */
-  .hero .hfig{display:block; flex:1 1 0; min-height:150px; width:100%;
-    object-fit:contain; margin:12px auto 0;}
-  .hero .sdown{position:static; transform:none; margin:16px auto 4px; display:flex; bottom:auto;}
+  .hero .hfig{display:block; flex:1 1 0; min-height:170px; aspect-ratio:2086/1000;
+    width:auto; max-width:100%; object-fit:cover; object-position:center; margin:12px auto 0;}
+  .hero .sdown{position:static; transform:none; margin:10px auto 2px; display:flex; bottom:auto;}
 </style>
 </head>
 <body>
@@ -712,7 +712,7 @@
         <div class="uc blue">
           <span class="no">04</span>
           <span class="uarw" aria-hidden="true"><svg viewBox="0 0 22 22"><path d="M5 17 17 5M8 5h9v9" stroke="currentColor" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-          <h3>카드 실적은 물론<br>포인트도 받을 수 있어요</h3>
+          <h3>카드 실적은 물론<br>포인트까지+</h3>
           <p>정상 결제와 똑같이 처리돼<br>혜택이 그대로 쌓여요</p>
           <img class="coins" src="img/coins2.jpg?v=2" alt="">
         </div>
