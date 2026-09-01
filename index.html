@@ -1383,8 +1383,10 @@
   if (location.search.indexOf('edit=1') < 0) return;
   var 들 = document.querySelectorAll('.hemo');
   if (!들.length) return;
-  var 모바일 = window.matchMedia('(max-width:767px)').matches;
-  var 기준 = 모바일 ? document.querySelector('.figwrap') : document.querySelector('.hero');
+  /* 실제 적용된 배치로 판단 — 상자가 살아 있으면 모바일 규칙 */
+  var 상자 = document.querySelector('.figwrap');
+  var 모바일 = !!(상자 && getComputedStyle(상자).display !== 'contents');
+  var 기준 = 모바일 ? 상자 : document.querySelector('.hero');
   if (!기준) 기준 = document.querySelector('.hero');
   var 고른 = null;
 
