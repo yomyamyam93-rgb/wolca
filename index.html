@@ -1229,7 +1229,6 @@
     서류칸.innerHTML = 정보.docs.map(function (d) {
       return '<div class="doc"><span class="ck">✓</span><p>' + d + '</p></div>';
     }).join('');
-    가기.href = '화면/10_1_유형선택.html';
   }
   function 선택(b) {
     들.forEach(function (x) { x.classList.toggle('on', x === b); });
@@ -1349,29 +1348,48 @@
 })();
 </script>
 <script>
-/* 이모지 위치 편집 모드 — 주소에 ?edit=1 을 붙이면 마우스로 끌어 옮길 수 있다 */
+/* 이모지 편집 모드 — ?edit=1 : 드래그로 위치, 휠/버튼으로 크기 */
 (function () {
   if (location.search.indexOf('edit=1') < 0) return;
   var 히어로 = document.querySelector('.hero');
   var 들 = document.querySelectorAll('.hemo');
   if (!히어로 || !들.length) return;
+  var 고른 = null;
 
   var 안내 = document.createElement('div');
-  안내.style.cssText = 'position:fixed; left:16px; bottom:16px; z-index:9999; background:#111C2E;' +
+  안내.style.cssText = 'position:fixed; left:16px; bottom:16px; z-index:99999; background:#111C2E;' +
     'color:#fff; padding:14px 16px; border-radius:10px; font-size:13.5px; line-height:1.7;' +
-    'box-shadow:0 10px 30px rgba(0,0,0,.35); max-width:300px;';
-  안내.innerHTML = '<b style="font-size:14.5px">이모지 편집 모드</b><br>' +
-    '이모지를 마우스로 끌어서 옮기세요.<br>다 옮겼으면 아래 버튼을 누르고<br>클로드에게 붙여넣기 하세요.' +
-    '<br><button id="emoCopy" style="margin-top:10px; width:100%; height:36px; border:none;' +
-    'border-radius:8px; background:#156FF9; color:#fff; font-weight:700; cursor:pointer;">위치 복사하기</button>' +
-    '<div id="emoOut" style="margin-top:8px; font-size:11.5px; color:#9FB3D9; white-space:pre-line;"></div>';
+    'box-shadow:0 10px 30px rgba(0,0,0,.35); max-width:320px; font-family:inherit;';
+  안내.innerHTML = '<b style="font-size:15px">이모지 편집 모드</b><br>' +
+    '· 끌어서 위치 옮기기<br>· 이모지 클릭 후 <b>+ / −</b> 버튼으로 크기<br>· 마우스 휠로도 크기 조절' +
+    '<div style="display:flex; gap:8px; margin-top:10px">' +
+    '<button id="emoMinus" style="flex:1; height:38px; border:none; border-radius:8px; background:#33415C; color:#fff; font-size:18px; font-weight:700; cursor:pointer">−</button>' +
+    '<button id="emoPlus" style="flex:1; height:38px; border:none; border-radius:8px; background:#33415C; color:#fff; font-size:18px; font-weight:700; cursor:pointer">+</button>' +
+    '</div>' +
+    '<button id="emoCopy" style="margin-top:8px; width:100%; height:38px; border:none;' +
+    'border-radius:8px; background:#156FF9; color:#fff; font-weight:700; cursor:pointer">위치 · 크기 복사하기</button>' +
+    '<div id="emoOut" style="margin-top:8px; font-size:11.5px; color:#9FB3D9; white-space:pre-line"></div>';
   document.body.appendChild(안내);
+
+  function 고르기(el) {
+    들.forEach(function (x) { x.style.outline = 'none'; });
+    고른 = el;
+    el.style.outline = '2px dashed #156FF9';
+    el.style.outlineOffset = '4px';
+  }
+  function 크기(el, 값) {
+    var h = el.getBoundingClientRect().height + 값;
+    if (h < 18) h = 18;
+    if (h > 260) h = 260;
+    el.style.height = Math.round(h) + 'px';
+  }
 
   들.forEach(function (el) {
     el.style.pointerEvents = 'auto';
     el.style.cursor = 'grab';
     el.addEventListener('pointerdown', function (e) {
       e.preventDefault();
+      고르기(el);
       var 판 = 히어로.getBoundingClientRect();
       var 상자 = el.getBoundingClientRect();
       var 차X = e.clientX - 상자.left, 차Y = e.clientY - 상자.top;
@@ -1384,7 +1402,7 @@
         el.style.top = (y / 판.height * 100).toFixed(2) + '%';
         el.style.right = 'auto'; el.style.bottom = 'auto';
       }
-      function 끝(ev) {
+      function 끝() {
         el.style.cursor = 'grab';
         el.removeEventListener('pointermove', 이동);
         el.removeEventListener('pointerup', 끝);
@@ -1392,7 +1410,15 @@
       el.addEventListener('pointermove', 이동);
       el.addEventListener('pointerup', 끝);
     });
+    el.addEventListener('wheel', function (e) {
+      e.preventDefault();
+      고르기(el);
+      크기(el, e.deltaY < 0 ? 6 : -6);
+    }, { passive: false });
   });
+
+  document.getElementById('emoPlus').addEventListener('click', function () { if (고른) 크기(고른, 6); });
+  document.getElementById('emoMinus').addEventListener('click', function () { if (고른) 크기(고른, -6); });
 
   document.getElementById('emoCopy').addEventListener('click', function () {
     var 줄 = [];
@@ -1402,8 +1428,7 @@
         ((r.left - 판.left) / 판.width * 100).toFixed(1) + '%; top:' +
         ((r.top - 판.top) / 판.height * 100).toFixed(1) + '%;}');
     });
-    var 글 = 줄.join('
-');
+    var 글 = 줄.join(String.fromCharCode(10));
     document.getElementById('emoOut').textContent = 글;
     if (navigator.clipboard) navigator.clipboard.writeText(글);
   });
