@@ -708,9 +708,10 @@
   .cfig{display:none;}
   /* 01 민트 · 02 분홍 포인트 (헤더 이모지 색과 통일) */
   .whygrid .uc:nth-child(1) .no{background:#16D9BE;}
-  .whygrid .uc:nth-child(1) .uarw{color:#12C6AD;}
+
   .whygrid .uc:nth-child(2) .no{background:#FF3FA4;}
-  .whygrid .uc:nth-child(2) .uarw{color:#F02F95;}
+  /* 흰 카드 3장의 화살표는 검정 */
+  .whygrid .uc:not(.blue) .uarw{color:var(--ink);}
 </style>
 </head>
 <body>
