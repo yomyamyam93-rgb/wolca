@@ -133,7 +133,7 @@
   /* 파란 강조 카드 — 임대인 동의 불필요 */
   .uc.blue{background:var(--primary); overflow:hidden;
     background:linear-gradient(140deg,#0D2E9C 0%,#051643 52%,#01113F 100%); border-color:transparent;
-    box-shadow:0 18px 36px rgba(21,111,249,.30);}
+    box-shadow:none;}
   .uc.blue .no,.uc.blue h3,.uc.blue p{position:relative; z-index:1;}
   .uc.blue .coins{position:absolute; top:50%; right:-24%; height:170%; width:auto; max-width:none; z-index:0;
     transform:translateY(-50%);
@@ -380,10 +380,9 @@
   #endcta .wrap{position:relative; z-index:1;}
   /* 모바일 — 글은 위로 · 이미지는 아래 전용 구역으로 분리 */
   @media(max-width:767px){
-    #endcta{min-height:0; padding-top:72px; padding-bottom:calc(56vw + 26px);
-      background-color:#F9F8FC;
-      background-image:url('img/cta-bg-m.jpg?v=4');
-      background-size:190% auto; background-position:center calc(100% + 21vw);}
+    #endcta{min-height:0; padding-top:72px; padding-bottom:76px;
+      background-color:#F9F8FC; background-image:none;}
+    #endcta .cfig{display:block; width:150%; max-width:none; margin:26px -25% 0;}
     #endcta:before{background:linear-gradient(180deg, #F7F8FA 0%, rgba(249,248,252,0) 100%);}
   }
   #endcta .eyebrow{color:var(--primary-600);}
@@ -649,6 +648,7 @@
     background-image:radial-gradient(circle, #2E63D8 1.7px, transparent 2.1px);
     background-size:5px 11px; background-repeat:repeat-y; background-position:center top;}
   @media(max-width:767px){ .vdots{height:64px; margin:-78px auto 26px;} }
+  .cfig{display:none;}
 </style>
 </head>
 <body>
@@ -986,6 +986,9 @@
       <div class="ctaend">
         <a class="btn btn-primary" href="app.html"><img class="btn-logo" src="img/logo3-white.png" alt="">바로 송금하기</a>
         <a class="btn btn-ghostw" href="guide.html">어떻게 이용하나요?</a>
+      </div>
+      <img class="cfig" src="img/cta-bg-m.jpg?v=4" alt="" aria-hidden="true">
+      <div style="display:none">
       </div>
     </div>
   </section>
