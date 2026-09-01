@@ -19,7 +19,7 @@
   /* flex 자식은 내용 폭만큼 늘어나려 한다 — 가로 스크롤 줄(후기)이 밀어내지 않게 */
   .sec > .wrap{width:100%; min-width:0;}
 
-  /* ① 히어로 — 가운데 한 마디 + 한 장씩 넘어가는 대화 카드 (레퍼런스 방식) */
+  /* 1. 히어로 — 가운데 한 마디 + 한 장씩 넘어가는 대화 카드 (레퍼런스 방식) */
   .hero{position:relative; color:var(--ink); padding:88px 0 24px; overflow:clip;
     background-color:#F6F7FB; background-image:none;
     min-height:0;
@@ -151,8 +151,8 @@
   .uc.blue .no{background:#fff; color:var(--primary-600);}
   .uc.blue .art{color:rgba(255,255,255,.95);}
 
-  /* ② 항목 카드 — 설명과 핵심이 카드 안에 다 보인다 (레퍼런스식) */
-  /* ② 결제 항목 — 아이콘 타일 나열 · 누르면 그 항목으로 결제 화면 이동
+  /* 2. 항목 카드 — 설명과 핵심이 카드 안에 다 보인다 (레퍼런스식) */
+  /* 2. 결제 항목 — 아이콘 타일 나열 · 누르면 그 항목으로 결제 화면 이동
      아래엔 카드사 로고 띠를 작은 캡션과 함께 붙여 한 화면에 담는다 */
   #itemsec .head + *{margin-top:40px;}
   @media(min-width:768px){ #itemsec{min-height:0; padding-top:114px; padding-bottom:150px;} #itemsec .head + *{margin-top:40px;} }
@@ -276,7 +276,7 @@
 
     transition:width 2.6s cubic-bezier(.3,.6,.25,1);}
 
-  /* ③ 카드사 — 로고가 끊김 없이 천천히 흐른다 (아래 줄은 반대 방향 · 올리면 멈춤) */
+  /* 3. 카드사 — 로고가 끊김 없이 천천히 흐른다 (아래 줄은 반대 방향 · 올리면 멈춤) */
   .cobelt{margin-top:64px; overflow:clip;}
   @media(min-width:768px){ .cobelt{margin-top:96px;} }
   .corow{display:flex; align-items:center; width:max-content; animation:coRoll 46s linear infinite;}
@@ -288,7 +288,7 @@
     .corow img.tall{height:46px;}
   }
 
-  /* ④ 이유 3가지 — 흰 카드 3장 + 모서리 배지 (랩스튜디오식)
+  /* 4. 이유 3가지 — 흰 카드 3장 + 모서리 배지 (랩스튜디오식)
      훑는 층 = 배지·파란 제목·큰 숫자만 봐도 통한다 */
   .rzgrid{display:grid; gap:20px;}
   @media(min-width:900px){ .rzgrid{grid-template-columns:repeat(3,1fr); gap:24px;} }
@@ -321,7 +321,7 @@
   @media(min-width:900px){ .rz li{font-size:16px;} }
   .rz li:before{content:'\B7'; position:absolute; left:2px; color:var(--placeholder);}
 
-  /* ⑤ 이용 방법 — 6단계 상세 카드 (2열 · 번호 + 제목 + 설명 + 아이콘) */
+  /* 5. 이용 방법 — 6단계 상세 카드 (2열 · 번호 + 제목 + 설명 + 아이콘) */
   .gdgrid{display:grid; gap:16px;}
   @media(min-width:900px){ .gdgrid{grid-template-columns:1fr 1fr; gap:24px;} }
   .gd{position:relative; display:flex; align-items:center; gap:14px; background:#fff;
@@ -352,7 +352,7 @@
   .gd p{margin-top:12px; font-size:15px; line-height:1.75; color:var(--sub);}
   @media(min-width:900px){ .gd p{font-size:15.5px;} }
 
-  /* ⑥ 보안 — 파란 큰 패널 + 흰 정보 카드 (레퍼런스식) */
+  /* 6. 보안 — 파란 큰 패널 + 흰 정보 카드 (레퍼런스식) */
   .sboard{background:var(--primary); background:linear-gradient(140deg,#0D2E9C 0%,#051643 52%,#01113F 100%); border-radius:8px; padding:30px 24px;
     color:#fff; display:flex; flex-direction:column; gap:30px;}
   @media(min-width:900px){ .sboard{flex-direction:row; align-items:center; justify-content:flex-start;
@@ -376,7 +376,7 @@
   .srow h4 em{font-style:normal; color:var(--primary);}
   .srow p{margin-top:10px; font-size:15.5px; line-height:1.8; color:var(--sub);}
 
-  /* ⑧ 마무리 — 밝은 카드 이미지 배경 · 어두운 글 */
+  /* 8. 마무리 — 밝은 카드 이미지 배경 · 어두운 글 */
   #endcta{position:relative; background-color:#ECECF6;
     background-image:url('img/cta-bg3.jpg?v=3');
     background-size:2000px auto; background-position:center calc(100% + 70px);
@@ -410,7 +410,7 @@
     box-shadow:0 10px 26px rgba(21,111,249,.32);}
   #endcta .btn-ghostw{background:#fff; border:1px solid var(--line); color:var(--ink);}
 
-  /* ⑦ 후기 — 두 줄이 한 칸씩 자동으로 밀린다 (아랫줄은 반대 방향 · 올리면 멈춤) */
+  /* 7. 후기 — 두 줄이 한 칸씩 자동으로 밀린다 (아랫줄은 반대 방향 · 올리면 멈춤) */
   .rvband{margin-top:56px; overflow-x:clip; overflow-y:visible;}
   @media(min-width:768px){ .rvband{margin-top:80px;} }
   .rvrow{display:flex; width:max-content; will-change:transform;}
@@ -738,7 +738,7 @@
 
 <main class="main">
 
-  <!-- ===== ① 히어로 — 가운데 한 마디 + 흐르는 대화 카드 ===== -->
+  <!-- ===== 1. 히어로 — 가운데 한 마디 + 흐르는 대화 카드 ===== -->
   <section class="hero">
     <div class="wrap hero2">
       <div class="hleft">
@@ -798,7 +798,7 @@
     </div>
   </section>
 
-  <!-- ===== ② 결제 항목 + 카드사 로고 — 한 화면 ===== -->
+  <!-- ===== 2. 결제 항목 + 카드사 로고 — 한 화면 ===== -->
   <section class="sec tight tint" id="itemsec">
     <div class="wrap">
       <div class="head">
@@ -835,7 +835,7 @@
 
   </section>
 
-  <!-- ===== ④ 기능 3가지 — 흰 카드 3장 + 모서리 배지 ===== -->
+  <!-- ===== 4. 기능 3가지 — 흰 카드 3장 + 모서리 배지 ===== -->
   <section class="sec tint" id="featsec">
     <div class="wrap">
       <div class="head">
@@ -885,7 +885,7 @@
     </div>
   </section>
 
-  <!-- ===== ⑤ 이용 방법 — 6단계 상세 ===== -->
+  <!-- ===== 5. 이용 방법 — 6단계 상세 ===== -->
   <section class="sec tint" id="howto">
     <div class="wrap">
       <div class="head">
@@ -946,14 +946,14 @@
     </div>
   </section>
 
-  <!-- ===== ⑤-2 카드사 로고 — 로고만 조용히 ===== -->
+  <!-- ===== 5.-2 카드사 로고 — 로고만 조용히 ===== -->
   <section class="cosec tint">
     <div class="cobelt">
       <div class="corow"><img src="img/카드사/shinhan.svg" alt="신한카드"><img src="img/카드사/kb.svg" alt="KB국민카드"><img src="img/카드사/samsung.svg" alt="삼성카드"><img src="img/카드사/hyundai.svg" alt="현대카드"><img src="img/카드사/lotte.svg" alt="롯데카드"><img src="img/카드사/woori.svg" alt="우리카드"><img src="img/카드사/hana.svg" alt="하나카드"><img src="img/카드사/nh.svg" alt="NH농협카드"><img class="tall" src="img/카드사/bc.svg" alt="BC카드"><img src="img/카드사/citi.svg" alt="씨티카드"><img src="img/카드사/shinhan.svg" alt="신한카드"><img src="img/카드사/kb.svg" alt="KB국민카드"><img src="img/카드사/samsung.svg" alt="삼성카드"><img src="img/카드사/hyundai.svg" alt="현대카드"><img src="img/카드사/lotte.svg" alt="롯데카드"><img src="img/카드사/woori.svg" alt="우리카드"><img src="img/카드사/hana.svg" alt="하나카드"><img src="img/카드사/nh.svg" alt="NH농협카드"><img class="tall" src="img/카드사/bc.svg" alt="BC카드"><img src="img/카드사/citi.svg" alt="씨티카드"><img src="img/카드사/shinhan.svg" alt="신한카드"><img src="img/카드사/kb.svg" alt="KB국민카드"><img src="img/카드사/samsung.svg" alt="삼성카드"><img src="img/카드사/hyundai.svg" alt="현대카드"><img src="img/카드사/lotte.svg" alt="롯데카드"><img src="img/카드사/woori.svg" alt="우리카드"><img src="img/카드사/hana.svg" alt="하나카드"><img src="img/카드사/nh.svg" alt="NH농협카드"><img class="tall" src="img/카드사/bc.svg" alt="BC카드"><img src="img/카드사/citi.svg" alt="씨티카드"><img src="img/카드사/shinhan.svg" alt="신한카드"><img src="img/카드사/kb.svg" alt="KB국민카드"><img src="img/카드사/samsung.svg" alt="삼성카드"><img src="img/카드사/hyundai.svg" alt="현대카드"><img src="img/카드사/lotte.svg" alt="롯데카드"><img src="img/카드사/woori.svg" alt="우리카드"><img src="img/카드사/hana.svg" alt="하나카드"><img src="img/카드사/nh.svg" alt="NH농협카드"><img class="tall" src="img/카드사/bc.svg" alt="BC카드"><img src="img/카드사/citi.svg" alt="씨티카드"></div>
     </div>
   </section>
 
-  <!-- ===== ⑥ 보안 — 파란 패널 (레퍼런스식) ===== -->
+  <!-- ===== 6. 보안 — 파란 패널 (레퍼런스식) ===== -->
   <section class="sec tint" id="trustsec">
     <div class="wrap">
       <div class="head">
@@ -991,7 +991,7 @@
     </div>
   </section>
 
-  <!-- ===== ⑦ 후기 — 두 줄 자동 롤링 ===== -->
+  <!-- ===== 7. 후기 — 두 줄 자동 롤링 ===== -->
   <section class="sec tint" id="rvsec">
     <div class="wrap">
       <div class="head">
@@ -1042,7 +1042,7 @@
     </div>
   </section>
 
-  <!-- ===== ⑧ 마무리 — 지금 바로 시작 ===== -->
+  <!-- ===== 8. 마무리 — 지금 바로 시작 ===== -->
   <section class="sec" id="endcta">
     <div class="wrap">
       <div class="head">
