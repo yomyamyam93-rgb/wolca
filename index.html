@@ -512,10 +512,9 @@
   .srow{background:linear-gradient(180deg,#FFFFFF,#F8FAFE);
     box-shadow:0 14px 30px rgba(15,23,42,.08), 0 3px 8px rgba(15,23,42,.04);}
   /* 서류 3줄 + 버튼 = 신용카드 한 장 */
-  #itemsec .itr-card{background:transparent url('img/card-face.png?v=2') center/100% 100% no-repeat;
-    border:none; border-radius:0; aspect-ratio:1.492/1; padding:24px 28px;
-    display:flex; flex-direction:column; justify-content:flex-end;
-    filter:drop-shadow(0 16px 26px rgba(10,14,26,.38));}
+  #itemsec .itr-card{background:transparent url('img/card-face-v.png') center/100% 100% no-repeat;
+    border:none; border-radius:0; width:186px; aspect-ratio:1/1.492; margin:22px auto 4px;
+    filter:drop-shadow(0 14px 24px rgba(10,14,26,.30));}
   #itemsec .itl .itr{margin-top:14px; width:100%; gap:0;}
   #itemsec .itr-card{display:block;}
   #itemsec .itpanel{position:relative;}
@@ -543,7 +542,7 @@
   #itemsec .itr{background:none; border:none; box-shadow:none; border-radius:0; padding:0; gap:0;}
   @media(max-width:999px){
     /* 신용카드 비율 — 가로는 100% 고정이라 절대 안 잘린다 */
-    #itemsec .itr-card{width:100%; aspect-ratio:1.492/1; padding:14px 18px; border-radius:0;}
+    #itemsec .itr-card{width:150px; aspect-ratio:1/1.492; padding:0; margin:16px auto 2px;}
     #itemsec .itr-tt{font-size:14px; margin-top:16px;}
     #itemsec .doc{padding:2px 0;}
     #itemsec .doc p{font-size:13px;}
