@@ -147,7 +147,8 @@ img{max-width:100%;}
 .ptabs a.on:after{content:''; position:absolute; left:0; right:0; bottom:-1px; height:2px; background:var(--primary);}
 
 /* ---------- 하위 페이지 공용 배너 · 슬림 푸터 ---------- */
-.banner{background:var(--primary); background:var(--grad); color:#fff; padding:64px 0 56px; text-align:center;}
+.banner{background:#0D2E9C; background:linear-gradient(140deg,#0D2E9C 0%,#051643 52%,#01113F 100%);
+  color:#fff; padding:64px 0 56px; text-align:center;}
 .banner .h-hero{color:#fff;}
 .banner .h-hero .hl{color:#fff;}
 .banner p{margin-top:14px; font-size:15px; line-height:1.7; color:rgba(255,255,255,.85);}
