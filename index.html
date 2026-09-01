@@ -610,7 +610,8 @@
   }
   /* PC — SCROLL DOWN 크게 · 바닥에서 띄우기 */
   @media(min-width:900px){
-    .sdown{bottom:16px; gap:8px;}
+    .sdown{position:static; transform:none; margin:30px auto 0; bottom:auto; gap:8px;
+      display:flex;}
     .sdown .mouse{width:30px; height:48px; border-width:2.5px; border-radius:16px;}
     .sdown .mouse iconify-icon{font-size:19px; margin-top:9px;}
     .sdown b{font-size:12.5px; letter-spacing:3px;}
