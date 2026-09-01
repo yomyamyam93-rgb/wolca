@@ -35,8 +35,9 @@
     .hero{min-height:calc(100svh - var(--appbar));
       display:flex; flex-direction:column; justify-content:center;
       background-image:url('img/hero-bg10-m.jpg?v=9');
-      background-size:min(96%, 128svh) auto; background-position:center calc(100% - 96px);
-      padding:3svh 0 calc(min(48vw, 36svh) + 96px);}
+      /* 이미지 높이 = 확보 공간 — 글을 덮을 수 없다 */
+      background-size:auto min(46vw, 40svh); background-position:center calc(100% - 52px);
+      padding:2svh 0 calc(min(46vw, 40svh) + 52px);}
     .hero .lead{font-size:20px;}
   }
   /* 스크롤 유도 — 마우스 모양 + 문구 */
@@ -633,9 +634,9 @@
   }
   /* 노트북(세로 짧은 PC) — 한 화면에 맞게 축소 */
   @media(min-width:768px) and (max-height:850px){
-    .hero{background-size:min(96%, 108svh) auto;
+    .hero{background-size:auto min(46vw, 33svh);
       background-position:center calc(100% - 44px);
-      padding:1svh 0 calc(min(46vw, 34svh) + 44px);}
+      padding:1svh 0 calc(min(46vw, 33svh) + 44px);}
     .hero .h-hero{font-size:38px;}
     .hchecks{margin-top:16px; gap:7px;}
     .hchecks li{font-size:15px;}
