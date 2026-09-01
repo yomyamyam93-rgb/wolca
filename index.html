@@ -380,10 +380,10 @@
   #endcta .wrap{position:relative; z-index:1;}
   /* 모바일 — 글은 위로 · 이미지는 아래 전용 구역으로 분리 */
   @media(max-width:767px){
-    #endcta{min-height:0; padding-top:72px; padding-bottom:calc(56vw + 72px);
+    #endcta{min-height:0; padding-top:72px; padding-bottom:calc(56vw + 26px);
       background-color:#F9F8FC;
       background-image:url('img/cta-bg-m.jpg?v=4');
-      background-size:190% auto; background-position:center calc(100% + 36vw);}
+      background-size:190% auto; background-position:center calc(100% + 21vw);}
     #endcta:before{background:linear-gradient(180deg, #F7F8FA 0%, rgba(249,248,252,0) 100%);}
   }
   #endcta .eyebrow{color:var(--primary-600);}
@@ -632,11 +632,11 @@
       align-items:center; justify-content:center; gap:10px; padding:10px;
       width:100%; max-width:100%; min-width:0; min-height:0; align-self:start;}
     #itemsec .it b{margin-top:0;}
-    /* 패널 — 세로 스택(겹침 방지: 카드가 일반 흐름에 위치) */
-    #itemsec .itpanel{display:flex !important; flex-direction:column;
-      justify-content:center; gap:0 !important;}
-    #itemsec .itl{flex:0 0 auto;}
-    #itemsec .itr-card{position:static; flex:0 0 auto; margin:26px auto 0;}
+    /* 패널 — 카드 왼쪽 · 텍스트 오른쪽 */
+    #itemsec .itpanel{display:flex !important; flex-direction:row; align-items:center;
+      gap:34px !important;}
+    #itemsec .itr-card{position:static; flex:0 0 auto; order:0; margin:0;}
+    #itemsec .itl{flex:1 1 auto; order:1; min-width:0;}
   }
   #itemsec .itpanel .parw{position:static; display:inline-flex; margin-top:18px; align-self:flex-start;}
   /* 배경 이미지 = 남는 세로 공간을 채우는 흐름 요소 (화면이 길수록 커진다) */
@@ -645,7 +645,7 @@
   .hero .sdown{position:static; transform:none; margin:10px auto 2px; display:flex; bottom:auto;}
   #itemsec{background:#fff;}
   /* 단락을 잇는 점선 ⋮ */
-  .vdots{width:6px; height:58px; margin:-26px auto 26px;
+  .vdots{width:6px; height:52px; margin:0 auto 24px;
     background-image:radial-gradient(circle, #AFC6F0 2.6px, transparent 3px);
     background-size:6px 14px; background-repeat:repeat-y; background-position:center top;}
 </style>
@@ -729,8 +729,8 @@
   <!-- ===== ② 결제 항목 + 카드사 로고 — 한 화면 ===== -->
   <section class="sec tight tint" id="itemsec">
     <div class="wrap">
-      <div class="vdots" aria-hidden="true"></div>
       <div class="head">
+        <div class="vdots" aria-hidden="true"></div>
         <h2 class="h-sec"><span class="soft">어떤 항목이 필요하신가요?</span><br>지금 바로 <span class="hl">카드로 결제</span>하세요</h2>
       </div>
 
@@ -755,7 +755,7 @@
         <div class="itl">
           <h3 id="itp-h"></h3>
           <div class="itr" id="itp-docs"></div>
-          <a class="parw" href="화면/10_1_유형선택.html">바로가기<svg viewBox="0 0 22 22" aria-hidden="true"><path d="M5 17 17 5M8 5h9v9" stroke="currentColor" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <a class="btn btn-primary" id="itgo" href="화면/10_1_유형선택.html"><img class="btn-logo" src="img/logo3-white.png" alt=""><span id="itgo-t">월세 결제하기</span></a>
         </div>
         <div class="itr-card" aria-hidden="true"></div>
       </div>
@@ -1149,6 +1149,8 @@
   function 채우기(b) {
     var n = b.dataset.n, 정보 = 자료[n];
     큰제목.textContent = 정보.t;
+    var 가기글 = document.getElementById('itgo-t');
+    if (가기글) 가기글.textContent = n + ' 결제하기';
     서류칸.innerHTML = 정보.docs.map(function (d) {
       return '<div class="doc"><span class="ck">✓</span><p>' + d + '</p></div>';
     }).join('');
