@@ -20,10 +20,9 @@
   .sec > .wrap{width:100%; min-width:0;}
 
   /* ① 히어로 — 가운데 한 마디 + 한 장씩 넘어가는 대화 카드 (레퍼런스 방식) */
-  .hero{position:relative; color:var(--ink); padding:88px 0 42vw; overflow:clip;
-    background-color:#F6F7FB; background-image:url('img/hero-bg10.jpg?v=5');
-    background-size:100% auto; background-position:center bottom; background-repeat:no-repeat;
-    min-height:calc(100vh - var(--appbar)); min-height:calc(100svh - var(--appbar));
+  .hero{position:relative; color:var(--ink); padding:88px 0 24px; overflow:clip;
+    background-color:#F6F7FB; background-image:none;
+    min-height:0;
     display:flex; flex-direction:column; justify-content:flex-start;}
   /* 텍스트는 위쪽 — 아래 카드 이미지와 안 겹치게 */
   .hero-top{text-align:center;}
@@ -33,9 +32,9 @@
   .hero .btn{margin-top:34px; height:56px; font-size:17px; padding:0 34px; border-radius:8px;}
   @media(min-width:768px){
     .hero{min-height:calc(100svh - var(--appbar));
-      display:flex; flex-direction:column; justify-content:flex-start;
+      display:flex; flex-direction:column; justify-content:center;
       background-color:#EFF2FB; background-image:none;
-      padding:11svh 0 60px;}
+      padding:56px 0 44px;}
     .hero .hero2{margin:0 auto;}
 
     .hero .lead{font-size:20px;}
@@ -56,7 +55,7 @@
     .hero{background-color:#EFF2FB; background-image:none;
       min-height:calc(100svh - var(--appbar));
       display:flex; flex-direction:column; justify-content:flex-start;
-      padding:9svh 0 14px;}
+      padding:38px 0 14px;}
     .hero .hero2{text-align:center;}
     .hero .hleft{display:block;}
     .hero .hero2 .hbtns{justify-content:center; margin-top:22px; flex-wrap:nowrap;}
@@ -391,8 +390,9 @@
   /* ⑧ 마무리 — 밝은 카드 이미지 배경 · 어두운 글 */
   #endcta{position:relative; background-color:#F0F1F7;
     background-image:url('img/cta-bg.jpg?v=2');
-    background-size:cover; background-position:center calc(100% + 7vw); background-repeat:no-repeat;
-    justify-content:flex-start; padding-top:190px;}
+    background-size:1500px auto; background-position:center calc(100% + 100px);
+    background-repeat:no-repeat;
+    min-height:0; justify-content:flex-start; padding-top:190px; padding-bottom:321px;}
   /* 위 후기 단락 색이 스며들며 사라지는 이음 덧층 */
   #endcta:before{content:''; position:absolute; left:0; right:0; top:0; height:200px;
     background:linear-gradient(180deg, #F7F8FA 0%, rgba(247,248,250,0) 100%); pointer-events:none;}
@@ -618,12 +618,6 @@
     .hero .hero2 .hbtns{justify-content:center !important; flex-wrap:nowrap;}
     .hero .hbtns .btn{flex:0 0 auto !important; padding:0 22px;}
   }
-  /* 세로가 짧은 폰 — 이미지 비중 줄여 한 화면 유지 */
-  @media(max-width:767px) and (max-height:730px){
-    .hero{padding:4svh 0 12px;}
-    .sdown .mouse{width:20px; height:32px;}
-    .sdown b{font-size:9.5px;}
-  }
   /* PC — SCROLL DOWN 크게 · 바닥에서 띄우기 */
   @media(min-width:900px){
     .sdown{position:static; transform:none; margin:30px auto 0; bottom:auto; gap:8px;
@@ -646,16 +640,6 @@
     .srow h4{font-size:19px;}
     .srow p{margin-top:8px; font-size:14.5px; line-height:1.7;}
   }
-  /* 노트북(세로 짧은 PC) — 한 화면에 맞게 축소 */
-  @media(min-width:768px) and (max-height:850px){
-    .hero{padding:9svh 0 60px;}
-    .hero .h-hero{font-size:38px;}
-    .hchecks{margin-top:16px; gap:7px;}
-    .hchecks li{font-size:15px;}
-    .hero .hbtns{margin-top:24px;}
-    .hero .hbtns .btn{height:52px;}
-    .sdown{bottom:18px;}
-  }
   /* 타일 정사각형 · 패널 세로 구성(글 위 · 카드 아래 · 바로가기는 글 밑) */
   @media(min-width:1000px){
     #itemsec .it{aspect-ratio:1/1; display:flex; flex-direction:column;
@@ -672,16 +656,15 @@
   /* 배경 이미지 = 남는 세로 공간을 채우는 흐름 요소 (화면이 길수록 커진다) */
   /* 헤더 위에 둥실거리는 3D 이모지 */
   /* PC: 상자를 없는 것처럼 → 기존 좌표 유지 · 모바일: 이미지 상자 기준 */
-  .figwrap{display:contents;}
+  /* 상자 = 이미지 크기 (PC · 모바일 공통) → 이모지가 이미지를 따라간다 */
+  .figwrap{display:block; position:relative; width:min(1180px, 94%);
+    aspect-ratio:2400/1258; margin:12px auto 0; flex:0 0 auto;}
+  .figwrap .hfig{display:block; width:100%; height:100%; object-fit:contain; margin:0;}
   .hemo{position:absolute; z-index:1; pointer-events:none; user-select:none;
     width:auto; animation:emoFloat 6.4s ease-in-out infinite;
     filter:drop-shadow(0 10px 18px rgba(15,30,80,.16));}
   /* 직접 배치한 위치 · 크기 (PC) */
-  .em1{height:58px; left:55.2%; top:73.0%;}
-  .em2{height:107px; left:41.3%; top:66.4%; animation-delay:1.1s;}
-  .em3{height:48px; left:60.7%; top:41.2%; animation-delay:2.2s;}
-  .em4{height:101px; left:58.0%; top:43.4%; animation-delay:.6s;}
-  .em5{height:62px; left:38.0%; top:39.9%; animation-delay:1.7s;}
+  .em2{height:17.3%; left:39.4%; top:56.5%;}
   /* 시작 = 끝 상태라 끊김 없이 이어진다 */
   @keyframes emoFloat{
     0%{transform:translateY(-8px) rotate(-3.5deg);}
@@ -690,8 +673,6 @@
   }
   @media(max-width:767px){
   }
-  .hero .hfig{display:block; flex:1 1 0; min-height:170px; aspect-ratio:2400/1258;
-    width:auto; max-width:min(100%, 1180px); object-fit:contain; object-position:center; margin:12px auto 0;}
   .hero .sdown{position:static; transform:none; margin:10px auto 2px; display:flex; bottom:auto;}
   #itemsec{background:#fff;}
   /* 단락을 잇는 점선 ⋮ */
@@ -726,15 +707,14 @@
     /* 글 · 버튼만 30px 아래로 (이미지는 제자리) */
     .hero .hero2{margin-top:30px;}
     /* 상자 = 이미지 크기와 동일 → 이모지가 항상 카드와 같은 자리 */
-    .figwrap{display:block; position:relative; flex:0 0 auto; width:100%;
-      aspect-ratio:2400/1258; max-width:520px; margin:auto auto 0; overflow:visible;}
+    .figwrap{display:block; position:relative; flex:0 0 auto;
+      width:165%; max-width:none; aspect-ratio:2400/1258;
+      margin:auto -32.5% 0; overflow:visible;}
     /* 좌우 덜 잘리게 — 폭을 우선 맞추고 세로는 상자에 맞춤 */
     .figwrap .hfig{display:block; width:100%; height:100%; max-width:100%;
       object-fit:contain; object-position:center; margin:0;}
     /* 카드 상자 대비 위치 · 크기 (화면이 바뀌어도 카드와 함께 움직임) */
     .em2{height:20.0%; left:22.1%; right:auto; top:49.7%;}
-    .em3{height:8.0%;  left:70.8%; right:auto; top:21.5%;}
-    .em5{height:15.3%; left:16.4%; right:auto; top:calc(5.2% + 30px);}
   }
   /* 이용 방법 01 — 분홍 강조 */
   .gdgrid .gd:first-child .no{background:#FF2E9A; box-shadow:0 4px 12px rgba(255,46,154,.28);}
@@ -785,8 +765,6 @@
     <div class="figwrap">
       <img class="hfig" src="img/hero-bg10-m.jpg?v=12" alt="" aria-hidden="true">
       <img class="hemo em2" src="img/emo2.png?v=2" alt="" aria-hidden="true">
-      <img class="hemo em3" src="img/emo3.png?v=2" alt="" aria-hidden="true">
-      <img class="hemo em5" src="img/emo5.png?v=2" alt="" aria-hidden="true">
     </div>
     <div class="sdown" aria-hidden="true"><span class="mouse"><iconify-icon icon="mingcute:arrow-down-line"></iconify-icon></span><b>SCROLL DOWN</b></div>
   </section>
