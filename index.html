@@ -729,11 +729,9 @@
     .figwrap .hfig{flex:none; width:100%; max-width:100%; height:auto; min-height:0;
       aspect-ratio:auto; object-fit:contain; object-position:center bottom; margin:0;}
     /* 카드 상자 대비 위치 · 크기 (화면이 바뀌어도 카드와 함께 움직임) */
-    .em1{height:13.2%; left:77.4%; right:auto; top:72.8%;}
-    .em2{height:26.1%; left:4.9%;  right:auto; top:53.1%;}
-    .em3{height:7.7%;  left:88.6%; right:auto; top:4.0%;}
-    .em4{height:18.0%; left:75.4%; right:auto; top:9.9%;}
-    .em5{height:15.1%; left:11.7%; right:auto; top:0.4%;}
+    .em2{height:20.0%; left:22.1%; right:auto; top:49.7%;}
+    .em3{height:8.0%;  left:70.8%; right:auto; top:21.5%;}
+    .em5{height:15.3%; left:16.4%; right:auto; top:5.2%;}
   }
   /* 이용 방법 01 — 분홍 강조 */
   .gdgrid .gd:first-child .no{background:#FF2E9A; box-shadow:0 4px 12px rgba(255,46,154,.28);}
@@ -1461,7 +1459,8 @@
     들.forEach(function (el, i) {
       var r = el.getBoundingClientRect();
       var 높이 = 모바일 ? ((r.height / 판.height * 100).toFixed(1) + '%') : (Math.round(r.height) + 'px');
-      줄.push('.em' + (i + 1) + '{height:' + 높이 + '; left:' +
+      var 이름 = (el.className.match(/em\d/) || ['em' + (i + 1)])[0];
+      줄.push('.' + 이름 + '{height:' + 높이 + '; left:' +
         ((r.left - 판.left) / 판.width * 100).toFixed(1) + '%; top:' +
         ((r.top - 판.top) / 판.height * 100).toFixed(1) + '%;}');
     });
