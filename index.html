@@ -33,14 +33,14 @@
   .hero .btn{margin-top:34px; height:56px; font-size:17px; padding:0 34px; border-radius:8px;}
   @media(min-width:768px){
     .hero{min-height:calc(100svh - var(--appbar));
-      display:flex; flex-direction:column; justify-content:space-between;
+      display:flex; flex-direction:column; justify-content:flex-end;
       background-color:#EFF2FB;
       background-image:url('img/hero-bg10-m.jpg?v=9');
       /* 이미지 높이 = 확보 공간 — 글을 덮을 수 없다 */
       background-size:auto min(46vw, 40svh); background-position:center calc(100% - 86px);
       padding:2svh 0 calc(min(46vw, 40svh) + 86px);}
     /* 위 여백은 살짝 · 남는 공간은 이미지 쪽으로 */
-    .hero .hero2{margin:9svh auto 40px;}
+    .hero .hero2{margin:auto auto 40px;}
     .hero .lead{font-size:20px;}
   }
   /* 스크롤 유도 — 마우스 모양 + 문구 */
