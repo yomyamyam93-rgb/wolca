@@ -399,9 +399,9 @@
   #endcta .wrap{position:relative; z-index:1;}
   /* 모바일 — 글은 위로 · 이미지는 아래 전용 구역으로 분리 */
   @media(max-width:767px){
-    #endcta{min-height:0; padding-top:72px; padding-bottom:76px;
+    #endcta{min-height:0; padding-top:118px; padding-bottom:76px;
       background-color:#F9F8FD; background-image:none;}
-    #endcta .cfig{display:block; width:270%; max-width:none; margin:16px -85% 0;}
+    #endcta .cfig{display:block; width:270%; max-width:none; margin:2px -85% 0;}
     #endcta:before{background:linear-gradient(180deg, #F7F8FA 0%, rgba(249,248,253,0) 100%);}
   }
   #endcta .eyebrow{color:var(--primary-600);}
@@ -1385,7 +1385,9 @@
   if (!들.length) return;
   /* 실제 적용된 배치로 판단 — 상자가 살아 있으면 모바일 규칙 */
   var 상자 = document.querySelector('.figwrap');
-  var 모바일 = !!(상자 && getComputedStyle(상자).display !== 'contents');
+  var 좁은화면 = window.innerWidth <= 767 || window.matchMedia('(max-width:767px)').matches;
+  var 상자살아있음 = !!(상자 && getComputedStyle(상자).display !== 'contents');
+  var 모바일 = 좁은화면 || 상자살아있음;
   var 기준 = 모바일 ? 상자 : document.querySelector('.hero');
   if (!기준) 기준 = document.querySelector('.hero');
   var 고른 = null;
@@ -1396,6 +1398,7 @@
     'line-height:1.6; box-shadow:0 10px 30px rgba(0,0,0,.35); font-family:inherit;';
   안내.innerHTML = '<b style="font-size:14.5px">이모지 편집 — ' + (모바일 ? '모바일' : 'PC') + ' 화면</b><br>' +
     '이모지를 끌어서 옮기고, 하나 누른 뒤 <b>+ / −</b> 로 크기 조절' +
+    '<div style="font-size:11.5px;color:#9FB3D9;margin-top:4px">화면 폭 ' + window.innerWidth + 'px</div>' +
     '<div style="display:flex; gap:8px; margin-top:8px">' +
     '<button id="emoMinus" style="flex:1; height:44px; border:none; border-radius:8px; background:#33415C; color:#fff; font-size:20px; font-weight:700">−</button>' +
     '<button id="emoPlus" style="flex:1; height:44px; border:none; border-radius:8px; background:#33415C; color:#fff; font-size:20px; font-weight:700">+</button>' +
