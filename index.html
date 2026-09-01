@@ -737,6 +737,10 @@
   /* 이용 방법 01 — 분홍 강조 */
   .gdgrid .gd:first-child .no{background:#FF2E9A; box-shadow:0 4px 12px rgba(255,46,154,.28);}
   .gdgrid .gd:first-child .nx{color:#FF2E9A;}
+  /* 따라다니는 버튼 — 두 번째 단락부터 나타남 */
+  .fab{opacity:0; visibility:hidden; transform:translateX(-50%) translateY(14px);
+    transition:opacity .3s, transform .3s, visibility .3s;}
+  .fab.show{opacity:1; visibility:visible; transform:translateX(-50%) translateY(0);}
 </style>
 </head>
 <body>
@@ -1464,6 +1468,20 @@
     칸.select();
     if (navigator.clipboard) navigator.clipboard.writeText(글);
   });
+})();
+</script>
+<script>
+/* 「맡겨보세요」 단락에 닿으면 따라다니는 버튼 등장 */
+(function(){
+  var 버튼=document.querySelector('.fab'), 기준=document.getElementById('whysec');
+  if(!버튼||!기준) return;
+  function 확인(){
+    var r=기준.getBoundingClientRect();
+    버튼.classList.toggle('show', r.top<=window.innerHeight*0.85);
+  }
+  window.addEventListener('scroll', 확인, {passive:true});
+  window.addEventListener('resize', 확인);
+  확인();
 })();
 </script>
 </body>
