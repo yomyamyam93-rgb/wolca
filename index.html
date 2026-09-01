@@ -156,7 +156,7 @@
   /* ② 결제 항목 — 아이콘 타일 나열 · 누르면 그 항목으로 결제 화면 이동
      아래엔 카드사 로고 띠를 작은 캡션과 함께 붙여 한 화면에 담는다 */
   #itemsec .head + *{margin-top:40px;}
-  @media(min-width:768px){ #itemsec{min-height:0; padding-top:114px; padding-bottom:110px;} #itemsec .head + *{margin-top:40px;} }
+  @media(min-width:768px){ #itemsec{min-height:0; padding-top:114px; padding-bottom:220px;} #itemsec .head + *{margin-top:40px;} }
   /* PC — 좌측 항목 타일 · 우측 설명 패널 */
   .itarw{display:none;}
   @media(min-width:1000px){
@@ -189,9 +189,9 @@
   .fcta a:hover{transform:scale(1.05);}
   .fcta iconify-icon{font-size:20px; margin-top:4px;}
   @media(max-width:767px){
-    #featsec{clip-path:polygon(0 0, 50% 7vw, 100% 0, 100% 100%, 0 100%);
-      padding-top:calc(7vw + 96px);}
-    .fcta{margin:0 0 calc(-56px - 7vw);}
+    #featsec{clip-path:polygon(0 0, 50% 13vw, 100% 0, 100% 100%, 0 100%);
+      padding-top:calc(13vw + 96px);}
+    .fcta{margin:0 0 calc(-56px - 13vw);}
     .fcta a{width:112px; height:112px; font-size:14px; border-width:3px;}
   }
   #featsec{background-color:#0C1E8F;
@@ -679,12 +679,12 @@
   /* 위 단락 끝과 아래 제목 사이 정중앙 */
   #itemsec .head{position:relative;}
   #itemsec .vdots{position:absolute; left:50%; transform:translateX(-50%);
-    top:calc(-1 * (var(--pt, 136px) / 2) - 50px); margin:0;}
+    top:calc(-1 * (var(--pt, 136px) / 2) - 32px); margin:0;}
   @media(min-width:768px){ #itemsec{--pt:114px;} }
   @media(max-width:767px){
-    #itemsec{--pt:92px; padding-top:92px;}
-    #whysec{padding-bottom:76px;}
-    .vdots{top:calc(-1 * (var(--pt) / 2) - 127px);}
+    #itemsec{--pt:52px; padding-top:52px; padding-bottom:150px;}
+    #whysec{padding-bottom:40px;}
+    .vdots{top:calc(-1 * (var(--pt) / 2) - 60px);}
   }
   .cfig{display:none;}
 </style>
