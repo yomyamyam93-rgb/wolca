@@ -725,12 +725,12 @@
   @media(max-width:767px){
     /* 글 · 버튼만 30px 아래로 (이미지는 제자리) */
     .hero .hero2{margin-top:30px;}
-    .figwrap{display:flex; position:relative; flex:1 1 0; min-height:170px; width:100%;
-      align-items:center; justify-content:center; margin:-18px auto 0; overflow:hidden;}
+    /* 상자 = 이미지 크기와 동일 → 이모지가 항상 카드와 같은 자리 */
+    .figwrap{display:block; position:relative; flex:0 0 auto; width:100%;
+      aspect-ratio:2400/1258; margin:auto auto 0; overflow:visible;}
     /* 좌우 덜 잘리게 — 폭을 우선 맞추고 세로는 상자에 맞춤 */
-    /* 좌우 안 잘리게 — 폭 100% 안에서 전체 보이기 */
-    .figwrap .hfig{flex:none; width:100%; max-width:100%; height:auto; min-height:0;
-      aspect-ratio:auto; object-fit:contain; object-position:center bottom; margin:0;}
+    .figwrap .hfig{display:block; width:100%; height:100%; max-width:100%;
+      object-fit:contain; object-position:center; margin:0;}
     /* 카드 상자 대비 위치 · 크기 (화면이 바뀌어도 카드와 함께 움직임) */
     .em2{height:20.0%; left:22.1%; right:auto; top:49.7%;}
     .em3{height:8.0%;  left:70.8%; right:auto; top:21.5%;}
