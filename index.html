@@ -383,11 +383,11 @@
     background-repeat:no-repeat;
     min-height:0; justify-content:flex-start; padding-top:150px; padding-bottom:853px;}
   /* 위 후기 단락 색이 스며들며 사라지는 이음 덧층 */
-  #endcta:before{content:''; position:absolute; left:0; right:0; top:0; height:200px;
-    background:linear-gradient(180deg, #F7F8FA 0%, rgba(236,236,246,0) 100%); pointer-events:none;}
-  #endcta:after{content:''; position:absolute; inset:0; z-index:1; pointer-events:none;
-    background:linear-gradient(90deg, #ECECF6 0%, rgba(236,236,246,0) 11%,
-      rgba(236,236,246,0) 89%, #ECECF6 100%);}
+  #endcta:before{content:''; position:absolute; left:0; right:0; top:0; height:200px; z-index:1;
+    background:linear-gradient(180deg, #F7F8FA 0%, rgba(247,248,250,0) 100%); pointer-events:none;}
+  #endcta:after{content:''; position:absolute; inset:0; z-index:0; pointer-events:none;
+    background:linear-gradient(90deg, #ECECF6 0%, rgba(236,236,246,0) 16%,
+      rgba(236,236,246,0) 84%, #ECECF6 100%);}
   #endcta .wrap{position:relative; z-index:2;}
   /* 모바일 — 글은 위로 · 이미지는 아래 전용 구역으로 분리 */
   @media(max-width:767px){
