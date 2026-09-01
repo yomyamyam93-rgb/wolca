@@ -31,8 +31,8 @@
   /* 버튼은 알약형 — 레퍼런스와 같은 꼴 */
   .hero .btn{margin-top:34px; height:56px; font-size:17px; padding:0 34px; border-radius:8px;}
   @media(min-width:768px){
-    .hero{min-height:calc(100svh - var(--appbar));
-      display:flex; flex-direction:column; justify-content:center;
+    .hero{min-height:0;
+      display:flex; flex-direction:column; justify-content:flex-start;
       background-color:#EFF2FB; background-image:none;
       padding:56px 0 44px;}
     .hero .hero2{margin:0 auto;}
@@ -53,7 +53,7 @@
   /* 모바일 — 이미지 크게 · 가운데 정렬 */
   @media(max-width:767px){
     .hero{background-color:#EFF2FB; background-image:none;
-      min-height:calc(100svh - var(--appbar));
+      min-height:0;
       display:flex; flex-direction:column; justify-content:flex-start;
       padding:38px 0 14px;}
     .hero .hero2{text-align:center;}
@@ -177,22 +177,11 @@
   /* 기능 단락 — 어두운 그라데이션 배경 */
   /* 상단 V자 컷 + 원형 CTA */
   #featsec{display:block; min-height:0;
-    clip-path:polygon(0 0, 50% 5.2vw, 100% 0, 100% 100%, 0 100%);
-    padding-top:calc(5.2vw + 116px);}
-  .fcta{position:relative; z-index:6; display:flex; justify-content:center;
-    margin:0 0 calc(-36px - 5.2vw);}
-  .fcta a{width:72px; height:72px; border-radius:999px; border:none;
-    background:#0D2E9C; background:linear-gradient(150deg,#123CB8 0%,#0B2A86 60%,#06215E 100%); color:#fff;
-    display:flex; align-items:center; justify-content:center;
-    box-shadow:none; transition:transform .18s;}
-  .fcta a:hover{transform:scale(1.05);}
-  .fcta iconify-icon{font-size:28px;}
+    clip-path:polygon(0 0, 50% 76px, 100% 0, 100% 100%, 0 100%);
+    padding-top:192px; margin-top:-1px;}
   @media(max-width:767px){
-    #featsec{clip-path:polygon(0 0, 50% 13vw, 100% 0, 100% 100%, 0 100%);
-      padding-top:calc(13vw + 78px);}
-    .fcta{margin:0 0 calc(-30px - 13vw);}
-    .fcta a{width:60px; height:60px;}
-    .fcta iconify-icon{font-size:24px;}
+    #featsec{clip-path:polygon(0 0, 50% 52px, 100% 0, 100% 100%, 0 100%);
+      padding-top:130px;}
   }
   #featsec{background-color:#0C1E8F;
     background-image:linear-gradient(rgba(3,10,40,.42), rgba(3,10,40,.42)), url('img/hero-bg4.jpg?v=2');
@@ -388,11 +377,11 @@
   .srow p{margin-top:10px; font-size:15.5px; line-height:1.8; color:var(--sub);}
 
   /* ⑧ 마무리 — 밝은 카드 이미지 배경 · 어두운 글 */
-  #endcta{position:relative; background-color:#F0F1F7;
-    background-image:url('img/cta-bg.jpg?v=2');
-    background-size:1500px auto; background-position:center calc(100% + 100px);
+  #endcta{position:relative; background-color:#F9F8FD;
+    background-image:url('img/cta-bg2.jpg?v=1');
+    background-size:1920px auto; background-position:center bottom;
     background-repeat:no-repeat;
-    min-height:0; justify-content:flex-start; padding-top:190px; padding-bottom:321px;}
+    min-height:0; justify-content:flex-start; padding-top:150px; padding-bottom:600px;}
   /* 위 후기 단락 색이 스며들며 사라지는 이음 덧층 */
   #endcta:before{content:''; position:absolute; left:0; right:0; top:0; height:200px;
     background:linear-gradient(180deg, #F7F8FA 0%, rgba(247,248,250,0) 100%); pointer-events:none;}
@@ -489,12 +478,12 @@
   @media(min-width:900px){
     /* 세로 카드 3장 — 같은 폭 3열 */
     .rzgrid{grid-template-columns:repeat(3,1fr); gap:20px;}
-    .rz{display:block; padding:32px 30px 235px; text-align:left;}
-    .rz .in{font-size:22px; font-weight:800; letter-spacing:-.5px; margin-bottom:0;}
-    .rz h3{font-size:22px; margin-top:2px;}
+    .rz{display:block; padding:36px 32px 218px; text-align:left;}
+    .rz .in{font-size:24px; font-weight:800; letter-spacing:-.5px; margin-bottom:0;}
+    .rz h3{font-size:24px; margin-top:3px;}
     .rz .dash{display:none;}
-    .rz ul{margin-top:16px; display:block;}
-    .rz li{margin-bottom:7px; font-size:15px;}
+    .rz ul{margin-top:20px; display:block;}
+    .rz li{margin-bottom:10px; font-size:16.5px; line-height:1.7;}
     .plus{display:none;}
   }
   /* 6번 취소 · 환불 — 어두운 그라데이션 카드 */
@@ -507,8 +496,8 @@
   .rz .fig{display:none;}
   @media(min-width:900px){
     .rz{position:relative; overflow:hidden;}
-    .rz .fig{display:block; position:absolute; right:14px; bottom:16px;
-      max-width:210px; max-height:210px; width:auto; height:auto;}
+    .rz .fig{display:block; position:absolute; right:6px; bottom:8px;
+      max-width:198px; max-height:198px; width:auto; height:auto;}
   }
   /* 이용 방법 카드 — 3D 느낌 */
   .gd{background:linear-gradient(180deg,#FFFFFF,#F8FAFE);
@@ -586,14 +575,14 @@
     #featsec .wrap{overflow:clip;}
     .rzgrid{display:flex; gap:0; touch-action:pan-y; will-change:transform;}
     .rz{flex:0 0 calc(100% - 16px); margin:0 8px; position:relative; overflow:hidden;
-      padding:24px 22px 168px;}
-    .rz .in{font-size:19px; font-weight:800;}
-    .rz h3{font-size:19px; margin-top:2px;}
+      padding:26px 22px 160px;}
+    .rz .in{font-size:20.5px; font-weight:800;}
+    .rz h3{font-size:20.5px; margin-top:2px;}
     .rz .dash{display:none;}
-    .rz ul{margin-top:14px;}
-    .rz li{margin-bottom:6px; font-size:14px; line-height:1.55;}
-    .rz .fig{display:block; position:absolute; right:8px; bottom:10px;
-      max-width:165px; max-height:165px; width:auto; height:auto;}
+    .rz ul{margin-top:17px;}
+    .rz li{margin-bottom:9px; font-size:15.5px; line-height:1.65;}
+    .rz .fig{display:block; position:absolute; right:4px; bottom:6px;
+      max-width:146px; max-height:146px; width:auto; height:auto;}
     .plus{display:none;}
   }
   /* 달력 · 시계 아이콘은 오른쪽으로 조금 더 */
@@ -664,7 +653,7 @@
     width:auto; animation:emoFloat 6.4s ease-in-out infinite;
     filter:drop-shadow(0 10px 18px rgba(15,30,80,.16));}
   /* 직접 배치한 위치 · 크기 (PC) */
-  .em2{height:17.3%; left:39.4%; top:56.5%;}
+  .em2{height:22.3%; left:56.2%; top:38.2%;}
   /* 시작 = 끝 상태라 끊김 없이 이어진다 */
   @keyframes emoFloat{
     0%{transform:translateY(-8px) rotate(-3.5deg);}
@@ -842,10 +831,6 @@
     </div>
 
   </section>
-
-  <div class="fcta">
-    <a href="화면/10_1_유형선택.html" aria-label="송금하러 가기"><iconify-icon icon="mingcute:arrow-down-line" aria-hidden="true"></iconify-icon></a>
-  </div>
 
   <!-- ===== ④ 기능 3가지 — 흰 카드 3장 + 모서리 배지 ===== -->
   <section class="sec tint" id="featsec">
