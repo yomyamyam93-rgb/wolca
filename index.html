@@ -374,10 +374,10 @@
   #endcta .wrap{position:relative; z-index:1;}
   /* 모바일 — 글은 위로 · 이미지는 아래 전용 구역으로 분리 */
   @media(max-width:767px){
-    #endcta{min-height:0; padding-top:72px; padding-bottom:calc(81vw + 26px);
+    #endcta{min-height:0; padding-top:72px; padding-bottom:calc(56vw + 26px);
       background-color:#F9F8FC;
       background-image:url('img/cta-bg-m.jpg?v=4');
-      background-size:135% auto; background-position:center bottom;}
+      background-size:190% auto; background-position:center calc(100% + 36vw);}
     #endcta:before{background:linear-gradient(180deg, #F7F8FA 0%, rgba(249,248,252,0) 100%);}
   }
   #endcta .eyebrow{color:var(--primary-600);}
@@ -607,6 +607,10 @@
   }
   /* 헤더 배경 끝색이 다음 단락까지 이어진다 */
   #whysec{background:linear-gradient(180deg, #F0F1FA 0%, #F7F8FB 62%, #FFFFFF 100%);}
+  /* 히어로 바닥을 다음 단락 색으로 녹여 경계 제거 */
+  .hero:after{content:''; position:absolute; left:0; right:0; bottom:0; height:150px;
+    background:linear-gradient(180deg, rgba(240,241,250,0), #F0F1FA); pointer-events:none; z-index:0;}
+  .sdown{z-index:2;}
   @media(min-width:900px){ #whysec{padding-top:64px;} }
   /* 모바일 — 보안 카드 세로 간격 정리 */
   @media(max-width:767px){
