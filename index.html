@@ -401,14 +401,15 @@
   @media(max-width:767px){
     #endcta{min-height:0; padding-top:96px; padding-bottom:20px;
       background-color:#F9F8FD; background-image:none;}
-    #endcta .cfig{display:block; position:relative; z-index:0; width:270%; max-width:none; margin:-8px -85% 0;}
+    #endcta .cfig{display:block; position:relative; z-index:0; width:270%; max-width:none; margin:0 -85%;}
     #endcta:before{background:linear-gradient(180deg, #F7F8FA 0%, rgba(249,248,253,0) 100%);}
   }
   #endcta .eyebrow{color:var(--primary-600);}
   #endcta .h-sec{color:var(--ink);}
   #endcta .h-sec .hl{color:var(--primary);}
   #endcta .head p{color:var(--sub);}
-  .ctaend{display:flex; justify-content:center; gap:10px; flex-wrap:nowrap;}
+  .ctaend{display:flex; justify-content:center; gap:10px; flex-wrap:nowrap;
+    position:relative; z-index:3;}
   @media(max-width:639px){ .ctaend .btn{flex:1; max-width:220px; padding:0 8px; font-size:14.5px; height:48px;} }
   .btn-ghostw{background:transparent; border:1px solid rgba(255,255,255,.6); color:#fff;}
   #endcta .head + *{margin-top:28px;}
