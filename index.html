@@ -156,7 +156,7 @@
   /* ② 결제 항목 — 아이콘 타일 나열 · 누르면 그 항목으로 결제 화면 이동
      아래엔 카드사 로고 띠를 작은 캡션과 함께 붙여 한 화면에 담는다 */
   #itemsec .head + *{margin-top:40px;}
-  @media(min-width:768px){ #itemsec{padding-top:56px; padding-bottom:96px;} #itemsec .head + *{margin-top:52px;} }
+  @media(min-width:768px){ #itemsec{padding-top:24px; padding-bottom:96px;} #itemsec .head + *{margin-top:52px;} }
   /* PC — 좌측 항목 타일 · 우측 설명 패널 */
   .itarw{display:none;}
   @media(min-width:1000px){
@@ -618,7 +618,7 @@
   .hero:after{content:''; position:absolute; left:0; right:0; bottom:0; height:150px;
     background:linear-gradient(180deg, rgba(239,242,251,0), #EFF2FB); pointer-events:none; z-index:0;}
   .sdown{z-index:2;}
-  @media(min-width:900px){ #whysec{padding-top:40px; padding-bottom:44px;} }
+  @media(min-width:900px){ #whysec{padding-top:40px; padding-bottom:10px;} }
   /* 모바일 — 보안 카드 세로 간격 정리 */
   @media(max-width:767px){
     .srows{gap:12px; margin-top:18px;}
@@ -655,16 +655,19 @@
   .hero .sdown{position:static; transform:none; margin:10px auto 2px; display:flex; bottom:auto;}
   #itemsec{background:#fff;}
   /* 단락을 잇는 점선 ⋮ */
-  .vdots{width:5px; height:76px; margin:calc(-50% - 38px) auto 0;
-    position:relative; top:calc(-1 * var(--vgap, 0px));
+  .vdots{width:5px; height:32px;
     background-image:radial-gradient(circle, #2E63D8 1.7px, transparent 2.1px);
     background-size:5px 11px; background-repeat:repeat-y; background-position:center top;}
   /* 위 단락 끝과 아래 제목 사이 정중앙 */
   #itemsec .head{position:relative;}
   #itemsec .vdots{position:absolute; left:50%; transform:translateX(-50%);
-    top:calc(-1 * (var(--pt, 136px) / 2) - 85px); margin:0;}
-  @media(min-width:768px){ #itemsec{--pt:56px;} .vdots{height:64px;} }
-  @media(max-width:767px){ #itemsec{--pt:88px;} .vdots{height:60px; top:calc(-1 * (var(--pt) / 2) - 89px);} }
+    top:calc(-1 * (var(--pt, 136px) / 2) - 66px); margin:0;}
+  @media(min-width:768px){ #itemsec{--pt:24px;} }
+  @media(max-width:767px){
+    #itemsec{--pt:28px; padding-top:28px;}
+    #whysec{padding-bottom:8px;}
+    .vdots{top:calc(-1 * (var(--pt) / 2) - 73px);}
+  }
   .cfig{display:none;}
 </style>
 </head>
