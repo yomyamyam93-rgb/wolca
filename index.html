@@ -724,9 +724,9 @@
   @media(max-width:767px){
     .figwrap{display:flex; position:relative; flex:1 1 0; min-height:170px; width:100%;
       align-items:center; justify-content:center; margin:12px auto 0; overflow:hidden;}
-    /* 이미지는 원래대로 — 상자를 꽉 채우고 잘림 허용 */
-    .figwrap .hfig{flex:none; height:100%; width:auto; min-width:100%; max-width:none;
-      aspect-ratio:2086/1000; object-fit:cover; object-position:center; margin:0; min-height:0;}
+    /* 좌우 덜 잘리게 — 폭을 우선 맞추고 세로는 상자에 맞춤 */
+    .figwrap .hfig{flex:none; width:112%; max-width:none; height:auto; min-height:100%;
+      aspect-ratio:auto; object-fit:cover; object-position:center; margin:0;}
     /* 카드 상자 대비 위치 · 크기 (화면이 바뀌어도 카드와 함께 움직임) */
     .em1{height:13.2%; left:77.4%; right:auto; top:72.8%;}
     .em2{height:26.1%; left:4.9%;  right:auto; top:53.1%;}
@@ -780,7 +780,7 @@
     </div>
 
     <div class="figwrap">
-      <img class="hfig" src="img/hero-bg10-m.jpg?v=11" alt="" aria-hidden="true">
+      <img class="hfig" src="img/hero-bg10-m.jpg?v=12" alt="" aria-hidden="true">
       <img class="hemo em2" src="img/emo2.png?v=2" alt="" aria-hidden="true">
       <img class="hemo em3" src="img/emo3.png?v=2" alt="" aria-hidden="true">
       <img class="hemo em5" src="img/emo5.png?v=2" alt="" aria-hidden="true">
