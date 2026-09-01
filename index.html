@@ -546,7 +546,13 @@
     #itemsec .itr-card{flex:0 0 auto; order:0; width:114px; max-width:114px;
       aspect-ratio:1/1.492; padding:0; margin:0;}
     #itemsec .itl{order:1; flex:1 1 auto; min-width:0; align-items:flex-start; text-align:left;}
-    #itemsec .itl .btn{width:100%;}
+    #itemsec .itl .btn{width:100%; margin-top:16px; height:46px; font-size:14.5px;}
+    /* 서류 행간 조임 */
+    #itemsec .itl .itr{margin-top:12px;}
+    #itemsec .doc{margin-bottom:4px;}
+    #itemsec .doc p, #itemsec .doc .ck{line-height:19px;}
+    #itemsec .doc p{font-size:14px;}
+    #itemsec .itl h3{font-size:19px;}
     #itemsec .itr-tt{font-size:14px; margin-top:16px;}
     #itemsec .doc{padding:2px 0;}
     #itemsec .doc p{font-size:13px;}
@@ -649,10 +655,16 @@
   .hero .sdown{position:static; transform:none; margin:10px auto 2px; display:flex; bottom:auto;}
   #itemsec{background:#fff;}
   /* 단락을 잇는 점선 ⋮ */
-  .vdots{width:5px; height:76px; margin:-96px auto 32px;
+  .vdots{width:5px; height:76px; margin:calc(-50% - 38px) auto 0;
+    position:relative; top:calc(-1 * var(--vgap, 0px));
     background-image:radial-gradient(circle, #2E63D8 1.7px, transparent 2.1px);
     background-size:5px 11px; background-repeat:repeat-y; background-position:center top;}
-  @media(max-width:767px){ .vdots{height:64px; margin:-78px auto 26px;} }
+  /* 위 단락 끝과 아래 제목 사이 정중앙 */
+  #itemsec .head{position:relative;}
+  #itemsec .vdots{position:absolute; left:50%; transform:translateX(-50%);
+    top:calc(-1 * (var(--pt, 136px) / 2) - 87px); margin:0;}
+  @media(min-width:768px){ #itemsec{--pt:104px;} }
+  @media(max-width:767px){ #itemsec{--pt:88px;} .vdots{height:60px; top:calc(-1 * (var(--pt) / 2) - 70px);} }
   .cfig{display:none;}
 </style>
 </head>
