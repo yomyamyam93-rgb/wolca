@@ -168,7 +168,7 @@
     #itemsec .wrap{display:grid; grid-template-columns:1fr 72px 1fr; gap:0; align-items:stretch;}
     #itemsec .wrap > *{min-width:0;}
     #itemsec .head{grid-column:1/-1;}
-    #itemsec .itgrid{grid-column:1; grid-row:2; grid-template-columns:repeat(3,1fr); gap:14px;
+    #itemsec .itgrid{grid-column:1; grid-row:2; grid-template-columns:repeat(4,1fr); gap:12px;
       align-content:stretch; margin-top:52px;}
     .itarw{display:flex; grid-column:2; grid-row:2; align-self:center; justify-self:center;
       margin-top:52px; color:var(--primary); opacity:.65;}
@@ -520,12 +520,6 @@
   #itemsec .itr-card{background:transparent url('img/card-face-v.png') center/100% 100% no-repeat;
     border:none; border-radius:0; width:100%; max-width:172px; aspect-ratio:1/1.492;
     justify-self:center; align-self:center; margin:0;}
-  /* 텍스트 왼쪽 · 세로 카드 오른쪽 */
-  @media(min-width:1000px){
-    #itemsec .itpanel{grid-template-columns:1fr 172px !important; column-gap:28px !important;
-      align-items:center;}
-    #itemsec .itl{align-self:center;}
-  }
   #itemsec .itl .itr{margin-top:14px; width:100%; gap:0;}
   #itemsec .itr-card{display:block;}
   #itemsec .itpanel{position:relative;}
@@ -647,6 +641,15 @@
     .hero .hbtns .btn{height:52px;}
     .sdown{bottom:10px;}
   }
+  /* 타일 정사각형 · 패널 세로 구성(글 위 · 카드 아래 · 바로가기는 글 밑) */
+  @media(min-width:1000px){
+    #itemsec .it{aspect-ratio:1/1; display:flex; flex-direction:column;
+      align-items:center; justify-content:center; gap:10px; padding:10px;}
+    #itemsec .it b{margin-top:0;}
+    #itemsec .itpanel{grid-template-columns:1fr !important; gap:0 !important; align-content:center;}
+    #itemsec .itr-card{margin:26px auto 0;}
+  }
+  #itemsec .itpanel .parw{position:static; display:inline-flex; margin-top:18px; align-self:flex-start;}
 </style>
 </head>
 <body>
@@ -749,10 +752,10 @@
       <div class="itarw" aria-hidden="true"><svg viewBox="0 0 22 22" aria-hidden="true"><path d="M4 11h13M11 4l7 7-7 7" stroke="currentColor" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
 
       <div class="itpanel">
-        <a class="parw" href="화면/10_1_유형선택.html">바로가기<svg viewBox="0 0 22 22" aria-hidden="true"><path d="M5 17 17 5M8 5h9v9" stroke="currentColor" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         <div class="itl">
           <h3 id="itp-h"></h3>
           <div class="itr" id="itp-docs"></div>
+          <a class="parw" href="화면/10_1_유형선택.html">바로가기<svg viewBox="0 0 22 22" aria-hidden="true"><path d="M5 17 17 5M8 5h9v9" stroke="currentColor" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         </div>
         <div class="itr-card" aria-hidden="true"></div>
       </div>
