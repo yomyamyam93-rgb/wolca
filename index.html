@@ -541,7 +541,12 @@
   #itemsec .itr{background:none; border:none; box-shadow:none; border-radius:0; padding:0; gap:0;}
   @media(max-width:999px){
     /* 신용카드 비율 — 가로는 100% 고정이라 절대 안 잘린다 */
-    #itemsec .itr-card{max-width:132px; aspect-ratio:1/1.492; padding:0; margin:14px auto 0;}
+    /* 모바일도 카드 왼쪽 · 텍스트 오른쪽 */
+    #itemsec .itpanel{display:flex; flex-direction:row; align-items:center; gap:18px;}
+    #itemsec .itr-card{flex:0 0 auto; order:0; width:114px; max-width:114px;
+      aspect-ratio:1/1.492; padding:0; margin:0;}
+    #itemsec .itl{order:1; flex:1 1 auto; min-width:0; align-items:flex-start; text-align:left;}
+    #itemsec .itl .btn{width:100%;}
     #itemsec .itr-tt{font-size:14px; margin-top:16px;}
     #itemsec .doc{padding:2px 0;}
     #itemsec .doc p{font-size:13px;}
