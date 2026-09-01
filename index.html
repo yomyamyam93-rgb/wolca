@@ -670,18 +670,15 @@
   #itemsec .itpanel .parw{position:static; display:inline-flex; margin-top:18px; align-self:flex-start;}
   /* 배경 이미지 = 남는 세로 공간을 채우는 흐름 요소 (화면이 길수록 커진다) */
   /* 헤더 위에 둥실거리는 3D 이모지 */
-  /* 이미지 상자 — 이모지는 이 상자 기준이라 어느 화면에서도 카드와 같은 자리 */
-  .figwrap{position:relative; flex:1 1 0; min-height:150px; width:100%;
-    display:flex; align-items:center; justify-content:center; margin:12px auto 0;}
   .hemo{position:absolute; z-index:2; pointer-events:none; user-select:none;
     width:auto; animation:emoFloat 6.4s ease-in-out infinite;
     filter:drop-shadow(0 10px 18px rgba(15,30,80,.16));}
-  /* 카드 이미지 상자 기준 — 크기도 상자에 비례 */
-  .em1{height:15%;  left:6%;   top:26%;}
-  .em2{height:26%;  left:34%;  top:60%;  animation-delay:1.1s;}
-  .em3{height:16%;  right:7%;  top:24%;  animation-delay:2.2s;}
-  .em4{height:30%;  right:20%; top:52%;  animation-delay:.6s;}
-  .em5{height:17%;  left:14%;  top:62%;  animation-delay:1.7s;}
+  /* 직접 배치한 위치 · 크기 */
+  .em1{height:52px; left:48.9%; top:5.5%;}
+  .em2{height:93px; left:39.9%; top:66.1%; animation-delay:1.1s;}
+  .em3{height:56px; left:65.1%; top:32.7%; animation-delay:2.2s;}
+  .em4{height:121px; left:61.0%; top:34.9%; animation-delay:.6s;}
+  .em5{height:60px; left:33.0%; top:38.8%; animation-delay:1.7s;}
   /* 시작 = 끝 상태라 끊김 없이 이어진다 */
   @keyframes emoFloat{
     0%{transform:translateY(-8px) rotate(-3.5deg);}
@@ -690,7 +687,8 @@
   }
   @media(max-width:767px){
   }
-  .hero .hfig{display:block; height:100%; width:auto; max-width:100%; object-fit:contain;}
+  .hero .hfig{display:block; flex:1 1 0; min-height:170px; aspect-ratio:2086/1000;
+    width:auto; max-width:100%; object-fit:cover; object-position:center; margin:12px auto 0;}
   .hero .sdown{position:static; transform:none; margin:10px auto 2px; display:flex; bottom:auto;}
   #itemsec{background:#fff;}
   /* 단락을 잇는 점선 ⋮ */
@@ -758,14 +756,12 @@
       </div>
     </div>
 
-    <div class="figwrap">
-      <img class="hfig" src="img/hero-bg10-m.jpg?v=9" alt="" aria-hidden="true">
-      <img class="hemo em1" src="img/emo1.png?v=2" alt="" aria-hidden="true">
-      <img class="hemo em2" src="img/emo2.png?v=2" alt="" aria-hidden="true">
-      <img class="hemo em3" src="img/emo3.png?v=2" alt="" aria-hidden="true">
-      <img class="hemo em4" src="img/emo4.png?v=2" alt="" aria-hidden="true">
-      <img class="hemo em5" src="img/emo5.png?v=2" alt="" aria-hidden="true">
-    </div>
+    <img class="hfig" src="img/hero-bg10-m.jpg?v=9" alt="" aria-hidden="true">
+    <img class="hemo em1" src="img/emo1.png?v=2" alt="" aria-hidden="true">
+    <img class="hemo em2" src="img/emo2.png?v=2" alt="" aria-hidden="true">
+    <img class="hemo em3" src="img/emo3.png?v=2" alt="" aria-hidden="true">
+    <img class="hemo em4" src="img/emo4.png?v=2" alt="" aria-hidden="true">
+    <img class="hemo em5" src="img/emo5.png?v=2" alt="" aria-hidden="true">
     <div class="sdown" aria-hidden="true"><span class="mouse"><iconify-icon icon="mingcute:arrow-down-line"></iconify-icon></span><b>SCROLL DOWN</b></div>
   </section>
 
