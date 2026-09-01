@@ -112,6 +112,24 @@
   <div class="body">
     <div class="q">어떻게 결제할까요?</div>
 
+    <div class="fld"><label>누가 결제하나요?</label>
+      <div class="seg2">
+        <button type="button" id="자기" class="on">내가 결제</button>
+        <button type="button" id="요청">다른 사람에게 요청</button>
+      </div>
+    </div>
+
+    <div id="요청칸" style="display:none">
+      <div class="fld"><label>요청받을 분 이름</label>
+        <input class="in" id="요청이름" placeholder="예: 김부모">
+      </div>
+      <div class="fld"><label>요청받을 분 휴대폰 번호</label>
+        <input class="in" id="요청번호" inputmode="numeric" placeholder="- 없이 숫자만">
+      </div>
+      <p class="hint" style="margin-top:-4px">문자로 결제 링크를 보내드려요. 상대가 카드로 결제하면<br>계약서에 적힌 계좌로 송금됩니다.</p>
+    </div>
+
+    <div id="자기칸">
     <div class="fld"><label>결제 수단</label>
       <div class="seg2">
         <button type="button" id="수단신용" class="on">신용카드</button>
@@ -167,6 +185,8 @@
         <option>5개월 (무이자)</option><option>6개월 (무이자)</option><option>7개월 (무이자)</option>
         <option>10개월</option><option>12개월</option><option>18개월</option><option>24개월</option>
       </select>
+    </div>
+
     </div>
 
     <div class="fld"><label>송금 시점</label>
@@ -354,12 +374,43 @@
   $('d이전').addEventListener('click', function () { 보임.setMonth(보임.getMonth() - 1); 달그리기(); });
   $('d다음').addEventListener('click', function () { 보임.setMonth(보임.getMonth() + 1); 달그리기(); });
 
+  var 요청모드 = false;
+  function 결제자(요청임) {
+    요청모드 = 요청임;
+    $('요청').classList.toggle('on', 요청임);
+    $('자기').classList.toggle('on', !요청임);
+    $('요청칸').style.display = 요청임 ? 'block' : 'none';
+    $('자기칸').style.display = 요청임 ? 'none' : 'block';
+  }
+  $('자기').addEventListener('click', function () { 결제자(false); });
+  $('요청').addEventListener('click', function () { 결제자(true); });
+
   $('다음').addEventListener('click', function () {
     var 예약임 = $('예약').classList.contains('on');
     if (예약임 && !$('예약일').value) {
       $('오류').style.display = 'block'; $('오류').textContent = '예약 송금 날짜를 골라주세요.'; return;
     }
+    if (요청모드) {
+      var 이름 = $('요청이름').value.trim(), 번호 = $('요청번호').value.replace(/[^0-9]/g, '');
+      if (!이름 || 번호.length < 10) {
+        $('오류').style.display = 'block';
+        $('오류').textContent = '요청받을 분 이름과 휴대폰 번호를 입력해주세요.'; return;
+      }
+      저장.결제자 = '요청';
+      저장.요청이름 = 이름;
+      저장.요청번호 = 번호;
+      저장.수단 = '결제 요청';
+      저장.카드 = 이름 + '님에게 요청';
+      저장.할부 = '요청받는 분이 선택';
+      저장.시점 = 예약임 ? '예약' : '즉시';
+      저장.예약일 = 예약임 ? $('예약일').value : '';
+      저장.반복 = (예약임 && 매달임) ? '매달' : '한번';
+      sessionStorage.setItem('lp_reg', JSON.stringify(저장));
+      location.href = '등록4_서류.html';
+      return;
+    }
     var 앱임 = $('수단앱').classList.contains('on');
+    저장.결제자 = '본인';
     저장.수단 = 앱임 ? '앱카드' : '신용카드';
     저장.카드 = 앱임 ? document.querySelector('.appc.on').dataset.v
                      : document.querySelector('.cardrow.on').dataset.v;
