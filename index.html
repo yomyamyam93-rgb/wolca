@@ -37,10 +37,10 @@
       background-color:#EFF2FB;
       background-image:url('img/hero-bg10-m.jpg?v=9');
       /* 이미지 높이 = 확보 공간 — 글을 덮을 수 없다 */
-      background-size:auto min(46vw, 40svh); background-position:center calc(100% - 52px);
-      padding:2svh 0 calc(min(46vw, 40svh) + 52px);}
+      background-size:auto min(46vw, 40svh); background-position:center calc(100% - 86px);
+      padding:2svh 0 calc(min(46vw, 40svh) + 86px);}
     /* 위 여백은 살짝 · 남는 공간은 이미지 쪽으로 */
-    .hero .hero2{margin:5svh auto 40px;}
+    .hero .hero2{margin:9svh auto 40px;}
     .hero .lead{font-size:20px;}
   }
   /* 스크롤 유도 — 마우스 모양 + 문구 */
@@ -646,8 +646,11 @@
     #itemsec .it{aspect-ratio:1/1; display:flex; flex-direction:column;
       align-items:center; justify-content:center; gap:10px; padding:10px;}
     #itemsec .it b{margin-top:0;}
-    #itemsec .itpanel{grid-template-columns:1fr !important; gap:0 !important; align-content:center;}
-    #itemsec .itr-card{margin:26px auto 0;}
+    /* 패널 — 세로 스택(겹침 방지: 카드가 일반 흐름에 위치) */
+    #itemsec .itpanel{display:flex !important; flex-direction:column;
+      justify-content:center; gap:0 !important;}
+    #itemsec .itl{flex:0 0 auto;}
+    #itemsec .itr-card{position:static; flex:0 0 auto; margin:26px auto 0;}
   }
   #itemsec .itpanel .parw{position:static; display:inline-flex; margin-top:18px; align-self:flex-start;}
 </style>
