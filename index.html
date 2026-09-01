@@ -1366,11 +1366,10 @@
   if (!들.length) return;
   /* 실제 적용된 배치로 판단 — 상자가 살아 있으면 모바일 규칙 */
   var 상자 = document.querySelector('.figwrap');
-  var 좁은화면 = window.innerWidth <= 767 || window.matchMedia('(max-width:767px)').matches;
-  var 상자살아있음 = !!(상자 && getComputedStyle(상자).display !== 'contents');
-  var 모바일 = 좁은화면 || 상자살아있음;
-  var 기준 = 모바일 ? 상자 : document.querySelector('.hero');
-  if (!기준) 기준 = document.querySelector('.hero');
+  var 모바일 = window.innerWidth <= 767 || window.matchMedia('(max-width:767px)').matches;
+  var 기준 = 상자 || document.querySelector('.hero');
+  /* 둥실거림을 멈춰야 잡은 자리에 정확히 붙는다 */
+  들.forEach(function (el) { el.style.animation = 'none'; });
   var 고른 = null;
 
   var 안내 = document.createElement('div');
@@ -1401,7 +1400,7 @@
     var h = el.getBoundingClientRect().height + 값;
     if (h < 16) h = 16;
     if (h > 300) h = 300;
-    el.style.height = 모바일 ? (h / 판.height * 100).toFixed(1) + '%' : Math.round(h) + 'px';
+    el.style.height = (h / 판.height * 100).toFixed(1) + '%';
   }
 
   들.forEach(function (el) {
@@ -1441,7 +1440,7 @@
     var 줄 = [모바일 ? '[모바일]' : '[PC]'];
     들.forEach(function (el, i) {
       var r = el.getBoundingClientRect();
-      var 높이 = 모바일 ? ((r.height / 판.height * 100).toFixed(1) + '%') : (Math.round(r.height) + 'px');
+      var 높이 = (r.height / 판.height * 100).toFixed(1) + '%';
       var 이름 = (el.className.match(/em\d/) || ['em' + (i + 1)])[0];
       줄.push('.' + 이름 + '{height:' + 높이 + '; left:' +
         ((r.left - 판.left) / 판.width * 100).toFixed(1) + '%; top:' +
