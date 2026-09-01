@@ -14,7 +14,7 @@
 
   /* ===== 모든 단락 상하 크기 통일 — 한 단락 = 한 화면 =====
      내용이 적으면 세로 가운데로, 많으면 자연스럽게 늘어난다 */
-  .sec{min-height:calc(100vh - var(--appbar)); min-height:calc(100svh - var(--appbar));
+  .sec{min-height:0;
     display:flex; flex-direction:column; justify-content:center;}
   /* flex 자식은 내용 폭만큼 늘어나려 한다 — 가로 스크롤 줄(후기)이 밀어내지 않게 */
   .sec > .wrap{width:100%; min-width:0;}
@@ -379,9 +379,9 @@
   /* ⑧ 마무리 — 밝은 카드 이미지 배경 · 어두운 글 */
   #endcta{position:relative; background-color:#F9F8FD;
     background-image:url('img/cta-bg2.jpg?v=1');
-    background-size:1920px auto; background-position:center bottom;
+    background-size:2400px auto; background-position:center bottom;
     background-repeat:no-repeat;
-    min-height:0; justify-content:flex-start; padding-top:150px; padding-bottom:600px;}
+    min-height:0; justify-content:flex-start; padding-top:150px; padding-bottom:1006px;}
   /* 위 후기 단락 색이 스며들며 사라지는 이음 덧층 */
   #endcta:before{content:''; position:absolute; left:0; right:0; top:0; height:200px;
     background:linear-gradient(180deg, #F7F8FA 0%, rgba(247,248,250,0) 100%); pointer-events:none;}
