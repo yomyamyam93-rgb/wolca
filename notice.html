@@ -12,6 +12,7 @@
 <style>
   /* 게시판 목록 */
   .nboard{max-width:980px; margin:62px auto 0; border-top:2px solid var(--ink);}
+  @media(max-width:639px){ .nboard,.npost{margin-top:30px;} }
   .nhead{display:flex; gap:14px; padding:13px 6px; font-size:13.5px; font-weight:700;
     color:var(--placeholder); border-bottom:1px solid var(--line);}
   .nrow{display:flex; gap:14px; align-items:center; padding:17px 6px;
@@ -130,7 +131,7 @@
               <li>카드마다 <b>할부 개월을 따로</b> 정할 수 있어요</li>
             </ul>
 
-            수수료는 똑같이 3.8%이고 카드사 무이자 행사도 그대로 적용됩니다.</div>
+            수수료는 똑같이 4%이고 카드사 무이자 행사도 그대로 적용됩니다.</div>
           <div class="nback"><a class="btn btn-line" href="#">목록으로</a></div>
         </article>
         <article class="npost" id="n8">
@@ -302,7 +303,7 @@
 </aside>
 
 <!-- 늘 따라다니는 시작 버튼 -->
-<a class="fab" href="app.html"><img class="btn-logo" src="img/logo3-white.png" alt="">바로 송금하기</a>
+<a class="fab" href="app.html" target="_blank" rel="noopener"><img class="btn-logo" src="img/logo3-white.png" alt="">바로 송금하기</a>
 
 <script>
 /* 목록 ↔ 본문 전환 — 주소의 #n번호로 오가며 뒤로 가기도 자연스럽게 */

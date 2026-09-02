@@ -63,7 +63,9 @@
       <select class="in" id="은행">
         <option value="">은행 선택</option>
         <option>신한</option><option>KB국민</option><option>우리</option><option>하나</option>
-        <option>NH농협</option><option>IBK기업</option><option>카카오뱅크</option><option>토스뱅크</option><option>새마을금고</option>
+        <option>NH농협</option><option>IBK기업</option><option>카카오뱅크</option><option>토스뱅크</option>
+        <option>케이뱅크</option><option>새마을금고</option><option>우체국</option><option>SC제일</option>
+        <option>부산</option><option>iM뱅크</option><option>수협</option><option>신협</option>
       </select>
     </div>
 
@@ -89,7 +91,7 @@
     </div>
 
     <div class="est" id="예상" style="display:none">
-      <div class="er"><span>예상 수수료 (3.8%)</span><b id="수수료">0원</b></div>
+      <div class="er"><span>예상 수수료 (4%)</span><b id="수수료">0원</b></div>
       <div class="er"><span>예상 결제 총액</span><b id="총액">0원</b></div>
       <div class="es">실제 수수료는 부가세 포함 기준으로 결제 시점에 확정됩니다.</div>
     </div>
@@ -117,7 +119,7 @@
     $('금액').value = n ? n.toLocaleString('ko-KR') : '';
     $('예상').style.display = n ? 'block' : 'none';
     if (n) {
-      var 비 = Math.round(n * 0.038);
+      var 비 = Math.round(n * 0.04);
       $('수수료').textContent = 비.toLocaleString('ko-KR') + '원';
       $('총액').textContent = (n + 비).toLocaleString('ko-KR') + '원';
     }
@@ -151,5 +153,6 @@
   });
 })();
 </script>
+<script src="선택시트.js?v=1"></script>
 </body>
 </html>

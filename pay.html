@@ -103,7 +103,7 @@
           <div class="more-b">
             <div class="brow"><span>카드 포인트 적립 (0.5%)</span><b id="포인트">3,500원</b></div>
             <div class="brow"><span>월세 세액공제 (연 17%)</span><b id="공제">119,000원</b></div>
-            <div class="brow"><span>결제 수수료</span><b id="수수료" style="color:var(--danger)">-26,600원</b></div>
+            <div class="brow"><span>결제 수수료</span><b id="수수료" style="color:var(--danger)">-28,000원</b></div>
             <p class="note">실제 금액은 카드사·소득 구간에 따라 달라질 수 있어요.</p>
           </div>
         </details>
@@ -170,7 +170,7 @@ function 계산() {
   var 월세인가 = 항목 && 항목.dataset.n === '월세';
   var 포인트 = Math.round(n * 0.005);
   var 공제   = 월세인가 ? Math.round(n * 12 * 0.17 / 12) * 1 : 0;   /* 한 달분 기준 환산 */
-  var 수수료 = Math.round(n * 0.038);
+  var 수수료 = Math.round(n * 0.04);
   document.getElementById('포인트').textContent = 포인트.toLocaleString('ko-KR') + '원';
   document.getElementById('공제').textContent   = 월세인가 ? 공제.toLocaleString('ko-KR') + '원' : '해당 없음';
   document.getElementById('수수료').textContent = '-' + 수수료.toLocaleString('ko-KR') + '원';

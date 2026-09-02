@@ -104,8 +104,8 @@ body{display:block !important; padding:0 !important; background:#EDF0F4 !importa
       <div class="rrow"><span class="l">송금 시점</span><span class="v" id="r시점">즉시 송금</span></div>
       <div class="rdiv"></div>
       <div class="rrow"><span class="l">신청 금액</span><span class="v" id="r금액">700,000원</span></div>
-      <div class="rrow"><span class="l">수수료 (3.8%)</span><span class="v" id="r수수료">26,600원</span></div>
-      <div class="rrow big"><span class="l">결제 예정 금액</span><span class="v" id="r총액">726,600원</span></div>
+      <div class="rrow"><span class="l">수수료 (4%)</span><span class="v" id="r수수료">28,000원</span></div>
+      <div class="rrow big"><span class="l">결제 예정 금액</span><span class="v" id="r총액">728,000원</span></div>
     </div>
 
     <div class="pend">
@@ -131,7 +131,7 @@ body{display:block !important; padding:0 !important; background:#EDF0F4 !importa
   넣기('r시점', 저장.시점 === '예약' ? ((저장.반복 === '매달' ? '매달 예약 · 첫 송금 ' : '예약 송금 · ') + (저장.예약일 || '')) : (저장.시점 ? '즉시 송금' : ''));
   var 금액 = Number(저장.금액) || 0;
   if (금액) {
-    var 비 = Math.round(금액 * 0.038);
+    var 비 = Math.round(금액 * 0.04);
     넣기('r금액', 금액.toLocaleString('ko-KR') + '원');
     넣기('r수수료', 비.toLocaleString('ko-KR') + '원');
     넣기('r총액', (금액 + 비).toLocaleString('ko-KR') + '원');

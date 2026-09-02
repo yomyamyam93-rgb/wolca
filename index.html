@@ -690,10 +690,13 @@
   .whygrid .uc:not(.blue) .uarw{color:var(--ink);}
   /* 신뢰 단락 — 민트 포인트 */
   /* 보안 패널 — 민트 딥 그라데이션 */
-  #trustsec .sboard{background:linear-gradient(140deg,#12A899 0%,#0A7F78 55%,#065F5C 100%);}
-  #trustsec .eyebrow{color:#0FA895;}
-  #trustsec .h-sec .hl{color:#12C6AD;}
-  #trustsec .srow h4 em{color:#0FA895;}
+  #trustsec .sboard{background:#0C5CE8; background:linear-gradient(140deg,#2A7BFF 0%,#0C5CE8 52%,#0A45C4 100%);}
+  #trustsec .eyebrow{color:var(--primary-600);}
+  #trustsec .h-sec .hl{color:var(--primary);}
+  #trustsec .srow h4 em{color:var(--primary-600);}
+  /* 두 항목만 강조색 — 안심 결제(민트) · 전액 취소(분홍) */
+  #trustsec .srow:nth-child(1) h4 em{color:#0FA895;}
+  #trustsec .srow:nth-child(4) h4 em{color:#FF2E9A;}
   /* ===== 모바일 — 카드 이미지 상자 기준 (PC 값보다 뒤에 둬서 확실히 적용) ===== */
   @media(max-width:767px){
     /* 글 · 버튼만 30px 아래로 (이미지는 제자리) */
@@ -713,10 +716,22 @@
   .gdgrid .gd:first-child .no{background:#FF2E9A; box-shadow:0 4px 12px rgba(255,46,154,.28);}
   .gdgrid .gd:first-child .nx{color:#FF2E9A;}
   /* 따라다니는 버튼 — 두 번째 단락부터 나타남 */
-  .fab{opacity:0; visibility:hidden; transform:translateX(-50%) translateY(14px);
+  .fab{opacity:0; visibility:hidden; pointer-events:none; transform:translateX(-50%) translateY(14px);
     transition:opacity .3s, transform .3s, visibility .3s;}
-  .fab.show{opacity:1; visibility:visible; transform:translateX(-50%) translateY(0);}
+  .fab.show{opacity:1; visibility:visible; pointer-events:auto; transform:translateX(-50%) translateY(0);}
   .hero .hero2{position:relative; z-index:4;}
+
+  /* 항목 상세 패널 — 모바일 압축 (우측 열이 좁아서 데스크톱 크기가 뚱뚱해 보임) */
+  @media(max-width:767px){
+    #itemsec .itpanel{gap:14px; padding:18px 16px;}
+    #itemsec .itl h3{font-size:17px; letter-spacing:-.4px; line-height:1.35;}
+    #itemsec .itl p{margin-top:8px; font-size:12.5px; line-height:1.6;}
+    #itemsec .itl .btn{margin-top:14px; width:100%; max-width:100%; height:44px; font-size:13.5px;}
+    #itemsec .itr{gap:8px;}
+    #itemsec .doc{padding:10px 12px; gap:8px;}
+    #itemsec .doc .ck{font-size:13px;}
+    #itemsec .doc p{font-size:12.5px; white-space:normal;}
+  }
 </style>
 </head>
 <body>
@@ -749,14 +764,14 @@
           <li><i>✓</i>상대방 계좌로 안심 송금 서비스</li>
         </ul>
         <div class="hbtns">
-          <a class="btn btn-primary" href="app.html"><img class="btn-logo" src="img/logo3-white.png" alt="">바로 송금하기</a>
+          <a class="btn btn-primary" href="app.html" target="_blank" rel="noopener"><img class="btn-logo" src="img/logo3-white.png" alt="">바로 송금하기</a>
           <a class="btn btn-line" href="guide.html">어떻게 이용하나요?</a>
         </div>
       </div>
     </div>
 
     <div class="figwrap">
-      <img class="hfig" src="img/hero-bg10-m.jpg?v=12" alt="" aria-hidden="true">
+      <img class="hfig" src="img/hero-bg10_5.jpg?v=13" alt="" aria-hidden="true">
       <img class="hemo em2" src="img/emo2.png?v=2" alt="" aria-hidden="true">
     </div>
     <div class="sdown" aria-hidden="true"><span class="mouse"><iconify-icon icon="mingcute:arrow-down-line"></iconify-icon></span><b>SCROLL DOWN</b></div>
@@ -966,7 +981,7 @@
           <h3>전자금융거래법 준수<br>정식 등록 결제대행사</h3>
           <p class="d">결제 대금은 이용자가 지정한 계좌로만 송금됩니다.<br>대출이나 현금서비스가 아닌 정식 결제 서비스예요.</p>
         </div>
-        <img class="simg" src="img/status3d.png?v=2"
+        <img class="simg" src="img/status3d-blue.png?v=1"
           alt="결제 현황 — 누적 이용자 42,000명+ · 총 송금 건수 16,800건+ · 평균 입금 시간 5분 · 정식 PG">
       </div>
 
@@ -1054,7 +1069,7 @@
         </ul>
       </div>
       <div class="ctaend">
-        <a class="btn btn-primary" href="app.html"><img class="btn-logo" src="img/logo3-white.png" alt="">바로 송금하기</a>
+        <a class="btn btn-primary" href="app.html" target="_blank" rel="noopener"><img class="btn-logo" src="img/logo3-white.png" alt="">바로 송금하기</a>
         <a class="btn btn-ghostw" href="guide.html">어떻게 이용하나요?</a>
       </div>
       <img class="cfig" src="img/cta-bg-m.jpg?v=5" alt="" aria-hidden="true">
@@ -1108,7 +1123,7 @@
 </aside>
 
 <!-- 늘 따라다니는 시작 버튼 -->
-<a class="fab" href="app.html"><img class="btn-logo" src="img/logo3-white.png" alt="">바로 송금하기</a>
+<a class="fab" href="app.html" target="_blank" rel="noopener"><img class="btn-logo" src="img/logo3-white.png" alt="">바로 송금하기</a>
 <script>
 /* 후기 두 줄 — 한 칸씩 밀린다. 아랫줄(data-dir=-1)은 반대 방향 */
 (function () {
