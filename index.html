@@ -1194,7 +1194,9 @@
       margin-left:calc(50% - 50vw + 28px); margin-right:calc(50% - 50vw + 28px); max-width:none;
       background-attachment:fixed;}
   }
-  .bandart .h-band{color:#FFFFFF; text-shadow:0 2px 20px rgba(4,12,30,.55);}
+  /* 상자 폭을 넘기지 않게 — 넘치면 줄바꿈 */
+  .bandart .h-band{max-width:100%; color:#FFFFFF; text-shadow:0 2px 20px rgba(4,12,30,.55);}
+  @media(max-width:767px){ .bandart .h-band{font-size:min(6.6vw, 30px);} }
   .bandart .h-band .soft{color:#FFFFFF;}
   .bandart .h-band .hl{color:#B9D6FF;}
 
@@ -1404,7 +1406,7 @@
       </div>
 
       <div class="hwrap">
-        <img class="hpic" src="img/band-bg.jpg?v=1" alt="랜선페이 앱으로 결제하는 모습">
+        <img class="hpic" src="img/band-bg.jpg?v=2" alt="랜선페이 앱으로 결제하는 모습">
         <div class="hcol">
           <div class="hphone"><img id="hshot" src="img/guide_shots/login.png?v=2" alt="단계별 앱 화면"></div>
           <div class="hnav">
