@@ -1091,13 +1091,19 @@
   /* 상자 대신 — 가운데는 옅은 하늘색, 좌우로 갈수록 흰색으로 사라진다 */
   .hwrap{position:relative; display:grid; gap:32px; justify-items:center;
     padding:30px 22px; max-width:560px; margin-left:auto; margin-right:auto;}
-  .hwrap:before{content:''; position:absolute; z-index:0; top:0; bottom:0;
-    left:50%; width:100vw; transform:translateX(-50%);
+  /* 하늘색 바탕은 제목까지 덮는다 — 단락 밖으로 넘겨 칠한다 */
+  #howto{position:relative;}
+  #howto:before{content:''; position:absolute; z-index:0; top:-60px; bottom:-70px;
+    left:50%; width:100vw; transform:translateX(-50%); pointer-events:none;
     background:linear-gradient(90deg,
       rgba(255,255,255,0) 0%,
       color-mix(in srgb, var(--primary) 7%, #fff) 24%,
       color-mix(in srgb, var(--primary) 7%, #fff) 76%,
       rgba(255,255,255,0) 100%);}
+  #howto > *{position:relative; z-index:1;}
+  /* 제목과 사진 사이를 좁힌다 */
+  #howto .head + *{margin-top:22px;}
+  @media(min-width:900px){ #howto .head + *{margin-top:30px;} }
   .hwrap > *{position:relative; z-index:1;}
   @media(min-width:900px){
     .hwrap{grid-template-columns:1fr 246px; gap:56px;
@@ -1131,18 +1137,19 @@
   .tbd p{margin-top:7px; font-size:15px; line-height:1.75; color:var(--sub);}
   @media(min-width:900px){ .tbd p{font-size:15.5px;} }
 
-  /* 모바일 — 목업 대신 사진 한 장 */
-  .hpic{display:none;}
-  @media(max-width:899px){
-    .hpic{display:block; order:-1; width:100%; height:auto; border-radius:16px;
-      margin-bottom:6px;}
+  /* 제목과 단계 사이 — 사람 · 휴대폰 사진 한 줄 */
+  .hpic{display:block; width:100%; height:180px; object-fit:cover;
+    object-position:center 42%; border-radius:16px; order:-1;}
+  @media(min-width:900px){
+    .hpic{grid-column:1/-1; height:250px; border-radius:22px;
+      object-position:center 44%; margin-bottom:10px;}
   }
 
   /* 모바일 — 휴대폰 목업도 배경 그라데이션도 없이 타임라인만 */
   @media(max-width:899px){
     .hcol{display:none !important;}
     .hwrap{padding:0; background:none;}
-    .hwrap:before{display:none !important;}
+    #howto:before{display:none !important;}
   }
 
   /* 단계 넘기기 — 좌우 화살표 · 단계 클릭 */
