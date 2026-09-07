@@ -921,17 +921,43 @@
 
   /* ===== 띠 대제목 — 아래 세 단락(혜택 · 이용방법 · 결제방식)을 하나로 묶는다 ===== */
   .bandhead{text-align:center; padding-top:16px; padding-bottom:44px;}
-  @media(min-width:768px){ .bandhead{padding-top:32px; padding-bottom:80px;} }
+  @media(min-width:768px){ .bandhead{padding-top:32px; padding-bottom:104px;} }
   /* 크기 단계 — 히어로 h1 > 띠 대제목 > 단락 세부제목 > 카드 제목 */
   .h-band{font-size:min(7.4vw, 46px); font-weight:800; line-height:1.3; letter-spacing:-.8px;
     color:var(--ink); white-space:normal; word-break:keep-all;}
-  .h-band .soft{display:block; margin-bottom:6px; font-weight:400; color:var(--sub);
-    font-size:.78em; letter-spacing:-.3px;}
+  .h-band .soft{display:block; margin-bottom:2px; font-weight:800; color:var(--ink);
+    font-size:1em; letter-spacing:-.8px;}
   .h-band .hl{color:var(--primary);}
   .h-band br{display:none;}
   /* 세 단락 제목은 한 단계 아래로 (대제목 > 세부제목) */
-  .midband .h-sec{font-size:min(5.2vw, 32px); letter-spacing:-.5px;}
-  .midband .head .h-sec .soft{margin-bottom:4px;}
+  .midband .h-sec{font-size:min(4.4vw, 21px); font-weight:800; letter-spacing:-.3px;
+    line-height:1.5; color:var(--ink);}
+  .midband .h-sec .hl{color:var(--ink);}
+  /* 세부제목과 내용 사이 — 대제목보다 훨씬 좁게 */
+  .midband .head + *{margin-top:30px;}
+  @media(min-width:768px){ .midband .head + *{margin-top:40px;} }
+
+  /* ===== 신뢰 단락 — 짙은 남색 한 판 (삼쩜삼 톤) =====
+     ① 균일한 남색 바탕 ② 본문은 흐린 회청색 ③ 핵심 구절만 연한 파랑
+     ④ 그림 · 카드는 한 톤 밝은 남색 상자 안에 */
+  #trustsec{background:#0B1C3C; color:#fff;}
+  #trustsec .eyebrow{color:#7FB0FF;}
+  #trustsec .h-sec{color:#fff;}
+  #trustsec .h-sec .soft{color:rgba(226,236,255,.55);}
+  #trustsec .h-sec .hl{color:#6FA8FF;}
+  /* 그림 판 · 카드 4장 — 바탕보다 한 톤 밝은 남색 */
+  #trustsec .sboard,
+  #trustsec .srow{background:#12294F; border:1px solid rgba(255,255,255,.07); box-shadow:none;}
+  #trustsec .sboard h3, #trustsec .srow h4{color:#fff;}
+  /* 본문은 흰색이 아니라 흐린 회청색 */
+  #trustsec .sboard .d,
+  #trustsec .srow p{color:rgba(214,227,250,.58); line-height:1.85;}
+  /* 핵심 구절만 밝게 — 문장 전체를 칠하지 않는다 */
+  #trustsec p b{color:#9CC4FF; font-weight:700;}
+  /* 소제목 강조는 한 가지 파랑으로 통일 */
+  #trustsec .srow h4 em,
+  #trustsec .srow:nth-child(3) h4 em,
+  #trustsec .srow:nth-child(4) h4 em{color:#6FA8FF;}
 
   /* 가운데 띠 — 아래쪽도 꺾인 형태로 끝난다 */
   .midband{clip-path:polygon(0 0, 50% 76px, 100% 0, 100% calc(100% - 76px), 50% 100%, 0 calc(100% - 76px));
@@ -1033,7 +1059,7 @@
   <section class="sec tight" id="whysec">
     <div class="wrap">
       <div class="head">
-        <h2 class="h-sec"><span class="soft"><span class="hl">랜선페이</span>로 결제하면</span><br>더 유리한 이유 4가지</h2>
+        <h2 class="h-sec">랜선페이로 결제하면 더 유리한 이유 4가지</h2>
       </div>
       <div class="whygrid">
         <div class="uc">
@@ -1075,7 +1101,7 @@
   <section class="sec tint" id="howto">
     <div class="wrap">
       <div class="head">
-        <h2 class="h-sec"><span class="soft">한 번의 등록으로 끝</span><br><span class="hl">쉽고 빠른</span> 결제 시스템</h2>
+        <h2 class="h-sec">한 번의 등록으로 끝나는 쉽고 빠른 결제 시스템</h2>
         <a class="morelink" href="guide.html">자세한 이용가이드 보기<svg viewBox="0 0 22 22" aria-hidden="true"><path d="M8.5 4.5 15 11l-6.5 6.5" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       </div>
 
@@ -1136,7 +1162,7 @@
   <section class="sec tint" id="featsec">
     <div class="wrap">
       <div class="head">
-        <h2 class="h-sec"><span class="soft">분할 · 예약 · 24시간 송금까지</span><br>어떤 결제든 <span class="hl">원하는 방식</span>으로</h2>
+        <h2 class="h-sec">분할 · 예약 · 24시간 송금까지 원하는 방식으로</h2>
         <a class="morelink" href="app.html" target="_blank" rel="noopener">결제 바로가기<svg viewBox="0 0 22 22" aria-hidden="true"><path d="M8.5 4.5 15 11l-6.5 6.5" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       </div>
 
@@ -1196,7 +1222,7 @@
       <div class="sboard">
         <div>
           <h3>전자금융거래법 준수<br>정식 등록 결제대행사</h3>
-          <p class="d">결제 대금은 이용자가 지정한 계좌로만 송금됩니다.<br>대출이나 현금서비스가 아닌 정식 결제 서비스예요.</p>
+          <p class="d">결제 대금은 <b>이용자가 지정한 계좌로만</b> 송금됩니다.<br>대출이나 현금서비스가 아닌 <b>정식 결제 서비스</b>예요.</p>
         </div>
         <img class="simg" src="img/status3d-blue.png?v=1"
           alt="결제 현황 — 누적 이용자 42,000명+ · 총 송금 건수 16,800건+ · 평균 입금 시간 5분 · 정식 PG">
@@ -1205,19 +1231,19 @@
       <div class="srows">
         <div class="srow">
           <h4>카드번호 미저장<br><em>안심 결제</em></h4>
-          <p>전체 카드번호는 서버에 남기지 않습니다<br>마스킹된 번호만 안전하게 보관해요</p>
+          <p>전체 카드번호는 <b>서버에 남기지 않습니다</b><br>마스킹된 번호만 안전하게 보관해요</p>
         </div>
         <div class="srow">
           <h4>국제 표준<br><em>AES-256 암호화</em></h4>
-          <p>SSL 보안 통신으로 위 · 변조를 막고<br>저장할 때도 암호화된 상태로 보관합니다</p>
+          <p><b>SSL 보안 통신</b>으로 위 · 변조를 막고<br>저장할 때도 암호화된 상태로 보관합니다</p>
         </div>
         <div class="srow">
           <h4>24시간<br><em>이상 거래 감시</em></h4>
-          <p>평소와 다른 결제 패턴은 자동으로 차단하고<br>필요하면 추가 인증을 요청합니다</p>
+          <p>평소와 다른 결제 패턴은 <b>자동으로 차단</b>하고<br>필요하면 추가 인증을 요청합니다</p>
         </div>
         <div class="srow">
           <h4>송금 전이면<br><em>100% 전액 취소</em></h4>
-          <p>서류가 반려되면 돈이 나가지 않습니다<br>예약 송금은 전날까지 취소할 수 있어요</p>
+          <p>서류가 반려되면 <b>돈이 나가지 않습니다</b><br>예약 송금은 전날까지 취소할 수 있어요</p>
         </div>
       </div>
     </div>
