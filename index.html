@@ -818,10 +818,10 @@
   .hero .sdown{position:static; transform:none; margin:38px auto 0; bottom:auto; z-index:2;}
   @media(min-width:768px){ .hero .sdown{margin-top:56px;} }
   /* 가운데 띠 — 아래쪽도 꺾인 형태로 끝난다 */
-  .midband{clip-path:polygon(0 0, 50% 76px, 100% 0, 100% 100%, 50% calc(100% - 76px), 0 100%);
+  .midband{clip-path:polygon(0 0, 50% 76px, 100% 0, 100% calc(100% - 76px), 50% 100%, 0 calc(100% - 76px));
     padding-bottom:120px;}
   @media(max-width:767px){
-    .midband{clip-path:polygon(0 0, 50% 52px, 100% 0, 100% 100%, 50% calc(100% - 52px), 0 100%);
+    .midband{clip-path:polygon(0 0, 50% 52px, 100% 0, 100% calc(100% - 52px), 50% 100%, 0 calc(100% - 52px));
       padding-bottom:84px;}
   }
 </style>
