@@ -792,6 +792,25 @@
   /* 버튼과 사진 사이 — 머리 위 공간 */
   .hmodel{margin-top:56px;}
   @media(min-width:768px){ .hmodel{margin-top:72px;} }
+
+  /* ===== 가운데 띠 — 현금거래 고민 ~ 어떤 결제든 (옅은 하늘색 · 위쪽 V컷) ===== */
+  .midband{position:relative; margin-top:-1px;
+    clip-path:polygon(0 0, 50% 76px, 100% 0, 100% 100%, 0 100%);
+    padding-top:120px;
+    background:
+      radial-gradient(1200px 700px at 78% 12%, rgba(186,214,255,.55), transparent 66%),
+      radial-gradient(1000px 640px at 14% 62%, rgba(206,228,255,.50), transparent 68%),
+      linear-gradient(180deg,#E7F0FF 0%,#EFF5FF 46%,#E9F2FF 100%);}
+  @media(max-width:767px){
+    .midband{clip-path:polygon(0 0, 50% 52px, 100% 0, 100% 100%, 0 100%); padding-top:84px;}
+  }
+  /* 띠 안 단락은 배경 없이 */
+  .midband .sec{background:none;}
+  /* 기능 단락 — 어두운 배경 · V컷 해제하고 밝은 띠 위 글씨로 */
+  #featsec{background:none; clip-path:none; padding-top:0; margin-top:0;}
+  #featsec .h-sec{color:var(--ink);}
+  #featsec .h-sec .hl{color:var(--primary);}
+  #featsec .morelink{color:var(--primary-600);}
 </style>
 </head>
 <body>
@@ -881,6 +900,7 @@
   </div>
 
   <!-- ===== 랜선페이를 써야 하는 이유 — 1~7 펼침 ===== -->
+  <div class="midband">
   <section class="sec tight" id="whysec">
     <div class="wrap">
       <div class="head">
@@ -1028,6 +1048,7 @@
       </div>
     </div>
   </section>
+  </div>
 
 
   <!-- ===== 6. 보안 — 파란 패널 (레퍼런스식) ===== -->
