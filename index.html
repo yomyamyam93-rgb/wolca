@@ -639,13 +639,13 @@
     background-image:radial-gradient(circle, #2E63D8 1.7px, transparent 2.1px);
     background-size:5px 11px; background-repeat:repeat-y; background-position:center top;}
   /* 위 단락 끝과 아래 제목 사이 정중앙 */
-  #itemsec .head{position:relative;}
-  #itemsec .vdots{position:absolute; left:50%; transform:translateX(-50%);
+  #whysec .head{position:relative;}
+  #whysec .vdots{position:absolute; left:50%; transform:translateX(-50%);
     top:calc(-1 * (var(--pt, 136px) / 2) - 32px); margin:0;}
-  @media(min-width:768px){ #itemsec{--pt:114px;} }
+  @media(min-width:768px){ #whysec{--pt:114px;} }
   @media(max-width:767px){
-    #itemsec{--pt:52px; padding-top:52px; padding-bottom:52px;}
-    #whysec{padding-bottom:40px;}
+    #itemsec{padding-top:52px; padding-bottom:52px;}
+    #whysec{--pt:52px; padding-bottom:40px;}
     .vdots{top:calc(-1 * (var(--pt) / 2) - 60px);}
   }
   .cfig{display:none;}
@@ -758,7 +758,6 @@
   <section class="sec tight tint" id="itemsec">
     <div class="wrap">
       <div class="head">
-        <div class="vdots" aria-hidden="true"></div>
         <h2 class="h-sec"><span class="soft">어떤 항목이 필요하신가요?</span><br>지금 바로 <span class="hl">카드로 결제</span>하세요</h2>
       </div>
 
@@ -795,6 +794,7 @@
   <section class="sec tight" id="whysec">
     <div class="wrap">
       <div class="head">
+        <div class="vdots" aria-hidden="true"></div>
         <h2 class="h-sec"><span class="soft">현금거래가 고민이신가요?</span><br>이제 <span class="hl">랜선페이</span>에게 맡겨보세요</h2>
       </div>
       <div class="whygrid">
