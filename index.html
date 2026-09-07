@@ -991,15 +991,17 @@
   @media(min-width:1000px){ #itemsec .itpanel{gap:10px !important; padding:8px;} }
   /* 왼쪽 속칸 · 오른쪽 내용 = 반반 */
   #itemsec .itin{order:0; flex:1 1 0; min-width:0;
+    /* 세로 신용카드 비율 고정 — 늘어나지 않게 */
+    aspect-ratio:1/1.492; height:auto; align-self:center;
     display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px;
-    border-radius:13px; padding:22px 14px;
+    border-radius:13px; padding:16px 12px;
     background:linear-gradient(140deg,#A9C8F7 0%,#C9DBF9 38%,#E4ECFB 70%,#F6F9FE 100%);}
   /* 아이콘은 상자 없이 그대로 */
   #itemsec .itin .itin-ico{display:flex; align-items:center; justify-content:center;
     color:var(--primary-600); font-size:40px; line-height:1;}
   #itemsec .itin .itin-name{font-size:17px; font-weight:800; letter-spacing:-.3px; color:var(--ink);}
   @media(min-width:1000px){
-    #itemsec .itin{padding:34px 20px; gap:14px; border-radius:14px;}
+    #itemsec .itin{padding:20px; gap:14px; border-radius:14px;}
     #itemsec .itin .itin-ico{font-size:58px;}
     #itemsec .itin .itin-name{font-size:22px;}
   }
