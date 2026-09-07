@@ -932,8 +932,13 @@
   /* 세 단락 제목은 한 단계 아래로 (대제목 > 세부제목) */
   /* 아이디 선택자로 써야 위에 있는 #whysec .h-sec 규칙을 이긴다 */
   #whysec .h-sec, #howto .h-sec, #featsec .h-sec{
-    font-size:min(4.8vw, 23px); font-weight:800; letter-spacing:-.3px;
+    font-size:min(5.4vw, 30px); font-weight:800; letter-spacing:-.3px;
     line-height:1.5; color:var(--ink);}
+  /* 카드 제목은 세부제목보다 확실히 아래 단계로 (24 → 18/20) */
+  #whysec .uc h3, #howto h3, #featsec .rz .in, #featsec .rz h3{font-size:18px; line-height:1.4;}
+  @media(min-width:768px){
+    #whysec .uc h3, #howto h3, #featsec .rz .in, #featsec .rz h3{font-size:20px;}
+  }
   #whysec .h-sec .hl, #howto .h-sec .hl, #featsec .h-sec .hl{color:var(--ink);}
   /* 세부제목과 내용 사이 — 대제목보다 훨씬 좁게 */
   .midband .head + *{margin-top:30px;}
@@ -952,7 +957,7 @@
   }
   #trustsec .eyebrow{color:#7FB0FF;}
   #trustsec .h-sec{color:#fff;}
-  #trustsec .h-sec .soft{color:rgba(226,236,255,.55);}
+  #trustsec .h-sec .soft{color:#fff;}
   #trustsec .h-sec .hl{color:#6FA8FF;}
   /* 그림 판 · 카드 4장 — 바탕보다 한 톤 밝은 남색 */
   #trustsec .sboard,
@@ -960,7 +965,7 @@
   #trustsec .sboard h3, #trustsec .srow h4{color:#fff;}
   /* 본문은 흰색이 아니라 흐린 회청색 */
   #trustsec .sboard .d,
-  #trustsec .srow p{color:rgba(214,227,250,.58); line-height:1.85;}
+  #trustsec .srow p{color:rgba(220,231,252,.74); line-height:1.85;}
   /* 핵심 구절만 밝게 — 문장 전체를 칠하지 않는다 */
   #trustsec p b{color:#9CC4FF; font-weight:700;}
   /* 소제목 강조는 한 가지 파랑으로 통일 */
