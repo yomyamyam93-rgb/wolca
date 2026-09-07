@@ -986,12 +986,12 @@
   #howto, #featsec{margin-top:var(--gap);}
 
   /* ===== 항목 상세 패널 — 칸 안에 칸 (왼쪽 속칸: 카드 + 항목 이름 / 오른쪽: 서류 · 버튼) ===== */
-  #itemsec .itpanel{display:flex !important; flex-direction:row; align-items:stretch;
-    gap:8px !important; padding:7px; background:#fff; border:1px solid #EEF0F4;}
+  #itemsec .itpanel{display:flex !important; flex-direction:row; align-items:center;
+    gap:16px !important; padding:16px; background:#fff; border:1px solid #EEF0F4;}
   /* PC 에서는 왼쪽 타일 격자 높이에 맞춰 늘어나던 걸 내용 높이로 (위아래 여백 축소) */
-  @media(min-width:1000px){ #itemsec .itpanel{gap:10px !important; padding:8px; align-self:center;} }
+  @media(min-width:1000px){ #itemsec .itpanel{gap:22px !important; padding:22px; align-self:center;} }
   /* 왼쪽 속칸 · 오른쪽 내용 = 반반 */
-  #itemsec .itin{order:0; flex:0 0 38%; max-width:38%; min-width:0;
+  #itemsec .itin{order:0; flex:0 0 39%; max-width:153px; min-width:0;
     /* 상자 없이 신용카드만 — 세로 신용카드 비율 고정 */
     aspect-ratio:1/1.492; height:auto; align-self:center;
     display:flex; align-items:center; justify-content:center;
@@ -1020,8 +1020,8 @@
     #itemsec .itpanel{margin-top:16px; align-self:auto;
       max-width:540px; margin-left:auto; margin-right:auto;}
     /* 위아래로 쌓이면 속칸이 너무 커지지 않게 — 폭 고정 */
-    #itemsec .itin{flex:0 0 auto; width:150px; max-width:150px;}
-    #itemsec .itl{padding:18px 22px;}
+    #itemsec .itin{flex:0 0 auto; width:146px; max-width:146px;}
+    #itemsec .itl{padding:0;}
     #itemsec .itl .btn{width:auto; min-width:200px; align-self:flex-start; margin-top:16px;}
   }
 
@@ -1046,28 +1046,6 @@
   #itemsec{padding-top:92px;}
   @media(min-width:768px){ #itemsec{padding-top:156px;} }
 
-  /* ===== 기능 카드 — 아래쪽에 그라데이션 속칸을 넣고 3D 이미지를 담는다 ===== */
-  #featsec .rz{padding:9px; overflow:hidden; display:flex; flex-direction:column; background:#fff;}
-  /* 글 묶음 = 그라데이션 속칸 */
-  #featsec .rz .rztop{position:relative; border-radius:13px; padding:26px 22px 28px;}
-  #featsec .rz .in{padding:0;}
-  #featsec .rz h3, #featsec .rz .dash, #featsec .rz ul{padding-left:0; padding-right:0;}
-  #featsec .rz .uarw{top:20px; right:20px;}
-  /* 그림 자리 = 흰색 */
-  #featsec .rz .rzfig{margin-top:14px; background:none; padding:10px 10px 16px;
-    display:flex; align-items:center; justify-content:center; min-height:160px;}
-  #featsec .rz .rzfig .fig{display:block; position:static; right:auto; bottom:auto;
-    max-width:78%; max-height:150px; width:auto; height:auto;}
-  @media(min-width:900px){
-    #featsec .rz{padding:10px;}
-    #featsec .rz .rztop{padding:30px 26px 32px;}
-    #featsec .rz .rzfig{min-height:186px;}
-    #featsec .rz .rzfig .fig{max-height:170px;}
-  }
-  /* 글 속칸 배경 — 파랑 · 민트 · 파랑 (.plus 때문에 홀수 번째가 카드다) */
-  #featsec .rzgrid .rz:nth-of-type(1) .rztop{background:linear-gradient(150deg,#CFE0FA 0%,#E2EBFA 58%,#F3F7FD 100%);}
-  #featsec .rzgrid .rz:nth-of-type(3) .rztop{background:linear-gradient(150deg,#CDEFE7 0%,#E0F5F0 58%,#F2FBF9 100%);}
-  #featsec .rzgrid .rz:nth-of-type(5) .rztop{background:linear-gradient(150deg,#D8E6F6 0%,#E4EEF8 58%,#F4F9FD 100%);}
 
   /* 가운데 띠 — 아래쪽도 꺾인 형태로 끝난다 */
   .midband{clip-path:polygon(0 0, 50% 76px, 100% 0, 100% calc(100% - 76px), 50% 100%, 0 calc(100% - 76px));
@@ -1281,7 +1259,7 @@
 
       <div class="rzgrid">
         <div class="rz">
-          <div class="rztop"><span class="uarw" aria-hidden="true"><svg viewBox="0 0 22 22"><path d="M5 17 17 5M8 5h9v9" stroke="currentColor" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span class="uarw" aria-hidden="true"><svg viewBox="0 0 22 22"><path d="M5 17 17 5M8 5h9v9" stroke="currentColor" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           <div class="in">한도가 부족하다면?</div>
           <h3>여러 카드 분할결제</h3>
           <div class="dash"></div>
@@ -1289,12 +1267,12 @@
             <li>법인 · 개인 카드 조합 결제</li>
             <li>금액을 여러 카드로 나누기</li>
             <li>무이자 할부 혜택 그대로</li>
-          </ul></div>
-          <div class="rzfig"><img class="fig" src="img/feat1-t.png?v=1" alt=""></div>
+          </ul>
+          <img class="fig" src="img/feat1-t.png?v=1" alt="">
         </div>
         <div class="plus" aria-hidden="true">+</div>
         <div class="rz alt">
-          <div class="rztop"><span class="uarw" aria-hidden="true"><svg viewBox="0 0 22 22"><path d="M5 17 17 5M8 5h9v9" stroke="currentColor" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span class="uarw" aria-hidden="true"><svg viewBox="0 0 22 22"><path d="M5 17 17 5M8 5h9v9" stroke="currentColor" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           <div class="in">원하는 시간에 알아서</div>
           <h3>예약결제 · 정기결제</h3>
           <div class="dash"></div>
@@ -1302,12 +1280,12 @@
             <li>정해진 날짜에 자동 예약송금</li>
             <li>매달 같은 날 정기결제</li>
             <li>급여일 · 납부일에 맞춰 예약</li>
-          </ul></div>
-          <div class="rzfig"><img class="fig" src="img/feat2-t.png?v=1" alt=""></div>
+          </ul>
+          <img class="fig" src="img/feat2-t.png?v=1" alt="">
         </div>
         <div class="plus" aria-hidden="true">+</div>
         <div class="rz">
-          <div class="rztop"><span class="uarw" aria-hidden="true"><svg viewBox="0 0 22 22"><path d="M5 17 17 5M8 5h9v9" stroke="currentColor" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span class="uarw" aria-hidden="true"><svg viewBox="0 0 22 22"><path d="M5 17 17 5M8 5h9v9" stroke="currentColor" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           <div class="in">연중무휴</div>
           <h3>365일 24시간 송금</h3>
           <div class="dash"></div>
@@ -1315,8 +1293,8 @@
             <li>야간에도 실시간 입금</li>
             <li>주말 · 공휴일 정상 송금</li>
             <li>서류 검토도 연중무휴</li>
-          </ul></div>
-          <div class="rzfig"><img class="fig" src="img/feat3-t.png?v=1" alt=""></div>
+          </ul>
+          <img class="fig" src="img/feat3-t.png?v=1" alt="">
         </div>
       </div>
     </div>
