@@ -1174,21 +1174,25 @@
   /* ===== 항목 상세 — 흰 휴대폰 목업(윗부분만) 안에 내용 · 그 위에 뜬 신용카드 ===== */
   #itemsec .itpanel{display:block !important; background:none; border:none; padding:0;
     position:relative; overflow:hidden; box-shadow:none;}
-  #itemsec .itphone{position:relative; width:min(286px, 84%); margin:62px auto 0;
+  /* 위 내용 · 가운데 카드 · 아래 버튼 (애플페이식) */
+  #itemsec .itphone{position:relative; width:min(286px, 84%); margin:34px auto 0;
     background:#FFFFFF; border:1px solid #E9ECF1; border-bottom:none;
-    border-radius:32px 32px 0 0; padding:112px 20px 34px;
+    border-radius:32px 32px 0 0; padding:34px 20px 32px;
+    display:flex; flex-direction:column; align-items:center; gap:20px;
     box-shadow:0 18px 46px rgba(15,23,42,.13), 0 3px 12px rgba(15,23,42,.06);}
-  /* 휴대폰 위로 떠 있는 카드 */
-  #itemsec .itcard{position:absolute; top:-46px; left:50%; width:96px; height:auto;
-    transform:translateX(-50%) rotate(-8deg); z-index:2;
-    filter:drop-shadow(0 14px 24px rgba(8,26,66,.32));}
-  #itemsec .itphone .itl{display:flex; flex-direction:column; align-items:stretch;
-    text-align:left; padding:0; width:100%;}
+  #itemsec .itphone .itl{order:0; display:flex; flex-direction:column; align-items:center;
+    text-align:center; padding:0; width:100%;}
+  #itemsec .itphone .itcard{order:1;}
+  #itemsec .itphone .btn{order:2;}
   #itemsec .itphone .itl h3{margin:0 0 12px; text-align:center;}
-  #itemsec .itphone .itl .btn{width:100%; min-width:0; margin-top:16px; align-self:stretch;}
+  #itemsec .itphone .itr{align-items:center;}
+  #itemsec .itphone .doc{justify-content:center;}
+  /* 가운데 카드 — 정면 */
+  #itemsec .itcard{position:static; transform:none; width:84%; height:auto; margin:2px 0;
+    filter:drop-shadow(0 14px 26px rgba(8,26,66,.26));}
+  #itemsec .itphone .btn{width:100%; min-width:0; margin-top:0;}
   @media(min-width:1000px){
-    #itemsec .itphone{width:300px; margin:70px auto 0; padding:126px 22px 36px;}
-    #itemsec .itcard{top:-52px; width:112px;}
+    #itemsec .itphone{width:302px; margin:36px auto 0; padding:38px 22px 34px; gap:22px;}
   }
 
   /* 기능 카드 — 좌상단 흰색에서 우하단 옅은 하늘색으로 */
@@ -1276,12 +1280,12 @@
 
       <div class="itpanel">
         <div class="itphone">
-          <img class="itcard" src="img/card-face-v.png" alt="" aria-hidden="true">
           <div class="itl">
             <h3 id="itp-h"></h3>
             <div class="itr" id="itp-docs"></div>
-            <a class="btn btn-primary" id="itgo" href="화면/10_1_유형선택.html"><img class="btn-logo" src="img/logo3-white.png" alt=""><span id="itgo-t">즉시 결제하기</span></a>
           </div>
+          <img class="itcard" src="img/card-face.png" alt="" aria-hidden="true">
+          <a class="btn btn-primary" id="itgo" href="화면/10_1_유형선택.html"><img class="btn-logo" src="img/logo3-white.png" alt=""><span id="itgo-t">즉시 결제하기</span></a>
         </div>
       </div>
     </div>
