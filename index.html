@@ -1167,9 +1167,33 @@
       background-attachment:fixed;
       background-image:url('img/hero-bg6.jpg');}
   }
-  .bandart .h-band{color:#FFFFFF;}
-  .bandart .h-band .soft{color:rgba(255,255,255,.88);}
-  .bandart .h-band .hl{color:var(--primary-300);}
+  .bandart .h-band{color:#FFFFFF; text-shadow:0 2px 20px rgba(4,12,30,.55);}
+  .bandart .h-band .soft{color:#FFFFFF;}
+  .bandart .h-band .hl{color:#B9D6FF;}
+
+  /* ===== 항목 상세 — 흰 휴대폰 목업(윗부분만) 안에 내용 · 그 위에 뜬 신용카드 ===== */
+  #itemsec .itpanel{display:block !important; background:none; border:none; padding:0;
+    position:relative; overflow:hidden; box-shadow:none;}
+  #itemsec .itphone{position:relative; width:min(292px, 84%); margin:74px auto -30px;
+    background:#FFFFFF; border:1px solid #E9ECF1; border-bottom:none;
+    border-radius:34px 34px 0 0; padding:74px 20px 30px;
+    box-shadow:0 18px 46px rgba(15,23,42,.13), 0 3px 12px rgba(15,23,42,.06);}
+  /* 휴대폰 위로 떠 있는 카드 */
+  #itemsec .itcard{position:absolute; top:-52px; left:50%; width:118px; height:auto;
+    transform:translateX(-50%) rotate(-9deg); z-index:2;
+    filter:drop-shadow(0 16px 26px rgba(8,26,66,.34));}
+  #itemsec .itphone .itl{display:flex; flex-direction:column; align-items:stretch;
+    text-align:left; padding:0; width:100%;}
+  #itemsec .itphone .itl h3{margin:0 0 12px; text-align:center;}
+  #itemsec .itphone .itl .btn{width:100%; min-width:0; margin-top:16px; align-self:stretch;}
+  @media(min-width:1000px){
+    #itemsec .itphone{width:300px; margin:86px auto -34px; padding:84px 22px 34px;}
+    #itemsec .itcard{top:-58px; width:132px;}
+  }
+
+  /* 기능 카드 — 좌상단 흰색에서 우하단 옅은 하늘색으로 */
+  #featsec .rz{background:linear-gradient(135deg,
+    #FFFFFF 0%, #FFFFFF 38%, #F1F6FD 68%, var(--primary-150) 100%);}
 
   /* 클릭되지 않는 장식 화살표는 뺀다 */
   .whygrid .uc .uarw{display:none;}
@@ -1251,13 +1275,13 @@
       <div class="itarw" aria-hidden="true"><svg viewBox="0 0 22 22" aria-hidden="true"><path d="M4 11h13M11 4l7 7-7 7" stroke="currentColor" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
 
       <div class="itpanel">
-        <div class="itin">
-          <div class="itr-card" aria-hidden="true"></div>
-        </div>
-        <div class="itl">
-          <h3 id="itp-h"></h3>
-          <div class="itr" id="itp-docs"></div>
-          <a class="btn btn-primary" id="itgo" href="화면/10_1_유형선택.html"><img class="btn-logo" src="img/logo3-white.png" alt=""><span id="itgo-t">즉시 결제하기</span></a>
+        <div class="itphone">
+          <img class="itcard" src="img/card-face-v.png" alt="" aria-hidden="true">
+          <div class="itl">
+            <h3 id="itp-h"></h3>
+            <div class="itr" id="itp-docs"></div>
+            <a class="btn btn-primary" id="itgo" href="화면/10_1_유형선택.html"><img class="btn-logo" src="img/logo3-white.png" alt=""><span id="itgo-t">즉시 결제하기</span></a>
+          </div>
         </div>
       </div>
     </div>
@@ -1377,7 +1401,7 @@
             <li>금액을 여러 카드로 나누기</li>
             <li>무이자 할부 혜택 그대로</li>
           </ul>
-          <img class="fig" src="img/feat1-t.png?v=1" alt="">
+          <img class="fig" src="img/feat1-t.png?v=3" alt="">
         </div>
         <div class="plus" aria-hidden="true">+</div>
         <div class="rz alt">
@@ -1390,7 +1414,7 @@
             <li>매달 같은 날 정기결제</li>
             <li>급여일 · 납부일에 맞춰 예약</li>
           </ul>
-          <img class="fig" src="img/feat2-t.png?v=1" alt="">
+          <img class="fig" src="img/feat2-t.png?v=3" alt="">
         </div>
         <div class="plus" aria-hidden="true">+</div>
         <div class="rz">
@@ -1403,7 +1427,7 @@
             <li>주말 · 공휴일 정상 송금</li>
             <li>서류 검토도 연중무휴</li>
           </ul>
-          <img class="fig" src="img/feat3-t.png?v=1" alt="">
+          <img class="fig" src="img/feat3-t.png?v=3" alt="">
         </div>
       </div>
     </div>
