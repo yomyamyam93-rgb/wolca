@@ -202,7 +202,7 @@ main{flex:1 0 auto;}
 
 /* ---------- 버튼 (가이드 6장) ---------- */
 .btn{display:inline-flex; align-items:center; justify-content:center; gap:8px;
-  height:52px; padding:0 24px; border-radius:18px;
+  height:54px; padding:0 30px; border-radius:13px;
   font-size:16px; font-weight:700; white-space:nowrap;
   transition:transform .15s, filter .2s, box-shadow .2s;}
 .btn iconify-icon{font-size:20px;}
@@ -215,7 +215,7 @@ main{flex:1 0 auto;}
 .btn-outline{background:var(--card); border:1px solid var(--border); color:var(--ink);}
 .btn-white{background:#fff; color:var(--primary-600);}
 .btn-ghost{height:44px; padding:0 8px; color:var(--primary-600); font-weight:700;}
-.btn-lg{height:64px; padding:0 36px; font-size:19px; border-radius:18px;}
+.btn-lg{height:66px; padding:0 40px; font-size:19px; border-radius:15px;}
 
 /* 단락마다 넣는 CTA 줄 — 「바로 송금하기」로 보내는 자리 */
 .ctarow{margin-top:32px; display:flex; flex-direction:column; align-items:center; gap:10px;}
