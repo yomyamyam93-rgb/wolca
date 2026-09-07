@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>랜선페이 — 현금으로 내던 돈 이제 카드로</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
-<link rel="stylesheet" href="style.css?v=27">
+<link rel="stylesheet" href="style.css?v=28">
 <link rel="icon" type="image/png" href="img/logo3.png">
 <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 <script src="app.js?v=15"></script>
@@ -130,7 +130,7 @@
   @media(min-width:1000px){ .uc .art{font-size:52px; right:30px; bottom:30px;} }
   /* 파란 강조 카드 — 임대인 동의 불필요 */
   .uc.blue{background:var(--primary); overflow:hidden;
-    background:linear-gradient(140deg,#0D2E9C 0%,#051643 52%,#01113F 100%); border-color:transparent;
+    background:linear-gradient(140deg,var(--primary-700) 0%,var(--primary-800) 52%,var(--primary-900) 100%); border-color:transparent;
     box-shadow:none;}
   .uc.blue .no,.uc.blue h3,.uc.blue p{position:relative; z-index:1;}
   .uc.blue .coins{position:absolute; top:50%; right:-24%; height:170%; width:auto; max-width:none; z-index:0;
@@ -182,7 +182,7 @@
     #featsec{clip-path:polygon(0 0, 50% 52px, 100% 0, 100% 100%, 0 100%);
       padding-top:130px;}
   }
-  #featsec{background-color:#0C1E8F;
+  #featsec{background-color:var(--primary-700);
     background-image:linear-gradient(rgba(3,10,40,.42), rgba(3,10,40,.42)), url('img/hero-bg4.jpg?v=2');
     background-size:cover; background-position:center; background-repeat:no-repeat;}
   #featsec .h-sec{color:#fff;}
@@ -352,7 +352,7 @@
   @media(min-width:900px){ .gd p{font-size:15.5px;} }
 
   /* 6. 보안 — 파란 큰 패널 + 흰 정보 카드 (레퍼런스식) */
-  .sboard{background:var(--primary); background:linear-gradient(140deg,#0D2E9C 0%,#051643 52%,#01113F 100%); border-radius:18px; padding:30px 24px;
+  .sboard{background:var(--primary); background:linear-gradient(140deg,var(--primary-700) 0%,var(--primary-800) 52%,var(--primary-900) 100%); border-radius:18px; padding:30px 24px;
     color:#fff; display:flex; flex-direction:column; gap:30px;}
   @media(min-width:900px){ .sboard{flex-direction:row; align-items:center; justify-content:flex-start;
     gap:48px; padding:38px 64px; border-radius:18px; position:relative; overflow:hidden; min-height:296px;} }
@@ -456,7 +456,7 @@
     .plus{display:none;}
   }
   /* 6번 취소 · 환불 — 어두운 그라데이션 카드 */
-  .gd.dark{background:linear-gradient(140deg,#0D2E9C 0%,#051643 52%,#01113F 100%);}
+  .gd.dark{background:linear-gradient(140deg,var(--primary-700) 0%,var(--primary-800) 52%,var(--primary-900) 100%);}
   .gd.dark h3{color:#fff;}
   .gd.dark p{color:rgba(255,255,255,.85);}
   .gd.dark .no{background:#fff; color:var(--primary-600); box-shadow:none;}
@@ -471,7 +471,7 @@
   /* 이용 방법 카드 — 3D 느낌 */
   .gd{background:linear-gradient(180deg,#FFFFFF,#F8FAFE);
     box-shadow:0 14px 30px rgba(15,23,42,.08), 0 3px 8px rgba(15,23,42,.04);}
-  .gd.dark{background:linear-gradient(140deg,#0D2E9C 0%,#051643 52%,#01113F 100%);
+  .gd.dark{background:linear-gradient(140deg,var(--primary-700) 0%,var(--primary-800) 52%,var(--primary-900) 100%);
     box-shadow:0 16px 34px rgba(2,10,40,.30), 0 3px 8px rgba(2,10,40,.18);}
   /* 신뢰 · 후기 제목 — 두 줄 같은 크기 */
   #trustsec .h-sec br{display:none;}
@@ -629,7 +629,7 @@
   #itemsec{background:#fff;}
   /* 단락을 잇는 점선 ⋮ */
   .vdots{width:5px; height:32px;
-    background-image:radial-gradient(circle, #2E63D8 1.7px, transparent 2.1px);
+    background-image:radial-gradient(circle, var(--primary-600) 1.7px, transparent 2.1px);
     background-size:5px 11px; background-repeat:repeat-y; background-position:center top;}
   /* 위 단락 끝과 아래 제목 사이 정중앙 */
   #whysec .head{position:relative;}
@@ -643,20 +643,20 @@
   }
   .cfig{display:none;}
   /* 01 민트 · 02 분홍 포인트 (헤더 이모지 색과 통일) */
-  .whygrid .uc:nth-child(1) .no{background:#156FF9;}
+  .whygrid .uc:nth-child(1) .no{background:var(--primary);}
 
-  .whygrid .uc:nth-child(2) .no{background:#12C4AC;}
+  .whygrid .uc:nth-child(2) .no{background:var(--mint);}
   /* 흰 카드 3장의 화살표는 검정 */
   .whygrid .uc:not(.blue) .uarw{color:var(--ink);}
   /* 신뢰 단락 — 민트 포인트 */
   /* 보안 패널 — 민트 딥 그라데이션 */
-  #trustsec .sboard{background:#0C5CE8; background:linear-gradient(140deg,#2A7BFF 0%,#0C5CE8 52%,#0A45C4 100%);}
+  #trustsec .sboard{background:var(--primary-600); background:linear-gradient(140deg,var(--primary) 0%,var(--primary-600) 52%,var(--primary-700) 100%);}
   #trustsec .eyebrow{color:var(--primary-600);}
   #trustsec .h-sec .hl{color:var(--primary);}
   #trustsec .srow h4 em{color:var(--primary-600);}
   /* 두 항목만 강조색 — 이상 거래 감시(민트) · 전액 취소(분홍) */
-  #trustsec .srow:nth-child(3) h4 em{color:#0FA895;}
-  #trustsec .srow:nth-child(4) h4 em{color:#156FF9;}
+  #trustsec .srow:nth-child(3) h4 em{color:var(--mint-600);}
+  #trustsec .srow:nth-child(4) h4 em{color:var(--primary);}
   /* ===== 모바일 — 카드 이미지 상자 기준 (PC 값보다 뒤에 둬서 확실히 적용) ===== */
   @media(max-width:767px){
     /* 글 · 버튼만 30px 아래로 (이미지는 제자리) */
@@ -673,8 +673,8 @@
     .em2{height:20.1%; left:56.3%; right:auto; top:42.6%;}
   }
   /* 이용 방법 01 — 분홍 강조 */
-  .gdgrid .gd:first-child .no{background:#156FF9; box-shadow:0 4px 12px rgba(21,111,249,.28);}
-  .gdgrid .gd:first-child .nx{color:#156FF9;}
+  .gdgrid .gd:first-child .no{background:var(--primary); box-shadow:0 4px 12px rgba(21,111,249,.28);}
+  .gdgrid .gd:first-child .nx{color:var(--primary);}
   /* 따라다니는 버튼 — 두 번째 단락부터 나타남 */
   .fab{opacity:0; visibility:hidden; pointer-events:none; transform:translateX(-50%) translateY(14px);
     transition:opacity .3s, transform .3s, visibility .3s;}
@@ -751,7 +751,7 @@
 
   .hero .hero2{display:block; text-align:center; gap:0; margin:0 auto;}
   .hbadge{display:inline-block; padding:8px 18px; border-radius:999px;
-    background:rgba(255,255,255,.9); border:1px solid #DCE6FE;
+    background:rgba(255,255,255,.9); border:1px solid var(--primary-100);
     font-size:13px; font-weight:700; color:var(--primary-600);}
   @media(min-width:768px){ .hbadge{font-size:14px; padding:9px 20px;} }
   .hero .h-hero{margin-top:18px; font-size:30px; line-height:1.3;}
@@ -816,7 +816,7 @@
     background-repeat:no-repeat;}
   /* 단락은 전부 투명 — 어두운 기능 단락만 예외 */
   .main .sec, .main .sec.tint, .topband, .topband .hero, .topband #itemsec, #itemsec, #whysec, #endcta{background:none;}
-  #featsec{background-color:#0C1E8F;
+  #featsec{background-color:var(--primary-700);
     background-image:linear-gradient(rgba(3,10,40,.42), rgba(3,10,40,.42)), url('img/hero-bg4.jpg?v=2');
     background-size:cover; background-position:center; background-repeat:no-repeat;}
 
@@ -913,9 +913,9 @@
   @media(min-width:1000px){ .whygrid .uc:not(.blue){padding:8px;} }
   .whygrid .ucin{position:relative; border-radius:13px; padding:20px 20px 26px;}
   @media(min-width:1000px){ .whygrid .ucin{padding:24px 24px 32px; border-radius:14px;} }
-  .whygrid .uc:nth-child(1) .ucin{background:linear-gradient(150deg,#CFE0FA 0%,#E2EBFA 58%,#F3F7FD 100%);}
-  .whygrid .uc:nth-child(2) .ucin{background:linear-gradient(150deg,#CDEFE7 0%,#E0F5F0 58%,#F2FBF9 100%);}
-  .whygrid .uc:nth-child(3) .ucin{background:linear-gradient(150deg,#D8E6F6 0%,#E4EEF8 58%,#F4F9FD 100%);}
+  .whygrid .uc:nth-child(1) .ucin{background:linear-gradient(150deg,var(--primary-150) 0%,var(--primary-100) 58%,#F3F7FD 100%);}
+  .whygrid .uc:nth-child(2) .ucin{background:linear-gradient(150deg,var(--mint-100) 0%,var(--mint-50) 58%,#F2FBF9 100%);}
+  .whygrid .uc:nth-child(3) .ucin{background:linear-gradient(150deg,var(--primary-150) 0%,var(--primary-100) 58%,#F4F9FD 100%);}
   .whygrid .ucin .no{margin:0;}
   .whygrid .ucin h3{margin-top:14px;}
   .whygrid .ucin .uarw{position:absolute; top:18px; right:18px; color:var(--ink);}
@@ -953,7 +953,7 @@
   /* ===== 신뢰 단락 — 짙은 남색 한 판 (삼쩜삼 톤) =====
      ① 균일한 남색 바탕 ② 본문은 흐린 회청색 ③ 핵심 구절만 연한 파랑
      ④ 그림 · 카드는 한 톤 밝은 남색 상자 안에 */
-  #trustsec{background:#0B1C3C; color:#fff;
+  #trustsec{background:var(--primary-900); color:#fff;
     /* 회색 띠의 꺾인 아래 선과 똑같은 모양으로 물린다 (틈 없이) */
     clip-path:polygon(0 0, 50% 76px, 100% 0, 100% 100%, 0 100%);
     margin-top:-76px; padding-top:244px;}
@@ -961,23 +961,23 @@
     #trustsec{clip-path:polygon(0 0, 50% 52px, 100% 0, 100% 100%, 0 100%);
       margin-top:-52px; padding-top:156px;}
   }
-  #trustsec .eyebrow{color:#7FB0FF;}
+  #trustsec .eyebrow{color:var(--primary-400);}
   #trustsec .h-sec{color:#fff;}
   #trustsec .h-sec .soft{color:#fff;}
-  #trustsec .h-sec .hl{color:#6FA8FF;}
+  #trustsec .h-sec .hl{color:var(--primary-400);}
   /* 그림 판 · 카드 4장 — 바탕보다 한 톤 밝은 남색 */
   #trustsec .sboard,
-  #trustsec .srow{background:#12294F; border:1px solid rgba(255,255,255,.07); box-shadow:none;}
+  #trustsec .srow{background:var(--primary-800); border:1px solid rgba(255,255,255,.07); box-shadow:none;}
   #trustsec .sboard h3, #trustsec .srow h4{color:#fff;}
   /* 본문은 흰색이 아니라 흐린 회청색 */
   #trustsec .sboard .d,
   #trustsec .srow p{color:rgba(220,231,252,.74); line-height:1.85;}
   /* 핵심 구절만 밝게 — 문장 전체를 칠하지 않는다 */
-  #trustsec p b{color:#9CC4FF; font-weight:700;}
+  #trustsec p b{color:var(--primary-300); font-weight:700;}
   /* 소제목 강조는 한 가지 파랑으로 통일 */
   #trustsec .srow h4 em,
   #trustsec .srow:nth-child(3) h4 em,
-  #trustsec .srow:nth-child(4) h4 em{color:#6FA8FF;}
+  #trustsec .srow:nth-child(4) h4 em{color:var(--primary-400);}
 
   /* ===== 띠 안 간격을 하나로 — 대제목↔단락, 단락↔단락 모두 같은 값 ===== */
   .midband{--gap:96px;}
@@ -1031,7 +1031,7 @@
 
   /* ===== 배경 뒤집기 — 항목 단락은 하늘색 · 가운데 띠는 흰색 ===== */
   .topband #itemsec, #itemsec{background:linear-gradient(180deg,
-      rgba(215,231,252,0) 0%, rgba(215,231,252,.60) 26%, #DEEAFB 54%, #D7E7FC 100%);}
+      rgba(215,231,252,0) 0%, rgba(215,231,252,.60) 26%, var(--primary-150) 54%, var(--primary-150) 100%);}
   .midband{background:#FFFFFF;}
 
   /* ===== 꺾임을 위쪽(하늘색) 단락으로 옮긴다 =====
@@ -1711,7 +1711,7 @@
 
   var 안내 = document.createElement('div');
   안내.style.cssText = 'position:fixed; left:10px; right:10px; bottom:10px; z-index:99999;' +
-    'background:#111C2E; color:#fff; padding:12px 14px; border-radius:18px; font-size:13px;' +
+    'background:var(--primary-900); color:#fff; padding:12px 14px; border-radius:18px; font-size:13px;' +
     'line-height:1.6; box-shadow:0 10px 30px rgba(0,0,0,.35); font-family:inherit;';
   안내.innerHTML = '<b style="font-size:14.5px">이모지 편집 — ' + (모바일 ? '모바일' : 'PC') + ' 화면</b><br>' +
     '이모지를 끌어서 옮기고, 하나 누른 뒤 <b>+ / −</b> 로 크기 조절' +
@@ -1721,15 +1721,15 @@
     '<button id="emoPlus" style="flex:1; height:44px; border:none; border-radius:18px; background:#33415C; color:#fff; font-size:20px; font-weight:700">+</button>' +
     '</div>' +
     '<button id="emoCopy" style="margin-top:8px; width:100%; height:44px; border:none;' +
-    'border-radius:18px; background:#156FF9; color:#fff; font-weight:700; font-size:14px">위치 · 크기 복사하기</button>' +
+    'border-radius:18px; background:var(--primary); color:#fff; font-weight:700; font-size:14px">위치 · 크기 복사하기</button>' +
     '<textarea id="emoOut" readonly style="margin-top:8px; width:100%; height:78px; border:none; border-radius:18px;' +
-    'background:#0B1424; color:#9FB3D9; font-size:11px; padding:8px; display:none"></textarea>';
+    'background:var(--primary-900); color:#9FB3D9; font-size:11px; padding:8px; display:none"></textarea>';
   document.body.appendChild(안내);
 
   function 고르기(el) {
     들.forEach(function (x) { x.style.outline = 'none'; });
     고른 = el;
-    el.style.outline = '2px dashed #156FF9';
+    el.style.outline = '2px dashed var(--primary)';
     el.style.outlineOffset = '4px';
   }
   function 크기(el, 값) {

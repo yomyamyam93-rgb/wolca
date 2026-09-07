@@ -6,8 +6,21 @@
 
 :root{
   /* 브랜드색 — 사장님 색으로 바꾸려면 여기만 (가이드 2장) */
-  --primary:#156FF9; --primary-600:#0F5AD1; --primary-700:#0B45A4;
-  --primary-50:#EEF3FF; --primary-100:#DCE6FE;
+  /* 파랑 한 줄기 — 밝은 쪽부터 어두운 쪽까지 10단계. 파랑은 전부 여기서만 나온다 */
+  --primary-50:#EEF3FF;    /* 가장 옅은 바탕 */
+  --primary-100:#DCE6FE;   /* 옅은 바탕 · 테두리 */
+  --primary-150:#CFE0FA;   /* 옅은 바탕 (진한 쪽) · 그라데이션 시작 */
+  --primary-300:#9CC4FF;   /* 어두운 바탕 위 본문 강조 */
+  --primary-400:#6FA8FF;   /* 어두운 바탕 위 밝은 파랑 */
+  --primary-500:#4A8CFF;   /* 버튼 그라데이션 시작 */
+  --primary:#156FF9;       /* 기본 — 버튼 · 아이콘 */
+  --primary-600:#0F5AD1;   /* 강조 글자 */
+  --primary-700:#0B45A4;   /* 진한 파랑 · 그라데이션 끝 */
+  --primary-800:#12294F;   /* 남색 바탕 위 카드 */
+  --primary-900:#0B1C3C;   /* 신뢰 단락 짙은 남색 바탕 */
+
+  /* 민트 — 보조 포인트 한 줄기 */
+  --mint-50:#E0F5F0; --mint-100:#CDEFE7; --mint:#12C4AC; --mint-600:#0FA895;
 
   /* 회색 (가이드 2장) */
   --bg:#F4F5F6; --card:#FFFFFF; --line:#ECEEF1; --border:#CCD0D8;
@@ -27,7 +40,7 @@
   --safe:env(safe-area-inset-bottom, 0px);
 
   /* 파란 버튼만 예외로 입체감 허용 (가이드 5장) */
-  --grad:linear-gradient(140deg, #4A8CFF 0%, #156FF9 42%, #0B2BC4 100%);   /* 카드 메탈 느낌 대각선 */
+  --grad:linear-gradient(140deg, var(--primary-500) 0%, var(--primary) 42%, var(--primary-700) 100%);   /* 카드 메탈 느낌 대각선 */
   --btn-shadow:0 4px 12px color-mix(in srgb, var(--primary) 28%, transparent), inset 0 1px 0 rgba(255,255,255,.18);
   --soft:0 2px 8px rgba(0,0,0,.06);   /* 가이드 5장 — 최대 그림자 */
 }
@@ -147,7 +160,7 @@ img{max-width:100%;}
 .ptabs a.on:after{content:''; position:absolute; left:0; right:0; bottom:-1px; height:2px; background:var(--primary);}
 
 /* ---------- 하위 페이지 공용 배너 · 슬림 푸터 ---------- */
-.banner{background:#0D2E9C; background:linear-gradient(140deg,#0D2E9C 0%,#051643 52%,#01113F 100%);
+.banner{background:var(--primary-700); background:linear-gradient(140deg,var(--primary-700) 0%,var(--primary-800) 52%,var(--primary-900) 100%);
   color:#fff; padding:64px 0 56px; text-align:center;}
 .banner .h-hero{color:#fff;}
 .banner .h-hero .hl{color:#fff;}
@@ -182,7 +195,7 @@ main{flex:1 0 auto;}
 .head .eyebrow{display:block; color:var(--primary-600);
   font-size:15px; font-weight:700; letter-spacing:-.2px; margin-bottom:16px;}
 @media(min-width:768px){ .head .eyebrow{font-size:19px; margin-bottom:22px;} }
-.sec.dark .head .eyebrow{color:#9DC0FF;}
+.sec.dark .head .eyebrow{color:var(--primary-300);}
 .head .h-sec + p{margin-top:18px; font-size:16px; line-height:1.75; color:var(--sub);}
 .sec.dark .head .h-sec + p{color:rgba(255,255,255,.72);}
 .head + *{margin-top:44px;}
