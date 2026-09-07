@@ -1220,6 +1220,22 @@
   @media(min-width:1000px){ #itemsec .itl .btn{height:54px; font-size:16px;} }
   @media(min-width:1000px){ #itemsec .itin{flex:0 0 auto; width:170px; max-width:170px;} #itemsec .itl{padding:0;} }
 
+  /* ===== 모바일 기능 카드 — 가로 스와이프 대신 세로로 쌓고 얇게 ===== */
+  @media(max-width:899px){
+    #featsec .wrap{overflow:visible;}
+    #featsec .rzgrid{display:grid !important; grid-template-columns:1fr; gap:14px;
+      transform:none !important; transition:none !important; touch-action:auto;}
+    #featsec .rz{flex:none; width:auto; margin:0 6px; overflow:hidden;
+      padding:22px 20px 108px; min-height:0;}
+    #featsec .rz .in{font-size:16.5px;}
+    #featsec .rz h3{font-size:16.5px;}
+    #featsec .rz ul{margin-top:13px;}
+    #featsec .rz li{margin-bottom:7px; font-size:14px; line-height:1.6;}
+    #featsec .rz .fig{position:absolute; right:10px; bottom:10px;
+      max-width:104px; max-height:104px;}
+    #featsec .rzgrid .rz:last-child .fig, #featsec .rz.alt .fig{right:10px;}
+  }
+
   /* 기능 카드 — 좌상단 흰색에서 우하단 옅은 하늘색으로 */
   #featsec .rz{background:linear-gradient(135deg,
     #FFFFFF 0%, #FFFFFF 38%, #F1F6FD 68%, var(--primary-150) 100%);}
@@ -1840,7 +1856,8 @@
   var 판=document.querySelector('.rzgrid');
   if(!판) return;
   var N=판.querySelectorAll('.rz').length, i=0;
-  var 모바일=window.matchMedia('(max-width:899px)');
+  /* 모바일은 세로로 쌓으므로 슬라이더를 쓰지 않는다 */
+  var 모바일={matches:false};
   function 이동(부드럽게){
     판.style.transition=부드럽게?'transform .35s cubic-bezier(.3,.6,.25,1)':'none';
     판.style.transform='translateX('+(-i*100)+'%)';
