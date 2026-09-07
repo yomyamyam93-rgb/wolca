@@ -703,8 +703,10 @@
   @media(min-width:768px){ .hstats span{font-size:13.5px;} }
 
   /* 스크롤 안내 — 움직이는 화살표만 남긴다 */
-  .sdown .mouse{width:auto; height:auto; border:none; border-radius:0; opacity:1;
-    display:block;}
+  .sdown .mouse{width:auto; border:none; border-radius:0; opacity:1;
+    /* 화살표가 위아래로 움직일 자리 — 없으면 아래가 잘린다 */
+    display:flex; align-items:flex-start; justify-content:center; height:36px;}
+  @media(min-width:768px){ .sdown .mouse{height:41px;} }
   .sdown .mouse iconify-icon{font-size:26px; margin-top:0; opacity:.8;}
   @media(min-width:768px){ .sdown .mouse iconify-icon{font-size:30px;} }
   .sdown b{display:none;}
@@ -914,7 +916,10 @@
   .whygrid .ucin{position:relative; border-radius:13px; padding:20px 20px 26px;}
   @media(min-width:1000px){ .whygrid .ucin{padding:24px 24px 32px; border-radius:14px;} }
   /* 파스텔은 한 가지만 — 세 장을 똑같이 (다른 건 04 한 장뿐) */
-  .whygrid .uc:not(.blue) .ucin{background:linear-gradient(150deg,var(--primary-150) 0%,var(--primary-100) 58%,#F4F8FD 100%);}
+  /* 색은 같고 번지는 모양만 카드마다 다르게 */
+  .whygrid .uc:not(.blue) .ucin{background:linear-gradient(150deg,var(--primary-100) 0%,var(--primary-50) 56%,#FBFCFF 100%);}
+  .whygrid .uc:nth-child(2) .ucin{background:radial-gradient(130% 100% at 88% 8%, var(--primary-100) 0%, var(--primary-50) 52%, #FBFCFF 100%);}
+  .whygrid .uc:nth-child(3) .ucin{background:linear-gradient(28deg, var(--primary-100) 0%, var(--primary-50) 54%, #FBFCFF 100%);}
   .whygrid .ucin .no{margin:0;}
   .whygrid .ucin h3{margin-top:14px;}
   .whygrid .ucin .uarw{position:absolute; top:18px; right:18px; color:var(--ink);}
@@ -1054,6 +1059,35 @@
 
   /* 후기 단락 제목 — 두 줄 모두 굵게 */
   #rvsec .h-sec .soft{font-weight:800; color:var(--ink);}
+
+  /* ===== 이용 방법 — 왼쪽 휴대폰 목업 · 오른쪽 세로 타임라인 ===== */
+  .hwrap{display:grid; gap:44px; justify-items:center;}
+  @media(min-width:900px){
+    .hwrap{grid-template-columns:minmax(240px,320px) 1fr; gap:76px;
+      align-items:center; justify-items:stretch;}
+  }
+  /* 휴대폰 목업 — 테두리는 CSS 로 그린다 */
+  .hphone{width:min(286px, 74vw); padding:9px; border-radius:38px; background:#15181D;
+    box-shadow:0 26px 60px rgba(15,23,42,.20), 0 4px 14px rgba(15,23,42,.10);
+    justify-self:center;}
+  .hphone img{display:block; width:100%; height:auto; border-radius:30px;}
+  /* 세로 타임라인 */
+  .tline{list-style:none; margin:0; padding:0; width:100%; max-width:560px;}
+  @media(min-width:900px){ .tline{max-width:none;} }
+  .tstep{position:relative; display:grid; grid-template-columns:34px 1fr; gap:16px; padding-bottom:28px;}
+  .tstep:last-child{padding-bottom:0;}
+  .tstep:not(:last-child):before{content:''; position:absolute; left:16px; top:38px; bottom:2px;
+    width:2px; background:var(--line);}
+  .tno{width:34px; height:34px; border-radius:999px; z-index:1;
+    display:flex; align-items:center; justify-content:center;
+    background:var(--primary-50); color:var(--primary-600);
+    font-size:14px; font-weight:800; letter-spacing:0;}
+  .tstep.on .tno{background:var(--primary); color:#fff;
+    box-shadow:0 4px 12px rgba(21,111,249,.30);}
+  #howto .tbd h3{margin:5px 0 0; font-size:18px; font-weight:800; letter-spacing:-.3px; line-height:1.4;}
+  @media(min-width:900px){ #howto .tbd h3{font-size:20px;} }
+  .tbd p{margin-top:7px; font-size:15px; line-height:1.75; color:var(--sub);}
+  @media(min-width:900px){ .tbd p{font-size:15.5px;} }
 
   /* 클릭되지 않는 장식 화살표는 뺀다 */
   .whygrid .uc .uarw{display:none;}
@@ -1203,54 +1237,34 @@
         <a class="morelink" href="guide.html">자세한 이용가이드 보기<svg viewBox="0 0 22 22" aria-hidden="true"><path d="M8.5 4.5 15 11l-6.5 6.5" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       </div>
 
-      <div class="gdgrid">
-        <div class="gd">
-          <span class="no">01</span>
-          <div class="bd">
-            <h3>회원가입 · 로그인</h3>
-            <p>오른쪽 아래 바로 송금하기를 누르고 <br>휴대폰 번호로 간단히 가입하세요 <br>이미 계정이 있다면 로그인만 하면 돼요</p>
-          </div>
-          <span class="nx"><svg viewBox="0 0 22 22" aria-hidden="true"><path d="M4 11h13M11 4l7 7-7 7" stroke="currentColor" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-        </div>
-        <div class="gd">
-          <span class="no">02</span>
-          <div class="bd">
-            <h3>결제 정보 등록</h3>
-            <p>결제할 항목과 금액을 입력하고 <br>받는 분 이름과 계좌번호를 등록하세요 <br>한 번 등록하면 다음부터는 불러와서 써요</p>
-          </div>
-          <span class="nx"><svg viewBox="0 0 22 22" aria-hidden="true"><path d="M4 11h13M11 4l7 7-7 7" stroke="currentColor" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-        </div>
-        <div class="gd">
-          <span class="no">03</span>
-          <div class="bd">
-            <h3>서류 검토</h3>
-            <p>임대차계약서 같은 증빙 서류를 올리면 <br>연중무휴로 검토가 진행되고 <br>보통 10분 안에 결과를 알려드려요</p>
-          </div>
-          <span class="nx"><svg viewBox="0 0 22 22" aria-hidden="true"><path d="M4 11h13M11 4l7 7-7 7" stroke="currentColor" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-        </div>
-        <div class="gd">
-          <span class="no">04</span>
-          <div class="bd">
-            <h3>신용카드로 결제</h3>
-            <p>등록한 금액과 받는 분 정보를 확인하고 <br>원하는 카드로 결제하세요 <br>일시불부터 최대 24개월 할부까지 돼요</p>
-          </div>
-          <span class="nx"><svg viewBox="0 0 22 22" aria-hidden="true"><path d="M4 11h13M11 4l7 7-7 7" stroke="currentColor" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-        </div>
-        <div class="gd">
-          <span class="no">05</span>
-          <div class="bd">
-            <h3>송금 확인</h3>
-            <p>결제가 확인되면 평균 5분 안에 <br>받는 분 계좌로 송금이 완료되고 <br>내역은 마이페이지에서 볼 수 있어요</p>
-          </div>
-          <span class="nx"><svg viewBox="0 0 22 22" aria-hidden="true"><path d="M4 11h13M11 4l7 7-7 7" stroke="currentColor" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-        </div>
-        <div class="gd dark">
-          <span class="no">06</span>
-          <div class="bd">
-            <h3>취소 · 환불</h3>
-            <p>송금 전이라면 언제든 100% 취소되고 <br>예약 송금은 전날까지 취소할 수 있어요 <br>반려되면 돈이 나가지 않아요</p>
-          </div>
-        </div>
+      <div class="hwrap">
+        <div class="hphone" aria-hidden="true"><img src="img/guide_shots/home.png?v=1" alt=""></div>
+        <ol class="tline">
+          <li class="tstep">
+            <span class="tno">1</span>
+            <div class="tbd"><h3>회원가입 · 로그인</h3><p>오른쪽 아래 바로 송금하기를 누르고 <br>휴대폰 번호로 간단히 가입하세요 <br>이미 계정이 있다면 로그인만 하면 돼요</p></div>
+          </li>
+          <li class="tstep">
+            <span class="tno">2</span>
+            <div class="tbd"><h3>결제 정보 등록</h3><p>결제할 항목과 금액을 입력하고 <br>받는 분 이름과 계좌번호를 등록하세요 <br>한 번 등록하면 다음부터는 불러와서 써요</p></div>
+          </li>
+          <li class="tstep">
+            <span class="tno">3</span>
+            <div class="tbd"><h3>서류 검토</h3><p>임대차계약서 같은 증빙 서류를 올리면 <br>연중무휴로 검토가 진행되고 <br>보통 10분 안에 결과를 알려드려요</p></div>
+          </li>
+          <li class="tstep">
+            <span class="tno">4</span>
+            <div class="tbd"><h3>신용카드로 결제</h3><p>등록한 금액과 받는 분 정보를 확인하고 <br>원하는 카드로 결제하세요 <br>일시불부터 최대 24개월 할부까지 돼요</p></div>
+          </li>
+          <li class="tstep on">
+            <span class="tno">5</span>
+            <div class="tbd"><h3>송금 확인</h3><p>결제가 확인되면 평균 5분 안에 <br>받는 분 계좌로 송금이 완료되고 <br>내역은 마이페이지에서 볼 수 있어요</p></div>
+          </li>
+          <li class="tstep">
+            <span class="tno">6</span>
+            <div class="tbd"><h3>취소 · 환불</h3><p>송금 전이라면 언제든 100% 취소되고 <br>예약 송금은 전날까지 취소할 수 있어요 <br>반려되면 돈이 나가지 않아요</p></div>
+          </li>
+        </ol>
       </div>
 
     </div>
