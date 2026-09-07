@@ -1258,10 +1258,10 @@
     #featsec .rz li{margin-bottom:0; font-size:13.5px; line-height:1.55;}
     #featsec .rz li:nth-child(n+2){display:none;}
     /* 아이콘 — 카드 오른쪽 밖으로 크게 · 화살표와 안 겹치게 아래쪽에 */
-    #featsec .rz .fig{position:absolute; right:-34px; bottom:10px; z-index:2;
-      max-width:134px; max-height:134px;
-      filter:drop-shadow(0 5px 8px rgba(8,26,66,.16));}
-    #featsec .rzgrid .rz:last-child .fig, #featsec .rz.alt .fig{right:-34px;}
+    /* 그림자는 이미지에 이미 들어 있어 따로 넣지 않는다 */
+    #featsec .rz .fig{position:absolute; right:-49px; bottom:35px; z-index:2;
+      max-width:134px; max-height:134px; filter:none;}
+    #featsec .rzgrid .rz:last-child .fig, #featsec .rz.alt .fig{right:-49px;}
     /* 설명 앞 가운뎃점 제거 */
     #featsec .rz li{padding-left:0;}
     #featsec .rz li:before{display:none;}
