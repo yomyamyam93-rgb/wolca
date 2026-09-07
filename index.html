@@ -1101,6 +1101,9 @@
       color-mix(in srgb, var(--primary) 7%, #fff) 76%,
       rgba(255,255,255,0) 100%);}
   #howto > *{position:relative; z-index:1;}
+  /* 바탕이 위아래로 넘쳐 칠해지는 만큼 단락 간격을 더해 준다 (앞뒤 흰 여백 유지) */
+  #howto{margin-top:calc(var(--gap) + 115px);}
+  #featsec{margin-top:calc(var(--gap) + 80px);}
   /* 제목과 사진 사이를 좁힌다 */
   #howto .head + *{margin-top:22px;}
   @media(min-width:900px){ #howto .head + *{margin-top:30px;} }
