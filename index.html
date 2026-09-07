@@ -1243,7 +1243,10 @@
     /* 카드 밖으로 3D 가 튀어나오게 — 오른쪽에 자리를 비우고 경계를 넘긴다 */
     #featsec .rzgrid{overflow:visible;}
     #featsec .rz{flex:none; width:auto; margin:0 44px 0 6px; overflow:visible;
-      padding:26px 104px 74px 20px; min-height:0;}
+      padding:30px 92px 92px 20px; min-height:0;
+      box-shadow:0 4px 14px rgba(15,23,42,.06), 0 1px 3px rgba(15,23,42,.04);}
+    /* 장식 화살표 제거 */
+    #featsec .rz .uarw{display:none;}
     #featsec .rz .in{font-size:17px;}
     #featsec .rz h3{font-size:17px;}
     /* 설명은 한 줄만 */
@@ -1251,10 +1254,10 @@
     #featsec .rz li{margin-bottom:0; font-size:13.5px; line-height:1.55;}
     #featsec .rz li:nth-child(n+2){display:none;}
     /* 아이콘 — 카드 오른쪽 밖으로 크게 · 화살표와 안 겹치게 아래쪽에 */
-    #featsec .rz .fig{position:absolute; right:-44px; bottom:-10px; z-index:2;
-      max-width:140px; max-height:140px;
-      filter:drop-shadow(0 12px 20px rgba(8,26,66,.20));}
-    #featsec .rzgrid .rz:last-child .fig, #featsec .rz.alt .fig{right:-44px;}
+    #featsec .rz .fig{position:absolute; right:-34px; bottom:-8px; z-index:2;
+      max-width:112px; max-height:112px;
+      filter:drop-shadow(0 8px 14px rgba(8,26,66,.18));}
+    #featsec .rzgrid .rz:last-child .fig, #featsec .rz.alt .fig{right:-34px;}
     /* 설명 앞 가운뎃점 제거 */
     #featsec .rz li{padding-left:0;}
     #featsec .rz li:before{display:none;}
