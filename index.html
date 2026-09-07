@@ -1157,6 +1157,11 @@
       object-position:center 44%; margin-bottom:10px;}
   }
 
+  /* 기능 카드 설명 — 가운뎃점 빼고 두 줄만 (PC · 모바일 공통) */
+  #featsec .rz li{padding-left:0;}
+  #featsec .rz li:before{display:none;}
+  #featsec .rz li:nth-child(n+3){display:none;}
+
   /* 결제 방식 제목 — 파란색 빼고 검정으로 */
   #featsec .h-sec .hl{color:var(--ink);}
   /* 모바일 — 단계 선택을 못 바꾸게 하고 마지막 단계만 켠다 */
@@ -1266,19 +1271,15 @@
     #featsec .rz .uarw{display:none;}
     #featsec .rz .in{font-size:17px;}
     #featsec .rz h3{font-size:17px;}
-    /* 설명은 한 줄만 */
     #featsec .rz ul{margin-top:10px;}
-    #featsec .rz li{margin-bottom:0; font-size:13.5px; line-height:1.55;}
-    #featsec .rz li:nth-child(n+2){display:none;}
+    #featsec .rz li{margin-bottom:5px; font-size:13.5px; line-height:1.55;}
     /* 아이콘 — 카드 오른쪽 밖으로 크게 · 화살표와 안 겹치게 아래쪽에 */
     /* 그림자는 이미지에 이미 들어 있어 따로 넣지 않는다 */
     #featsec .rz .fig{position:absolute; right:-49px; bottom:35px; z-index:2;
       max-width:134px; max-height:134px; filter:none;}
     #featsec .rz .fig{bottom:25px;}
     #featsec .rzgrid .rz:last-child .fig, #featsec .rz.alt .fig{right:-49px;}
-    /* 설명 앞 가운뎃점 제거 */
-    #featsec .rz li{padding-left:0;}
-    #featsec .rz li:before{display:none;}
+
   }
 
   /* 기능 카드 — 좌상단 흰색에서 우하단 옅은 하늘색으로 */
