@@ -1045,7 +1045,7 @@
       align-self:center; justify-self:center; margin-top:0;
       color:var(--primary); opacity:.6;}
     #itemsec .itpanel{grid-column:3; grid-row:2;
-      margin-top:0; align-self:stretch; max-width:none; width:100%;}
+      margin-top:0; align-self:center; max-width:none; width:100%;}
     /* 위아래로 쌓이면 속칸이 너무 커지지 않게 — 폭 고정 */
     #itemsec .itin{flex:0 0 auto; width:170px; max-width:170px;}
     #itemsec .itl{padding:0;}
@@ -1065,9 +1065,23 @@
   .midband{clip-path:none; margin-top:0; padding-top:140px;}
   @media(min-width:768px){ .midband{padding-top:190px;} }
   /* 남색 단락 위쪽을 흰색에서 서서히 */
-  #trustsec{position:relative; clip-path:none; margin-top:0;}
-  #trustsec:before{content:''; position:absolute; top:0; left:0; right:0; height:240px;
-    background:linear-gradient(180deg, #FFFFFF 0%, rgba(255,255,255,.70) 36%, rgba(255,255,255,0) 100%);
+  /* 토스식 — 길고 완만하게 흰색이 걷히면서 남색이 드러난다 */
+  #trustsec{position:relative; clip-path:none; margin-top:0;
+    --fade:300px; padding-top:calc(var(--fade) + 40px);}
+  @media(min-width:768px){ #trustsec{--fade:430px;} }
+  #trustsec:before{content:''; position:absolute; top:0; left:0; right:0; height:var(--fade);
+    background:linear-gradient(180deg,
+      #FFFFFF 0%,
+      rgba(255,255,255,.985) 10%,
+      rgba(255,255,255,.945) 20%,
+      rgba(255,255,255,.875) 30%,
+      rgba(255,255,255,.775) 40%,
+      rgba(255,255,255,.650) 50%,
+      rgba(255,255,255,.505) 60%,
+      rgba(255,255,255,.355) 70%,
+      rgba(255,255,255,.215) 80%,
+      rgba(255,255,255,.095) 90%,
+      rgba(255,255,255,0) 100%);
     pointer-events:none; z-index:0;}
   #trustsec > *{position:relative; z-index:1;}
 
