@@ -1034,7 +1034,8 @@
   @media(min-width:1000px){
     /* 타일 왼쪽 · 상세 패널 오른쪽 — 좌우 허전함 없이 */
     /* 타일 · 화살표 · 상세 패널 세 칸 — 높이를 맞춘다 */
-    #itemsec .wrap{display:grid; grid-template-columns:540px 44px 1fr; gap:18px;
+    #itemsec .wrap{display:grid; grid-template-columns:540px 44px 1fr;
+      column-gap:18px; row-gap:64px;
       max-width:1120px; margin-left:auto; margin-right:auto; align-items:stretch;}
     #itemsec .head{grid-column:1/-1; width:100%; max-width:none;}
     #itemsec .itgrid{grid-column:1; grid-row:2;
@@ -1139,6 +1140,9 @@
   .tstep.on .tbd h3{color:var(--primary-600);}
   .tstep:focus-visible{outline:2px solid var(--primary); outline-offset:4px; border-radius:8px;}
 
+  /* 항목 단락 — 제목과 타일 사이 여백 */
+  #itemsec .head + *{margin-top:44px;}
+
   /* 클릭되지 않는 장식 화살표는 뺀다 */
   .whygrid .uc .uarw{display:none;}
 
@@ -1198,6 +1202,7 @@
     <div class="wrap">
       <div class="head">
         <h2 class="h-sec"><span class="soft">어떤 항목이 필요하신가요?</span><br>지금 바로 <span class="hl">카드로 결제</span>하세요</h2>
+        <p>원하는 항목을 고르면 필요한 서류와 결제 방법을 바로 확인할 수 있어요</p>
       </div>
 
       <div class="itgrid">
