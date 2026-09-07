@@ -985,6 +985,38 @@
   /* 아이디로 써야 #featsec{margin-top:0} 을 이긴다 */
   #howto, #featsec{margin-top:var(--gap);}
 
+  /* ===== 항목 상세 패널 — 칸 안에 칸 (왼쪽 속칸: 카드 + 항목 이름 / 오른쪽: 서류 · 버튼) ===== */
+  #itemsec .itpanel{display:flex !important; flex-direction:row; align-items:stretch;
+    gap:12px !important; padding:12px; background:#fff; border:1px solid #EEF0F4;}
+  @media(min-width:1000px){ #itemsec .itpanel{gap:16px !important; padding:14px;} }
+  #itemsec .itin{order:0; flex:0 0 42%; max-width:42%;
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px;
+    border-radius:14px; padding:18px 14px;
+    background:linear-gradient(150deg,#CFDEF8 0%,#DFE7F7 58%,#EFF3FB 100%);}
+  #itemsec .itin .itin-ico{width:62px; height:62px; border-radius:20px; background:#fff;
+    display:flex; align-items:center; justify-content:center;
+    color:var(--primary); font-size:30px; box-shadow:0 4px 14px rgba(15,23,42,.08);}
+  #itemsec .itin .itin-name{font-size:17px; font-weight:800; letter-spacing:-.3px; color:var(--ink);}
+  @media(min-width:1000px){
+    #itemsec .itin{padding:30px 20px; gap:16px; border-radius:15px;}
+    #itemsec .itin .itin-ico{width:84px; height:84px; border-radius:26px; font-size:42px;}
+    #itemsec .itin .itin-name{font-size:21px;}
+  }
+  #itemsec .itl h3{margin:0 0 10px; font-size:16px; font-weight:800; letter-spacing:-.3px;
+    line-height:1.35; color:var(--ink);}
+  @media(min-width:1000px){ #itemsec .itl h3{font-size:20px; margin-bottom:14px;} }
+  #itemsec .itl{order:1; flex:1 1 auto; min-width:0;
+    display:flex; flex-direction:column; justify-content:center; align-items:flex-start;
+    text-align:left; padding:4px 6px;}
+  @media(min-width:1000px){ #itemsec .itl{padding:10px 14px;} }
+  #itemsec .itl .itr{margin-top:0;}
+  #itemsec .itl .btn{margin-top:14px; width:100%;}
+
+  /* 이용 방법 05 — 민트 그라데이션 (송금 완료 단계 강조) */
+  .gdgrid .gd:nth-child(5){background:linear-gradient(150deg,#CDEFE7 0%,#E0F5F0 58%,#F5FCFA 100%);}
+  .gdgrid .gd:nth-child(5) .no{background:#12C4AC; box-shadow:0 4px 12px rgba(18,196,172,.30);}
+  .gdgrid .gd:nth-child(5) .nx{color:#0FA895;}
+
   /* 가운데 띠 — 아래쪽도 꺾인 형태로 끝난다 */
   .midband{clip-path:polygon(0 0, 50% 76px, 100% 0, 100% calc(100% - 76px), 50% 100%, 0 calc(100% - 76px));
     padding-bottom:215px;}
@@ -1064,12 +1096,15 @@
       <div class="itarw" aria-hidden="true"><svg viewBox="0 0 22 22" aria-hidden="true"><path d="M4 11h13M11 4l7 7-7 7" stroke="currentColor" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
 
       <div class="itpanel">
+        <div class="itin">
+          <span class="itin-ico"><iconify-icon id="itp-ico" icon="mingcute:home-4-fill" aria-hidden="true"></iconify-icon></span>
+          <b class="itin-name" id="itp-name">월세</b>
+        </div>
         <div class="itl">
           <h3 id="itp-h"></h3>
           <div class="itr" id="itp-docs"></div>
-          <a class="btn btn-primary" id="itgo" href="화면/10_1_유형선택.html"><img class="btn-logo" src="img/logo3-white.png" alt=""><span id="itgo-t">월세 결제하기</span></a>
+          <a class="btn btn-primary" id="itgo" href="화면/10_1_유형선택.html"><img class="btn-logo" src="img/logo3-white.png" alt=""><span id="itgo-t">랜선페이 결제하기</span></a>
         </div>
-        <div class="itr-card" aria-hidden="true"></div>
       </div>
     </div>
 
@@ -1498,8 +1533,11 @@
   function 채우기(b) {
     var n = b.dataset.n, 정보 = 자료[n];
     큰제목.textContent = 정보.t;
-    var 가기글 = document.getElementById('itgo-t');
-    if (가기글) 가기글.textContent = n + ' 결제하기';
+    var 아이콘 = document.getElementById('itp-ico');
+    var 이름 = document.getElementById('itp-name');
+    var 원본 = b.querySelector('iconify-icon');
+    if (아이콘 && 원본) 아이콘.setAttribute('icon', 원본.getAttribute('icon'));
+    if (이름) 이름.textContent = n;
     서류칸.innerHTML = 정보.docs.map(function (d) {
       return '<div class="doc"><span class="ck">✓</span><p>' + d + '</p></div>';
     }).join('');
