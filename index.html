@@ -1101,6 +1101,8 @@
     left:50%; width:calc(100vw - 56px); transform:translateX(-50%); pointer-events:none;
     border-radius:22px; background:color-mix(in srgb, var(--primary) 7%, #fff);}
   @media(min-width:768px){ #howto:before{border-radius:34px;} }
+  /* 모바일 — 둥근 상자 대신 화면을 꽉 채운 띠 */
+  @media(max-width:767px){ #howto:before{width:100vw; border-radius:0;} }
   #howto > *{position:relative; z-index:1;}
   /* 바탕이 위아래로 넘쳐 칠해지는 만큼 단락 간격을 더해 준다 (앞뒤 흰 여백 유지) */
   #howto{margin-top:calc(var(--gap) + var(--bx));}
@@ -1228,18 +1230,22 @@
       transform:none !important; transition:none !important; touch-action:auto;}
     /* 카드 밖으로 3D 가 튀어나오게 — 오른쪽에 자리를 비우고 경계를 넘긴다 */
     #featsec .rzgrid{overflow:visible;}
-    #featsec .rz{flex:none; width:auto; margin:0 6px; overflow:visible;
-      padding:22px 104px 22px 20px; min-height:0;}
+    #featsec .rz{flex:none; width:auto; margin:0 44px 0 6px; overflow:visible;
+      padding:26px 88px 58px 20px; min-height:0;}
     #featsec .rz .in{font-size:17px;}
     #featsec .rz h3{font-size:17px;}
     /* 설명은 한 줄만 */
     #featsec .rz ul{margin-top:10px;}
     #featsec .rz li{margin-bottom:0; font-size:13.5px; line-height:1.55;}
     #featsec .rz li:nth-child(n+2){display:none;}
-    #featsec .rz .fig{position:absolute; right:-14px; bottom:-14px; z-index:2;
-      max-width:112px; max-height:112px;
-      filter:drop-shadow(0 10px 18px rgba(8,26,66,.18));}
-    #featsec .rzgrid .rz:last-child .fig, #featsec .rz.alt .fig{right:-14px;}
+    /* 아이콘 — 카드 오른쪽 밖으로 크게 · 화살표와 안 겹치게 아래쪽에 */
+    #featsec .rz .fig{position:absolute; right:-48px; bottom:-6px; z-index:2;
+      max-width:120px; max-height:120px;
+      filter:drop-shadow(0 12px 20px rgba(8,26,66,.20));}
+    #featsec .rzgrid .rz:last-child .fig, #featsec .rz.alt .fig{right:-48px;}
+    /* 설명 앞 가운뎃점 제거 */
+    #featsec .rz li{padding-left:0;}
+    #featsec .rz li:before{display:none;}
   }
 
   /* 기능 카드 — 좌상단 흰색에서 우하단 옅은 하늘색으로 */
@@ -1434,7 +1440,7 @@
   <section class="sec tint" id="featsec">
     <div class="wrap">
       <div class="head">
-        <h2 class="h-sec">원하는 시간에 원하는 방식으로<br><span class="hl">맞춤 송금 시스템</span></h2>
+        <h2 class="h-sec">원하는 시간 · 원하는 방식<br><span class="hl">맞춤 송금 시스템</span></h2>
         <a class="morelink" href="app.html" target="_blank" rel="noopener">결제 바로가기<svg viewBox="0 0 22 22" aria-hidden="true"><path d="M8.5 4.5 15 11l-6.5 6.5" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       </div>
 
