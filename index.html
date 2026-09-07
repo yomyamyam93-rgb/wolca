@@ -862,8 +862,11 @@
   .hero > .hero2, .hero > .wrap, .hero > .sdown{flex:0 0 auto;}
   /* 사진 비율은 원본 그대로 — 좌우가 절대 안 잘린다.
      자리가 좁으면 아래(숫자 카드가 덮는 쪽)만 잘리고 남는 높이는 위아래 여백으로 간다 */
-  .hmodel{flex:0 1 auto; align-self:center; overflow:hidden;
-    width:min(588px, calc((100vw - 32px) * .95)); aspect-ratio:1603/1147; min-height:118px; margin-top:26px;}
+  .hmodel{--mw:min(588px, calc((100vw - 32px) * .95));
+    flex:1 1 auto; align-self:center; overflow:hidden;
+    width:var(--mw); aspect-ratio:1603/1147; height:auto; min-height:118px; margin-top:20px;
+    /* 남는 높이를 조금 더 먹되 좌우 잘림은 최대 15%까지만 */
+    max-height:calc(var(--mw) / 1.398 * 1.15);}
   .hmodel img{width:100%; height:100%; object-fit:cover; object-position:center top;}
   /* 글 묶음과 사진 사이 최소 숨통 */
   .hero > .hero2{margin-bottom:clamp(22px, 4svh, 54px);}
@@ -1043,17 +1046,13 @@
   }
 
   /* 숫자 카드 ~ 「어떤 항목이 필요하신가요?」 사이 조금 더 */
-  #itemsec{padding-top:92px;}
-  @media(min-width:768px){ #itemsec{padding-top:156px;} }
+  #itemsec{padding-top:92px; padding-bottom:150px;}
+  @media(min-width:768px){ #itemsec{padding-top:156px; padding-bottom:230px;} }
 
 
-  /* 가운데 띠 — 아래쪽도 꺾인 형태로 끝난다 */
-  .midband{clip-path:polygon(0 0, 50% 76px, 100% 0, 100% calc(100% - 76px), 50% 100%, 0 calc(100% - 76px));
-    padding-bottom:215px;}
-  @media(max-width:767px){
-    .midband{clip-path:polygon(0 0, 50% 52px, 100% 0, 100% calc(100% - 52px), 50% 100%, 0 calc(100% - 52px));
-      padding-bottom:150px;}
-  }
+  /* 가운데 띠 — 아래 여백 (꺾임은 위 규칙 하나만 쓴다) */
+  .midband{padding-bottom:215px;}
+  @media(max-width:767px){ .midband{padding-bottom:150px;} }
 </style>
 </head>
 <body>
