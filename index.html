@@ -1093,14 +1093,19 @@
     padding:0 0 30px; max-width:560px; margin-left:auto; margin-right:auto;}
   /* 하늘색 바탕은 제목까지 덮는다 — 단락 밖으로 넘겨 칠한다 */
   #howto{position:relative;}
-  #howto:before{content:''; position:absolute; z-index:0; top:-70px; bottom:-70px;
+  /* 상자가 위아래로 넘치는 양 — 이 값만 바꾸면 여백과 단락 간격이 같이 움직인다 */
+  #howto{--bx:96px;}
+  @media(min-width:768px){ #howto{--bx:150px;} }
+  #howto:before{content:''; position:absolute; z-index:0;
+    top:calc(-1 * var(--bx)); bottom:calc(-1 * var(--bx));
     left:50%; width:calc(100vw - 56px); transform:translateX(-50%); pointer-events:none;
     border-radius:22px; background:color-mix(in srgb, var(--primary) 7%, #fff);}
-  @media(min-width:768px){ #howto:before{border-radius:34px; top:-90px; bottom:-90px;} }
+  @media(min-width:768px){ #howto:before{border-radius:34px;} }
   #howto > *{position:relative; z-index:1;}
   /* 바탕이 위아래로 넘쳐 칠해지는 만큼 단락 간격을 더해 준다 (앞뒤 흰 여백 유지) */
-  #howto{margin-top:calc(var(--gap) + 90px);}
-  #featsec{margin-top:calc(var(--gap) + 90px);}
+  #howto{margin-top:calc(var(--gap) + var(--bx));}
+  #featsec{margin-top:calc(var(--gap) + 150px);}
+  @media(max-width:767px){ #featsec{margin-top:calc(var(--gap) + 96px);} }
   /* 제목과 사진 사이를 좁힌다 */
   #howto .head + *{margin-top:22px;}
   @media(min-width:900px){ #howto .head + *{margin-top:30px;} }
