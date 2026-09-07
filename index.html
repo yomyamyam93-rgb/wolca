@@ -1090,7 +1090,7 @@
   /* 둘을 옅은 패널 하나에 담는다 — 흰 배경 위에서 한 덩어리로 읽히게 */
   /* 상자 대신 — 가운데는 옅은 하늘색, 좌우로 갈수록 흰색으로 사라진다 */
   .hwrap{position:relative; display:grid; gap:32px; justify-items:center;
-    padding:30px 22px; max-width:560px; margin-left:auto; margin-right:auto;}
+    padding:0 0 30px; max-width:560px; margin-left:auto; margin-right:auto;}
   /* 하늘색 바탕은 제목까지 덮는다 — 단락 밖으로 넘겨 칠한다 */
   #howto{position:relative;}
   #howto:before{content:''; position:absolute; z-index:0; top:-60px; bottom:-70px;
@@ -1108,7 +1108,7 @@
   @media(min-width:900px){
     .hwrap{grid-template-columns:1fr 246px; gap:56px;
       max-width:880px; align-items:center; justify-items:stretch;
-      padding:56px 40px;}
+      padding:0 40px 56px;}
     .tline{order:0;}
   }
   /* 휴대폰 목업 — 테두리는 CSS 로 그린다 */
