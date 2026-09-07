@@ -987,25 +987,26 @@
 
   /* ===== 항목 상세 패널 — 칸 안에 칸 (왼쪽 속칸: 카드 + 항목 이름 / 오른쪽: 서류 · 버튼) ===== */
   #itemsec .itpanel{display:flex !important; flex-direction:row; align-items:stretch;
-    gap:12px !important; padding:12px; background:#fff; border:1px solid #EEF0F4;}
-  @media(min-width:1000px){ #itemsec .itpanel{gap:16px !important; padding:14px;} }
-  #itemsec .itin{order:0; flex:0 0 42%; max-width:42%;
-    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px;
-    border-radius:14px; padding:18px 14px;
-    background:linear-gradient(150deg,#CFDEF8 0%,#DFE7F7 58%,#EFF3FB 100%);}
-  #itemsec .itin .itin-ico{width:62px; height:62px; border-radius:20px; background:#fff;
-    display:flex; align-items:center; justify-content:center;
-    color:var(--primary); font-size:30px; box-shadow:0 4px 14px rgba(15,23,42,.08);}
+    gap:8px !important; padding:7px; background:#fff; border:1px solid #EEF0F4;}
+  @media(min-width:1000px){ #itemsec .itpanel{gap:10px !important; padding:8px;} }
+  /* 왼쪽 속칸 · 오른쪽 내용 = 반반 */
+  #itemsec .itin{order:0; flex:1 1 0; min-width:0;
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px;
+    border-radius:13px; padding:22px 14px;
+    background:linear-gradient(140deg,#A9C8F7 0%,#C9DBF9 38%,#E4ECFB 70%,#F6F9FE 100%);}
+  /* 아이콘은 상자 없이 그대로 */
+  #itemsec .itin .itin-ico{display:flex; align-items:center; justify-content:center;
+    color:var(--primary-600); font-size:40px; line-height:1;}
   #itemsec .itin .itin-name{font-size:17px; font-weight:800; letter-spacing:-.3px; color:var(--ink);}
   @media(min-width:1000px){
-    #itemsec .itin{padding:30px 20px; gap:16px; border-radius:15px;}
-    #itemsec .itin .itin-ico{width:84px; height:84px; border-radius:26px; font-size:42px;}
-    #itemsec .itin .itin-name{font-size:21px;}
+    #itemsec .itin{padding:34px 20px; gap:14px; border-radius:14px;}
+    #itemsec .itin .itin-ico{font-size:58px;}
+    #itemsec .itin .itin-name{font-size:22px;}
   }
   #itemsec .itl h3{margin:0 0 10px; font-size:16px; font-weight:800; letter-spacing:-.3px;
     line-height:1.35; color:var(--ink);}
   @media(min-width:1000px){ #itemsec .itl h3{font-size:20px; margin-bottom:14px;} }
-  #itemsec .itl{order:1; flex:1 1 auto; min-width:0;
+  #itemsec .itl{order:1; flex:1 1 0; min-width:0;
     display:flex; flex-direction:column; justify-content:center; align-items:flex-start;
     text-align:left; padding:4px 6px;}
   @media(min-width:1000px){ #itemsec .itl{padding:10px 14px;} }
