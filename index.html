@@ -930,9 +930,11 @@
   .h-band .hl{color:var(--primary);}
   .h-band br{display:none;}
   /* 세 단락 제목은 한 단계 아래로 (대제목 > 세부제목) */
-  .midband .h-sec{font-size:min(4.4vw, 21px); font-weight:800; letter-spacing:-.3px;
+  /* 아이디 선택자로 써야 위에 있는 #whysec .h-sec 규칙을 이긴다 */
+  #whysec .h-sec, #howto .h-sec, #featsec .h-sec{
+    font-size:min(4.8vw, 23px); font-weight:800; letter-spacing:-.3px;
     line-height:1.5; color:var(--ink);}
-  .midband .h-sec .hl{color:var(--ink);}
+  #whysec .h-sec .hl, #howto .h-sec .hl, #featsec .h-sec .hl{color:var(--ink);}
   /* 세부제목과 내용 사이 — 대제목보다 훨씬 좁게 */
   .midband .head + *{margin-top:30px;}
   @media(min-width:768px){ .midband .head + *{margin-top:40px;} }
@@ -940,7 +942,14 @@
   /* ===== 신뢰 단락 — 짙은 남색 한 판 (삼쩜삼 톤) =====
      ① 균일한 남색 바탕 ② 본문은 흐린 회청색 ③ 핵심 구절만 연한 파랑
      ④ 그림 · 카드는 한 톤 밝은 남색 상자 안에 */
-  #trustsec{background:#0B1C3C; color:#fff;}
+  #trustsec{background:#0B1C3C; color:#fff;
+    /* 회색 띠의 꺾인 아래 선과 똑같은 모양으로 물린다 (틈 없이) */
+    clip-path:polygon(0 0, 50% 76px, 100% 0, 100% 100%, 0 100%);
+    margin-top:-76px; padding-top:244px;}
+  @media(max-width:767px){
+    #trustsec{clip-path:polygon(0 0, 50% 52px, 100% 0, 100% 100%, 0 100%);
+      margin-top:-52px; padding-top:156px;}
+  }
   #trustsec .eyebrow{color:#7FB0FF;}
   #trustsec .h-sec{color:#fff;}
   #trustsec .h-sec .soft{color:rgba(226,236,255,.55);}
