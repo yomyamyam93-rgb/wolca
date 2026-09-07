@@ -645,7 +645,7 @@
   /* 01 민트 · 02 분홍 포인트 (헤더 이모지 색과 통일) */
   .whygrid .uc:nth-child(1) .no{background:var(--primary);}
 
-  .whygrid .uc:nth-child(2) .no{background:var(--mint);}
+  .whygrid .uc:nth-child(2) .no{background:var(--primary);}
   /* 흰 카드 3장의 화살표는 검정 */
   .whygrid .uc:not(.blue) .uarw{color:var(--ink);}
   /* 신뢰 단락 — 민트 포인트 */
@@ -913,9 +913,8 @@
   @media(min-width:1000px){ .whygrid .uc:not(.blue){padding:8px;} }
   .whygrid .ucin{position:relative; border-radius:13px; padding:20px 20px 26px;}
   @media(min-width:1000px){ .whygrid .ucin{padding:24px 24px 32px; border-radius:14px;} }
-  .whygrid .uc:nth-child(1) .ucin{background:linear-gradient(150deg,var(--primary-150) 0%,var(--primary-100) 58%,#F3F7FD 100%);}
-  .whygrid .uc:nth-child(2) .ucin{background:linear-gradient(150deg,var(--mint-100) 0%,var(--mint-50) 58%,#F2FBF9 100%);}
-  .whygrid .uc:nth-child(3) .ucin{background:linear-gradient(150deg,var(--primary-150) 0%,var(--primary-100) 58%,#F4F9FD 100%);}
+  /* 파스텔은 한 가지만 — 세 장을 똑같이 (다른 건 04 한 장뿐) */
+  .whygrid .uc:not(.blue) .ucin{background:linear-gradient(150deg,var(--primary-150) 0%,var(--primary-100) 58%,#F4F8FD 100%);}
   .whygrid .ucin .no{margin:0;}
   .whygrid .ucin h3{margin-top:14px;}
   .whygrid .ucin .uarw{position:absolute; top:18px; right:18px; color:var(--ink);}
@@ -1055,6 +1054,9 @@
 
   /* 후기 단락 제목 — 두 줄 모두 굵게 */
   #rvsec .h-sec .soft{font-weight:800; color:var(--ink);}
+
+  /* 클릭되지 않는 장식 화살표는 뺀다 */
+  .whygrid .uc .uarw{display:none;}
 
   /* 가운데 띠 — 아래 여백 (꺾임은 위 규칙 하나만 쓴다) */
   .midband{padding-bottom:215px;}
