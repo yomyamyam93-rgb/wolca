@@ -1128,6 +1128,13 @@
   .tbd p{margin-top:7px; font-size:15px; line-height:1.75; color:var(--sub);}
   @media(min-width:900px){ .tbd p{font-size:15.5px;} }
 
+  /* 모바일 — 휴대폰 목업도 배경 그라데이션도 없이 타임라인만 */
+  @media(max-width:899px){
+    .hcol{display:none !important;}
+    .hwrap{padding:0; background:none;}
+    .hwrap:before{display:none !important;}
+  }
+
   /* 단계 넘기기 — 좌우 화살표 · 단계 클릭 */
   .hcol{display:flex; flex-direction:column; align-items:center; gap:18px;}
   @media(min-width:900px){ .hcol{order:1;} }
@@ -1152,12 +1159,12 @@
   .bandart{position:relative; border-radius:22px; overflow:hidden;
     aspect-ratio:16/8; min-height:230px; padding:20px;
     display:flex; align-items:center; justify-content:center;
-    background-image:url('img/hero-bg6.jpg');
+    background-image:url('img/band-bg.png?v=1');
     background-position:center center; background-size:cover;
     background-attachment:scroll;}
   /* 사진 위에 어두운 막 */
   .bandart:after{content:''; position:absolute; inset:0; z-index:1;
-    background:linear-gradient(rgba(8,17,38,.60), rgba(8,17,38,.72));}
+    background:linear-gradient(rgba(8,17,38,.42), rgba(8,17,38,.56));}
   .bandart .h-band{position:relative; z-index:2;}
   @media(min-width:768px){
     .bandart{border-radius:34px; padding:32px;
@@ -1165,7 +1172,7 @@
       margin-left:calc(50% - 50vw + 28px); margin-right:calc(50% - 50vw + 28px); max-width:none;
       /* 스크롤해도 사진은 제자리 — 글만 지나간다 */
       background-attachment:fixed;
-      background-image:url('img/hero-bg6.jpg');}
+      background-image:url('img/band-bg.png?v=1');}
   }
   .bandart .h-band{color:#FFFFFF; text-shadow:0 2px 20px rgba(4,12,30,.55);}
   .bandart .h-band .soft{color:#FFFFFF;}
@@ -1174,44 +1181,27 @@
   /* ===== 항목 상세 — 흰 휴대폰 목업(윗부분만) 안에 내용 · 그 위에 뜬 신용카드 ===== */
   #itemsec .itpanel{display:block !important; background:none; border:none; padding:0;
     position:relative; overflow:hidden; box-shadow:none;}
-  /* 폰 = 상태바 + 앱바 + 카드 + 흰 내용 카드 (실제 앱 화면처럼) */
-  #itemsec .itphone{position:relative; width:min(286px, 84%); margin:0 auto;
-    background:#F3F4F8; border:1px solid #DCE0E8; border-bottom:none;
-    border-radius:30px 30px 0 0; padding:10px 12px 0;
-    display:flex; flex-direction:column; align-items:stretch; gap:11px;
-    box-shadow:0 18px 46px rgba(15,23,42,.15), 0 3px 12px rgba(15,23,42,.07);}
-  #itemsec .itbar{display:flex; align-items:center; justify-content:space-between;
-    padding:2px 8px 0; font-size:11.5px; font-weight:700; color:#1D2023; letter-spacing:.1px;}
-  #itemsec .itst{display:flex; align-items:center; gap:5px; color:#1D2023;}
-  #itemsec .itst iconify-icon{font-size:12px;}
-  #itemsec .itst .sg{display:flex; align-items:flex-end; gap:1.5px; height:9px; font-style:normal;}
-  #itemsec .itst .sg em{width:2.5px; background:#1D2023; border-radius:1px;}
-  #itemsec .itst .sg em:nth-child(1){height:3px;}
-  #itemsec .itst .sg em:nth-child(2){height:5px;}
-  #itemsec .itst .sg em:nth-child(3){height:7px;}
-  #itemsec .itst .sg em:nth-child(4){height:9px;}
-  #itemsec .itst .bt{position:relative; width:17px; height:9px; font-style:normal;
-    border:1.3px solid #1D2023; border-radius:3px;}
-  #itemsec .itst .bt:before{content:''; position:absolute; inset:1.4px; width:70%;
-    background:#1D2023; border-radius:1px;}
-  #itemsec .itst .bt:after{content:''; position:absolute; right:-3.2px; top:2.6px;
-    width:1.8px; height:3.4px; background:#1D2023; border-radius:0 1px 1px 0;}
-  #itemsec .itnav{display:flex; align-items:center; gap:6px; padding:2px 6px 0;}
-  #itemsec .itnav img{width:17px; height:auto;}
-  #itemsec .itnav b{font-size:13.5px; font-weight:800; letter-spacing:-.3px; color:var(--ink);}
-  #itemsec .itnav iconify-icon{margin-left:auto; font-size:17px; color:var(--placeholder);}
-  #itemsec .itcard{position:static; transform:none; width:100%; height:auto; margin:0;
-    border-radius:11px; filter:drop-shadow(0 8px 18px rgba(8,26,66,.20));}
-  #itemsec .itphone .itl{display:flex; flex-direction:column; align-items:stretch;
-    text-align:left; width:100%; padding:14px 13px 14px;
-    background:#FFFFFF; border-radius:16px;
-    box-shadow:0 2px 10px rgba(15,23,42,.05);}
-  #itemsec .itphone .itl h3{margin:0 0 9px; text-align:left; font-size:15px;}
-  #itemsec .itphone .itl .btn{width:100%; min-width:0; margin-top:12px; height:44px; font-size:14px;}
-  @media(min-width:1000px){
-    #itemsec .itphone{width:300px; margin:0 auto; padding:10px 13px 0; gap:12px;}
-    #itemsec .itphone .itl h3{font-size:16px;}
-  }
+  /* ===== 항목 상세 패널 — 왼쪽 세로 신용카드 / 오른쪽 서류 · 버튼 ===== */
+  #itemsec .itpanel{display:flex !important; flex-direction:row; align-items:center;
+    gap:16px !important; padding:16px; background:#fff; border:1px solid #EEF0F4;}
+  @media(min-width:1000px){ #itemsec .itpanel{gap:22px !important; padding:22px;} }
+  #itemsec .itin{order:0; flex:0 0 39%; max-width:153px; min-width:0;
+    aspect-ratio:1/1.492; height:auto; align-self:center;
+    display:flex; align-items:center; justify-content:center;
+    border-radius:0; padding:0; background:none;}
+  #itemsec .itin .itr-card{width:100%; max-width:none; min-width:0; margin:0;
+    aspect-ratio:1/1.492; align-self:stretch;}
+  #itemsec .itl h3{margin:0 0 10px; font-size:16px; font-weight:800; letter-spacing:-.3px;
+    line-height:1.35; color:var(--ink);}
+  @media(min-width:1000px){ #itemsec .itl h3{font-size:20px; margin-bottom:14px;} }
+  #itemsec .itl{order:1; flex:1 1 auto; min-width:0;
+    display:flex; flex-direction:column; justify-content:center; align-items:flex-start;
+    text-align:left; padding:4px 6px;}
+  @media(min-width:1000px){ #itemsec .itl{padding:10px 14px;} }
+  #itemsec .itl .itr{margin-top:0;}
+  #itemsec .itl .btn{margin-top:16px; width:100%; height:48px; font-size:14.5px; padding:0 20px;}
+  @media(min-width:1000px){ #itemsec .itl .btn{height:54px; font-size:16px;} }
+  @media(min-width:1000px){ #itemsec .itin{flex:0 0 auto; width:170px; max-width:170px;} #itemsec .itl{padding:0;} }
 
   /* 기능 카드 — 좌상단 흰색에서 우하단 옅은 하늘색으로 */
   #featsec .rz{background:linear-gradient(135deg,
@@ -1297,25 +1287,13 @@
       <div class="itarw" aria-hidden="true"><svg viewBox="0 0 22 22" aria-hidden="true"><path d="M4 11h13M11 4l7 7-7 7" stroke="currentColor" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
 
       <div class="itpanel">
-        <div class="itphone">
-          <div class="itbar" aria-hidden="true">
-            <b>9:41</b>
-            <span class="itst">
-              <i class="sg"><em></em><em></em><em></em><em></em></i>
-              <iconify-icon icon="mingcute:wifi-line"></iconify-icon>
-              <i class="bt"></i>
-            </span>
-          </div>
-          <div class="itnav" aria-hidden="true">
-            <img src="img/logo3.png" alt=""><b>랜선페이</b>
-            <iconify-icon icon="mingcute:user-3-fill"></iconify-icon>
-          </div>
-          <img class="itcard" src="img/card-face.png" alt="" aria-hidden="true">
-          <div class="itl">
-            <h3 id="itp-h"></h3>
-            <div class="itr" id="itp-docs"></div>
-            <a class="btn btn-primary" id="itgo" href="화면/10_1_유형선택.html"><img class="btn-logo" src="img/logo3-white.png" alt=""><span id="itgo-t">즉시 결제하기</span></a>
-          </div>
+        <div class="itin">
+          <div class="itr-card" aria-hidden="true"></div>
+        </div>
+        <div class="itl">
+          <h3 id="itp-h"></h3>
+          <div class="itr" id="itp-docs"></div>
+          <a class="btn btn-primary" id="itgo" href="화면/10_1_유형선택.html"><img class="btn-logo" src="img/logo3-white.png" alt=""><span id="itgo-t">즉시 결제하기</span></a>
         </div>
       </div>
     </div>
@@ -1385,29 +1363,25 @@
           <div class="hphone"><img id="hshot" src="img/guide_shots/login.png?v=2" alt="단계별 앱 화면"></div>
           <div class="hnav">
             <button class="hbtn" type="button" id="hprev" aria-label="이전 단계">‹</button>
-            <span class="hcount"><b id="hnow">1</b> / 5</span>
+            <span class="hcount"><b id="hnow">1</b> / 4</span>
             <button class="hbtn" type="button" id="hnext" aria-label="다음 단계">›</button>
           </div>
         </div>
         <ol class="tline">
-          <li class="tstep on" data-shot="img/guide_shots/login.png?v=2" role="button" tabindex="0">
+          <li class="tstep on" data-shot="img/guide_shots/reg2.png?v=1" role="button" tabindex="0">
             <span class="tno">1</span>
-            <div class="tbd"><h3>회원가입 · 로그인</h3><p>휴대폰 번호만 있으면 1분 안에 가입돼요<br>이미 계정이 있다면 로그인만 하면 됩니다</p></div>
-          </li>
-          <li class="tstep" data-shot="img/guide_shots/reg2.png?v=1" role="button" tabindex="0">
-            <span class="tno">2</span>
             <div class="tbd"><h3>결제 정보 등록</h3><p>결제할 항목과 금액 · 받는 분 계좌를 입력하세요<br>한 번 등록하면 다음부터는 불러와서 씁니다</p></div>
           </li>
           <li class="tstep" data-shot="img/guide_shots/reg4.png?v=1" role="button" tabindex="0">
-            <span class="tno">3</span>
+            <span class="tno">2</span>
             <div class="tbd"><h3>서류 검토</h3><p>임대차계약서 같은 증빙 서류를 올리면<br>연중무휴로 검토해 보통 10분 안에 알려드려요</p></div>
           </li>
           <li class="tstep" data-shot="img/guide_shots/reg3.png?v=1" role="button" tabindex="0">
-            <span class="tno">4</span>
+            <span class="tno">3</span>
             <div class="tbd"><h3>신용카드로 결제</h3><p>등록한 내용을 확인하고 원하는 카드로 결제하세요<br>일시불부터 최대 24개월 할부까지 됩니다</p></div>
           </li>
           <li class="tstep" data-shot="img/guide_shots/done.png?v=1" role="button" tabindex="0">
-            <span class="tno">5</span>
+            <span class="tno">4</span>
             <div class="tbd"><h3>송금 확인</h3><p>결제가 확인되면 평균 5분 안에 받는 분 계좌로 입금되고<br>내역은 마이페이지에서 바로 볼 수 있어요</p></div>
           </li>
         </ol>
