@@ -1155,9 +1155,8 @@
     background-image:url('img/hero-bg6.jpg');
     background-position:center center; background-size:cover;
     background-attachment:scroll;}
-  /* 사진 위에 흐림 + 어두운 막 (배경 고정을 살리려고 오버레이로 흐린다) */
+  /* 사진 위에 어두운 막 */
   .bandart:after{content:''; position:absolute; inset:0; z-index:1;
-    -webkit-backdrop-filter:blur(4px); backdrop-filter:blur(4px);
     background:linear-gradient(rgba(8,17,38,.60), rgba(8,17,38,.72));}
   .bandart .h-band{position:relative; z-index:2;}
   @media(min-width:768px){
