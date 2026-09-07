@@ -1199,9 +1199,13 @@
   .bandart .h-band{max-width:100%; color:#FFFFFF; text-shadow:0 2px 20px rgba(4,12,30,.55);}
   /* 모바일 — 마스크 없이 화면을 꽉 채운다 */
   @media(max-width:767px){
-    .bandart{width:auto; min-height:0; aspect-ratio:16/9; border-radius:0; padding:20px 22px;
+    .bandart{width:auto; min-height:0; aspect-ratio:3/2; border-radius:0; padding:20px 22px;
       margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw);}
     .bandart .h-band{font-size:min(7vw, 32px);}
+    /* 사진 띠 앞뒤 흰 여백을 줄인다 */
+    #itemsec{padding-bottom:92px;}
+    .midband{padding-top:52px;}
+    .bandhead{padding-top:0;}
   }
   .bandart .h-band .soft{color:#FFFFFF;}
   .bandart .h-band .hl{color:#B9D6FF;}
@@ -1799,6 +1803,14 @@
     var src = 단계들[i].dataset.shot;
     if (src && 화면.getAttribute('src') !== src) 화면.setAttribute('src', src);
     if (번호) 번호.textContent = i + 1;
+  }
+  /* 모바일은 목업이 없으니 마지막 단계(송금 확인)만 켜 두고 누를 수 없게 */
+  if (window.matchMedia('(max-width:899px)').matches) {
+    가기(단계들.length - 1);
+    단계들.forEach(function (e) {
+      e.removeAttribute('role'); e.removeAttribute('tabindex'); e.style.cursor = 'default';
+    });
+    return;
   }
   단계들.forEach(function (e, k) {
     e.addEventListener('click', function () { 가기(k); });
