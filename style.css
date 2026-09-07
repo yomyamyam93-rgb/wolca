@@ -91,7 +91,7 @@ img{max-width:100%;}
 .appbar .logo img:first-child{height:22px;}
 .appbar .logo img:last-child{height:17px;}
 .appbar .acts{margin-left:auto; display:flex; align-items:center; gap:2px;}
-.appbar .act{position:relative; width:48px; height:48px; border-radius:12px;
+.appbar .act{position:relative; width:48px; height:48px; border-radius:18px;
   display:flex; align-items:center; justify-content:center; font-size:22px; color:var(--sub);}
 .appbar .act:hover{background:var(--bg);}
 .appbar .act .dot{position:absolute; top:11px; right:11px; width:6px; height:6px;
@@ -100,7 +100,7 @@ img{max-width:100%;}
   display:flex; align-items:center; justify-content:center; font-size:24px;}
 .appbar .ttl{font-size:17px; font-weight:700; letter-spacing:-.3px;}
 /* 상단바 안의 작은 CTA */
-.appbar-cta{height:40px; padding:0 16px; border-radius:12px; font-size:14px; font-weight:700;
+.appbar-cta{height:40px; padding:0 16px; border-radius:18px; font-size:14px; font-weight:700;
   background:var(--primary); background:var(--grad); box-shadow:var(--btn-shadow); color:#fff;
   display:inline-flex; align-items:center; white-space:nowrap;}
 
@@ -111,10 +111,10 @@ img{max-width:100%;}
 /* ---------- 우상단 메뉴 (PC) · 햄버거(모바일) ---------- */
 .gnb{margin-left:auto; display:none; align-items:center; gap:2px;}
 .gnb a{display:inline-flex; align-items:center; min-height:44px; padding:0 14px;
-  font-size:15px; font-weight:700; color:rgba(255,255,255,.75); border-radius:10px;}
+  font-size:15px; font-weight:700; color:rgba(255,255,255,.75); border-radius:18px;}
 .gnb a:hover{background:rgba(255,255,255,.1); color:#fff;}
 .gnb a.on{color:#fff;}
-.burger{margin-left:auto; width:48px; height:48px; border-radius:12px;
+.burger{margin-left:auto; width:48px; height:48px; border-radius:18px;
   display:flex; align-items:center; justify-content:center; font-size:24px; color:#fff;}
 .burger:hover{background:rgba(255,255,255,.1);}
 @media(min-width:1024px){ .gnb{display:flex;} .burger{display:none;} }
@@ -122,7 +122,7 @@ img{max-width:100%;}
 /* ---------- 늘 따라다니는 시작 버튼 ---------- */
 .fab{position:fixed; left:50%; transform:translateX(-50%); bottom:calc(20px + var(--safe)); z-index:70;
   display:inline-flex; align-items:center; gap:8px; height:56px; padding:0 24px;
-  border-radius:8px; background:var(--primary); background:var(--grad);
+  border-radius:18px; background:var(--primary); background:var(--grad);
   color:#fff; font-size:16px; font-weight:700; white-space:nowrap;
   transition:opacity .3s, transform .3s, filter .2s;}
 .fab iconify-icon{font-size:20px;}
@@ -190,7 +190,7 @@ main{flex:1 0 auto;}
 @media(min-width:1024px){ .head .h-sec + p{font-size:21px;} }
 
 /* ---------- 카드 (가이드 6장 · 흰 배경 + 얇은 테두리) ---------- */
-.card{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:22px;}
+.card{background:var(--card); border:1px solid var(--line); border-radius:18px; padding:22px;}
 @media(min-width:768px){ .card{padding:30px;} }
 .grid{display:grid; gap:14px;}
 .grid.c2{grid-template-columns:1fr;}
@@ -202,7 +202,7 @@ main{flex:1 0 auto;}
 
 /* ---------- 버튼 (가이드 6장) ---------- */
 .btn{display:inline-flex; align-items:center; justify-content:center; gap:8px;
-  height:52px; padding:0 24px; border-radius:8px;
+  height:52px; padding:0 24px; border-radius:18px;
   font-size:16px; font-weight:700; white-space:nowrap;
   transition:transform .15s, filter .2s, box-shadow .2s;}
 .btn iconify-icon{font-size:20px;}
@@ -215,7 +215,7 @@ main{flex:1 0 auto;}
 .btn-outline{background:var(--card); border:1px solid var(--border); color:var(--ink);}
 .btn-white{background:#fff; color:var(--primary-600);}
 .btn-ghost{height:44px; padding:0 8px; color:var(--primary-600); font-weight:700;}
-.btn-lg{height:64px; padding:0 36px; font-size:19px; border-radius:14px;}
+.btn-lg{height:64px; padding:0 36px; font-size:19px; border-radius:18px;}
 
 /* 단락마다 넣는 CTA 줄 — 「바로 송금하기」로 보내는 자리 */
 .ctarow{margin-top:32px; display:flex; flex-direction:column; align-items:center; gap:10px;}
@@ -238,7 +238,7 @@ main{flex:1 0 auto;}
 /* ---------- 입력창 (가이드 6장) ---------- */
 .field{margin-top:16px;}
 .field > label{display:block; font-size:13px; font-weight:700; color:var(--sub); margin-bottom:8px;}
-.input{width:100%; height:52px; padding:0 16px; border-radius:12px;
+.input{width:100%; height:52px; padding:0 16px; border-radius:18px;
   border:1px solid var(--border); background:var(--card);
   font-family:inherit; font-size:16px; color:var(--ink);}
 .input::placeholder{color:var(--placeholder);}
@@ -246,7 +246,7 @@ main{flex:1 0 auto;}
 
 /* ---------- 뱃지 (가이드 6장 · 24px · radius 8) ---------- */
 .badge{display:inline-flex; align-items:center; height:28px; padding:0 10px;
-  border-radius:8px; font-size:13px; font-weight:700;
+  border-radius:18px; font-size:13px; font-weight:700;
   background:var(--primary-50); color:var(--primary-600);}
 .badge.ok{background:var(--success-bg); color:var(--success);}
 .badge.warn{background:var(--warn-bg); color:var(--warn);}
@@ -255,7 +255,7 @@ main{flex:1 0 auto;}
 /* ---------- 목록 행 ---------- */
 .row{display:flex; align-items:center; gap:12px; min-height:56px; padding:10px 8px;}
 .row + .row{border-top:1px solid var(--line);}
-.row .ic{width:40px; height:40px; flex:0 0 auto; border-radius:12px;
+.row .ic{width:40px; height:40px; flex:0 0 auto; border-radius:18px;
   background:var(--primary-50); color:var(--primary);
   display:flex; align-items:center; justify-content:center; font-size:20px;}
 .row .tx{flex:1; min-width:0;}
