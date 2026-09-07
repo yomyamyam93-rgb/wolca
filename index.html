@@ -1174,22 +1174,43 @@
   /* ===== 항목 상세 — 흰 휴대폰 목업(윗부분만) 안에 내용 · 그 위에 뜬 신용카드 ===== */
   #itemsec .itpanel{display:block !important; background:none; border:none; padding:0;
     position:relative; overflow:hidden; box-shadow:none;}
-  /* 폰 안 = 카드 → 흰 내용 카드(제목 · 서류 · 버튼) */
-  #itemsec .itphone{position:relative; width:min(286px, 84%); margin:34px auto 0;
-    background:#F3F4F8; border:1px solid #E6E9EF; border-bottom:none;
-    border-radius:32px 32px 0 0; padding:22px 14px 26px;
-    display:flex; flex-direction:column; align-items:stretch; gap:16px;
-    box-shadow:0 18px 46px rgba(15,23,42,.13), 0 3px 12px rgba(15,23,42,.06);}
+  /* 폰 = 상태바 + 앱바 + 카드 + 흰 내용 카드 (실제 앱 화면처럼) */
+  #itemsec .itphone{position:relative; width:min(286px, 84%); margin:0 auto;
+    background:#F3F4F8; border:1px solid #DCE0E8; border-bottom:none;
+    border-radius:30px 30px 0 0; padding:10px 12px 0;
+    display:flex; flex-direction:column; align-items:stretch; gap:11px;
+    box-shadow:0 18px 46px rgba(15,23,42,.15), 0 3px 12px rgba(15,23,42,.07);}
+  #itemsec .itbar{display:flex; align-items:center; justify-content:space-between;
+    padding:2px 8px 0; font-size:11.5px; font-weight:700; color:#1D2023; letter-spacing:.1px;}
+  #itemsec .itst{display:flex; align-items:center; gap:5px; color:#1D2023;}
+  #itemsec .itst iconify-icon{font-size:12px;}
+  #itemsec .itst .sg{display:flex; align-items:flex-end; gap:1.5px; height:9px; font-style:normal;}
+  #itemsec .itst .sg em{width:2.5px; background:#1D2023; border-radius:1px;}
+  #itemsec .itst .sg em:nth-child(1){height:3px;}
+  #itemsec .itst .sg em:nth-child(2){height:5px;}
+  #itemsec .itst .sg em:nth-child(3){height:7px;}
+  #itemsec .itst .sg em:nth-child(4){height:9px;}
+  #itemsec .itst .bt{position:relative; width:17px; height:9px; font-style:normal;
+    border:1.3px solid #1D2023; border-radius:3px;}
+  #itemsec .itst .bt:before{content:''; position:absolute; inset:1.4px; width:70%;
+    background:#1D2023; border-radius:1px;}
+  #itemsec .itst .bt:after{content:''; position:absolute; right:-3.2px; top:2.6px;
+    width:1.8px; height:3.4px; background:#1D2023; border-radius:0 1px 1px 0;}
+  #itemsec .itnav{display:flex; align-items:center; gap:6px; padding:2px 6px 0;}
+  #itemsec .itnav img{width:17px; height:auto;}
+  #itemsec .itnav b{font-size:13.5px; font-weight:800; letter-spacing:-.3px; color:var(--ink);}
+  #itemsec .itnav iconify-icon{margin-left:auto; font-size:17px; color:var(--placeholder);}
   #itemsec .itcard{position:static; transform:none; width:100%; height:auto; margin:0;
-    border-radius:12px; filter:drop-shadow(0 10px 20px rgba(8,26,66,.20));}
+    border-radius:11px; filter:drop-shadow(0 8px 18px rgba(8,26,66,.20));}
   #itemsec .itphone .itl{display:flex; flex-direction:column; align-items:stretch;
-    text-align:left; width:100%; padding:16px 15px 15px;
-    background:#FFFFFF; border-radius:18px;
+    text-align:left; width:100%; padding:14px 13px 14px;
+    background:#FFFFFF; border-radius:16px;
     box-shadow:0 2px 10px rgba(15,23,42,.05);}
-  #itemsec .itphone .itl h3{margin:0 0 10px; text-align:left;}
-  #itemsec .itphone .itl .btn{width:100%; min-width:0; margin-top:14px;}
+  #itemsec .itphone .itl h3{margin:0 0 9px; text-align:left; font-size:15px;}
+  #itemsec .itphone .itl .btn{width:100%; min-width:0; margin-top:12px; height:44px; font-size:14px;}
   @media(min-width:1000px){
-    #itemsec .itphone{width:302px; margin:36px auto 0; padding:24px 16px 28px; gap:18px;}
+    #itemsec .itphone{width:300px; margin:0 auto; padding:10px 13px 0; gap:12px;}
+    #itemsec .itphone .itl h3{font-size:16px;}
   }
 
   /* 기능 카드 — 좌상단 흰색에서 우하단 옅은 하늘색으로 */
@@ -1277,6 +1298,18 @@
 
       <div class="itpanel">
         <div class="itphone">
+          <div class="itbar" aria-hidden="true">
+            <b>9:41</b>
+            <span class="itst">
+              <i class="sg"><em></em><em></em><em></em><em></em></i>
+              <iconify-icon icon="mingcute:wifi-line"></iconify-icon>
+              <i class="bt"></i>
+            </span>
+          </div>
+          <div class="itnav" aria-hidden="true">
+            <img src="img/logo3.png" alt=""><b>랜선페이</b>
+            <iconify-icon icon="mingcute:user-3-fill"></iconify-icon>
+          </div>
           <img class="itcard" src="img/card-face.png" alt="" aria-hidden="true">
           <div class="itl">
             <h3 id="itp-h"></h3>
