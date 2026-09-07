@@ -997,14 +997,11 @@
     display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px;
     border-radius:13px; padding:16px 12px;
     background:linear-gradient(140deg,#A9C8F7 0%,#C9DBF9 38%,#E4ECFB 70%,#F6F9FE 100%);}
-  /* 아이콘은 상자 없이 그대로 */
-  #itemsec .itin .itin-ico{display:flex; align-items:center; justify-content:center;
-    color:var(--primary-600); font-size:40px; line-height:1;}
-  #itemsec .itin .itin-name{font-size:17px; font-weight:800; letter-spacing:-.3px; color:var(--ink);}
+  /* 속칸 안에 신용카드 */
+  #itemsec .itin .itr-card{width:76%; max-width:none; min-width:0; margin:0;
+    aspect-ratio:1/1.492; align-self:center;}
   @media(min-width:1000px){
-    #itemsec .itin{flex:0 0 32%; max-width:32%; padding:18px; gap:12px; border-radius:14px;}
-    #itemsec .itin .itin-ico{font-size:58px;}
-    #itemsec .itin .itin-name{font-size:22px;}
+    #itemsec .itin{flex:0 0 32%; max-width:32%; padding:18px; border-radius:14px;}
   }
   #itemsec .itl h3{margin:0 0 10px; font-size:16px; font-weight:800; letter-spacing:-.3px;
     line-height:1.35; color:var(--ink);}
@@ -1020,15 +1017,19 @@
   /* ===== 항목 단락 — PC 도 모바일처럼 위아래로 쌓고 폭을 좁힌다 ===== */
   @media(min-width:1000px){
     #itemsec .wrap{display:block; max-width:820px; margin-left:auto; margin-right:auto;}
-    #itemsec .itgrid{grid-template-columns:repeat(6,1fr); gap:12px; margin-top:44px;}
+    #itemsec .itgrid{grid-template-columns:repeat(4,1fr); gap:12px; margin-top:44px;}
     #itemsec .itarw{display:none !important;}
     .itarw{display:none !important;}
     #itemsec .itpanel{margin-top:16px; align-self:auto;}
     /* 위아래로 쌓이면 속칸이 너무 커지지 않게 — 폭 고정 */
     #itemsec .itin{flex:0 0 auto; width:176px; max-width:176px;}
-    /* 버튼은 폭을 채우지 않고 내용만큼 — 왼쪽 정렬 */
-    #itemsec .itl{padding:22px 26px;}
-    #itemsec .itl .btn{width:auto; min-width:200px; align-self:flex-start;}
+    /* 오른쪽 빈 자리를 버튼이 채우도록 — 글 왼쪽 · 버튼 오른쪽 */
+    #itemsec .itl{display:grid; grid-template-columns:1fr auto; align-items:center;
+      column-gap:28px; padding:22px 26px;}
+    #itemsec .itl h3{grid-column:1; grid-row:1;}
+    #itemsec .itl .itr{grid-column:1; grid-row:2;}
+    #itemsec .itl .btn{grid-column:2; grid-row:1/3; align-self:center;
+      width:auto; min-width:210px; margin-top:0;}
   }
 
   /* ===== 배경 뒤집기 — 항목 단락은 하늘색 · 가운데 띠는 흰색 ===== */
@@ -1038,20 +1039,42 @@
 
   /* ===== 꺾임을 위쪽(하늘색) 단락으로 옮긴다 =====
      아래 띠가 흰색이 되면서 흰 배경 위 흰 꺾임이라 안 보이던 문제 */
+  /* 꺾임 깊이를 화면 폭에 비례시켜 PC · 모바일 각도를 같게 */
+  .main{--cut:min(5.9vw, 84px);}
   .topband #itemsec, #itemsec{position:relative; z-index:1;
-    clip-path:polygon(0 0, 100% 0, 100% calc(100% - 76px), 50% 100%, 0 calc(100% - 76px));}
-  .midband{clip-path:polygon(0 0, 100% 0, 100% calc(100% - 76px), 50% 100%, 0 calc(100% - 76px));
-    margin-top:-76px; padding-top:291px;}
+    clip-path:polygon(0 0, 100% 0, 100% calc(100% - var(--cut)), 50% 100%, 0 calc(100% - var(--cut)));}
+  .midband{clip-path:polygon(0 0, 100% 0, 100% calc(100% - var(--cut)), 50% 100%, 0 calc(100% - var(--cut)));
+    margin-top:calc(-1 * var(--cut)); padding-top:calc(215px + var(--cut));}
   @media(max-width:767px){
-    .topband #itemsec, #itemsec{
-      clip-path:polygon(0 0, 100% 0, 100% calc(100% - 52px), 50% 100%, 0 calc(100% - 52px));}
-    .midband{clip-path:polygon(0 0, 100% 0, 100% calc(100% - 52px), 50% 100%, 0 calc(100% - 52px));
-      margin-top:-52px; padding-top:202px;}
+    .midband{padding-top:calc(150px + var(--cut));}
   }
 
   /* 숫자 카드 ~ 「어떤 항목이 필요하신가요?」 사이 조금 더 */
   #itemsec{padding-top:92px;}
   @media(min-width:768px){ #itemsec{padding-top:156px;} }
+
+  /* ===== 기능 카드 — 아래쪽에 그라데이션 속칸을 넣고 3D 이미지를 담는다 ===== */
+  #featsec .rz{padding:9px; overflow:hidden; display:flex; flex-direction:column; background:#fff;}
+  /* 글 묶음 = 그라데이션 속칸 */
+  #featsec .rz .rztop{position:relative; border-radius:13px; padding:26px 22px 28px;}
+  #featsec .rz .in{padding:0;}
+  #featsec .rz h3, #featsec .rz .dash, #featsec .rz ul{padding-left:0; padding-right:0;}
+  #featsec .rz .uarw{top:20px; right:20px;}
+  /* 그림 자리 = 흰색 */
+  #featsec .rz .rzfig{margin-top:14px; background:none; padding:10px 10px 16px;
+    display:flex; align-items:center; justify-content:center; min-height:160px;}
+  #featsec .rz .rzfig .fig{display:block; position:static; right:auto; bottom:auto;
+    max-width:78%; max-height:150px; width:auto; height:auto;}
+  @media(min-width:900px){
+    #featsec .rz{padding:10px;}
+    #featsec .rz .rztop{padding:30px 26px 32px;}
+    #featsec .rz .rzfig{min-height:186px;}
+    #featsec .rz .rzfig .fig{max-height:170px;}
+  }
+  /* 글 속칸 배경 — 파랑 · 민트 · 파랑 (.plus 때문에 홀수 번째가 카드다) */
+  #featsec .rzgrid .rz:nth-of-type(1) .rztop{background:linear-gradient(150deg,#CFE0FA 0%,#E2EBFA 58%,#F3F7FD 100%);}
+  #featsec .rzgrid .rz:nth-of-type(3) .rztop{background:linear-gradient(150deg,#CDEFE7 0%,#E0F5F0 58%,#F2FBF9 100%);}
+  #featsec .rzgrid .rz:nth-of-type(5) .rztop{background:linear-gradient(150deg,#D8E6F6 0%,#E4EEF8 58%,#F4F9FD 100%);}
 
   /* 가운데 띠 — 아래쪽도 꺾인 형태로 끝난다 */
   .midband{clip-path:polygon(0 0, 50% 76px, 100% 0, 100% calc(100% - 76px), 50% 100%, 0 calc(100% - 76px));
@@ -1134,13 +1157,12 @@
 
       <div class="itpanel">
         <div class="itin">
-          <span class="itin-ico"><iconify-icon id="itp-ico" icon="mingcute:home-4-fill" aria-hidden="true"></iconify-icon></span>
-          <b class="itin-name" id="itp-name">월세</b>
+          <div class="itr-card" aria-hidden="true"></div>
         </div>
         <div class="itl">
           <h3 id="itp-h"></h3>
           <div class="itr" id="itp-docs"></div>
-          <a class="btn btn-primary" id="itgo" href="화면/10_1_유형선택.html"><img class="btn-logo" src="img/logo3-white.png" alt=""><span id="itgo-t">랜선페이 결제</span></a>
+          <a class="btn btn-primary" id="itgo" href="화면/10_1_유형선택.html"><img class="btn-logo" src="img/logo3-white.png" alt=""><span id="itgo-t">즉시 결제하기</span></a>
         </div>
       </div>
     </div>
@@ -1266,7 +1288,7 @@
 
       <div class="rzgrid">
         <div class="rz">
-          <span class="uarw" aria-hidden="true"><svg viewBox="0 0 22 22"><path d="M5 17 17 5M8 5h9v9" stroke="currentColor" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <div class="rztop"><span class="uarw" aria-hidden="true"><svg viewBox="0 0 22 22"><path d="M5 17 17 5M8 5h9v9" stroke="currentColor" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           <div class="in">한도가 부족하다면?</div>
           <h3>여러 카드 분할결제</h3>
           <div class="dash"></div>
@@ -1274,12 +1296,12 @@
             <li>법인 · 개인 카드 조합 결제</li>
             <li>금액을 여러 카드로 나누기</li>
             <li>무이자 할부 혜택 그대로</li>
-          </ul>
-          <img class="fig" src="img/feat1.png" alt="">
+          </ul></div>
+          <div class="rzfig"><img class="fig" src="img/feat1-t.png?v=1" alt=""></div>
         </div>
         <div class="plus" aria-hidden="true">+</div>
         <div class="rz alt">
-          <span class="uarw" aria-hidden="true"><svg viewBox="0 0 22 22"><path d="M5 17 17 5M8 5h9v9" stroke="currentColor" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <div class="rztop"><span class="uarw" aria-hidden="true"><svg viewBox="0 0 22 22"><path d="M5 17 17 5M8 5h9v9" stroke="currentColor" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           <div class="in">원하는 시간에 알아서</div>
           <h3>예약결제 · 정기결제</h3>
           <div class="dash"></div>
@@ -1287,12 +1309,12 @@
             <li>정해진 날짜에 자동 예약송금</li>
             <li>매달 같은 날 정기결제</li>
             <li>급여일 · 납부일에 맞춰 예약</li>
-          </ul>
-          <img class="fig" src="img/feat2.png?v=4" alt="">
+          </ul></div>
+          <div class="rzfig"><img class="fig" src="img/feat2-t.png?v=1" alt=""></div>
         </div>
         <div class="plus" aria-hidden="true">+</div>
         <div class="rz">
-          <span class="uarw" aria-hidden="true"><svg viewBox="0 0 22 22"><path d="M5 17 17 5M8 5h9v9" stroke="currentColor" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <div class="rztop"><span class="uarw" aria-hidden="true"><svg viewBox="0 0 22 22"><path d="M5 17 17 5M8 5h9v9" stroke="currentColor" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           <div class="in">연중무휴</div>
           <h3>365일 24시간 송금</h3>
           <div class="dash"></div>
@@ -1300,8 +1322,8 @@
             <li>야간에도 실시간 입금</li>
             <li>주말 · 공휴일 정상 송금</li>
             <li>서류 검토도 연중무휴</li>
-          </ul>
-          <img class="fig" src="img/feat3.png?v=4" alt="">
+          </ul></div>
+          <div class="rzfig"><img class="fig" src="img/feat3-t.png?v=1" alt=""></div>
         </div>
       </div>
     </div>
