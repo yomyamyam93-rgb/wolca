@@ -952,8 +952,8 @@
   /* 세 단락 제목은 한 단계 아래로 (대제목 > 세부제목) */
   /* 아이디 선택자로 써야 위에 있는 #whysec .h-sec 규칙을 이긴다 */
   #whysec .h-sec, #howto .h-sec, #featsec .h-sec{
-    font-size:min(6.2vw, 34px); font-weight:800; letter-spacing:-.4px;
-    line-height:1.42; color:var(--ink);}
+    font-size:min(6.8vw, 38px); font-weight:800; letter-spacing:-.5px;
+    line-height:1.4; color:var(--ink);}
   /* 두 줄로 — 검정 줄 아래 파란 줄 */
   #whysec .h-sec br, #howto .h-sec br, #featsec .h-sec br{display:inline;}
   /* 카드 제목은 세부제목보다 확실히 아래 단계로 (24 → 18/20) */
@@ -1147,6 +1147,23 @@
   /* 항목 단락 — 제목과 타일 사이 여백 (PC 는 격자 row-gap 이 담당) */
   @media(max-width:999px){ #itemsec .head + *{margin-top:44px;} }
 
+  /* 대제목 뒤에 카드 사진을 고정으로 깔고 둥근 사각으로 오려낸다 */
+  .bandart{position:relative; border-radius:26px; overflow:hidden;
+    padding:140px 20px 150px;
+    background-image:linear-gradient(rgba(255,255,255,.80), rgba(255,255,255,.84)),
+      url('img/hero-bg6.jpg');
+    background-position:center center; background-size:cover;
+    background-attachment:scroll;}
+  @media(min-width:768px){
+    .bandart{border-radius:40px; padding:265px 32px 280px;
+      /* 화면 좌우를 거의 꽉 채운다 (transform 을 쓰면 배경 고정이 깨져서 음수 여백으로) */
+      margin-left:calc(50% - 50vw + 28px); margin-right:calc(50% - 50vw + 28px); max-width:none;
+      /* 스크롤해도 사진은 제자리 — 글만 지나간다 */
+      background-attachment:fixed;
+      background-image:linear-gradient(rgba(255,255,255,.78), rgba(255,255,255,.82)),
+        url('img/hero-bg6.jpg');}
+  }
+
   /* 클릭되지 않는 장식 화살표는 뺀다 */
   .whygrid .uc .uarw{display:none;}
 
@@ -1244,7 +1261,9 @@
   <!-- ===== 랜선페이를 써야 하는 이유 — 1~7 펼침 ===== -->
   <div class="midband">
   <div class="wrap bandhead">
-    <h2 class="h-band"><span class="soft">불편했던 현금거래</span><br>이제 <span class="hl">랜선페이</span>에게 맡겨보세요</h2>
+    <div class="bandart">
+      <h2 class="h-band"><span class="soft">불편했던 현금거래</span><br>이제 <span class="hl">랜선페이</span>에게 맡겨보세요</h2>
+    </div>
     <div class="banddots" aria-hidden="true"><span class="vdots"></span></div>
   </div>
   <section class="sec tight" id="whysec">
