@@ -916,10 +916,20 @@
   .whygrid .ucin{position:relative; border-radius:13px; padding:20px 20px 26px;}
   @media(min-width:1000px){ .whygrid .ucin{padding:24px 24px 32px; border-radius:14px;} }
   /* 파스텔은 한 가지만 — 세 장을 똑같이 (다른 건 04 한 장뿐) */
-  /* 색은 같고 번지는 모양만 카드마다 다르게 */
-  .whygrid .uc:not(.blue) .ucin{background:linear-gradient(150deg,var(--primary-100) 0%,var(--primary-50) 56%,#FBFCFF 100%);}
-  .whygrid .uc:nth-child(2) .ucin{background:radial-gradient(130% 100% at 88% 8%, var(--primary-100) 0%, var(--primary-50) 52%, #FBFCFF 100%);}
-  .whygrid .uc:nth-child(3) .ucin{background:linear-gradient(28deg, var(--primary-100) 0%, var(--primary-50) 54%, #FBFCFF 100%);}
+  /* 부드럽게 번지는 얼룩 두 개씩 — 직선 경계 없이 · 위치만 카드마다 다르게 */
+  .whygrid .uc:not(.blue) .ucin{background:#FAFCFF;}
+  .whygrid .uc:nth-child(1) .ucin{background:
+      radial-gradient(115% 95% at 10% 6%,  color-mix(in srgb, var(--primary) 13%, transparent), transparent 64%),
+      radial-gradient(95% 80% at 95% 92%,  color-mix(in srgb, var(--primary) 7%, transparent),  transparent 66%),
+      #FAFCFF;}
+  .whygrid .uc:nth-child(2) .ucin{background:
+      radial-gradient(105% 85% at 92% 8%,  color-mix(in srgb, var(--primary) 13%, transparent), transparent 62%),
+      radial-gradient(120% 95% at 4% 96%,  color-mix(in srgb, var(--primary) 7%, transparent),  transparent 66%),
+      #FAFCFF;}
+  .whygrid .uc:nth-child(3) .ucin{background:
+      radial-gradient(130% 105% at 50% 112%, color-mix(in srgb, var(--primary) 14%, transparent), transparent 62%),
+      radial-gradient(85% 70% at 14% 4%,   color-mix(in srgb, var(--primary) 7%, transparent),  transparent 66%),
+      #FAFCFF;}
   .whygrid .ucin .no{margin:0;}
   .whygrid .ucin h3{margin-top:14px;}
   .whygrid .ucin .uarw{position:absolute; top:18px; right:18px; color:var(--ink);}
@@ -1063,19 +1073,22 @@
   /* ===== 이용 방법 — 왼쪽 휴대폰 목업 · 오른쪽 세로 타임라인 ===== */
   .hwrap{display:grid; gap:44px; justify-items:center;}
   @media(min-width:900px){
-    .hwrap{grid-template-columns:minmax(240px,320px) 1fr; gap:76px;
+    /* 제목과 같은 중심선에 오도록 폭을 묶어 가운데로 */
+    .hwrap{grid-template-columns:246px 1fr; gap:60px;
+      max-width:820px; margin-left:auto; margin-right:auto;
       align-items:center; justify-items:stretch;}
   }
   /* 휴대폰 목업 — 테두리는 CSS 로 그린다 */
-  .hphone{width:min(286px, 74vw); padding:10px; border-radius:38px;
+  .hphone{width:min(246px, 70vw); padding:9px; border-radius:34px;
     background:#FFFFFF; border:1px solid #E9ECF1;
     box-shadow:0 26px 60px rgba(15,23,42,.13), 0 4px 14px rgba(15,23,42,.06);
     justify-self:center;}
-  .hphone img{display:block; width:100%; height:auto; border-radius:30px;}
+  .hphone img{display:block; width:100%; height:auto; border-radius:27px;}
   /* 세로 타임라인 */
   .tline{list-style:none; margin:0; padding:0; width:100%; max-width:560px;}
   @media(min-width:900px){ .tline{max-width:none;} }
-  .tstep{position:relative; display:grid; grid-template-columns:34px 1fr; gap:16px; padding-bottom:28px;}
+  .tstep{position:relative; display:grid; grid-template-columns:34px 1fr; gap:16px; padding-bottom:30px;}
+  @media(min-width:900px){ .tstep{padding-bottom:44px;} }
   .tstep:last-child{padding-bottom:0;}
   .tstep:not(:last-child):before{content:''; position:absolute; left:16px; top:38px; bottom:2px;
     width:2px; background:var(--line);}
@@ -1260,10 +1273,6 @@
           <li class="tstep on">
             <span class="tno">5</span>
             <div class="tbd"><h3>송금 확인</h3><p>평균 5분 안에 받는 분 계좌로 입금</p></div>
-          </li>
-          <li class="tstep">
-            <span class="tno">6</span>
-            <div class="tbd"><h3>취소 · 환불</h3><p>송금 전이면 100% 전액 취소</p></div>
           </li>
         </ol>
       </div>
