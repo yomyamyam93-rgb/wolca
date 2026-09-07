@@ -992,17 +992,13 @@
   @media(min-width:1000px){ #itemsec .itpanel{gap:10px !important; padding:8px; align-self:center;} }
   /* 왼쪽 속칸 · 오른쪽 내용 = 반반 */
   #itemsec .itin{order:0; flex:0 0 38%; max-width:38%; min-width:0;
-    /* 세로 신용카드 비율 고정 — 늘어나지 않게 */
+    /* 상자 없이 신용카드만 — 세로 신용카드 비율 고정 */
     aspect-ratio:1/1.492; height:auto; align-self:center;
-    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px;
-    border-radius:13px; padding:16px 12px;
-    background:linear-gradient(140deg,#A9C8F7 0%,#C9DBF9 38%,#E4ECFB 70%,#F6F9FE 100%);}
-  /* 속칸 안에 신용카드 */
-  #itemsec .itin .itr-card{width:76%; max-width:none; min-width:0; margin:0;
-    aspect-ratio:1/1.492; align-self:center;}
-  @media(min-width:1000px){
-    #itemsec .itin{flex:0 0 32%; max-width:32%; padding:18px; border-radius:14px;}
-  }
+    display:flex; align-items:center; justify-content:center;
+    border-radius:0; padding:0; background:none;}
+  /* 신용카드가 속칸 자리를 그대로 차지 */
+  #itemsec .itin .itr-card{width:100%; max-width:none; min-width:0; margin:0;
+    aspect-ratio:1/1.492; align-self:stretch;}
   #itemsec .itl h3{margin:0 0 10px; font-size:16px; font-weight:800; letter-spacing:-.3px;
     line-height:1.35; color:var(--ink);}
   @media(min-width:1000px){ #itemsec .itl h3{font-size:20px; margin-bottom:14px;} }
@@ -1017,19 +1013,16 @@
   /* ===== 항목 단락 — PC 도 모바일처럼 위아래로 쌓고 폭을 좁힌다 ===== */
   @media(min-width:1000px){
     #itemsec .wrap{display:block; max-width:820px; margin-left:auto; margin-right:auto;}
-    #itemsec .itgrid{grid-template-columns:repeat(4,1fr); gap:12px; margin-top:44px;}
+    #itemsec .itgrid{grid-template-columns:repeat(4,126px); justify-content:center;
+      gap:12px; margin-top:44px;}
     #itemsec .itarw{display:none !important;}
     .itarw{display:none !important;}
-    #itemsec .itpanel{margin-top:16px; align-self:auto;}
+    #itemsec .itpanel{margin-top:16px; align-self:auto;
+      max-width:540px; margin-left:auto; margin-right:auto;}
     /* 위아래로 쌓이면 속칸이 너무 커지지 않게 — 폭 고정 */
-    #itemsec .itin{flex:0 0 auto; width:176px; max-width:176px;}
-    /* 오른쪽 빈 자리를 버튼이 채우도록 — 글 왼쪽 · 버튼 오른쪽 */
-    #itemsec .itl{display:grid; grid-template-columns:1fr auto; align-items:center;
-      column-gap:28px; padding:22px 26px;}
-    #itemsec .itl h3{grid-column:1; grid-row:1;}
-    #itemsec .itl .itr{grid-column:1; grid-row:2;}
-    #itemsec .itl .btn{grid-column:2; grid-row:1/3; align-self:center;
-      width:auto; min-width:210px; margin-top:0;}
+    #itemsec .itin{flex:0 0 auto; width:150px; max-width:150px;}
+    #itemsec .itl{padding:18px 22px;}
+    #itemsec .itl .btn{width:auto; min-width:200px; align-self:flex-start; margin-top:16px;}
   }
 
   /* ===== 배경 뒤집기 — 항목 단락은 하늘색 · 가운데 띠는 흰색 ===== */
