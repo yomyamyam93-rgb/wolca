@@ -1054,20 +1054,22 @@
 
   /* ===== 배경 뒤집기 — 항목 단락은 하늘색 · 가운데 띠는 흰색 ===== */
   .topband #itemsec, #itemsec{background:linear-gradient(180deg,
-      rgba(215,231,252,0) 0%, rgba(215,231,252,.60) 26%, var(--primary-150) 54%, var(--primary-150) 100%);}
+      rgba(215,231,252,0) 0%, rgba(215,231,252,.60) 22%, var(--primary-150) 44%,
+      var(--primary-150) 64%, #EFF4FC 86%, #FFFFFF 100%);}
   .midband{background:#FFFFFF;}
 
   /* ===== 꺾임을 위쪽(하늘색) 단락으로 옮긴다 =====
      아래 띠가 흰색이 되면서 흰 배경 위 흰 꺾임이라 안 보이던 문제 */
-  /* 꺾임 깊이를 화면 폭에 비례시켜 PC · 모바일 각도를 같게 */
-  .main{--cut:min(5.9vw, 84px);}
-  .topband #itemsec, #itemsec{position:relative; z-index:1;
-    clip-path:polygon(0 0, 100% 0, 100% calc(100% - var(--cut)), 50% 100%, 0 calc(100% - var(--cut)));}
-  .midband{clip-path:polygon(0 0, 100% 0, 100% calc(100% - var(--cut)), 50% 100%, 0 calc(100% - var(--cut)));
-    margin-top:calc(-1 * var(--cut)); padding-top:calc(215px + var(--cut));}
-  @media(max-width:767px){
-    .midband{padding-top:calc(150px + var(--cut));}
-  }
+  /* 꺾임 없이 — 색이 서로 스며들어 이어진다 */
+  .topband #itemsec, #itemsec{position:relative; z-index:1; clip-path:none;}
+  .midband{clip-path:none; margin-top:0; padding-top:140px;}
+  @media(min-width:768px){ .midband{padding-top:190px;} }
+  /* 남색 단락 위쪽을 흰색에서 서서히 */
+  #trustsec{position:relative; clip-path:none; margin-top:0;}
+  #trustsec:before{content:''; position:absolute; top:0; left:0; right:0; height:240px;
+    background:linear-gradient(180deg, #FFFFFF 0%, rgba(255,255,255,.70) 36%, rgba(255,255,255,0) 100%);
+    pointer-events:none; z-index:0;}
+  #trustsec > *{position:relative; z-index:1;}
 
   /* 숫자 카드 ~ 「어떤 항목이 필요하신가요?」 사이 조금 더 */
   #itemsec{padding-top:var(--acen); padding-bottom:150px;}
@@ -1202,7 +1204,7 @@
     <div class="wrap">
       <div class="head">
         <h2 class="h-sec"><span class="soft">어떤 항목이 필요하신가요?</span><br>지금 바로 <span class="hl">카드로 결제</span>하세요</h2>
-        <p>원하는 항목을 고르면 필요한 서류와 결제 방법을 바로 확인할 수 있어요</p>
+        <p>항목을 고르면 서류를 바로 알려드려요</p>
       </div>
 
       <div class="itgrid">
@@ -1294,7 +1296,7 @@
 
       <div class="hwrap">
         <div class="hcol">
-          <div class="hphone"><img id="hshot" src="img/guide_shots/home.png?v=1" alt="단계별 앱 화면"></div>
+          <div class="hphone"><img id="hshot" src="img/guide_shots/login.png?v=2" alt="단계별 앱 화면"></div>
           <div class="hnav">
             <button class="hbtn" type="button" id="hprev" aria-label="이전 단계">‹</button>
             <span class="hcount"><b id="hnow">1</b> / 5</span>
@@ -1302,7 +1304,7 @@
           </div>
         </div>
         <ol class="tline">
-          <li class="tstep on" data-shot="img/guide_shots/home.png?v=1" role="button" tabindex="0">
+          <li class="tstep on" data-shot="img/guide_shots/login.png?v=2" role="button" tabindex="0">
             <span class="tno">1</span>
             <div class="tbd"><h3>회원가입 · 로그인</h3><p>휴대폰 번호만 있으면 1분 안에 가입돼요<br>이미 계정이 있다면 로그인만 하면 됩니다</p></div>
           </li>
