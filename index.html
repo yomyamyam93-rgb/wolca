@@ -763,6 +763,20 @@
       radial-gradient(760px 420px at 50% -12%, rgba(224,232,255,.75), transparent 70%),
       radial-gradient(620px 360px at 88% 6%, rgba(206,222,255,.45), transparent 66%),
       linear-gradient(180deg,#F4F7FE 0%,#FAFBFF 58%,#FFFFFF 100%);}
+
+  /* 히어로 + 항목 단락을 한 배경 위에 — 경계 없이 이어진다 */
+  .topband{background:
+      radial-gradient(720px 420px at 16% 5%, rgba(255,214,224,.50), transparent 60%),
+      radial-gradient(780px 460px at 86% 10%, rgba(206,222,255,.60), transparent 62%),
+      radial-gradient(1200px 760px at 50% 56%, rgba(222,231,255,.60), transparent 74%),
+      linear-gradient(180deg,#FDFDFF 0%,#F1F5FE 40%,#F3F7FE 62%,#F8FBFF 84%,#FFFFFF 100%);}
+  .topband .hero, .topband #itemsec{background:none;}
+  /* 숫자 카드가 경계에 붙지 않게 아래 여백 */
+  .topband .hero{padding-bottom:56px;}
+  @media(min-width:768px){ .topband .hero{padding-bottom:76px;} }
+  /* 사진 — 얼굴 가운데 맞춘 파일이라 폭을 그만큼 키운다 */
+  .hmodel{width:min(516px, 104vw);}
+  @media(min-width:768px){ .hmodel{width:min(640px, 72vw);} }
 </style>
 </head>
 <body>
@@ -785,6 +799,7 @@
 <main class="main">
 
   <!-- ===== 1. 히어로 — 가운데 한 마디 + 흐르는 대화 카드 ===== -->
+  <div class="topband">
   <section class="hero">
     <div class="wrap hero2">
       <span class="hbadge">금융위원회 등록 정식 PG</span>
@@ -801,7 +816,7 @@
     </div>
 
     <div class="hmodel">
-      <img src="img/people.png?v=1" alt="랜선페이를 쓰는 모델">
+      <img src="img/people-c.png?v=1" alt="랜선페이를 쓰는 모델">
     </div>
 
     <div class="wrap">
@@ -848,6 +863,7 @@
     </div>
 
   </section>
+  </div>
 
   <!-- ===== 랜선페이를 써야 하는 이유 — 1~7 펼침 ===== -->
   <section class="sec tight" id="whysec">
