@@ -1841,22 +1841,19 @@
     if (번호) 번호.textContent = i + 1;
   }
   /* 모바일은 목업이 없으니 마지막 단계(송금 확인)만 켜 두고 누를 수 없게 */
-  if (window.matchMedia('(max-width:899px)').matches) {
-    가기(단계들.length - 1);
-    단계들.forEach(function (e) {
-      e.removeAttribute('role'); e.removeAttribute('tabindex'); e.style.cursor = 'default';
-    });
-    return;
-  }
+  var 좁은화면 = window.matchMedia('(max-width:899px)');
   단계들.forEach(function (e, k) {
-    e.addEventListener('click', function () { 가기(k); });
+    e.addEventListener('click', function () { if (좁은화면.matches) return; 가기(k); });
     e.addEventListener('keydown', function (ev) {
+      if (좁은화면.matches) return;
       if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); 가기(k); }
     });
   });
+  function 맞추기() { 가기(좁은화면.matches ? 단계들.length - 1 : 0); }
+  좁은화면.addEventListener('change', 맞추기);
+  맞추기();
   if (이전) 이전.addEventListener('click', function () { 가기(i - 1); });
   if (다음) 다음.addEventListener('click', function () { 가기(i + 1); });
-  가기(0);
 })();
 </script>
 
