@@ -779,6 +779,7 @@ if (location.hash === '#menu') { drawer(true); history.replaceState(null, '', lo
   if (!팝) return;
   var PC = matchMedia('(min-width:1280px)').matches;
   var 강제 = location.search.indexOf('evpop=1') > -1;
+  if (!강제) return;                       /* 이벤트 준비 전까지 팝업 끔 — 되살리려면 이 줄만 지우세요 */
   if (!PC) {
     try { if (!강제 && localStorage.getItem('lp_apop') === new Date().toDateString()) return; } catch (e) {}
     딤.hidden = false;
