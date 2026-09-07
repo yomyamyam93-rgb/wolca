@@ -785,10 +785,9 @@
     background-size:cover; background-position:center; background-repeat:no-repeat;}
 
   /* 히어로 배지 — 더 또렷하게 */
-  .hbadge{background:#fff; border-color:#C9DAFE; color:var(--primary);
-    font-size:14px; padding:10px 22px; letter-spacing:-.2px;
-    box-shadow:0 4px 14px rgba(21,111,249,.12);}
-  @media(min-width:768px){ .hbadge{font-size:15.5px; padding:11px 26px;} }
+  .hbadge{background:none; border:none; box-shadow:none; padding:0;
+    color:var(--primary); font-size:15px; font-weight:700; letter-spacing:-.2px;}
+  @media(min-width:768px){ .hbadge{font-size:17px;} }
   /* 버튼과 사진 사이 — 머리 위 공간 */
   .hmodel{margin-top:56px;}
   @media(min-width:768px){ .hmodel{margin-top:72px;} }
@@ -811,6 +810,20 @@
   #featsec .h-sec{color:var(--ink);}
   #featsec .h-sec .hl{color:var(--primary);}
   #featsec .morelink{color:var(--primary-600);}
+
+  /* 숫자 카드 ~ 다음 단락 사이 두 배로 · 스크롤다운 자리 확보 */
+  .topband .hero{padding-bottom:170px;}
+  @media(min-width:768px){ .topband .hero{padding-bottom:270px;} }
+  /* 스크롤다운 — 카드 아래 여백 한가운데 */
+  .hero .sdown{position:static; transform:none; margin:56px auto 0; bottom:auto; z-index:2;}
+  @media(min-width:768px){ .hero .sdown{margin-top:96px;} }
+  /* 가운데 띠 — 아래쪽도 꺾인 형태로 끝난다 */
+  .midband{clip-path:polygon(0 0, 50% 76px, 100% 0, 100% 100%, 50% calc(100% - 76px), 0 100%);
+    padding-bottom:120px;}
+  @media(max-width:767px){
+    .midband{clip-path:polygon(0 0, 50% 52px, 100% 0, 100% 100%, 50% calc(100% - 52px), 0 100%);
+      padding-bottom:84px;}
+  }
 </style>
 </head>
 <body>
@@ -860,6 +873,7 @@
         <div><span>평균 입금 시간</span><b>5<i>분</i></b></div>
       </div>
     </div>
+    <div class="sdown" aria-hidden="true"><span class="mouse"><iconify-icon icon="mingcute:arrow-down-line"></iconify-icon></span><b>SCROLL DOWN</b></div>
   </section>
 
   <!-- ===== 2. 결제 항목 + 카드사 로고 — 한 화면 ===== -->
