@@ -1171,27 +1171,21 @@
 
   /* 대제목 뒤에 카드 사진을 고정으로 깔고 둥근 사각으로 오려낸다 */
   /* 16:9 로 꽉 채우고 · 사진은 어둡게 · 글씨는 흰색 */
+  /* 사진 대신 넓은 하늘색 상자 */
   .bandart{position:relative; border-radius:22px; overflow:hidden;
-    aspect-ratio:16/8; min-height:230px; padding:20px;
+    padding:88px 20px 92px;
     display:flex; align-items:center; justify-content:center;
-    background-image:url('img/hero-bg6.jpg');
-    background-position:center center; background-size:cover;
-    background-attachment:scroll;}
-  /* 사진 위에 어두운 막 */
-  .bandart:after{content:''; position:absolute; inset:0; z-index:1;
-    background:linear-gradient(rgba(8,17,38,.60), rgba(8,17,38,.72));}
+    background:color-mix(in srgb, var(--primary) 7%, #fff);}
+  .bandart:after{display:none;}
   .bandart .h-band{position:relative; z-index:2;}
   @media(min-width:768px){
-    .bandart{border-radius:34px; padding:32px;
-      /* 화면 좌우를 거의 꽉 채운다 (transform 을 쓰면 배경 고정이 깨져서 음수 여백으로) */
-      margin-left:calc(50% - 50vw + 28px); margin-right:calc(50% - 50vw + 28px); max-width:none;
-      /* 스크롤해도 사진은 제자리 — 글만 지나간다 */
-      background-attachment:fixed;
-      background-image:url('img/hero-bg6.jpg');}
+    .bandart{border-radius:34px; padding:132px 32px 140px;
+      /* 화면 좌우를 거의 꽉 채운다 */
+      margin-left:calc(50% - 50vw + 28px); margin-right:calc(50% - 50vw + 28px); max-width:none;}
   }
-  .bandart .h-band{color:#FFFFFF; text-shadow:0 2px 20px rgba(4,12,30,.55);}
-  .bandart .h-band .soft{color:#FFFFFF;}
-  .bandart .h-band .hl{color:#B9D6FF;}
+  .bandart .h-band{color:var(--ink); text-shadow:none;}
+  .bandart .h-band .soft{color:var(--sub);}
+  .bandart .h-band .hl{color:var(--primary);}
 
   /* ===== 항목 상세 — 흰 휴대폰 목업(윗부분만) 안에 내용 · 그 위에 뜬 신용카드 ===== */
   #itemsec .itpanel{display:block !important; background:none; border:none; padding:0;
