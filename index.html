@@ -833,9 +833,9 @@
     clip-path:polygon(0 0, 50% 76px, 100% 0, 100% 100%, 0 100%);
     padding-top:120px;
     background:
-      radial-gradient(1200px 700px at 78% 12%, rgba(186,214,255,.55), transparent 66%),
-      radial-gradient(1000px 640px at 14% 62%, rgba(206,228,255,.50), transparent 68%),
-      linear-gradient(180deg,#E7F0FF 0%,#EFF5FF 46%,#E9F2FF 100%);}
+      radial-gradient(1200px 700px at 78% 12%, rgba(15,23,42,.05), transparent 66%),
+      radial-gradient(1000px 640px at 14% 62%, rgba(15,23,42,.035), transparent 68%),
+      linear-gradient(180deg,#F0F1F4 0%,#F6F7F9 46%,#EEEFF2 100%);}
   @media(max-width:767px){
     .midband{clip-path:polygon(0 0, 50% 52px, 100% 0, 100% 100%, 0 100%); padding-top:84px;}
   }
@@ -900,6 +900,24 @@
     .sdown .mouse{width:26px; height:40px;}
     .sdown b{font-size:11px; letter-spacing:2.2px;}
   }
+
+  /* ===== 이유 카드 — 칸 안에 또 칸 (토스식) =====
+     바깥은 흰 카드 · 위쪽 속칸에 파스텔 그라데이션 + 번호 · 화살표 · 제목
+     설명은 속칸 아래 흰 자리에. 04(파란 카드)는 그대로 둔다 */
+  .whygrid .uc:not(.blue){background:#FFFFFF; border:1px solid #EEF0F4;
+    padding:12px; display:flex; flex-direction:column; min-height:0;}
+  @media(min-width:1000px){ .whygrid .uc:not(.blue){padding:14px;} }
+  .whygrid .ucin{position:relative; border-radius:14px; padding:20px 20px 26px;}
+  @media(min-width:1000px){ .whygrid .ucin{padding:24px 24px 32px; border-radius:15px;} }
+  .whygrid .uc:nth-child(1) .ucin{background:linear-gradient(150deg,#D9E4F7 0%,#E7EAF7 58%,#F5F6FA 100%);}
+  .whygrid .uc:nth-child(2) .ucin{background:linear-gradient(150deg,#E2E3F6 0%,#ECE6F4 58%,#F7F3F8 100%);}
+  .whygrid .uc:nth-child(3) .ucin{background:linear-gradient(150deg,#EAE2F2 0%,#F1E6EF 58%,#FAF4F6 100%);}
+  .whygrid .ucin .no{margin:0;}
+  .whygrid .ucin h3{margin-top:14px;}
+  .whygrid .ucin .uarw{position:absolute; top:18px; right:18px; color:var(--ink);}
+  @media(min-width:1000px){ .whygrid .ucin .uarw{top:22px; right:22px;} }
+  .whygrid .uc:not(.blue) > p{margin:0; padding:16px 8px 10px;}
+  @media(min-width:1000px){ .whygrid .uc:not(.blue) > p{padding:18px 10px 12px;} }
 
   /* 가운데 띠 — 아래쪽도 꺾인 형태로 끝난다 */
   .midband{clip-path:polygon(0 0, 50% 76px, 100% 0, 100% calc(100% - 76px), 50% 100%, 0 calc(100% - 76px));
@@ -1002,21 +1020,27 @@
       </div>
       <div class="whygrid">
         <div class="uc">
-          <span class="no">01</span>
-          <span class="uarw" aria-hidden="true"><svg viewBox="0 0 22 22"><path d="M5 17 17 5M8 5h9v9" stroke="currentColor" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-          <h3>큰 금액도 할부로<br>나눠낼 수 있어요</h3>
+          <div class="ucin">
+            <span class="no">01</span>
+            <span class="uarw" aria-hidden="true"><svg viewBox="0 0 22 22"><path d="M5 17 17 5M8 5h9v9" stroke="currentColor" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <h3>큰 금액도 할부로<br>나눠낼 수 있어요</h3>
+          </div>
           <p>최대 24개월 할부<br>무이자는 최대 7개월</p>
         </div>
         <div class="uc">
-          <span class="no">02</span>
-          <span class="uarw" aria-hidden="true"><svg viewBox="0 0 22 22"><path d="M5 17 17 5M8 5h9v9" stroke="currentColor" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-          <h3>월세 납부액의<br>최대 17% 돌려받아요</h3>
+          <div class="ucin">
+            <span class="no">02</span>
+            <span class="uarw" aria-hidden="true"><svg viewBox="0 0 22 22"><path d="M5 17 17 5M8 5h9v9" stroke="currentColor" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <h3>월세 납부액의<br>최대 17% 돌려받아요</h3>
+          </div>
           <p>소득공제는 자동 환급<br>세액공제까지 챙겨드려요</p>
         </div>
         <div class="uc">
-          <span class="no">03</span>
-          <span class="uarw" aria-hidden="true"><svg viewBox="0 0 22 22"><path d="M5 17 17 5M8 5h9v9" stroke="currentColor" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-          <h3>임대인 동의 없이<br>계좌로 입금돼요</h3>
+          <div class="ucin">
+            <span class="no">03</span>
+            <span class="uarw" aria-hidden="true"><svg viewBox="0 0 22 22"><path d="M5 17 17 5M8 5h9v9" stroke="currentColor" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <h3>임대인 동의 없이<br>계좌로 입금돼요</h3>
+          </div>
           <p>가입 요청 없이<br>보내는 분 이름 그대로 입금</p>
         </div>
         <div class="uc blue">
