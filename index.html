@@ -1095,11 +1095,7 @@
   #howto{position:relative;}
   #howto:before{content:''; position:absolute; z-index:0; top:-115px; bottom:-80px;
     left:50%; width:100vw; transform:translateX(-50%); pointer-events:none;
-    background:linear-gradient(90deg,
-      rgba(255,255,255,0) 0%,
-      color-mix(in srgb, var(--primary) 7%, #fff) 24%,
-      color-mix(in srgb, var(--primary) 7%, #fff) 76%,
-      rgba(255,255,255,0) 100%);}
+    background:color-mix(in srgb, var(--primary) 7%, #fff);}
   #howto > *{position:relative; z-index:1;}
   /* 바탕이 위아래로 넘쳐 칠해지는 만큼 단락 간격을 더해 준다 (앞뒤 흰 여백 유지) */
   #howto{margin-top:calc(var(--gap) + 115px);}
@@ -1227,15 +1223,20 @@
     #featsec .wrap{overflow:visible;}
     #featsec .rzgrid{display:grid !important; grid-template-columns:1fr; gap:14px;
       transform:none !important; transition:none !important; touch-action:auto;}
-    #featsec .rz{flex:none; width:auto; margin:0 6px; overflow:hidden;
-      padding:22px 20px 108px; min-height:0;}
-    #featsec .rz .in{font-size:16.5px;}
-    #featsec .rz h3{font-size:16.5px;}
-    #featsec .rz ul{margin-top:13px;}
-    #featsec .rz li{margin-bottom:7px; font-size:14px; line-height:1.6;}
-    #featsec .rz .fig{position:absolute; right:10px; bottom:10px;
-      max-width:104px; max-height:104px;}
-    #featsec .rzgrid .rz:last-child .fig, #featsec .rz.alt .fig{right:10px;}
+    /* 카드 밖으로 3D 가 튀어나오게 — 오른쪽에 자리를 비우고 경계를 넘긴다 */
+    #featsec .rzgrid{overflow:visible;}
+    #featsec .rz{flex:none; width:auto; margin:0 6px; overflow:visible;
+      padding:22px 104px 22px 20px; min-height:0;}
+    #featsec .rz .in{font-size:17px;}
+    #featsec .rz h3{font-size:17px;}
+    /* 설명은 한 줄만 */
+    #featsec .rz ul{margin-top:10px;}
+    #featsec .rz li{margin-bottom:0; font-size:13.5px; line-height:1.55;}
+    #featsec .rz li:nth-child(n+2){display:none;}
+    #featsec .rz .fig{position:absolute; right:-14px; bottom:-14px; z-index:2;
+      max-width:112px; max-height:112px;
+      filter:drop-shadow(0 10px 18px rgba(8,26,66,.18));}
+    #featsec .rzgrid .rz:last-child .fig, #featsec .rz.alt .fig{right:-14px;}
   }
 
   /* 기능 카드 — 좌상단 흰색에서 우하단 옅은 하늘색으로 */
