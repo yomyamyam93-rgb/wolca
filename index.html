@@ -447,7 +447,7 @@
   @media(min-width:900px){
     /* 세로 카드 3장 — 같은 폭 3열 */
     .rzgrid{grid-template-columns:repeat(3,1fr); gap:20px;}
-    .rz{display:block; padding:36px 32px 262px; text-align:left;}
+    .rz{display:block; padding:36px 32px 214px; text-align:left;}
     .rz .in{font-size:24px; font-weight:800; letter-spacing:-.5px; margin-bottom:0;}
     .rz h3{font-size:24px; margin-top:3px;}
     .rz .dash{display:none;}
@@ -465,8 +465,8 @@
   .rz .fig{display:none;}
   @media(min-width:900px){
     .rz{position:relative; overflow:hidden;}
-    .rz .fig{display:block; position:absolute; right:2px; bottom:6px;
-      max-width:248px; max-height:248px; width:auto; height:auto;}
+    .rz .fig{display:block; position:absolute; right:4px; bottom:8px;
+      max-width:196px; max-height:196px; width:auto; height:auto;}
   }
   /* 이용 방법 카드 — 3D 느낌 */
   .gd{background:linear-gradient(180deg,#FFFFFF,#F8FAFE);
@@ -1103,7 +1103,11 @@
     border-radius:22px; background:color-mix(in srgb, var(--primary) 7%, #fff);}
   @media(min-width:768px){ #howto:before{border-radius:34px;} }
   /* 모바일 — 둥근 상자 대신 화면을 꽉 채운 띠 */
-  @media(max-width:767px){ #howto:before{width:100vw; border-radius:0;} }
+  @media(max-width:767px){
+    #howto:before{width:100vw; border-radius:0;
+      -webkit-mask-image:linear-gradient(180deg, transparent 0%, #000 9%, #000 91%, transparent 100%);
+      mask-image:linear-gradient(180deg, transparent 0%, #000 9%, #000 91%, transparent 100%);}
+  }
   #howto > *{position:relative; z-index:1;}
   /* 바탕이 위아래로 넘쳐 칠해지는 만큼 단락 간격을 더해 준다 (앞뒤 흰 여백 유지) */
   #howto{margin-top:calc(var(--gap) + var(--bx));}
@@ -1199,7 +1203,7 @@
   .bandart .h-band{max-width:100%; color:#FFFFFF; text-shadow:0 2px 20px rgba(4,12,30,.55);}
   /* 모바일 — 마스크 없이 화면을 꽉 채운다 */
   @media(max-width:767px){
-    .bandart{width:auto; min-height:0; aspect-ratio:3/2; border-radius:0; padding:20px 22px;
+    .bandart{width:auto; min-height:0; aspect-ratio:1/1; border-radius:0; padding:20px 22px;
       margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw);}
     .bandart .h-band{font-size:min(7vw, 32px);}
     /* 사진 띠 앞뒤 흰 여백을 줄인다 */
@@ -1243,7 +1247,7 @@
     /* 카드 밖으로 3D 가 튀어나오게 — 오른쪽에 자리를 비우고 경계를 넘긴다 */
     #featsec .rzgrid{overflow:visible;}
     #featsec .rz{flex:none; width:auto; margin:0 44px 0 6px; overflow:visible;
-      padding:30px 92px 92px 20px; min-height:0;
+      padding:30px 104px 96px 20px; min-height:0;
       box-shadow:0 4px 14px rgba(15,23,42,.06), 0 1px 3px rgba(15,23,42,.04);}
     /* 장식 화살표 제거 */
     #featsec .rz .uarw{display:none;}
@@ -1254,9 +1258,9 @@
     #featsec .rz li{margin-bottom:0; font-size:13.5px; line-height:1.55;}
     #featsec .rz li:nth-child(n+2){display:none;}
     /* 아이콘 — 카드 오른쪽 밖으로 크게 · 화살표와 안 겹치게 아래쪽에 */
-    #featsec .rz .fig{position:absolute; right:-34px; bottom:-8px; z-index:2;
-      max-width:112px; max-height:112px;
-      filter:drop-shadow(0 8px 14px rgba(8,26,66,.18));}
+    #featsec .rz .fig{position:absolute; right:-34px; bottom:10px; z-index:2;
+      max-width:134px; max-height:134px;
+      filter:drop-shadow(0 5px 8px rgba(8,26,66,.16));}
     #featsec .rzgrid .rz:last-child .fig, #featsec .rz.alt .fig{right:-34px;}
     /* 설명 앞 가운뎃점 제거 */
     #featsec .rz li{padding-left:0;}
