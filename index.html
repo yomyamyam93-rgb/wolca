@@ -1131,6 +1131,13 @@
   .tbd p{margin-top:7px; font-size:15px; line-height:1.75; color:var(--sub);}
   @media(min-width:900px){ .tbd p{font-size:15.5px;} }
 
+  /* 모바일 — 목업 대신 사진 한 장 */
+  .hpic{display:none;}
+  @media(max-width:899px){
+    .hpic{display:block; order:-1; width:100%; height:auto; border-radius:16px;
+      margin-bottom:6px;}
+  }
+
   /* 모바일 — 휴대폰 목업도 배경 그라데이션도 없이 타임라인만 */
   @media(max-width:899px){
     .hcol{display:none !important;}
@@ -1162,12 +1169,12 @@
   .bandart{position:relative; border-radius:22px; overflow:hidden;
     aspect-ratio:16/8; min-height:230px; padding:20px;
     display:flex; align-items:center; justify-content:center;
-    background-image:url('img/band-bg.png?v=1');
+    background-image:url('img/hero-bg6.jpg');
     background-position:center center; background-size:cover;
     background-attachment:scroll;}
   /* 사진 위에 어두운 막 */
   .bandart:after{content:''; position:absolute; inset:0; z-index:1;
-    background:linear-gradient(rgba(8,17,38,.42), rgba(8,17,38,.56));}
+    background:linear-gradient(rgba(8,17,38,.60), rgba(8,17,38,.72));}
   .bandart .h-band{position:relative; z-index:2;}
   @media(min-width:768px){
     .bandart{border-radius:34px; padding:32px;
@@ -1175,7 +1182,7 @@
       margin-left:calc(50% - 50vw + 28px); margin-right:calc(50% - 50vw + 28px); max-width:none;
       /* 스크롤해도 사진은 제자리 — 글만 지나간다 */
       background-attachment:fixed;
-      background-image:url('img/band-bg.png?v=1');}
+      background-image:url('img/hero-bg6.jpg');}
   }
   .bandart .h-band{color:#FFFFFF; text-shadow:0 2px 20px rgba(4,12,30,.55);}
   .bandart .h-band .soft{color:#FFFFFF;}
@@ -1362,6 +1369,7 @@
       </div>
 
       <div class="hwrap">
+        <img class="hpic" src="img/band-bg.png?v=1" alt="랜선페이 앱으로 결제하는 모습">
         <div class="hcol">
           <div class="hphone"><img id="hshot" src="img/guide_shots/login.png?v=2" alt="단계별 앱 화면"></div>
           <div class="hnav">
