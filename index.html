@@ -1034,18 +1034,18 @@
   @media(min-width:1000px){
     /* 타일 왼쪽 · 상세 패널 오른쪽 — 좌우 허전함 없이 */
     /* 타일 · 화살표 · 상세 패널 세 칸 — 높이를 맞춘다 */
-    #itemsec .wrap{display:grid; grid-template-columns:540px 44px 1fr;
-      column-gap:18px; row-gap:64px;
-      max-width:1120px; margin-left:auto; margin-right:auto; align-items:stretch;}
+    #itemsec .wrap{display:grid; grid-template-columns:540px 1fr;
+      column-gap:12px; row-gap:56px;
+      max-width:1100px; margin-left:auto; margin-right:auto; align-items:stretch;}
+    /* 격자에만 margin-top 이 붙어 제목 간격이 두 번 더해지고 중심이 어긋나던 문제 */
+    #itemsec .head + *{margin-top:0;}
     #itemsec .head{grid-column:1/-1; width:100%; max-width:none;}
     #itemsec .itgrid{grid-column:1; grid-row:2;
       grid-template-columns:repeat(4,126px); justify-content:center;
       gap:12px; margin-top:0; align-self:start;}
-    #itemsec .itarw{display:flex !important; grid-column:2; grid-row:2;
-      align-self:center; justify-self:center; margin-top:0;
-      color:var(--primary); opacity:.6;}
-    #itemsec .itpanel{grid-column:3; grid-row:2;
-      margin-top:0; align-self:center; max-width:none; width:100%;}
+    #itemsec .itarw{display:none !important;}
+    #itemsec .itpanel{grid-column:2; grid-row:2;
+      margin-top:0; align-self:stretch; max-width:none; width:100%;}
     /* 위아래로 쌓이면 속칸이 너무 커지지 않게 — 폭 고정 */
     #itemsec .itin{flex:0 0 auto; width:170px; max-width:170px;}
     #itemsec .itl{padding:0;}
@@ -1065,24 +1065,12 @@
   .midband{clip-path:none; margin-top:0; padding-top:140px;}
   @media(min-width:768px){ .midband{padding-top:190px;} }
   /* 남색 단락 위쪽을 흰색에서 서서히 */
-  /* 토스식 — 길고 완만하게 흰색이 걷히면서 남색이 드러난다 */
+  /* 토스식 — 흰색에서 살구빛을 한 번 거쳐 남색으로. 회색을 안 거쳐서 눈이 편하다 */
+  /* 그라데이션 없이 딱 끊어지게 */
   #trustsec{position:relative; clip-path:none; margin-top:0;
-    --fade:300px; padding-top:calc(var(--fade) + 40px);}
-  @media(min-width:768px){ #trustsec{--fade:430px;} }
-  #trustsec:before{content:''; position:absolute; top:0; left:0; right:0; height:var(--fade);
-    background:linear-gradient(180deg,
-      #FFFFFF 0%,
-      rgba(255,255,255,.985) 10%,
-      rgba(255,255,255,.945) 20%,
-      rgba(255,255,255,.875) 30%,
-      rgba(255,255,255,.775) 40%,
-      rgba(255,255,255,.650) 50%,
-      rgba(255,255,255,.505) 60%,
-      rgba(255,255,255,.355) 70%,
-      rgba(255,255,255,.215) 80%,
-      rgba(255,255,255,.095) 90%,
-      rgba(255,255,255,0) 100%);
-    pointer-events:none; z-index:0;}
+    padding-top:104px; background:var(--primary-900);}
+  @media(min-width:768px){ #trustsec{padding-top:168px;} }
+  #trustsec:before{display:none;}
   #trustsec > *{position:relative; z-index:1;}
 
   /* 숫자 카드 ~ 「어떤 항목이 필요하신가요?」 사이 조금 더 */
@@ -1156,8 +1144,8 @@
   .tstep.on .tbd h3{color:var(--primary-600);}
   .tstep:focus-visible{outline:2px solid var(--primary); outline-offset:4px; border-radius:8px;}
 
-  /* 항목 단락 — 제목과 타일 사이 여백 */
-  #itemsec .head + *{margin-top:44px;}
+  /* 항목 단락 — 제목과 타일 사이 여백 (PC 는 격자 row-gap 이 담당) */
+  @media(max-width:999px){ #itemsec .head + *{margin-top:44px;} }
 
   /* 클릭되지 않는 장식 화살표는 뺀다 */
   .whygrid .uc .uarw{display:none;}
@@ -1218,7 +1206,7 @@
     <div class="wrap">
       <div class="head">
         <h2 class="h-sec"><span class="soft">어떤 항목이 필요하신가요?</span><br>지금 바로 <span class="hl">카드로 결제</span>하세요</h2>
-        <p>항목을 고르면 서류를 바로 알려드려요</p>
+        <p>원하는 항목을 고르고 바로 결제하세요</p>
       </div>
 
       <div class="itgrid">
