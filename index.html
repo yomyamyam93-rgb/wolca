@@ -718,15 +718,15 @@
   @media(max-width:767px){
     #itemsec .itpanel{gap:16px; padding:18px 16px; align-items:center;}
     /* 카드 크기 = 패널 폭 비율 → 글 높이와 같이 늘고 준다 */
-    #itemsec .itr-card{width:36%; max-width:148px; min-width:96px; aspect-ratio:1/1.492;}
+    #itemsec .itr-card{width:34%; max-width:148px; min-width:92px; aspect-ratio:1/1.492;}
     #itemsec .itl h3{font-size:16.5px; line-height:1.35;}
-    #itemsec .itl .itr{margin-top:11px;}
+    #itemsec .itl .itr{margin-top:9px;}
     /* 서류 줄 — 상자였던 시절의 안쪽 여백을 걷어낸다 */
-    #itemsec .doc{padding:0; margin:0 0 7px; gap:7px;}
+    #itemsec .doc{padding:0; margin:0 0 -2px; gap:7px; line-height:1.45; align-items:center;}
     #itemsec .doc:last-child{margin-bottom:0;}
     #itemsec .doc p{font-size:13px; line-height:1.45;}
     #itemsec .doc .ck{font-size:12px; line-height:1.45;}
-    #itemsec .itl .btn{margin-top:13px; height:42px; font-size:13.5px;}
+    #itemsec .itl .btn{margin-top:11px; height:42px; font-size:13.5px;}
   }
 
   /* 마지막 — 더 알아보기 메뉴 */
@@ -855,19 +855,21 @@
   @media(min-width:768px){ .hero .sdown{margin-top:56px;} }
   /* ===== 히어로 한 화면 맞춤 — 휴대폰에서 기종이 달라도 첫 화면에 다 들어오게 ===== */
   .hero{display:flex; flex-direction:column; justify-content:safe center;
-    min-height:calc(100svh - var(--appbar));
+    /* 한 화면 안에는 들어오되, 길쭉한 기기에서 억지로 늘어나진 않는다 */
+    min-height:min(calc(100svh - var(--appbar)), 800px);
     max-height:calc(100svh - var(--appbar));}
+  @media(min-width:768px){ .hero{min-height:min(calc(100svh - var(--appbar)), 1060px);} }
   .hero > .hero2, .hero > .wrap, .hero > .sdown{flex:0 0 auto;}
   /* 사진 비율은 원본 그대로 — 좌우가 절대 안 잘린다.
      자리가 좁으면 아래(숫자 카드가 덮는 쪽)만 잘리고 남는 높이는 위아래 여백으로 간다 */
   .hmodel{flex:0 1 auto; align-self:center; overflow:hidden;
-    width:min(619px, calc(100vw - 32px)); aspect-ratio:1603/1147; min-height:118px; margin-top:26px;}
+    width:min(588px, calc((100vw - 32px) * .95)); aspect-ratio:1603/1147; min-height:118px; margin-top:26px;}
   .hmodel img{width:100%; height:100%; object-fit:cover; object-position:center top;}
   /* 글 묶음과 사진 사이 최소 숨통 */
   .hero > .hero2{margin-bottom:clamp(22px, 4svh, 54px);}
   /* PC — 사진 1.2배 · 40px 위로 */
   @media(min-width:768px){
-    .hmodel{width:min(768px, 86vw); margin-top:32px; min-height:240px;}
+    .hmodel{width:min(730px, 81.7vw); margin-top:32px; min-height:240px;}
   }
   /* 배지와 제목 사이 — 바짝 붙인다 */
   .hero .h-hero{margin-top:6px;}
