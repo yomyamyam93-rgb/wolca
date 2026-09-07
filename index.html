@@ -1033,16 +1033,20 @@
   /* ===== 항목 단락 — PC 도 모바일처럼 위아래로 쌓고 폭을 좁힌다 ===== */
   @media(min-width:1000px){
     /* 타일 왼쪽 · 상세 패널 오른쪽 — 좌우 허전함 없이 */
-    #itemsec .wrap{display:grid; grid-template-columns:540px 1fr; gap:52px;
-      max-width:1040px; margin-left:auto; margin-right:auto; align-items:center;}
-    #itemsec .head{grid-column:1/-1;}
-    #itemsec .itgrid{grid-template-columns:repeat(4,126px); justify-content:center;
-      gap:12px; margin-top:0; align-self:center;}
-    #itemsec .itarw{display:none !important;}
-    .itarw{display:none !important;}
-    #itemsec .itpanel{margin-top:0; align-self:center; max-width:none;}
+    /* 타일 · 화살표 · 상세 패널 세 칸 — 높이를 맞춘다 */
+    #itemsec .wrap{display:grid; grid-template-columns:540px 44px 1fr; gap:18px;
+      max-width:1120px; margin-left:auto; margin-right:auto; align-items:stretch;}
+    #itemsec .head{grid-column:1/-1; width:100%; max-width:none;}
+    #itemsec .itgrid{grid-column:1; grid-row:2;
+      grid-template-columns:repeat(4,126px); justify-content:center;
+      gap:12px; margin-top:0; align-self:start;}
+    #itemsec .itarw{display:flex !important; grid-column:2; grid-row:2;
+      align-self:center; justify-self:center; margin-top:0;
+      color:var(--primary); opacity:.6;}
+    #itemsec .itpanel{grid-column:3; grid-row:2;
+      margin-top:0; align-self:stretch; max-width:none; width:100%;}
     /* 위아래로 쌓이면 속칸이 너무 커지지 않게 — 폭 고정 */
-    #itemsec .itin{flex:0 0 auto; width:146px; max-width:146px;}
+    #itemsec .itin{flex:0 0 auto; width:170px; max-width:170px;}
     #itemsec .itl{padding:0;}
     #itemsec .itl .btn{width:auto; min-width:200px; align-self:flex-start; margin-top:16px;}
   }
@@ -1076,14 +1080,22 @@
 
   /* ===== 이용 방법 — 왼쪽 휴대폰 목업 · 오른쪽 세로 타임라인 ===== */
   /* 둘을 옅은 패널 하나에 담는다 — 흰 배경 위에서 한 덩어리로 읽히게 */
-  .hwrap{display:grid; gap:32px; justify-items:center;
-    background:#F5F8FD; border-radius:22px; padding:30px 22px;
-    max-width:560px; margin-left:auto; margin-right:auto;}
+  /* 상자 대신 — 가운데는 옅은 하늘색, 좌우로 갈수록 흰색으로 사라진다 */
+  .hwrap{position:relative; display:grid; gap:32px; justify-items:center;
+    padding:30px 22px; max-width:560px; margin-left:auto; margin-right:auto;}
+  .hwrap:before{content:''; position:absolute; z-index:0; top:0; bottom:0;
+    left:50%; width:100vw; transform:translateX(-50%);
+    background:linear-gradient(90deg,
+      rgba(255,255,255,0) 0%,
+      color-mix(in srgb, var(--primary) 7%, #fff) 24%,
+      color-mix(in srgb, var(--primary) 7%, #fff) 76%,
+      rgba(255,255,255,0) 100%);}
+  .hwrap > *{position:relative; z-index:1;}
   @media(min-width:900px){
     .hwrap{grid-template-columns:1fr 246px; gap:56px;
       max-width:880px; align-items:center; justify-items:stretch;
-      border-radius:28px; padding:46px 50px;}
-    .tline{order:0;} .hphone{order:1;}
+      padding:56px 40px;}
+    .tline{order:0;}
   }
   /* 휴대폰 목업 — 테두리는 CSS 로 그린다 */
   .hphone{width:min(246px, 70vw); padding:9px; border-radius:34px;
@@ -1110,6 +1122,22 @@
   @media(min-width:900px){ #howto .tbd h3{font-size:20px;} }
   .tbd p{margin-top:7px; font-size:15px; line-height:1.75; color:var(--sub);}
   @media(min-width:900px){ .tbd p{font-size:15.5px;} }
+
+  /* 단계 넘기기 — 좌우 화살표 · 단계 클릭 */
+  .hcol{display:flex; flex-direction:column; align-items:center; gap:18px;}
+  @media(min-width:900px){ .hcol{order:1;} }
+  .hnav{display:flex; align-items:center; gap:14px;}
+  .hbtn{width:38px; height:38px; border-radius:999px; border:1px solid var(--primary-100);
+    background:#fff; color:var(--primary-600); font-size:20px; line-height:1; cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 2px 8px rgba(15,23,42,.06); transition:background .15s, border-color .15s;}
+  .hbtn:hover{background:var(--primary-50); border-color:var(--primary);}
+  .hcount{font-size:14px; font-weight:700; color:var(--placeholder); letter-spacing:.2px;}
+  .hcount b{color:var(--primary-600); font-weight:800;}
+  /* 고른 단계 강조 */
+  .tstep{cursor:pointer;}
+  .tstep.on .tbd h3{color:var(--primary-600);}
+  .tstep:focus-visible{outline:2px solid var(--primary); outline-offset:4px; border-radius:8px;}
 
   /* 클릭되지 않는 장식 화살표는 뺀다 */
   .whygrid .uc .uarw{display:none;}
@@ -1260,25 +1288,32 @@
       </div>
 
       <div class="hwrap">
-        <div class="hphone" aria-hidden="true"><img src="img/guide_shots/done.png?v=1" alt=""></div>
+        <div class="hcol">
+          <div class="hphone"><img id="hshot" src="img/guide_shots/home.png?v=1" alt="단계별 앱 화면"></div>
+          <div class="hnav">
+            <button class="hbtn" type="button" id="hprev" aria-label="이전 단계">‹</button>
+            <span class="hcount"><b id="hnow">1</b> / 5</span>
+            <button class="hbtn" type="button" id="hnext" aria-label="다음 단계">›</button>
+          </div>
+        </div>
         <ol class="tline">
-          <li class="tstep">
+          <li class="tstep on" data-shot="img/guide_shots/home.png?v=1" role="button" tabindex="0">
             <span class="tno">1</span>
             <div class="tbd"><h3>회원가입 · 로그인</h3><p>휴대폰 번호만 있으면 1분 안에 가입돼요<br>이미 계정이 있다면 로그인만 하면 됩니다</p></div>
           </li>
-          <li class="tstep">
+          <li class="tstep" data-shot="img/guide_shots/reg2.png?v=1" role="button" tabindex="0">
             <span class="tno">2</span>
             <div class="tbd"><h3>결제 정보 등록</h3><p>결제할 항목과 금액 · 받는 분 계좌를 입력하세요<br>한 번 등록하면 다음부터는 불러와서 씁니다</p></div>
           </li>
-          <li class="tstep">
+          <li class="tstep" data-shot="img/guide_shots/reg4.png?v=1" role="button" tabindex="0">
             <span class="tno">3</span>
             <div class="tbd"><h3>서류 검토</h3><p>임대차계약서 같은 증빙 서류를 올리면<br>연중무휴로 검토해 보통 10분 안에 알려드려요</p></div>
           </li>
-          <li class="tstep">
+          <li class="tstep" data-shot="img/guide_shots/reg3.png?v=1" role="button" tabindex="0">
             <span class="tno">4</span>
             <div class="tbd"><h3>신용카드로 결제</h3><p>등록한 내용을 확인하고 원하는 카드로 결제하세요<br>일시불부터 최대 24개월 할부까지 됩니다</p></div>
           </li>
-          <li class="tstep on">
+          <li class="tstep" data-shot="img/guide_shots/done.png?v=1" role="button" tabindex="0">
             <span class="tno">5</span>
             <div class="tbd"><h3>송금 확인</h3><p>결제가 확인되면 평균 5분 안에 받는 분 계좌로 입금되고<br>내역은 마이페이지에서 바로 볼 수 있어요</p></div>
           </li>
@@ -1292,7 +1327,7 @@
   <section class="sec tint" id="featsec">
     <div class="wrap">
       <div class="head">
-        <h2 class="h-sec">분할 · 예약 · 24시간 송금까지<br><span class="hl">원하는 방식으로</span></h2>
+        <h2 class="h-sec">분할 · 예약 · 365일 24시간<br><span class="hl">원하는 방식으로 송금</span></h2>
         <a class="morelink" href="app.html" target="_blank" rel="noopener">결제 바로가기<svg viewBox="0 0 22 22" aria-hidden="true"><path d="M8.5 4.5 15 11l-6.5 6.5" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       </div>
 
@@ -1624,6 +1659,35 @@
   들[0].classList.add('on');
   채우기(들[0]);
   패널.classList.add('go');
+})();
+</script>
+
+<script>
+/* 이용 방법 — 단계를 누르거나 좌우 화살표로 넘기면 목업 화면이 바뀐다 */
+(function () {
+  var 단계들 = [].slice.call(document.querySelectorAll('#howto .tstep'));
+  var 화면 = document.getElementById('hshot');
+  var 번호 = document.getElementById('hnow');
+  var 이전 = document.getElementById('hprev');
+  var 다음 = document.getElementById('hnext');
+  if (!단계들.length || !화면) return;
+  var i = 0;
+  function 가기(n) {
+    i = (n + 단계들.length) % 단계들.length;
+    단계들.forEach(function (e, k) { e.classList.toggle('on', k === i); });
+    var src = 단계들[i].dataset.shot;
+    if (src && 화면.getAttribute('src') !== src) 화면.setAttribute('src', src);
+    if (번호) 번호.textContent = i + 1;
+  }
+  단계들.forEach(function (e, k) {
+    e.addEventListener('click', function () { 가기(k); });
+    e.addEventListener('keydown', function (ev) {
+      if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); 가기(k); }
+    });
+  });
+  if (이전) 이전.addEventListener('click', function () { 가기(i - 1); });
+  if (다음) 다음.addEventListener('click', function () { 가기(i + 1); });
+  가기(0);
 })();
 </script>
 
