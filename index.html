@@ -33,7 +33,6 @@
   @media(min-width:768px){
     .hero{min-height:0;
       display:flex; flex-direction:column; justify-content:flex-start;
-      background-color:#EFF2FB; background-image:none;
       padding:150px 0 44px;}
     .hero .hero2{margin:0 auto;}
 
@@ -52,7 +51,7 @@
 
   /* 모바일 — 이미지 크게 · 가운데 정렬 */
   @media(max-width:767px){
-    .hero{background-color:#EFF2FB; background-image:none;
+    .hero{
       min-height:0;
       display:flex; flex-direction:column; justify-content:flex-start;
       padding:38px 0 14px;}
@@ -585,11 +584,6 @@
     .sdown .mouse iconify-icon{font-size:19px; margin-top:9px;}
     .sdown b{font-size:12.5px; letter-spacing:3px;}
   }
-  /* 헤더 배경 끝색이 다음 단락까지 이어진다 */
-  /* 히어로 바닥을 다음 단락 색으로 녹여 경계 제거 */
-  .hero:after{content:''; position:absolute; left:0; right:0; bottom:0; height:150px;
-    background:linear-gradient(180deg, rgba(239,242,251,0), #EFF2FB); pointer-events:none; z-index:0;}
-  .sdown{z-index:2;}
   @media(min-width:900px){ #whysec{min-height:0; padding-top:24px; padding-bottom:104px;} }
   /* 모바일 — 보안 카드 세로 간격 정리 */
   @media(max-width:767px){
