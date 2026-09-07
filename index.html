@@ -1148,21 +1148,26 @@
   @media(max-width:999px){ #itemsec .head + *{margin-top:44px;} }
 
   /* 대제목 뒤에 카드 사진을 고정으로 깔고 둥근 사각으로 오려낸다 */
-  .bandart{position:relative; border-radius:26px; overflow:hidden;
-    padding:140px 20px 150px;
-    background-image:linear-gradient(rgba(255,255,255,.80), rgba(255,255,255,.84)),
+  /* 16:9 로 꽉 채우고 · 사진은 어둡게 · 글씨는 흰색 */
+  .bandart{position:relative; border-radius:22px; overflow:hidden;
+    aspect-ratio:16/9; min-height:250px; padding:20px;
+    display:flex; align-items:center; justify-content:center;
+    background-image:linear-gradient(rgba(9,20,42,.48), rgba(9,20,42,.60)),
       url('img/hero-bg6.jpg');
     background-position:center center; background-size:cover;
     background-attachment:scroll;}
   @media(min-width:768px){
-    .bandart{border-radius:40px; padding:265px 32px 280px;
+    .bandart{border-radius:34px; padding:32px;
       /* 화면 좌우를 거의 꽉 채운다 (transform 을 쓰면 배경 고정이 깨져서 음수 여백으로) */
       margin-left:calc(50% - 50vw + 28px); margin-right:calc(50% - 50vw + 28px); max-width:none;
       /* 스크롤해도 사진은 제자리 — 글만 지나간다 */
       background-attachment:fixed;
-      background-image:linear-gradient(rgba(255,255,255,.78), rgba(255,255,255,.82)),
+      background-image:linear-gradient(rgba(9,20,42,.46), rgba(9,20,42,.58)),
         url('img/hero-bg6.jpg');}
   }
+  .bandart .h-band{color:#FFFFFF;}
+  .bandart .h-band .soft{color:rgba(255,255,255,.88);}
+  .bandart .h-band .hl{color:var(--primary-300);}
 
   /* 클릭되지 않는 장식 화살표는 뺀다 */
   .whygrid .uc .uarw{display:none;}
