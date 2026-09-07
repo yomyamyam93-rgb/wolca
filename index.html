@@ -977,7 +977,12 @@
   /* ===== 띠 안 간격을 하나로 — 대제목↔단락, 단락↔단락 모두 같은 값 ===== */
   .midband{--gap:96px;}
   @media(min-width:768px){ .midband{--gap:150px;} }
-  .bandhead{padding-bottom:var(--gap);}
+  /* 대제목 ↔ 첫 세부제목 사이 — 가운데에 움직이는 화살표 */
+  .bandhead{padding-bottom:calc(var(--gap) / 2 - 20px);}
+  .bandarw{display:flex; justify-content:center; line-height:1; color:var(--primary);
+    font-size:26px; margin-top:calc(var(--gap) / 2 - 20px);}
+  @media(min-width:768px){ .bandarw{font-size:30px;} }
+  .bandarw iconify-icon{display:block; animation:swheel 1.7s ease-in-out infinite;}
   #whysec, #howto, #featsec{padding-top:0; padding-bottom:0;}
   /* 아이디로 써야 #featsec{margin-top:0} 을 이긴다 */
   #howto, #featsec{margin-top:var(--gap);}
@@ -1078,6 +1083,7 @@
   <div class="midband">
   <div class="wrap bandhead">
     <h2 class="h-band"><span class="soft">현금거래가 고민이신가요?</span><br>이제 <span class="hl">랜선페이</span>에게 맡겨보세요</h2>
+    <div class="bandarw" aria-hidden="true"><iconify-icon icon="mingcute:arrow-down-line"></iconify-icon></div>
   </div>
   <section class="sec tight" id="whysec">
     <div class="wrap">
