@@ -1196,7 +1196,12 @@
   }
   /* 상자 폭을 넘기지 않게 — 넘치면 줄바꿈 */
   .bandart .h-band{max-width:100%; color:#FFFFFF; text-shadow:0 2px 20px rgba(4,12,30,.55);}
-  @media(max-width:767px){ .bandart .h-band{font-size:min(6.6vw, 30px);} }
+  /* 모바일 — 마스크 없이 화면을 꽉 채운다 */
+  @media(max-width:767px){
+    .bandart{width:auto; min-height:0; aspect-ratio:16/9; border-radius:0; padding:20px 22px;
+      margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw);}
+    .bandart .h-band{font-size:min(7vw, 32px);}
+  }
   .bandart .h-band .soft{color:#FFFFFF;}
   .bandart .h-band .hl{color:#B9D6FF;}
 
@@ -1233,7 +1238,7 @@
     /* 카드 밖으로 3D 가 튀어나오게 — 오른쪽에 자리를 비우고 경계를 넘긴다 */
     #featsec .rzgrid{overflow:visible;}
     #featsec .rz{flex:none; width:auto; margin:0 44px 0 6px; overflow:visible;
-      padding:26px 128px 110px 20px; min-height:0;}
+      padding:26px 104px 74px 20px; min-height:0;}
     #featsec .rz .in{font-size:17px;}
     #featsec .rz h3{font-size:17px;}
     /* 설명은 한 줄만 */
@@ -1241,10 +1246,10 @@
     #featsec .rz li{margin-bottom:0; font-size:13.5px; line-height:1.55;}
     #featsec .rz li:nth-child(n+2){display:none;}
     /* 아이콘 — 카드 오른쪽 밖으로 크게 · 화살표와 안 겹치게 아래쪽에 */
-    #featsec .rz .fig{position:absolute; right:-56px; bottom:-12px; z-index:2;
-      max-width:180px; max-height:180px;
-      filter:drop-shadow(0 14px 24px rgba(8,26,66,.20));}
-    #featsec .rzgrid .rz:last-child .fig, #featsec .rz.alt .fig{right:-56px;}
+    #featsec .rz .fig{position:absolute; right:-44px; bottom:-10px; z-index:2;
+      max-width:140px; max-height:140px;
+      filter:drop-shadow(0 12px 20px rgba(8,26,66,.20));}
+    #featsec .rzgrid .rz:last-child .fig, #featsec .rz.alt .fig{right:-44px;}
     /* 설명 앞 가운뎃점 제거 */
     #featsec .rz li{padding-left:0;}
     #featsec .rz li:before{display:none;}
