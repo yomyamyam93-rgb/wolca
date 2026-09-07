@@ -883,9 +883,10 @@
   @media(min-width:768px){ .hero .h-hero{font-size:52px;} }
   @media(min-width:768px){ .hero .h-hero{margin-top:8px;} }
   /* 카드 아래 여백 · 스크롤다운도 화면 높이에 맞춰 */
-  .topband .hero{padding-bottom:clamp(16px, 3svh, 44px);}
-  .hero .sdown{margin:clamp(8px, 2.2svh, 30px) auto 0;}
-  @media(min-width:768px){ .hero .sdown{margin-top:clamp(10px, 2.2svh, 34px);} }
+  .topband .hero{padding-bottom:0;}
+  /* 화살표를 히어로와 다음 단락 사이 정중앙에 — 위아래 같은 값으로 묶는다 */
+  .main{--acen:clamp(46px, 8svh, 112px);}
+  .hero .sdown{margin:var(--acen) auto 0;}
   /* 위 여백도 화면 높이에 맞춰 */
   .hero{padding-top:clamp(30px, 5.4svh, 60px);}
   @media(min-width:768px){ .hero{padding-top:clamp(36px, 6.4svh, 78px);} }
@@ -1046,8 +1047,10 @@
   }
 
   /* 숫자 카드 ~ 「어떤 항목이 필요하신가요?」 사이 조금 더 */
-  #itemsec{padding-top:92px; padding-bottom:150px;}
-  @media(min-width:768px){ #itemsec{padding-top:156px; padding-bottom:230px;} }
+  #itemsec{padding-top:var(--acen); padding-bottom:150px;}
+  /* 모바일은 히어로 아래에 남는 여유(약 24px)가 있어 그만큼 뺀다 */
+  @media(max-width:767px){ #itemsec{padding-top:calc(var(--acen) - 24px);} }
+  @media(min-width:768px){ #itemsec{padding-bottom:230px;} }
 
 
   /* 가운데 띠 — 아래 여백 (꺾임은 위 규칙 하나만 쓴다) */
