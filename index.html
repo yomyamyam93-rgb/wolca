@@ -989,7 +989,10 @@
   #trustsec .sboard .d,
   #trustsec .srow p{color:rgba(220,231,252,.74); line-height:1.85;}
   /* 핵심 구절만 밝게 — 문장 전체를 칠하지 않는다 */
-  #trustsec p b{color:var(--primary-300); font-weight:700;}
+  #trustsec p b{color:var(--primary-300); font-weight:700;
+    /* 강조 구절이 중간에서 잘리지 않게 */
+    white-space:nowrap;}
+  @media(max-width:520px){ #trustsec p b{white-space:normal; word-break:keep-all;} }
   /* 소제목 강조는 한 가지 파랑으로 통일 */
   #trustsec .srow h4 em,
   #trustsec .srow:nth-child(3) h4 em,
