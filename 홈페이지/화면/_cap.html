@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>html,body{margin:0;padding:0;background:#fff;}iframe{border:0;display:block;}  /* 휴대폰 글줄 정리 — 본문은 줄 끝까지 채우고 제목·강조는 어절을 지킨다 */
+  p, li, dd, .a, .dr, .tx{word-break:normal; overflow-wrap:anywhere; text-wrap:pretty; letter-spacing:-.2px;}
+  p b, li b, strong, h1, h2, h3, b{word-break:keep-all;}
+</style>
+</head>
+<body>
+<iframe id="f"></iframe>
+<script>
+/* 캡처 하네스 — 실제 화면에 견본 값을 채워서 헤드리스 크롬으로 찍는다 */
+var q = new URLSearchParams(location.search);
+var seed = {유형:'월세', 은행:'신한', 계좌:'110-1234-5678', 예금주:'김집주', 휴대폰:'010-9876-5432',
+  금액:700000, 수단:'신용카드', 카드:'신한카드 **** 1479', 할부:'5개월 (무이자)', 시점:'즉시'};
+sessionStorage.setItem('lp_reg', JSON.stringify(seed));
+var f = document.getElementById('f');
+f.style.width = (q.get('w') || 390) + 'px';
+f.style.height = (q.get('h') || 844) + 'px';
+f.src = q.get('p') || '../app.html';
+f.onload = function () {
+  setTimeout(function () {
+    try {
+      var d = f.contentDocument;
+      d.querySelectorAll('.apop,.apop-dim,.evpop,.evpop-dim,[id^=apop],[id^=evpop]').forEach(function (e) {
+        e.setAttribute('hidden',''); e.style.display = 'none';
+      });
+      var k = q.get('k') || '';
+      if (k === 'reg2') { var b = d.getElementById('예금주확인'); if (b) b.click(); }
+      if (k === 'reg3') {
+        var s = d.getElementById('할부');
+        if (s) { s.value = '5개월 (무이자)'; s.dispatchEvent(new Event('change', {bubbles:true})); }
+      }
+    } catch (e) {}
+  }, 700);
+};
+</script>
+</body>
+</html>

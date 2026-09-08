@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>랜선페이 — 마이페이지</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="../style.css?v=28">
+<style>
+  body{background:#EDF0F4;}
+  .apphull{width:100%; max-width:480px; min-height:100svh; margin:0 auto; background:#fff;
+    box-shadow:0 0 44px rgba(15,23,42,.10); display:flex; flex-direction:column; padding-bottom:40px;}
+  .topbar{height:52px; position:sticky; top:0; z-index:50; background:#fff; display:flex; align-items:center; padding:0 10px; flex:0 0 auto;}
+  .back{width:40px; height:40px; display:flex; align-items:center; justify-content:center;
+    font-size:24px; color:var(--ink); cursor:pointer;}
+  .topbar .ttl{flex:1; text-align:center; font-size:16px; font-weight:700; margin-right:40px;}
+  .abody{flex:1; padding:6px 20px 30px;}
+
+  /* 프로필 카드 */
+  .prof{background:var(--primary-50); border:1px solid #DCE6F7; border-radius:8px; padding:20px; display:flex;
+    align-items:center; gap:14px;}
+  .prof .av{width:52px; height:52px; border-radius:999px; background:var(--primary);
+    background:var(--grad); color:#fff; font-size:20px; font-weight:800;
+    display:flex; align-items:center; justify-content:center; flex:0 0 auto;}
+  .prof .tx b{display:block; font-size:17px; font-weight:800; letter-spacing:-.3px;}
+  .prof .tx span{display:block; margin-top:3px; font-size:12.5px; color:var(--sub);}
+
+  .glabel{margin:24px 2px 8px; font-size:13px; font-weight:700; color:var(--placeholder);}
+  .gcard{background:#fff; border-radius:8px; border:1px solid #E9EDF3; box-shadow:0 2px 8px rgba(0,0,0,.06); padding:2px 16px;}
+  .grow{display:flex; align-items:center; justify-content:space-between; gap:12px; padding:15px 0;
+    border-bottom:1px solid var(--line); color:var(--ink); font-size:15px; font-weight:600;}
+  .gcard .grow:last-child{border-bottom:none;}
+  .grow i{font-style:normal; color:var(--icon-off); font-size:17px;}
+  .grow span.v{font-size:13.5px; font-weight:500; color:var(--sub);}
+
+  .outbtn{width:100%; height:48px; margin-top:26px; border:1px solid var(--line); border-radius:8px;
+    background:#fff; font:inherit; font-size:14.5px; font-weight:700; color:var(--sub); cursor:pointer;}
+  /* 하단 탭바 — 모든 콘텐츠 화면 공통 */
+  .apphull, .phone{padding-bottom:110px !important;}
+  .atab{position:fixed; left:50%; transform:translateX(-50%); bottom:0; z-index:60;
+    width:100%; max-width:480px; display:flex; background:rgba(255,255,255,.97);
+    backdrop-filter:blur(8px); border-top:1px solid #E9EDF3;
+    border-radius:26px 26px 0 0; box-shadow:0 -4px 18px rgba(15,23,42,.08);
+    padding:22px 0 calc(24px + var(--safe));}
+  .atab a,.atab button{flex:1; display:flex; flex-direction:column; align-items:center; gap:6px;
+    font-size:11.5px; font-weight:700; color:var(--placeholder); background:none; border:none; cursor:pointer;}
+  .atab iconify-icon{font-size:24px;}
+  .atab .on{color:var(--primary);}
+
+  /* 온오프 스위치 */
+  .sw{position:relative; width:46px; height:27px; border-radius:999px; background:#D6DBE3;
+    border:none; cursor:pointer; transition:background .2s; flex:0 0 auto; padding:0;}
+  .sw:after{content:''; position:absolute; top:3px; left:3px; width:21px; height:21px; border-radius:999px;
+    background:#fff; transition:left .2s; box-shadow:0 1px 3px rgba(0,0,0,.25);}
+  .sw.on{background:var(--primary);}
+  .sw.on:after{left:22px;}
+
+  .glabel{display:flex; align-items:center; justify-content:space-between;}
+  .gl-act{font-size:12.5px; font-weight:700; color:var(--primary-600);}
+  .gnote{padding:12px 0 14px; font-size:12px; color:var(--placeholder); line-height:1.65; border-top:1px solid var(--line); margin-top:-1px;}
+  .grow span.vb{color:var(--primary-600); font-weight:600;}
+  .docempty{padding:26px 16px; text-align:center; font-size:13.5px; color:var(--placeholder);
+    border-style:dashed;}
+</style>
+<script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+</head>
+<body>
+<div class="apphull">
+  <div class="topbar"><div class="back" onclick="history.length>1?history.back():location.href='../app.html'">‹</div><div class="ttl">마이페이지</div></div>
+
+  <div class="abody">
+    <div class="prof">
+      <span class="av">김</span>
+      <span class="tx"><b>김미역</b><span>일반회원 · 010-1234-5678</span></span>
+    </div>
+
+    <div class="glabel">내 정보</div>
+    <div class="gcard">
+      <a class="grow" href="#">이름<span class="v">김미역</span></a>
+      <a class="grow" href="#">휴대폰 번호<span class="v">010-1234-5678</span></a>
+      <a class="grow" href="#">이메일<span class="v">miyeok@naver.com</span></a>
+      <div class="grow">가입일<span class="v">2026.08.26</span></div>
+      <div class="grow">회원등급<span class="v">일반회원</span></div>
+      <div class="grow">인증상태<span class="v vb">이메일 · 휴대폰 인증 완료</span></div>
+      <a class="grow" href="#">비밀번호 변경<i>›</i></a>
+    </div>
+
+    <div class="glabel">사업자 정보 <a class="gl-act" href="#">정보 입력</a></div>
+    <div class="gcard">
+      <div class="grow">사업자등록번호<span class="v">-</span></div>
+      <div class="grow">상호<span class="v">-</span></div>
+      <div class="grow">대표자명<span class="v">-</span></div>
+      <div class="grow">계산서 수신 이메일<span class="v">-</span></div>
+      <div class="gnote">사업자 회원은 계산서 발행 정보를 입력하면 세금계산서 발행이 가능합니다.</div>
+    </div>
+
+    <div class="glabel">혜택</div>
+    <div class="gcard">
+      <a class="grow" href="#">쿠폰 · 포인트<i>›</i></a>
+    </div>
+
+    <div class="glabel">세금 · 증빙</div>
+    <div class="gcard">
+      <a class="grow" href="증빙.html#세액공제">월세 세액공제 증빙<i>›</i></a>
+      <a class="grow" href="증빙.html#세금계산서">세금계산서 발행<i>›</i></a>
+      <a class="grow" href="증빙.html#부가세">부가세 신고용 자료<i>›</i></a>
+      <a class="grow" href="증빙.html#입금확인서">무통장 입금 확인서<i>›</i></a>
+    </div>
+
+    <div class="glabel">설정</div>
+    <div class="gcard">
+      <div class="grow">알림 설정<button class="sw on" id="알림" type="button" aria-label="알림 켜짐"></button></div>
+      <a class="grow" href="약관.html#terms">약관 · 정책<i>›</i></a>
+      <a class="grow" href="약관.html#terms">약관 재동의<i>›</i></a>
+    </div>
+
+    <div class="glabel">보유 서류</div>
+    <div class="gcard docempty">등록된 서류가 없습니다.</div>
+
+    <button class="outbtn" type="button">로그아웃</button>
+  </div>
+</div>
+<nav class="atab">
+  <a href="../app.html"><iconify-icon icon="mingcute:home-4-fill"></iconify-icon>홈</a>
+  <a href="10_1_유형선택.html"><iconify-icon icon="mingcute:bank-card-fill"></iconify-icon>결제하기</a>
+  <a href="안내.html"><iconify-icon icon="mingcute:book-2-fill"></iconify-icon>이용안내</a>
+  <button type="button" onclick="location.href='../app.html#menu'"><iconify-icon icon="mingcute:menu-fill"></iconify-icon>전체메뉴</button>
+</nav>
+<script>
+document.getElementById('알림').addEventListener('click', function(){
+  this.classList.toggle('on');
+  this.setAttribute('aria-label', this.classList.contains('on') ? '알림 켜짐' : '알림 꺼짐');
+});
+</script>
+</body>
+</html>
