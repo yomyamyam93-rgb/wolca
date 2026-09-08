@@ -323,3 +323,13 @@ main{flex:1 0 auto;}
 .more-b ul{list-style:none;}
 .more-b li{position:relative; padding-left:15px; margin-bottom:7px;}
 .more-b li:before{content:'·'; position:absolute; left:3px; color:var(--icon-off);}
+
+/* ===== 휴대폰 글줄 정리 — 앱 화면 공통 =====
+   본문은 줄 끝이 비지 않게 글자 단위 줄바꿈까지 허용하고
+   제목과 강조한 말은 어절을 지킨다 */
+@media(max-width:900px){
+  body p, body li, body dd, body .a, body .dr, body .tx{
+    word-break:normal; overflow-wrap:anywhere; text-wrap:pretty; letter-spacing:-.2px;}
+  body p b, body li b, body strong, body h1, body h2, body h3,
+  body .h-sec, body .h-hero, body b{word-break:keep-all;}
+}

@@ -51,6 +51,9 @@ body{display:block !important; padding:0 !important; background:#EDF0F4 !importa
   width:100%; max-width:480px; bottom:0 !important; z-index:80;}
 .cta,.bottom,.btm{position:fixed !important; left:50% !important; right:auto !important; transform:translateX(-50%);
   width:100%; max-width:480px; bottom:0 !important; z-index:80;}
+  /* 휴대폰 글줄 정리 — 본문은 줄 끝까지 채우고 제목·강조는 어절을 지킨다 */
+  p, li, dd, .a, .dr, .tx{word-break:normal; overflow-wrap:anywhere; text-wrap:pretty; letter-spacing:-.2px;}
+  p b, li b, strong, h1, h2, h3, b{word-break:keep-all;}
 </style>
 </head>
 <body>

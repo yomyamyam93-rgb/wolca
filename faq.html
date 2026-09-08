@@ -23,14 +23,21 @@
     cursor:pointer; list-style:none; font-size:17px; font-weight:700; line-height:1.5;}
   .acc summary::-webkit-details-marker{display:none;}
   .acc .q{flex:0 0 auto; font-size:16px; font-weight:700; color:var(--primary);}
-  .acc summary .t{flex:1; min-width:0;}
+  .acc summary .t{flex:1; min-width:0; padding-right:14px; word-break:keep-all;}
   .acc summary .arw{flex:0 0 auto; font-size:20px; color:var(--icon-off); transition:transform .25s;}
   .acc details[open] summary .arw{transform:rotate(180deg);}
-  .acc .a{padding:2px 4px 22px 34px; font-size:16px; line-height:1.8; color:var(--sub);}
+  .acc .a{padding:2px 26px 22px 34px; font-size:16px; line-height:1.8; color:var(--sub);}
   .acc .a b{color:var(--ink);}
   /* 탭 아래 첫 묶음까지 — 공지사항 게시판과 같은 간격 */
   .sec.tight{padding-top:62px;}
   @media(max-width:639px){ .sec.tight{padding-top:30px;} }
+  /* 휴대폰 — 양쪽 정렬 대신 어절 단위로 끊고 줄 끝 균형만 잡는다 */
+  @media(max-width:767px){
+    /* 어절만 지키면 줄 끝에 빈 자리가 크게 남는다 — 글자 단위 줄바꿈을 허용한다 */
+    .acc .a{text-align:left; word-break:normal; overflow-wrap:anywhere;
+      text-wrap:pretty; letter-spacing:-.2px;}
+  }
+
 </style>
 </head>
 <body>
@@ -72,7 +79,7 @@
           <details><summary><span class="q">Q.</span><span class="t">세입자 본인만 이용할 수 있나요?</span><iconify-icon class="arw" icon="mingcute:down-line"></iconify-icon></summary>
             <div class="a">본인 명의 계약이 원칙입니다. 다만 가족이 대신 내주는 경우도 가능해요. 계약서와 결제하는 분의 관계를 확인할 수 있는 서류를 함께 올려주세요.</div></details>
           <details><summary><span class="q">Q.</span><span class="t">서류는 무엇이 필요한가요?</span><iconify-icon class="arw" icon="mingcute:down-line"></iconify-icon></summary>
-            <div class="a">항목마다 다르지만 대부분 <b>한 장</b>이면 됩니다. 월세는 임대차 계약서 · 관리비는 고지서 · 인건비는 근로계약서 + 급여명세서예요. 자세한 목록은 공지사항의 「유형별 필요 서류 한눈에 보기」에서 확인하세요.</div></details>
+            <div class="a">항목마다 다르지만 대부분 <b>한 장</b>이면 됩니다. 월세는 임대차 계약서, 관리비는 고지서, 인건비는 근로계약서 + 급여명세서예요. 자세한 목록은 공지사항의 「유형별 필요 서류 한눈에 보기」에서 확인하세요.</div></details>
         </div>
       </div>
 

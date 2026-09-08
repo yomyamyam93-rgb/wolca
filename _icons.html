@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>아이콘 세트 비교</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+<style>
+  body{font-family:Pretendard,sans-serif; background:#0C5CE8; margin:0; padding:24px 16px 60px; color:#fff;}
+  h2{font-size:16px; font-weight:700; margin:26px 0 10px;}
+  .g{display:grid; grid-template-columns:repeat(4,1fr); gap:7px; max-width:480px;}
+  .t{aspect-ratio:1/1; background:rgba(255,255,255,.22); border-radius:16px;
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px;}
+  .t iconify-icon{font-size:25px; color:#fff;}
+  .t b{font-size:12px; font-weight:600;}
+</style>
+</head>
+<body>
+<h2>A · 지금 (Mingcute)</h2>
+<div class="g" id="a"></div>
+<h2>B · Solar Bold</h2>
+<div class="g" id="b"></div>
+<h2>C · Remix Fill</h2>
+<div class="g" id="c"></div>
+<h2>D · Phosphor Fill</h2>
+<div class="g" id="d"></div>
+<script>
+var 항목=['월세','관리비','인건비','보증금','매입대금','학원비','학교공과금','인테리어','이사','청소비','중개수수료','기타'];
+var 셋={
+a:['mingcute:home-4-fill','mingcute:building-2-fill','mingcute:group-2-fill','mingcute:safe-lock-fill','mingcute:box-2-fill','mingcute:book-2-fill','mingcute:mortarboard-fill','mingcute:paint-brush-fill','mingcute:truck-fill','mingcute:broom-fill','mingcute:key-2-fill','mingcute:more-2-fill'],
+b:['solar:home-2-bold','solar:buildings-2-bold','solar:users-group-two-rounded-bold','solar:safe-square-bold','solar:box-bold','solar:notebook-bold','solar:square-academic-cap-bold','solar:paint-roller-bold','solar:cart-large-2-bold','solar:broom-bold','solar:key-bold','solar:menu-dots-bold'],
+c:['ri:home-5-fill','ri:building-2-fill','ri:group-fill','ri:safe-2-fill','ri:archive-fill','ri:book-2-fill','ri:graduation-cap-fill','ri:brush-fill','ri:truck-fill','ri:brush-4-fill','ri:key-2-fill','ri:more-fill'],
+d:['ph:house-fill','ph:buildings-fill','ph:users-three-fill','ph:vault-fill','ph:package-fill','ph:book-bookmark-fill','ph:graduation-cap-fill','ph:paint-roller-fill','ph:truck-fill','ph:broom-fill','ph:key-fill','ph:dots-three-circle-fill']
+};
+Object.keys(셋).forEach(function(k){
+  document.getElementById(k).innerHTML=셋[k].map(function(ic,i){
+    return '<div class="t"><iconify-icon icon="'+ic+'"></iconify-icon><b>'+항목[i]+'</b></div>';
+  }).join('');
+});
+</script>
+</body>
+</html>

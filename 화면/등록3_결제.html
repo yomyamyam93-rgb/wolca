@@ -101,6 +101,10 @@
   .prev{border:1px solid var(--line); background:#fff; color:var(--ink);}
   .next{border:none; color:#fff; background:var(--primary); background:var(--grad);
     box-shadow:0 4px 12px color-mix(in srgb, var(--primary) 32%, transparent);}
+  /* 휴대폰 글줄 정리 — 본문은 줄 끝까지 채우고 제목·강조는 어절을 지킨다 */
+  p, li, dd, .a, .dr, .tx{word-break:normal; overflow-wrap:anywhere; text-wrap:pretty; letter-spacing:-.2px;}
+  p b, li b, strong, h1, h2, h3, b{word-break:keep-all;}
+
 </style>
 </head>
 <body>

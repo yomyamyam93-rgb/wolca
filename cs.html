@@ -13,11 +13,25 @@
   .wrapn{max-width:640px; margin:0 auto;}
   .grp{margin-top:28px; font-size:13px; font-weight:700; color:var(--placeholder); margin-bottom:6px;}
   .menu{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:4px 16px;}
-  .call{margin-top:28px; padding:24px; border-radius:14px; background:var(--primary-50);
-    border:1px solid var(--primary-100); text-align:center;}
+  .call{margin-top:28px; padding:26px; border-radius:16px; text-align:center;
+    border:1px solid var(--primary-100);
+    background:
+      radial-gradient(115% 95% at 12% 8%, color-mix(in srgb, var(--primary) 13%, transparent), transparent 64%),
+      radial-gradient(95% 80% at 92% 94%, color-mix(in srgb, var(--primary) 7%, transparent), transparent 66%),
+      #FAFCFF;}
   .call b{display:block; font-size:28px; font-weight:700; letter-spacing:-.5px; color:var(--primary-700);}
   .call span{display:block; margin-top:6px; font-size:13px; color:var(--sub);}
   .main .sec:first-of-type{padding-top:8px;}
+  /* ===== 휴대폰 글줄 정리 (회사소개 · 자주 묻는 질문과 같은 기준) =====
+     본문은 줄 끝이 비지 않게 글자 단위 줄바꿈까지 허용하고
+     제목과 강조한 말은 어절을 지킨다 */
+  @media(max-width:767px){
+    .main p, .main li, .main dd{word-break:normal; overflow-wrap:anywhere;
+      text-wrap:pretty; letter-spacing:-.2px;}
+    .main p b, .main li b, .main strong,
+    .main h1, .main h2, .main h3, .main .h-sec, .main .h-hero{word-break:keep-all;}
+  }
+
 </style>
 </head>
 <body>

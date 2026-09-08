@@ -28,14 +28,25 @@
 
   /* 한 눈에 보는 프로세스 — 5단계 */
   .flow{display:grid; grid-template-columns:repeat(5,1fr); gap:38px;}
-  .fs{position:relative; background:#fff; border-radius:8px;
-    padding:30px 16px 26px; text-align:center; box-shadow:0 2px 8px rgba(0,0,0,.05);}
-  .fs .no{display:inline-flex; align-items:center; justify-content:center; width:34px; height:34px;
-    border-radius:999px; background:var(--primary); background:var(--grad); box-shadow:var(--btn-shadow);
-    color:#fff; font-size:13.5px; font-weight:700;}
-  .fs h3{margin-top:12px; font-size:19px; font-weight:800; letter-spacing:-.4px;}
-  .fs img{width:84px; height:84px; object-fit:contain; margin-top:18px;}
-  .fs p{margin-top:18px; padding-top:16px; border-top:1px solid var(--line);
+  .fs{position:relative; background:#fff; border-radius:16px;
+    padding:14px 14px 26px; text-align:center; box-shadow:0 2px 8px rgba(0,0,0,.05);}
+  .fs .no{display:block; width:auto; height:auto; background:none; box-shadow:none; border-radius:0;
+    color:var(--ink); font-size:14px; font-weight:800; letter-spacing:.2px;}
+  .fs h3{margin-top:12px; font-size:19px; font-weight:800; letter-spacing:-.4px; color:var(--primary-600);}
+  /* 바깥 흰 상자 안에 그라데이션 상자 (사이트 공통 카드 방식) */
+  .fs-in{border-radius:12px; padding:26px 12px 26px;
+    background:
+      radial-gradient(115% 95% at 12% 8%, color-mix(in srgb, var(--primary) 13%, transparent), transparent 64%),
+      radial-gradient(95% 80% at 92% 94%, color-mix(in srgb, var(--primary) 7%, transparent), transparent 66%),
+      #FAFCFF;}
+  .fs:nth-child(even) .fs-in{background:
+      radial-gradient(115% 95% at 88% 8%, color-mix(in srgb, var(--primary) 13%, transparent), transparent 64%),
+      radial-gradient(95% 80% at 10% 92%, color-mix(in srgb, var(--primary) 7%, transparent), transparent 66%),
+      #FAFCFF;}
+  .fs .fs-ic{display:grid; place-items:center; margin:20px auto 4px;
+    background:none; box-shadow:none;}
+  .fs .fs-ic svg{width:44px; height:44px; opacity:.92;}
+  .fs p{margin-top:18px; padding-top:0; border-top:none;
     font-size:14px; line-height:1.7; color:var(--sub);}
   /* 다음 단계 화살표 — 로고식 */
   .fnx{position:absolute; right:-31px; top:50%; transform:translateY(-50%); z-index:1;
@@ -49,16 +60,25 @@
     .fs:not(:last-child):after{content:''; position:absolute; top:44px;
       left:calc(50% + 19px); right:calc(-50% + 19px); height:2px;
       background:var(--primary-100, #D6E4FF);}
-    .fs .no{grid-row:2; width:30px; height:30px; font-size:12px; position:relative; z-index:1;}
+    .fs .no{grid-row:2; display:inline-flex; align-items:center; justify-content:center;
+      width:30px; height:30px; border-radius:999px; background:var(--primary); background:var(--grad);
+      box-shadow:var(--btn-shadow); color:#fff; font-size:12px; position:relative; z-index:1;}
     .fs h3{grid-row:3; margin:0; font-size:11.5px; letter-spacing:-.4px; line-height:1.35; white-space:nowrap;}
     .fs:nth-child(even) h3{grid-row:1;}
-    .fs img{display:none;}
+    .fs-in{display:contents;}
+    .fs .fs-ic{display:none;}
     .fs p{display:none;}
   }
 
   /* 단계 상세 — 맨바탕에 번호 · 제목 · 순서 안내 · 폰 목업 (조이페이 배치) */
-  .steps2{max-width:980px; margin:0 auto; display:grid; gap:104px;}
+  .steps2{max-width:980px; margin:0 auto; display:grid; gap:168px;}
   .sd{display:flex; flex-direction:column; align-items:center; text-align:center;}
+  /* 단계마다 바탕을 번갈아 깔아 구분 */
+  .steps2 .sd:nth-child(even){position:relative;}
+  .steps2 .sd:nth-child(even):before{content:''; position:absolute; z-index:-1;
+    left:50%; width:100vw; transform:translateX(-50%);
+    top:-84px; bottom:-84px; background:#F5F8FC;}
+  .steps2{position:relative; z-index:0;}
   .sd .no{display:inline-flex; align-items:center; justify-content:center; width:38px; height:38px;
     border-radius:999px; background:var(--primary); background:var(--grad); box-shadow:var(--btn-shadow);
     color:#fff; font-size:14px; font-weight:700;}
@@ -383,13 +403,28 @@
 
   /* 단계 사이 구분 — 가는 선 위에 아래 화살표 */
   .steps2 .sd:not(:last-child)::after{
-    content:''; display:block; width:100%; max-width:560px; height:34px;
-    margin:52px auto -52px;
+    content:''; display:block; width:100vw; max-width:none; height:34px;
+    margin:67px calc(50% - 50vw) -101px;   /* 선 한가운데가 단락 경계에 정확히 오도록 */
     background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='34' viewBox='0 0 34 34'%3E%3Ccircle cx='17' cy='17' r='16' fill='%23fff' stroke='%23E4E8EF'/%3E%3Cpath d='M11.5 14.5 17 20l5.5-5.5' fill='none' stroke='%23156FF9' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/34px 34px no-repeat,
                linear-gradient(var(--line), var(--line)) center/100% 1px no-repeat;}
   @media(min-width:740px){
     .steps2 .sdx:not(:last-child)::after{grid-row:5; grid-column:1/3; justify-self:stretch;}
   }
+  /* 단락 제목 크기 — 다른 페이지와 같은 급으로 */
+  .main .head .h-sec{font-size:24px; letter-spacing:-.6px; line-height:1.4;}
+  @media(min-width:768px){ .main .head .h-sec{font-size:30px;} }
+  .main .head .h-sec + p{font-size:15.5px; line-height:1.8;}
+
+  /* ===== 휴대폰 글줄 정리 (회사소개 · 자주 묻는 질문과 같은 기준) =====
+     본문은 줄 끝이 비지 않게 글자 단위 줄바꿈까지 허용하고
+     제목과 강조한 말은 어절을 지킨다 */
+  @media(max-width:767px){
+    .main p, .main li, .main dd{word-break:normal; overflow-wrap:anywhere;
+      text-wrap:pretty; letter-spacing:-.2px;}
+    .main p b, .main li b, .main strong,
+    .main h1, .main h2, .main h3, .main .h-sec, .main .h-hero{word-break:keep-all;}
+  }
+
 </style>
 </head>
 <body>
@@ -429,11 +464,11 @@
           <p>간단한 5단계로 빠르고 안전하게 이용하세요!</p>
         </div>
         <div class="flow">
-          <div class="fs"><span class="no">01</span><h3>시작하기</h3><img src="img/guide3d/01.png" alt=""><p>간편하게 회원가입 후<br>본인인증까지 진행해요</p><span class="fnx"><svg viewBox="0 0 24 16" aria-hidden="true"><path d="M1.5 5.8h11V1.6L22.6 8l-10.1 6.4v-4.2h-11z" fill="currentColor" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span></div>
-          <div class="fs"><span class="no">02</span><h3>결제 정보 입력</h3><img src="img/guide3d/02.png" alt=""><p>항목을 고르고 받는 분<br>계좌와 금액을 입력해요</p><span class="fnx"><svg viewBox="0 0 24 16" aria-hidden="true"><path d="M1.5 5.8h11V1.6L22.6 8l-10.1 6.4v-4.2h-11z" fill="currentColor" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span></div>
-          <div class="fs"><span class="no">03</span><h3>결제 방식 선택</h3><img src="img/guide3d/04.png" alt=""><p>결제할 카드와 할부<br>송금 시점까지 정해요</p><span class="fnx"><svg viewBox="0 0 24 16" aria-hidden="true"><path d="M1.5 5.8h11V1.6L22.6 8l-10.1 6.4v-4.2h-11z" fill="currentColor" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span></div>
-          <div class="fs"><span class="no">04</span><h3>서류 제출</h3><img src="img/guide3d/03.png" alt=""><p>증빙 서류를 올리면<br>연중무휴 검토가 시작돼요</p><span class="fnx"><svg viewBox="0 0 24 16" aria-hidden="true"><path d="M1.5 5.8h11V1.6L22.6 8l-10.1 6.4v-4.2h-11z" fill="currentColor" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span></div>
-          <div class="fs"><span class="no">05</span><h3>송금 완료</h3><img src="img/guide3d/05.png" alt=""><p>승인되면 카드로 결제되고<br>현금이 빠르게 입금돼요</p></div>
+          <div class="fs"><div class="fs-in"><span class="no">01</span><h3>시작하기</h3><span class="fs-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="gi1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#B9D2FB"/><stop offset="1" stop-color="#6E9BE0"/></linearGradient></defs><path fill="url(#gi1)" d="M16 14a5 5 0 0 1 5 5v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-1a5 5 0 0 1 5-5zm5.414-4.919a1 1 0 0 1 1.414 1.414L20 13.325q-.037.036-.076.068a1 1 0 0 1-1.338-.069l-1.414-1.414a1.001 1.001 0 0 1 1.414-1.415l.707.708zM12 2a5 5 0 1 1 0 10a5 5 0 0 1 0-10"/></svg></span></div><p>간편하게 회원가입 후<br>본인인증까지 진행해요</p><span class="fnx"><svg viewBox="0 0 24 16" aria-hidden="true"><path d="M1.5 5.8h11V1.6L22.6 8l-10.1 6.4v-4.2h-11z" fill="currentColor" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span></div>
+          <div class="fs"><div class="fs-in"><span class="no">02</span><h3>결제 정보 입력</h3><span class="fs-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="gi2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#B9D2FB"/><stop offset="1" stop-color="#6E9BE0"/></linearGradient></defs><path fill="url(#gi2)" d="m18.777 16.468l-4.243 4.243a1 1 0 0 1-.707.293H11a1 1 0 0 1-1-1v-2.83c0-.264.106-.519.293-.706l4.242-4.242zM17 2a2 2 0 0 1 2 2v4.02a5 5 0 0 0-4.466 1.377l-5.656 5.657a3 3 0 0 0-.879 2.12v2.83c0 .343.062.679.174.996H5a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm-1.052 8.812a3 3 0 0 1 4.243 4.242zM7 6a1 1 0 0 0 0 2h4a1 1 0 1 0 0-2z"/></svg></span></div><p>항목을 고르고 받는 분<br>계좌와 금액을 입력해요</p><span class="fnx"><svg viewBox="0 0 24 16" aria-hidden="true"><path d="M1.5 5.8h11V1.6L22.6 8l-10.1 6.4v-4.2h-11z" fill="currentColor" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span></div>
+          <div class="fs"><div class="fs-in"><span class="no">03</span><h3>결제 방식 선택</h3><span class="fs-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="gi3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#B9D2FB"/><stop offset="1" stop-color="#6E9BE0"/></linearGradient></defs><path fill="url(#gi3)" d="M22 17a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3v-7h20zm-7.293-4.535a1 1 0 0 0-1.414 1.414l.121.121H9a1 1 0 1 0 0 2h4.414l-.121.121a1 1 0 0 0 1.414 1.414l1.828-1.828a1 1 0 0 0 0-1.414ZM19 4a3 3 0 0 1 3 3v1H2V7a3 3 0 0 1 3-3z"/></svg></span></div><p>결제할 카드와 할부<br>송금 시점까지 정해요</p><span class="fnx"><svg viewBox="0 0 24 16" aria-hidden="true"><path d="M1.5 5.8h11V1.6L22.6 8l-10.1 6.4v-4.2h-11z" fill="currentColor" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span></div>
+          <div class="fs"><div class="fs-in"><span class="no">04</span><h3>서류 제출</h3><span class="fs-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="gi4" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#B9D2FB"/><stop offset="1" stop-color="#6E9BE0"/></linearGradient></defs><path fill="url(#gi4)" d="M12 8.5a1.5 1.5 0 0 0 1.5 1.5H20v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h6zm3.006 5.157a1 1 0 0 0-1.415 0l-2.475 2.475l-.707-.707a1 1 0 0 0-1.414 1.414l1.414 1.414a1 1 0 0 0 1.414 0l3.183-3.182a1 1 0 0 0 0-1.414M14 2.044a2 2 0 0 1 1 .542L19.414 7a2 2 0 0 1 .541 1H14z"/></svg></span></div><p>증빙 서류를 올리면<br>연중무휴 검토가 시작돼요</p><span class="fnx"><svg viewBox="0 0 24 16" aria-hidden="true"><path d="M1.5 5.8h11V1.6L22.6 8l-10.1 6.4v-4.2h-11z" fill="currentColor" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span></div>
+          <div class="fs"><div class="fs-in"><span class="no">05</span><h3>송금 완료</h3><span class="fs-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="gi5" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#B9D2FB"/><stop offset="1" stop-color="#6E9BE0"/></linearGradient></defs><path fill="url(#gi5)" d="M21.432 4.862a1 1 0 0 0-1.181-1.33l-17.5 4.5a1 1 0 0 0-.443 1.691l5.193 4.965v4.52a.5.5 0 0 0 .853.353l2.073-2.073l3.381 3.235a1 1 0 0 0 1.624-.361zM9.768 14.813l-1.735-1.66L19 6z"/></svg></span></div><p>승인되면 카드로 결제되고<br>현금이 빠르게 입금돼요</p></div>
         </div>
       </div>
     </section>

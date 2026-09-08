@@ -209,7 +209,8 @@
   .apphull{background:#EFF1F5; padding-bottom:96px;}
 
   /* 파랑: 로열블루 → 밝은 하늘 파랑 (아래로 갈수록 밝아짐) */
-  .bluetop{background:#0C5CE8; background:linear-gradient(180deg,#2A7BFF 0%,#0C5CE8 55%,#0A45C4 100%);
+  /* 파랑 바탕 */
+  .bluetop{background:var(--primary);
     padding-top:max(env(safe-area-inset-top, 0px), 8px); padding-bottom:48px;
     position:sticky; top:0; z-index:0;}
   .bluetop .atop{background:transparent; backdrop-filter:none; position:static; height:52px;}
@@ -219,7 +220,7 @@
   .bluetop .asec{margin-top:18px;}
   .bluetop .asec > b{color:#fff; font-size:21px; font-weight:700; letter-spacing:-.3px;}
 
-  /* 타일 — 반투명 · 모서리 20 · 아이콘 왼쪽 위 · 글씨 왼쪽 아래 */
+  /* 타일 — 반투명 · 모서리 20 */
   .bluetop .agrid{gap:7px; margin-top:14px;}
   .bluetop .ait{background:rgba(255,255,255,.22); border:none; box-shadow:none;
     border-radius:18px; aspect-ratio:1/1; min-height:0; padding:10px 4px;
@@ -230,16 +231,15 @@
   .bluetop .ait.on iconify-icon{color:var(--primary);}
   .bluetop .ait.on b{color:var(--ink); font-weight:700;}
 
-  /* 필요 서류 — 상자 없이 파랑 위에 바로 (참고의 잔액 텍스트 방식) */
+  /* 필요 서류 */
   .bluetop .apanel{margin-top:14px; background:rgba(255,255,255,.14); border:none;
     border-radius:18px; padding:16px 16px 14px; box-shadow:none;}
   .bluetop .apanel > b{color:#fff; font-size:14.5px; font-weight:700;}
   .bluetop .apanel .dr{color:rgba(255,255,255,.95); font-size:14px; font-weight:600; margin-top:8px;}
   .bluetop .apanel .dr i,.bluetop .apanel .dr b{color:#fff;}
 
-  /* 결제 버튼 — 흰 바탕 · 파란 동그라미 아이콘 · 파란 글씨 */
-  .bluetop .apgo{background:#fff; color:var(--primary-600); border-radius:14px;
-    box-shadow:0 8px 20px rgba(4,20,90,.25);
+  /* 결제 버튼 — 흰 바탕 · 파란 글씨 */
+  .bluetop .apgo{background:#fff; color:var(--primary-600); border-radius:14px; box-shadow:none;
     margin-top:16px; height:56px; font-size:15.5px; font-weight:700; gap:9px;}
   .bluetop .apgo img{height:16px;}
 
@@ -261,11 +261,11 @@
   /* 아이콘 — 회색 상자 없이 색으로 (토스식) */
   .sheet .grow .ic{width:30px; height:30px; border-radius:0; background:none;}
   .sheet .grow .ic iconify-icon{font-size:27px;}
-  .sheet .ggrid .grow:nth-child(1) .ic{color:#156FF9;}
-  .sheet .ggrid .grow:nth-child(2) .ic{color:#156FF9;}
+  .sheet .ggrid .grow:nth-child(1) .ic{color:var(--primary);}
+  .sheet .ggrid .grow:nth-child(2) .ic{color:var(--primary);}
   .sheet .ggrid .grow:nth-child(3) .ic{color:#0FC0A6;}
-  .sheet .ggrid .grow:nth-child(4) .ic{color:#156FF9;}
-  .sheet .ggrid .grow:nth-child(5) .ic{color:#156FF9;}
+  .sheet .ggrid .grow:nth-child(4) .ic{color:var(--primary);}
+  .sheet .ggrid .grow:nth-child(5) .ic{color:var(--primary);}
   .sheet .grow .tx{font-size:15.5px; font-weight:600; letter-spacing:-.2px;}
 
   /* 쇼케이스 타일 — 연회색 + 3D + 흰 알약 라벨 (참고의 Витрина) */
@@ -356,13 +356,22 @@
     aspect-ratio:520/270; min-height:0; padding:14px 14px 12px; color:var(--ink);
     display:flex; flex-direction:column; justify-content:space-between;}
   .u2.dark{background:linear-gradient(255deg,#3A404A 0%,#23262B 60%,#191C1F 100%); color:#fff;}
+  /* 앞 두 칸 — 카드 전체를 색으로 채운다 (톤 다르게) */
+  /* 민트 · 블루 그라데이션 (좌측 위 어둡고 우측 아래로 밝게) */
+  .u2.grad{border:none; color:#fff;
+    background:linear-gradient(140deg,#0C8F79 0%,#17AC90 48%,#3FD6B1 100%);}
+  .u2.grad.alt{background:linear-gradient(140deg, var(--primary-700) 0%, var(--primary) 48%, var(--primary-500) 100%);}
+  .u2.grad .tt{color:#fff;}
+  .u2.grad .tt span{color:rgba(255,255,255,.66);}
+  .u2.grad .lm{color:rgba(255,255,255,.82);}
+  .u2.grad .arw2{color:#fff;}
   .u2 .tt{font-size:15px; font-weight:700; line-height:1.3; letter-spacing:-.3px;
     position:relative; z-index:1; padding-right:34px;}
   .u2 .tt span{display:block; margin-top:3px; font-size:12px; font-weight:600; color:#B4BAC5; letter-spacing:-.2px;}
   .u2.dark .tt span{color:rgba(255,255,255,.55);}
   .u2 .lm{font-size:11px; font-weight:700; color:var(--sub); position:relative; z-index:1;}
   .u2 .arw2{position:absolute; top:12px; right:12px; font-size:25px; font-weight:700;
-    color:#156FF9; line-height:1; width:25px; height:25px;
+    color:var(--primary); line-height:1; width:25px; height:25px;
     display:flex; align-items:center; justify-content:center;}
   .u2 img{position:absolute; right:2px; top:50%; transform:translateY(-50%);
     width:76px; height:auto; pointer-events:none;}
@@ -429,7 +438,7 @@
   .sheet .grow .ic .sub{position:absolute; right:-1px; bottom:1px; font-size:13px; line-height:1;
     filter:drop-shadow(1px 0 0 #fff) drop-shadow(-1px 0 0 #fff) drop-shadow(0 1px 0 #fff) drop-shadow(0 -1px 0 #fff);}
   .sheet .grow .ic .s-amber{color:#0FC0A6;}
-  .sheet .grow .ic .s-blue{color:#156FF9;}
+  .sheet .grow .ic .s-blue{color:var(--primary);}
   .sheet .grow .ic .s-mint{color:#0FC0A6;}
 </style>
 </head>
@@ -497,12 +506,12 @@
   <div class="asec">
     <b>자주 찾는 메뉴</b>
     <div class="usp2wrap">
-    <a class="u2" href="화면/안내.html">
+    <a class="u2 grad" href="화면/안내.html">
       <span class="arw2">↗</span>
       <span class="tt">종합 이용 가이드<span>가입부터 송금까지</span></span>
       <span class="lm">자세히 보기</span>
     </a>
-    <a class="u2" href="화면/공지.html#n7">
+    <a class="u2 grad alt" href="화면/공지.html#n7">
       <span class="arw2">↗</span>
       <span class="tt">무이자 할부 안내<span>카드사별 행사 보기</span></span>
       <span class="lm">자세히 보기</span>

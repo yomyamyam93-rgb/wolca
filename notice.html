@@ -56,6 +56,16 @@
   .btn-line{background:#fff; border:1px solid var(--line); color:var(--ink);}
   /* 탭과 내용 사이 여백 축소 */
   .sec.tight{padding-top:8px;}
+  /* ===== 휴대폰 글줄 정리 (회사소개 · 자주 묻는 질문과 같은 기준) =====
+     본문은 줄 끝이 비지 않게 글자 단위 줄바꿈까지 허용하고
+     제목과 강조한 말은 어절을 지킨다 */
+  @media(max-width:767px){
+    .main p, .main li, .main dd{word-break:normal; overflow-wrap:anywhere;
+      text-wrap:pretty; letter-spacing:-.2px;}
+    .main p b, .main li b, .main strong,
+    .main h1, .main h2, .main h3, .main .h-sec, .main .h-hero{word-break:keep-all;}
+  }
+
 </style>
 </head>
 <body>
