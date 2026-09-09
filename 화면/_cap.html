@@ -26,6 +26,14 @@ f.onload = function () {
       d.querySelectorAll('.apop,.apop-dim,.evpop,.evpop-dim,[id^=apop],[id^=evpop]').forEach(function (e) {
         e.setAttribute('hidden',''); e.style.display = 'none';
       });
+      /* 숫자 카운트업은 헤드리스에서 끝까지 안 도니까 최종값 요소로 갈아끼운다 */
+      d.querySelectorAll('.cnt').forEach(function (e) {
+        var to = e.getAttribute('data-to'), dec = e.getAttribute('data-dec');
+        var s = d.createElement('em');
+        s.style.fontStyle = 'normal';
+        s.textContent = dec ? Number(to).toFixed(+dec) : to;
+        e.parentNode.replaceChild(s, e);
+      });
       var k = q.get('k') || '';
       if (k === 'reg2') { var b = d.getElementById('예금주확인'); if (b) b.click(); }
       if (k === 'reg3') {
