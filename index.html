@@ -1298,8 +1298,7 @@
     background:linear-gradient(rgba(8,17,38,.60), rgba(8,17,38,.72));}
   .bandart .h-band{position:relative; z-index:2;}
   @media(min-width:768px){
-    .bandart{border-radius:34px; padding:32px;
-      margin-left:calc(50% - 50vw + 28px); margin-right:calc(50% - 50vw + 28px); max-width:none;
+    .bandart{border-radius:34px; padding:32px; max-width:none;
       background-attachment:fixed;}
   }
   /* 상자 폭을 넘기지 않게 — 넘치면 줄바꿈 */
@@ -1307,8 +1306,7 @@
     font-size:min(7.4vw, 64px);}
   /* 모바일 — 마스크 없이 화면을 꽉 채운다 */
   @media(max-width:767px){
-    .bandart{width:auto; min-height:0; aspect-ratio:1/1; border-radius:0; padding:20px 22px;
-      margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw);}
+    .bandart{width:auto; min-height:0; aspect-ratio:1/1; border-radius:0; padding:20px 22px;}
     .bandart .h-band{font-size:min(7vw, 30px);}   /* 두 줄로 떨어지는 크기 */
     /* 사진 띠 앞뒤 흰 여백을 줄인다 */
     #itemsec{padding-bottom:60px;}
@@ -1377,10 +1375,21 @@
   .midband{padding-bottom:215px;}
   @media(max-width:767px){ .midband{padding-bottom:150px;} }
   /* 사진 띠 — 스크롤 위치에 따라 가로 · 세로로 퍼졌다 다시 오므라든다 */
-  .js-motion .bandart{clip-path:inset(20% 46%); will-change:clip-path;}
-  @media(min-width:768px){ .js-motion .bandart{clip-path:inset(20% 46% round 34px);} }
+  /* 오려내기(clip-path)는 띠 자체가 아니라 바깥 창에 건다.
+     띠는 따로 한 겹(layer)으로 올려두면, 창만 바뀔 때 다시 그리지 않아 폰에서 안 끊긴다 */
+  .bandclip{display:block; max-width:none;
+    margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw);}
+  .bandclip > .bandart{margin-left:0; margin-right:0;}
+  @media(min-width:768px){
+    .bandclip{margin-left:calc(50% - 50vw + 28px); margin-right:calc(50% - 50vw + 28px);}
+  }
+  @media(max-width:767px){
+    .bandclip > .bandart{transform:translateZ(0); will-change:transform;}
+  }
+  .js-motion .bandclip{clip-path:inset(20% 46%); will-change:clip-path;}
+  @media(min-width:768px){ .js-motion .bandclip{clip-path:inset(20% 46% round 34px);} }
   @media(prefers-reduced-motion:reduce){
-    .js-motion .bandart{clip-path:none !important;}
+    .js-motion .bandclip{clip-path:none !important;}
   }
 
   /* 히어로 아래 — 공식 채널 바로가기 (로고 · 이름 · 화살표) */
@@ -1511,8 +1520,10 @@
   <!-- ===== 랜선페이를 써야 하는 이유 — 1~7 펼침 ===== -->
   <div class="midband">
   <div class="wrap bandhead">
-    <div class="bandart">
-      <h2 class="h-band"><span class="soft">불편했던 현금거래</span><br>이제 <span class="hl">랜선페이</span>에게 맡겨보세요</h2>
+    <div class="bandclip">
+      <div class="bandart">
+        <h2 class="h-band"><span class="soft">불편했던 현금거래</span><br>이제 <span class="hl">랜선페이</span>에게 맡겨보세요</h2>
+      </div>
     </div>
     <div class="banddots" aria-hidden="true"><span class="vdots"></span></div>
   </div>
@@ -2242,7 +2253,7 @@
 <script>
 /* 사진 띠 — 스크롤에 따라 퍼졌다 오므라든다 (가로 · 세로 동시) */
 (function(){
-  var el = document.querySelector('.bandart');
+  var el = document.querySelector('.bandclip');
   if(!el) return;
   if(window.matchMedia('(prefers-reduced-motion:reduce)').matches){ el.style.clipPath='none'; return; }
 
