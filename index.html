@@ -937,24 +937,21 @@
   /* 위 여백도 화면 높이에 맞춰 */
   .hero{padding-top:clamp(30px, 5.4svh, 60px);}
   @media(min-width:768px){ .hero{padding-top:clamp(36px, 6.4svh, 78px);} }
-  /* 화면이 짧은 기종 — 글씨 · 버튼을 한 단계 줄여 한 화면을 지킨다 */
-  @media(max-height:740px) and (max-width:767px){
-    .hero .h-hero{line-height:1.32;}
-    .hero .hchecks{gap:5px; margin-top:12px;}
-    .hero .hchecks li{font-size:13px;}
-    .hero .hbtns{margin-top:16px;}
-    .hero .hbtns .btn{height:44px; font-size:13.5px; padding:0 18px;}
-    .hbadge{font-size:13.5px;}
-    /* 사진 자리를 벌어준다 — 위아래 여백을 한 단계씩 줄여 사람이 덜 잘리게 */
-    .hero{padding-top:18px;}
-    .hero > .hero2{margin-bottom:12px;}
-    .hero .hsns{margin-top:14px;}
-    .hero .sdown{margin-top:22px;}
-    .hmodel{min-height:150px;}
-    .hstats{padding:14px 4px;}
-    .hstats b{font-size:19px;}
-    .sdown .mouse{width:26px; height:40px;}
-    .sdown b{font-size:11px; letter-spacing:2.2px;}
+  /* 화면 높이에 따라 여백 · 글씨를 '연속으로' 줄인다.
+     높이 기준 미디어쿼리(max-height)를 쓰면 사파리에서 주소창이 접힐 때마다
+     조건이 켜졌다 꺼져서 화면이 통째로 튄다. svh 는 주소창과 무관하게 고정이라 안 튄다 */
+  @media(max-width:767px){
+    .hero{padding-top:clamp(18px, calc(15.9svh - 85px), 60px);}
+    .hero > .hero2{margin-bottom:clamp(12px, calc(12.6svh - 70px), 54px);}
+    .hbadge{font-size:clamp(13.5px, calc(.93svh + 7.4px), 15px);}
+    .hero .hero2 .hbtns{margin-top:clamp(16px, calc(3.7svh - 8px), 22px);}
+    .hero .hbtns .btn{height:clamp(44px, calc(4.94svh + 12px), 52px);
+      font-size:clamp(13.5px, calc(.93svh + 7.4px), 15px);
+      padding:0 clamp(18px, calc(2.47svh + 2px), 22px);}
+    .hero .hsns{margin-top:clamp(14px, calc(6.17svh - 26px), 24px);}
+    .hero .sdown{margin-top:clamp(22px, calc(26.5svh - 150px), 112px);}
+    .hstats{padding:clamp(14px, calc(3.7svh - 10px), 20px) 4px;}
+    .hstats b{font-size:clamp(19px, calc(1.24svh + 11px), 21px);}
   }
 
   /* ===== 이유 카드 — 칸 안에 또 칸 (토스식) =====
