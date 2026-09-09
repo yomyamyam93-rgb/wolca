@@ -908,8 +908,10 @@
   /* 사진 비율은 원본 그대로 — 좌우가 절대 안 잘린다.
      자리가 좁으면 아래(숫자 카드가 덮는 쪽)만 잘리고 남는 높이는 위아래 여백으로 간다 */
   .hmodel{--mw:min(588px, calc((100vw - 32px) * .95));
-    flex:1 1 auto; align-self:center; overflow:hidden;
-    width:var(--mw); aspect-ratio:1603/1147; height:auto; min-height:118px; margin-top:20px;
+    flex:0 1 auto; align-self:center; overflow:hidden;
+    width:var(--mw); aspect-ratio:1603/1147; height:auto; min-height:118px;
+    /* 남는 높이는 사진이 아니라 사진 '위'가 가져간다 — 사람은 늘 흰 카드에 붙어 있게 */
+    margin-top:auto;
     max-height:calc(var(--mw) / 1.398 * 1.15);}
   /* 새 사진은 원본과 좌우 여백이 달라서, 사람이 예전과 똑같은 자리에 오도록 맞춘다 */
   .hmodel img{position:absolute; top:0; left:15.47%; width:88.58%; height:auto; display:block;}
@@ -924,7 +926,7 @@
   /* 사람을 30px 위로 (카드는 제자리 — 흰 카드에 덜 묻히게) */
   .hmodel{position:relative; top:-30px;}
   /* 제목 — 한 단계 크게 (위계) */
-  .hero .h-hero{font-size:min(8.4vw, 36px); line-height:1.3;}
+  .hero .h-hero{font-size:min(8.4vw, 36px, calc(2.6svh + 15px)); line-height:1.3;}
   @media(min-width:768px){ .hero .h-hero{font-size:52px;} }
   @media(min-width:768px){ .hero .h-hero{margin-top:8px;} }
   /* 카드 아래 여백 · 스크롤다운도 화면 높이에 맞춰 */
@@ -937,7 +939,7 @@
   @media(min-width:768px){ .hero{padding-top:clamp(36px, 6.4svh, 78px);} }
   /* 화면이 짧은 기종 — 글씨 · 버튼을 한 단계 줄여 한 화면을 지킨다 */
   @media(max-height:740px) and (max-width:767px){
-    .hero .h-hero{font-size:min(7.2vw, 27px); line-height:1.32;}
+    .hero .h-hero{line-height:1.32;}
     .hero .hchecks{gap:5px; margin-top:12px;}
     .hero .hchecks li{font-size:13px;}
     .hero .hbtns{margin-top:16px;}
@@ -948,7 +950,7 @@
     .hero > .hero2{margin-bottom:12px;}
     .hero .hsns{margin-top:14px;}
     .hero .sdown{margin-top:22px;}
-    .hmodel{min-height:150px; margin-top:8px;}
+    .hmodel{min-height:150px;}
     .hstats{padding:14px 4px;}
     .hstats b{font-size:19px;}
     .sdown .mouse{width:26px; height:40px;}
