@@ -233,10 +233,13 @@
     -webkit-mask-image:linear-gradient(180deg, transparent 0%, #000 7%);
     mask-image:linear-gradient(180deg, transparent 0%, #000 7%);}
   @media(min-width:768px){
-    .afin{padding:120px 0 calc(min(100vw, 1920px) * .44 - 150px);}
-    .afin:before{height:calc(min(100vw, 1920px) * .46 - 70px);
+    /* 기준 폭 — 화면이 1200 보다 좁아지면(=브라우저를 확대하면) 1200 에서 멈춘다.
+       그래야 글씨가 커질 때 사진도 같이 커진다 */
+    .afin{--cw:clamp(1200px, 100vw, 1920px);
+      padding:120px 0 calc(var(--cw) * .44 - 150px);}
+    .afin:before{height:calc(var(--cw) * .46 - 70px);
       background-image:url('img/cta-bg2.jpg?v=1');
-      background-size:100% auto;
+      background-size:var(--cw) auto;
       background-position:center calc(100% + 160px);
       -webkit-mask-image:linear-gradient(180deg, transparent 0%, #000 12%);
       mask-image:linear-gradient(180deg, transparent 0%, #000 12%);}
