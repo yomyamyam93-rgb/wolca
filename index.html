@@ -2269,5 +2269,43 @@
   update();
 })();
 </script>
+<script>
+/* 임시 진단 — 주소 뒤에 ?diag=1 을 붙였을 때만 뜬다 (평소에는 아무 일도 안 함) */
+(function(){
+  if(location.search.indexOf('diag') < 0) return;
+  var box = document.createElement('div');
+  box.style.cssText = 'position:fixed;left:6px;right:6px;top:60px;z-index:99999;'
+    + 'background:rgba(0,0,0,.86);color:#0f0;font:700 12px/1.5 ui-monospace,monospace;'
+    + 'padding:8px 10px;border-radius:8px;white-space:pre;pointer-events:none;';
+  document.body.appendChild(box);
+  var probe = document.createElement('div');
+  probe.style.cssText = 'position:absolute;top:-9999px;height:100svh;width:1px;';
+  var probeL = probe.cloneNode(); probeL.style.height = '100lvh';
+  var probeD = probe.cloneNode(); probeD.style.height = '100dvh';
+  document.body.appendChild(probe); document.body.appendChild(probeL); document.body.appendChild(probeD);
+  var lo = 9999, hi = 0, sLo = 9999, sHi = 0;
+  function n(x){ return Math.round(x); }
+  function draw(){
+    var ih = window.innerHeight;
+    lo = Math.min(lo, ih); hi = Math.max(hi, ih);
+    var sv = probe.getBoundingClientRect().height;
+    sLo = Math.min(sLo, sv); sHi = Math.max(sHi, sv);
+    var hero = document.querySelector('.hero'), m = document.querySelector('.hmodel');
+    var t = document.querySelector('.hero .h-hero');
+    box.textContent =
+      'innerHeight ' + n(ih) + '  (min ' + n(lo) + ' / max ' + n(hi) + ')
+' +
+      'svh ' + n(sv) + ' (min ' + n(sLo) + '/max ' + n(sHi) + ')  lvh ' + n(probeL.getBoundingClientRect().height) + '  dvh ' + n(probeD.getBoundingClientRect().height) + '
+' +
+      '히어로 ' + n(hero.getBoundingClientRect().height) + '  사진칸 ' + n(m.getBoundingClientRect().height) + '  사진 ' + n(m.querySelector('img').getBoundingClientRect().height) + '
+' +
+      '제목 ' + getComputedStyle(t).fontSize + '  위여백 ' + getComputedStyle(hero).paddingTop + '  폭 ' + n(innerWidth);
+  }
+  addEventListener('scroll', draw, {passive:true});
+  addEventListener('resize', draw);
+  if(window.visualViewport){ visualViewport.addEventListener('resize', draw); }
+  setInterval(draw, 200); draw();
+})();
+</script>
 </body>
 </html>
