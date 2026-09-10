@@ -907,17 +907,25 @@
   .hero > .hero2, .hero > .wrap, .hero > .sdown{flex:0 0 auto;}
   /* 사진 비율은 원본 그대로 — 좌우가 절대 안 잘린다.
      자리가 좁으면 아래(숫자 카드가 덮는 쪽)만 잘리고 남는 높이는 위아래 여백으로 간다 */
-  .hmodel{--mw:min(588px, calc((100vw - 32px) * .95));
+  .hmodel{--mw:min(588px, calc(100vw - 32px));
     flex:0 1 auto; align-self:center; overflow:hidden;
     width:var(--mw); aspect-ratio:1603/1147; height:auto; min-height:118px;
     /* 남는 높이는 사진이 아니라 사진 '위'가 가져간다 — 사람은 늘 흰 카드에 붙어 있게 */
     margin-top:auto;
     max-height:calc(var(--mw) / 1.398 * 1.15);}
   /* 새 사진은 원본과 좌우 여백이 달라서, 사람이 예전과 똑같은 자리에 오도록 맞춘다 */
+  /* 새 사진은 원본과 좌우 여백이 달라서, 사람이 예전과 똑같은 자리에 오도록 맞춘다 (머리가 칸 가운데) */
   .hmodel img{position:absolute; top:0; left:15.47%; width:88.58%; height:auto; display:block;}
+  /* PC — 자리가 넉넉하니 사진을 칸 폭만큼(13% 크게) 쓴다. 머리(사진의 38.66%)가 가운데 오게 왼쪽 11.34% */
+  @media(min-width:768px){
+    .hmodel{aspect-ratio:1420/1147; max-height:calc(var(--mw) / 1.238 * 1.15);}
+    .hmodel img{left:11.34%; width:100%;}
+  }
   /* 말풍선 — 사람 머리 위 한가운데 · 꼬리는 아래 가운데. 사진 칸 위로 삐져나오므로
      칸의 overflow 대신 clip-path 로 아래 · 좌우만 자르고 위쪽은 열어 둔다 */
   .hmodel{overflow:visible; clip-path:inset(-90px 0 0 0);}
+  /* PC — 사진이 칸 오른쪽으로 11% 넘치므로 좌우는 자르지 않는다 */
+  @media(min-width:768px){ .hmodel{clip-path:inset(-90px -90px 0 -90px);} }
   .hbub{position:absolute; z-index:3; left:50%; bottom:calc(100% + 10px); transform:translateX(-50%);
     padding:8px 14px; border-radius:999px;
     background:rgba(255,255,255,.82); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px);
@@ -939,12 +947,13 @@
   }
   /* 글 묶음과 사진 사이 최소 숨통 */
   /* 말풍선이 사진 위에 얹히므로 그만큼(52px 이상) 벌린다 */
-  .hero > .hero2{margin-bottom:clamp(66px, 4svh, 76px);}
+  .hero > .hero2{margin-bottom:clamp(52px, 4svh, 64px);}
   /* PC — 사진 1.2배 · 40px 위로 */
   @media(min-width:768px){
     /* 상한을 vw 로 좁게 잡으면 브라우저를 확대했을 때 사진만 안 커진다.
        화면 밖으로 넘칠 때만 걸리도록 넉넉히 둔다 */
-    .hmodel{width:min(600px, 94vw); margin-top:26px; min-height:min(300px, 34svh);}
+    /* 화면이 높을수록 사람을 키운다 (900px 화면 600 → 1200px 화면 660) */
+    .hmodel{width:min(94vw, max(600px, 55svh)); margin-top:4px; min-height:min(300px, 28svh);}
   }
   /* 배지와 제목 사이 — 바짝 붙인다 */
   .hero .h-hero{margin-top:6px;}
@@ -959,9 +968,11 @@
   /* 화살표를 히어로와 다음 단락 사이 정중앙에 — 위아래 같은 값으로 묶는다 */
   .main{--acen:clamp(46px, 8svh, 112px);}
   .hero .sdown{margin:var(--acen) auto 0;}
+  /* PC — 화살표 위 여백을 줄여 그만큼 사진에 준다 */
+  @media(min-width:768px){ .hero .sdown{margin-top:16px;} .hero .hsns{margin-top:10px;} .hstats{padding:22px 12px;} }
   /* 위 여백도 화면 높이에 맞춰 */
   .hero{padding-top:clamp(30px, 5.4svh, 60px);}
-  @media(min-width:768px){ .hero{padding-top:clamp(36px, 6.4svh, 78px);} }
+  @media(min-width:768px){ .hero{padding-top:clamp(36px, 4.6svh, 78px);} }
   /* 화면 높이에 따라 여백 · 글씨를 '연속으로' 줄인다.
      높이 기준 미디어쿼리(max-height)를 쓰면 사파리에서 주소창이 접힐 때마다
      조건이 켜졌다 꺼져서 화면이 통째로 튄다. svh 는 주소창과 무관하게 고정이라 안 튄다 */
@@ -974,7 +985,7 @@
       font-size:clamp(13.5px, calc(.93svh + 7.4px), 15px);
       padding:0 clamp(18px, calc(2.47svh + 2px), 22px);}
     .hero .hsns{margin-top:clamp(10px, calc(8.64svh - 46px), 24px);}
-    .hero .sdown{margin-top:clamp(10px, calc(33.9svh - 210px), 112px);}
+    .hero .sdown{margin-top:clamp(10px, calc(16svh - 90px), 44px);}
     .hstats{padding:clamp(12px, calc(4.94svh - 20px), 20px) 4px;}
     .hstats b{font-size:clamp(19px, calc(1.24svh + 11px), 21px);}
   }
@@ -1421,10 +1432,10 @@
   #howto > .wrap{box-sizing:border-box; width:calc(100% - 32px); max-width:none; margin:0 16px;
     background:#fff; border:1px solid var(--line); border-radius:24px; padding:48px 16px 40px;
     box-shadow:0 18px 44px -30px rgba(20,40,90,.25), 0 1px 3px rgba(15,23,42,.04);}
-  #howto > .wrap .hwrap{max-width:none;}
   @media(min-width:900px){
     #howto > .wrap{width:100%; max-width:960px; margin:0 auto; border-radius:30px; padding:84px 40px 84px;}
-    #howto > .wrap .hwrap{padding:0 0 0;}
+    /* 안쪽 배치는 원래대로(좌우 40px 여백 · 내용 폭 800) — 아래 여백만 상자에 맡긴다 */
+    #howto > .wrap .hwrap{padding:0 40px 0;}
   }
   /* 사진 띠 — 스크롤 위치에 따라 가로 · 세로로 퍼졌다 다시 오므라든다 */
   /* 오려내기(clip-path)는 띠 자체가 아니라 바깥 창에 건다.
