@@ -11,7 +11,10 @@
 <script src="app.js?v=15"></script>
 <style>
   /* 게시판 목록 */
-  .nboard{max-width:980px; margin:62px auto 0; border-top:2px solid var(--ink);}
+  /* 흰 둥근 카드 안에 얇은 구분선 — 고객센터 메뉴와 같은 방식 */
+  .nboard{max-width:980px; margin:62px auto 0; background:var(--card); border:1px solid var(--line);
+    border-radius:14px; padding:4px 16px;}
+  .nrow:last-child{border-bottom:none;}
   @media(max-width:639px){ .nboard,.npost{margin-top:30px;} }
   .nhead{display:flex; gap:14px; padding:13px 6px; font-size:13.5px; font-weight:700;
     color:var(--placeholder); border-bottom:1px solid var(--line);}
@@ -25,7 +28,9 @@
   .c4{flex:0 0 92px; text-align:right; font-size:13.5px; color:var(--placeholder);}
   @media(max-width:599px){ .c1,.c3{display:none;} .c4{flex:0 0 auto;} .nrow{font-size:14.5px;} }
   /* 본문 보기 */
-  .npost{display:none; max-width:980px; margin:62px auto 0; border-top:2px solid var(--ink); padding-top:24px;}
+  .npost{display:none; max-width:980px; margin:62px auto 0; background:var(--card); border:1px solid var(--line);
+    border-radius:14px; padding:26px 24px 10px;}
+  @media(max-width:639px){ .npost{padding:20px 16px 8px;} }
   .npost h2{font-size:21px; font-weight:800; line-height:1.45; letter-spacing:-.4px;}
   @media(min-width:768px){ .npost h2{font-size:24px;} }
   .nmeta{margin-top:10px; padding-bottom:18px; border-bottom:1px solid var(--line);

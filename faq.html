@@ -13,12 +13,14 @@
   /* 분류별 묶음 — 미리 나눠 두고 한눈에 훑는다 */
   .faqgrp{max-width:980px; margin:0 auto;}
   .faqgrp + .faqgrp{margin-top:52px;}
-  .fgt{font-size:20px; font-weight:800; letter-spacing:-.3px; margin-bottom:13px;}
-  @media(max-width:639px){ .faqgrp + .faqgrp{margin-top:38px;} .fgt{font-size:18px;} }
+  /* 묶음 제목 — 고객센터 메뉴와 같은 작은 회색 라벨 */
+  .fgt{font-size:13px; font-weight:700; color:var(--placeholder); margin-bottom:6px;}
+  .faqgrp + .faqgrp{margin-top:28px;}
+  @media(max-width:639px){ .faqgrp + .faqgrp{margin-top:24px;} }
 
-  /* 질문 아코디언 */
-  .acc{border-top:2px solid var(--ink);}
-  .acc details{border-bottom:1px solid var(--line);}
+  /* 질문 아코디언 — 흰 둥근 카드 안에 얇은 구분선 (고객센터 메뉴 방식) */
+  .acc{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:4px 16px;}
+  .acc details + details{border-top:1px solid var(--line);}
   .acc summary{display:flex; align-items:center; gap:12px; min-height:68px; padding:16px 4px;
     cursor:pointer; list-style:none; font-size:17px; font-weight:700; line-height:1.5;}
   .acc summary::-webkit-details-marker{display:none;}

@@ -274,8 +274,8 @@
   .chip.on{background:var(--primary-50); border-color:var(--primary-100); color:var(--primary-600);}
 
   /* 아코디언 (자주 묻는 질문 · 필요 서류) */
-  .acc{border-top:2px solid var(--ink); max-width:980px; margin:0 auto;}
-  .acc details{border-bottom:1px solid var(--line);}
+  .acc{max-width:980px; margin:0 auto; background:var(--card); border:1px solid var(--line); border-radius:14px; padding:4px 16px;}
+  .acc details + details{border-top:1px solid var(--line);}
   .acc summary{display:flex; align-items:center; gap:12px; min-height:68px; padding:16px 4px;
     cursor:pointer; list-style:none; font-size:17px; font-weight:700; line-height:1.5;}
   .acc summary::-webkit-details-marker{display:none;}
@@ -290,7 +290,8 @@
   .acc .a li:before{content:'·'; position:absolute; left:4px; color:var(--icon-off);}
 
   /* 공지 목록 */
-  .board{border-top:2px solid var(--ink);}
+  .board{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:4px 16px;}
+  .board a:last-child{border-bottom:none;}
   .board a{display:flex; align-items:center; gap:12px; min-height:68px; padding:14px 4px;
     border-bottom:1px solid var(--line);}
   .board a:hover{background:var(--bg);}
