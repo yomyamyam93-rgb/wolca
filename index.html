@@ -918,7 +918,7 @@
   /* 말풍선 — 사람 머리 위 한가운데 · 꼬리는 아래 가운데. 사진 칸 위로 삐져나오므로
      칸의 overflow 대신 clip-path 로 아래 · 좌우만 자르고 위쪽은 열어 둔다 */
   .hmodel{overflow:visible; clip-path:inset(-90px 0 0 0);}
-  .hbub{position:absolute; z-index:3; left:50%; bottom:calc(100% - 6px); transform:translateX(-50%);
+  .hbub{position:absolute; z-index:3; left:50%; bottom:calc(100% + 10px); transform:translateX(-50%);
     padding:8px 14px; border-radius:999px;
     background:rgba(255,255,255,.82); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px);
     border:1px solid rgba(255,255,255,.95);
@@ -932,13 +932,13 @@
     filter:drop-shadow(0 0 5px rgba(255,255,255,.95)) drop-shadow(0 0 10px rgba(255,255,255,.7));}
   .hname img{display:block; width:100%; height:auto;}
   @media(min-width:768px){
-    .hbub{bottom:calc(100% - 8px); padding:11px 20px; font-size:15.5px;}
+    .hbub{bottom:calc(100% + 12px); padding:11px 20px; font-size:15.5px;}
     .hbub:after{bottom:-5px; width:11px; height:11px; margin-left:-5.5px;}
     .hname{right:3%; top:25%; width:160px;}
   }
   /* 글 묶음과 사진 사이 최소 숨통 */
   /* 말풍선이 사진 위에 얹히므로 그만큼(52px 이상) 벌린다 */
-  .hero > .hero2{margin-bottom:clamp(52px, 4svh, 64px);}
+  .hero > .hero2{margin-bottom:clamp(66px, 4svh, 76px);}
   /* PC — 사진 1.2배 · 40px 위로 */
   @media(min-width:768px){
     /* 상한을 vw 로 좁게 잡으면 브라우저를 확대했을 때 사진만 안 커진다.
@@ -966,7 +966,7 @@
      조건이 켜졌다 꺼져서 화면이 통째로 튄다. svh 는 주소창과 무관하게 고정이라 안 튄다 */
   @media(max-width:767px){
     .hero{padding-top:clamp(12px, calc(19.8svh - 117px), 60px);}
-    .hero > .hero2{margin-bottom:clamp(36px, calc(15.1svh - 90px), 54px);}
+    .hero > .hero2{margin-bottom:clamp(50px, calc(15.1svh - 90px), 60px);}
     .hbadge{font-size:clamp(13.5px, calc(.93svh + 7.4px), 15px);}
     .hero .hero2 .hbtns{margin-top:clamp(16px, calc(3.7svh - 8px), 22px);}
     .hero .hbtns .btn{height:clamp(44px, calc(4.94svh + 12px), 52px);
