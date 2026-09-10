@@ -233,9 +233,8 @@
     -webkit-mask-image:linear-gradient(180deg, transparent 0%, #000 7%);
     mask-image:linear-gradient(180deg, transparent 0%, #000 7%);}
   @media(min-width:768px){
-    /* 기준 폭 — 화면이 1200 보다 좁아지면(=브라우저를 확대하면) 1200 에서 멈춘다.
-       그래야 글씨가 커질 때 사진도 같이 커진다 */
-    .afin{--cw:clamp(1200px, 100vw, 1920px);
+    /* 기준 폭 = 화면 폭 (1920 상한). 1200 하한을 뒀더니 좁은 화면에서 카드가 아래로 밀려 되돌림 */
+    .afin{--cw:min(100vw, 1920px);
       padding:120px 0 calc(var(--cw) * .44 - 150px);}
     .afin:before{height:calc(var(--cw) * .46 - 70px);
       background-image:url('img/cta-bg2.jpg?v=1');
@@ -488,10 +487,10 @@
           <p><b>100만여 명</b>이 선택했고 하루에도 <b>수백 건</b>이 랜선페이를 통해 결제됩니다.<br class="pcbr">
             쌓이는 거래만큼 서비스와 신뢰도 하루하루 더 단단해지고 있습니다.</p>
           <div class="astats">
-            <div class="ast"><b><span class="countup">10</span>만명<i>+</i></b><span>누적 이용자</span></div>
-            <div class="ast"><b><span class="countup">15</span>만건<i>+</i></b><span>총 송금 건수</span></div>
+            <div class="ast"><b><span class="countup">100</span>만명<i>+</i></b><span>누적 이용자</span></div>
+            <div class="ast"><b><span class="countup">1,800</span>만건<i>+</i></b><span>총 송금 건수</span></div>
             <div class="ast"><b><span class="countup">4.8</span><i>점</i></b><span>평균 평점</span></div>
-            <div class="ast"><b>평균 <span class="countup">5</span><i>분</i></b><span>송금 속도</span></div>
+            <div class="ast"><b>평균 5~<span class="countup">10</span><i>분</i></b><span>송금 속도</span></div>
           </div>
         </div>
         <div class="numgraph" aria-hidden="true">
