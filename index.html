@@ -5,8 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>랜선페이 — 현금으로 내던 돈 이제 카드로</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap">
 <link rel="stylesheet" href="style.css?v=28">
 <link rel="icon" type="image/png" href="img/logo3.png">
 <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
@@ -927,18 +925,13 @@
   .hbub b{color:var(--primary); font-weight:800; margin-left:2px;}
   .hbub:after{content:''; position:absolute; left:14px; bottom:-4px; width:9px; height:9px; border-radius:2px;
     background:rgba(255,255,255,.9); transform:rotate(45deg);}
-  /* 모델명 — 사인처럼 손글씨 */
-  .hname{position:absolute; z-index:3; right:5%; top:46%; text-align:left; line-height:1.1;}
-  .hname small{display:block; font-size:10px; font-weight:600; color:var(--sub); letter-spacing:.2px;}
-  .hname b{display:block; margin:1px 0 0 -2px; font-family:'Nanum Pen Script', cursive;
-    font-size:34px; font-weight:400; color:var(--ink); letter-spacing:-.5px; transform:rotate(-5deg);
-    transform-origin:left bottom;}
+  /* 모델명 — 손글씨 사인 이미지 */
+  .hname{position:absolute; z-index:3; right:4%; top:42%; width:118px;}
+  .hname img{display:block; width:100%; height:auto;}
   @media(min-width:768px){
     .hbub{top:6%; right:2%; padding:11px 20px; font-size:15.5px;}
     .hbub:after{left:20px; bottom:-5px; width:11px; height:11px;}
-    .hname{right:3%; top:47%;}
-    .hname small{font-size:12px;}
-    .hname b{font-size:46px;}
+    .hname{right:2%; top:44%; width:190px;}
   }
   /* 글 묶음과 사진 사이 최소 숨통 */
   .hero > .hero2{margin-bottom:clamp(22px, 4svh, 54px);}
@@ -1412,13 +1405,19 @@
   /* 「쉽고 빠른」 → 사진 띠 사이 */
   .bandhead{padding-top:var(--gap);}
   /* 「맞춤 송금」 — 화면을 꽉 채운 하늘색 띠 (위아래로 넘쳐 칠하고, 그만큼 단락 간격을 더한다) */
-  #featsec{position:relative; --bx:96px; --bxb:60px; margin-top:calc(var(--gap) + var(--bx));}
-  @media(min-width:768px){ #featsec{--bx:150px; --bxb:92px;} }
+  /* 아래로는 .midband 바닥(=남색 단락 시작)까지 칠해서 흰 줄이 안 생기게 */
+  #featsec{position:relative; --bx:96px; --bxb:150px; margin-top:calc(var(--gap) + var(--bx));}
+  @media(min-width:768px){ #featsec{--bx:150px; --bxb:215px;} }
   #featsec:before{content:''; position:absolute; z-index:0;
     top:calc(-1 * var(--bx)); bottom:calc(-1 * var(--bxb));
     left:50%; width:100vw; transform:translateX(-50%); pointer-events:none;
     background:color-mix(in srgb, var(--primary) 7%, #fff);}
   #featsec > *{position:relative; z-index:1;}
+  /* 「쉽고 빠른」 내용(사진 · 단계 · 휴대폰)을 흰 둥근 상자에 담는다 — PC */
+  @media(min-width:900px){
+    .hwrap{background:#fff; border-radius:30px; padding:40px 40px 56px;
+      box-shadow:0 30px 60px -40px rgba(20,40,90,.28), 0 1px 3px rgba(15,23,42,.04);}
+  }
   /* 사진 띠 — 스크롤 위치에 따라 가로 · 세로로 퍼졌다 다시 오므라든다 */
   /* 오려내기(clip-path)는 띠 자체가 아니라 바깥 창에 건다.
      띠는 따로 한 겹(layer)으로 올려두면, 창만 바뀔 때 다시 그리지 않아 폰에서 안 끊긴다 */
@@ -1502,7 +1501,7 @@
     <div class="hmodel">
       <img src="img/people3.png?v=1" alt="랜선페이를 쓰는 모델">
       <span class="hbub">이용수수료 <b>단 4.4%</b></span>
-      <span class="hname"><small>랜선페이 대표 모델</small><b>이서아</b></span>
+      <span class="hname"><img src="img/싸인.png?v=1" alt="랜선페이 대표 모델 이서아"></span>
     </div>
 
     <div class="wrap statwrap">
