@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>랜선페이 — 현금으로 내던 돈 이제 카드로</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap">
 <link rel="stylesheet" href="style.css?v=28">
 <link rel="icon" type="image/png" href="img/logo3.png">
 <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
@@ -915,23 +917,28 @@
     max-height:calc(var(--mw) / 1.398 * 1.15);}
   /* 새 사진은 원본과 좌우 여백이 달라서, 사람이 예전과 똑같은 자리에 오도록 맞춘다 */
   .hmodel img{position:absolute; top:0; left:15.47%; width:88.58%; height:auto; display:block;}
-  /* 말풍선 · 모델명 — 사진 칸 안 오른쪽 빈 자리에 */
+  /* 말풍선 — 숫자 카드와 같은 유리 질감 · 꼬리는 작고 둥글게 */
   .hbub{position:absolute; z-index:3; top:5%; right:3%;
-    padding:9px 13px 9px 12px; border-radius:16px 16px 16px 4px;
-    background:#fff; color:var(--ink); font-size:13px; font-weight:700; letter-spacing:-.3px; white-space:nowrap;
-    box-shadow:0 12px 26px -14px rgba(15,23,42,.45), 0 0 0 1px rgba(21,111,249,.08);}
-  .hbub b{color:var(--primary); font-weight:800;}
-  .hbub:after{content:''; position:absolute; left:-5px; bottom:6px; width:12px; height:12px;
-    background:#fff; clip-path:polygon(100% 0, 100% 100%, 0 100%); transform:skewY(-20deg);}
-  .hname{position:absolute; z-index:3; right:4%; top:44%; text-align:left; line-height:1.25;}
-  .hname small{display:block; font-size:10.5px; font-weight:600; color:var(--sub); letter-spacing:-.2px;}
-  .hname b{display:block; margin-top:2px; font-size:15px; font-weight:800; color:var(--ink); letter-spacing:-.4px;}
+    padding:8px 14px; border-radius:999px;
+    background:rgba(255,255,255,.78); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px);
+    border:1px solid rgba(255,255,255,.95);
+    color:var(--sub); font-size:12.5px; font-weight:600; letter-spacing:-.3px; white-space:nowrap;
+    box-shadow:0 8px 22px -14px rgba(15,23,42,.35);}
+  .hbub b{color:var(--primary); font-weight:800; margin-left:2px;}
+  .hbub:after{content:''; position:absolute; left:14px; bottom:-4px; width:9px; height:9px; border-radius:2px;
+    background:rgba(255,255,255,.9); transform:rotate(45deg);}
+  /* 모델명 — 사인처럼 손글씨 */
+  .hname{position:absolute; z-index:3; right:5%; top:46%; text-align:left; line-height:1.1;}
+  .hname small{display:block; font-size:10px; font-weight:600; color:var(--sub); letter-spacing:.2px;}
+  .hname b{display:block; margin:1px 0 0 -2px; font-family:'Nanum Pen Script', cursive;
+    font-size:34px; font-weight:400; color:var(--ink); letter-spacing:-.5px; transform:rotate(-5deg);
+    transform-origin:left bottom;}
   @media(min-width:768px){
-    .hbub{top:6%; right:2%; padding:12px 18px 12px 16px; font-size:16px; border-radius:20px 20px 20px 5px;}
-    .hbub:after{left:-6px; bottom:8px; width:15px; height:15px;}
-    .hname{right:3%; top:46%;}
-    .hname small{font-size:12.5px;}
-    .hname b{font-size:19px; margin-top:3px;}
+    .hbub{top:6%; right:2%; padding:11px 20px; font-size:15.5px;}
+    .hbub:after{left:20px; bottom:-5px; width:11px; height:11px;}
+    .hname{right:3%; top:47%;}
+    .hname small{font-size:12px;}
+    .hname b{font-size:46px;}
   }
   /* 글 묶음과 사진 사이 최소 숨통 */
   .hero > .hero2{margin-bottom:clamp(22px, 4svh, 54px);}
