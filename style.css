@@ -177,6 +177,13 @@ main{flex:1 0 auto;}
 .finfo{display:flex; flex-wrap:wrap; gap:6px 26px; margin-top:22px; max-width:1020px;}
 .finfo span{font-size:13px; line-height:1.8; color:rgba(255,255,255,.78);}
 .finfo b{font-weight:500; color:rgba(255,255,255,.4); margin-right:8px;}
+/* 휴대폰 — 항목 이름 | 내용 두 칸 표로 줄 맞춤 (주소처럼 긴 내용은 내용 칸 안에서만 줄바꿈) */
+@media(max-width:767px){
+  .finfo{display:grid; grid-template-columns:max-content 1fr; column-gap:14px; row-gap:7px; margin-top:20px;}
+  .finfo span{display:contents;}
+  .finfo b{display:block; margin-right:0; white-space:nowrap; line-height:1.8;}
+  .finfo span > *:not(b){min-width:0;}
+}
 .fnote{margin-top:20px; font-size:12.5px; color:rgba(255,255,255,.45);}
 .fcopy{margin-top:8px; font-size:12.5px; color:rgba(255,255,255,.3);}
 
