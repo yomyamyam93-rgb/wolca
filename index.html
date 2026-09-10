@@ -1416,10 +1416,15 @@
     left:50%; width:100vw; transform:translateX(-50%); pointer-events:none;
     background:color-mix(in srgb, var(--primary) 7%, #fff);}
   #featsec > *{position:relative; z-index:1;}
-  /* 「쉽고 빠른」 내용 — 흰 둥근 상자 (바탕도 흰색이라 얇은 테두리와 옅은 그림자로 경계를 준다) */
-  .hwrap{background:#fff; border:1px solid var(--line); border-radius:24px; padding:20px 16px 28px;
+  /* 「쉽고 빠른」 — 제목부터 내용까지 흰 둥근 상자 하나에 (바탕도 흰색이라 얇은 테두리 · 옅은 그림자로 경계) */
+  #howto > .wrap{box-sizing:border-box; width:calc(100% - 32px); max-width:none; margin:0 16px;
+    background:#fff; border:1px solid var(--line); border-radius:24px; padding:36px 16px 28px;
     box-shadow:0 18px 44px -30px rgba(20,40,90,.25), 0 1px 3px rgba(15,23,42,.04);}
-  @media(min-width:900px){ .hwrap{border-radius:30px; padding:40px 40px 56px;} }
+  #howto > .wrap .hwrap{max-width:none;}
+  @media(min-width:900px){
+    #howto > .wrap{width:100%; max-width:960px; margin:0 auto; border-radius:30px; padding:56px 40px 56px;}
+    #howto > .wrap .hwrap{padding:0 0 0;}
+  }
   /* 사진 띠 — 스크롤 위치에 따라 가로 · 세로로 퍼졌다 다시 오므라든다 */
   /* 오려내기(clip-path)는 띠 자체가 아니라 바깥 창에 건다.
      띠는 따로 한 겹(layer)으로 올려두면, 창만 바뀔 때 다시 그리지 않아 폰에서 안 끊긴다 */
