@@ -1141,21 +1141,21 @@
   @media(max-width:767px){
     .topband #itemsec, #itemsec{background:linear-gradient(180deg,
         rgba(233,241,252,0) 0%, rgba(233,241,252,.75) 9%, #E9F1FC 24%,
-        #E9F1FC 100%);}
+        #E9F1FC 88%, #F0F5FE 100%);}
     /* 하늘색이 카드 사진까지 그대로 이어진다 — 중간에 흰색으로 빠지지 않게 */
     /* 배너 뒤가 딱 끊기지 않게 아래로 길게 풀어 준다 */
     .midband{background:linear-gradient(180deg,
-        #E9F1FC 0px, #F3F7FE 70px, #FFFFFF 150px);
+        #F0F5FE 0px, #F8FAFF 50px, #FFFFFF 90px);
       background-repeat:no-repeat;}
   }
   /* PC — 하늘색을 끝까지 끌고 내려와 카드 사진 앞에서 흰색으로 풀린다 */
   @media(min-width:768px){
     .topband #itemsec, #itemsec{background:linear-gradient(180deg,
         rgba(233,241,252,0) 0%, rgba(233,241,252,.65) 20%, #E9F1FC 42%,
-        #E9F1FC 100%);}
-    /* 카드 사진이 시작되기 전까지 하늘색 · 사진이 걸쳐 있는 구간에서 흰색으로 풀린다 */
+        #E9F1FC 80%, #F1F6FE 100%);}
+    /* 항목 카드가 끝난 뒤부터 밝아지기 시작해 「쉽고 빠른」 제목 앞에서 흰색이 된다 (약 320px) */
     .midband{background:linear-gradient(180deg,
-        #E9F1FC 0px, #F3F7FE 70px, #FFFFFF 150px);
+        #F1F6FE 0px, #F8FAFF 70px, #FFFFFF 140px);
       background-repeat:no-repeat;}
   }
 
@@ -1403,8 +1403,8 @@
   #howto:before{display:none;}
   #howto{margin-top:0;}
   /* 항목 단락(아래로 갈수록 흰색) → 「쉽고 빠른」 제목 사이 */
-  .midband{padding-top:40px;}
-  @media(max-width:767px){ .midband{padding-top:48px;} }
+  .midband{padding-top:170px;}
+  @media(max-width:767px){ .midband{padding-top:110px;} }
   /* 「쉽고 빠른」 → 사진 띠 사이 */
   .bandhead{padding-top:var(--gap);}
   /* 「맞춤 송금」 — 화면을 꽉 채운 하늘색 띠 (위아래로 넘쳐 칠하고, 그만큼 단락 간격을 더한다) */
