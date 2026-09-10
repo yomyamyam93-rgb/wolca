@@ -1145,7 +1145,7 @@
     /* 하늘색이 카드 사진까지 그대로 이어진다 — 중간에 흰색으로 빠지지 않게 */
     /* 배너 뒤가 딱 끊기지 않게 아래로 길게 풀어 준다 */
     .midband{background:linear-gradient(180deg,
-        #E9F1FC 0px, #EBF2FD 90px, #F1F6FD 220px, #F8FBFE 340px, #FFFFFF 460px);
+        #E9F1FC 0px, #F3F7FE 70px, #FFFFFF 150px);
       background-repeat:no-repeat;}
   }
   /* PC — 하늘색을 끝까지 끌고 내려와 카드 사진 앞에서 흰색으로 풀린다 */
@@ -1155,8 +1155,7 @@
         #E9F1FC 100%);}
     /* 카드 사진이 시작되기 전까지 하늘색 · 사진이 걸쳐 있는 구간에서 흰색으로 풀린다 */
     .midband{background:linear-gradient(180deg,
-        #E9F1FC 0px, #E9F1FC 222px,
-        #EDF3FD 350px, #F6F9FE 580px, #FFFFFF 860px);
+        #E9F1FC 0px, #F3F7FE 70px, #FFFFFF 150px);
       background-repeat:no-repeat;}
   }
 
@@ -1417,11 +1416,6 @@
     left:50%; width:100vw; transform:translateX(-50%); pointer-events:none;
     background:color-mix(in srgb, var(--primary) 7%, #fff);}
   #featsec > *{position:relative; z-index:1;}
-  /* 「쉽고 빠른」 내용(사진 · 단계 · 휴대폰)을 흰 둥근 상자에 담는다 — PC */
-  @media(min-width:900px){
-    .hwrap{background:#fff; border-radius:30px; padding:40px 40px 56px;
-      box-shadow:0 30px 60px -40px rgba(20,40,90,.28), 0 1px 3px rgba(15,23,42,.04);}
-  }
   /* 사진 띠 — 스크롤 위치에 따라 가로 · 세로로 퍼졌다 다시 오므라든다 */
   /* 오려내기(clip-path)는 띠 자체가 아니라 바깥 창에 건다.
      띠는 따로 한 겹(layer)으로 올려두면, 창만 바뀔 때 다시 그리지 않아 폰에서 안 끊긴다 */
