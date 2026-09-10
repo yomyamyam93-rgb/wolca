@@ -1286,7 +1286,7 @@
   /* 모바일 — 휴대폰 목업도 배경 그라데이션도 없이 타임라인만 */
   @media(max-width:899px){
     .hcol{display:none !important;}
-    .hwrap{padding:0 0 24px; background:none;}
+    .tbd p br{display:none;}   /* 상자 안 폭이 좁아 억지 줄바꿈 대신 자연 줄바꿈 */
   }
 
   /* 단계 넘기기 — 좌우 화살표 · 단계 클릭 */
@@ -1416,6 +1416,10 @@
     left:50%; width:100vw; transform:translateX(-50%); pointer-events:none;
     background:color-mix(in srgb, var(--primary) 7%, #fff);}
   #featsec > *{position:relative; z-index:1;}
+  /* 「쉽고 빠른」 내용 — 흰 둥근 상자 (바탕도 흰색이라 얇은 테두리와 옅은 그림자로 경계를 준다) */
+  .hwrap{background:#fff; border:1px solid var(--line); border-radius:24px; padding:20px 16px 28px;
+    box-shadow:0 18px 44px -30px rgba(20,40,90,.25), 0 1px 3px rgba(15,23,42,.04);}
+  @media(min-width:900px){ .hwrap{border-radius:30px; padding:40px 40px 56px;} }
   /* 사진 띠 — 스크롤 위치에 따라 가로 · 세로로 퍼졌다 다시 오므라든다 */
   /* 오려내기(clip-path)는 띠 자체가 아니라 바깥 창에 건다.
      띠는 따로 한 겹(layer)으로 올려두면, 창만 바뀔 때 다시 그리지 않아 폰에서 안 끊긴다 */
@@ -1584,19 +1588,19 @@
         <ol class="tline">
           <li class="tstep on" data-shot="img/guide_shots/reg2.png?v=1" role="button" tabindex="0">
             <span class="tno">1</span>
-            <div class="tbd"><h3>결제 정보 등록</h3><p>결제할 항목과 금액 · 받는 분 계좌를 입력하세요<br>한 번 등록하면 다음부터는 불러와서 씁니다</p></div>
+            <div class="tbd"><h3>결제 정보 등록</h3><p>결제할 항목과 금액 · 받는 분 계좌를 입력하세요 <br>한 번 등록하면 다음부터는 불러와서 씁니다</p></div>
           </li>
           <li class="tstep" data-shot="img/guide_shots/reg4.png?v=1" role="button" tabindex="0">
             <span class="tno">2</span>
-            <div class="tbd"><h3>서류 검토</h3><p>임대차계약서 같은 증빙 서류를 올리면<br>연중무휴로 검토해 보통 10분 안에 알려드려요</p></div>
+            <div class="tbd"><h3>서류 검토</h3><p>임대차계약서 같은 증빙 서류를 올리면 <br>연중무휴로 검토해 보통 10분 안에 알려드려요</p></div>
           </li>
           <li class="tstep" data-shot="img/guide_shots/reg3.png?v=1" role="button" tabindex="0">
             <span class="tno">3</span>
-            <div class="tbd"><h3>신용카드로 결제</h3><p>등록한 내용을 확인하고 카드로 결제하세요<br>일시불부터 최대 24개월 할부까지 됩니다</p></div>
+            <div class="tbd"><h3>신용카드로 결제</h3><p>등록한 내용을 확인하고 카드로 결제하세요 <br>일시불부터 최대 24개월 할부까지 됩니다</p></div>
           </li>
           <li class="tstep" data-shot="img/guide_shots/done.png?v=1" role="button" tabindex="0">
             <span class="tno">4</span>
-            <div class="tbd"><h3>송금 확인</h3><p>결제가 확인되면 평균 5분 안에 입금되고<br>내역은 마이페이지에서 바로 볼 수 있어요</p></div>
+            <div class="tbd"><h3>송금 확인</h3><p>결제가 확인되면 평균 5분 안에 입금되고 <br>내역은 마이페이지에서 바로 볼 수 있어요</p></div>
           </li>
         </ol>
       </div>
