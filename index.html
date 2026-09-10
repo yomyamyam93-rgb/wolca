@@ -915,6 +915,24 @@
     max-height:calc(var(--mw) / 1.398 * 1.15);}
   /* 새 사진은 원본과 좌우 여백이 달라서, 사람이 예전과 똑같은 자리에 오도록 맞춘다 */
   .hmodel img{position:absolute; top:0; left:15.47%; width:88.58%; height:auto; display:block;}
+  /* 말풍선 · 모델명 — 사진 칸 안 오른쪽 빈 자리에 */
+  .hbub{position:absolute; z-index:3; top:5%; right:3%;
+    padding:9px 13px 9px 12px; border-radius:16px 16px 16px 4px;
+    background:#fff; color:var(--ink); font-size:13px; font-weight:700; letter-spacing:-.3px; white-space:nowrap;
+    box-shadow:0 12px 26px -14px rgba(15,23,42,.45), 0 0 0 1px rgba(21,111,249,.08);}
+  .hbub b{color:var(--primary); font-weight:800;}
+  .hbub:after{content:''; position:absolute; left:-5px; bottom:6px; width:12px; height:12px;
+    background:#fff; clip-path:polygon(100% 0, 100% 100%, 0 100%); transform:skewY(-20deg);}
+  .hname{position:absolute; z-index:3; right:4%; top:44%; text-align:left; line-height:1.25;}
+  .hname small{display:block; font-size:10.5px; font-weight:600; color:var(--sub); letter-spacing:-.2px;}
+  .hname b{display:block; margin-top:2px; font-size:15px; font-weight:800; color:var(--ink); letter-spacing:-.4px;}
+  @media(min-width:768px){
+    .hbub{top:6%; right:2%; padding:12px 18px 12px 16px; font-size:16px; border-radius:20px 20px 20px 5px;}
+    .hbub:after{left:-6px; bottom:8px; width:15px; height:15px;}
+    .hname{right:3%; top:46%;}
+    .hname small{font-size:12.5px;}
+    .hname b{font-size:19px; margin-top:3px;}
+  }
   /* 글 묶음과 사진 사이 최소 숨통 */
   .hero > .hero2{margin-bottom:clamp(22px, 4svh, 54px);}
   /* PC — 사진 1.2배 · 40px 위로 */
@@ -1458,13 +1476,15 @@
 
     <div class="hmodel">
       <img src="img/people3.png?v=1" alt="랜선페이를 쓰는 모델">
+      <span class="hbub">이용수수료 <b>단 4.4%</b></span>
+      <span class="hname"><small>랜선페이 대표 모델</small><b>이서아</b></span>
     </div>
 
     <div class="wrap statwrap">
       <div class="hstats">
-        <div><span>누적 이용자</span><b><em class="cnt" data-to="10">0</em>만<i>명+</i></b></div>
-        <div><span>총 송금 건수</span><b><em class="cnt" data-to="15">0</em>만<i>건+</i></b></div>
-        <div><span>평균 입금 시간</span><b><em class="cnt" data-to="5">0</em><i>분</i></b></div>
+        <div><span>누적 이용자</span><b><em class="cnt" data-to="100">0</em>만<i>명+</i></b></div>
+        <div><span>총 송금 건수</span><b><em class="cnt" data-to="1800" data-comma="1">0</em>만<i>건+</i></b></div>
+        <div><span>평균 입금 시간</span><b>5~<em class="cnt" data-to="10">0</em><i>분</i></b></div>
         <div><span>평균 평점</span><b><em class="cnt" data-to="4.8" data-dec="1">0</em><i>점</i></b></div>
       </div>
     </div>
@@ -1521,6 +1541,47 @@
 
   <!-- ===== 랜선페이를 써야 하는 이유 — 1~7 펼침 ===== -->
   <div class="midband">
+  <!-- ===== 5. 이용 방법 — 6단계 상세 ===== -->
+  <section class="sec tint" id="howto">
+    <div class="wrap">
+      <div class="head">
+        <h2 class="h-sec"><span class="hl">쉽고 빠른</span> 결제 시스템</h2>
+        <a class="morelink" href="guide.html">자세한 이용가이드 보기<svg viewBox="0 0 22 22" aria-hidden="true"><path d="M8.5 4.5 15 11l-6.5 6.5" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+
+      <div class="hwrap">
+        <img class="hpic" src="img/band-bg.jpg?v=3" alt="랜선페이 앱으로 결제하는 모습">
+        <div class="hcol">
+          <div class="hphone"><img id="hshot" src="img/guide_shots/login.png?v=2" alt="단계별 앱 화면"></div>
+          <div class="hnav">
+            <button class="hbtn" type="button" id="hprev" aria-label="이전 단계">‹</button>
+            <span class="hcount"><b id="hnow">1</b> / 4</span>
+            <button class="hbtn" type="button" id="hnext" aria-label="다음 단계">›</button>
+          </div>
+        </div>
+        <ol class="tline">
+          <li class="tstep on" data-shot="img/guide_shots/reg2.png?v=1" role="button" tabindex="0">
+            <span class="tno">1</span>
+            <div class="tbd"><h3>결제 정보 등록</h3><p>결제할 항목과 금액 · 받는 분 계좌를 입력하세요<br>한 번 등록하면 다음부터는 불러와서 씁니다</p></div>
+          </li>
+          <li class="tstep" data-shot="img/guide_shots/reg4.png?v=1" role="button" tabindex="0">
+            <span class="tno">2</span>
+            <div class="tbd"><h3>서류 검토</h3><p>임대차계약서 같은 증빙 서류를 올리면<br>연중무휴로 검토해 보통 10분 안에 알려드려요</p></div>
+          </li>
+          <li class="tstep" data-shot="img/guide_shots/reg3.png?v=1" role="button" tabindex="0">
+            <span class="tno">3</span>
+            <div class="tbd"><h3>신용카드로 결제</h3><p>등록한 내용을 확인하고 카드로 결제하세요<br>일시불부터 최대 24개월 할부까지 됩니다</p></div>
+          </li>
+          <li class="tstep" data-shot="img/guide_shots/done.png?v=1" role="button" tabindex="0">
+            <span class="tno">4</span>
+            <div class="tbd"><h3>송금 확인</h3><p>결제가 확인되면 평균 5분 안에 입금되고<br>내역은 마이페이지에서 바로 볼 수 있어요</p></div>
+          </li>
+        </ol>
+      </div>
+
+    </div>
+  </section>
+
   <div class="wrap bandhead">
     <div class="bandclip">
       <div class="bandart">
@@ -1570,46 +1631,6 @@
     </div>
   </section>
 
-  <!-- ===== 5. 이용 방법 — 6단계 상세 ===== -->
-  <section class="sec tint" id="howto">
-    <div class="wrap">
-      <div class="head">
-        <h2 class="h-sec"><span class="hl">쉽고 빠른</span> 결제 시스템</h2>
-        <a class="morelink" href="guide.html">자세한 이용가이드 보기<svg viewBox="0 0 22 22" aria-hidden="true"><path d="M8.5 4.5 15 11l-6.5 6.5" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-      </div>
-
-      <div class="hwrap">
-        <img class="hpic" src="img/band-bg.jpg?v=3" alt="랜선페이 앱으로 결제하는 모습">
-        <div class="hcol">
-          <div class="hphone"><img id="hshot" src="img/guide_shots/login.png?v=2" alt="단계별 앱 화면"></div>
-          <div class="hnav">
-            <button class="hbtn" type="button" id="hprev" aria-label="이전 단계">‹</button>
-            <span class="hcount"><b id="hnow">1</b> / 4</span>
-            <button class="hbtn" type="button" id="hnext" aria-label="다음 단계">›</button>
-          </div>
-        </div>
-        <ol class="tline">
-          <li class="tstep on" data-shot="img/guide_shots/reg2.png?v=1" role="button" tabindex="0">
-            <span class="tno">1</span>
-            <div class="tbd"><h3>결제 정보 등록</h3><p>결제할 항목과 금액 · 받는 분 계좌를 입력하세요<br>한 번 등록하면 다음부터는 불러와서 씁니다</p></div>
-          </li>
-          <li class="tstep" data-shot="img/guide_shots/reg4.png?v=1" role="button" tabindex="0">
-            <span class="tno">2</span>
-            <div class="tbd"><h3>서류 검토</h3><p>임대차계약서 같은 증빙 서류를 올리면<br>연중무휴로 검토해 보통 10분 안에 알려드려요</p></div>
-          </li>
-          <li class="tstep" data-shot="img/guide_shots/reg3.png?v=1" role="button" tabindex="0">
-            <span class="tno">3</span>
-            <div class="tbd"><h3>신용카드로 결제</h3><p>등록한 내용을 확인하고 카드로 결제하세요<br>일시불부터 최대 24개월 할부까지 됩니다</p></div>
-          </li>
-          <li class="tstep" data-shot="img/guide_shots/done.png?v=1" role="button" tabindex="0">
-            <span class="tno">4</span>
-            <div class="tbd"><h3>송금 확인</h3><p>결제가 확인되면 평균 5분 안에 입금되고<br>내역은 마이페이지에서 바로 볼 수 있어요</p></div>
-          </li>
-        </ol>
-      </div>
-
-    </div>
-  </section>
 
   <!-- ===== 4. 기능 3가지 — 흰 카드 3장 + 모서리 배지 ===== -->
   <section class="sec tint" id="featsec">
@@ -1707,7 +1728,7 @@
   <section class="sec tint" id="rvsec">
     <div class="wrap">
       <div class="head">
-        <h2 class="h-sec"><span class="soft">10만명+이 선택한 랜선페이</span><br>평균 평점 <span class="hl">4.8점</span></h2>
+        <h2 class="h-sec"><span class="soft">100만명+이 선택한 랜선페이</span><br>평균 평점 <span class="hl">4.8점</span></h2>
       </div>
     </div>
     <div class="rvband">
@@ -1809,9 +1830,11 @@
       <span><b>대표</b>김남기</span>
       <span><b>서버책임 · 개인정보관리자</b>민기범</span>
       <span><b>사업자등록번호</b>437-88-03148</span>
+      <span><b>통신판매업신고번호</b></span>
       <span><b>주소</b>충청남도 천안시 서북구 쌍용대로 234, 방영학생활건강빌딩 3층 (성정동)</span>
-      <span><b>대표번호</b>1577-6369 (평일 9:00~18:00)</span>
-      <span><b>메일</b>help@lanseonpay.co.kr</span>
+      <span><b>대표번호</b>1577-6369</span>
+      <span><b>카카오채널</b>@랜선페이</span>
+      <span><b>이메일</b>lanpay567@naver.com</span>
     </div>
     <p class="fnote">랜선페이는 전자금융거래법에 따라 등록된 전자지급결제대행(PG) 서비스입니다.</p>
     <p class="fcopy">Copyright © 2026 랜선페이. All rights reserved.</p>
@@ -2238,7 +2261,8 @@
     var to = parseFloat(el.dataset.to), dec = +(el.dataset.dec || 0), t0 = performance.now(), dur = 1100;
     (function tick(now){
       var p = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - p, 3);
-      el.textContent = (to * e).toFixed(dec);
+      var v = (to * e).toFixed(dec);
+      el.textContent = el.dataset.comma ? Number(v).toLocaleString('ko-KR') : v;
       if(p < 1) requestAnimationFrame(tick);
     })(t0);
   }

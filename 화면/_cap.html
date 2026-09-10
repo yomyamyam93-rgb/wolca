@@ -31,7 +31,8 @@ f.onload = function () {
         var to = e.getAttribute('data-to'), dec = e.getAttribute('data-dec');
         var s = d.createElement('em');
         s.style.fontStyle = 'normal';
-        s.textContent = dec ? Number(to).toFixed(+dec) : to;
+        var v = dec ? Number(to).toFixed(+dec) : to;
+        s.textContent = e.getAttribute('data-comma') ? Number(v).toLocaleString('ko-KR') : v;
         e.parentNode.replaceChild(s, e);
       });
       var k = q.get('k') || '';
