@@ -1401,6 +1401,24 @@
   /* 가운데 띠 — 아래 여백 (꺾임은 위 규칙 하나만 쓴다) */
   .midband{padding-bottom:215px;}
   @media(max-width:767px){ .midband{padding-bottom:150px;} }
+
+  /* ===== 단락 순서 변경(쉽고 빠른 → 사진 띠 → 핵심 포인트 → 맞춤 송금)에 맞춘 배경 · 간격 =====
+     하늘색 띠는 「쉽고 빠른」에서 「맞춤 송금」으로 옮긴다. 「쉽고 빠른」은 흰 바탕 */
+  #howto:before{display:none;}
+  #howto{margin-top:0;}
+  /* 항목 단락(아래로 갈수록 흰색) → 「쉽고 빠른」 제목 사이 */
+  .midband{padding-top:40px;}
+  @media(max-width:767px){ .midband{padding-top:48px;} }
+  /* 「쉽고 빠른」 → 사진 띠 사이 */
+  .bandhead{padding-top:var(--gap);}
+  /* 「맞춤 송금」 — 화면을 꽉 채운 하늘색 띠 (위아래로 넘쳐 칠하고, 그만큼 단락 간격을 더한다) */
+  #featsec{position:relative; --bx:96px; --bxb:60px; margin-top:calc(var(--gap) + var(--bx));}
+  @media(min-width:768px){ #featsec{--bx:150px; --bxb:92px;} }
+  #featsec:before{content:''; position:absolute; z-index:0;
+    top:calc(-1 * var(--bx)); bottom:calc(-1 * var(--bxb));
+    left:50%; width:100vw; transform:translateX(-50%); pointer-events:none;
+    background:color-mix(in srgb, var(--primary) 7%, #fff);}
+  #featsec > *{position:relative; z-index:1;}
   /* 사진 띠 — 스크롤 위치에 따라 가로 · 세로로 퍼졌다 다시 오므라든다 */
   /* 오려내기(clip-path)는 띠 자체가 아니라 바깥 창에 건다.
      띠는 따로 한 겹(layer)으로 올려두면, 창만 바뀔 때 다시 그리지 않아 폰에서 안 끊긴다 */
