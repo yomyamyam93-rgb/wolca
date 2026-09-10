@@ -915,26 +915,30 @@
     max-height:calc(var(--mw) / 1.398 * 1.15);}
   /* 새 사진은 원본과 좌우 여백이 달라서, 사람이 예전과 똑같은 자리에 오도록 맞춘다 */
   .hmodel img{position:absolute; top:0; left:15.47%; width:88.58%; height:auto; display:block;}
-  /* 말풍선 — 숫자 카드와 같은 유리 질감 · 꼬리는 작고 둥글게 */
-  .hbub{position:absolute; z-index:3; top:5%; right:3%;
+  /* 말풍선 — 사람 머리 위 한가운데 · 꼬리는 아래 가운데. 사진 칸 위로 삐져나오므로
+     칸의 overflow 대신 clip-path 로 아래 · 좌우만 자르고 위쪽은 열어 둔다 */
+  .hmodel{overflow:visible; clip-path:inset(-90px 0 0 0);}
+  .hbub{position:absolute; z-index:3; left:50%; bottom:calc(100% - 6px); transform:translateX(-50%);
     padding:8px 14px; border-radius:999px;
-    background:rgba(255,255,255,.78); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px);
+    background:rgba(255,255,255,.82); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px);
     border:1px solid rgba(255,255,255,.95);
     color:var(--sub); font-size:12.5px; font-weight:600; letter-spacing:-.3px; white-space:nowrap;
     box-shadow:0 8px 22px -14px rgba(15,23,42,.35);}
   .hbub b{color:var(--primary); font-weight:800; margin-left:2px;}
-  .hbub:after{content:''; position:absolute; left:14px; bottom:-4px; width:9px; height:9px; border-radius:2px;
-    background:rgba(255,255,255,.9); transform:rotate(45deg);}
-  /* 모델명 — 손글씨 사인 이미지 */
-  .hname{position:absolute; z-index:3; right:4%; top:42%; width:118px;}
+  .hbub:after{content:''; position:absolute; left:50%; bottom:-4px; width:9px; height:9px; margin-left:-4.5px;
+    border-radius:2px; background:rgba(255,255,255,.92); transform:rotate(45deg);}
+  /* 머리카락과 안 겹치게 — 말풍선 바로 아래, 얼굴 옆 빈 자리 */
+  .hname{position:absolute; z-index:3; right:3%; top:24%; width:108px;
+    filter:drop-shadow(0 0 5px rgba(255,255,255,.95)) drop-shadow(0 0 10px rgba(255,255,255,.7));}
   .hname img{display:block; width:100%; height:auto;}
   @media(min-width:768px){
-    .hbub{top:6%; right:2%; padding:11px 20px; font-size:15.5px;}
-    .hbub:after{left:20px; bottom:-5px; width:11px; height:11px;}
-    .hname{right:2%; top:44%; width:190px;}
+    .hbub{bottom:calc(100% - 8px); padding:11px 20px; font-size:15.5px;}
+    .hbub:after{bottom:-5px; width:11px; height:11px; margin-left:-5.5px;}
+    .hname{right:3%; top:25%; width:160px;}
   }
   /* 글 묶음과 사진 사이 최소 숨통 */
-  .hero > .hero2{margin-bottom:clamp(22px, 4svh, 54px);}
+  /* 말풍선이 사진 위에 얹히므로 그만큼(52px 이상) 벌린다 */
+  .hero > .hero2{margin-bottom:clamp(52px, 4svh, 64px);}
   /* PC — 사진 1.2배 · 40px 위로 */
   @media(min-width:768px){
     /* 상한을 vw 로 좁게 잡으면 브라우저를 확대했을 때 사진만 안 커진다.
@@ -962,7 +966,7 @@
      조건이 켜졌다 꺼져서 화면이 통째로 튄다. svh 는 주소창과 무관하게 고정이라 안 튄다 */
   @media(max-width:767px){
     .hero{padding-top:clamp(12px, calc(19.8svh - 117px), 60px);}
-    .hero > .hero2{margin-bottom:clamp(8px, calc(15.1svh - 90px), 54px);}
+    .hero > .hero2{margin-bottom:clamp(36px, calc(15.1svh - 90px), 54px);}
     .hbadge{font-size:clamp(13.5px, calc(.93svh + 7.4px), 15px);}
     .hero .hero2 .hbtns{margin-top:clamp(16px, calc(3.7svh - 8px), 22px);}
     .hero .hbtns .btn{height:clamp(44px, calc(4.94svh + 12px), 52px);
