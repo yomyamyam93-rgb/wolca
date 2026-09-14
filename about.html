@@ -171,6 +171,16 @@
   .num-tx .ast b i{font-size:inherit;}
   .num-tx .ast > span{display:block; margin:0 0 7px; font-size:12.5px; font-weight:700;
     color:var(--primary-600); white-space:nowrap;}
+  /* 휴대폰: 4칸이 한 줄에 안 들어가 깨지므로 2×2 */
+  @media(max-width:599px){
+    .num-tx .astats{grid-template-columns:repeat(2, 1fr); row-gap:14px; padding:18px 8px;}
+    .num-tx .ast{padding:0 4px;}
+    .num-tx .ast:nth-child(3):before{display:none;}
+    .num-tx .ast:nth-child(n+3){padding-top:14px; border-top:1px solid var(--line);}
+    .num-tx .ast:nth-child(n+3):before{top:calc(10% + 14px);}
+    .num-tx .ast b .countup, .num-tx .ast b .n{font-size:26px;}
+    .num-tx .ast b small{margin-right:2px;}
+  }
   .numgraph{padding:0;}
   .numgraph svg{display:block; width:100%; height:auto;}
 
