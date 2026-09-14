@@ -32,9 +32,7 @@
     color:#fff; font-size:14px; font-weight:700;}
   .sd h3{margin-top:12px; font-size:21px; font-weight:800; letter-spacing:-.4px;}
   @media(min-width:768px){ .sd h3{font-size:25px;} }
-  /* inline-block 이면 iOS 사파리가 목록을 가장 긴 줄 폭(max-content)으로 잡아 화면을 넘긴다
-     → 블록으로 두고 폭을 컨테이너에 묶는다 (가운데 정렬은 margin auto) */
-  .sd ol{display:block; width:100%; max-width:520px; margin:16px auto 0; text-align:left; list-style:none; counter-reset:s;}
+  .sd ol{display:inline-block; text-align:left; max-width:520px; margin-top:16px; list-style:none; counter-reset:s;}
   .sd ol li{position:relative; counter-increment:s; padding-left:30px; margin-bottom:10px;
     font-size:14.5px; line-height:1.7; color:var(--sub);
     word-break:keep-all;}

@@ -89,9 +89,7 @@
     color:#fff; font-size:14px; font-weight:700;}
   .sd h3{margin-top:12px; font-size:21px; font-weight:800; letter-spacing:-.4px;}
   @media(min-width:768px){ .sd h3{font-size:25px;} }
-  /* inline-block 이면 iOS 사파리가 목록을 가장 긴 줄 폭(max-content)으로 잡아 화면을 넘긴다
-     → 블록으로 두고 폭을 컨테이너에 묶는다 (가운데 정렬은 margin auto) */
-  .sd ol{display:block; width:100%; max-width:430px; margin:16px auto 0; text-align:left; list-style:none; counter-reset:s;}
+  .sd ol{display:inline-block; text-align:left; max-width:430px; margin-top:16px; list-style:none; counter-reset:s;}
   .sd ol li{position:relative; counter-increment:s; padding-left:30px; margin-bottom:10px;
     font-size:14.5px; line-height:1.7; color:var(--sub);}
   @media(min-width:768px){ .sd ol li{font-size:15.5px;} }
@@ -263,8 +261,6 @@
   @media(max-width:739px){
     /* 휴대폰 목업은 실제 크기의 80% — 글 · 여백 비율은 그대로 두고 통째로 줄인다 */
     .sd .phone{margin-top:22px; zoom:.8;}
-    /* 단계 설명 목록은 단락마다 같은 폭(312px)으로 가운데에 */
-    .sd ol{max-width:312px;}
     /* 사진 목업: 틀이 사진을 자르지 못하게 — 틀 높이는 사진이 정하고, 잘라내기를 끈다 (iOS 에서 하단 잘림 방지) */
     .phone.shot{overflow:visible; height:auto; min-height:0;}
     .phone.shot .mk-shot{border-radius:30px;}
