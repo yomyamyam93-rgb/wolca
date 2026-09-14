@@ -905,7 +905,7 @@
     max-height:calc(100svh - var(--appbar));}
   /* 카톡 · 텔레그램 안 브라우저처럼 위아래 막대가 화면을 잡아먹는 곳 — 한 화면에 억지로 맞추다 사진이 짜부되지 않게,
      휴대폰에서는 자리가 모자라면 히어로가 화면보다 길어지도록 둔다 (아래 카드가 스크롤로 내려갈 뿐) */
-  @media(max-width:767px){ .hero{max-height:none;} }
+  @media(max-width:767px){ .hero{max-height:none;} .hmodel{flex:0 0 auto;} }   /* 사진은 절대 줄이지 않는다 — 원래 크기 그대로 */
   @media(min-width:768px){ .hero{min-height:min(calc(100svh - var(--appbar)), 1060px);} }
   .hero > .hero2, .hero > .wrap, .hero > .sdown{flex:0 0 auto;}
   /* 사진 비율은 원본 그대로: 좌우가 절대 안 잘린다.
