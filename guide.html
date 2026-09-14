@@ -653,5 +653,23 @@
   맞추기();
 })();
 </script>
+<script>
+/* 임시 진단: 주소 뒤에 ?diag=1 일 때만 — 어떤 요소가 화면보다 넓거나 치우쳤는지 화면에 적는다 */
+(function(){
+  if(location.search.indexOf('diag')<0) return;
+  var NL=String.fromCharCode(10);
+  var box=document.createElement('pre');
+  box.style.cssText='position:fixed;left:4px;right:4px;top:60px;z-index:99999;background:rgba(0,0,0,.88);color:#0f0;font:700 11px/1.45 ui-monospace,monospace;padding:8px;border-radius:8px;white-space:pre-wrap;max-height:70vh;overflow:auto;pointer-events:none;';
+  document.body.appendChild(box);
+  function draw(){
+    var w=innerWidth, lines=['vw '+w+' docW '+document.documentElement.scrollWidth+' bodyW '+document.body.scrollWidth+' scrollX '+Math.round(scrollX)];
+    var wrap=document.querySelector('.steps2'), sd=document.querySelector('.steps2 .sd'), ph=document.querySelector('.steps2 .phone'), ol=document.querySelector('.steps2 ol');
+    [['wrap',wrap],['sd',sd],['phone',ph],['ol',ol]].forEach(function(a){ if(!a[1]) return; var r=a[1].getBoundingClientRect(); lines.push(a[0]+' L'+Math.round(r.left)+' R'+Math.round(r.right)+' W'+Math.round(r.width)); });
+    var n=0; document.querySelectorAll('body *').forEach(function(e){ if(n>=12) return; var r=e.getBoundingClientRect(); var cs=getComputedStyle(e); if(cs.position==='fixed'||cs.display==='none') return; if(r.width>20 && (r.right>w+2 || r.left<-2)){ n++; lines.push('OVER '+e.tagName.toLowerCase()+'.'+String(e.className).split(' ').slice(0,2).join('.')+' L'+Math.round(r.left)+' R'+Math.round(r.right)); } });
+    box.textContent=lines.join(NL);
+  }
+  setInterval(draw,400); draw();
+})();
+</script>
 </body>
 </html>
