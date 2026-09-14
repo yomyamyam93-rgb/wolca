@@ -932,8 +932,9 @@
     box-shadow:0 10px 24px -12px rgba(21,111,249,.7);}
   .hbub small{display:block; font-size:inherit; opacity:.9;}
   .hbub b{display:block; margin-top:3px; color:#fff; font-weight:900; font-size:18px; letter-spacing:-.5px;}
-  .hbub:after{content:''; position:absolute; z-index:-1; left:10px; bottom:-5px; width:10px; height:10px;
-    border-radius:2px; background:var(--primary); transform:rotate(45deg);}
+  /* 꼬리 — 둥근 모서리 안쪽(평평한 아랫변)에서 왼쪽 아래로 뾰족하게 */
+  .hbub:after{content:''; position:absolute; left:22px; bottom:-10px; width:18px; height:11px;
+    background:var(--primary); clip-path:polygon(0 0, 100% 0, 22% 100%);}
   /* 머리카락과 안 겹치게 — 말풍선 바로 아래, 얼굴 옆 빈 자리 */
   .hname{position:absolute; z-index:3; right:3%; top:24%; width:108px;
     filter:drop-shadow(0 0 5px rgba(255,255,255,.95)) drop-shadow(0 0 10px rgba(255,255,255,.7));}
@@ -941,7 +942,7 @@
   @media(min-width:768px){
     .hbub{left:65%; bottom:calc(100% - 44px); padding:14px 24px 16px; font-size:15px; border-radius:24px;}
     .hbub b{font-size:24px; margin-top:4px;}
-    .hbub:after{left:14px; bottom:-6px; width:12px; height:12px;}
+    .hbub:after{left:26px; bottom:-13px; width:22px; height:14px;}
     .hname{right:3%; top:25%; width:160px;}
   }
   /* 글 묶음과 사진 사이 최소 숨통 */
@@ -1118,8 +1119,7 @@
       radial-gradient(115% 95% at 10% 6%, color-mix(in srgb, var(--primary) 16%, transparent), transparent 64%),
       radial-gradient(95% 80% at 95% 92%, color-mix(in srgb, var(--primary) 9%, transparent), transparent 66%), #FAFCFF;
     border:1px solid color-mix(in srgb, var(--primary) 10%, transparent);}
-  #itemsec .itr-ic iconify-icon{font-size:64px; color:var(--primary); filter:drop-shadow(0 8px 14px rgba(21,111,249,.25));}
-  @media(min-width:1000px){ #itemsec .itr-ic iconify-icon{font-size:76px;} }
+  #itemsec .itr-ic img{width:64%; height:auto; max-height:70%; object-fit:contain; filter:drop-shadow(0 12px 18px rgba(21,111,249,.28));}
   #itemsec .itl h3{margin:0 0 10px; font-size:16px; font-weight:800; letter-spacing:-.3px;
     line-height:1.35; color:var(--ink);}
   @media(min-width:1000px){ #itemsec .itl h3{font-size:20px; margin-bottom:14px;} }
@@ -1561,25 +1561,25 @@
       </div>
 
       <div class="itgrid">
-      <button class="it" type="button" data-n="월세"><span class="tile"><iconify-icon icon="mingcute:home-4-fill" aria-hidden="true"></iconify-icon></span><b>월세</b></button>
-      <button class="it" type="button" data-n="관리비"><span class="tile"><iconify-icon icon="mingcute:building-2-fill" aria-hidden="true"></iconify-icon></span><b>관리비</b></button>
-      <button class="it" type="button" data-n="인건비"><span class="tile"><iconify-icon icon="mingcute:group-2-fill" aria-hidden="true"></iconify-icon></span><b>인건비</b></button>
-      <button class="it" type="button" data-n="보증금"><span class="tile"><iconify-icon icon="mingcute:safe-lock-fill" aria-hidden="true"></iconify-icon></span><b>보증금</b></button>
-      <button class="it" type="button" data-n="매입대금"><span class="tile"><iconify-icon icon="mingcute:box-2-fill" aria-hidden="true"></iconify-icon></span><b>매입대금</b></button>
-      <button class="it" type="button" data-n="학원비"><span class="tile"><iconify-icon icon="mingcute:book-2-fill" aria-hidden="true"></iconify-icon></span><b>학원비</b></button>
-      <button class="it" type="button" data-n="학교공과금"><span class="tile"><iconify-icon icon="mingcute:mortarboard-fill" aria-hidden="true"></iconify-icon></span><b>학교공과금</b></button>
-      <button class="it" type="button" data-n="인테리어"><span class="tile"><iconify-icon icon="mingcute:paint-brush-fill" aria-hidden="true"></iconify-icon></span><b>인테리어</b></button>
-      <button class="it" type="button" data-n="이사"><span class="tile"><iconify-icon icon="mingcute:truck-fill" aria-hidden="true"></iconify-icon></span><b>이사</b></button>
-      <button class="it" type="button" data-n="청소비"><span class="tile"><iconify-icon icon="mingcute:broom-fill" aria-hidden="true"></iconify-icon></span><b>청소비</b></button>
-      <button class="it" type="button" data-n="중개수수료"><span class="tile"><iconify-icon icon="mingcute:key-2-fill" aria-hidden="true"></iconify-icon></span><b>중개수수료</b></button>
-      <button class="it" type="button" data-n="기타"><span class="tile"><iconify-icon icon="mingcute:more-2-fill" aria-hidden="true"></iconify-icon></span><b>기타</b></button>
+      <button class="it" type="button" data-n="월세" data-d3="01"><span class="tile"><iconify-icon icon="mingcute:home-4-fill" aria-hidden="true"></iconify-icon></span><b>월세</b></button>
+      <button class="it" type="button" data-n="관리비" data-d3="02"><span class="tile"><iconify-icon icon="mingcute:building-2-fill" aria-hidden="true"></iconify-icon></span><b>관리비</b></button>
+      <button class="it" type="button" data-n="인건비" data-d3="03"><span class="tile"><iconify-icon icon="mingcute:group-2-fill" aria-hidden="true"></iconify-icon></span><b>인건비</b></button>
+      <button class="it" type="button" data-n="보증금" data-d3="11"><span class="tile"><iconify-icon icon="mingcute:safe-lock-fill" aria-hidden="true"></iconify-icon></span><b>보증금</b></button>
+      <button class="it" type="button" data-n="매입대금" data-d3="05"><span class="tile"><iconify-icon icon="mingcute:box-2-fill" aria-hidden="true"></iconify-icon></span><b>매입대금</b></button>
+      <button class="it" type="button" data-n="학원비" data-d3="07"><span class="tile"><iconify-icon icon="mingcute:book-2-fill" aria-hidden="true"></iconify-icon></span><b>학원비</b></button>
+      <button class="it" type="button" data-n="학교공과금" data-d3="06"><span class="tile"><iconify-icon icon="mingcute:mortarboard-fill" aria-hidden="true"></iconify-icon></span><b>학교공과금</b></button>
+      <button class="it" type="button" data-n="인테리어" data-d3="08"><span class="tile"><iconify-icon icon="mingcute:paint-brush-fill" aria-hidden="true"></iconify-icon></span><b>인테리어</b></button>
+      <button class="it" type="button" data-n="이사" data-d3="09"><span class="tile"><iconify-icon icon="mingcute:truck-fill" aria-hidden="true"></iconify-icon></span><b>이사</b></button>
+      <button class="it" type="button" data-n="청소비" data-d3="10"><span class="tile"><iconify-icon icon="mingcute:broom-fill" aria-hidden="true"></iconify-icon></span><b>청소비</b></button>
+      <button class="it" type="button" data-n="중개수수료" data-d3="04"><span class="tile"><iconify-icon icon="mingcute:key-2-fill" aria-hidden="true"></iconify-icon></span><b>중개수수료</b></button>
+      <button class="it" type="button" data-n="기타" data-d3="12"><span class="tile"><iconify-icon icon="mingcute:more-2-fill" aria-hidden="true"></iconify-icon></span><b>기타</b></button>
       </div>
 
       <div class="itarw" aria-hidden="true"><svg viewBox="0 0 22 22" aria-hidden="true"><path d="M4 11h13M11 4l7 7-7 7" stroke="currentColor" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
 
       <div class="itpanel">
         <div class="itin">
-          <div class="itr-ic" aria-hidden="true"><iconify-icon id="itp-ico" icon="mingcute:home-4-fill"></iconify-icon></div>
+          <div class="itr-ic" aria-hidden="true"><img id="itp-3d" src="img/item3d/01.png" alt=""></div>
         </div>
         <div class="itl">
           <h3 id="itp-h"></h3>
@@ -2034,6 +2034,8 @@
     var 이름 = document.getElementById('itp-name');
     var 원본 = b.querySelector('iconify-icon');
     if (아이콘 && 원본) 아이콘.setAttribute('icon', 원본.getAttribute('icon'));
+    var 입체 = document.getElementById('itp-3d');
+    if (입체 && b.dataset.d3) 입체.src = 'img/item3d/' + b.dataset.d3 + '.png';
     if (이름) 이름.textContent = n;
     서류칸.innerHTML = 정보.docs.map(function (d) {
       return '<div class="doc"><span class="ck">✓</span><p>' + d + '</p></div>';

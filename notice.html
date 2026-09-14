@@ -23,7 +23,7 @@
   .nrow:hover{background:#FAFBFD;}
   .c1{flex:0 0 44px; text-align:center; color:var(--placeholder);}
   .c2{flex:1; min-width:0; display:flex; align-items:center; gap:10px;}
-  .c2 .tt{font-weight:600; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  .c2 .tt{font-weight:600; white-space:normal; word-break:keep-all; overflow-wrap:anywhere; line-height:1.5;}
   .c3{flex:0 0 56px; text-align:center; font-size:13.5px; color:var(--sub);}
   .c4{flex:0 0 92px; text-align:right; font-size:13.5px; color:var(--placeholder);}
   @media(max-width:599px){ .c1,.c3{display:none;} .c4{flex:0 0 auto;} .nrow{font-size:14.5px;} }
@@ -105,21 +105,21 @@
   <section class="sec tight">
     <div class="wrap">
       <div class="nboard" id="nlist">
-        <div class="nhead"><span class="c1">번호</span><span class="c2">제목</span><span class="c3">작성자</span><span class="c4">작성일</span></div>
-        <a class="nrow" href="#n9"><span class="c1">9</span><span class="c2"><span class="badge solid">안내</span><span class="tt">예약송금 · 분할송금 이렇게 쓰세요</span></span><span class="c3">관리자</span><span class="c4">2026-08-28</span></a>
-        <a class="nrow" href="#n8"><span class="c1">8</span><span class="c2"><span class="badge solid">안내</span><span class="tt">유형별 필요 서류 한눈에 보기</span></span><span class="c3">관리자</span><span class="c4">2026-08-28</span></a>
-        <a class="nrow" href="#n7"><span class="c1">7</span><span class="c2"><span class="badge solid">안내</span><span class="tt">2026년 8월 카드사별 무이자 할부 안내</span></span><span class="c3">관리자</span><span class="c4">2026-08-01</span></a>
-        <a class="nrow" href="#n6"><span class="c1">6</span><span class="c2"><span class="badge solid">안내</span><span class="tt">사업자 부가세 신고 · 종합소득세 비용처리 안내</span></span><span class="c3">관리자</span><span class="c4">2026-07-20</span></a>
-        <a class="nrow" href="#n5"><span class="c1">5</span><span class="c2"><span class="badge solid">안내</span><span class="tt">연말정산 — 카드 소득공제 · 월세 세액공제 안내</span></span><span class="c3">관리자</span><span class="c4">2026-07-20</span></a>
-        <a class="nrow" href="#n4"><span class="c1">4</span><span class="c2"><span class="badge">공지</span><span class="tt">8월 할부 카드사 안내 (삼성 · 신한 · 현대)</span></span><span class="c3">관리자</span><span class="c4">2026-08-01</span></a>
-        <a class="nrow" href="#n3"><span class="c1">3</span><span class="c2"><span class="badge warn">점검</span><span class="tt">8월 20일(목) 새벽 2~4시 시스템 점검 안내</span></span><span class="c3">관리자</span><span class="c4">2026-07-28</span></a>
-        <a class="nrow" href="#n2"><span class="c1">2</span><span class="c2"><span class="badge">공지</span><span class="tt">개인정보 처리방침 개정 안내 (8월 1일 시행)</span></span><span class="c3">관리자</span><span class="c4">2026-07-08</span></a>
-        <a class="nrow" href="#n1"><span class="c1">1</span><span class="c2"><span class="badge">공지</span><span class="tt">여신전문금융업법에 따른 서비스 불가 거래 안내</span></span><span class="c3">관리자</span><span class="c4">2026-07-01</span></a>
+        <div class="nhead"><span class="c1">번호</span><span class="c2">제목</span><span class="c3">작성자</span></div>
+        <a class="nrow" href="#n9"><span class="c1">9</span><span class="c2"><span class="badge solid">안내</span><span class="tt">예약송금 · 분할송금 이렇게 쓰세요</span></span><span class="c3">관리자</span></a>
+        <a class="nrow" href="#n8"><span class="c1">8</span><span class="c2"><span class="badge solid">안내</span><span class="tt">유형별 필요 서류 한눈에 보기</span></span><span class="c3">관리자</span></a>
+        <a class="nrow" href="#n7"><span class="c1">7</span><span class="c2"><span class="badge solid">안내</span><span class="tt">2026년 8월 카드사별 무이자 할부 안내</span></span><span class="c3">관리자</span></a>
+        <a class="nrow" href="#n6"><span class="c1">6</span><span class="c2"><span class="badge solid">안내</span><span class="tt">사업자 부가세 신고 · 종합소득세 비용처리 안내</span></span><span class="c3">관리자</span></a>
+        <a class="nrow" href="#n5"><span class="c1">5</span><span class="c2"><span class="badge solid">안내</span><span class="tt">연말정산 — 카드 소득공제 · 월세 세액공제 안내</span></span><span class="c3">관리자</span></a>
+        <a class="nrow" href="#n4"><span class="c1">4</span><span class="c2"><span class="badge">공지</span><span class="tt">8월 할부 카드사 안내 (삼성 · 신한 · 현대)</span></span><span class="c3">관리자</span></a>
+        <a class="nrow" href="#n3"><span class="c1">3</span><span class="c2"><span class="badge warn">점검</span><span class="tt">8월 20일(목) 새벽 2~4시 시스템 점검 안내</span></span><span class="c3">관리자</span></a>
+        <a class="nrow" href="#n2"><span class="c1">2</span><span class="c2"><span class="badge">공지</span><span class="tt">개인정보 처리방침 개정 안내 (8월 1일 시행)</span></span><span class="c3">관리자</span></a>
+        <a class="nrow" href="#n1"><span class="c1">1</span><span class="c2"><span class="badge">공지</span><span class="tt">여신전문금융업법에 따른 서비스 불가 거래 안내</span></span><span class="c3">관리자</span></a>
       </div>
       <div class="nposts">
         <article class="npost" id="n9">
           <h2>예약송금 · 분할송금 이렇게 쓰세요</h2>
-          <p class="nmeta">관리자<i>|</i>2026-08-28</p>
+          <p class="nmeta">관리자</p>
           <div class="nbody">두 기능 모두 결제 등록 화면에서 바로 쓸 수 있습니다. 순서대로 따라 해보세요.
 
             <b class="dh">예약송금 사용 방법 — 날짜를 정해두면 알아서 나가요</b>
@@ -151,7 +151,7 @@
         </article>
         <article class="npost" id="n8">
           <h2>유형별 필요 서류 한눈에 보기</h2>
-          <p class="nmeta">관리자<i>|</i>2026-08-28</p>
+          <p class="nmeta">관리자</p>
           <div class="nbody">대부분 <b>서류 한 장</b>이면 충분합니다. 모든 서류는 금액과 받는 분 계좌가 보이게 올려주세요.
             <div class="dcard">
               <b class="dt">월세</b>
@@ -225,7 +225,7 @@
         </article>
         <article class="npost" id="n7">
           <h2>2026년 8월 카드사별 무이자 할부 안내</h2>
-          <p class="nmeta">관리자<i>|</i>2026-08-01</p>
+          <p class="nmeta">관리자</p>
           <div class="nbody">대상 — <b>5만원 이상 결제</b>부터 적용됩니다.
             <b class="dh">무이자 행사</b>
             <table class="ftb"><tr><th>카드사</th><th class="r">무이자 개월</th></tr><tr><td>신한카드</td><td class="r"><b>2~6개월</b></td></tr><tr><td>KB국민카드</td><td class="r"><b>2~3개월</b></td></tr><tr><td>삼성카드</td><td class="r"><b>2~6개월</b></td></tr><tr><td>현대카드</td><td class="r"><b>2~6개월</b></td></tr><tr><td>롯데카드</td><td class="r"><b>2~3개월</b></td></tr><tr><td>우리카드</td><td class="r"><b>2~5개월</b></td></tr><tr><td>하나카드</td><td class="r"><b>2~3개월</b></td></tr><tr><td>NH농협카드</td><td class="r"><b>2~6개월</b></td></tr><tr><td>BC카드</td><td class="r"><b>2~5개월</b></td></tr><tr><td>씨티카드</td><td class="r"><b>2~3개월</b></td></tr></table>
@@ -238,37 +238,37 @@
         </article>
         <article class="npost" id="n6">
           <h2>사업자 부가세 신고 · 종합소득세 비용처리 안내</h2>
-          <p class="nmeta">관리자<i>|</i>2026-07-20</p>
+          <p class="nmeta">관리자</p>
           <div class="nbody">랜선페이로 결제한 임차료 · 매입대금 · 인건비는 <b>사업 경비로 비용처리</b>할 수 있습니다. 결제 내역과 세금계산서(수수료분)는 화면에서 바로 내려받아 홈택스 신고 때 증빙으로 쓰면 됩니다. 부가세 신고 기간(1월 · 7월)에 맞춰 분기별 내역 묶음도 제공합니다.</div>
           <div class="nback"><a class="btn btn-line" href="#">목록으로</a></div>
         </article>
         <article class="npost" id="n5">
           <h2>연말정산 — 카드 소득공제 · 월세 세액공제 안내</h2>
-          <p class="nmeta">관리자<i>|</i>2026-07-20</p>
+          <p class="nmeta">관리자</p>
           <div class="nbody">랜선페이 결제는 <b>신용카드 소득공제</b> 대상이고 월세는 <b>세액공제</b>(총급여 5,500만원 이하 17% · 8,000만원 이하 15%)까지 함께 받을 수 있습니다. 연말정산용 월세 납입 증명은 이용내역에서 바로 내려받으세요.</div>
           <div class="nback"><a class="btn btn-line" href="#">목록으로</a></div>
         </article>
         <article class="npost" id="n4">
           <h2>8월 할부 카드사 안내 (삼성 · 신한 · 현대)</h2>
-          <p class="nmeta">관리자<i>|</i>2026-08-01</p>
+          <p class="nmeta">관리자</p>
           <div class="nbody">8월에는 삼성 · 신한 · 현대카드로 최대 12개월 할부 결제가 가능합니다. 그 밖의 카드사는 일시불과 무이자 행사 개월까지만 지원됩니다.</div>
           <div class="nback"><a class="btn btn-line" href="#">목록으로</a></div>
         </article>
         <article class="npost" id="n3">
           <h2>8월 20일(목) 새벽 2~4시 시스템 점검 안내</h2>
-          <p class="nmeta">관리자<i>|</i>2026-07-28</p>
+          <p class="nmeta">관리자</p>
           <div class="nbody">더 안정적인 서비스를 위해 <b>8월 20일(목) 02:00~04:00</b> 시스템 점검을 진행합니다. 점검 중에는 결제와 송금이 잠시 멈추고 예약 송금은 점검이 끝난 뒤 순서대로 처리됩니다.</div>
           <div class="nback"><a class="btn btn-line" href="#">목록으로</a></div>
         </article>
         <article class="npost" id="n2">
           <h2>개인정보 처리방침 개정 안내 (8월 1일 시행)</h2>
-          <p class="nmeta">관리자<i>|</i>2026-07-08</p>
+          <p class="nmeta">관리자</p>
           <div class="nbody">개인정보 보관 기간과 위탁 업체 목록이 일부 바뀌었습니다. 바뀐 내용은 고객센터의 개인정보 처리방침에서 확인할 수 있고 시행일은 8월 1일입니다.</div>
           <div class="nback"><a class="btn btn-line" href="#">목록으로</a></div>
         </article>
         <article class="npost" id="n1">
           <h2>여신전문금융업법에 따른 서비스 불가 거래 안내</h2>
-          <p class="nmeta">관리자<i>|</i>2026-07-01</p>
+          <p class="nmeta">관리자</p>
           <div class="nbody">아래 거래는 법에 따라 결제할 수 없습니다.
             <ul><li>실제 거래 없이 현금을 만들기 위한 결제</li>
                 <li>본인 계좌로 보내는 송금</li>
