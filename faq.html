@@ -30,6 +30,11 @@
   .acc details[open] summary .arw{transform:rotate(180deg);}
   .acc .a{padding:2px 26px 22px 34px; font-size:16px; line-height:1.8; color:var(--sub);}
   .acc .a b{color:var(--ink);}
+  /* 답변 안 목록 — 한 줄에 한 유형, 줄바꿈돼도 들여쓰기 유지 */
+  .acc .a .doclist{list-style:none; margin:12px 0 14px; padding:0;}
+  .acc .a .doclist li{position:relative; padding-left:14px; margin-bottom:8px; line-height:1.7; word-break:keep-all;}
+  .acc .a .doclist li:before{content:'·'; position:absolute; left:2px; color:var(--icon-off);}
+  .acc .a .doclist li b{color:var(--ink);}
   /* 탭 아래 첫 묶음까지 — 공지사항 게시판과 같은 간격 */
   .sec.tight{padding-top:62px;}
   @media(max-width:639px){ .sec.tight{padding-top:30px;} }
@@ -81,7 +86,18 @@
           <details><summary><span class="q">Q.</span><span class="t">세입자 본인만 이용할 수 있나요?</span><iconify-icon class="arw" icon="mingcute:down-line"></iconify-icon></summary>
             <div class="a">본인 명의 계약이 원칙입니다. 다만 가족이 대신 내주는 경우도 가능해요. 계약서와 결제하는 분의 관계를 확인할 수 있는 서류를 함께 올려주세요.</div></details>
           <details><summary><span class="q">Q.</span><span class="t">서류는 무엇이 필요한가요?</span><iconify-icon class="arw" icon="mingcute:down-line"></iconify-icon></summary>
-            <div class="a">항목마다 다르지만 대부분 <b>한 장</b>이면 됩니다. 월세는 임대차 계약서, 관리비는 고지서, 인건비는 근로계약서 + 급여명세서예요. 자세한 목록은 공지사항의 「유형별 필요 서류 한눈에 보기」에서 확인하세요.</div></details>
+            <div class="a">이용하는 결제 종류에 따라 필요한 서류가 다릅니다.
+              <ul class="doclist">
+                <li><b>월세 · 보증금</b> — 임대차 계약서 (중개사 확인이나 확정일자가 없으면 입금내역 2~3회분 추가)</li>
+                <li><b>관리비</b> — 관리비 고지서 · 알림톡 캡처 · 영수증 · 세금계산서 중 하나</li>
+                <li><b>인건비</b> — 근로계약서 + 4대보험 가입자 명부 + 급여 이체내역 (알바 · 프리랜서는 지급명세서)</li>
+                <li><b>학원비 · 학교공과금</b> — 고지서 · 납부 안내 알림톡/메일 캡처 중 하나 (과외비는 강사 자격 증빙 추가)</li>
+                <li><b>인테리어 · 이사 · 청소비</b> — 계약서 · 견적서 · 세금계산서 · 주문내역 캡처 중 하나</li>
+                <li><b>매입대금</b> — 세금계산서 · 거래명세서 · 영수증 · 계약서 중 하나 + 거래처 사업자등록증</li>
+                <li><b>중개수수료</b> — 중개보수가 적힌 계약서 또는 영수증</li>
+                <li><b>기타</b> — 금액과 받는 계좌가 확인되는 계약서 · 청구서 · 영수증</li>
+              </ul>
+              자세한 목록은 공지사항 → 「유형별 필요 서류 한눈에 보기」에서 확인하세요.</div></details>
         </div>
       </div>
 
@@ -99,7 +115,7 @@
         <h2 class="fgt">이용료 · 비용</h2>
         <div class="acc">
           <details><summary><span class="q">Q.</span><span class="t">수수료는 얼마인가요?</span><iconify-icon class="arw" icon="mingcute:down-line"></iconify-icon></summary>
-            <div class="a">송금 금액의 <b>4.4%</b> (부가세 포함)입니다. 결제 전에 정확한 금액을 화면에서 미리 보여드려요. 숨은 비용은 없습니다.</div></details>
+            <div class="a">송금 금액의 <b>4%</b>입니다. 결제 전에 정확한 금액을 화면에서 미리 보여드려요. 숨은 비용은 없습니다.</div></details>
           <details><summary><span class="q">Q.</span><span class="t">월세 세액공제는 어떻게 받나요?</span><iconify-icon class="arw" icon="mingcute:down-line"></iconify-icon></summary>
             <div class="a">카드로 낸 월세도 <b>현금영수증과 같이</b> 세액공제 대상입니다. 연말정산 때 쓸 증빙은 화면에서 바로 내려받을 수 있어요. 소득 구간에 따라 최대 17%까지 환급됩니다.</div></details>
         </div>

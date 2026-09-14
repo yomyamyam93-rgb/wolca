@@ -921,28 +921,27 @@
     .hmodel{aspect-ratio:1420/1147; max-height:calc(var(--mw) / 1.238 * 1.15);}
     .hmodel img{left:11.34%; width:100%;}
   }
-  /* 말풍선 — 사람 머리 위 한가운데 · 꼬리는 아래 가운데. 사진 칸 위로 삐져나오므로
-     칸의 overflow 대신 clip-path 로 아래 · 좌우만 자르고 위쪽은 열어 둔다 */
+  /* 말풍선 — 머리 오른쪽 위에 대각선으로 · 꼬리는 왼쪽 아래(머리 쪽) · 파란 채움으로 눈에 띄게.
+     사진 칸 위로 삐져나오므로 칸의 overflow 대신 clip-path 로 아래만 자르고 위쪽은 열어 둔다 */
   .hmodel{overflow:visible; clip-path:inset(-90px 0 0 0);}
-  /* PC — 사진이 칸 오른쪽으로 11% 넘치므로 좌우는 자르지 않는다 */
-  @media(min-width:768px){ .hmodel{clip-path:inset(-90px -90px 0 -90px);} }
-  .hbub{position:absolute; z-index:3; left:50%; bottom:calc(100% + 10px); transform:translateX(-50%);
-    padding:8px 14px; border-radius:999px;
-    background:rgba(255,255,255,.82); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px);
-    border:1px solid rgba(255,255,255,.95);
-    color:var(--sub); font-size:12.5px; font-weight:600; letter-spacing:-.3px; white-space:nowrap;
-    box-shadow:0 8px 22px -14px rgba(15,23,42,.35);}
-  .hbub b{color:var(--primary); font-weight:800; margin-left:2px;}
-  /* 꼬리 — 글씨 뒤로 보내고(z-index:-1) 위로 덜 파고들게 작게 · 낮게 */
-  .hbub:after{content:''; position:absolute; z-index:-1; left:50%; bottom:-5px; width:8px; height:8px; margin-left:-4px;
-    border-radius:2px; background:rgba(255,255,255,.95); transform:rotate(45deg);}
+  .hbub{position:absolute; z-index:3; left:55%; bottom:calc(100% - 26px); transform:rotate(-6deg);
+    transform-origin:left bottom;
+    padding:12px 18px 13px; border-radius:20px; text-align:center; line-height:1.2;
+    background:var(--primary); color:rgba(255,255,255,.9);
+    font-size:12.5px; font-weight:700; letter-spacing:-.3px; white-space:nowrap;
+    box-shadow:0 10px 24px -12px rgba(21,111,249,.7);}
+  .hbub small{display:block; font-size:inherit; opacity:.9;}
+  .hbub b{display:block; margin-top:3px; color:#fff; font-weight:900; font-size:18px; letter-spacing:-.5px;}
+  .hbub:after{content:''; position:absolute; z-index:-1; left:10px; bottom:-5px; width:10px; height:10px;
+    border-radius:2px; background:var(--primary); transform:rotate(45deg);}
   /* 머리카락과 안 겹치게 — 말풍선 바로 아래, 얼굴 옆 빈 자리 */
   .hname{position:absolute; z-index:3; right:3%; top:24%; width:108px;
     filter:drop-shadow(0 0 5px rgba(255,255,255,.95)) drop-shadow(0 0 10px rgba(255,255,255,.7));}
   .hname img{display:block; width:100%; height:auto;}
   @media(min-width:768px){
-    .hbub{bottom:calc(100% + 12px); padding:11px 20px; font-size:15.5px;}
-    .hbub:after{bottom:-6px; width:11px; height:11px; margin-left:-5.5px;}
+    .hbub{left:56%; bottom:calc(100% - 22px); padding:14px 24px 16px; font-size:15px; border-radius:24px;}
+    .hbub b{font-size:24px; margin-top:4px;}
+    .hbub:after{left:14px; bottom:-6px; width:12px; height:12px;}
     .hname{right:3%; top:25%; width:160px;}
   }
   /* 글 묶음과 사진 사이 최소 숨통 */
@@ -990,6 +989,8 @@
     .hstats b{font-size:clamp(19px, calc(1.24svh + 11px), 21px);}
   }
 
+  /* 핵심 포인트 — 할부 개월 · 환급률만 크게 */
+  .whygrid .uc h3 em{font-style:normal; color:var(--primary); font-weight:900;}
   /* ===== 이유 카드 — 칸 안에 또 칸 (토스식) =====
      바깥은 흰 카드 · 위쪽 속칸에 파스텔 그라데이션 + 번호 · 화살표 · 제목
      설명은 속칸 아래 흰 자리에. 04(파란 카드)는 그대로 둔다 */
@@ -1111,6 +1112,14 @@
   /* 신용카드가 속칸 자리를 그대로 차지 */
   #itemsec .itin .itr-card{width:100%; max-width:none; min-width:0; margin:0;
     aspect-ratio:1/1.492; align-self:stretch;}
+  /* 선택한 항목의 아이콘을 크게 — 우리 그라데이션 타일 */
+  #itemsec .itr-ic{width:100%; height:100%; border-radius:22px; display:flex; align-items:center; justify-content:center;
+    background:
+      radial-gradient(115% 95% at 10% 6%, color-mix(in srgb, var(--primary) 16%, transparent), transparent 64%),
+      radial-gradient(95% 80% at 95% 92%, color-mix(in srgb, var(--primary) 9%, transparent), transparent 66%), #FAFCFF;
+    border:1px solid color-mix(in srgb, var(--primary) 10%, transparent);}
+  #itemsec .itr-ic iconify-icon{font-size:64px; color:var(--primary); filter:drop-shadow(0 8px 14px rgba(21,111,249,.25));}
+  @media(min-width:1000px){ #itemsec .itr-ic iconify-icon{font-size:76px;} }
   #itemsec .itl h3{margin:0 0 10px; font-size:16px; font-weight:800; letter-spacing:-.3px;
     line-height:1.35; color:var(--ink);}
   @media(min-width:1000px){ #itemsec .itl h3{font-size:20px; margin-bottom:14px;} }
@@ -1235,22 +1244,22 @@
   /* 세로 타임라인 */
   .tline{list-style:none; margin:0; padding:0; width:100%; max-width:560px;}
   @media(min-width:900px){ .tline{max-width:none;} }
-  .tstep{position:relative; display:grid; grid-template-columns:34px 1fr; gap:16px; padding-bottom:30px;}
+  .tstep{position:relative; display:grid; grid-template-columns:38px 1fr; gap:16px; padding-bottom:30px;}
   @media(min-width:900px){ .tstep{padding-bottom:44px;} }
   .tstep:last-child{padding-bottom:0;}
-  .tstep:not(:last-child):before{content:''; position:absolute; left:16px; top:38px; bottom:2px;
+  .tstep:not(:last-child):before{content:''; position:absolute; left:18px; top:42px; bottom:2px;
     width:2px; background:var(--primary-100);}
-  .tno{width:34px; height:34px; border-radius:999px; z-index:1;
+  .tno{width:38px; height:38px; border-radius:999px; z-index:1;
     display:flex; align-items:center; justify-content:center;
     background:#fff; border:1.5px solid var(--primary-100); color:var(--primary-600);
     font-size:14px; font-weight:800; letter-spacing:0;
     box-shadow:0 1px 4px rgba(15,23,42,.06);}
   .tstep.on .tno{background:var(--primary); border-color:var(--primary); color:#fff;
     box-shadow:0 4px 12px rgba(21,111,249,.32);}
-  #howto .tbd h3{margin:5px 0 0; font-size:18px; font-weight:800; letter-spacing:-.3px; line-height:1.4;}
-  @media(min-width:900px){ #howto .tbd h3{font-size:20px;} }
-  .tbd p{margin-top:7px; font-size:15px; line-height:1.75; color:var(--sub); word-break:keep-all;}
-  @media(min-width:900px){ .tbd p{font-size:15.5px;} }
+  #howto .tbd h3{margin:5px 0 0; font-size:19px; font-weight:800; letter-spacing:-.3px; line-height:1.4;}
+  @media(min-width:900px){ #howto .tbd h3{font-size:22px;} }
+  .tbd p{margin-top:8px; font-size:15.5px; line-height:1.75; color:var(--sub); word-break:keep-all;}
+  @media(min-width:900px){ .tbd p{font-size:17px;} }
 
   /* 제목과 단계 사이 — 사람 · 휴대폰 사진 한 줄 */
   .hpic{display:block; width:100%; height:180px; object-fit:cover;
@@ -1511,7 +1520,7 @@
     <div class="wrap hero2">
       <span class="hbadge">365일 24시간 연중무휴</span>
       <h1 class="h-hero">현금으로만 내던 돈<br>이제 <span class="hl">카드로 결제</span>하세요</h1>
-      <p class="hlead">어떤 결제든 신용카드 하나로 안심 송금</p>
+      <p class="hlead">어떤 결제든 신용카드 하나로 안심 송금 · <b>수수료 4%</b></p>
       <div class="hbtns">
         <a class="btn btn-primary" href="app.html" target="_blank" rel="noopener"><img class="btn-logo" src="img/logo3-white.png" alt="">바로 송금하기</a>
         <a class="btn btn-line" href="guide.html">어떻게 이용하나요?</a>
@@ -1520,7 +1529,7 @@
 
     <div class="hmodel">
       <img src="img/people3.png?v=1" alt="랜선페이를 쓰는 모델">
-      <span class="hbub">이용수수료 <b>단 4.4%</b></span>
+      <span class="hbub"><small>이용수수료</small><b>단 4%</b></span>
       <span class="hname"><img src="img/싸인.png?v=1" alt="랜선페이 대표 모델 이서아"></span>
     </div>
 
@@ -1570,7 +1579,7 @@
 
       <div class="itpanel">
         <div class="itin">
-          <div class="itr-card" aria-hidden="true"></div>
+          <div class="itr-ic" aria-hidden="true"><iconify-icon id="itp-ico" icon="mingcute:home-4-fill"></iconify-icon></div>
         </div>
         <div class="itl">
           <h3 id="itp-h"></h3>
@@ -1629,7 +1638,7 @@
   <div class="wrap bandhead">
     <div class="bandclip">
       <div class="bandart">
-        <h2 class="h-band"><span class="soft">불편했던 현금거래</span><br>이제 <span class="hl">랜선페이</span>에게 맡겨보세요</h2>
+        <h2 class="h-band"><span class="soft">현금이 없어도</span><br><span class="hl">랜선페이</span>에서 해결하세요</h2>
       </div>
     </div>
     <div class="banddots" aria-hidden="true"><span class="vdots"></span></div>
@@ -1644,7 +1653,7 @@
           <div class="ucin">
             <span class="no">01</span>
             <span class="uarw" aria-hidden="true"><svg viewBox="0 0 22 22"><path d="M5 17 17 5M8 5h9v9" stroke="currentColor" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-            <h3>큰 금액도 할부로<br>나눠낼 수 있어요</h3>
+            <h3>큰 금액도 <em>최대 24개월</em><br>할부로 나눠낼 수 있어요</h3>
           </div>
           <p>최대 24개월 할부<br>무이자는 최대 7개월</p>
         </div>
@@ -1652,7 +1661,7 @@
           <div class="ucin">
             <span class="no">02</span>
             <span class="uarw" aria-hidden="true"><svg viewBox="0 0 22 22"><path d="M5 17 17 5M8 5h9v9" stroke="currentColor" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-            <h3>월세 납부액의<br>최대 17% 돌려받아요</h3>
+            <h3>월세 납부액의<br><em>최대 17%</em> 돌려받아요</h3>
           </div>
           <p>소득공제는 자동 환급<br>세액공제까지 챙겨드려요</p>
         </div>
@@ -1660,7 +1669,7 @@
           <div class="ucin">
             <span class="no">03</span>
             <span class="uarw" aria-hidden="true"><svg viewBox="0 0 22 22"><path d="M5 17 17 5M8 5h9v9" stroke="currentColor" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-            <h3>임대인 동의 없이<br>계좌로 입금돼요</h3>
+            <h3><em>임대인 동의 없이</em><br>계좌로 입금돼요</h3>
           </div>
           <p>가입 요청 없이<br>보내는 분 이름 그대로 입금</p>
         </div>
