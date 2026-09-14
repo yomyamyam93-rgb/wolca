@@ -1311,6 +1311,8 @@
   @media(max-width:899px){
     .hcol{display:none !important;}
     .tbd p br{display:none;}   /* 상자 안 폭이 좁아 억지 줄바꿈 대신 자연 줄바꿈 */
+    /* 단계 설명은 어절 단위 + 줄 길이 반반 — '입력하세 / 요' 같은 한 글자 · 한 단어 떨어짐 방지 */
+    .tbd p{word-break:keep-all !important; overflow-wrap:normal; text-wrap:balance !important;}
   }
 
   /* 단계 넘기기: 좌우 화살표 · 단계 클릭 */
