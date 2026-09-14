@@ -903,13 +903,16 @@
     /* 한 화면 안에는 들어오되, 길쭉한 기기에서 억지로 늘어나진 않는다 */
     min-height:min(calc(100svh - var(--appbar)), 800px);
     max-height:calc(100svh - var(--appbar));}
+  /* 카톡 · 텔레그램 안 브라우저처럼 위아래 막대가 화면을 잡아먹는 곳 — 한 화면에 억지로 맞추다 사진이 짜부되지 않게,
+     휴대폰에서는 자리가 모자라면 히어로가 화면보다 길어지도록 둔다 (아래 카드가 스크롤로 내려갈 뿐) */
+  @media(max-width:767px){ .hero{max-height:none;} }
   @media(min-width:768px){ .hero{min-height:min(calc(100svh - var(--appbar)), 1060px);} }
   .hero > .hero2, .hero > .wrap, .hero > .sdown{flex:0 0 auto;}
   /* 사진 비율은 원본 그대로: 좌우가 절대 안 잘린다.
      자리가 좁으면 아래(숫자 카드가 덮는 쪽)만 잘리고 남는 높이는 위아래 여백으로 간다 */
   .hmodel{--mw:min(588px, calc(100vw - 32px));
     flex:0 1 auto; align-self:center; overflow:hidden;
-    width:var(--mw); aspect-ratio:1603/1147; height:auto; min-height:118px;
+    width:var(--mw); aspect-ratio:1603/1147; height:auto; min-height:200px;
     /* 남는 높이는 사진이 아니라 사진 '위'가 가져간다: 사람은 늘 흰 카드에 붙어 있게 */
     margin-top:auto;
     max-height:calc(var(--mw) / 1.398 * 1.15);}
