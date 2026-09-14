@@ -95,7 +95,7 @@
   @media(min-width:768px){ .sd ol li{font-size:15.5px;} }
   .sd ol li:last-child{margin-bottom:0;}
   /* 단계 설명은 어절 단위로만 줄바꿈 (공통 규칙의 글자 단위 채우기보다 우선) — '확인하세 / 요' 같은 한 글자 떨어짐 방지 */
-  body .sd ol li{word-break:keep-all !important; overflow-wrap:normal;}
+  body .sd ol li{word-break:keep-all !important; overflow-wrap:normal; text-wrap:balance !important;}   /* 두 줄이면 반반으로 — 마지막 줄에 한 단어만 남지 않게 */
   @media(min-width:768px){ .sd ol{display:table; width:auto; max-width:100%; margin-left:auto; margin-right:auto;} .sd ol li{white-space:nowrap;} }
 
   .sd ol li:before{content:counter(s); position:absolute; left:0; top:3px; width:20px; height:20px;
