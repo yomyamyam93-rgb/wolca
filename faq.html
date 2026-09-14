@@ -31,10 +31,10 @@
   .acc .a{padding:2px 26px 22px 34px; font-size:16px; line-height:1.8; color:var(--sub);}
   .acc .a b{color:var(--ink);}
   /* 답 구조 — 한 줄 결론 + 항목 목록 + 표. 목록 · 표는 어절 단위로 줄바꿈 */
-  .acc .a .lead{margin:0 0 8px; font-weight:700; color:var(--ink); word-break:keep-all; overflow-wrap:anywhere; text-wrap:pretty;}
+  .acc .a .lead{margin:0 0 8px; font-weight:700; color:var(--ink); word-break:normal; overflow-wrap:anywhere; text-wrap:pretty;}
   .acc .a .pts, .acc .a .doclist{list-style:none; margin:0 0 8px; padding:0;}
   .acc .a .pts li, .acc .a .doclist li{position:relative; padding-left:14px; margin-bottom:7px; line-height:1.7;
-    word-break:keep-all; overflow-wrap:anywhere; text-wrap:pretty;}
+    word-break:normal; overflow-wrap:anywhere; text-wrap:pretty; letter-spacing:-.2px;}
   .acc .a .pts li:before, .acc .a .doclist li:before{content:'·'; position:absolute; left:2px; color:var(--icon-off);}
   .acc .a .pts li b, .acc .a .doclist li b{color:var(--ink);}
   .acc .a .kv{display:grid; grid-template-columns:max-content 1fr; column-gap:16px; row-gap:6px; margin:4px 0 10px; font-size:15px;}
