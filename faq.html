@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>랜선페이 | 자주 묻는 질문</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
-<link rel="stylesheet" href="style.css?v=33">
+<link rel="stylesheet" href="style.css?v=34">
 <link rel="icon" type="image/png" href="img/logo3.png">
 <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 <script src="app.js?v=15"></script>
@@ -31,10 +31,10 @@
   .acc .a{padding:2px 26px 22px 34px; font-size:16px; line-height:1.8; color:var(--sub);}
   .acc .a b{color:var(--ink);}
   /* 답 구조: 한 줄 결론 + 항목 목록 + 표. 목록 · 표는 어절 단위로 줄바꿈 */
-  .acc .a .lead{margin:0 0 8px; font-weight:700; color:var(--ink); word-break:normal; overflow-wrap:anywhere; text-wrap:pretty;}
+  .acc .a .lead{margin:0 0 8px; font-weight:700; color:var(--ink); word-break:normal; overflow-wrap:anywhere;}
   .acc .a .pts, .acc .a .doclist{list-style:none; margin:0 0 8px; padding:0;}
   .acc .a .pts li, .acc .a .doclist li{position:relative; padding-left:14px; margin-bottom:7px; line-height:1.7;
-    word-break:normal; overflow-wrap:anywhere; text-wrap:pretty; letter-spacing:-.2px;}
+    word-break:normal; overflow-wrap:anywhere; letter-spacing:-.2px;}
   /* 목록 표시: 작은 파란 점 (첫 줄 가운데 높이) */
   .acc .a .pts li, .acc .a .doclist li{padding-left:16px;}
   .acc .a .pts li:before, .acc .a .doclist li:before{content:''; position:absolute; left:2px; top:.72em; width:6px; height:6px; border-radius:50%; background:var(--primary); opacity:.85;}
@@ -58,8 +58,7 @@
   /* 휴대폰: 양쪽 정렬 대신 어절 단위로 끊고 줄 끝 균형만 잡는다 */
   @media(max-width:767px){
     /* 어절만 지키면 줄 끝에 빈 자리가 크게 남는다: 글자 단위 줄바꿈을 허용한다 */
-    .acc .a{text-align:left; word-break:normal; overflow-wrap:anywhere;
-      text-wrap:pretty; letter-spacing:-.2px;}
+    .acc .a{text-align:left; word-break:normal; overflow-wrap:anywhere; letter-spacing:-.2px;}
   }
 
 </style>

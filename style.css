@@ -340,7 +340,7 @@ main{flex:1 0 auto;}
 @media(max-width:900px){
   /* 페이지마다 따로 준 keep-all(.tbd p · .pcard p 등)보다 우선하도록 !important */
   body p, body li, body dd, body td, body .a, body .dr, body .tx{
-    word-break:normal !important; overflow-wrap:anywhere; text-wrap:pretty; letter-spacing:-.2px;}
+    word-break:normal !important; overflow-wrap:anywhere; text-wrap:wrap !important; letter-spacing:-.2px;}   /* pretty/balance 는 사파리에서 줄을 일찍 끊어 들쑥날쑥해진다 */
   body p b, body li b, body strong, body h1, body h2, body h3, body h4,
   body .h-sec, body .h-hero, body b, body .lead, body dt, body summary, body label{word-break:keep-all !important;}
 }
