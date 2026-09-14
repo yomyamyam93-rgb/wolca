@@ -61,6 +61,9 @@
   .acc .a .doclist li{position:relative; padding-left:14px; margin-bottom:8px; line-height:1.7; word-break:keep-all;}
   .acc .a .doclist li:before{content:'·'; position:absolute; left:2px; color:var(--icon-off);}
   .acc .a .doclist li b{color:var(--ink);}
+  .acc .a p{margin:0 0 10px;}
+  .acc .a p:last-child{margin-bottom:0;}
+  .acc .a .doclist{margin:6px 0 12px;}
   /* 답 아래 바로가기 */
   .acc .a .more{display:inline-flex; align-items:center; gap:2px; margin-top:12px; padding:0; border:0; background:none; width:auto;
     font-size:14px; font-weight:700; color:var(--primary);}
@@ -78,20 +81,20 @@
       <div class="gh">서비스</div>
       <div class="acc">
         <details data-cat="서비스"><summary><span class="q">Q.</span><span class="t">이게 무슨 서비스예요? 대출인가요?</span><iconify-icon class="arw" icon="mingcute:down-line"></iconify-icon></summary>
-            <div class="a">대출이 아닙니다. 현금으로 내야 하던 돈을 <b>카드로 결제</b>하면 저희가 받는 분 계좌로 현금을 대신 보내드립니다. 카드값은 다음 달 카드 결제일에 내면 됩니다.</div></details>
+            <div class="a"><p>대출이 아니라 <b>카드 결제 대행 서비스</b>입니다. 월세처럼 현금으로만 내야 하던 돈을 신용카드로 결제하면, 랜선페이가 받는 분 계좌로 현금을 대신 보내드립니다.</p><p>받는 분은 평소처럼 계좌로 입금받고, 결제하신 분은 다음 달 카드 결제일에 카드값만 내면 됩니다. 이자가 붙거나 신용 조회가 되는 대출과는 다르고, 전자금융거래법에 따라 등록된 PG 서비스라 안심하고 쓰실 수 있습니다.</p></div></details>
         <details data-cat="서비스"><summary><span class="q">Q.</span><span class="t">어떤 항목을 결제할 수 있나요?</span><iconify-icon class="arw" icon="mingcute:down-line"></iconify-icon></summary>
-            <div class="a">월세 · 관리비 · 인건비 · 보증금 · 매입대금 · 학원비 · 학교공과금 · 인테리어 · 이사 · 청소비 · 중개수수료, 그 밖의 상거래 결제도 됩니다.</div></details>
+            <div class="a"><p>현금으로 내던 고정비는 대부분 됩니다.</p><ul class="doclist"><li><b>주거</b> — 월세 · 관리비 · 보증금 · 중개수수료</li><li><b>사업</b> — 인건비 · 매입대금 · 인테리어</li><li><b>생활</b> — 학원비 · 학교공과금 · 이사 · 청소비</li></ul><p>그 밖에도 계약서나 청구서처럼 거래 내용과 받는 계좌를 확인할 수 있는 서류가 있으면 대부분의 상거래 결제에 쓸 수 있습니다. 항목마다 필요한 서류가 다르니 「서류는 무엇이 필요한가요?」를 함께 봐 주세요.</p></div></details>
         <details data-cat="서비스"><summary><span class="q">Q.</span><span class="t">임대인이나 거래처 동의가 필요한가요?</span><iconify-icon class="arw" icon="mingcute:down-line"></iconify-icon></summary>
-            <div class="a">필요 없습니다. 받는 분에게는 <b>평범한 계좌 입금</b>으로 보이고, 보내는 분 이름 그대로 들어갑니다.</div></details>
+            <div class="a"><p>필요 없습니다. 받는 분에게는 <b>일반 계좌 이체와 똑같이</b> 입금되고, 입금자명도 결제하신 분 이름 그대로 표시됩니다.</p><p>받는 분이 랜선페이에 가입하거나 따로 해야 할 일은 없고, 카드로 결제했다는 사실이 상대방에게 안내되지도 않습니다.</p></div></details>
         <details data-cat="서비스"><summary><span class="q">Q.</span><span class="t">이용할 수 없는 거래가 있나요?</span><iconify-icon class="arw" icon="mingcute:down-line"></iconify-icon></summary>
-            <div class="a">대출 상환 · 이자 · 카드 대금 납부, 실제 거래 없이 현금을 만드는 결제, 세금 회피 목적 거래는 법(여신전문금융업법)으로 막혀 있습니다.</div></details>
+            <div class="a"><p>여신전문금융업법에 따라 다음 거래에는 신용카드를 쓸 수 없습니다.</p><ul class="doclist"><li>대출 원금 · 이자 상환, 카드 대금 납부처럼 <b>빚을 갚는 용도</b></li><li>실제 거래 없이 카드로 <b>현금을 만드는</b> 결제</li><li>매출 누락이나 <b>세금 회피</b>가 목적인 거래</li><li>캐피탈 · 파이낸셜 할부금, 자동차 리스료 같은 <b>부채성 거래</b></li></ul><p>그 외의 정상적인 거래는 이용할 수 있습니다. 가능한지 애매하면 등록 전에 고객센터로 물어봐 주세요.</p></div></details>
       </div>
       <div class="gh">가입 · 서류</div>
       <div class="acc">
         <details data-cat="가입"><summary><span class="q">Q.</span><span class="t">세입자 본인만 이용할 수 있나요?</span><iconify-icon class="arw" icon="mingcute:down-line"></iconify-icon></summary>
-            <div class="a">본인 명의 계약이 원칙이지만 가족이 대신 낼 수도 있습니다. 결제하는 분과의 <b>관계를 확인할 수 있는 서류</b>를 함께 올려주세요.</div></details>
+            <div class="a"><p>계약서에 이름이 있는 <b>본인이 결제하는 게 원칙</b>입니다. 다만 부모님이 자녀 월세를 내주는 것처럼 가족이 대신 결제하는 경우도 가능합니다.</p><p>이때는 계약서와 함께 결제하는 분과 계약자의 관계를 확인할 수 있는 서류(가족관계증명서 등)를 올려주세요. 아무 관계가 없는 제3자의 계약은 진행이 어렵습니다.</p></div></details>
         <details data-cat="가입"><summary><span class="q">Q.</span><span class="t">서류는 무엇이 필요한가요?</span><iconify-icon class="arw" icon="mingcute:down-line"></iconify-icon></summary>
-            <div class="a">이용하는 결제 종류에 따라 다릅니다.<ul class="doclist">
+            <div class="a"><p>이용하는 결제 종류에 따라 다릅니다. 공통으로 서류에서 <b>금액 · 받는 계좌 · 거래 상대방</b>이 확인돼야 합니다.</p><ul class="doclist">
 <li><b>월세 · 보증금</b> — 임대차 계약서 (중개사 확인이나 확정일자가 없으면 입금내역 2~3회분 추가)</li>
 <li><b>관리비</b> — 관리비 고지서 · 알림톡 캡처 · 영수증 · 세금계산서 중 하나</li>
 <li><b>인건비</b> — 근로계약서 + 4대보험 가입자 명부 + 급여 이체내역 (알바 · 프리랜서는 지급명세서)</li>
@@ -100,50 +103,50 @@
 <li><b>매입대금</b> — 세금계산서 · 거래명세서 · 영수증 · 계약서 중 하나 + 거래처 사업자등록증</li>
 <li><b>중개수수료</b> — 중개보수가 적힌 계약서 또는 영수증</li>
 <li><b>기타</b> — 금액과 받는 계좌가 확인되는 계약서 · 청구서 · 영수증</li>
-</ul><a class="more" href="공지.html#n8">유형별 필요 서류 자세히 보기 <iconify-icon icon="mingcute:right-line"></iconify-icon></a></div></details>
+</ul><p>휴대폰으로 찍어 올리면 되고, 검토 중 확인이 더 필요하면 추가 서류를 요청드릴 수 있습니다.</p><a class="more" href="공지.html#n8">유형별 필요 서류 자세히 보기 <iconify-icon icon="mingcute:right-line"></iconify-icon></a></div></details>
         <details data-cat="가입"><summary><span class="q">Q.</span><span class="t">서류 검토는 얼마나 걸리나요?</span><iconify-icon class="arw" icon="mingcute:down-line"></iconify-icon></summary>
-            <div class="a">연중무휴로 검토하고, 끝나는 대로 <b>카카오톡</b>으로 결과를 알려드립니다.</div></details>
+            <div class="a"><p>등록하면 담당자가 <b>연중무휴</b>로 서류를 확인하고, 끝나는 대로 카카오톡으로 승인 여부를 알려드립니다. 승인된 뒤에 결제로 넘어가니 검토 중에는 돈이 나가지 않습니다.</p><p>서류에서 금액이나 계좌가 잘 안 보이면 보완 요청이 갈 수 있으니, 글씨가 선명하게 찍힌 사진으로 올려주세요.</p></div></details>
         <details data-cat="가입"><summary><span class="q">Q.</span><span class="t">계약서를 잃어버렸어요</span><iconify-icon class="arw" icon="mingcute:down-line"></iconify-icon></summary>
-            <div class="a">재발급이 어렵다면 <b>건축물대장등본</b>과 같은 금액으로 입금한 <b>입금내역 2~3회분</b>을 함께 올려주세요.</div></details>
+            <div class="a"><p>계약서를 다시 구하기 어렵다면 두 가지를 함께 올려주세요.</p><ul class="doclist"><li><b>건축물대장등본</b> — 정부24에서 무료로 발급됩니다 (PC에서 가능)</li><li>같은 금액으로 임대인에게 입금했던 <b>입금내역 2~3회분</b> — 은행 앱 이체내역 화면을 캡처하면 됩니다</li></ul><p>이 두 가지로 실제 임대 거래인지 확인한 뒤 진행합니다.</p></div></details>
         <details data-cat="가입"><summary><span class="q">Q.</span><span class="t">계약서의 개인정보가 걱정돼요</span><iconify-icon class="arw" icon="mingcute:down-line"></iconify-icon></summary>
-            <div class="a">임대인 · 임차인의 <b>주소 · 주민번호 · 휴대폰번호는 가리고</b> 올려주세요. 사업자번호와 중개사 정보는 가리지 않아도 됩니다.</div></details>
+            <div class="a"><p>계약서를 올릴 때 임대인 · 임차인의 <b>주소 · 주민등록번호 · 휴대폰번호는 가리고</b> 올려주세요. 사업자번호와 공인중개사 정보는 영업 정보라 가리지 않아도 됩니다.</p><p>다만 소재지 · 보증금 · 월세 · 납입일 · 입금계좌처럼 검토에 필요한 항목은 보여야 합니다. 올린 서류는 검토 목적으로만 사용합니다.</p></div></details>
       </div>
       <div class="gh">결제 · 송금</div>
       <div class="acc">
         <details data-cat="결제"><summary><span class="q">Q.</span><span class="t">어떤 카드로 되나요?</span><iconify-icon class="arw" icon="mingcute:down-line"></iconify-icon></summary>
-            <div class="a">국내 주요 카드사 10곳의 <b>신용카드</b>로 됩니다. 체크카드는 안 되고, 법인카드는 사업 목적 결제만 가능합니다.</div></details>
+            <div class="a"><p>국내 주요 카드사 10곳의 <b>신용카드</b>로 결제할 수 있습니다. 체크카드 · 선불카드 · 기프트카드는 안 되고, 법인카드는 매입대금 · 인건비 같은 사업 목적 결제만 가능합니다.</p><p>카드 한도 안에서 결제되니 큰 금액을 낼 때는 한도를 미리 확인해 주세요.</p></div></details>
         <details data-cat="결제"><summary><span class="q">Q.</span><span class="t">다른 사람 카드로도 결제할 수 있나요?</span><iconify-icon class="arw" icon="mingcute:down-line"></iconify-icon></summary>
-            <div class="a">가능합니다. 다만 결제할 때 카드사 본인인증(앱카드 · ISP 등)은 <b>카드 명의자가 직접</b> 해야 합니다.</div></details>
+            <div class="a"><p>가능합니다. 다만 카드 번호만 입력하는 방식은 안 되고, 결제할 때 카드사 본인인증(앱카드 · ISP 등)을 <b>카드 명의자가 직접</b> 해야 합니다.</p><p>예를 들어 부모님 카드로 내려면 결제 단계에서 부모님 휴대폰으로 인증을 진행하면 됩니다.</p></div></details>
         <details data-cat="결제"><summary><span class="q">Q.</span><span class="t">할부로 나눠 낼 수 있나요?</span><iconify-icon class="arw" icon="mingcute:down-line"></iconify-icon></summary>
-            <div class="a"><b>최대 24개월</b> 할부가 됩니다. 카드사 행사 기간에는 무이자 할부도 적용되고, 무이자 개월 수는 카드사마다 매달 달라집니다.<a class="more" href="공지.html#n7">이달 무이자 할부 보기 <iconify-icon icon="mingcute:right-line"></iconify-icon></a></div></details>
+            <div class="a"><p><b>최대 24개월</b>까지 할부가 됩니다. 결제 단계에서 개월 수를 고르면 되고, 카드사 무이자 행사 기간에는 무이자 할부도 그대로 적용됩니다.</p><p>무이자 개월 수와 대상 카드는 카드사마다 매달 달라지니 아래 안내에서 이달 조건을 확인해 주세요. 할부 이자는 카드사가 정하는 것이고, 랜선페이 수수료는 할부 개월과 관계없이 같습니다.</p><a class="more" href="공지.html#n7">이달 무이자 할부 보기 <iconify-icon icon="mingcute:right-line"></iconify-icon></a></div></details>
         <details data-cat="결제"><summary><span class="q">Q.</span><span class="t">나눠서 · 날짜 정해서 보낼 수 있나요?</span><iconify-icon class="arw" icon="mingcute:down-line"></iconify-icon></summary>
-            <div class="a">여러 장의 카드로 나눠 결제해도 받는 분에게는 <b>한 번에 입금</b>되고, 예약 송금을 걸어 두면 정한 날짜에 자동으로 나갑니다.<a class="more" href="공지.html#n9">예약 · 분할 송금 자세히 보기 <iconify-icon icon="mingcute:right-line"></iconify-icon></a></div></details>
+            <div class="a"><p>둘 다 됩니다.</p><ul class="doclist"><li><b>분할 결제</b> — 금액이 크면 카드 두세 장으로 나눠 결제할 수 있고, 같은 날 결제한 건은 받는 분에게 한 번에 합쳐서 입금됩니다.</li><li><b>예약 송금</b> — 결제는 지금 하고 송금 날짜를 지정해 두면 그날 자동으로 입금됩니다. 월세 납부일에 맞춰 두면 편하고, 송금일 전날까지 취소할 수 있습니다.</li></ul><a class="more" href="공지.html#n9">예약 · 분할 송금 자세히 보기 <iconify-icon icon="mingcute:right-line"></iconify-icon></a></div></details>
         <details data-cat="결제"><summary><span class="q">Q.</span><span class="t">입금까지 얼마나 걸리나요?</span><iconify-icon class="arw" icon="mingcute:down-line"></iconify-icon></summary>
-            <div class="a">서류 승인 후 결제하면 <b>평균 5~10분</b> 안에 입금됩니다.</div></details>
+            <div class="a"><p>서류가 승인된 뒤 결제하면 <b>평균 5~10분</b> 안에 받는 분 계좌로 입금됩니다.</p><p>처음 이용할 때는 서류 검토 시간이 앞에 더해지고, 한 번 승인된 계약은 다음부터 서류 없이 바로 결제할 수 있어 더 빠릅니다. 예약 송금은 지정한 날짜에 입금됩니다.</p></div></details>
         <details data-cat="결제"><summary><span class="q">Q.</span><span class="t">송금이 됐는지 어떻게 확인하나요?</span><iconify-icon class="arw" icon="mingcute:down-line"></iconify-icon></summary>
-            <div class="a">송금이 끝나면 알림이 가고, 앱 결제 내역에서 <b>입금확인서</b>도 바로 받을 수 있습니다.</div></details>
+            <div class="a"><p>송금이 끝나면 카카오톡 알림이 가고, 앱 결제 내역에서 완료 상태를 볼 수 있습니다.</p><p>받는 분에게 보여줄 자료가 필요하면 앱 증빙 화면에서 <b>입금확인서</b>(입금일 · 금액 · 받는 분 정보)를 내려받을 수 있고, 받는 분 통장에도 일반 이체처럼 내역이 남습니다.</p></div></details>
         <details data-cat="결제"><summary><span class="q">Q.</span><span class="t">주말 · 공휴일에도 되나요?</span><iconify-icon class="arw" icon="mingcute:down-line"></iconify-icon></summary>
-            <div class="a">됩니다. 서류 검토와 송금 모두 <b>연중무휴</b>입니다.</div></details>
+            <div class="a"><p>됩니다. 서류 검토와 송금 모두 <b>연중무휴</b>로 처리해서 주말이나 공휴일에도 평일과 똑같이 입금됩니다. 급한 월세가 주말에 걸려도 걱정 없습니다.</p></div></details>
       </div>
       <div class="gh">수수료 · 세금</div>
       <div class="acc">
         <details data-cat="비용"><summary><span class="q">Q.</span><span class="t">수수료는 얼마인가요?</span><iconify-icon class="arw" icon="mingcute:down-line"></iconify-icon></summary>
-            <div class="a">송금 금액의 <b>4%</b>(부가세 별도, 부가세 포함 4.4%)입니다. 결제 전에 정확한 금액을 화면에서 미리 보여드리고, 그 외에 붙는 비용은 없습니다.</div></details>
+            <div class="a"><p>송금 금액의 <b>4%</b>(부가세 별도)이며, 부가세를 포함하면 4.4%입니다.</p><p>예를 들어 70만원을 보내면 수수료 30,800원이 더해져 카드로 730,800원이 결제되고, 받는 분에게는 70만원이 그대로 입금됩니다. 결제 전에 화면에서 정확한 금액을 보여드리고, 가입비 · 월 이용료 같은 다른 비용은 없습니다.</p></div></details>
         <details data-cat="비용"><summary><span class="q">Q.</span><span class="t">할부하거나 카드를 나누면 수수료가 더 붙나요?</span><iconify-icon class="arw" icon="mingcute:down-line"></iconify-icon></summary>
-            <div class="a">아니요, 똑같습니다. 카드사가 부과하는 할부 이자만 카드사 정책을 따릅니다.</div></details>
+            <div class="a"><p>아니요. 수수료는 송금 금액의 4%로 정해져 있어서 <b>할부 개월 수나 카드 장수와 관계없이 같습니다.</b> 여러 장으로 나누면 각 카드에 결제 금액 비율만큼 나뉘어 청구될 뿐 총액은 그대로입니다.</p><p>다만 유이자 할부를 고르면 카드사 할부 이자는 별도로 붙습니다.</p></div></details>
         <details data-cat="비용"><summary><span class="q">Q.</span><span class="t">세액공제 · 소득공제 되나요?</span><iconify-icon class="arw" icon="mingcute:down-line"></iconify-icon></summary>
-            <div class="a">월세는 <b>월세 세액공제(최대 17%)</b> 또는 카드 소득공제 중 하나를 받을 수 있습니다. 연말정산에 쓸 증빙은 앱에서 바로 내려받습니다.<a class="more" href="공지.html#n5">연말정산 안내 보기 <iconify-icon icon="mingcute:right-line"></iconify-icon></a></div></details>
+            <div class="a"><p>됩니다. 월세는 두 가지 중 하나를 고를 수 있습니다.</p><ul class="doclist"><li><b>월세 세액공제</b> — 무주택 세대주 등 요건을 갖추면 낸 월세의 최대 17%를 세금에서 돌려받습니다.</li><li><b>신용카드 소득공제</b> — 카드사 이용내역에 결제액이 포함돼 자동으로 잡힙니다.</li></ul><p>둘을 동시에 받을 수는 없고 하나만 선택해야 합니다. 세액공제용 납입증명서는 앱 증빙 화면에서 바로 내려받을 수 있습니다.</p><a class="more" href="공지.html#n5">연말정산 안내 보기 <iconify-icon icon="mingcute:right-line"></iconify-icon></a></div></details>
         <details data-cat="비용"><summary><span class="q">Q.</span><span class="t">사업자인데 비용처리 되나요?</span><iconify-icon class="arw" icon="mingcute:down-line"></iconify-icon></summary>
-            <div class="a">임차료 · 매입대금 · 인건비는 <b>사업 경비로 처리</b>할 수 있고, 수수료에 대한 세금계산서는 앱 증빙 화면에서 발급받을 수 있습니다.<a class="more" href="공지.html#n6">부가세 · 비용처리 안내 보기 <iconify-icon icon="mingcute:right-line"></iconify-icon></a></div></details>
+            <div class="a"><p>됩니다. 랜선페이로 낸 임차료 · 매입대금 · 인건비는 <b>사업 경비로 처리</b>할 수 있고, 거래 상대방이 발행한 세금계산서나 계약서로 증빙하면 됩니다.</p><p>랜선페이 수수료에 대해서는 별도로 세금계산서를 발행해 드리니 앱 증빙 화면에서 신청하세요. 부가세 신고에 쓸 기간별 거래내역서도 같은 곳에서 받을 수 있습니다.</p><a class="more" href="공지.html#n6">부가세 · 비용처리 안내 보기 <iconify-icon icon="mingcute:right-line"></iconify-icon></a></div></details>
       </div>
       <div class="gh">취소 · 문의</div>
       <div class="acc">
         <details data-cat="취소"><summary><span class="q">Q.</span><span class="t">결제를 취소할 수 있나요?</span><iconify-icon class="arw" icon="mingcute:down-line"></iconify-icon></summary>
-            <div class="a"><b>송금 전</b>이면 수수료까지 전액 취소됩니다. 이미 송금이 끝났다면 받는 분에게 직접 돌려받으셔야 합니다. 예약 송금은 송금일 전날까지 취소할 수 있습니다.</div></details>
+            <div class="a"><p><b>송금 전</b>이면 수수료까지 전액 취소됩니다. 앱 결제 내역에서 취소하면 카드 승인도 함께 취소돼 카드값이 청구되지 않습니다.</p><p>이미 받는 분 계좌로 송금이 끝났다면 랜선페이에서 되돌릴 수 없어서 받는 분에게 직접 돌려받으셔야 합니다. 예약 송금은 송금일 전날까지 언제든 취소할 수 있습니다.</p></div></details>
         <details data-cat="취소"><summary><span class="q">Q.</span><span class="t">서류가 반려되면 어떻게 되나요?</span><iconify-icon class="arw" icon="mingcute:down-line"></iconify-icon></summary>
-            <div class="a">결제 전이라 <b>돈이 나가지 않습니다.</b> 무엇이 부족한지 카카오톡으로 알려드리니 서류만 다시 올려주시면 됩니다.</div></details>
+            <div class="a"><p>결제 전 단계라 <b>돈이 나가지 않고</b> 카드 승인도 되지 않습니다. 무엇이 부족한지 카카오톡으로 알려드리니 안내에 맞춰 서류만 다시 올려주시면 됩니다.</p><p>자주 반려되는 경우는 글씨가 흐려 금액이나 계좌가 안 보일 때, 계약서에 날인이 없을 때, 계좌 예금주와 계약 상대방이 다를 때입니다.</p></div></details>
         <details data-cat="취소"><summary><span class="q">Q.</span><span class="t">문의는 어디로 하나요?</span><iconify-icon class="arw" icon="mingcute:down-line"></iconify-icon></summary>
-            <div class="a">채팅 상담은 365일 24시간, 카카오채널 <b>@랜선페이</b>, 대표번호 <b>1577-6369</b>로 연락 주세요.</div></details>
+            <div class="a"><p>채팅 상담은 <b>365일 24시간</b> 열려 있고, 카카오채널 <b>@랜선페이</b>와 이메일 <b>lanpay567@naver.com</b>으로도 문의할 수 있습니다. 전화는 대표번호 <b>1577-6369</b>입니다.</p></div></details>
       </div>
   </div>
 </div>
