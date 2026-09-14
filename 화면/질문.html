@@ -71,8 +71,9 @@
   .acc .a .nb{white-space:nowrap;}
   /* 펼쳤을 때 답이 구분되게 — 옅은 하늘색 판 */
   .acc details[open] summary .t{color:var(--primary-700, #0B45A4);}
-  .acc .a{background:color-mix(in srgb, var(--primary) 6%, #fff); border-radius:12px; padding:16px 18px 18px; margin:0 0 16px;}
-  @media(max-width:767px){ .acc .a{padding:14px 14px 16px; margin:0 0 14px;} }
+  .acc{overflow:hidden;}
+  .acc .a{background:color-mix(in srgb, var(--primary) 6%, #fff); border-radius:0; margin:0 -16px 4px; padding:16px 20px 20px 50px;}
+  @media(max-width:767px){ .acc .a{padding:14px 16px 18px 20px;} }
   /* 답 아래 바로가기 */
   .acc .a .more{display:inline-flex; align-items:center; gap:2px; margin-top:12px; padding:0; border:0; background:none; width:auto;
     font-size:14px; font-weight:700; color:var(--primary);}
