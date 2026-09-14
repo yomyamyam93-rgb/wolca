@@ -74,21 +74,18 @@
     .main h1, .main h2, .main h3, .main .h-sec, .main .h-hero{word-break:keep-all;}
   }
 
-  /* 안내 단계 — 글 + 화면 캡처 */
+  /* 안내 단계 — 이용가이드처럼 글 위 · 화면 아래 */
   .nbody .gtip{color:#E5484D; font-weight:700;}
-  .nbody .gstep{display:flex; gap:22px; align-items:flex-start; margin:18px 0 6px; padding:18px; background:#F7F8FA; border-radius:14px;}
-  .nbody .gtx{flex:1; min-width:0;}
-  .nbody .gno{display:inline-flex; align-items:center; justify-content:center; width:26px; height:26px; border-radius:999px;
-    background:var(--primary); color:#fff; font-size:13px; font-weight:800; margin-bottom:8px;}
-  .nbody .gtx b{display:block; font-size:15.5px; color:var(--ink); line-height:1.5; margin-bottom:6px;}
-  .nbody .gtx p{margin:0; font-size:14px; line-height:1.7; color:var(--sub);}
-  .nbody .gshot{flex:0 0 220px;}
-  .nbody .gshot img{display:block; width:100%; height:auto; border-radius:18px; border:1px solid var(--line);
-    box-shadow:0 10px 26px -14px rgba(15,23,42,.3);}
-  @media(max-width:599px){
-    .nbody .gstep{flex-direction:column; gap:14px; padding:16px 14px;}
-    .nbody .gshot{flex:none; width:100%; max-width:260px; margin:0 auto;}
-  }
+  .nbody .gstep{display:flex; flex-direction:column; align-items:center; text-align:center; margin:30px 0 8px;}
+  .nbody .gtx{max-width:560px;}
+  .nbody .gno{display:inline-flex; align-items:center; justify-content:center; width:28px; height:28px; border-radius:999px;
+    background:var(--primary); color:#fff; font-size:13px; font-weight:800; margin-bottom:10px;}
+  .nbody .gtx b{display:block; font-size:16.5px; color:var(--ink); line-height:1.5; margin-bottom:6px;}
+  .nbody .gtx p{margin:0; font-size:14.5px; line-height:1.75; color:var(--sub);}
+  .nbody .gshot{width:322px; max-width:100%; margin-top:22px; padding:10px; background:#fff; border-radius:30px;
+    box-shadow:0 24px 48px rgba(15,23,42,.14), 0 4px 12px rgba(15,23,42,.06);}
+  .nbody .gshot img{display:block; width:100%; height:auto; border-radius:22px;}
+  .nbody .gstep + .gstep{margin-top:44px; padding-top:36px; border-top:1px solid var(--line);}
 </style>
 </head>
 <body>
