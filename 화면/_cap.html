@@ -14,6 +14,9 @@
 var q = new URLSearchParams(location.search);
 var seed = {유형:'월세', 은행:'신한', 계좌:'110-1234-5678', 예금주:'김집주', 휴대폰:'010-9876-5432',
   금액:700000, 수단:'신용카드', 카드:'신한카드 **** 1479', 할부:'5개월 (무이자)', 시점:'즉시'};
+var q0 = new URLSearchParams(location.search);
+if (q0.get('seat')) seed.시점 = q0.get('seat');
+if (q0.get('date')) seed.예약일 = q0.get('date');
 sessionStorage.setItem('lp_reg', JSON.stringify(seed));
 var f = document.getElementById('f');
 f.style.width = (q.get('w') || 390) + 'px';
@@ -34,6 +37,17 @@ f.onload = function () {
         var v = dec ? Number(to).toFixed(+dec) : to;
         s.textContent = e.getAttribute('data-comma') ? Number(v).toLocaleString('ko-KR') : v;
         e.parentNode.replaceChild(s, e);
+      });
+      /* 특정 요소로 스크롤 · 빨간 테두리 강조 (안내 캡처용) */
+      (q.get('click') || '').split('|').filter(Boolean).forEach(function (sel) { var ce = d.querySelector(sel); if (ce) ce.click(); });
+      var sc = q.get('scroll'); if (sc) { var se = d.querySelector(sc); if (se) se.scrollIntoView({block:'center'}); }
+      (q.get('hl') || '').split('|').filter(Boolean).forEach(function (sel) {
+        Array.prototype.slice.call(d.querySelectorAll(sel), 0, +(q.get('hln') || 99)).forEach(function (el) {
+          var r = el.getBoundingClientRect(), o = d.createElement('div');
+          o.style.cssText = 'position:fixed;left:' + (r.left - 6) + 'px;top:' + (r.top - 6) + 'px;width:' + (r.width + 12) + 'px;height:' + (r.height + 12) + 'px;'
+            + 'border:3px solid #E5484D;border-radius:14px;box-shadow:0 0 0 4px rgba(229,72,77,.18);z-index:99999;pointer-events:none;';
+          d.body.appendChild(o);
+        });
       });
       var k = q.get('k') || '';
       if (k === 'reg2') { var b = d.getElementById('예금주확인'); if (b) b.click(); }

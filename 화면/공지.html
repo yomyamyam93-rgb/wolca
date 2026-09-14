@@ -105,6 +105,21 @@
     font-size:12.8px; line-height:1.8; color:var(--sub);}
   .dacc .dbody .warn b{display:inline-block; color:var(--ink); font-weight:800; margin-bottom:3px;}
   .dacc .dbody a{color:var(--primary-700); font-weight:700; text-decoration:underline; word-break:break-all;}
+  /* 안내 단계 — 글 + 화면 캡처 */
+  .nbody .gtip{color:#E5484D; font-weight:700;}
+  .nbody .gstep{display:flex; gap:22px; align-items:flex-start; margin:18px 0 6px; padding:18px; background:#F7F8FA; border-radius:14px;}
+  .nbody .gtx{flex:1; min-width:0;}
+  .nbody .gno{display:inline-flex; align-items:center; justify-content:center; width:26px; height:26px; border-radius:999px;
+    background:var(--primary); color:#fff; font-size:13px; font-weight:800; margin-bottom:8px;}
+  .nbody .gtx b{display:block; font-size:15.5px; color:var(--ink); line-height:1.5; margin-bottom:6px;}
+  .nbody .gtx p{margin:0; font-size:14px; line-height:1.7; color:var(--sub);}
+  .nbody .gshot{flex:0 0 220px;}
+  .nbody .gshot img{display:block; width:100%; height:auto; border-radius:18px; border:1px solid var(--line);
+    box-shadow:0 10px 26px -14px rgba(15,23,42,.3);}
+  @media(max-width:599px){
+    .nbody .gstep{flex-direction:column; gap:14px; padding:16px 14px;}
+    .nbody .gshot{flex:none; width:100%; max-width:260px; margin:0 auto;}
+  }
 </style>
 </head>
 <body>
@@ -131,33 +146,47 @@
         <article class="npost" id="n9">
           <h2>예약송금 · 분할송금 이렇게 쓰세요</h2>
           <p class="nmeta">관리자</p>
-          <div class="nbody">두 기능 모두 결제 등록 화면에서 바로 쓸 수 있습니다. 순서대로 따라 해보세요.
+          <div class="nbody">두 기능 모두 결제 등록 화면에서 바로 쓸 수 있습니다. 화면을 보면서 순서대로 따라 해보세요. <span class="gtip">빨간 테두리가 누를 곳입니다.</span>
 
-            <b class="dh">예약송금 사용 방법 — 날짜를 정해두면 알아서 나가요</b>
-            <ol>
-              <li>홈에서 결제할 항목을 고르고 <b>[월세 결제하기]</b> 버튼을 누르세요</li>
-              <li>받는 분 계좌와 금액을 입력하고 <b>STEP 3 결제 방식</b>까지 진행하세요</li>
-              <li>송금 시점에서 <b>[예약 송금]</b>을 누르고 날짜 선택에서 원하는 날짜를 고르세요</li>
-              <li>서류까지 올려 등록을 마치면 끝이에요. 정한 날짜에 자동으로 결제되고 송금됩니다</li>
-            </ol>
+            <b class="dh">예약송금 — 날짜를 정해두면 그날 알아서 나가요</b>
+            월세 납부일이나 급여일에 맞춰 미리 결제만 해두는 기능입니다. 카드 결제는 지금 되고, 송금은 정한 날짜에 됩니다.
+            <div class="gstep">
+              <div class="gtx"><span class="gno">1</span><b>홈에서 항목을 고르고 [월세 결제하기]를 누르세요</b><p>받는 분 계좌와 금액을 넣고 STEP 3 결제 방식까지 진행합니다.</p></div>
+              <div class="gshot"><img src="../img/guide_shots/g_home.png?v=1" alt=""></div>
+            </div>
+            <div class="gstep">
+              <div class="gtx"><span class="gno">2</span><b>송금 시점에서 [예약 송금]을 누르고 날짜를 고르세요</b><p>달력에서 원하는 날짜를 고르면 그 날짜가 표시됩니다. 매달 같은 날 보내려면 [매달 반복]을 켜두세요.</p></div>
+              <div class="gshot"><img src="../img/guide_shots/g_reserve.png?v=1" alt=""></div>
+            </div>
+            <div class="gstep">
+              <div class="gtx"><span class="gno">3</span><b>서류를 올려 등록을 마치면 끝 — 예약 건은 결제 관리에서</b><p>정한 날짜에 자동으로 결제되고 송금됩니다. 전체메뉴 → 결제 관리 → <b>정기결제</b> 탭에서 예약 중인 건을 확인하고, 송금일 전날까지 날짜를 바꾸거나 취소할 수 있어요. 송금 전날 문자로 미리 알려드려요.</p></div>
+              <div class="gshot"><img src="../img/guide_shots/g_manage.png?v=1" alt=""></div>
+            </div>
             <ul>
-              <li>변경 · 취소는 <b>전체메뉴 → 예약결제 관리</b>에서 송금일 전날까지 할 수 있어요</li>
-              <li>송금 전날 문자로 미리 알려드려요</li>
+              <li>변경 · 취소는 <b>전체메뉴 → 결제 관리 → 정기결제</b>에서 송금일 전날까지 할 수 있어요</li>
+              <li>예약해도 수수료는 똑같이 4%이고 추가 비용은 없어요</li>
             </ul>
 
-            <b class="dh">분할송금 사용 방법 — 여러 카드로 나눠 내요</b>
-            <ol>
-              <li>결제 등록을 평소처럼 진행해 <b>STEP 3 결제 방식</b>까지 가세요</li>
-              <li>결제할 카드 중 <b>첫 번째 카드</b>를 고르고 등록을 마치세요. 없는 카드는 그 자리의 <b>새 카드 등록</b>으로 추가하면 돼요</li>
-              <li>등록 직후 <b>고객센터(1577-6369)나 카카오톡 상담</b>으로 분할 결제를 요청하세요</li>
-              <li>카드별 금액과 할부 개월을 정해드리고 나눠서 승인해드려요</li>
-            </ol>
+            <b class="dh">분할송금 — 여러 카드로 나눠서 내요</b>
+            한도가 부족하거나 카드마다 무이자 조건이 다를 때, 한 건을 카드 두세 장으로 나눠 결제합니다. 받는 분에게는 한 번에 합쳐서 입금됩니다.
+            <div class="gstep">
+              <div class="gtx"><span class="gno">1</span><b>결제 등록을 평소처럼 STEP 3까지 진행하세요</b><p>카드 선택에서 나눠 낼 카드 중 <b>첫 번째 카드</b>를 고릅니다. 목록에 없는 카드는 그 자리의 [새 카드 등록]으로 추가하면 돼요.</p></div>
+              <div class="gshot"><img src="../img/guide_shots/g_card.png?v=1" alt=""></div>
+            </div>
+            <div class="gstep">
+              <div class="gtx"><span class="gno">2</span><b>등록을 마친 뒤 고객센터에 분할 결제를 요청하세요</b><p>전체메뉴 → 고객센터에서 <b>카카오톡 1:1 상담</b>이나 대표번호 1577-6369로 "방금 등록한 건 카드 두 장으로 나눠주세요"라고 알려주시면 됩니다.</p></div>
+              <div class="gshot"><img src="../img/guide_shots/g_cs.png?v=1" alt=""></div>
+            </div>
+            <div class="dcard">
+              <b class="dt">이렇게 나눌 수 있어요 — 월세 100만원 예시</b>
+              <div class="dr"><span>신한카드</span><em>60만원 · 3개월 무이자</em></div>
+              <div class="dr"><span>삼성카드</span><em>40만원 · 일시불</em></div>
+              <div class="dn">카드마다 금액과 할부 개월을 따로 정할 수 있어요. 담당자가 카드별로 나눠서 승인해드립니다.</div>
+            </div>
             <ul>
-              <li>예시 — 월세 100만원이면 신한카드 60만원(3개월 무이자) + 삼성카드 40만원(일시불)처럼 나눌 수 있어요</li>
-              <li>카드마다 <b>할부 개월을 따로</b> 정할 수 있어요</li>
-            </ul>
-
-            수수료는 똑같이 4%이고 카드사 무이자 행사도 그대로 적용됩니다.</div>
+              <li>수수료는 나눠도 똑같이 송금액의 4%예요. 카드 장수가 늘어도 총액은 같습니다</li>
+              <li>카드사 무이자 행사는 카드별로 그대로 적용돼요</li>
+            </ul></div>
           <div class="nback"><a class="btn btn-line" href="#">목록으로</a></div>
         </article>
         <article class="npost" id="n8">
