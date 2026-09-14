@@ -923,7 +923,8 @@
   }
   /* 말풍선 — 머리 오른쪽 위에 대각선으로 · 꼬리는 왼쪽 아래(머리 쪽) · 파란 채움으로 눈에 띄게.
      사진 칸 위로 삐져나오므로 칸의 overflow 대신 clip-path 로 아래만 자르고 위쪽은 열어 둔다 */
-  .hmodel{overflow:visible; clip-path:inset(-90px 0 0 0);}
+  /* 말풍선이 칸 오른쪽으로 나가도 잘리지 않게 — 아래만 자른다 */
+  .hmodel{overflow:visible; clip-path:inset(-90px -80px 0 -80px);}
   .hbub{position:absolute; z-index:3; left:65%; bottom:calc(100% - 40px);
     padding:12px 18px 13px; border-radius:20px; text-align:center; line-height:1.2;
     background:var(--primary); color:rgba(255,255,255,.9);
