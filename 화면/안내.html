@@ -33,6 +33,9 @@
   .sd h3{margin-top:12px; font-size:21px; font-weight:800; letter-spacing:-.4px;}
   @media(min-width:768px){ .sd h3{font-size:25px;} }
   .sd ol{display:inline-block; text-align:left; max-width:520px; margin-top:16px; list-style:none; counter-reset:s;}
+  /* iOS: 목록 · 단계 칸이 자리보다 넓어져 내용이 오른쪽으로 밀리던 문제 차단 */
+  .sd ol{max-width:min(520px, 100%); box-sizing:border-box;}
+  .steps2 > .sd{min-width:0; max-width:100%; width:100%; box-sizing:border-box;}
   .sd ol li{position:relative; counter-increment:s; padding-left:30px; margin-bottom:10px;
     font-size:14.5px; line-height:1.7; color:var(--sub);
     word-break:keep-all;}

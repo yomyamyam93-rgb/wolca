@@ -90,6 +90,7 @@
   .sd h3{margin-top:12px; font-size:21px; font-weight:800; letter-spacing:-.4px;}
   @media(min-width:768px){ .sd h3{font-size:25px;} }
   .sd ol{display:inline-block; text-align:left; max-width:430px; margin-top:16px; list-style:none; counter-reset:s;}
+  .sd ol{max-width:min(430px, 100%); box-sizing:border-box;}
   .sd ol li{position:relative; counter-increment:s; padding-left:30px; margin-bottom:10px;
     font-size:14.5px; line-height:1.7; color:var(--sub);}
   @media(min-width:768px){ .sd ol li{font-size:15.5px;} }
