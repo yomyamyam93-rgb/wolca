@@ -260,7 +260,8 @@
 
   /* 목업 2개 단계: 모바일은 설명 · 목업이 번호 순서대로, PC는 기존 배치 */
   @media(max-width:739px){
-    .sd .phone{margin-top:22px;}
+    /* 휴대폰 목업은 실제 크기의 80% — 글 · 여백 비율은 그대로 두고 통째로 줄인다 */
+    .sd .phone{margin-top:22px; zoom:.8;}
     .sdx ol.ob{margin-top:64px;}
   }
   @media(min-width:740px){
