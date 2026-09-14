@@ -163,21 +163,18 @@
     flex:none; padding:0 6px; min-width:0;}
   .num-tx .ast + .ast:before{content:''; position:absolute; left:0; top:10%; bottom:10%;
     width:1px; background:var(--line);}
-  /* 숫자만 크게 · 단위(만명 · 만건 · 점 · 분 · 평균)는 작게 */
-  .num-tx .ast b{display:block; white-space:nowrap; font-size:13px; font-weight:700; letter-spacing:-.3px; line-height:1;}
-  .num-tx .ast b .countup, .num-tx .ast b .n{font-size:clamp(24px, 2.3vw, 32px); font-weight:800; letter-spacing:-1.2px;}
-  .num-tx .ast b .n .countup{font-size:inherit;}
-  .num-tx .ast b small{font-size:inherit;}
-  .num-tx .ast b i{font-size:inherit;}
+  /* 메인 히어로 숫자 카드와 같은 표기 — 검은 큰 숫자 + 회색 작은 단위 */
+  .num-tx .ast b{display:block; white-space:nowrap; font-size:clamp(22px, 2.1vw, 30px); font-weight:800; color:var(--ink); letter-spacing:-1px; line-height:1;}
+  .num-tx .ast b .countup, .num-tx .ast b .n{font-size:inherit; font-weight:inherit; letter-spacing:inherit;}
+  .num-tx .ast b i{font-style:normal; font-size:.48em; font-weight:700; color:var(--placeholder); margin-left:1px; letter-spacing:0;}
   .num-tx .ast > span{display:block; margin:0 0 7px; font-size:12.5px; font-weight:700;
     color:var(--primary-600); white-space:nowrap;}
   /* 휴대폰: 4칸을 한 줄에 — 글씨를 화면 폭에 맞춰 줄여서 안 깨지게 */
   @media(max-width:599px){
     .num-tx .astats{padding:16px 4px; gap:0;}
     .num-tx .ast{padding:0 3px;}
-    .num-tx .ast > span{font-size:min(11.5px, 3vw); margin-bottom:5px;}
-    .num-tx .ast b{font-size:min(11px, 2.9vw); letter-spacing:-.4px;}
-    .num-tx .ast b .countup, .num-tx .ast b .n{font-size:min(21px, 5.4vw); letter-spacing:-1px;}
+    .num-tx .ast > span{font-size:min(11.5px, 3vw); margin-bottom:6px;}
+    .num-tx .ast b{font-size:min(18px, 4.7vw); letter-spacing:-1px;}
   }
   .numgraph{padding:0;}
   .numgraph svg{display:block; width:100%; height:auto;}
@@ -503,10 +500,10 @@
           <p><b>100만여 명</b>이 선택했고 하루에도 <b>수백 건</b>이 랜선페이를 통해 결제됩니다.<br class="pcbr">
             쌓이는 거래만큼 서비스와 신뢰도 하루하루 더 단단해지고 있습니다.</p>
           <div class="astats">
-            <div class="ast"><b><span class="countup">100</span>만명<i>+</i></b><span>누적 이용자</span></div>
-            <div class="ast"><b><span class="countup">1,800</span>만건<i>+</i></b><span>총 송금 건수</span></div>
+            <div class="ast"><b><span class="countup">100</span>만<i>명+</i></b><span>누적 이용자</span></div>
+            <div class="ast"><b><span class="countup">1,800</span>만<i>건+</i></b><span>총 송금 건수</span></div>
             <div class="ast"><b><span class="countup">4.8</span><i>점</i></b><span>평균 평점</span></div>
-            <div class="ast"><b><small>평균</small> <span class="n">5~<span class="countup">10</span></span><i>분</i></b><span>송금 속도</span></div>
+            <div class="ast"><b>5~<span class="countup">10</span><i>분</i></b><span>송금 속도</span></div>
           </div>
         </div>
         <div class="numgraph" aria-hidden="true">
