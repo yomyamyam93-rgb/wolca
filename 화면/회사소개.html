@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>랜선페이 — 회사소개</title>
+<title>랜선페이 | 회사소개</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
 <link rel="stylesheet" href="../style.css?v=28">
 <script src="../app.js?v=15"></script>
@@ -35,7 +35,7 @@
   /* 영상 · 수치가 있는 두 섹션은 글도 가운데 */
   .sec:has(.avid) .head, .sec:has(.astats) .head{text-align:center;}
   .sec:has(.avid) .prose, .sec:has(.astats) .prose{margin:0 auto; text-align:center;}
-  /* 소개 페이지 — 랜딩보다 차분한 제목 크기 */
+  /* 소개 페이지: 랜딩보다 차분한 제목 크기 */
   .head .eyebrow{font-size:13.5px; margin-bottom:10px;}
   .head .h-sec{font-size:23px; letter-spacing:-.5px;}
   @media(min-width:768px){
@@ -64,11 +64,11 @@
   .prose b{color:var(--ink);}
   @media(min-width:768px){ .prose{font-size:17px;} }
 
-  /* 흐름 영상 — 가운데 */
+  /* 흐름 영상: 가운데 */
   .avid{max-width:760px; margin:52px auto 0; overflow:hidden;}
   .avid video{width:134%; margin:-23.2% -15.9% -27.5% -17.8%; filter:brightness(1.012); display:block;}
 
-  /* 항목 타일 12개 — 장식용 */
+  /* 항목 타일 12개: 장식용 */
   .aitems{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:52px;}
   @media(min-width:640px){ .aitems{grid-template-columns:repeat(4,1fr);} }
   @media(min-width:900px){ .aitems{grid-template-columns:repeat(6,1fr); gap:16px;} }
@@ -85,7 +85,7 @@
   .ai.on .w{opacity:1;}
   .ai.on b{color:#fff;}
 
-  /* 큰 수치 — 우측 정렬 */
+  /* 큰 수치: 우측 정렬 */
   .astats{margin-top:64px; display:flex; flex-wrap:wrap; justify-content:center;
     gap:28px 64px; text-align:center;}
   .ast b{display:block; font-size:clamp(30px, 3.6vw, 46px); font-weight:800; color:var(--primary);
@@ -94,7 +94,7 @@
   .ast b i{font-style:normal; font-size:.5em;}
   .ast > span{display:block; margin-top:9px; font-size:14px; color:var(--sub);}
 
-  /* 마무리 — 파란 밴드 + CTA */
+  /* 마무리: 파란 밴드 + CTA */
   .afin{background:var(--primary); background:var(--grad); padding:96px 0; text-align:center; color:#fff;}
   .afin p{font-size:clamp(22px, 3vw, 30px); font-weight:800; letter-spacing:-.8px; line-height:1.55;}
   .afin p .hl{color:#fff;}
@@ -112,7 +112,7 @@
   }
 
 
-  /* ── 앱 폭(480) 고정 — 화면이 넓어도 항상 모바일 배치 ── */
+  /* ── 앱 폭(480) 고정: 화면이 넓어도 항상 모바일 배치 ── */
   .main .sec.tight{min-height:0 !important; display:block !important; padding:64px 0 !important;}
   .aphotos{display:flex !important; overflow-x:auto !important; gap:12px !important;
     margin:44px -20px 0 !important; padding:0 20px 6px !important; scroll-snap-type:x mandatory;}
@@ -127,7 +127,7 @@
   .afin{padding:64px 0 !important;}
   .prose{font-size:15.5px !important;}
   .head .h-sec{font-size:22px !important;}
-  /* 하단 탭바 — 모든 콘텐츠 화면 공통 */
+  /* 하단 탭바: 모든 콘텐츠 화면 공통 */
   .apphull, .phone{padding-bottom:110px !important;}
   .atab{position:fixed; left:50%; transform:translateX(-50%); bottom:0; z-index:60;
     width:100%; max-width:480px; display:flex; background:rgba(255,255,255,.97);
@@ -276,7 +276,7 @@
 })();
 </script>
 <script>
-/* 사진 줄 — 마우스로 끌어서 넘기기 (이미지 고스트 드래그 차단) */
+/* 사진 줄: 마우스로 끌어서 넘기기 (이미지 고스트 드래그 차단) */
 (function () {
   document.querySelectorAll('.aphotos').forEach(function (판) {
     var 끌기 = false, x0 = 0, s0 = 0;

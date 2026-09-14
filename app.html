@@ -4,16 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#2A7BFF">
-<title>랜선페이 — 홈</title>
+<title>랜선페이 | 홈</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
 <link rel="stylesheet" href="style.css?v=32">
 <link rel="icon" type="image/png" href="img/logo3.png">
 <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 <script src="app.js?v=15"></script>
 <style>
-  /* ===== 앱 틀 — 웹에서도 같은 앱 화면 (가운데 480px) ===== */
+  /* ===== 앱 틀: 웹에서도 같은 앱 화면 (가운데 480px) ===== */
   body{background:#EDF0F4;}
-  /* 휴대폰에서는 화면 전체가 앱이라 회색 테두리색이 상태바까지 비친다 — 흰색으로 */
+  /* 휴대폰에서는 화면 전체가 앱이라 회색 테두리색이 상태바까지 비친다: 흰색으로 */
   @media(max-width:520px){ html,body{background:#2A7BFF;} .apphull{box-shadow:none;} }
   .apphull{--cardw:calc(min(480px, 100vw) - 32px); position:relative; width:100%; max-width:480px; margin:0 auto;
     min-height:100svh; background:#fff; box-shadow:0 0 44px rgba(15,23,42,.08); padding-bottom:96px;}
@@ -47,7 +47,7 @@
   .asec{margin:28px 16px 0;}
   .asec:has(.ggrid){margin-top:34px;}
   .asec > b{display:block; font-size:17px; font-weight:800; letter-spacing:-.4px;}
-  /* 홈의 주인공 — 항목 고르기만 확실히 크게 */
+  /* 홈의 주인공: 항목 고르기만 확실히 크게 */
   .asec:has(.agrid){margin-top:38px;}
   .asec:has(.agrid) > b{font-size:26px; line-height:1.3; letter-spacing:-.7px;}
   .agrid{display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-top:16px;}
@@ -74,9 +74,9 @@
     color:#fff; font-size:14.5px; font-weight:700; box-shadow:var(--btn-shadow);}
   .apgo img{height:15px;}
 
-  /* USP 롤링 띠 — 홈페이지처럼 한 장씩 자동으로 밀린다 */
+  /* USP 롤링 띠: 홈페이지처럼 한 장씩 자동으로 밀린다 */
   .uspband{margin-top:0;}
-  /* 이벤트 카드 — PC 는 앱 왼쪽에 상시 · 휴대폰은 하루 한 번 팝업 */
+  /* 이벤트 카드: PC 는 앱 왼쪽에 상시 · 휴대폰은 하루 한 번 팝업 */
   .apop{position:fixed; z-index:55; top:50%; left:50%; transform:translate(-50%,-50%);
     width:min(330px, 86vw); background:#fff; border-radius:8px; overflow:hidden;
     box-shadow:0 14px 44px rgba(15,23,42,.28);}
@@ -119,13 +119,13 @@
   .aup p{margin-top:9px; font-size:13.5px; line-height:1.7; color:var(--sub);}
   .aup img{position:absolute; right:20px; bottom:16px; max-width:58px; max-height:66px; width:auto; height:auto;}
 
-  /* 핵심 안내 — 2×3 버튼 격자 */
+  /* 핵심 안내: 2×3 버튼 격자 */
   .ggrid{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:0;}
   .gbtn{display:flex; flex-direction:column; align-items:flex-start; justify-content:space-between;
     min-height:92px; background:#F4F6F9; border-radius:8px; padding:16px;
     font-size:14.5px; font-weight:700; color:var(--ink); letter-spacing:-.3px; line-height:1.4;}
   .gbtn i{font-style:normal; color:var(--icon-off); font-size:17px; align-self:flex-end;}
-  /* 아래 4개 — 아이콘 · 설명 · 화살표 한 줄 행 */
+  /* 아래 4개: 아이콘 · 설명 · 화살표 한 줄 행 */
   .gbtn.grow{grid-column:1 / 3; flex-direction:row; align-items:center; gap:12px;
     min-height:0; padding:11px 14px; background:#fff; border:1px solid #E9EDF3; box-shadow:0 2px 8px rgba(0,0,0,.06);}
   .grow .ic{flex:0 0 auto; width:28px; height:28px; border-radius:0; background:none;
@@ -133,8 +133,8 @@
   .grow .ic iconify-icon{font-size:22px;}
   .grow .tx{flex:1; min-width:0;}
   .grow i{align-self:center;}
-  /* 강조 카드 두 개 — 레퍼런스 비율 · 라벨 + 큰 글씨 + 설명 */
-  /* 강조 카드 두 개 — 좌우 나란히 · 민트 · 분홍 테마 */
+  /* 강조 카드 두 개: 레퍼런스 비율 · 라벨 + 큰 글씨 + 설명 */
+  /* 강조 카드 두 개: 좌우 나란히 · 민트 · 분홍 테마 */
   .gbtn.gpick{grid-column:auto; align-items:stretch; justify-content:flex-start;
     min-height:150px; padding:16px 15px; color:#fff;}
   .gpick{border:none;}
@@ -168,7 +168,7 @@
     color:#fff; font-size:16px; font-weight:700; box-shadow:var(--btn-shadow);}
   .ago img{height:18px;}
 
-  /* 전체메뉴 — 프로필 + 아이콘 없는 목록 */
+  /* 전체메뉴: 프로필 + 아이콘 없는 목록 */
   .mhead{display:flex; align-items:center; gap:10px; padding:18px 16px 16px; border-bottom:1px solid var(--line);}
   .mp{flex:1; min-width:0;}
   .mp b{display:block; font-size:17px; font-weight:800; letter-spacing:-.3px;}
@@ -205,7 +205,7 @@
   .ait iconify-icon{font-size:40px; color:var(--primary); line-height:1;}
   .ait.on iconify-icon{color:#fff;}
 
-  /* ===== 참고 앱 문법 — 위가 진하고 아래가 밝은 파랑 · 왼쪽 정렬 타일 ===== */
+  /* ===== 참고 앱 문법: 위가 진하고 아래가 밝은 파랑 · 왼쪽 정렬 타일 ===== */
   .apphull{background:#EFF1F5; padding-bottom:96px;}
 
   /* 파랑: 로열블루 → 밝은 하늘 파랑 (아래로 갈수록 밝아짐) */
@@ -220,7 +220,7 @@
   .bluetop .asec{margin-top:18px;}
   .bluetop .asec > b{color:#fff; font-size:21px; font-weight:700; letter-spacing:-.3px;}
 
-  /* 타일 — 반투명 · 모서리 20 */
+  /* 타일: 반투명 · 모서리 20 */
   .bluetop .agrid{gap:7px; margin-top:14px;}
   .bluetop .ait{background:rgba(255,255,255,.22); border:none; box-shadow:none;
     border-radius:18px; aspect-ratio:1/1; min-height:0; padding:10px 4px;
@@ -238,12 +238,12 @@
   .bluetop .apanel .dr{color:rgba(255,255,255,.95); font-size:14px; font-weight:600; margin-top:8px;}
   .bluetop .apanel .dr i,.bluetop .apanel .dr b{color:#fff;}
 
-  /* 결제 버튼 — 흰 바탕 · 파란 글씨 */
+  /* 결제 버튼: 흰 바탕 · 파란 글씨 */
   .bluetop .apgo{background:#fff; color:var(--primary-600); border-radius:14px; box-shadow:none;
     margin-top:16px; height:56px; font-size:15.5px; font-weight:700; gap:9px;}
   .bluetop .apgo img{height:16px;}
 
-  /* 시트 — 연회색 바닥 · 흰 상자 · 모서리 20 */
+  /* 시트: 연회색 바닥 · 흰 상자 · 모서리 20 */
   .sheet{position:relative; z-index:1; margin-top:-22px; background:#EFF1F5;
     border-radius:26px 26px 0 0; padding:10px 0 0;
     box-shadow:0 -8px 22px rgba(4,20,80,.16);}
@@ -258,7 +258,7 @@
   /* 다섯 줄을 흰 카드 하나로 묶는다 (토스식) */
   .sheet .asec .ggrid{background:#fff; border-radius:20px; padding:6px 4px; gap:0;}
   .sheet .gbtn.grow{background:none; border:none; box-shadow:none; border-radius:12px; padding:15px 14px;}
-  /* 아이콘 — 회색 상자 없이 색으로 (토스식) */
+  /* 아이콘: 회색 상자 없이 색으로 (토스식) */
   .sheet .grow .ic{width:30px; height:30px; border-radius:0; background:none;}
   .sheet .grow .ic iconify-icon{font-size:27px;}
   .sheet .ggrid .grow:nth-child(1) .ic{color:var(--primary);}
@@ -268,7 +268,7 @@
   .sheet .ggrid .grow:nth-child(5) .ic{color:var(--primary);}
   .sheet .grow .tx{font-size:15.5px; font-weight:600; letter-spacing:-.2px;}
 
-  /* 쇼케이스 타일 — 연회색 + 3D + 흰 알약 라벨 (참고의 Витрина) */
+  /* 쇼케이스 타일: 연회색 + 3D + 흰 알약 라벨 (참고의 Витрина) */
   .sheet .vitr{display:flex; flex-direction:column; align-items:center; justify-content:flex-end;
     background:#E7EBF3; border:none; box-shadow:none; border-radius:20px;
     min-height:168px; padding:10px; position:relative; overflow:hidden;}
@@ -277,31 +277,31 @@
   .sheet .vitr .vlab{position:relative; width:100%; background:#fff; border-radius:14px;
     padding:13px 6px; text-align:center; font-size:14.5px; font-weight:700; color:var(--ink); letter-spacing:-.3px;}
 
-  /* USP 배너 — 시트 문법에 맞춘 흰 카드 */
+  /* USP 배너: 시트 문법에 맞춘 흰 카드 */
   .sheet .uspband{margin:10px 16px 0; border-radius:20px; overflow:hidden; background:#fff;}
   .sheet .evdots{margin:10px 0 6px;}
   /* 묶음 제목 */
   .sheet .asec > b{font-size:18px; font-weight:700; letter-spacing:-.3px; margin-bottom:12px;}
-  /* 숫자 카드 — 여백 압축 */
+  /* 숫자 카드: 여백 압축 */
   .sheet .stat{padding:15px 16px 14px;}
   .sheet .stat .sic{width:42px; height:42px; font-size:21px;}
   .sheet .stat b{margin-top:12px; font-size:19px;}
-  /* 쇼케이스 — 조금 낮게 */
+  /* 쇼케이스: 조금 낮게 */
   .sheet .vitr{min-height:148px;}
   .sheet .vitr img{width:84px; height:84px; top:10px;}
-  /* 목록 줄 — 조금 촘촘하게 */
+  /* 목록 줄: 조금 촘촘하게 */
   .sheet .ggrid{gap:10px;}
   .sheet .uspband .aup{flex:0 0 calc(min(480px, 100vw) - 32px); background:#fff;}
   .sheet .uspband .aup{padding:0; min-height:0;}
   .sheet .uspband .aup .bimg{display:block; width:100%; height:auto; position:static; max-width:100%; max-height:none;
     transform:none; right:auto; top:auto;}
 
-  /* 히어로 — 작은 라벨 + 굵은 제목 (라벨 · 값 쌍) */
+  /* 히어로: 작은 라벨 + 굵은 제목 (라벨 · 값 쌍) */
   .ohero{margin-top:4px;}
   .ohero .hl{display:block; font-size:13px; font-weight:600; color:rgba(255,255,255,.75); margin-bottom:7px;}
   .ohero b{font-size:22px;}
 
-  /* 항목 목록 — 반투명 줄 (아이콘 · 이름 · 필요서류 · 화살표) */
+  /* 항목 목록: 반투명 줄 (아이콘 · 이름 · 필요서류 · 화살표) */
   .olist{display:flex; flex-direction:column; gap:7px; margin-top:16px;}
   .orow{display:flex; align-items:center; gap:11px; min-height:58px;
     background:rgba(255,255,255,.18); border-radius:16px; padding:9px 12px 9px 10px; color:#fff;}
@@ -312,7 +312,7 @@
     font-weight:500; color:rgba(255,255,255,.8); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
   .orow .ogv{flex:0 0 auto; font-size:17px; color:rgba(255,255,255,.65);}
 
-  /* 동사 버튼 줄 — 흰 버튼 · 파란 동그라미 아이콘 */
+  /* 동사 버튼 줄: 흰 버튼 · 파란 동그라미 아이콘 */
   .actrow{margin-top:14px;}
   .act{display:flex; align-items:center; justify-content:center; gap:9px;
     background:#fff; border-radius:16px; height:58px;
@@ -349,14 +349,14 @@
     margin-top:18px; border:none; border-radius:13px; background:var(--primary); background:var(--grad);
     color:#fff; font-size:15px; font-weight:700; cursor:pointer; box-shadow:var(--btn-shadow);}
 
-  /* 2×2 카드 — 가로로 긴 비율 · 글 왼쪽 열 · 3D 오른쪽 열 (레퍼런스 규격) */
+  /* 2×2 카드: 가로로 긴 비율 · 글 왼쪽 열 · 3D 오른쪽 열 (레퍼런스 규격) */
   .usp2wrap{display:grid; grid-template-columns:1fr 1fr; gap:10px;}
   .sheet .asec:has(.usp2wrap){margin-top:8px;}
   .u2{position:relative; overflow:hidden; border-radius:13px; background:#fff; border:1px solid var(--line);
     aspect-ratio:520/270; min-height:0; padding:14px 14px 12px; color:var(--ink);
     display:flex; flex-direction:column; justify-content:space-between;}
   .u2.dark{background:linear-gradient(255deg,#3A404A 0%,#23262B 60%,#191C1F 100%); color:#fff;}
-  /* 앞 두 칸 — 카드 전체를 색으로 채운다 (톤 다르게) */
+  /* 앞 두 칸: 카드 전체를 색으로 채운다 (톤 다르게) */
   /* 민트 · 블루 그라데이션 (좌측 위 어둡고 우측 아래로 밝게) */
   .u2.grad{border:none; color:#fff;
     background:linear-gradient(140deg,#0C8F79 0%,#17AC90 48%,#3FD6B1 100%);}
@@ -391,7 +391,7 @@
   .docsheet .dn2{margin-top:8px; font-size:12.5px; color:var(--sub); line-height:1.7;}
   .docsheet > b{margin-bottom:6px;}
 
-  /* 서류 시트 본문 — 등록 화면 안내 팝업과 같은 규칙 */
+  /* 서류 시트 본문: 등록 화면 안내 팝업과 같은 규칙 */
   .docsheet{max-height:82vh; display:flex; flex-direction:column;}
   .docsheet #ds-list{flex:1 1 auto; overflow-y:auto; margin-top:12px; scrollbar-width:none;}
   .docsheet #ds-list::-webkit-scrollbar{display:none;}
@@ -411,7 +411,7 @@
   .docsheet #ds-list a{color:var(--primary-700); font-weight:700; text-decoration:underline; word-break:break-all;}
   .docsheet .ds-x{flex:0 0 auto;}
 
-  /* 정보고지 푸터 — 약관 · SNS · 사업자 정보 */
+  /* 정보고지 푸터: 약관 · SNS · 사업자 정보 */
   .afoot{margin:28px 16px 0;}
   .afoot .fr{display:flex; align-items:center; justify-content:space-between;
     padding:15px 2px; font-size:15px; font-weight:600; color:var(--ink); border-bottom:1px solid #E2E6ED;}
@@ -426,7 +426,7 @@
   .finfo2 i{font-style:normal; margin:0 6px; color:#D5DAE3;}
   .finfo2 .cp{margin-top:10px; word-break:keep-all;}
 
-  /* 좁은 화면 — 타일 축소 */
+  /* 좁은 화면: 타일 축소 */
   @media(max-width:419px){
     .bluetop .ait iconify-icon{font-size:25px;}
     .bluetop .ait b{font-size:13px;}
@@ -659,7 +659,7 @@ window.서류시트 = function(on){
 </script>
 
 <script>
-/* 롤링 띠 공용 — 자동(4.5초) + 드래그로 넘기기 */
+/* 롤링 띠 공용: 자동(4.5초) + 드래그로 넘기기 */
 (function () {
   ['usptrack'].forEach(function (아이디) {
     var tk = document.getElementById(아이디);
@@ -735,7 +735,7 @@ window.서류시트 = function(on){
     '중개수수료': ['부동산 매매 · 전세 계약서', '월세 임대차계약서', '중개보수 영수증'],
     '기타': ['계약서 · 거래 내역', '청구서 · 안내문', '증빙 + 받는 분 계좌']
   };
-  var 안내글 = {"월세": "<h4>1. 계좌 예금주 확인</h4>\n<p>등록한 계좌의 예금주와 임대인이 일치하는 경우에만 진행됩니다.</p>\n<h4>2. 중개사 확인 또는 확정일자가 있는 계약</h4>\n<p>중개사 정보 · 날인이 확인되는 정식 계약서나 확정일자 도장이 찍힌 계약서라면 <b>계약서</b>만 첨부하세요.</p>\n<h4>3. 중개사 확인도 확정일자도 없는 계약</h4>\n<ol><li><span class=\"n\">1</span><span><b>계약서</b></span></li><li><span class=\"n\">2</span><span>일정한 월세 금액으로 입금했던 <b>입금내역 2~3회분</b></span></li></ol>\n<p>두 가지를 함께 첨부해주세요.</p>\n<h4>4. 계약서를 분실한 경우</h4>\n<p>재발급이 어렵다면 아래 두 가지를 함께 첨부해주세요.</p>\n<ol><li><span class=\"n\">1</span><span><b>건축물대장등본</b> — <a href=\"https://www.gov.kr/mw/AA020InfoCappView.do?HighCtgCD=A09005&CappBizCD=15000000098&tp_seq=03\" target=\"_blank\" rel=\"noopener\">무료로 발급받기 (PC에서 가능)</a></span></li><li><span class=\"n\">2</span><span>일정한 월세 금액으로 입금했던 <b>입금내역 2~3회분</b></span></li></ol>\n<div class=\"warn\"><b>유의사항</b><br>계약서에서 소재지 · 보증금 · 월세 · 관리비 · 납입일 · 입금계좌를 확인할 수 있어야 합니다.<br><br>임대차 계약서를 첨부할 때는 임대인 · 임차인의 개인정보를 반드시 가려주세요. 거주지 주소 · 주민번호 · 휴대폰번호가 대상이며 사업자번호는 가리지 않아도 됩니다.<br><br>확인이 어려운 내용이 있거나 날인이 없으면 서류 보완을 요청드립니다. 등본상 명의와 임대인 명의가 다르거나 공인중개사 확인이 없는 직거래 계약은 검토 과정에서 추가 증빙을 요청드릴 수 있습니다.</div>", "보증금": "<h4>1. 계좌 예금주 확인</h4>\n<p>등록한 계좌의 예금주와 임대인이 일치하는 경우에만 진행됩니다.</p>\n<h4>2. 중개사 확인 또는 확정일자가 있는 계약</h4>\n<p>중개사 정보 · 날인이 확인되는 정식 계약서나 확정일자 도장이 찍힌 계약서라면 <b>계약서</b>만 첨부하세요.</p>\n<h4>3. 중개사 확인도 확정일자도 없는 계약</h4>\n<ol><li><span class=\"n\">1</span><span><b>계약서</b></span></li><li><span class=\"n\">2</span><span>일정한 월세 금액으로 입금했던 <b>입금내역 2~3회분</b></span></li></ol>\n<p>두 가지를 함께 첨부해주세요.</p>\n<h4>4. 계약서를 분실한 경우</h4>\n<p>재발급이 어렵다면 아래 두 가지를 함께 첨부해주세요.</p>\n<ol><li><span class=\"n\">1</span><span><b>건축물대장등본</b> — <a href=\"https://www.gov.kr/mw/AA020InfoCappView.do?HighCtgCD=A09005&CappBizCD=15000000098&tp_seq=03\" target=\"_blank\" rel=\"noopener\">무료로 발급받기 (PC에서 가능)</a></span></li><li><span class=\"n\">2</span><span>일정한 월세 금액으로 입금했던 <b>입금내역 2~3회분</b></span></li></ol>\n<div class=\"warn\"><b>유의사항</b><br>계약서에서 소재지 · 보증금 · 월세 · 관리비 · 납입일 · 입금계좌를 확인할 수 있어야 합니다.<br><br>임대차 계약서를 첨부할 때는 임대인 · 임차인의 개인정보를 반드시 가려주세요. 거주지 주소 · 주민번호 · 휴대폰번호가 대상이며 사업자번호는 가리지 않아도 됩니다.<br><br>확인이 어려운 내용이 있거나 날인이 없으면 서류 보완을 요청드립니다. 등본상 명의와 임대인 명의가 다르거나 공인중개사 확인이 없는 직거래 계약은 검토 과정에서 추가 증빙을 요청드릴 수 있습니다.</div>", "관리비": "<p>다음 서류 중 하나를 첨부해주세요.</p>\n<ol><li><span class=\"n\">1</span><span><b>관리비 고지서(청구서)</b></span></li><li><span class=\"n\">2</span><span><b>알림톡 캡쳐본</b></span></li><li><span class=\"n\">3</span><span><b>관리비 영수증</b></span></li><li><span class=\"n\">4</span><span><b>세금계산서</b></span></li></ol>\n<div class=\"warn\">증빙에서 관리비 금액과 납부계좌를 확인할 수 있어야 합니다.<br><br>알림톡은 내용을 자르거나 복사하지 마시고 발신자와 메시지 내용이 모두 보이게 한 화면으로 캡쳐해주세요.</div>", "인테리어": "<p>다음 서류 중 하나를 첨부해주세요.</p>\n<ol><li><span class=\"n\">1</span><span><b>세금계산서</b></span></li><li><span class=\"n\">2</span><span><b>계약서</b></span></li><li><span class=\"n\">3</span><span><b>견적서</b></span></li><li><span class=\"n\">4</span><span><b>거래명세서</b></span></li></ol>\n<div class=\"warn\">증빙에서 금액과 계좌정보, 업체 사업자정보를 반드시 확인할 수 있어야 합니다. 사업자 정보가 확인되지 않으면 추가로 요청드립니다.<br><br>수기로 작성된 약식 증빙만으로는 진행이 어려운 점 양해 부탁드립니다.</div>", "중개수수료": "<p>다음 서류 중 하나를 첨부해주세요.</p>\n<ol><li><span class=\"n\">1</span><span><b>중개보수가 포함된 계약서</b></span></li><li><span class=\"n\">2</span><span><b>중개보수 영수증</b></span></li></ol>\n<div class=\"warn\">증빙에서 금액과 계좌정보를 확인할 수 있어야 합니다.<br><br>첨부한 증빙에 납부계좌 정보가 없으면 계좌정보가 나오는 부동산 명함사진이 추가로 필요합니다. 예금주가 중개사 사업자 계좌로 확인되면 생략할 수 있습니다.</div>", "이사": "<p>다음 서류 중 하나를 첨부해주세요.</p>\n<ol><li><span class=\"n\">1</span><span>이사앱 등의 <b>주문내역 캡처본</b></span></li><li><span class=\"n\">2</span><span><b>이사비 견적서</b></span></li><li><span class=\"n\">3</span><span><b>계약서</b></span></li><li><span class=\"n\">4</span><span><b>문자/카톡 내역</b> (업자 명함 포함 필수)</span></li></ol>\n<div class=\"warn\">증빙에서 금액과 계좌정보를 확인할 수 있어야 합니다.<br><br>100만원 이상 거래는 업체 <b>사업자등록증</b>을 추가로 요청드립니다. 납부계좌가 사업자계좌로 확인되면 생략할 수 있습니다.</div>", "청소비": "<p>다음 서류 중 하나를 첨부해주세요.</p>\n<ol><li><span class=\"n\">1</span><span>청소앱 등의 <b>주문내역 캡처본</b></span></li><li><span class=\"n\">2</span><span><b>청소비 견적서</b></span></li><li><span class=\"n\">3</span><span><b>계약서</b></span></li><li><span class=\"n\">4</span><span><b>문자/카톡 내역</b> (업자 명함 포함 필수)</span></li></ol>\n<div class=\"warn\">증빙에서 금액과 계좌정보를 확인할 수 있어야 합니다.<br><br>50만원 이상 거래는 업체 <b>사업자등록증</b>을 추가로 요청드립니다. 납부계좌가 사업자계좌로 확인되면 생략할 수 있습니다.</div>", "매입대금": "<p>B2B 매입 거래는 1. 매입처 사업자 계좌 2. 매입처 대표 개인계좌 3. 전용 가상계좌로 송금할 때만 진행됩니다. 유형별 첨부서류는 다음과 같습니다.</p>\n<h4>1. 사업자계좌로 송금</h4>\n<p><b>세금계산서</b>, <b>거래명세서</b>, <b>영수증</b>, <b>계약서</b> 중 하나 첨부</p>\n<h4>2. 대표 개인계좌로 송금</h4>\n<p><b>세금계산서</b>, <b>거래명세서</b>, <b>영수증</b>, <b>계약서</b> 중 하나 + 거래처 <b>사업자등록증</b> 사본</p>\n<h4>3. 매입거래 전용 가상계좌로 송금</h4>\n<p>주문내역과 입금계좌가 확인되는 발주용 전산 프로그램 <b>화면 캡처본</b> + 거래처 <b>사업자등록증</b> 사본</p>\n<div class=\"warn\"><b>사업자등록증을 생략할 수 있는 경우</b><br>승인번호가 나온 전자세금계산서, POS식으로 출력된 전자영수증, 명판이 찍히거나 인쇄된 영수증<br><br><b>간이영수증 제출 시</b><br>공급자정보와 계좌정보가 명판으로 찍혀 있거나 인쇄되어 있어야 합니다. 수기로만 작성된 증빙은 진행이 어렵습니다.<br><br><b>이용한도</b><br>계약 승인 시 증빙에서 확인되는 금액으로 이용 한도를 설정해드리며, 이후 같은 거래는 다시 등록하지 않아도 승인한도 내에서 매월 재결제할 수 있습니다. 한도 증액이 필요하면 고객센터로 문의주세요. 거래 규모를 확인할 수 있는 적격증빙(세금계산서 등)으로 한도를 늘려드립니다.</div>", "인건비": "<h4>1. 정규직 급여</h4>\n<ol><li><span class=\"n\">1</span><span><b>근로계약서</b> 날인본</span></li><li><span class=\"n\">2</span><span><b>4대보험 가입자 명부</b> (4대보험 연계센터 출력본)</span></li><li><span class=\"n\">3</span><span><b>급여이체내역</b></span></li></ol>\n<h4>2. 알바비 (일용직 · 단기)</h4>\n<ol><li><span class=\"n\">1</span><span><b>근로계약서</b> 날인본</span></li><li><span class=\"n\">2</span><span><b>일용근로소득 지급명세서</b> (정상자료 상세내역)</span></li></ol>\n<h4>3. 용역비 — 비사업자 (프리랜서, 3.3%)</h4>\n<ol><li><span class=\"n\">1</span><span><b>용역계약서</b> 날인본</span></li><li><span class=\"n\">2</span><span><b>간이지급명세서</b> (거주자의 사업소득 · 정상자료 상세내역)</span></li></ol>\n<h4>4. 용역비 — 사업자</h4>\n<ol><li><span class=\"n\">1</span><span><b>전자세금계산서</b> (홈택스 발급본)</span></li></ol>\n<div class=\"warn\">반드시 수급자(근로자 · 프리랜서) 본인 명의 계좌로만 송금됩니다.<br><br>계약 유형별 증빙서류를 모두 제출해주세요. 2 · 3번은 직접 신고인지 세무사무소 대행인지에 따라 조회 경로가 다릅니다. <a href=\"https://drive.google.com/file/d/15_9ToBEL2QktS1UCcxQpQMDrZhUn1LRH/view?usp=sharing\" target=\"_blank\" rel=\"noopener\">발급방법 보기</a><br><br>원천징수영수증은 국세청 제출 사실 확인이 어려워 증빙으로 채택되지 않으며, 퇴직금은 진행이 어렵습니다.</div>", "학원비": "<h4>1. 학원비 · 수강료 · 등록금</h4>\n<p>다음 서류 중 하나를 첨부해주세요.</p>\n<ol><li><span class=\"n\">1</span><span><b>고지서</b> (납부통지서 · 청구서)</span></li><li><span class=\"n\">2</span><span><b>알림톡 또는 납부안내 메일 캡처본</b></span></li><li><span class=\"n\">3</span><span><b>온라인 공지문 캡처본</b></span></li><li><span class=\"n\">4</span><span>교육기관에 게시된 <b>수강비 안내문 · 공지사항</b></span></li></ol>\n<h4>2. 과외비 · 레슨비</h4>\n<p>강사 자격증빙과 거래증빙을 함께 첨부해주세요.</p>\n<p class=\"mid\">[1] 강사 자격증빙 — 아래 A 또는 B 중 하나</p>\n<ol><li><span class=\"n\">A.</span><span>공식 자격증빙 : 1. <b>개인과외교습자신고필증</b> 2. <b>강사 등록 확인서</b> 중 하나</span></li><li><span class=\"n\">B.</span><span>간접 증빙 : 1. <b>학생증</b> 2. <b>자격증</b> 3. 각종 플랫폼 <b>강사 프로필 화면 캡처본</b> 중 하나</span></li></ol>\n<p class=\"mid\">[2] 거래증빙</p>\n<ol><li><span class=\"n\">1</span><span><b>과외 계약서</b> 2. <b>영수증</b> 3. 전문 사이트 <b>주문서 캡쳐본</b> 4. <b>문자나 카톡 대화 내역 캡쳐본</b> 중 하나</span></li></ol>\n<div class=\"warn\">증빙에서 계좌와 금액을 확인할 수 있어야 합니다.<br><br>문자 · 카톡 증빙은 수업일정 · 납부계좌 · 납부금액이 확인되어야 하며, 특정 문자만 자르거나 당일 소통 하나만 보이는 화면은 진행이 어렵습니다. 이전 내역이 어느 정도 확인되는 수준으로 부탁드립니다.</div>", "학교공과금": "<h4>1. 학원비 · 수강료 · 등록금</h4>\n<p>다음 서류 중 하나를 첨부해주세요.</p>\n<ol><li><span class=\"n\">1</span><span><b>고지서</b> (납부통지서 · 청구서)</span></li><li><span class=\"n\">2</span><span><b>알림톡 또는 납부안내 메일 캡처본</b></span></li><li><span class=\"n\">3</span><span><b>온라인 공지문 캡처본</b></span></li><li><span class=\"n\">4</span><span>교육기관에 게시된 <b>수강비 안내문 · 공지사항</b></span></li></ol>\n<h4>2. 과외비 · 레슨비</h4>\n<p>강사 자격증빙과 거래증빙을 함께 첨부해주세요.</p>\n<p class=\"mid\">[1] 강사 자격증빙 — 아래 A 또는 B 중 하나</p>\n<ol><li><span class=\"n\">A.</span><span>공식 자격증빙 : 1. <b>개인과외교습자신고필증</b> 2. <b>강사 등록 확인서</b> 중 하나</span></li><li><span class=\"n\">B.</span><span>간접 증빙 : 1. <b>학생증</b> 2. <b>자격증</b> 3. 각종 플랫폼 <b>강사 프로필 화면 캡처본</b> 중 하나</span></li></ol>\n<p class=\"mid\">[2] 거래증빙</p>\n<ol><li><span class=\"n\">1</span><span><b>과외 계약서</b> 2. <b>영수증</b> 3. 전문 사이트 <b>주문서 캡쳐본</b> 4. <b>문자나 카톡 대화 내역 캡쳐본</b> 중 하나</span></li></ol>\n<div class=\"warn\">증빙에서 계좌와 금액을 확인할 수 있어야 합니다.<br><br>문자 · 카톡 증빙은 수업일정 · 납부계좌 · 납부금액이 확인되어야 하며, 특정 문자만 자르거나 당일 소통 하나만 보이는 화면은 진행이 어렵습니다. 이전 내역이 어느 정도 확인되는 수준으로 부탁드립니다.</div>", "기타": "<p>서비스 불가 거래를 제외한 모든 상거래 결제에 이용할 수 있습니다.</p>\n<p>다음 서류 중 하나를 첨부해주세요.</p>\n<ol><li><span class=\"n\">1</span><span><b>계약서</b> 또는 <b>거래 확인 내역</b></span></li><li><span class=\"n\">2</span><span><b>청구서 · 안내문</b></span></li><li><span class=\"n\">3</span><span><b>영수증 · 결제 안내 캡처본</b></span></li></ol>\n<p>증빙과 함께 <b>받는 분 계좌 정보</b>가 확인되어야 합니다.</p>\n<div class=\"warn\">증빙에서 상품명 · 거래금액 · 납부계좌를 확인할 수 있어야 합니다.<br><br>개인 간 거래에서 수기로 작성된 약식 증빙은 진행이 어려운 점 양해 부탁드립니다.<br><br>진행에 어려움이 있으면 언제든 고객센터로 문의주세요.</div>"};
+  var 안내글 = {"월세": "<h4>1. 계좌 예금주 확인</h4>\n<p>등록한 계좌의 예금주와 임대인이 일치하는 경우에만 진행됩니다.</p>\n<h4>2. 중개사 확인 또는 확정일자가 있는 계약</h4>\n<p>중개사 정보 · 날인이 확인되는 정식 계약서나 확정일자 도장이 찍힌 계약서라면 <b>계약서</b>만 첨부하세요.</p>\n<h4>3. 중개사 확인도 확정일자도 없는 계약</h4>\n<ol><li><span class=\"n\">1</span><span><b>계약서</b></span></li><li><span class=\"n\">2</span><span>일정한 월세 금액으로 입금했던 <b>입금내역 2~3회분</b></span></li></ol>\n<p>두 가지를 함께 첨부해주세요.</p>\n<h4>4. 계약서를 분실한 경우</h4>\n<p>재발급이 어렵다면 아래 두 가지를 함께 첨부해주세요.</p>\n<ol><li><span class=\"n\">1</span><span><b>건축물대장등본</b>: <a href=\"https://www.gov.kr/mw/AA020InfoCappView.do?HighCtgCD=A09005&CappBizCD=15000000098&tp_seq=03\" target=\"_blank\" rel=\"noopener\">무료로 발급받기 (PC에서 가능)</a></span></li><li><span class=\"n\">2</span><span>일정한 월세 금액으로 입금했던 <b>입금내역 2~3회분</b></span></li></ol>\n<div class=\"warn\"><b>유의사항</b><br>계약서에서 소재지 · 보증금 · 월세 · 관리비 · 납입일 · 입금계좌를 확인할 수 있어야 합니다.<br><br>임대차 계약서를 첨부할 때는 임대인 · 임차인의 개인정보를 반드시 가려주세요. 거주지 주소 · 주민번호 · 휴대폰번호가 대상이며 사업자번호는 가리지 않아도 됩니다.<br><br>확인이 어려운 내용이 있거나 날인이 없으면 서류 보완을 요청드립니다. 등본상 명의와 임대인 명의가 다르거나 공인중개사 확인이 없는 직거래 계약은 검토 과정에서 추가 증빙을 요청드릴 수 있습니다.</div>", "보증금": "<h4>1. 계좌 예금주 확인</h4>\n<p>등록한 계좌의 예금주와 임대인이 일치하는 경우에만 진행됩니다.</p>\n<h4>2. 중개사 확인 또는 확정일자가 있는 계약</h4>\n<p>중개사 정보 · 날인이 확인되는 정식 계약서나 확정일자 도장이 찍힌 계약서라면 <b>계약서</b>만 첨부하세요.</p>\n<h4>3. 중개사 확인도 확정일자도 없는 계약</h4>\n<ol><li><span class=\"n\">1</span><span><b>계약서</b></span></li><li><span class=\"n\">2</span><span>일정한 월세 금액으로 입금했던 <b>입금내역 2~3회분</b></span></li></ol>\n<p>두 가지를 함께 첨부해주세요.</p>\n<h4>4. 계약서를 분실한 경우</h4>\n<p>재발급이 어렵다면 아래 두 가지를 함께 첨부해주세요.</p>\n<ol><li><span class=\"n\">1</span><span><b>건축물대장등본</b>: <a href=\"https://www.gov.kr/mw/AA020InfoCappView.do?HighCtgCD=A09005&CappBizCD=15000000098&tp_seq=03\" target=\"_blank\" rel=\"noopener\">무료로 발급받기 (PC에서 가능)</a></span></li><li><span class=\"n\">2</span><span>일정한 월세 금액으로 입금했던 <b>입금내역 2~3회분</b></span></li></ol>\n<div class=\"warn\"><b>유의사항</b><br>계약서에서 소재지 · 보증금 · 월세 · 관리비 · 납입일 · 입금계좌를 확인할 수 있어야 합니다.<br><br>임대차 계약서를 첨부할 때는 임대인 · 임차인의 개인정보를 반드시 가려주세요. 거주지 주소 · 주민번호 · 휴대폰번호가 대상이며 사업자번호는 가리지 않아도 됩니다.<br><br>확인이 어려운 내용이 있거나 날인이 없으면 서류 보완을 요청드립니다. 등본상 명의와 임대인 명의가 다르거나 공인중개사 확인이 없는 직거래 계약은 검토 과정에서 추가 증빙을 요청드릴 수 있습니다.</div>", "관리비": "<p>다음 서류 중 하나를 첨부해주세요.</p>\n<ol><li><span class=\"n\">1</span><span><b>관리비 고지서(청구서)</b></span></li><li><span class=\"n\">2</span><span><b>알림톡 캡쳐본</b></span></li><li><span class=\"n\">3</span><span><b>관리비 영수증</b></span></li><li><span class=\"n\">4</span><span><b>세금계산서</b></span></li></ol>\n<div class=\"warn\">증빙에서 관리비 금액과 납부계좌를 확인할 수 있어야 합니다.<br><br>알림톡은 내용을 자르거나 복사하지 마시고 발신자와 메시지 내용이 모두 보이게 한 화면으로 캡쳐해주세요.</div>", "인테리어": "<p>다음 서류 중 하나를 첨부해주세요.</p>\n<ol><li><span class=\"n\">1</span><span><b>세금계산서</b></span></li><li><span class=\"n\">2</span><span><b>계약서</b></span></li><li><span class=\"n\">3</span><span><b>견적서</b></span></li><li><span class=\"n\">4</span><span><b>거래명세서</b></span></li></ol>\n<div class=\"warn\">증빙에서 금액과 계좌정보, 업체 사업자정보를 반드시 확인할 수 있어야 합니다. 사업자 정보가 확인되지 않으면 추가로 요청드립니다.<br><br>수기로 작성된 약식 증빙만으로는 진행이 어려운 점 양해 부탁드립니다.</div>", "중개수수료": "<p>다음 서류 중 하나를 첨부해주세요.</p>\n<ol><li><span class=\"n\">1</span><span><b>중개보수가 포함된 계약서</b></span></li><li><span class=\"n\">2</span><span><b>중개보수 영수증</b></span></li></ol>\n<div class=\"warn\">증빙에서 금액과 계좌정보를 확인할 수 있어야 합니다.<br><br>첨부한 증빙에 납부계좌 정보가 없으면 계좌정보가 나오는 부동산 명함사진이 추가로 필요합니다. 예금주가 중개사 사업자 계좌로 확인되면 생략할 수 있습니다.</div>", "이사": "<p>다음 서류 중 하나를 첨부해주세요.</p>\n<ol><li><span class=\"n\">1</span><span>이사앱 등의 <b>주문내역 캡처본</b></span></li><li><span class=\"n\">2</span><span><b>이사비 견적서</b></span></li><li><span class=\"n\">3</span><span><b>계약서</b></span></li><li><span class=\"n\">4</span><span><b>문자/카톡 내역</b> (업자 명함 포함 필수)</span></li></ol>\n<div class=\"warn\">증빙에서 금액과 계좌정보를 확인할 수 있어야 합니다.<br><br>100만원 이상 거래는 업체 <b>사업자등록증</b>을 추가로 요청드립니다. 납부계좌가 사업자계좌로 확인되면 생략할 수 있습니다.</div>", "청소비": "<p>다음 서류 중 하나를 첨부해주세요.</p>\n<ol><li><span class=\"n\">1</span><span>청소앱 등의 <b>주문내역 캡처본</b></span></li><li><span class=\"n\">2</span><span><b>청소비 견적서</b></span></li><li><span class=\"n\">3</span><span><b>계약서</b></span></li><li><span class=\"n\">4</span><span><b>문자/카톡 내역</b> (업자 명함 포함 필수)</span></li></ol>\n<div class=\"warn\">증빙에서 금액과 계좌정보를 확인할 수 있어야 합니다.<br><br>50만원 이상 거래는 업체 <b>사업자등록증</b>을 추가로 요청드립니다. 납부계좌가 사업자계좌로 확인되면 생략할 수 있습니다.</div>", "매입대금": "<p>B2B 매입 거래는 1. 매입처 사업자 계좌 2. 매입처 대표 개인계좌 3. 전용 가상계좌로 송금할 때만 진행됩니다. 유형별 첨부서류는 다음과 같습니다.</p>\n<h4>1. 사업자계좌로 송금</h4>\n<p><b>세금계산서</b>, <b>거래명세서</b>, <b>영수증</b>, <b>계약서</b> 중 하나 첨부</p>\n<h4>2. 대표 개인계좌로 송금</h4>\n<p><b>세금계산서</b>, <b>거래명세서</b>, <b>영수증</b>, <b>계약서</b> 중 하나 + 거래처 <b>사업자등록증</b> 사본</p>\n<h4>3. 매입거래 전용 가상계좌로 송금</h4>\n<p>주문내역과 입금계좌가 확인되는 발주용 전산 프로그램 <b>화면 캡처본</b> + 거래처 <b>사업자등록증</b> 사본</p>\n<div class=\"warn\"><b>사업자등록증을 생략할 수 있는 경우</b><br>승인번호가 나온 전자세금계산서, POS식으로 출력된 전자영수증, 명판이 찍히거나 인쇄된 영수증<br><br><b>간이영수증 제출 시</b><br>공급자정보와 계좌정보가 명판으로 찍혀 있거나 인쇄되어 있어야 합니다. 수기로만 작성된 증빙은 진행이 어렵습니다.<br><br><b>이용한도</b><br>계약 승인 시 증빙에서 확인되는 금액으로 이용 한도를 설정해드리며, 이후 같은 거래는 다시 등록하지 않아도 승인한도 내에서 매월 재결제할 수 있습니다. 한도 증액이 필요하면 고객센터로 문의주세요. 거래 규모를 확인할 수 있는 적격증빙(세금계산서 등)으로 한도를 늘려드립니다.</div>", "인건비": "<h4>1. 정규직 급여</h4>\n<ol><li><span class=\"n\">1</span><span><b>근로계약서</b> 날인본</span></li><li><span class=\"n\">2</span><span><b>4대보험 가입자 명부</b> (4대보험 연계센터 출력본)</span></li><li><span class=\"n\">3</span><span><b>급여이체내역</b></span></li></ol>\n<h4>2. 알바비 (일용직 · 단기)</h4>\n<ol><li><span class=\"n\">1</span><span><b>근로계약서</b> 날인본</span></li><li><span class=\"n\">2</span><span><b>일용근로소득 지급명세서</b> (정상자료 상세내역)</span></li></ol>\n<h4>3. 용역비: 비사업자 (프리랜서, 3.3%)</h4>\n<ol><li><span class=\"n\">1</span><span><b>용역계약서</b> 날인본</span></li><li><span class=\"n\">2</span><span><b>간이지급명세서</b> (거주자의 사업소득 · 정상자료 상세내역)</span></li></ol>\n<h4>4. 용역비: 사업자</h4>\n<ol><li><span class=\"n\">1</span><span><b>전자세금계산서</b> (홈택스 발급본)</span></li></ol>\n<div class=\"warn\">반드시 수급자(근로자 · 프리랜서) 본인 명의 계좌로만 송금됩니다.<br><br>계약 유형별 증빙서류를 모두 제출해주세요. 2 · 3번은 직접 신고인지 세무사무소 대행인지에 따라 조회 경로가 다릅니다. <a href=\"https://drive.google.com/file/d/15_9ToBEL2QktS1UCcxQpQMDrZhUn1LRH/view?usp=sharing\" target=\"_blank\" rel=\"noopener\">발급방법 보기</a><br><br>원천징수영수증은 국세청 제출 사실 확인이 어려워 증빙으로 채택되지 않으며, 퇴직금은 진행이 어렵습니다.</div>", "학원비": "<h4>1. 학원비 · 수강료 · 등록금</h4>\n<p>다음 서류 중 하나를 첨부해주세요.</p>\n<ol><li><span class=\"n\">1</span><span><b>고지서</b> (납부통지서 · 청구서)</span></li><li><span class=\"n\">2</span><span><b>알림톡 또는 납부안내 메일 캡처본</b></span></li><li><span class=\"n\">3</span><span><b>온라인 공지문 캡처본</b></span></li><li><span class=\"n\">4</span><span>교육기관에 게시된 <b>수강비 안내문 · 공지사항</b></span></li></ol>\n<h4>2. 과외비 · 레슨비</h4>\n<p>강사 자격증빙과 거래증빙을 함께 첨부해주세요.</p>\n<p class=\"mid\">[1] 강사 자격증빙: 아래 A 또는 B 중 하나</p>\n<ol><li><span class=\"n\">A.</span><span>공식 자격증빙 : 1. <b>개인과외교습자신고필증</b> 2. <b>강사 등록 확인서</b> 중 하나</span></li><li><span class=\"n\">B.</span><span>간접 증빙 : 1. <b>학생증</b> 2. <b>자격증</b> 3. 각종 플랫폼 <b>강사 프로필 화면 캡처본</b> 중 하나</span></li></ol>\n<p class=\"mid\">[2] 거래증빙</p>\n<ol><li><span class=\"n\">1</span><span><b>과외 계약서</b> 2. <b>영수증</b> 3. 전문 사이트 <b>주문서 캡쳐본</b> 4. <b>문자나 카톡 대화 내역 캡쳐본</b> 중 하나</span></li></ol>\n<div class=\"warn\">증빙에서 계좌와 금액을 확인할 수 있어야 합니다.<br><br>문자 · 카톡 증빙은 수업일정 · 납부계좌 · 납부금액이 확인되어야 하며, 특정 문자만 자르거나 당일 소통 하나만 보이는 화면은 진행이 어렵습니다. 이전 내역이 어느 정도 확인되는 수준으로 부탁드립니다.</div>", "학교공과금": "<h4>1. 학원비 · 수강료 · 등록금</h4>\n<p>다음 서류 중 하나를 첨부해주세요.</p>\n<ol><li><span class=\"n\">1</span><span><b>고지서</b> (납부통지서 · 청구서)</span></li><li><span class=\"n\">2</span><span><b>알림톡 또는 납부안내 메일 캡처본</b></span></li><li><span class=\"n\">3</span><span><b>온라인 공지문 캡처본</b></span></li><li><span class=\"n\">4</span><span>교육기관에 게시된 <b>수강비 안내문 · 공지사항</b></span></li></ol>\n<h4>2. 과외비 · 레슨비</h4>\n<p>강사 자격증빙과 거래증빙을 함께 첨부해주세요.</p>\n<p class=\"mid\">[1] 강사 자격증빙: 아래 A 또는 B 중 하나</p>\n<ol><li><span class=\"n\">A.</span><span>공식 자격증빙 : 1. <b>개인과외교습자신고필증</b> 2. <b>강사 등록 확인서</b> 중 하나</span></li><li><span class=\"n\">B.</span><span>간접 증빙 : 1. <b>학생증</b> 2. <b>자격증</b> 3. 각종 플랫폼 <b>강사 프로필 화면 캡처본</b> 중 하나</span></li></ol>\n<p class=\"mid\">[2] 거래증빙</p>\n<ol><li><span class=\"n\">1</span><span><b>과외 계약서</b> 2. <b>영수증</b> 3. 전문 사이트 <b>주문서 캡쳐본</b> 4. <b>문자나 카톡 대화 내역 캡쳐본</b> 중 하나</span></li></ol>\n<div class=\"warn\">증빙에서 계좌와 금액을 확인할 수 있어야 합니다.<br><br>문자 · 카톡 증빙은 수업일정 · 납부계좌 · 납부금액이 확인되어야 하며, 특정 문자만 자르거나 당일 소통 하나만 보이는 화면은 진행이 어렵습니다. 이전 내역이 어느 정도 확인되는 수준으로 부탁드립니다.</div>", "기타": "<p>서비스 불가 거래를 제외한 모든 상거래 결제에 이용할 수 있습니다.</p>\n<p>다음 서류 중 하나를 첨부해주세요.</p>\n<ol><li><span class=\"n\">1</span><span><b>계약서</b> 또는 <b>거래 확인 내역</b></span></li><li><span class=\"n\">2</span><span><b>청구서 · 안내문</b></span></li><li><span class=\"n\">3</span><span><b>영수증 · 결제 안내 캡처본</b></span></li></ol>\n<p>증빙과 함께 <b>받는 분 계좌 정보</b>가 확인되어야 합니다.</p>\n<div class=\"warn\">증빙에서 상품명 · 거래금액 · 납부계좌를 확인할 수 있어야 합니다.<br><br>개인 간 거래에서 수기로 작성된 약식 증빙은 진행이 어려운 점 양해 부탁드립니다.<br><br>진행에 어려움이 있으면 언제든 고객센터로 문의주세요.</div>"};
   var 들 = document.querySelectorAll('.agrid .ait');
   var 제목 = document.getElementById('ap-t'), 목록 = document.getElementById('ap-docs');
   var 가기 = document.getElementById('ap-go'), 가기글 = document.getElementById('ap-go-t');
@@ -776,13 +776,13 @@ document.querySelectorAll('.orow').forEach(function(c){
 if (location.hash === '#menu') { drawer(true); history.replaceState(null, '', location.pathname); }
 </script>
 <script>
-/* 이벤트 카드 — PC 는 상시 · 휴대폰은 하루 한 번 (evpop=1 붙이면 강제로 보임) */
+/* 이벤트 카드: PC 는 상시 · 휴대폰은 하루 한 번 (evpop=1 붙이면 강제로 보임) */
 (function () {
   var 팝 = document.getElementById('apop'), 딤 = document.getElementById('apopdim');
   if (!팝) return;
   var PC = matchMedia('(min-width:1280px)').matches;
   var 강제 = location.search.indexOf('evpop=1') > -1;
-  if (!강제) return;                       /* 이벤트 준비 전까지 팝업 끔 — 되살리려면 이 줄만 지우세요 */
+  if (!강제) return;                       /* 이벤트 준비 전까지 팝업 끔: 되살리려면 이 줄만 지우세요 */
   if (!PC) {
     try { if (!강제 && localStorage.getItem('lp_apop') === new Date().toDateString()) return; } catch (e) {}
     딤.hidden = false;

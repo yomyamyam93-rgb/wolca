@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>랜선페이 — 결제하기</title>
+<title>랜선페이 | 결제하기</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
 <link rel="stylesheet" href="style.css?v=32">
 <link rel="icon" type="image/png" href="img/logo3.png">
@@ -13,7 +13,7 @@
   .pay{max-width:640px; margin:0 auto;}
   @media(min-width:1024px){ .pay{max-width:720px;} }
 
-  /* 항목 고르기 — 사장님페이처럼 격자로 */
+  /* 항목 고르기: 사장님페이처럼 격자로 */
   .cats{display:grid; grid-template-columns:repeat(4,1fr); gap:8px;}
   .cat{background:var(--card); border:1px solid var(--line); border-radius:14px;
     padding:14px 6px 12px; text-align:center; transition:border-color .15s, background .15s;}
@@ -22,7 +22,7 @@
   .cat.on{border:2px solid var(--primary); background:var(--primary-50); padding:13px 5px 11px;}
   @media(min-width:640px){ .cats{grid-template-columns:repeat(6,1fr); gap:10px;} }
 
-  /* 금액 — 이 화면에서 제일 큰 글자 */
+  /* 금액: 이 화면에서 제일 큰 글자 */
   .amt{position:relative;}
   .amt input{height:72px; font-size:32px; font-weight:700; letter-spacing:-1px; padding-right:48px;}
   .amt .won{position:absolute; right:18px; top:0; height:72px; display:flex; align-items:center;
@@ -32,7 +32,7 @@
     background:var(--card); font-size:13px; font-weight:700; color:var(--sub);}
   .quick button:hover{border-color:var(--primary); color:var(--primary-600);}
 
-  /* 예상 혜택 — 이 화면의 강조 (파란 박스) */
+  /* 예상 혜택: 이 화면의 강조 (파란 박스) */
   .benefit{margin-top:28px; border-radius:14px; padding:24px;
     background:var(--primary-50); border:1px solid var(--primary-100);}
   .benefit .ttl{display:flex; align-items:center; gap:6px; font-size:15px; font-weight:700; color:var(--primary-600);}
@@ -152,7 +152,7 @@ document.getElementById('cats').addEventListener('click', function (e) {
   계산();
 });
 
-/* 금액 입력 — 숫자만, 세 자리마다 쉼표 */
+/* 금액 입력: 숫자만, 세 자리마다 쉼표 */
 var 돈 = document.getElementById('money');
 function 값() { return Number((돈.value || '').replace(/[^0-9]/g, '')) || 0; }
 function 넣기(n) { 돈.value = n ? n.toLocaleString('ko-KR') : ''; }
@@ -163,7 +163,7 @@ document.querySelector('.quick').addEventListener('click', function (e) {
   계산();
 });
 
-/* 혜택 미리보기 — 이 화면에서 제일 보여주고 싶은 것 */
+/* 혜택 미리보기: 이 화면에서 제일 보여주고 싶은 것 */
 function 계산() {
   var n = 값();
   var 항목 = document.querySelector('.cat.on');

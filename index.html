@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>랜선페이 — 현금으로 내던 돈 이제 카드로</title>
+<title>랜선페이 | 현금으로 내던 돈 이제 카드로</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
 <link rel="stylesheet" href="style.css?v=32">
 <link rel="icon" type="image/png" href="img/logo3.png">
@@ -12,23 +12,23 @@
 <style>
   /* ===== 이 페이지에만 쓰는 것 ===== */
 
-  /* ===== 모든 단락 상하 크기 통일 — 한 단락 = 한 화면 =====
+  /* ===== 모든 단락 상하 크기 통일: 한 단락 = 한 화면 =====
      내용이 적으면 세로 가운데로, 많으면 자연스럽게 늘어난다 */
   .sec{min-height:0;
     display:flex; flex-direction:column; justify-content:center;}
-  /* flex 자식은 내용 폭만큼 늘어나려 한다 — 가로 스크롤 줄(후기)이 밀어내지 않게 */
+  /* flex 자식은 내용 폭만큼 늘어나려 한다: 가로 스크롤 줄(후기)이 밀어내지 않게 */
   .sec > .wrap{width:100%; min-width:0;}
 
-  /* 1. 히어로 — 가운데 한 마디 + 한 장씩 넘어가는 대화 카드 (레퍼런스 방식) */
+  /* 1. 히어로: 가운데 한 마디 + 한 장씩 넘어가는 대화 카드 (레퍼런스 방식) */
   .hero{position:relative; color:var(--ink); padding:88px 0 24px; overflow:clip;
     background-color:#F6F7FB; background-image:none;
     min-height:0;
     display:flex; flex-direction:column; justify-content:flex-start;}
-  /* 텍스트는 위쪽 — 아래 카드 이미지와 안 겹치게 */
+  /* 텍스트는 위쪽: 아래 카드 이미지와 안 겹치게 */
   .hero-top{text-align:center;}
   .hero .lead{margin-top:22px; font-size:17px; line-height:1.8; color:var(--sub);}
   .hero .lead b{color:var(--ink);}
-  /* 버튼은 알약형 — 레퍼런스와 같은 꼴 */
+  /* 버튼은 알약형: 레퍼런스와 같은 꼴 */
   .hero .btn{margin-top:34px; height:56px; font-size:17px; padding:0 34px; border-radius:13px;}
   @media(min-width:768px){
     .hero{min-height:0;
@@ -38,7 +38,7 @@
 
     .hero .lead{font-size:20px;}
   }
-  /* 스크롤 유도 — 마우스 모양 + 문구 */
+  /* 스크롤 유도: 마우스 모양 + 문구 */
   .sdown{position:absolute; left:50%; bottom:36px; transform:translateX(-50%);
     display:flex; flex-direction:column; align-items:center; gap:7px; pointer-events:none;}
   .sdown .mouse{width:24px; height:38px; border:2px solid var(--primary); border-radius:18px;
@@ -49,7 +49,7 @@
   @keyframes swheel{0%,100%{transform:translateY(0);} 50%{transform:translateY(7px);}}
   .sdown b{font-size:10.5px; font-weight:700; letter-spacing:2.5px; color:var(--primary); opacity:.7;}
 
-  /* 모바일 — 이미지 크게 · 가운데 정렬 */
+  /* 모바일: 이미지 크게 · 가운데 정렬 */
   @media(max-width:767px){
     .hero{
       min-height:0;
@@ -67,7 +67,7 @@
   .hero-top > :nth-child(3){animation-delay:.16s;}
   @keyframes heroUp{from{opacity:0; transform:translateY(16px);}}
 
-  /* 히어로 2단 — 왼쪽 글 · 오른쪽 「하는 일」 카드 (레퍼런스 배치) */
+  /* 히어로 2단: 왼쪽 글 · 오른쪽 「하는 일」 카드 (레퍼런스 배치) */
   .hero2{display:grid; gap:40px; align-items:center; text-align:left; width:100%;}
   @media(max-width:899px){
     .hero2{text-align:left; gap:0;}
@@ -96,18 +96,18 @@
   .hbtns{display:flex; flex-wrap:wrap; gap:10px; margin-top:26px;}
   .hbtns .btn{margin-top:0;}
   .btn-line{background:#fff; border:1px solid var(--line); color:var(--ink);}
-  /* 영상 틀 — 원본의 흰 여백을 잘라내고 내용물을 크게 */
+  /* 영상 틀: 원본의 흰 여백을 잘라내고 내용물을 크게 */
   .hvid{overflow:hidden; border-radius:18px;}
   .himg{width:134%; height:auto; margin:-23.2% -15.9% -27.5% -17.8%;
     filter:brightness(1.012); display:block;}
 
-  /* 랜선페이를 써야 하는 이유 — 1~7 펼침 (파랑 3톤) */
+  /* 랜선페이를 써야 하는 이유: 1~7 펼침 (파랑 3톤) */
   /* 카드 우상단 ↗ 화살표 */
   .uc .uarw, .rz .uarw{position:absolute; top:22px; right:22px; z-index:1;
     display:flex; color:var(--primary);}
   .uc .uarw svg, .rz .uarw svg{width:22px; height:22px;}
   .uc.blue .uarw{color:#fff;}
-  /* 두 줄 같은 크기 — 굵기만 차이 */
+  /* 두 줄 같은 크기: 굵기만 차이 */
   #whysec .h-sec br{display:none;}
   #whysec .h-sec .soft{display:block; margin-bottom:6px; font-weight:400;
     letter-spacing:-.4px; white-space:nowrap;}
@@ -128,7 +128,7 @@
   @media(min-width:1000px){ .uc p{font-size:15px;} }
   .uc .art{position:absolute; right:24px; bottom:24px; font-size:42px; line-height:1; color:var(--primary);}
   @media(min-width:1000px){ .uc .art{font-size:52px; right:30px; bottom:30px;} }
-  /* 파란 강조 카드 — 임대인 동의 불필요 */
+  /* 파란 강조 카드: 임대인 동의 불필요 */
   .uc.blue{background:var(--primary); overflow:hidden;
     background:linear-gradient(140deg,var(--primary-700) 0%,var(--primary-800) 52%,var(--primary-900) 100%); border-color:transparent;
     box-shadow:none;}
@@ -139,7 +139,7 @@
     mask-image:linear-gradient(90deg,transparent,#000 22%);}
   @media(max-width:767px){
     .uc.blue{min-height:230px;}
-    /* 동전 무리를 우측 하단에 — 흐림은 가장자리에만 살짝 */
+    /* 동전 무리를 우측 하단에: 흐림은 가장자리에만 살짝 */
     .uc.blue .coins{top:0; bottom:0; right:0; height:100%; width:52%;
       transform:none; object-fit:cover; object-position:40% 100%;
       -webkit-mask-image:linear-gradient(90deg,transparent,#000 13%);
@@ -150,12 +150,12 @@
   .uc.blue .no{background:#fff; color:var(--primary-600);}
   .uc.blue .art{color:rgba(255,255,255,.95);}
 
-  /* 2. 항목 카드 — 설명과 핵심이 카드 안에 다 보인다 (레퍼런스식) */
-  /* 2. 결제 항목 — 아이콘 타일 나열 · 누르면 그 항목으로 결제 화면 이동
+  /* 2. 항목 카드: 설명과 핵심이 카드 안에 다 보인다 (레퍼런스식) */
+  /* 2. 결제 항목: 아이콘 타일 나열 · 누르면 그 항목으로 결제 화면 이동
      아래엔 카드사 로고 띠를 작은 캡션과 함께 붙여 한 화면에 담는다 */
   #itemsec .head + *{margin-top:40px;}
   @media(min-width:768px){ #itemsec{min-height:0; padding-top:114px; padding-bottom:150px;} #itemsec .head + *{margin-top:40px;} }
-  /* PC — 좌측 항목 타일 · 우측 설명 패널 */
+  /* PC: 좌측 항목 타일 · 우측 설명 패널 */
   .itarw{display:none;}
   @media(min-width:1000px){
     #itemsec .wrap{display:grid; grid-template-columns:1fr 72px 1fr; gap:0; align-items:stretch;}
@@ -169,11 +169,11 @@
     #itemsec .itpanel{grid-column:3; grid-row:2; grid-template-columns:1fr; gap:26px;
       padding:36px 38px; margin-top:52px; align-content:center;}
   }
-  /* 이용 방법 제목 — 두 줄 같은 크기 */
+  /* 이용 방법 제목: 두 줄 같은 크기 */
   #howto .h-sec br{display:none;}
   #howto .h-sec .soft{display:block; margin-bottom:6px; font-weight:400;
     letter-spacing:-.4px; white-space:nowrap;}
-  /* 기능 단락 — 어두운 그라데이션 배경 */
+  /* 기능 단락: 어두운 그라데이션 배경 */
   /* 상단 V자 컷 + 원형 CTA */
   #featsec{display:block; min-height:0;
     clip-path:polygon(0 0, 50% 76px, 100% 0, 100% 100%, 0 100%);
@@ -188,21 +188,21 @@
   #featsec .h-sec{color:#fff;}
   #featsec .h-sec .hl{color:#fff;}
   #featsec .morelink{color:rgba(255,255,255,.9);}
-  /* 두 줄 같은 크기 — 굵기만 차이 */
+  /* 두 줄 같은 크기: 굵기만 차이 */
   #featsec .h-sec br{display:none;}
   #featsec .h-sec .soft{display:block; margin-bottom:6px; font-weight:400;
     letter-spacing:-.4px; white-space:nowrap;}
-  /* 설명 패널 — 위아래 호흡 · 3D 느낌 */
+  /* 설명 패널: 위아래 호흡 · 3D 느낌 */
   #itemsec .itl p{margin-top:14px;}
   #itemsec .itl .btn{margin-top:28px;}
   #itemsec .itpanel{background:linear-gradient(180deg,#FFFFFF,#F8FAFE); border:1px solid #ECEFF5;
     box-shadow:0 14px 30px rgba(15,23,42,.08), 0 3px 8px rgba(15,23,42,.04);}
   #itemsec .doc{background:#fff; border:1px solid #ECEFF5; box-shadow:0 6px 14px rgba(15,23,42,.05);}
-  /* 두 줄 같은 크기 — 굵기만 차이 */
+  /* 두 줄 같은 크기: 굵기만 차이 */
   #itemsec .h-sec br{display:none;}
   #itemsec .h-sec .soft{display:block; margin-bottom:6px; font-weight:400;
     letter-spacing:-.4px; white-space:nowrap;}
-  /* 항목 상세 패널 — 왼쪽 설명 · 오른쪽 필요 서류 (레퍼런스식) */
+  /* 항목 상세 패널: 왼쪽 설명 · 오른쪽 필요 서류 (레퍼런스식) */
   .itpanel{display:grid; gap:26px; margin-top:20px; background:#fff; border-radius:18px;
     padding:28px 22px; text-align:left;
 }
@@ -221,7 +221,7 @@
   @media(min-width:900px){ .itl h3{font-size:25px;} }
   .itl p{margin-top:12px; font-size:14.5px; line-height:1.8; color:var(--sub);}
   @media(min-width:900px){ .itl p{font-size:15.5px;} }
-  /* 버튼은 왼쪽 칸 맨 아래 붙박이 — 항목이 바뀌어도 같은 자리 */
+  /* 버튼은 왼쪽 칸 맨 아래 붙박이: 항목이 바뀌어도 같은 자리 */
   .itl .btn{margin-top:26px; height:48px; width:216px; padding:0; font-size:15.5px;}
   @media(min-width:900px){ .itl .btn{margin-top:auto;} }
   .itr{display:flex; flex-direction:column; gap:12px; justify-content:center;}
@@ -275,7 +275,7 @@
 
     transition:width 2.6s cubic-bezier(.3,.6,.25,1);}
 
-  /* 3. 카드사 — 로고가 끊김 없이 천천히 흐른다 (아래 줄은 반대 방향 · 올리면 멈춤) */
+  /* 3. 카드사: 로고가 끊김 없이 천천히 흐른다 (아래 줄은 반대 방향 · 올리면 멈춤) */
   .cobelt{margin-top:64px; overflow:clip;}
   @media(min-width:768px){ .cobelt{margin-top:96px;} }
   .corow{display:flex; align-items:center; width:max-content; animation:coRoll 46s linear infinite;}
@@ -287,14 +287,14 @@
     .corow img.tall{height:46px;}
   }
 
-  /* 4. 이유 3가지 — 흰 카드 3장 + 모서리 배지 (랩스튜디오식)
+  /* 4. 이유 3가지: 흰 카드 3장 + 모서리 배지 (랩스튜디오식)
      훑는 층 = 배지·파란 제목·큰 숫자만 봐도 통한다 */
   .rzgrid{display:grid; gap:20px;}
   @media(min-width:900px){ .rzgrid{grid-template-columns:repeat(3,1fr); gap:24px;} }
   .rz{position:relative; background:#fff; border-radius:18px; padding:84px 28px 32px;
     overflow:hidden; display:flex; flex-direction:column;}
   @media(min-width:900px){ .rz{padding:104px 32px 36px; border-radius:18px;} }
-  /* 모서리 배지 — 카드 위 · 오른쪽 변과 오목한 곡선으로 이어지는 접힌 탭 (레퍼런스식) */
+  /* 모서리 배지: 카드 위 · 오른쪽 변과 오목한 곡선으로 이어지는 접힌 탭 (레퍼런스식) */
   .rz .tab{position:absolute; top:0; right:0; background:var(--primary);
     color:#fff; font-size:14px; font-weight:700; padding:15px 24px 17px 36px;
     border-bottom-left-radius:12px; border-top-right-radius:8px;}
@@ -320,7 +320,7 @@
   @media(min-width:900px){ .rz li{font-size:16px;} }
   .rz li:before{content:'\B7'; position:absolute; left:2px; color:var(--placeholder);}
 
-  /* 5. 이용 방법 — 6단계 상세 카드 (2열 · 번호 + 제목 + 설명 + 아이콘) */
+  /* 5. 이용 방법: 6단계 상세 카드 (2열 · 번호 + 제목 + 설명 + 아이콘) */
   .gdgrid{display:grid; gap:16px;}
   @media(min-width:900px){ .gdgrid{grid-template-columns:1fr 1fr; gap:24px;} }
   .gd{position:relative; display:flex; align-items:center; gap:14px; background:#fff;
@@ -342,7 +342,7 @@
       padding:26px 18px 28px; gap:12px;}
     .gd .no{width:34px; height:34px; font-size:13.5px;}
     .gd h3{padding-top:0;}
-    /* 화살표는 카드 사이 틈 한가운데 — 여유 있게 */
+    /* 화살표는 카드 사이 틈 한가운데: 여유 있게 */
     .gd .nx{right:auto; left:50%; top:auto; bottom:-37px;
       transform:translateX(-50%) rotate(90deg); opacity:.55;}
   }
@@ -351,7 +351,7 @@
   .gd p{margin-top:12px; font-size:15px; line-height:1.75; color:var(--sub);}
   @media(min-width:900px){ .gd p{font-size:15.5px;} }
 
-  /* 6. 보안 — 파란 큰 패널 + 흰 정보 카드 (레퍼런스식) */
+  /* 6. 보안: 파란 큰 패널 + 흰 정보 카드 (레퍼런스식) */
   .sboard{background:var(--primary); background:linear-gradient(140deg,var(--primary-700) 0%,var(--primary-800) 52%,var(--primary-900) 100%); border-radius:18px; padding:30px 24px;
     color:#fff; display:flex; flex-direction:column; gap:30px;}
   @media(min-width:900px){ .sboard{flex-direction:row; align-items:center; justify-content:flex-start;
@@ -359,13 +359,13 @@
   .sboard h3{font-size:25px; font-weight:800; letter-spacing:-.7px; line-height:1.4;}
   @media(min-width:900px){ .sboard h3{font-size:31px;} }
   .sboard .d{margin-top:14px; font-size:15.5px; line-height:1.85; color:rgba(255,255,255,.88); max-width:420px;}
-  /* 결제 현황 — 3D 그림 한 장 (자물쇠 방패가 왼쪽에 겹쳐진 카드) */
+  /* 결제 현황: 3D 그림 한 장 (자물쇠 방패가 왼쪽에 겹쳐진 카드) */
   .simg{width:100%; max-width:340px; height:auto; align-self:center;
     filter:drop-shadow(0 14px 28px rgba(5,12,24,.22));}
   @media(min-width:900px){ .simg{position:absolute; right:64px; bottom:-52px;
     width:396px; max-width:none; align-self:auto;} }
 
-  /* 아래 : 흰 카드 4장 (2×2) — 제목이 주인공 · 설명은 짧게 */
+  /* 아래 : 흰 카드 4장 (2×2): 제목이 주인공 · 설명은 짧게 */
   .srows{display:grid; gap:24px; margin-top:24px;}
   @media(min-width:900px){ .srows{grid-template-columns:1fr 1fr;} }
   .srow{background:#fff; border-radius:18px; padding:32px 28px;}
@@ -376,7 +376,7 @@
   .srow p{margin-top:10px; font-size:15.5px; line-height:1.8; color:var(--sub);}
 
 
-  /* 7. 후기 — 두 줄이 한 칸씩 자동으로 밀린다 (아랫줄은 반대 방향 · 올리면 멈춤) */
+  /* 7. 후기: 두 줄이 한 칸씩 자동으로 밀린다 (아랫줄은 반대 방향 · 올리면 멈춤) */
   .rvband{margin-top:56px; overflow-x:clip; overflow-y:visible;}
   @media(min-width:768px){ .rvband{margin-top:80px;} }
   .rvrow{display:flex; width:max-content; will-change:transform;}
@@ -411,7 +411,7 @@
   .morelink svg{width:17px; height:17px;}
   .morelink:hover{text-decoration:underline;}
 
-  /* 이벤트 팝업 — PC는 좌측 상단 · 모바일은 가운데 (오늘 하루 보지 않기) */
+  /* 이벤트 팝업: PC는 좌측 상단 · 모바일은 가운데 (오늘 하루 보지 않기) */
   .evpop{position:fixed; z-index:120; top:50%; left:50%; transform:translate(-50%,-50%);
     width:min(430px, 88vw); background:#fff;
     border-radius:18px; overflow:hidden; box-shadow:0 18px 56px rgba(15,23,42,.32);}
@@ -434,7 +434,7 @@
   .evpop-dim{position:fixed; inset:0; z-index:110; background:rgba(15,23,42,.45);}
   .evpop-dim[hidden]{display:none;}
 
-  /* ===== 기능 3단 — 가로 밴드 3장 + 사이 + 원 (맨 끝에 둬서 우선 적용) ===== */
+  /* ===== 기능 3단: 가로 밴드 3장 + 사이 + 원 (맨 끝에 둬서 우선 적용) ===== */
   .plus{width:42px; height:42px; border-radius:999px; margin:-21px auto;
     position:relative; z-index:2; display:flex; align-items:center; justify-content:center;
     background:var(--primary); background:var(--grad); color:#fff;
@@ -445,7 +445,7 @@
   .rz.alt{background:#fff;}
   .rz.alt li:before{color:var(--primary);}
   @media(min-width:900px){
-    /* 세로 카드 3장 — 같은 폭 3열 */
+    /* 세로 카드 3장: 같은 폭 3열 */
     .rzgrid{grid-template-columns:repeat(3,1fr); gap:20px;}
     .rz{display:block; padding:36px 32px 152px; text-align:left;}
     .rz .in{font-size:24px; font-weight:800; letter-spacing:-.5px; margin-bottom:0;}
@@ -455,7 +455,7 @@
     .rz li{margin-bottom:10px; font-size:16.5px; line-height:1.7;}
     .plus{display:none;}
   }
-  /* 6번 취소 · 환불 — 어두운 그라데이션 카드 */
+  /* 6번 취소 · 환불: 어두운 그라데이션 카드 */
   .gd.dark{background:linear-gradient(140deg,var(--primary-700) 0%,var(--primary-800) 52%,var(--primary-900) 100%);}
   .gd.dark h3{color:#fff;}
   .gd.dark p{color:rgba(255,255,255,.85);}
@@ -467,27 +467,27 @@
     .rz{position:relative; overflow:hidden;}
     .rz .fig{display:block; position:absolute; right:18px; bottom:18px;
       max-width:116px; max-height:116px; width:auto; height:auto;}
-    /* 카드 그림은 가로로 길어서 같은 규격이면 작아 보인다 — 폭을 더 준다 */
+    /* 카드 그림은 가로로 길어서 같은 규격이면 작아 보인다: 폭을 더 준다 */
     .rzgrid .rz:first-child .fig{max-width:138px; max-height:110px;}
   }
-  /* 이용 방법 카드 — 3D 느낌 */
+  /* 이용 방법 카드: 3D 느낌 */
   .gd{background:linear-gradient(180deg,#FFFFFF,#F8FAFE);
     box-shadow:0 14px 30px rgba(15,23,42,.08), 0 3px 8px rgba(15,23,42,.04);}
   .gd.dark{background:linear-gradient(140deg,var(--primary-700) 0%,var(--primary-800) 52%,var(--primary-900) 100%);
     box-shadow:0 16px 34px rgba(2,10,40,.30), 0 3px 8px rgba(2,10,40,.18);}
-  /* 신뢰 · 후기 제목 — 두 줄 같은 크기 */
+  /* 신뢰 · 후기 제목: 두 줄 같은 크기 */
   #trustsec .h-sec br{display:none;}
   #trustsec .h-sec .soft,
   #rvsec .h-sec .soft{display:block; margin-bottom:6px; font-weight:400;
     letter-spacing:-.4px; white-space:nowrap;}
   #rvsec{background:#F7F8FA;}
-  /* 모바일 — 후기 단락은 내용만큼만 */
+  /* 모바일: 후기 단락은 내용만큼만 */
   @media(max-width:767px){
     #rvsec{min-height:0; padding:64px 0;}
     .rvband{margin-top:36px;}
   }
   #rvsec .h-sec br{display:none;}
-  /* 신뢰 카드 4장 — 3D 느낌 */
+  /* 신뢰 카드 4장: 3D 느낌 */
   .srow{background:linear-gradient(180deg,#FFFFFF,#F8FAFE);
     box-shadow:0 14px 30px rgba(15,23,42,.08), 0 3px 8px rgba(15,23,42,.04);}
   /* 서류 3줄 + 버튼 = 신용카드 한 장 */
@@ -503,7 +503,7 @@
     transition:background .15s;}
   #itemsec .itpanel .parw:hover{background:var(--primary-100);}
   #itemsec .itpanel .parw svg{width:15px; height:15px;}
-  /* 모바일 — 패널 텍스트 좌측 정렬 */
+  /* 모바일: 패널 텍스트 좌측 정렬 */
   @media(max-width:899px){
     #itemsec .itl{align-items:flex-start; text-align:left;}
   }
@@ -520,7 +520,7 @@
   #itemsec .itl .itr-tt, #itemsec .itl .itr{align-self:stretch; text-align:left;}
   #itemsec .itr{background:none; border:none; box-shadow:none; border-radius:0; padding:0; gap:0;}
   @media(max-width:999px){
-    /* 신용카드 비율 — 가로는 100% 고정이라 절대 안 잘린다 */
+    /* 신용카드 비율: 가로는 100% 고정이라 절대 안 잘린다 */
     /* 모바일도 카드 왼쪽 · 텍스트 오른쪽 */
     #itemsec .itpanel{display:flex; flex-direction:row; align-items:center; gap:18px;}
     #itemsec .itr-card{flex:0 0 auto; order:0; width:114px; max-width:114px;
@@ -541,7 +541,7 @@
   #itemsec .doc{border:none; box-shadow:none; background:none; border-radius:0;}
   #itemsec .doc:last-child{border-bottom:none;}
   #itemsec .itr-card .btn{width:100%; margin-top:auto; background:#fff; color:var(--primary-600); box-shadow:0 6px 16px rgba(5,12,24,.18);}
-  /* 기능 카드 — 모바일: 가로 스와이프 + 아이콘 표시 */
+  /* 기능 카드: 모바일: 가로 스와이프 + 아이콘 표시 */
   @media(max-width:899px){
     #featsec .wrap{overflow:clip;}
     .rzgrid{display:flex; gap:0; touch-action:pan-y; will-change:transform;}
@@ -560,26 +560,26 @@
   /* 달력 · 시계 아이콘은 오른쪽으로 조금 더 */
   @media(min-width:900px){ .rz.alt .fig, .rzgrid .rz:last-child .fig{right:18px;} }
   @media(max-width:899px){ .rz.alt .fig, .rzgrid .rz:last-child .fig{right:2px;} }
-  /* ===== 단락 제목 크기 표준 — 전 단락 동일 ===== */
+  /* ===== 단락 제목 크기 표준: 전 단락 동일 ===== */
   #whysec .h-sec, #itemsec .h-sec, #featsec .h-sec,
   #howto .h-sec, #trustsec .h-sec, #rvsec .h-sec, #endcta .h-sec{
     font-size:min(6.4vw, 48px);}
-  /* 마무리 CTA — 2줄 제목 + 떠 있는 배지 */
+  /* 마무리 CTA: 2줄 제목 + 떠 있는 배지 */
   #endcta .h-sec br{display:none;}
   #endcta .h-sec .soft{display:block; margin-bottom:6px; font-weight:400;
     letter-spacing:-.4px; white-space:nowrap;}
-  /* 히어로 제목 — 모바일에서 딱 2줄에 맞게 크기 자동 */
+  /* 히어로 제목: 모바일에서 딱 2줄에 맞게 크기 자동 */
   @media(max-width:767px){
     .hero .h-hero{font-size:min(7.7vw, 34px); white-space:nowrap; line-height:1.35;}
   }
-  /* ===== 히어로 배치 고정 — 900px 미만은 전부 같은 규칙 (옛 순서 규칙 무효화) ===== */
+  /* ===== 히어로 배치 고정: 900px 미만은 전부 같은 규칙 (옛 순서 규칙 무효화) ===== */
   @media(max-width:899px){
     .hero .hleft{display:block !important;}
     .hero .hero2{text-align:center !important;}
     .hero .hero2 .hbtns{justify-content:center !important; flex-wrap:nowrap;}
     .hero .hbtns .btn{flex:0 0 auto !important; padding:0 22px;}
   }
-  /* PC — SCROLL DOWN 크게 · 바닥에서 띄우기 */
+  /* PC: SCROLL DOWN 크게 · 바닥에서 띄우기 */
   @media(min-width:900px){
     .sdown{position:static; transform:none; margin:30px auto 0; bottom:auto; gap:8px;
       display:flex;}
@@ -588,7 +588,7 @@
     .sdown b{font-size:12.5px; letter-spacing:3px;}
   }
   @media(min-width:900px){ #whysec{min-height:0; padding-top:24px; padding-bottom:104px;} }
-  /* 모바일 — 보안 카드 세로 간격 정리 */
+  /* 모바일: 보안 카드 세로 간격 정리 */
   @media(max-width:767px){
     .srows{gap:12px; margin-top:18px;}
     .srow{padding:22px 20px;}
@@ -601,7 +601,7 @@
       align-items:center; justify-content:center; gap:10px; padding:10px;
       width:100%; max-width:100%; min-width:0; min-height:0; align-self:start;}
     #itemsec .it b{margin-top:0;}
-    /* 패널 — 카드 왼쪽 · 텍스트 오른쪽 */
+    /* 패널: 카드 왼쪽 · 텍스트 오른쪽 */
     #itemsec .itpanel{display:flex !important; flex-direction:row; align-items:center;
       gap:34px !important;}
     #itemsec .itr-card{position:static; flex:0 0 auto; order:0; margin:0;}
@@ -651,16 +651,16 @@
   .whygrid .uc:nth-child(2) .no{background:var(--primary);}
   /* 흰 카드 3장의 화살표는 검정 */
   .whygrid .uc:not(.blue) .uarw{color:var(--ink);}
-  /* 신뢰 단락 — 민트 포인트 */
-  /* 보안 패널 — 민트 딥 그라데이션 */
+  /* 신뢰 단락: 민트 포인트 */
+  /* 보안 패널: 민트 딥 그라데이션 */
   #trustsec .sboard{background:var(--primary-600); background:linear-gradient(140deg,var(--primary) 0%,var(--primary-600) 52%,var(--primary-700) 100%);}
   #trustsec .eyebrow{color:var(--primary-600);}
   #trustsec .h-sec .hl{color:var(--primary);}
   #trustsec .srow h4 em{color:var(--primary-600);}
-  /* 두 항목만 강조색 — 이상 거래 감시(민트) · 전액 취소(분홍) */
+  /* 두 항목만 강조색: 이상 거래 감시(민트) · 전액 취소(분홍) */
   #trustsec .srow:nth-child(3) h4 em{color:var(--mint-600);}
   #trustsec .srow:nth-child(4) h4 em{color:var(--primary);}
-  /* ===== 모바일 — 카드 이미지 상자 기준 (PC 값보다 뒤에 둬서 확실히 적용) ===== */
+  /* ===== 모바일: 카드 이미지 상자 기준 (PC 값보다 뒤에 둬서 확실히 적용) ===== */
   @media(max-width:767px){
     /* 글 · 버튼만 30px 아래로 (이미지는 제자리) */
     .hero .hero2{margin-top:30px;}
@@ -669,22 +669,22 @@
       width:165%; max-width:none; aspect-ratio:2400/1258;
       margin:22px -32.5% 0; overflow:visible;}
     .hero .sdown{margin:auto auto 2px;}
-    /* 좌우 덜 잘리게 — 폭을 우선 맞추고 세로는 상자에 맞춤 */
+    /* 좌우 덜 잘리게: 폭을 우선 맞추고 세로는 상자에 맞춤 */
     .figwrap .hfig{display:block; width:100%; height:100%; max-width:100%;
       object-fit:contain; object-position:center; margin:0;}
     /* 카드 상자 대비 위치 · 크기 (화면이 바뀌어도 카드와 함께 움직임) */
     .em2{height:20.1%; left:56.3%; right:auto; top:42.6%;}
   }
-  /* 이용 방법 01 — 분홍 강조 */
+  /* 이용 방법 01: 분홍 강조 */
   .gdgrid .gd:first-child .no{background:var(--primary); box-shadow:0 4px 12px rgba(21,111,249,.28);}
   .gdgrid .gd:first-child .nx{color:var(--primary);}
-  /* 따라다니는 버튼 — 두 번째 단락부터 나타남 */
+  /* 따라다니는 버튼: 두 번째 단락부터 나타남 */
   .fab{opacity:0; visibility:hidden; pointer-events:none; transform:translateX(-50%) translateY(14px);
     transition:opacity .3s, transform .3s, visibility .3s;}
   .fab.show{opacity:1; visibility:visible; pointer-events:auto; transform:translateX(-50%) translateY(0);}
   .hero .hero2{position:relative; z-index:4;}
 
-  /* 항목 상세 패널 — 모바일 압축 (우측 열이 좁아서 데스크톱 크기가 뚱뚱해 보임) */
+  /* 항목 상세 패널: 모바일 압축 (우측 열이 좁아서 데스크톱 크기가 뚱뚱해 보임) */
   @media(max-width:767px){
     #itemsec .itpanel{gap:14px; padding:18px 16px;}
     #itemsec .itl h3{font-size:17px; letter-spacing:-.4px; line-height:1.35;}
@@ -696,7 +696,7 @@
     #itemsec .doc p{font-size:12.5px; white-space:normal;}
   }
 
-  /* 숫자 카드 — 폭을 넉넉히 · 숫자가 구분선을 밟지 않게 */
+  /* 숫자 카드: 폭을 넉넉히 · 숫자가 구분선을 밟지 않게 */
   .statwrap{width:100%; max-width:none; padding:0 16px;}
   @media(min-width:768px){ .statwrap{padding:0 20px;} }
   .hstats > div{padding:0 2px;}
@@ -706,9 +706,9 @@
   .hstats span{font-size:min(10.5px, 2.8vw);}
   @media(min-width:768px){ .hstats span{font-size:13.5px;} }
 
-  /* 스크롤 안내 — 움직이는 화살표만 남긴다 */
+  /* 스크롤 안내: 움직이는 화살표만 남긴다 */
   .sdown .mouse{width:auto; border:none; border-radius:0; opacity:1;
-    /* 화살표가 위아래로 움직일 자리 — 없으면 아래가 잘린다 */
+    /* 화살표가 위아래로 움직일 자리: 없으면 아래가 잘린다 */
     display:flex; align-items:flex-start; justify-content:center; height:36px;}
   @media(min-width:768px){ .sdown .mouse{height:41px;} }
   .sdown .mouse iconify-icon{font-size:26px; margin-top:0; opacity:.8;}
@@ -720,14 +720,14 @@
     letter-spacing:-.3px;}
   @media(min-width:768px){ .hlead{margin-top:18px; font-size:19px;} }
 
-  /* 항목 상세 패널 — 카드와 글의 세로 길이를 맞춘다 (기종 바뀌어도 안 어긋나게) */
+  /* 항목 상세 패널: 카드와 글의 세로 길이를 맞춘다 (기종 바뀌어도 안 어긋나게) */
   @media(max-width:767px){
     #itemsec .itpanel{gap:16px; padding:18px 16px; align-items:center;}
     /* 카드 크기 = 패널 폭 비율 → 글 높이와 같이 늘고 준다 */
     #itemsec .itr-card{width:34%; max-width:148px; min-width:92px; aspect-ratio:1/1.492;}
     #itemsec .itl h3{font-size:16.5px; line-height:1.35;}
     #itemsec .itl .itr{margin-top:9px;}
-    /* 서류 줄 — 상자였던 시절의 안쪽 여백을 걷어낸다 */
+    /* 서류 줄: 상자였던 시절의 안쪽 여백을 걷어낸다 */
     #itemsec .doc{padding:0; margin:0 0 -2px; gap:7px; line-height:1.45; align-items:center;}
     #itemsec .doc:last-child{margin-bottom:0;}
     #itemsec .doc p{font-size:13px; line-height:1.45;}
@@ -735,10 +735,10 @@
     #itemsec .itl .btn{margin-top:11px; height:42px; font-size:13.5px;}
   }
 
-  /* 마지막 — 더 알아보기 메뉴 */
+  /* 마지막: 더 알아보기 메뉴 */
   #endcta{background:#fff; padding:56px 0 96px;}
   @media(min-width:768px){ #endcta{padding:72px 0 148px;} }
-  /* 후기 + 도움말 카드를 한 배경 위에 — 경계 없이 이어진다 */
+  /* 후기 + 도움말 카드를 한 배경 위에: 경계 없이 이어진다 */
   .tailband{background:
       radial-gradient(900px 520px at 50% 2%, rgba(214,228,255,.5), transparent 66%),
       radial-gradient(700px 460px at 12% 46%, rgba(206,222,255,.4), transparent 64%),
@@ -781,7 +781,7 @@
     .lc-d{padding:0 18px; margin-top:8px; font-size:14px; white-space:nowrap;}
   }
 
-  /* ===== 새 히어로 — 모델 · 숫자 카드 (토스식 옅은 그라데이션 바탕) ===== */
+  /* ===== 새 히어로: 모델 · 숫자 카드 (토스식 옅은 그라데이션 바탕) ===== */
   .hero{position:relative; overflow:clip; padding:44px 0 0; min-height:0;
     display:block; text-align:center;
     background:
@@ -802,7 +802,7 @@
     gap:7px; margin-top:18px; text-align:left;}
   .hero .hbtns{justify-content:center; margin-top:24px;}
 
-  /* 모델 — 바닥에 붙여서 숫자 카드가 살짝 덮게 */
+  /* 모델: 바닥에 붙여서 숫자 카드가 살짝 덮게 */
   .hmodel{margin:18px auto 0; width:min(420px, 88vw); line-height:0;}
   @media(min-width:768px){ .hmodel{width:min(520px, 60vw); margin-top:6px;} }
   .hmodel img{width:100%; height:auto; display:block;}
@@ -827,18 +827,18 @@
   .hstats i{font-style:normal; font-size:min(10px, 2.7vw); font-weight:700; color:var(--placeholder); margin-left:1px;}
   @media(min-width:768px){ .hstats i{font-size:16px;} }
 
-  /* 단락 사이 호흡 — 기본보다 넉넉하게 */
+  /* 단락 사이 호흡: 기본보다 넉넉하게 */
   .sec{padding:104px 0;}
   .sec.tight{padding:72px 0;}
   @media(min-width:768px){ .sec{padding:168px 0;} .sec.tight{padding:128px 0;} }
 
-  /* 어떤 항목이 필요하신가요? — 헤더 바탕을 그대로 이어받는다 */
+  /* 어떤 항목이 필요하신가요?: 헤더 바탕을 그대로 이어받는다 */
   #itemsec{background:
       radial-gradient(760px 420px at 50% -12%, rgba(224,232,255,.75), transparent 70%),
       radial-gradient(620px 360px at 88% 6%, rgba(206,222,255,.45), transparent 66%),
       linear-gradient(180deg,#F4F7FE 0%,#FAFBFF 58%,#FFFFFF 100%);}
 
-  /* 히어로 + 항목 단락을 한 배경 위에 — 경계 없이 이어진다 */
+  /* 히어로 + 항목 단락을 한 배경 위에: 경계 없이 이어진다 */
   .topband{background:
       radial-gradient(720px 420px at 16% 5%, rgba(214,228,255,.55), transparent 60%),
       radial-gradient(780px 460px at 86% 10%, rgba(206,222,255,.60), transparent 62%),
@@ -848,32 +848,32 @@
   /* 숫자 카드가 경계에 붙지 않게 아래 여백 */
   .topband .hero{padding-bottom:56px;}
   @media(min-width:768px){ .topband .hero{padding-bottom:76px;} }
-  /* 사진 — 얼굴 가운데 맞춘 파일이라 폭을 그만큼 키운다 */
+  /* 사진: 얼굴 가운데 맞춘 파일이라 폭을 그만큼 키운다 */
   .hmodel{width:min(516px, 104vw);}
   @media(min-width:768px){ .hmodel{width:min(640px, 72vw);} }
 
-  /* ===== 페이지 배경은 하나 — 단락마다 칠하지 않는다 (경계 끊김 방지) ===== */
+  /* ===== 페이지 배경은 하나: 단락마다 칠하지 않는다 (경계 끊김 방지) ===== */
   .main{background:
       radial-gradient(760px 460px at 16% 140px, rgba(214,228,255,.55), transparent 60%),
       radial-gradient(820px 500px at 86% 220px, rgba(206,222,255,.60), transparent 62%),
       radial-gradient(1300px 820px at 50% 880px, rgba(222,231,255,.55), transparent 72%),
       linear-gradient(180deg,#FDFDFF 0px,#F1F5FE 640px,#F5F8FF 1250px,#FCFDFF 1750px,#FFFFFF 2100px);
     background-repeat:no-repeat;}
-  /* 단락은 전부 투명 — 어두운 기능 단락만 예외 */
+  /* 단락은 전부 투명: 어두운 기능 단락만 예외 */
   .main .sec, .main .sec.tint, .topband, .topband .hero, .topband #itemsec, #itemsec, #whysec, #endcta{background:none;}
   #featsec{background-color:var(--primary-700);
     background-image:linear-gradient(rgba(3,10,40,.42), rgba(3,10,40,.42)), url('img/hero-bg4.jpg?v=2');
     background-size:cover; background-position:center; background-repeat:no-repeat;}
 
-  /* 히어로 배지 — 더 또렷하게 */
+  /* 히어로 배지: 더 또렷하게 */
   .hbadge{background:none; border:none; box-shadow:none; padding:0;
     color:var(--primary); font-size:15px; font-weight:700; letter-spacing:-.2px;}
   @media(min-width:768px){ .hbadge{font-size:17px;} }
-  /* 버튼과 사진 사이 — 머리 위 공간 */
+  /* 버튼과 사진 사이: 머리 위 공간 */
   .hmodel{margin-top:56px;}
   @media(min-width:768px){ .hmodel{margin-top:72px;} }
 
-  /* ===== 가운데 띠 — 현금거래 고민 ~ 어떤 결제든 (옅은 하늘색 · 위쪽 V컷) ===== */
+  /* ===== 가운데 띠: 현금거래 고민 ~ 어떤 결제든 (옅은 하늘색 · 위쪽 V컷) ===== */
   .midband{position:relative; margin-top:-1px;
     clip-path:polygon(0 0, 50% 76px, 100% 0, 100% 100%, 0 100%);
     padding-top:215px;
@@ -886,7 +886,7 @@
   }
   /* 띠 안 단락은 배경 없이 */
   .midband .sec{background:none;}
-  /* 기능 단락 — 어두운 배경 · V컷 해제하고 밝은 띠 위 글씨로 */
+  /* 기능 단락: 어두운 배경 · V컷 해제하고 밝은 띠 위 글씨로 */
   #featsec{background:none; clip-path:none; padding-top:0; margin-top:0;}
   #featsec .h-sec{color:var(--ink);}
   #featsec .h-sec .hl{color:var(--primary);}
@@ -895,35 +895,35 @@
   /* 숫자 카드 ~ 다음 단락 사이 두 배로 · 스크롤다운 자리 확보 */
   .topband .hero{padding-bottom:104px;}
   @media(min-width:768px){ .topband .hero{padding-bottom:150px;} }
-  /* 스크롤다운 — 카드 아래 여백 한가운데 */
+  /* 스크롤다운: 카드 아래 여백 한가운데 */
   .hero .sdown{position:static; transform:none; margin:38px auto 0; bottom:auto; z-index:2;}
   @media(min-width:768px){ .hero .sdown{margin-top:56px;} }
-  /* ===== 히어로 한 화면 맞춤 — 휴대폰에서 기종이 달라도 첫 화면에 다 들어오게 ===== */
+  /* ===== 히어로 한 화면 맞춤: 휴대폰에서 기종이 달라도 첫 화면에 다 들어오게 ===== */
   .hero{display:flex; flex-direction:column; justify-content:safe center;
     /* 한 화면 안에는 들어오되, 길쭉한 기기에서 억지로 늘어나진 않는다 */
     min-height:min(calc(100svh - var(--appbar)), 800px);
     max-height:calc(100svh - var(--appbar));}
   @media(min-width:768px){ .hero{min-height:min(calc(100svh - var(--appbar)), 1060px);} }
   .hero > .hero2, .hero > .wrap, .hero > .sdown{flex:0 0 auto;}
-  /* 사진 비율은 원본 그대로 — 좌우가 절대 안 잘린다.
+  /* 사진 비율은 원본 그대로: 좌우가 절대 안 잘린다.
      자리가 좁으면 아래(숫자 카드가 덮는 쪽)만 잘리고 남는 높이는 위아래 여백으로 간다 */
   .hmodel{--mw:min(588px, calc(100vw - 32px));
     flex:0 1 auto; align-self:center; overflow:hidden;
     width:var(--mw); aspect-ratio:1603/1147; height:auto; min-height:118px;
-    /* 남는 높이는 사진이 아니라 사진 '위'가 가져간다 — 사람은 늘 흰 카드에 붙어 있게 */
+    /* 남는 높이는 사진이 아니라 사진 '위'가 가져간다: 사람은 늘 흰 카드에 붙어 있게 */
     margin-top:auto;
     max-height:calc(var(--mw) / 1.398 * 1.15);}
   /* 새 사진은 원본과 좌우 여백이 달라서, 사람이 예전과 똑같은 자리에 오도록 맞춘다 */
   /* 새 사진은 원본과 좌우 여백이 달라서, 사람이 예전과 똑같은 자리에 오도록 맞춘다 (머리가 칸 가운데) */
   .hmodel img{position:absolute; top:0; left:15.47%; width:88.58%; height:auto; display:block;}
-  /* PC — 자리가 넉넉하니 사진을 칸 폭만큼(13% 크게) 쓴다. 머리(사진의 38.66%)가 가운데 오게 왼쪽 11.34% */
+  /* PC: 자리가 넉넉하니 사진을 칸 폭만큼(13% 크게) 쓴다. 머리(사진의 38.66%)가 가운데 오게 왼쪽 11.34% */
   @media(min-width:768px){
     .hmodel{aspect-ratio:1420/1147; max-height:calc(var(--mw) / 1.238 * 1.15);}
     .hmodel img{left:11.34%; width:100%;}
   }
-  /* 말풍선 — 머리 오른쪽 위에 대각선으로 · 꼬리는 왼쪽 아래(머리 쪽) · 파란 채움으로 눈에 띄게.
+  /* 말풍선: 머리 오른쪽 위에 대각선으로 · 꼬리는 왼쪽 아래(머리 쪽) · 파란 채움으로 눈에 띄게.
      사진 칸 위로 삐져나오므로 칸의 overflow 대신 clip-path 로 아래만 자르고 위쪽은 열어 둔다 */
-  /* 말풍선이 칸 오른쪽으로 나가도 잘리지 않게 — 아래만 자른다 */
+  /* 말풍선이 칸 오른쪽으로 나가도 잘리지 않게: 아래만 자른다 */
   .hmodel{overflow:visible; clip-path:inset(-90px -80px 0 -80px);}
   .hbub{position:absolute; z-index:3; left:65%; bottom:calc(100% - 40px);
     padding:12px 18px 13px; border-radius:20px; text-align:center; line-height:1.2;
@@ -932,10 +932,10 @@
     box-shadow:0 10px 24px -12px rgba(21,111,249,.7);}
   .hbub small{display:block; font-size:inherit; opacity:.9;}
   .hbub b{display:block; margin-top:3px; color:#fff; font-weight:900; font-size:18px; letter-spacing:-.5px;}
-  /* 꼬리 — 둥근 모서리 안쪽(평평한 아랫변)에서 왼쪽 아래로 뾰족하게 */
+  /* 꼬리: 둥근 모서리 안쪽(평평한 아랫변)에서 왼쪽 아래로 뾰족하게 */
   .hbub:after{content:''; position:absolute; left:22px; bottom:-10px; width:18px; height:11px;
     background:var(--primary); clip-path:polygon(0 0, 100% 0, 22% 100%);}
-  /* 머리카락과 안 겹치게 — 말풍선 바로 아래, 얼굴 옆 빈 자리 */
+  /* 머리카락과 안 겹치게: 말풍선 바로 아래, 얼굴 옆 빈 자리 */
   .hname{position:absolute; z-index:3; right:3%; top:24%; width:108px;
     filter:drop-shadow(0 0 5px rgba(255,255,255,.95)) drop-shadow(0 0 10px rgba(255,255,255,.7));}
   .hname img{display:block; width:100%; height:auto;}
@@ -948,27 +948,27 @@
   /* 글 묶음과 사진 사이 최소 숨통 */
   /* 말풍선이 사진 위에 얹히므로 그만큼(52px 이상) 벌린다 */
   .hero > .hero2{margin-bottom:clamp(52px, 4svh, 64px);}
-  /* PC — 사진 1.2배 · 40px 위로 */
+  /* PC: 사진 1.2배 · 40px 위로 */
   @media(min-width:768px){
     /* 상한을 vw 로 좁게 잡으면 브라우저를 확대했을 때 사진만 안 커진다.
        화면 밖으로 넘칠 때만 걸리도록 넉넉히 둔다 */
     /* 화면이 높을수록 사람을 키운다 (900px 화면 600 → 1200px 화면 660) */
     .hmodel{width:min(94vw, max(600px, 55svh)); margin-top:4px; min-height:min(300px, 28svh);}
   }
-  /* 배지와 제목 사이 — 바짝 붙인다 */
+  /* 배지와 제목 사이: 바짝 붙인다 */
   .hero .h-hero{margin-top:6px;}
-  /* 사람을 30px 위로 (카드는 제자리 — 흰 카드에 덜 묻히게) */
+  /* 사람을 30px 위로 (카드는 제자리: 흰 카드에 덜 묻히게) */
   .hmodel{position:relative;}
-  /* 제목 — 한 단계 크게 (위계) */
+  /* 제목: 한 단계 크게 (위계) */
   .hero .h-hero{font-size:min(8.4vw, 36px, calc(2.6svh + 15px)); line-height:1.3;}
   @media(min-width:768px){ .hero .h-hero{font-size:52px;} }
   @media(min-width:768px){ .hero .h-hero{margin-top:8px;} }
   /* 카드 아래 여백 · 스크롤다운도 화면 높이에 맞춰 */
   .topband .hero{padding-bottom:0;}
-  /* 화살표를 히어로와 다음 단락 사이 정중앙에 — 위아래 같은 값으로 묶는다 */
+  /* 화살표를 히어로와 다음 단락 사이 정중앙에: 위아래 같은 값으로 묶는다 */
   .main{--acen:clamp(46px, 8svh, 112px);}
   .hero .sdown{margin:var(--acen) auto 0;}
-  /* PC — 화살표 위 여백을 줄여 그만큼 사진에 준다 */
+  /* PC: 화살표 위 여백을 줄여 그만큼 사진에 준다 */
   @media(min-width:768px){ .hero .sdown{margin-top:16px;} .hero .hsns{margin-top:10px;} .hstats{padding:22px 12px;} }
   /* 위 여백도 화면 높이에 맞춰 */
   .hero{padding-top:clamp(30px, 5.4svh, 60px);}
@@ -990,9 +990,9 @@
     .hstats b{font-size:clamp(19px, calc(1.24svh + 11px), 21px);}
   }
 
-  /* 핵심 포인트 — 할부 개월 · 환급률만 크게 */
+  /* 핵심 포인트: 할부 개월 · 환급률만 크게 */
   .whygrid .uc h3 em{font-style:normal; color:var(--primary); font-weight:900;}
-  /* ===== 이유 카드 — 칸 안에 또 칸 (토스식) =====
+  /* ===== 이유 카드: 칸 안에 또 칸 (토스식) =====
      바깥은 흰 카드 · 위쪽 속칸에 파스텔 그라데이션 + 번호 · 화살표 · 제목
      설명은 속칸 아래 흰 자리에. 04(파란 카드)는 그대로 둔다 */
   .whygrid .uc:not(.blue){background:#FFFFFF; border:1px solid #EEF0F4;
@@ -1000,8 +1000,8 @@
   @media(min-width:1000px){ .whygrid .uc:not(.blue){padding:8px;} }
   .whygrid .ucin{position:relative; border-radius:13px; padding:20px 20px 26px;}
   @media(min-width:1000px){ .whygrid .ucin{padding:24px 24px 32px; border-radius:14px;} }
-  /* 파스텔은 한 가지만 — 세 장을 똑같이 (다른 건 04 한 장뿐) */
-  /* 부드럽게 번지는 얼룩 두 개씩 — 직선 경계 없이 · 위치만 카드마다 다르게 */
+  /* 파스텔은 한 가지만: 세 장을 똑같이 (다른 건 04 한 장뿐) */
+  /* 부드럽게 번지는 얼룩 두 개씩: 직선 경계 없이 · 위치만 카드마다 다르게 */
   .whygrid .uc:not(.blue) .ucin{background:#FAFCFF;}
   .whygrid .uc:nth-child(1) .ucin{background:
       radial-gradient(115% 95% at 10% 6%,  color-mix(in srgb, var(--primary) 13%, transparent), transparent 64%),
@@ -1022,11 +1022,11 @@
   .whygrid .uc:not(.blue) > p{margin:0; padding:15px 13px 11px;}
   @media(min-width:1000px){ .whygrid .uc:not(.blue) > p{padding:17px 16px 13px;} }
 
-  /* ===== 띠 대제목 — 아래 세 단락(혜택 · 이용방법 · 결제방식)을 하나로 묶는다 ===== */
+  /* ===== 띠 대제목: 아래 세 단락(혜택 · 이용방법 · 결제방식)을 하나로 묶는다 ===== */
   .bandhead{text-align:center; padding-top:16px;}
   @media(min-width:768px){ .bandhead{padding-top:32px;} }
 
-  /* 크기 단계 — 히어로 h1 > 띠 대제목 > 단락 세부제목 > 카드 제목 */
+  /* 크기 단계: 히어로 h1 > 띠 대제목 > 단락 세부제목 > 카드 제목 */
   /* 「어떤 항목이 필요하신가요?」 제목과 같은 급 · 같은 짜임 */
   .h-band{font-size:min(6.4vw, 48px); font-weight:800; line-height:1.26; letter-spacing:-.5px;
     color:var(--ink); white-space:normal; word-break:keep-all;}
@@ -1039,7 +1039,7 @@
   #whysec .h-sec, #howto .h-sec, #featsec .h-sec{
     font-size:min(6.8vw, 38px); font-weight:800; letter-spacing:-.5px;
     line-height:1.4; color:var(--ink);}
-  /* 두 줄로 — 검정 줄 아래 파란 줄 */
+  /* 두 줄로: 검정 줄 아래 파란 줄 */
   #whysec .h-sec br, #howto .h-sec br, #featsec .h-sec br{display:inline;}
   /* 카드 제목은 세부제목보다 확실히 아래 단계로 (24 → 18/20) */
   #whysec .uc h3, #howto h3, #featsec .rz .in, #featsec .rz h3{font-size:18px; line-height:1.4;}
@@ -1047,11 +1047,11 @@
     #whysec .uc h3, #howto h3, #featsec .rz .in, #featsec .rz h3{font-size:20px;}
   }
   #whysec .h-sec .hl, #howto .h-sec .hl, #featsec .h-sec .hl{color:var(--primary);}
-  /* 세부제목과 내용 사이 — 대제목보다 훨씬 좁게 */
+  /* 세부제목과 내용 사이: 대제목보다 훨씬 좁게 */
   .midband .head + *{margin-top:30px;}
   @media(min-width:768px){ .midband .head + *{margin-top:40px;} }
 
-  /* ===== 신뢰 단락 — 짙은 남색 한 판 (삼쩜삼 톤) =====
+  /* ===== 신뢰 단락: 짙은 남색 한 판 (삼쩜삼 톤) =====
      ① 균일한 남색 바탕 ② 본문은 흐린 회청색 ③ 핵심 구절만 연한 파랑
      ④ 그림 · 카드는 한 톤 밝은 남색 상자 안에 */
   #trustsec{background:var(--primary-900); color:#fff;
@@ -1066,14 +1066,14 @@
   #trustsec .h-sec{color:#fff;}
   #trustsec .h-sec .soft{color:#fff;}
   #trustsec .h-sec .hl{color:var(--primary-400);}
-  /* 그림 판 · 카드 4장 — 바탕보다 한 톤 밝은 남색 */
+  /* 그림 판 · 카드 4장: 바탕보다 한 톤 밝은 남색 */
   #trustsec .sboard,
   #trustsec .srow{background:var(--primary-800); border:1px solid rgba(255,255,255,.07); box-shadow:none;}
   #trustsec .sboard h3, #trustsec .srow h4{color:#fff;}
   /* 본문은 흰색이 아니라 흐린 회청색 */
   #trustsec .sboard .d,
   #trustsec .srow p{color:#DCE6F8; line-height:1.85;}
-  /* 핵심 구절만 밝게 — 문장 전체를 칠하지 않는다 */
+  /* 핵심 구절만 밝게: 문장 전체를 칠하지 않는다 */
   #trustsec p b{color:#FFFFFF; font-weight:700;
     /* 강조 구절이 중간에서 잘리지 않게 */
     white-space:nowrap;}
@@ -1084,13 +1084,13 @@
   #trustsec .srow:nth-child(3) h4 em,
   #trustsec .srow:nth-child(4) h4 em{color:var(--primary-400);}
 
-  /* ===== 띠 안 간격을 하나로 — 대제목↔단락, 단락↔단락 모두 같은 값 ===== */
+  /* ===== 띠 안 간격을 하나로: 대제목↔단락, 단락↔단락 모두 같은 값 ===== */
   .midband{--gap:96px;}
   @media(min-width:768px){ .midband{--gap:150px;} }
-  /* 대제목 ↔ 첫 세부제목 사이 — 가운데에 움직이는 화살표 */
+  /* 대제목 ↔ 첫 세부제목 사이: 가운데에 움직이는 화살표 */
   .bandhead{padding-bottom:calc(var(--gap) / 2 + 26px);}
   .banddots{display:flex; justify-content:center; margin-top:calc(var(--gap) / 2 + 26px);}
-  /* 휴대폰 — 사진 띠 앞뒤가 너무 벌어져 혼자 떠 보이던 여백을 줄인다 */
+  /* 휴대폰: 사진 띠 앞뒤가 너무 벌어져 혼자 떠 보이던 여백을 줄인다 */
   @media(max-width:767px){
     .bandhead{padding-bottom:30px;}
     .banddots{margin-top:26px;}
@@ -1099,21 +1099,21 @@
   /* 아이디로 써야 #featsec{margin-top:0} 을 이긴다 */
   #howto, #featsec{margin-top:var(--gap);}
 
-  /* ===== 항목 상세 패널 — 칸 안에 칸 (왼쪽 속칸: 카드 + 항목 이름 / 오른쪽: 서류 · 버튼) ===== */
+  /* ===== 항목 상세 패널: 칸 안에 칸 (왼쪽 속칸: 카드 + 항목 이름 / 오른쪽: 서류 · 버튼) ===== */
   #itemsec .itpanel{display:flex !important; flex-direction:row; align-items:center;
     gap:16px !important; padding:16px; background:#fff; border:1px solid #EEF0F4;}
   /* PC 에서는 왼쪽 타일 격자 높이에 맞춰 늘어나던 걸 내용 높이로 (위아래 여백 축소) */
   @media(min-width:1000px){ #itemsec .itpanel{gap:22px !important; padding:22px; align-self:center;} }
   /* 왼쪽 속칸 · 오른쪽 내용 = 반반 */
   #itemsec .itin{order:0; flex:0 0 39%; max-width:153px; min-width:0;
-    /* 상자 없이 신용카드만 — 세로 신용카드 비율 고정 */
+    /* 상자 없이 신용카드만: 세로 신용카드 비율 고정 */
     aspect-ratio:1/1.492; height:auto; align-self:center;
     display:flex; align-items:center; justify-content:center;
     border-radius:0; padding:0; background:none;}
   /* 신용카드가 속칸 자리를 그대로 차지 */
   #itemsec .itin .itr-card{width:100%; max-width:none; min-width:0; margin:0;
     aspect-ratio:1/1.492; align-self:stretch;}
-  /* 선택한 항목의 아이콘을 크게 — 우리 그라데이션 타일 */
+  /* 선택한 항목의 아이콘을 크게: 우리 그라데이션 타일 */
   #itemsec .itr-ic{width:100%; height:100%; border-radius:22px; display:flex; align-items:center; justify-content:center;
     background:
       radial-gradient(115% 95% at 10% 6%, color-mix(in srgb, var(--primary) 16%, transparent), transparent 64%),
@@ -1131,10 +1131,10 @@
   #itemsec .itl .btn{margin-top:16px; width:100%; height:48px; font-size:14.5px; padding:0 20px;}
   @media(min-width:1000px){ #itemsec .itl .btn{height:54px; font-size:16px;} }
 
-  /* ===== 항목 단락 — PC 도 모바일처럼 위아래로 쌓고 폭을 좁힌다 ===== */
+  /* ===== 항목 단락: PC 도 모바일처럼 위아래로 쌓고 폭을 좁힌다 ===== */
   @media(min-width:1000px){
-    /* 타일 왼쪽 · 상세 패널 오른쪽 — 좌우 허전함 없이 */
-    /* 타일 · 화살표 · 상세 패널 세 칸 — 높이를 맞춘다 */
+    /* 타일 왼쪽 · 상세 패널 오른쪽: 좌우 허전함 없이 */
+    /* 타일 · 화살표 · 상세 패널 세 칸: 높이를 맞춘다 */
     #itemsec .wrap{display:grid; grid-template-columns:540px 1fr;
       column-gap:12px; row-gap:56px;
       max-width:1100px; margin-left:auto; margin-right:auto; align-items:stretch;}
@@ -1147,29 +1147,29 @@
     #itemsec .itarw{display:none !important;}
     #itemsec .itpanel{grid-column:2; grid-row:2;
       margin-top:0; align-self:stretch; max-width:none; width:100%;}
-    /* 위아래로 쌓이면 속칸이 너무 커지지 않게 — 폭 고정 */
+    /* 위아래로 쌓이면 속칸이 너무 커지지 않게: 폭 고정 */
     #itemsec .itin{flex:0 0 auto; width:170px; max-width:170px;}
     #itemsec .itl{padding:0;}
     #itemsec .itl .btn{width:auto; min-width:200px; align-self:flex-start; margin-top:16px;}
   }
 
-  /* ===== 배경 뒤집기 — 항목 단락은 하늘색 · 가운데 띠는 흰색 ===== */
+  /* ===== 배경 뒤집기: 항목 단락은 하늘색 · 가운데 띠는 흰색 ===== */
   .topband #itemsec, #itemsec{background:linear-gradient(180deg,
       rgba(215,231,252,0) 0%, rgba(215,231,252,.60) 22%, var(--primary-150) 44%,
       var(--primary-150) 64%, #EFF4FC 86%, #FFFFFF 100%);}
   .midband{background:#FFFFFF;}
-  /* 휴대폰 — 하늘색이 단락 대부분을 채우고 맨 아래에서만 흰색으로 */
+  /* 휴대폰: 하늘색이 단락 대부분을 채우고 맨 아래에서만 흰색으로 */
   @media(max-width:767px){
     .topband #itemsec, #itemsec{background:linear-gradient(180deg,
         rgba(233,241,252,0) 0%, rgba(233,241,252,.75) 9%, #E9F1FC 24%,
         #E9F1FC 88%, #F0F5FE 100%);}
-    /* 하늘색이 카드 사진까지 그대로 이어진다 — 중간에 흰색으로 빠지지 않게 */
+    /* 하늘색이 카드 사진까지 그대로 이어진다: 중간에 흰색으로 빠지지 않게 */
     /* 배너 뒤가 딱 끊기지 않게 아래로 길게 풀어 준다 */
     .midband{background:linear-gradient(180deg,
         #F0F5FE 0px, #F8FAFF 50px, #FFFFFF 90px);
       background-repeat:no-repeat;}
   }
-  /* PC — 하늘색을 끝까지 끌고 내려와 카드 사진 앞에서 흰색으로 풀린다 */
+  /* PC: 하늘색을 끝까지 끌고 내려와 카드 사진 앞에서 흰색으로 풀린다 */
   @media(min-width:768px){
     .topband #itemsec, #itemsec{background:linear-gradient(180deg,
         rgba(233,241,252,0) 0%, rgba(233,241,252,.65) 20%, #E9F1FC 42%,
@@ -1182,12 +1182,12 @@
 
   /* ===== 꺾임을 위쪽(하늘색) 단락으로 옮긴다 =====
      아래 띠가 흰색이 되면서 흰 배경 위 흰 꺾임이라 안 보이던 문제 */
-  /* 꺾임 없이 — 색이 서로 스며들어 이어진다 */
+  /* 꺾임 없이: 색이 서로 스며들어 이어진다 */
   .topband #itemsec, #itemsec{position:relative; z-index:1; clip-path:none;}
   .midband{clip-path:none; margin-top:0; padding-top:140px;}
   @media(min-width:768px){ .midband{padding-top:127px;} }
   /* 남색 단락 위쪽을 흰색에서 서서히 */
-  /* 토스식 — 흰색에서 살구빛을 한 번 거쳐 남색으로. 회색을 안 거쳐서 눈이 편하다 */
+  /* 토스식: 흰색에서 살구빛을 한 번 거쳐 남색으로. 회색을 안 거쳐서 눈이 편하다 */
   /* 그라데이션 없이 딱 끊어지게 */
   #trustsec{position:relative; clip-path:none; margin-top:0;
     padding-top:104px; background:var(--primary-900);}
@@ -1202,17 +1202,17 @@
   @media(min-width:768px){ #itemsec{padding-bottom:153px;} }   /* 다음 단락과의 사이 2/3 로 */
 
 
-  /* 후기 단락 제목 — 두 줄 모두 굵게 */
+  /* 후기 단락 제목: 두 줄 모두 굵게 */
   #rvsec .h-sec .soft{font-weight:800; color:var(--ink);}
 
-  /* ===== 이용 방법 — 왼쪽 휴대폰 목업 · 오른쪽 세로 타임라인 ===== */
-  /* 둘을 옅은 패널 하나에 담는다 — 흰 배경 위에서 한 덩어리로 읽히게 */
-  /* 상자 대신 — 가운데는 옅은 하늘색, 좌우로 갈수록 흰색으로 사라진다 */
+  /* ===== 이용 방법: 왼쪽 휴대폰 목업 · 오른쪽 세로 타임라인 ===== */
+  /* 둘을 옅은 패널 하나에 담는다: 흰 배경 위에서 한 덩어리로 읽히게 */
+  /* 상자 대신: 가운데는 옅은 하늘색, 좌우로 갈수록 흰색으로 사라진다 */
   .hwrap{position:relative; display:grid; gap:32px; justify-items:center;
     padding:0 0 30px; max-width:560px; margin-left:auto; margin-right:auto;}
-  /* 하늘색 바탕은 제목까지 덮는다 — 단락 밖으로 넘겨 칠한다 */
+  /* 하늘색 바탕은 제목까지 덮는다: 단락 밖으로 넘겨 칠한다 */
   #howto{position:relative;}
-  /* 상자가 위아래로 넘치는 양 — 이 값만 바꾸면 여백과 단락 간격이 같이 움직인다 */
+  /* 상자가 위아래로 넘치는 양: 이 값만 바꾸면 여백과 단락 간격이 같이 움직인다 */
   #howto{--bx:96px; --bxb:60px;}
   @media(min-width:768px){ #howto{--bx:150px; --bxb:92px;} }
   /* 화면을 꽉 채운 띠 */
@@ -1235,7 +1235,7 @@
       padding:0 40px 56px;}
     .tline{order:0;}
   }
-  /* 휴대폰 목업 — 테두리는 CSS 로 그린다 */
+  /* 휴대폰 목업: 테두리는 CSS 로 그린다 */
   .hphone{width:min(290px, 74vw); padding:10px; border-radius:36px;
     background:#FFFFFF; border:1px solid #E9ECF1;
     box-shadow:0 26px 60px rgba(15,23,42,.13), 0 4px 14px rgba(15,23,42,.06);
@@ -1261,7 +1261,7 @@
   .tbd p{margin-top:8px; font-size:15.5px; line-height:1.75; color:var(--sub); word-break:keep-all;}
   @media(min-width:900px){ .tbd p{font-size:17px;} }
 
-  /* 제목과 단계 사이 — 사람 · 휴대폰 사진 한 줄 */
+  /* 제목과 단계 사이: 사람 · 휴대폰 사진 한 줄 */
   .hpic{display:block; width:100%; height:180px; object-fit:cover;
     object-position:center 42%; border-radius:16px; order:-1;}
   @media(min-width:900px){
@@ -1269,7 +1269,7 @@
       object-position:center 44%; margin-bottom:10px;}
   }
 
-  /* ===== 기능 카드 글 묶음 — 간격을 한 곳에서만 정한다 ===== */
+  /* ===== 기능 카드 글 묶음: 간격을 한 곳에서만 정한다 ===== */
   #featsec .rz .in{margin:0; line-height:1.4;}
   #featsec .rz h3{margin:3px 0 0; line-height:1.4;}
   #featsec .rz .dash{display:none;}
@@ -1289,9 +1289,9 @@
     #featsec .rz li{font-size:13.5px;}
   }
 
-  /* 결제 방식 제목 — 파란색 빼고 검정으로 */
+  /* 결제 방식 제목: 파란색 빼고 검정으로 */
   #featsec .h-sec .hl{color:var(--ink);}
-  /* 모바일 — 단계 선택을 못 바꾸게 하고 마지막 단계만 켠다 */
+  /* 모바일: 단계 선택을 못 바꾸게 하고 마지막 단계만 켠다 */
   @media(max-width:899px){
     .tstep{pointer-events:none; cursor:default;}
     #howto .tline .tstep.on .tno, #howto .tline .tstep .tno{
@@ -1304,13 +1304,13 @@
     #howto .tline .tstep:last-child .tbd h3{color:var(--primary-600);}
   }
 
-  /* 모바일 — 휴대폰 목업도 배경 그라데이션도 없이 타임라인만 */
+  /* 모바일: 휴대폰 목업도 배경 그라데이션도 없이 타임라인만 */
   @media(max-width:899px){
     .hcol{display:none !important;}
     .tbd p br{display:none;}   /* 상자 안 폭이 좁아 억지 줄바꿈 대신 자연 줄바꿈 */
   }
 
-  /* 단계 넘기기 — 좌우 화살표 · 단계 클릭 */
+  /* 단계 넘기기: 좌우 화살표 · 단계 클릭 */
   .hcol{display:flex; flex-direction:column; align-items:center; gap:18px;}
   @media(min-width:900px){ .hcol{order:1;} }
   .hnav{display:flex; align-items:center; gap:14px;}
@@ -1326,7 +1326,7 @@
   .tstep.on .tbd h3{color:var(--primary-600);}
   .tstep:focus-visible{outline:2px solid var(--primary); outline-offset:4px; border-radius:8px;}
 
-  /* 항목 단락 — 제목과 타일 사이 여백 (PC 는 격자 row-gap 이 담당) */
+  /* 항목 단락: 제목과 타일 사이 여백 (PC 는 격자 row-gap 이 담당) */
   @media(max-width:999px){ #itemsec .head + *{margin-top:44px;} }
 
   /* 대제목 뒤에 카드 사진을 고정으로 깔고 둥근 사각으로 오려낸다 */
@@ -1345,10 +1345,10 @@
     .bandart{border-radius:34px; padding:32px; max-width:none;
       background-attachment:fixed;}
   }
-  /* 상자 폭을 넘기지 않게 — 넘치면 줄바꿈 */
+  /* 상자 폭을 넘기지 않게: 넘치면 줄바꿈 */
   .bandart .h-band{max-width:100%; color:#FFFFFF; text-shadow:0 2px 20px rgba(4,12,30,.55);
     font-size:min(7.4vw, 64px);}
-  /* 모바일 — 마스크 없이 화면을 꽉 채운다 */
+  /* 모바일: 마스크 없이 화면을 꽉 채운다 */
   @media(max-width:767px){
     .bandart{width:auto; min-height:0; aspect-ratio:1/1; border-radius:0; padding:20px 22px;}
     .bandart .h-band{font-size:min(7vw, 30px);}   /* 두 줄로 떨어지는 크기 */
@@ -1360,10 +1360,10 @@
   .bandart .h-band .soft{color:#FFFFFF;}
   .bandart .h-band .hl{color:#B9D6FF;}
 
-  /* ===== 항목 상세 — 흰 휴대폰 목업(윗부분만) 안에 내용 · 그 위에 뜬 신용카드 ===== */
+  /* ===== 항목 상세: 흰 휴대폰 목업(윗부분만) 안에 내용 · 그 위에 뜬 신용카드 ===== */
   #itemsec .itpanel{display:block !important; background:none; border:none; padding:0;
     position:relative; overflow:hidden; box-shadow:none;}
-  /* ===== 항목 상세 패널 — 왼쪽 세로 신용카드 / 오른쪽 서류 · 버튼 ===== */
+  /* ===== 항목 상세 패널: 왼쪽 세로 신용카드 / 오른쪽 서류 · 버튼 ===== */
   #itemsec .itpanel{display:flex !important; flex-direction:row; align-items:center;
     gap:16px !important; padding:16px; background:#fff; border:1px solid #EEF0F4;}
   @media(min-width:1000px){ #itemsec .itpanel{gap:22px !important; padding:22px;} }
@@ -1385,12 +1385,12 @@
   @media(min-width:1000px){ #itemsec .itl .btn{height:54px; font-size:16px;} }
   @media(min-width:1000px){ #itemsec .itin{flex:0 0 auto; width:170px; max-width:170px;} #itemsec .itl{padding:0;} }
 
-  /* ===== 모바일 기능 카드 — 가로 스와이프 대신 세로로 쌓고 얇게 ===== */
+  /* ===== 모바일 기능 카드: 가로 스와이프 대신 세로로 쌓고 얇게 ===== */
   @media(max-width:899px){
     #featsec .wrap{overflow:visible;}
     #featsec .rzgrid{display:grid !important; grid-template-columns:1fr; gap:14px;
       transform:none !important; transition:none !important; touch-action:auto;}
-    /* 3D 는 카드 안에 — 오른쪽 끝까지 카드가 차지한다 */
+    /* 3D 는 카드 안에: 오른쪽 끝까지 카드가 차지한다 */
     #featsec .rzgrid{overflow:visible;}
     #featsec .rz{flex:none; width:auto; margin:0 6px; overflow:hidden;
       padding:30px 118px 92px 20px; min-height:0;
@@ -1398,7 +1398,7 @@
     /* 장식 화살표 제거 */
     #featsec .rz .uarw{display:none;}
 
-    /* 아이콘 — 카드 오른쪽 밖으로 크게 · 화살표와 안 겹치게 아래쪽에 */
+    /* 아이콘: 카드 오른쪽 밖으로 크게 · 화살표와 안 겹치게 아래쪽에 */
     /* 그림자는 이미지에 이미 들어 있어 따로 넣지 않는다 */
     #featsec .rz .fig{position:absolute; right:14px; bottom:35px; z-index:2;
       max-width:118px; max-height:118px; filter:none;}
@@ -1408,14 +1408,14 @@
 
   }
 
-  /* 기능 카드 — 좌상단 흰색에서 우하단 옅은 하늘색으로 */
+  /* 기능 카드: 좌상단 흰색에서 우하단 옅은 하늘색으로 */
   #featsec .rz{background:linear-gradient(135deg,
     #FFFFFF 0%, #FFFFFF 38%, #F1F6FD 68%, var(--primary-150) 100%);}
 
   /* 클릭되지 않는 장식 화살표는 뺀다 */
   .whygrid .uc .uarw{display:none;}
 
-  /* 가운데 띠 — 아래 여백 (꺾임은 위 규칙 하나만 쓴다) */
+  /* 가운데 띠: 아래 여백 (꺾임은 위 규칙 하나만 쓴다) */
   .midband{padding-bottom:215px;}
   @media(max-width:767px){ .midband{padding-bottom:150px;} }
 
@@ -1428,7 +1428,7 @@
   @media(max-width:767px){ .midband{padding-top:110px;} }
   /* 「쉽고 빠른」 → 사진 띠 사이 */
   .bandhead{padding-top:var(--gap);}
-  /* 「맞춤 송금」 — 화면을 꽉 채운 하늘색 띠 (위아래로 넘쳐 칠하고, 그만큼 단락 간격을 더한다) */
+  /* 「맞춤 송금」: 화면을 꽉 채운 하늘색 띠 (위아래로 넘쳐 칠하고, 그만큼 단락 간격을 더한다) */
   /* 아래로는 .midband 바닥(=남색 단락 시작)까지 칠해서 흰 줄이 안 생기게 */
   #featsec{position:relative; --bx:96px; --bxb:150px; margin-top:calc(var(--gap) + var(--bx));}
   @media(min-width:768px){ #featsec{--bx:150px; --bxb:215px;} }
@@ -1437,7 +1437,7 @@
     left:50%; width:100vw; transform:translateX(-50%); pointer-events:none;
     background:color-mix(in srgb, var(--primary) 7%, #fff);}
   #featsec > *{position:relative; z-index:1;}
-  /* 「쉽고 빠른」 — 제목부터 내용까지 흰 둥근 상자 하나에 (바탕도 흰색이라 얇은 테두리 · 옅은 그림자로 경계) */
+  /* 「쉽고 빠른」: 제목부터 내용까지 흰 둥근 상자 하나에 (바탕도 흰색이라 얇은 테두리 · 옅은 그림자로 경계) */
   #howto > .wrap{box-sizing:border-box; width:calc(100% - 32px); max-width:none; margin:0 16px;
     background:#fff; border:1px solid var(--line); border-radius:24px; padding:48px 16px 40px;
     box-shadow:0 18px 44px -30px rgba(20,40,90,.25), 0 1px 3px rgba(15,23,42,.04);}
@@ -1447,7 +1447,7 @@
     #howto > .wrap .hwrap{padding:0 52px 0;}
     #howto > .wrap .hpic{margin-left:-52px; margin-right:-52px; width:calc(100% + 104px); max-width:none;}
   }
-  /* 사진 띠 — 스크롤 위치에 따라 가로 · 세로로 퍼졌다 다시 오므라든다 */
+  /* 사진 띠: 스크롤 위치에 따라 가로 · 세로로 퍼졌다 다시 오므라든다 */
   /* 오려내기(clip-path)는 띠 자체가 아니라 바깥 창에 건다.
      띠는 따로 한 겹(layer)으로 올려두면, 창만 바뀔 때 다시 그리지 않아 폰에서 안 끊긴다 */
   .bandclip{display:block; max-width:none;
@@ -1465,7 +1465,7 @@
     .js-motion .bandclip{clip-path:none !important;}
   }
 
-  /* 히어로 아래 — 공식 채널 바로가기 (로고 · 이름 · 화살표) */
+  /* 히어로 아래: 공식 채널 바로가기 (로고 · 이름 · 화살표) */
   .hsns{display:flex; flex-wrap:nowrap; justify-content:center; gap:6px 16px; margin:24px auto 0;}
   .hsns em{font-style:normal;}
   @media(max-width:767px){
@@ -1514,7 +1514,7 @@
 
 <main class="main">
 
-  <!-- ===== 1. 히어로 — 가운데 한 마디 + 흐르는 대화 카드 ===== -->
+  <!-- ===== 1. 히어로: 가운데 한 마디 + 흐르는 대화 카드 ===== -->
   <div class="topband">
   <section class="hero">
     <div class="wrap hero2">
@@ -1552,7 +1552,7 @@
     <div class="sdown" aria-hidden="true"><span class="mouse"><iconify-icon icon="mingcute:arrow-down-line"></iconify-icon></span><b>SCROLL DOWN</b></div>
   </section>
 
-  <!-- ===== 2. 결제 항목 + 카드사 로고 — 한 화면 ===== -->
+  <!-- ===== 2. 결제 항목 + 카드사 로고: 한 화면 ===== -->
   <section class="sec tight tint" id="itemsec">
     <div class="wrap">
       <div class="head">
@@ -1592,9 +1592,9 @@
   </section>
   </div>
 
-  <!-- ===== 랜선페이를 써야 하는 이유 — 1~7 펼침 ===== -->
+  <!-- ===== 랜선페이를 써야 하는 이유: 1~7 펼침 ===== -->
   <div class="midband">
-  <!-- ===== 5. 이용 방법 — 6단계 상세 ===== -->
+  <!-- ===== 5. 이용 방법: 6단계 상세 ===== -->
   <section class="sec tint" id="howto">
     <div class="wrap">
       <div class="head">
@@ -1685,7 +1685,7 @@
   </section>
 
 
-  <!-- ===== 4. 기능 3가지 — 흰 카드 3장 + 모서리 배지 ===== -->
+  <!-- ===== 4. 기능 3가지: 흰 카드 3장 + 모서리 배지 ===== -->
   <section class="sec tint" id="featsec">
     <div class="wrap">
       <div class="head">
@@ -1738,7 +1738,7 @@
   </div>
 
 
-  <!-- ===== 6. 보안 — 파란 패널 (레퍼런스식) ===== -->
+  <!-- ===== 6. 보안: 파란 패널 (레퍼런스식) ===== -->
   <section class="sec tint" id="trustsec">
     <div class="wrap">
       <div class="head">
@@ -1752,7 +1752,7 @@
           <p class="d">결제 대금은 <b>지정 계좌로만</b> 송금됩니다<br>대출이 아닌 <b>정식 결제 서비스</b>예요</p>
         </div>
         <img class="simg" src="img/status3d-blue.png?v=1"
-          alt="결제 현황 — 누적 이용자 42,000명+ · 총 송금 건수 16,800건+ · 평균 입금 시간 5~10분 · 정식 PG">
+          alt="결제 현황: 누적 이용자 42,000명+ · 총 송금 건수 16,800건+ · 평균 입금 시간 5~10분 · 정식 PG">
       </div>
 
       <div class="srows">
@@ -1776,7 +1776,7 @@
     </div>
   </section>
 
-  <!-- ===== 7. 후기 — 두 줄 자동 롤링 ===== -->
+  <!-- ===== 7. 후기: 두 줄 자동 롤링 ===== -->
   <div class="tailband">
   <section class="sec tint" id="rvsec">
     <div class="wrap">
@@ -1828,7 +1828,7 @@
     </div>
   </section>
 
-  <!-- ===== 마지막 — 더 알아보기 메뉴 ===== -->
+  <!-- ===== 마지막: 더 알아보기 메뉴 ===== -->
   <section class="sec" id="endcta">
     <div class="wrap">
       <div class="endcard">
@@ -1868,7 +1868,7 @@
   </section>
   </div>
 
-  <!-- ===== 푸터 — 자세하게 ===== -->
+  <!-- ===== 푸터: 자세하게 ===== -->
 </main>
 
   <footer class="foot">
@@ -1917,7 +1917,7 @@
 <!-- 늘 따라다니는 시작 버튼 -->
 <a class="fab" href="app.html" target="_blank" rel="noopener"><img class="btn-logo" src="img/logo3-white.png" alt="">바로 송금하기</a>
 <script>
-/* 후기 두 줄 — 한 칸씩 밀린다. 아랫줄(data-dir=-1)은 반대 방향 */
+/* 후기 두 줄: 한 칸씩 밀린다. 아랫줄(data-dir=-1)은 반대 방향 */
 (function () {
   document.querySelectorAll('.rvrow').forEach(function (tk) {
     var band = tk.parentElement;
@@ -1958,7 +1958,7 @@
 })();
 </script>
 <script>
-/* 결제 항목 — 누르면 아래 상세 패널(설명 · 주의 · 필요 서류)이 바뀐다 */
+/* 결제 항목: 누르면 아래 상세 패널(설명 · 주의 · 필요 서류)이 바뀐다 */
 (function () {
   var 큰제목 = document.getElementById('itp-h');
   if (!큰제목) return;
@@ -2058,7 +2058,7 @@
 </script>
 
 <script>
-/* 이용 방법 — 단계를 누르거나 좌우 화살표로 넘기면 목업 화면이 바뀐다 */
+/* 이용 방법: 단계를 누르거나 좌우 화살표로 넘기면 목업 화면이 바뀐다 */
 (function () {
   var 단계들 = [].slice.call(document.querySelectorAll('#howto .tstep'));
   var 화면 = document.getElementById('hshot');
@@ -2113,12 +2113,12 @@
   </div>
 </div>
 <script>
-/* 이벤트 팝업 — 오늘 하루 숨김은 localStorage · 주소에 evpop=1 붙이면 강제로 보임 */
+/* 이벤트 팝업: 오늘 하루 숨김은 localStorage · 주소에 evpop=1 붙이면 강제로 보임 */
 (function () {
   var 팝 = document.getElementById('evpop'), 딤 = document.getElementById('evpopdim');
   if (!팝) return;
   var 강제 = location.search.indexOf('evpop=1') > -1;
-  if (!강제) return;                       /* 이벤트 준비 전까지 팝업 끔 — 되살리려면 이 줄만 지우세요 */
+  if (!강제) return;                       /* 이벤트 준비 전까지 팝업 끔: 되살리려면 이 줄만 지우세요 */
   try { if (!강제 && localStorage.getItem('lp_evpop') === new Date().toDateString()) return; } catch (e) {}
   팝.hidden = false; 딤.hidden = false;
   var i = 0, n = 6, tk = document.getElementById('evpoptrack');
@@ -2150,7 +2150,7 @@
 })();
 </script>
 <script>
-/* 기능 카드 — 모바일 슬라이더: 트랙을 통째로 밀어서 항상 한 장이 꽉 찬다 */
+/* 기능 카드: 모바일 슬라이더: 트랙을 통째로 밀어서 항상 한 장이 꽉 찬다 */
 (function(){
   var 판=document.querySelector('.rzgrid');
   if(!판) return;
@@ -2195,12 +2195,12 @@
 })();
 </script>
 <script>
-/* 이모지 편집 모드 — ?edit=1 : PC·모바일 모두 드래그로 위치, 버튼/휠로 크기 */
+/* 이모지 편집 모드: ?edit=1 : PC·모바일 모두 드래그로 위치, 버튼/휠로 크기 */
 (function () {
   if (location.search.indexOf('edit=1') < 0) return;
   var 들 = document.querySelectorAll('.hemo');
   if (!들.length) return;
-  /* 실제 적용된 배치로 판단 — 상자가 살아 있으면 모바일 규칙 */
+  /* 실제 적용된 배치로 판단: 상자가 살아 있으면 모바일 규칙 */
   var 상자 = document.querySelector('.figwrap');
   var 모바일 = window.innerWidth <= 767 || window.matchMedia('(max-width:767px)').matches;
   var 기준 = 상자 || document.querySelector('.hero');
@@ -2212,7 +2212,7 @@
   안내.style.cssText = 'position:fixed; left:10px; right:10px; bottom:10px; z-index:99999;' +
     'background:var(--primary-900); color:#fff; padding:12px 14px; border-radius:18px; font-size:13px;' +
     'line-height:1.6; box-shadow:0 10px 30px rgba(0,0,0,.35); font-family:inherit;';
-  안내.innerHTML = '<b style="font-size:14.5px">이모지 편집 — ' + (모바일 ? '모바일' : 'PC') + ' 화면</b><br>' +
+  안내.innerHTML = '<b style="font-size:14.5px">이모지 편집: ' + (모바일 ? '모바일' : 'PC') + ' 화면</b><br>' +
     '이모지를 끌어서 옮기고, 하나 누른 뒤 <b>+ / −</b> 로 크기 조절' +
     '<div style="font-size:11.5px;color:#9FB3D9;margin-top:4px">화면 폭 ' + window.innerWidth + 'px</div>' +
     '<div style="display:flex; gap:8px; margin-top:8px">' +
@@ -2306,7 +2306,7 @@
 })();
 </script>
 <script>
-/* 히어로 숫자 — 화면에 들어오면 0에서부터 올라간다 */
+/* 히어로 숫자: 화면에 들어오면 0에서부터 올라간다 */
 (function(){
   var els = [].slice.call(document.querySelectorAll('.hstats .cnt'));
   if(!els.length) return;
@@ -2327,12 +2327,12 @@
     }, {threshold:.4});
     els.forEach(function(el){ io.observe(el); });
   }
-  /* 안전장치 — 관찰이 안 울려도 2.5초 뒤에는 숫자를 보여준다 */
+  /* 안전장치: 관찰이 안 울려도 2.5초 뒤에는 숫자를 보여준다 */
   setTimeout(function(){ els.forEach(run); }, 2500);
 })();
 </script>
 <script>
-/* 사진 띠 — 스크롤에 따라 퍼졌다 오므라든다 (가로 · 세로 동시) */
+/* 사진 띠: 스크롤에 따라 퍼졌다 오므라든다 (가로 · 세로 동시) */
 (function(){
   var el = document.querySelector('.bandclip');
   if(!el) return;

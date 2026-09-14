@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>랜선페이 — 회사소개</title>
+<title>랜선페이 | 회사소개</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
 <link rel="stylesheet" href="style.css?v=32">
 <link rel="icon" type="image/png" href="img/logo3.png">
@@ -23,7 +23,7 @@
   /* 영상 · 수치가 있는 두 섹션은 글도 가운데 */
   .sec:has(.avid) .head, .sec:has(.astats) .head{text-align:center;}
   .sec:has(.avid) .prose, .sec:has(.astats) .prose{margin:0 auto; text-align:center;}
-  /* 소개 페이지 — 랜딩보다 차분한 제목 크기 */
+  /* 소개 페이지: 랜딩보다 차분한 제목 크기 */
   .head .eyebrow{font-size:13.5px; margin-bottom:10px;}
   .head .h-sec{font-size:23px; letter-spacing:-.5px;}
   @media(min-width:768px){
@@ -31,7 +31,7 @@
     .head .h-sec{font-size:27px;}
   }
 
-  /* ===== 1. 헤더 — 사진 한 장 위에 문구 ===== */
+  /* ===== 1. 헤더: 사진 한 장 위에 문구 ===== */
   .ahd{position:relative; isolation:isolate; overflow:hidden;
     min-height:min(92vh, 780px); display:flex; align-items:flex-end;}
   .ahd-img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
@@ -41,9 +41,9 @@
     background:
       linear-gradient(100deg, rgba(8,18,40,.8) 0%, rgba(8,18,40,.52) 20%, rgba(8,18,40,.14) 38%, rgba(8,18,40,0) 52%),
       linear-gradient(180deg, rgba(8,18,40,.1) 0%, rgba(8,18,40,0) 42%, rgba(8,18,40,.26) 100%);}
-  /* 휴대폰 — 글이 아래에만 있으니 아래쪽만 어둡게 · 인물은 오른쪽에 */
+  /* 휴대폰: 글이 아래에만 있으니 아래쪽만 어둡게 · 인물은 오른쪽에 */
   @media(max-width:767px){
-    /* 휴대폰 — 사진 크기는 그대로 두고 아래쪽만 잘라낸다 */
+    /* 휴대폰: 사진 크기는 그대로 두고 아래쪽만 잘라낸다 */
     .ahd{min-height:min(72vh, 560px);}
     .ahd-img{height:min(92vh, 780px); min-height:0; top:0; bottom:auto;
       object-position:46% top;}
@@ -60,7 +60,7 @@
   .ahd-tx p{margin-top:15px; font-size:clamp(14.5px, 1.6vw, 16.5px); line-height:1.8;
     color:rgba(255,255,255,.88); word-break:keep-all; text-shadow:0 1px 12px rgba(4,12,30,.4);}
 
-  /* ===== 단락 구분 — 옅은 회색 바탕 ===== */
+  /* ===== 단락 구분: 옅은 회색 바탕 ===== */
   .graysec{background:#F5F7FA;}
   .head.center{text-align:center;}
   .head-sub{margin-top:14px; font-size:15px; line-height:1.85; color:var(--sub); word-break:keep-all;}
@@ -74,7 +74,7 @@
   .afig img{width:100%; height:100%; min-height:340px; object-fit:cover; border-radius:16px; display:block;}
   @media(max-width:999px){ .afig img{height:auto; aspect-ratio:16/10;} }
 
-  /* ===== 3. 현금 vs 카드 — 왼쪽 글 · 오른쪽 비교 ===== */
+  /* ===== 3. 현금 vs 카드: 왼쪽 글 · 오른쪽 비교 ===== */
   .cmpwrap{max-width:1060px; margin:48px auto 0;}
   @media(min-width:768px){ .cmpwrap{margin-top:52px;} }
   .cmp2{display:grid; grid-template-columns:1fr; gap:12px; align-items:stretch;}
@@ -88,13 +88,13 @@
   .cmp li:last-child{margin-bottom:0;}
   .cmp li:before{content:''; position:absolute; left:0; top:8px; width:6px; height:6px; border-radius:50%;}
 
-  /* 현금으로 낼 때 — 가라앉은 회색 */
+  /* 현금으로 낼 때: 가라앉은 회색 */
   .cmp.before{background:#EDEFF3;}
   .cmp.before .cmp-tag{background:#fff; color:var(--placeholder);}
   .cmp.before li{color:#7B828D;}
   .cmp.before li:before{background:#BFC5CE;}
 
-  /* 랜선페이로 낼 때 — 우리 옅은 파랑 그라데이션 */
+  /* 랜선페이로 낼 때: 우리 옅은 파랑 그라데이션 */
   .cmp.after{border:1px solid var(--primary-100);
     background:
       radial-gradient(420px 220px at 88% 8%, rgba(255,255,255,.9), transparent 70%),
@@ -108,7 +108,7 @@
     color:var(--primary); font-size:24px; opacity:.55;}
   @media(max-width:899px){ .cmp-arw{transform:rotate(90deg); padding:2px 0;} }
 
-  /* ===== 5. 일하는 원칙 — 가운데 정렬 3칸 ===== */
+  /* ===== 5. 일하는 원칙: 가운데 정렬 3칸 ===== */
   .prin3{display:grid; grid-template-columns:1fr; gap:14px; max-width:1060px; margin:48px auto 0;}
   @media(min-width:768px){ .prin3{grid-template-columns:repeat(3,1fr); gap:18px; margin-top:52px;} }
   /* 바깥 흰 상자 · 안쪽에 그라데이션 상자 (메인 핵심 포인트 카드와 같은 방식) */
@@ -149,13 +149,13 @@
   }
   .aphotos img{width:100%; aspect-ratio:3/4; object-fit:cover; border-radius:8px; display:block;}
 
-  /* ===== 6. 숫자 — 왼쪽 수치 · 오른쪽 장식 그래프 ===== */
+  /* ===== 6. 숫자: 왼쪽 수치 · 오른쪽 장식 그래프 ===== */
   .numwrap{display:grid; gap:34px; align-items:center;}
   @media(min-width:1000px){ .numwrap{grid-template-columns:1fr 1fr; gap:64px;} }
   .num-tx .h-sec{font-size:24px; letter-spacing:-.6px; line-height:1.4;}
   @media(min-width:768px){ .num-tx .h-sec{font-size:30px;} }
   .num-tx > p{margin-top:18px; font-size:15.5px; line-height:1.8; color:var(--sub); word-break:keep-all;}
-  /* 메인 히어로 숫자 카드와 같은 방식 — 라벨 위 · 숫자 아래 · 칸 구분선 */
+  /* 메인 히어로 숫자 카드와 같은 방식: 라벨 위 · 숫자 아래 · 칸 구분선 */
   .num-tx .astats{margin-top:34px; display:grid; grid-template-columns:repeat(4, 1fr); gap:0;
     background:#fff; border:1px solid var(--line); border-radius:16px; padding:20px 6px;
     box-shadow:0 8px 22px -18px rgba(15,23,42,.45);}
@@ -182,11 +182,11 @@
   .prose b{color:var(--ink);}
   @media(min-width:768px){ .prose{font-size:17px;} }
 
-  /* 흐름 영상 — 가운데 */
+  /* 흐름 영상: 가운데 */
   .avid{max-width:760px; margin:34px auto 0; overflow:hidden;}
   .avid video{width:134%; margin:-23.2% -15.9% -27.5% -17.8%; filter:brightness(1.012); display:block;}
 
-  /* 항목 타일 12개 — 장식용 */
+  /* 항목 타일 12개: 장식용 */
   /* 왼쪽 글 · 오른쪽 정사각 타일 */
   .itemwrap{display:grid; gap:32px;}
   @media(min-width:1000px){ .itemwrap{grid-template-columns:1fr 1fr; gap:56px; align-items:center;} }
@@ -216,7 +216,7 @@
   .ai.on .w{opacity:1;}
   .ai.on b{color:#fff;}
 
-  /* 큰 수치 — 우측 정렬 */
+  /* 큰 수치: 우측 정렬 */
   .astats{margin-top:44px; display:flex; flex-wrap:nowrap; justify-content:center;
     gap:0; text-align:center;}
   .astats > .ast{flex:1 1 0; min-width:0; padding:0 4px;}
@@ -227,7 +227,7 @@
   .ast b i{font-style:normal; font-size:.5em;}
   .ast > span{display:block; margin-top:9px; font-size:14px; color:var(--sub);}
 
-  /* 마무리 — 파란 밴드 + CTA */
+  /* 마무리: 파란 밴드 + CTA */
   /* 카드 사진은 아래에 · 문구와 버튼은 그 위에 (겹치지 않게) */
   .afin{position:relative; isolation:isolate; overflow:hidden; text-align:center; color:var(--ink);
     background:#F8F7FC; padding:74px 0 384px;}
@@ -267,7 +267,7 @@
     .fbtn.ghost{flex:1 1 calc(50% - 5px); width:auto;}
   }
 
-  /* ===== 글씨 크기 통일 — 이 페이지의 위계는 여기서만 정한다 =====
+  /* ===== 글씨 크기 통일: 이 페이지의 위계는 여기서만 정한다 =====
      1) 섹션 제목  2) 눈썹  3) 소제목  4) 본문  5) 보조문구 */
   .head .h-sec, .split-l .h-sec{font-size:24px; letter-spacing:-.6px; line-height:1.4;}
   @media(min-width:768px){ .head .h-sec, .split-l .h-sec{font-size:30px;} }
@@ -292,7 +292,7 @@
   .ahd-tx p{font-size:16px;}
   .afin p{font-size:clamp(22px, 2.8vw, 30px);}
 
-  /* 휴대폰 — 제목과 설명은 모두 왼쪽 정렬 */
+  /* 휴대폰: 제목과 설명은 모두 왼쪽 정렬 */
   @media(max-width:767px){
     .main .head, .main .head.center{text-align:left;}
     .main .head-sub, .main .prose, .main .prose.center{text-align:left;}
@@ -301,7 +301,7 @@
     .main .head-sub br{display:none;}
   }
 
-  /* PC 에서만 문장마다 줄바꿈 — 휴대폰은 화면 폭에 맞춰 자연스럽게 흐르도록 */
+  /* PC 에서만 문장마다 줄바꿈: 휴대폰은 화면 폭에 맞춰 자연스럽게 흐르도록 */
   .pcbr{display:none;}
   @media(min-width:1000px){ .pcbr{display:inline;} }
 
@@ -309,7 +309,7 @@
      1) 한글은 어절 단위로 끊는다 (word-break:keep-all)
      2) 제목은 줄 길이를 고르게 (text-wrap:balance)
      3) 본문은 마지막 줄에 한 단어만 남지 않게 (text-wrap:pretty)
-     4) 한 줄은 40자 안쪽 — 그보다 길면 눈이 다음 줄을 놓친다
+     4) 한 줄은 40자 안쪽: 그보다 길면 눈이 다음 줄을 놓친다
      5) 강제 줄바꿈(br)은 PC 에서만 · 휴대폰은 화면 폭에 맡긴다 */
   /* 본문은 줄 끝이 비지 않게 글자 단위 줄바꿈까지 허용 · 제목과 강조는 어절 유지 */
   .main p, .main li{word-break:normal; overflow-wrap:anywhere; text-wrap:pretty; letter-spacing:-.2px;}
@@ -323,10 +323,10 @@
     .main .h-sec br:not(.keep), .main .head-sub br:not(.keep), .main p br:not(.keep){display:none;}
   }
 
-  /* 강조 규칙 통일 — 본문 안 강조는 진한 검정 굵게 · 파랑은 제목 강조에만 */
+  /* 강조 규칙 통일: 본문 안 강조는 진한 검정 굵게 · 파랑은 제목 강조에만 */
   .main .head-sub b, .main .prose b, .main .cmp b, .main p b{font-weight:800; color:var(--ink);}
 
-  /* 휴대폰 — 페이지 안 모든 글줄에 같은 규칙 (양쪽 정렬 안 씀 · 자간 일정)
+  /* 휴대폰: 페이지 안 모든 글줄에 같은 규칙 (양쪽 정렬 안 씀 · 자간 일정)
      어절 단위로 끊고 줄 끝 균형만 잡는다. 정렬 방향은 각 단락 설정을 그대로 둔다 */
   @media(max-width:767px){
     .main p, .main li{
@@ -355,7 +355,7 @@
 </header>
 
 <main class="main">
-  <!-- 1. 헤더 — 사진 한 장. 교체는 아래 img 한 줄만 -->
+  <!-- 1. 헤더: 사진 한 장. 교체는 아래 img 한 줄만 -->
   <header class="ahd">
     <img class="ahd-img" src="img/about-hero.png?v=5" alt="집에서 휴대폰으로 결제하는 모습">
     <div class="ahd-tx">
@@ -367,7 +367,7 @@
     </div>
   </header>
 
-  <!-- 2. 시작한 이유 — 글 + 사진 -->
+  <!-- 2. 시작한 이유: 글 + 사진 -->
   <section class="sec tight">
     <div class="wrap">
       <div class="acols">
@@ -426,7 +426,7 @@
     </div>
   </section>
 
-  <!-- 4. 결제 가능 항목 — 타일 12개 -->
+  <!-- 4. 결제 가능 항목: 타일 12개 -->
   <section class="sec tight">
     <div class="wrap">
       <div class="itemwrap">
@@ -606,7 +606,7 @@
 })();
 </script>
 <script>
-/* 사진 줄 — 마우스로 끌어서 넘기기 (이미지 고스트 드래그 차단) */
+/* 사진 줄: 마우스로 끌어서 넘기기 (이미지 고스트 드래그 차단) */
 (function () {
   document.querySelectorAll('.aphotos').forEach(function (판) {
     var 끌기 = false, x0 = 0, s0 = 0;
