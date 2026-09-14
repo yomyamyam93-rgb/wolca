@@ -222,6 +222,8 @@
   .steps2{gap:64px;}
   .sd h3{font-size:21px !important;}
   .sd ol li{font-size:14.5px !important;}
+  /* 단계 설명은 어절 단위로만 줄바꿈 (공통 규칙의 글자 단위 채우기보다 우선) */
+  body .sd ol li{word-break:keep-all !important; overflow-wrap:normal;}
   .sdx{display:flex !important; flex-direction:column !important; align-items:center !important;}
   .sdx .phone.pa, .sdx .phone.pb{margin:22px 0 0 !important;}
   .sd .phone{margin-top:22px;}
