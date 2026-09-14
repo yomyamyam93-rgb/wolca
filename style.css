@@ -338,8 +338,9 @@ main{flex:1 0 auto;}
    본문은 줄 끝이 비지 않게 글자 단위 줄바꿈까지 허용하고
    제목과 강조한 말은 어절을 지킨다 */
 @media(max-width:900px){
-  body p, body li, body dd, body .a, body .dr, body .tx{
-    word-break:normal; overflow-wrap:anywhere; text-wrap:pretty; letter-spacing:-.2px;}
-  body p b, body li b, body strong, body h1, body h2, body h3,
-  body .h-sec, body .h-hero, body b{word-break:keep-all;}
+  /* 페이지마다 따로 준 keep-all(.tbd p · .pcard p 등)보다 우선하도록 !important */
+  body p, body li, body dd, body td, body .a, body .dr, body .tx{
+    word-break:normal !important; overflow-wrap:anywhere; text-wrap:pretty; letter-spacing:-.2px;}
+  body p b, body li b, body strong, body h1, body h2, body h3, body h4,
+  body .h-sec, body .h-hero, body b, body .lead, body dt, body summary, body label{word-break:keep-all !important;}
 }
