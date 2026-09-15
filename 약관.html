@@ -14,6 +14,12 @@
   .tt-tabs a{height:40px; padding:0 18px; display:inline-flex; align-items:center; border-radius:999px;
     background:#F4F6F9; font-size:14px; font-weight:700; color:var(--sub);}
   .tt-tabs a.on{background:var(--primary); background:var(--grad); color:#fff;}
+  /* 좁은 폰(360~430)에서도 세 탭이 한 줄: 글자를 줄이고 앞말("서비스"·"개인정보")은 숨긴다 */
+  @media(max-width:479px){
+    .tt-tabs{gap:6px; flex-wrap:nowrap;}
+    .tt-tabs a{height:34px; padding:0 10px; font-size:12.5px; white-space:nowrap;}
+    .tt-tabs .lg{display:none;}
+  }
   .tdoc{display:none; max-width:760px; margin:0 auto;}
   .tdoc.on{display:block;}
   .tdoc h2{font-size:22px; font-weight:800; letter-spacing:-.4px; margin-bottom:22px;}
@@ -49,9 +55,9 @@
   <section class="sec tight" style="padding-top:44px">
     <div class="wrap">
       <div class="tt-tabs">
-        <a href="#terms" data-doc="terms">서비스 이용약관</a>
+        <a href="#terms" data-doc="terms"><span class="lg">서비스 </span>이용약관</a>
         <a href="#privacy" data-doc="privacy">개인정보 처리방침</a>
-        <a href="#thirdparty" data-doc="thirdparty">개인정보 3자 제공 고지</a>
+        <a href="#thirdparty" data-doc="thirdparty"><span class="lg">개인정보 </span>3자 제공 고지</a>
       </div>
       <article class="tdoc" id="terms"><h2>서비스 이용약관</h2>
 <h3>제1조 (목적)</h3>

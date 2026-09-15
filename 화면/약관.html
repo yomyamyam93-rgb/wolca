@@ -26,6 +26,12 @@
   .tdoc p{font-size:14.5px; line-height:1.85; color:var(--sub);}
   .tdoc .tdate{margin-top:30px; color:var(--placeholder); font-size:13px;}
   .tt-tabs{justify-content:flex-start; margin-bottom:26px;}
+  /* 좁은 폰(360~430)에서도 세 탭이 한 줄: 글자를 줄이고 앞말("서비스"·"개인정보")은 숨긴다 */
+  @media(max-width:479px){
+    .tt-tabs{gap:6px; flex-wrap:nowrap;}
+    .tt-tabs a{height:34px; padding:0 10px; font-size:12.5px; white-space:nowrap;}
+    .tt-tabs .lg{display:none;}
+  }
   /* 하단 탭바: 모든 콘텐츠 화면 공통 */
   .apphull, .phone{padding-bottom:110px !important;}
   .atab{position:fixed; left:50%; transform:translateX(-50%); bottom:0; z-index:60;
@@ -45,9 +51,9 @@
   <div class="topbar"><div class="back" onclick="history.length>1?history.back():location.href='../app.html'">‹</div><div class="ttl">약관 · 정책</div></div>
   <div class="abody">
     <div class="tt-tabs">
-        <a href="#terms" data-doc="terms">서비스 이용약관</a>
+        <a href="#terms" data-doc="terms"><span class="lg">서비스 </span>이용약관</a>
         <a href="#privacy" data-doc="privacy">개인정보 처리방침</a>
-        <a href="#thirdparty" data-doc="thirdparty">개인정보 3자 제공 고지</a>
+        <a href="#thirdparty" data-doc="thirdparty"><span class="lg">개인정보 </span>3자 제공 고지</a>
     </div>
       <article class="tdoc" id="terms"><h2>서비스 이용약관</h2>
 <h3>제1조 (목적)</h3>
