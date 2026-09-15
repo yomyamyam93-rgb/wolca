@@ -73,6 +73,8 @@ html,body{height:auto!important; max-height:none!important; overflow:visible!imp
 /* 기본 앱 홈: 배너 7장이 프레임 오른쪽 밖으로 이어져 보이게 (잘라내기 해제) */
 .figma-strip .sheet, .figma-strip .uspband, .figma-strip .aband{overflow:visible!important;}
 .figma-strip .atrack{width:max-content!important;}
+/* 목록 행: 아이콘과 글자 사이 간격을 gap 대신 margin 으로 (피그마 가져오기에서 gap 이 빠지던 문제) */
+.gbtn.grow{gap:0!important;} .gbtn.grow > .ic{margin-right:12px!important;}
 </style>
 </head>
 <body>
@@ -150,6 +152,9 @@ html,body{height:auto!important; max-height:none!important; overflow:visible!imp
  /* 안쪽에서 스크롤되는 상자를 전부 펼친다 */
  document.querySelectorAll('*').forEach(function(el){var cs=getComputedStyle(el);
    if(/(auto|scroll)/.test(cs.overflowY) && el.scrollHeight>el.clientHeight+4){el.style.setProperty('overflow','visible','important'); el.style.setProperty('height','auto','important'); el.style.setProperty('max-height','none','important');}});
+ /* 그림 크기 고정: 그려진 크기를 px 로 못 박아 피그마에서 찌그러지지 않게 (지연 로딩도 즉시) */
+ document.querySelectorAll('img').forEach(function(im){im.loading='eager';});
+ setTimeout(function(){document.querySelectorAll('img').forEach(function(im){var r=im.getBoundingClientRect(); if(r.width>0&&r.height>0){im.style.setProperty('width',r.width+'px','important'); im.style.setProperty('height',r.height+'px','important'); im.style.setProperty('max-width','none','important'); im.style.setProperty('max-height','none','important');}});},250);
 })();
 </script>
 </body>

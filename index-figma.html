@@ -2420,6 +2420,9 @@ body{min-height:0!important;}
  /* 전체메뉴 서랍: ?drawer=open 일 때만 열어서 남기고, 그 외에는 요소 자체를 뺀다 */
  if(q.get('drawer')==='open'){document.documentElement.classList.add('figma-drawer'); if(typeof drawer==='function') drawer(true);}
  else{['drawer','dim'].forEach(function(id){var e=document.getElementById(id); if(e) e.remove();});}
+ /* 그림 크기 고정: 그려진 크기를 px 로 못 박아 피그마에서 찌그러지지 않게 (지연 로딩도 즉시) */
+ document.querySelectorAll('img').forEach(function(im){im.loading='eager';});
+ setTimeout(function(){document.querySelectorAll('img').forEach(function(im){var r=im.getBoundingClientRect(); if(r.width>0&&r.height>0){im.style.setProperty('width',r.width+'px','important'); im.style.setProperty('height',r.height+'px','important'); im.style.setProperty('max-width','none','important'); im.style.setProperty('max-height','none','important');}});},250);
 })();
 </script>
 </body>
