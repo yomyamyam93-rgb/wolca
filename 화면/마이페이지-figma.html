@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>랜선페이 | 마이페이지</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="../style.css?v=28">
+<style>
+  body{background:#EDF0F4;}
+  .apphull{width:100%; max-width:480px; min-height:100svh; margin:0 auto; background:#fff;
+    box-shadow:0 0 44px rgba(15,23,42,.10); display:flex; flex-direction:column; padding-bottom:40px;}
+  .topbar{height:52px; position:sticky; top:0; z-index:50; background:#fff; display:flex; align-items:center; padding:0 10px; flex:0 0 auto;}
+  .back{width:40px; height:40px; display:flex; align-items:center; justify-content:center;
+    font-size:24px; color:var(--ink); cursor:pointer;}
+  .topbar .ttl{flex:1; text-align:center; font-size:16px; font-weight:700; margin-right:40px;}
+  .abody{flex:1; padding:6px 20px 30px;}
+
+  /* 프로필 카드 */
+  .prof{background:var(--primary-50); border:1px solid #DCE6F7; border-radius:8px; padding:20px; display:flex;
+    align-items:center; gap:14px;}
+  .prof .av{width:52px; height:52px; border-radius:999px; background:var(--primary);
+    background:var(--grad); color:#fff; font-size:20px; font-weight:800;
+    display:flex; align-items:center; justify-content:center; flex:0 0 auto;}
+  .prof .tx b{display:block; font-size:17px; font-weight:800; letter-spacing:-.3px;}
+  .prof .tx span{display:block; margin-top:3px; font-size:12.5px; color:var(--sub);}
+
+  .glabel{margin:24px 2px 8px; font-size:13px; font-weight:700; color:var(--placeholder);}
+  .gcard{background:#fff; border-radius:8px; border:1px solid #E9EDF3; box-shadow:0 2px 8px rgba(0,0,0,.06); padding:2px 16px;}
+  .grow{display:flex; align-items:center; justify-content:space-between; gap:12px; padding:15px 0;
+    border-bottom:1px solid var(--line); color:var(--ink); font-size:15px; font-weight:600;}
+  .gcard .grow:last-child{border-bottom:none;}
+  .grow i{font-style:normal; color:var(--icon-off); font-size:17px;}
+  .grow span.v{font-size:13.5px; font-weight:500; color:var(--sub);}
+
+  .outbtn{width:100%; height:48px; margin-top:26px; border:1px solid var(--line); border-radius:8px;
+    background:#fff; font:inherit; font-size:14.5px; font-weight:700; color:var(--sub); cursor:pointer;}
+  /* 하단 탭바: 모든 콘텐츠 화면 공통 */
+  .apphull, .phone{padding-bottom:110px !important;}
+  .atab{position:fixed; left:50%; transform:translateX(-50%); bottom:0; z-index:60;
+    width:100%; max-width:480px; display:flex; background:rgba(255,255,255,.97);
+    backdrop-filter:blur(8px); border-top:1px solid #E9EDF3;
+    border-radius:26px 26px 0 0; box-shadow:0 -4px 18px rgba(15,23,42,.08);
+    padding:22px 0 calc(24px + var(--safe));}
+  .atab a,.atab button{flex:1; display:flex; flex-direction:column; align-items:center; gap:6px;
+    font-size:11.5px; font-weight:700; color:var(--placeholder); background:none; border:none; cursor:pointer;}
+  .atab iconify-icon{font-size:24px;}
+  .atab .on{color:var(--primary);}
+
+  /* 온오프 스위치 */
+  .sw{position:relative; width:46px; height:27px; border-radius:999px; background:#D6DBE3;
+    border:none; cursor:pointer; transition:background .2s; flex:0 0 auto; padding:0;}
+  .sw:after{content:''; position:absolute; top:3px; left:3px; width:21px; height:21px; border-radius:999px;
+    background:#fff; transition:left .2s; box-shadow:0 1px 3px rgba(0,0,0,.25);}
+  .sw.on{background:var(--primary);}
+  .sw.on:after{left:22px;}
+
+  .glabel{display:flex; align-items:center; justify-content:space-between;}
+  .gl-act{font-size:12.5px; font-weight:700; color:var(--primary-600);}
+  .gnote{padding:12px 0 14px; font-size:12px; color:var(--placeholder); line-height:1.65; border-top:1px solid var(--line); margin-top:-1px;}
+  .grow span.vb{color:var(--primary-600); font-weight:600;}
+  .docempty{padding:26px 16px; text-align:center; font-size:13.5px; color:var(--placeholder);
+    border-style:dashed;}
+</style>
+<style id="figma-icons">iconify-icon{display:inline-block;width:1em;height:1em;line-height:0;vertical-align:-0.125em}iconify-icon>svg{display:block;width:1em;height:1em}</style>
+<style id="figma-fix-app">/* 피그마 가져오기용(앱) */
+*,*::before,*::after{animation:none!important;transition:none!important}
+.apphull{min-height:0!important; position:relative!important;}
+.atab{position:absolute!important; left:0!important; right:0!important; bottom:0!important; transform:none!important; width:100%!important; max-width:none!important;}
+.figma-drawer .drawer{height:780px!important; top:0!important; bottom:auto!important;}
+.figma-drawer .dim{height:780px!important; top:0!important; bottom:auto!important;}
+.figma-sheet .docsheet, .figma-sheet .dsheet, .figma-sheet .pksheet, .figma-sheet .gsheet{max-height:none!important;}
+/* figma-app-scroll: 안쪽 스크롤 틀을 펼쳐 페이지가 내용 길이만큼 길어지게 (가져오기는 화면 높이만큼만 담기 때문) */
+html,body{height:auto!important; max-height:none!important; overflow:visible!important;}
+.apphull{height:auto!important; max-height:none!important; overflow:visible!important;}
+/* ?slides=all → 롤링 배너 7장을 세로로 전부 펼침 */
+.figma-slides .atrack{flex-direction:column!important; width:100%!important; transform:none!important;}
+.figma-slides .aup{flex:none!important; width:100%!important; margin:0 0 12px!important;}
+.figma-slides #uspdots{display:none!important;}
+/* ?slides=row → 롤링 배너 7장만 가로 한 줄(장당 360px)로 */
+.figma-row body{width:2520px!important; margin:0!important; padding:0!important; background:#fff!important; display:block!important; min-height:0!important;}
+.figma-row .apphull{width:2520px!important; max-width:none!important; box-shadow:none!important; padding:0!important;}
+.figma-row .sheet{width:2520px!important; border-radius:0!important; padding:0!important; margin:0!important;}
+.figma-row .aband{overflow:visible!important; margin:0!important; padding:0!important; width:2520px!important; border-radius:0!important;}
+.figma-row .atrack{display:flex!important; flex-direction:row!important; transform:none!important; width:2520px!important;}
+.figma-row .aup{flex:0 0 360px!important; width:360px!important; margin:0!important;}
+.figma-row #uspdots{display:none!important;}
+/* 기본 앱 홈: 배너 7장이 프레임 오른쪽 밖으로 이어져 보이게 (잘라내기 해제) */
+.figma-strip .sheet, .figma-strip .uspband, .figma-strip .aband{overflow:visible!important;}
+.figma-strip .atrack{width:max-content!important;}
+</style>
+</head>
+<body>
+<div class="apphull">
+  <div class="topbar"><div class="back" onclick="history.length>1?history.back():location.href='../app.html'">‹</div><div class="ttl">마이페이지</div></div>
+
+  <div class="abody">
+    <div class="prof">
+      <span class="av">김</span>
+      <span class="tx"><b>김미역</b><span>일반회원 · 010-1234-5678</span></span>
+    </div>
+
+    <div class="glabel">내 정보</div>
+    <div class="gcard">
+      <a class="grow" href="#">이름<span class="v">김미역</span></a>
+      <a class="grow" href="#">휴대폰 번호<span class="v">010-1234-5678</span></a>
+      <a class="grow" href="#">이메일<span class="v">miyeok@naver.com</span></a>
+      <div class="grow">가입일<span class="v">2026.08.26</span></div>
+      <div class="grow">회원등급<span class="v">일반회원</span></div>
+      <div class="grow">인증상태<span class="v vb">이메일 · 휴대폰 인증 완료</span></div>
+      <a class="grow" href="#">비밀번호 변경<i>›</i></a>
+    </div>
+
+    <div class="glabel">사업자 정보 <a class="gl-act" href="#">정보 입력</a></div>
+    <div class="gcard">
+      <div class="grow">사업자등록번호<span class="v">-</span></div>
+      <div class="grow">상호<span class="v">-</span></div>
+      <div class="grow">대표자명<span class="v">-</span></div>
+      <div class="grow">계산서 수신 이메일<span class="v">-</span></div>
+      <div class="gnote">사업자 회원은 계산서 발행 정보를 입력하면 세금계산서 발행이 가능합니다.</div>
+    </div>
+
+    <div class="glabel">혜택</div>
+    <div class="gcard">
+      <a class="grow" href="#">쿠폰 · 포인트<i>›</i></a>
+    </div>
+
+    <div class="glabel">세금 · 증빙</div>
+    <div class="gcard">
+      <a class="grow" href="증빙.html#세액공제">월세 세액공제 증빙<i>›</i></a>
+      <a class="grow" href="증빙.html#세금계산서">세금계산서 발행<i>›</i></a>
+      <a class="grow" href="증빙.html#부가세">부가세 신고용 자료<i>›</i></a>
+      <a class="grow" href="증빙.html#입금확인서">무통장 입금 확인서<i>›</i></a>
+    </div>
+
+    <div class="glabel">설정</div>
+    <div class="gcard">
+      <div class="grow">알림 설정<button class="sw on" id="알림" type="button" aria-label="알림 켜짐"></button></div>
+      <a class="grow" href="약관.html#terms">약관 · 정책<i>›</i></a>
+      <a class="grow" href="약관.html#terms">약관 재동의<i>›</i></a>
+    </div>
+
+    <div class="glabel">보유 서류</div>
+    <div class="gcard docempty">등록된 서류가 없습니다.</div>
+
+    <button class="outbtn" type="button">로그아웃</button>
+  </div>
+</div>
+<nav class="atab">
+  <a href="../app.html"><iconify-icon icon="mingcute:home-4-fill"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M13.2 2.65a2 2 0 0 0-2.4 0l-7 5.25A2 2 0 0 0 3 9.5V19a2 2 0 0 0 2 2h3.9a1.1 1.1 0 0 0 1.1-1.1V15a2 2 0 1 1 4 0v4.9a1.1 1.1 0 0 0 1.1 1.1H19a2 2 0 0 0 2-2V9.5a2 2 0 0 0-.8-1.6z"/></svg></iconify-icon>홈</a>
+  <a href="10_1_유형선택.html"><iconify-icon icon="mingcute:bank-card-fill"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M22 17a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3v-7h20zm-7-3a1 1 0 1 0 0 2h3a1 1 0 1 0 0-2zm4-10a3 3 0 0 1 3 3v1H2V7a3 3 0 0 1 3-3z"/></svg></iconify-icon>결제하기</a>
+  <a href="안내.html"><iconify-icon icon="mingcute:book-2-fill"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M4 5a3 3 0 0 1 3-3h11a2 2 0 0 1 2 2v12.99c0 .168-.038.322-.113.472l-.545 1.09a1 1 0 0 0 0 .895l.543 1.088A1 1 0 0 1 19 22H7a3 3 0 0 1-3-3zm3 13h10.408a3 3 0 0 0 0 2H7a1 1 0 1 1 0-2m3-11a1 1 0 0 0 0 2h4a1 1 0 1 0 0-2z" clip-rule="evenodd"/></svg></iconify-icon>이용안내</a>
+  <button type="button" onclick="location.href='../app.html#menu'"><iconify-icon icon="mingcute:menu-fill"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="3" d="M4 6h16M4 12h16M4 18h16"/></svg></iconify-icon>전체메뉴</button>
+</nav>
+<script>
+document.getElementById('알림').addEventListener('click', function(){
+  this.classList.toggle('on');
+  this.setAttribute('aria-label', this.classList.contains('on') ? '알림 켜짐' : '알림 꺼짐');
+});
+</script>
+<script>/* 피그마 가져오기용(앱): ?drawer=open 서랍 열림 · ?sheet=1 첫 번째 시트 열림 · 그 외엔 서랍·시트 요소 제거 */
+ /* 색 반전 필터로 흰색을 만든 로고는 진짜 흰 로고 그림으로 교체 (필터는 피그마로 안 옮겨짐) */
+ document.querySelectorAll('img').forEach(function(im){var f=getComputedStyle(im).filter||''; if(f.indexOf('invert')<0) return;
+   var src=im.getAttribute('src')||''; if(src.indexOf('logo-text')>=0) im.src=src.replace(/logo-text[^/]*\.png/,'logo-text-white.png');
+   else if(src.indexOf('logo3.png')>=0) im.src=src.replace('logo3.png','logo3-white.png');
+   else if(/item3d\/(\d+)\.png/.test(src)) im.src=src.replace(/item3d\/(\d+)\.png/,'item3d/w$1.png');
+   im.style.setProperty('filter','none','important');});
+(function(){var q=new URLSearchParams(location.search);
+ if(q.get('drawer')==='open'){document.documentElement.classList.add('figma-drawer'); if(typeof drawer==='function') drawer(true);}
+ else{['drawer','dim'].forEach(function(id){var e=document.getElementById(id); if(e) e.remove();});}
+ if(q.get('open')==='all'){document.querySelectorAll('details').forEach(function(d){d.open=true;});}
+ var doList=q.get('do');
+ if(q.get('sheet')==='1'){document.documentElement.classList.add('figma-sheet'); var b=document.getElementById('ap-doclink')||document.querySelector('.pickbtn'); if(b) b.click();}
+ else if(doList){document.documentElement.classList.add('figma-sheet');
+   doList.split(';').forEach(function(step){var i=step.indexOf(':'), kind=step.slice(0,i), arg=step.slice(i+1), el=null;
+     if(kind==='click') el=document.querySelector(arg);
+     else if(kind==='text'){el=Array.prototype.find.call(document.querySelectorAll('button,a,div,span,label,li'), function(e){return e.children.length<3 && e.textContent.trim()===arg;});}
+     if(el){el.click();}});}
+ else{document.querySelectorAll('.docdim,.docsheet,.ask-layer,.pkdim,.pksheet,.ddim,.dsheet,.gdim,.gsheet').forEach(function(e){e.remove();});}
+ /* 롤링 배너: 자동 넘김을 멈추고 1번 장에 고정 · ?slides=all 이면 7장(중복 제거) 전부 세로로 */
+ for(var t=1;t<50000;t++){clearInterval(t);}
+ var band=document.querySelector('.uspband'), tk=document.getElementById('usptrack');
+ if(band&&tk){var ups=Array.prototype.slice.call(tk.querySelectorAll('.aup')), seen={}, uniq=[];
+   ups.forEach(function(u){var im=u.querySelector('img'); var k=im?im.getAttribute('src'):u.textContent.trim(); if(!seen[k]){seen[k]=1; uniq.push(u);}});
+   if(q.get('slides')==='row'){document.documentElement.classList.add('figma-row'); ups.forEach(function(u){if(uniq.indexOf(u)<0) u.remove();});
+     /* 배너는 제자리에 두고(스타일이 조상에 묶여 있음) 조상 사슬의 형제들만 숨긴다 */
+     var node=band; while(node && node!==document.body){ var par=node.parentElement;
+       Array.prototype.forEach.call(par.children, function(c){ if(c!==node) c.style.setProperty('display','none','important'); }); node=par; }
+     tk.style.setProperty('transform','none','important');}
+   else if(q.get('slides')==='all'){document.documentElement.classList.add('figma-slides'); ups.forEach(function(u){if(uniq.indexOf(u)<0) u.remove();}); tk.style.setProperty('transform','none','important');}
+   else if(q.get('slides')==='strip'){ /* 7장을 왼쪽부터 가로로 쭉 (프레임 밖으로 이어짐) */
+     document.documentElement.classList.add('figma-strip'); ups.forEach(function(u){if(uniq.indexOf(u)<0) u.remove();});
+     tk.style.transition='none'; tk.style.setProperty('transform','none','important');}
+   else{ /* 기본: 1번 장에 고정 */
+     var f=uniq[0]; tk.style.transition='none'; tk.style.transform='translateX('+(band.clientWidth/2-(f.offsetLeft+f.offsetWidth/2))+'px)';}
+ }
+ /* 안쪽에서 스크롤되는 상자를 전부 펼친다 */
+ document.querySelectorAll('*').forEach(function(el){var cs=getComputedStyle(el);
+   if(/(auto|scroll)/.test(cs.overflowY) && el.scrollHeight>el.clientHeight+4){el.style.setProperty('overflow','visible','important'); el.style.setProperty('height','auto','important'); el.style.setProperty('max-height','none','important');}});
+})();
+</script>
+</body>
+</html>

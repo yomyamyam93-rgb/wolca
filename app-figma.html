@@ -447,7 +447,7 @@
 .atab{position:absolute!important; left:0!important; right:0!important; bottom:0!important; transform:none!important; width:100%!important; max-width:none!important;}
 .figma-drawer .drawer{height:780px!important; top:0!important; bottom:auto!important;}
 .figma-drawer .dim{height:780px!important; top:0!important; bottom:auto!important;}
-.figma-sheet .docsheet, .figma-sheet .dsheet{max-height:none!important;}
+.figma-sheet .docsheet, .figma-sheet .dsheet, .figma-sheet .pksheet, .figma-sheet .gsheet{max-height:none!important;}
 /* figma-app-scroll: 안쪽 스크롤 틀을 펼쳐 페이지가 내용 길이만큼 길어지게 (가져오기는 화면 높이만큼만 담기 때문) */
 html,body{height:auto!important; max-height:none!important; overflow:visible!important;}
 .apphull{height:auto!important; max-height:none!important; overflow:visible!important;}
@@ -851,7 +851,14 @@ if (location.hash === '#menu') { drawer(true); history.replaceState(null, '', lo
 (function(){var q=new URLSearchParams(location.search);
  if(q.get('drawer')==='open'){document.documentElement.classList.add('figma-drawer'); if(typeof drawer==='function') drawer(true);}
  else{['drawer','dim'].forEach(function(id){var e=document.getElementById(id); if(e) e.remove();});}
+ if(q.get('open')==='all'){document.querySelectorAll('details').forEach(function(d){d.open=true;});}
+ var doList=q.get('do');
  if(q.get('sheet')==='1'){document.documentElement.classList.add('figma-sheet'); var b=document.getElementById('ap-doclink')||document.querySelector('.pickbtn'); if(b) b.click();}
+ else if(doList){document.documentElement.classList.add('figma-sheet');
+   doList.split(';').forEach(function(step){var i=step.indexOf(':'), kind=step.slice(0,i), arg=step.slice(i+1), el=null;
+     if(kind==='click') el=document.querySelector(arg);
+     else if(kind==='text'){el=Array.prototype.find.call(document.querySelectorAll('button,a,div,span,label,li'), function(e){return e.children.length<3 && e.textContent.trim()===arg;});}
+     if(el){el.click();}});}
  else{document.querySelectorAll('.docdim,.docsheet,.ask-layer,.pkdim,.pksheet,.ddim,.dsheet,.gdim,.gsheet').forEach(function(e){e.remove();});}
  /* 롤링 배너: 자동 넘김을 멈추고 1번 장에 고정 · ?slides=all 이면 7장(중복 제거) 전부 세로로 */
  for(var t=1;t<50000;t++){clearInterval(t);}
