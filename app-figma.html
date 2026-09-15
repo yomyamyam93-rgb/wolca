@@ -827,6 +827,11 @@ if (location.hash === '#menu') { drawer(true); history.replaceState(null, '', lo
 })();
 </script>
 <script>/* 피그마 가져오기용(앱): ?drawer=open 서랍 열림 · ?sheet=1 첫 번째 시트 열림 · 그 외엔 서랍·시트 요소 제거 */
+ /* 색 반전 필터로 흰색을 만든 로고는 진짜 흰 로고 그림으로 교체 (필터는 피그마로 안 옮겨짐) */
+ document.querySelectorAll('img').forEach(function(im){var f=getComputedStyle(im).filter||''; if(f.indexOf('invert')<0) return;
+   var src=im.getAttribute('src')||''; if(src.indexOf('logo-text')>=0) im.src=src.replace(/logo-text[^/]*\.png/,'logo-text-white.png');
+   else if(src.indexOf('logo3.png')>=0) im.src=src.replace('logo3.png','logo3-white.png');
+   im.style.setProperty('filter','none','important');});
 (function(){var q=new URLSearchParams(location.search);
  if(q.get('drawer')==='open'){document.documentElement.classList.add('figma-drawer'); if(typeof drawer==='function') drawer(true);}
  else{['drawer','dim'].forEach(function(id){var e=document.getElementById(id); if(e) e.remove();});}

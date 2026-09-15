@@ -2406,6 +2406,11 @@ body{min-height:0!important;}
 <script>/* 피그마 가져오기용: 숫자 카운트는 최종값으로 · ?open=all 접힌 항목 열기 · ?all=1 공지 글·약관 탭 전부 보이기 */
 (function(){
  document.querySelectorAll('[data-to]').forEach(function(el){var to=parseFloat(el.dataset.to),dec=+(el.dataset.dec||0);var v=to.toFixed(dec);el.textContent=el.dataset.comma?Number(v).toLocaleString('ko-KR'):v;el.dataset.done='1';});
+ /* 색 반전 필터로 흰색을 만든 로고는 진짜 흰 로고 그림으로 교체 (필터는 피그마로 안 옮겨짐) */
+ document.querySelectorAll('img').forEach(function(im){var f=getComputedStyle(im).filter||''; if(f.indexOf('invert')<0) return;
+   var src=im.getAttribute('src')||''; if(src.indexOf('logo-text')>=0) im.src=src.replace(/logo-text[^/]*\.png/,'logo-text-white.png');
+   else if(src.indexOf('logo3.png')>=0) im.src=src.replace('logo3.png','logo3-white.png');
+   im.style.setProperty('filter','none','important');});
  var q=new URLSearchParams(location.search);
  if(q.get('open')==='all'){document.querySelectorAll('details').forEach(function(d){d.open=true;});}
  if(q.get('all')==='1'){document.documentElement.classList.add('figma-all');
