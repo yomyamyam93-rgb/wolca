@@ -417,13 +417,14 @@
   .phone.shot .mk-shot{display:block; width:100%; height:auto;}
 
   /* 단계 사이 구분: 가는 선 위에 아래 화살표 */
-  .steps2 .sd:not(:last-child)::after{
-    content:''; display:block; width:100vw; max-width:none; height:34px;
-    margin:67px calc(50% - 50vw) -101px;   /* 선 한가운데가 단락 경계에 정확히 오도록 */
-    background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='34' viewBox='0 0 34 34'%3E%3Ccircle cx='17' cy='17' r='16' fill='%23fff' stroke='%23E4E8EF'/%3E%3Cpath d='M11.5 14.5 17 20l5.5-5.5' fill='none' stroke='%23156FF9' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/34px 34px no-repeat,
-               linear-gradient(var(--line), var(--line)) center/100% 1px no-repeat;}
+  /* 단계 사이 구분: 가는 선 위에 아래 화살표 (실제 요소 — 피그마 가져오기에서도 그대로) */
+  .steps2 .sd > .sdiv{display:block; position:relative; width:100vw; max-width:none; height:34px;
+    margin:67px calc(50% - 50vw) -101px;}   /* 선 한가운데가 단락 경계에 정확히 오도록 */
+  .sdiv .ln{position:absolute; left:0; right:0; top:50%; height:1px; background:var(--line);}
+  .sdiv .ck{position:absolute; left:50%; top:0; width:34px; height:34px; margin-left:-17px;}
+  .sdiv .ck svg{display:block; width:34px; height:34px;}
   @media(min-width:740px){
-    .steps2 .sdx:not(:last-child)::after{grid-row:5; grid-column:1/3; justify-self:stretch;}
+    .steps2 .sdx > .sdiv{grid-row:5; grid-column:1/3; justify-self:stretch;}
   }
   /* 단락 제목 크기: 다른 페이지와 같은 급으로 */
   .main .head .h-sec{font-size:24px; letter-spacing:-.6px; line-height:1.4;}
@@ -440,11 +441,10 @@
   }
 
 </style>
-<style>/* 피그마 가져오기용: 모션 끄고 떠 있는 버튼 숨김 */
+<style id="figma-fix">/* 피그마 가져오기용 */
 *,*::before,*::after{animation:none!important;transition:none!important}
 .fab{display:none!important}
-</style>
-<style id="figma-fix">/* 피그마 가져오기용: 화면 높이(svh)에 따라 변하는 값을 PC 1080 · 폰 780 기준 고정값으로 */
+/* 화면 높이(svh)에 따라 변하는 값을 PC 1080 · 폰 780 기준 고정값으로 */
 @media(min-width:768px){
   .hero{min-height:1016px!important; padding-top:50px!important;}
   .hero > .hero2{margin-bottom:52px!important;}
@@ -465,13 +465,15 @@
   .hero .h-hero{font-size:30px!important;}
   .main{--acen:62px!important;}
 }
-/* 버튼 두 개는 반드시 가로 한 줄 */
 .hbtns{display:flex!important; flex-direction:row!important; flex-wrap:nowrap!important; gap:10px!important;}
 .hbtns .btn{width:auto!important; max-width:none!important; flex:0 0 auto!important;}
 body{min-height:0!important;}
-/* 모델 사진: clip-path(피그마가 상자 크기로 잘라버림) 대신 사진 자체를 상자 높이에 맞춰 자름 → 말풍선이 안 잘림 */
+/* 모델 사진: clip-path 대신 사진 자체를 상자 높이에 맞춰 자름 → 말풍선이 안 잘림 */
 .hmodel{clip-path:none!important; overflow:visible!important;}
 .hmodel img{height:100%!important; object-fit:cover!important; object-position:top center!important;}
+/* ?all=1 → 숨은 글·탭을 전부 펼쳐 한 페이지에 */
+.figma-all .tdoc{display:block!important; margin-bottom:64px!important;}
+.figma-all .npost{margin-bottom:48px;}
 </style>
 </head>
 <body>
@@ -697,15 +699,20 @@ body{min-height:0!important;}
   맞추기();
 })();
 </script>
-<script>/* 피그마 가져오기용: 숫자 카운트 애니메이션 없이 최종 숫자를 바로 표시 */
-(function(){document.querySelectorAll('[data-to]').forEach(function(el){var to=parseFloat(el.dataset.to),dec=+(el.dataset.dec||0);var v=to.toFixed(dec);el.textContent=el.dataset.comma?Number(v).toLocaleString('ko-KR'):v;el.dataset.done='1';});})();
+<script>
+/* 단계 사이 구분선 + 화살표를 실제 요소로 붙인다 */
+(function () {
+  var svg = '<svg viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="16" fill="#fff" stroke="#E4E8EF"/><path d="M11.5 14.5 17 20l5.5-5.5" fill="none" stroke="#156FF9" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  document.querySelectorAll('.steps2 .sd:not(:last-child)').forEach(function (sd) {
+    var d = document.createElement('div'); d.className = 'sdiv'; d.setAttribute('aria-hidden', 'true');
+    d.innerHTML = '<b class="ln"></b><span class="ck">' + svg + '</span>'; sd.appendChild(d);
+  });
+})();
 </script>
-<style>/* 피그마 가져오기용: 주소 뒤에 ?all=1 → 숨은 글·탭을 전부 펼쳐 한 페이지에 */
-.figma-all .tdoc{display:block!important; margin-bottom:64px!important;}
-.figma-all .npost{margin-bottom:48px;}
-</style>
-<script>/* 피그마 가져오기용 스위치: ?open=all → 접힌 항목 전부 열기 · ?all=1 → 공지 글·약관 탭 전부 보이기 */
-(function(){var q=new URLSearchParams(location.search);
+<script>/* 피그마 가져오기용: 숫자 카운트는 최종값으로 · ?open=all 접힌 항목 열기 · ?all=1 공지 글·약관 탭 전부 보이기 */
+(function(){
+ document.querySelectorAll('[data-to]').forEach(function(el){var to=parseFloat(el.dataset.to),dec=+(el.dataset.dec||0);var v=to.toFixed(dec);el.textContent=el.dataset.comma?Number(v).toLocaleString('ko-KR'):v;el.dataset.done='1';});
+ var q=new URLSearchParams(location.search);
  if(q.get('open')==='all'){document.querySelectorAll('details').forEach(function(d){d.open=true;});}
  if(q.get('all')==='1'){document.documentElement.classList.add('figma-all');
    document.querySelectorAll('.npost').forEach(function(el){el.style.display='block';});

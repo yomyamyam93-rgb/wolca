@@ -32,11 +32,10 @@
   }
 
 </style>
-<style>/* 피그마 가져오기용: 모션 끄고 떠 있는 버튼 숨김 */
+<style id="figma-fix">/* 피그마 가져오기용 */
 *,*::before,*::after{animation:none!important;transition:none!important}
 .fab{display:none!important}
-</style>
-<style id="figma-fix">/* 피그마 가져오기용: 화면 높이(svh)에 따라 변하는 값을 PC 1080 · 폰 780 기준 고정값으로 */
+/* 화면 높이(svh)에 따라 변하는 값을 PC 1080 · 폰 780 기준 고정값으로 */
 @media(min-width:768px){
   .hero{min-height:1016px!important; padding-top:50px!important;}
   .hero > .hero2{margin-bottom:52px!important;}
@@ -57,13 +56,15 @@
   .hero .h-hero{font-size:30px!important;}
   .main{--acen:62px!important;}
 }
-/* 버튼 두 개는 반드시 가로 한 줄 */
 .hbtns{display:flex!important; flex-direction:row!important; flex-wrap:nowrap!important; gap:10px!important;}
 .hbtns .btn{width:auto!important; max-width:none!important; flex:0 0 auto!important;}
 body{min-height:0!important;}
-/* 모델 사진: clip-path(피그마가 상자 크기로 잘라버림) 대신 사진 자체를 상자 높이에 맞춰 자름 → 말풍선이 안 잘림 */
+/* 모델 사진: clip-path 대신 사진 자체를 상자 높이에 맞춰 자름 → 말풍선이 안 잘림 */
 .hmodel{clip-path:none!important; overflow:visible!important;}
 .hmodel img{height:100%!important; object-fit:cover!important; object-position:top center!important;}
+/* ?all=1 → 숨은 글·탭을 전부 펼쳐 한 페이지에 */
+.figma-all .tdoc{display:block!important; margin-bottom:64px!important;}
+.figma-all .npost{margin-bottom:48px;}
 </style>
 </head>
 <body>
@@ -185,15 +186,10 @@ body{min-height:0!important;}
 <!-- 늘 따라다니는 시작 버튼 -->
 <a class="fab" href="app.html" target="_blank" rel="noopener"><img class="btn-logo" src="img/logo3-white.png" alt="">바로 송금하기</a>
 
-<script>/* 피그마 가져오기용: 숫자 카운트 애니메이션 없이 최종 숫자를 바로 표시 */
-(function(){document.querySelectorAll('[data-to]').forEach(function(el){var to=parseFloat(el.dataset.to),dec=+(el.dataset.dec||0);var v=to.toFixed(dec);el.textContent=el.dataset.comma?Number(v).toLocaleString('ko-KR'):v;el.dataset.done='1';});})();
-</script>
-<style>/* 피그마 가져오기용: 주소 뒤에 ?all=1 → 숨은 글·탭을 전부 펼쳐 한 페이지에 */
-.figma-all .tdoc{display:block!important; margin-bottom:64px!important;}
-.figma-all .npost{margin-bottom:48px;}
-</style>
-<script>/* 피그마 가져오기용 스위치: ?open=all → 접힌 항목 전부 열기 · ?all=1 → 공지 글·약관 탭 전부 보이기 */
-(function(){var q=new URLSearchParams(location.search);
+<script>/* 피그마 가져오기용: 숫자 카운트는 최종값으로 · ?open=all 접힌 항목 열기 · ?all=1 공지 글·약관 탭 전부 보이기 */
+(function(){
+ document.querySelectorAll('[data-to]').forEach(function(el){var to=parseFloat(el.dataset.to),dec=+(el.dataset.dec||0);var v=to.toFixed(dec);el.textContent=el.dataset.comma?Number(v).toLocaleString('ko-KR'):v;el.dataset.done='1';});
+ var q=new URLSearchParams(location.search);
  if(q.get('open')==='all'){document.querySelectorAll('details').forEach(function(d){d.open=true;});}
  if(q.get('all')==='1'){document.documentElement.classList.add('figma-all');
    document.querySelectorAll('.npost').forEach(function(el){el.style.display='block';});
