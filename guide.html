@@ -97,7 +97,7 @@
   .sd ol li:last-child{margin-bottom:0;}
   @media(min-width:768px){ .sd ol{display:table; width:auto; max-width:100%; margin-left:auto; margin-right:auto;} .sd ol li{white-space:nowrap;} }
 
-  .sd ol li:before{content:counter(s); position:absolute; left:0; top:3px; width:20px; height:20px;
+  .sd ol li > .n{position:absolute; left:0; top:3px; width:20px; height:20px;
     border-radius:999px; background:var(--primary-50); color:var(--primary-600);
     font-size:12px; font-weight:700; display:flex; align-items:center; justify-content:center;}
   .sd li b{color:var(--ink); font-weight:700;}
@@ -672,6 +672,17 @@
   document.querySelectorAll('.steps2 .sd:not(:last-child)').forEach(function (sd) {
     var d = document.createElement('div'); d.className = 'sdiv'; d.setAttribute('aria-hidden', 'true');
     d.innerHTML = '<b class="ln"></b><span class="ck">' + svg + '</span>'; sd.appendChild(d);
+  });
+})();
+</script>
+<script>
+/* 단계 목록 번호를 실제 숫자 요소로 (CSS 카운터는 피그마 가져오기에서 빠짐) */
+(function () {
+  document.querySelectorAll('.sd ol').forEach(function (ol) {
+    var m = /counter-reset:\s*s\s+(\d+)/.exec(ol.getAttribute('style') || ''), n = m ? +m[1] : 0;
+    ol.querySelectorAll(':scope > li').forEach(function (li) {
+      n++; var i = document.createElement('i'); i.className = 'n'; i.textContent = n; li.insertBefore(i, li.firstChild);
+    });
   });
 })();
 </script>
