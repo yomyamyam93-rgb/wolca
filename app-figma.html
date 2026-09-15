@@ -451,6 +451,10 @@
 /* figma-app-scroll: 안쪽 스크롤 틀을 펼쳐 페이지가 내용 길이만큼 길어지게 (가져오기는 화면 높이만큼만 담기 때문) */
 html,body{height:auto!important; max-height:none!important; overflow:visible!important;}
 .apphull{height:auto!important; max-height:none!important; overflow:visible!important;}
+/* ?slides=all → 롤링 배너 7장을 세로로 전부 펼침 */
+.figma-slides .atrack{flex-direction:column!important; width:100%!important; transform:none!important;}
+.figma-slides .aup{flex:none!important; width:100%!important; margin:0 0 12px!important;}
+.figma-slides #uspdots{display:none!important;}
 </style>
 </head>
 <body>
@@ -838,6 +842,14 @@ if (location.hash === '#menu') { drawer(true); history.replaceState(null, '', lo
  else{['drawer','dim'].forEach(function(id){var e=document.getElementById(id); if(e) e.remove();});}
  if(q.get('sheet')==='1'){document.documentElement.classList.add('figma-sheet'); var b=document.getElementById('ap-doclink')||document.querySelector('.pickbtn'); if(b) b.click();}
  else{document.querySelectorAll('.docdim,.docsheet,.ask-layer,.pkdim,.pksheet,.ddim,.dsheet,.gdim,.gsheet').forEach(function(e){e.remove();});}
+ /* 롤링 배너: 자동 넘김을 멈추고 1번 장에 고정 · ?slides=all 이면 7장(중복 제거) 전부 세로로 */
+ for(var t=1;t<50000;t++){clearInterval(t);}
+ var band=document.querySelector('.uspband'), tk=document.getElementById('usptrack');
+ if(band&&tk){var ups=Array.prototype.slice.call(tk.querySelectorAll('.aup')), seen={}, uniq=[];
+   ups.forEach(function(u){var im=u.querySelector('img'); var k=im?im.getAttribute('src'):u.textContent.trim(); if(!seen[k]){seen[k]=1; uniq.push(u);}});
+   if(q.get('slides')==='all'){document.documentElement.classList.add('figma-slides'); ups.forEach(function(u){if(uniq.indexOf(u)<0) u.remove();}); tk.style.setProperty('transform','none','important');}
+   else{var f=uniq[0]; tk.style.transition='none'; tk.style.transform='translateX('+(band.clientWidth/2-(f.offsetLeft+f.offsetWidth/2))+'px)';}
+ }
  /* 안쪽에서 스크롤되는 상자를 전부 펼친다 */
  document.querySelectorAll('*').forEach(function(el){var cs=getComputedStyle(el);
    if(/(auto|scroll)/.test(cs.overflowY) && el.scrollHeight>el.clientHeight+4){el.style.setProperty('overflow','visible','important'); el.style.setProperty('height','auto','important'); el.style.setProperty('max-height','none','important');}});
