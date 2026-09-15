@@ -864,9 +864,11 @@ if (location.hash === '#menu') { drawer(true); history.replaceState(null, '', lo
        Array.prototype.forEach.call(par.children, function(c){ if(c!==node) c.style.setProperty('display','none','important'); }); node=par; }
      tk.style.setProperty('transform','none','important');}
    else if(q.get('slides')==='all'){document.documentElement.classList.add('figma-slides'); ups.forEach(function(u){if(uniq.indexOf(u)<0) u.remove();}); tk.style.setProperty('transform','none','important');}
-   else{ /* 기본: 웹 후기 줄처럼 7장을 왼쪽부터 가로로 쭉 (반복용 복제는 뺌, 프레임 밖으로 이어짐) */
+   else if(q.get('slides')==='strip'){ /* 7장을 왼쪽부터 가로로 쭉 (프레임 밖으로 이어짐) */
      document.documentElement.classList.add('figma-strip'); ups.forEach(function(u){if(uniq.indexOf(u)<0) u.remove();});
      tk.style.transition='none'; tk.style.setProperty('transform','none','important');}
+   else{ /* 기본: 1번 장에 고정 */
+     var f=uniq[0]; tk.style.transition='none'; tk.style.transform='translateX('+(band.clientWidth/2-(f.offsetLeft+f.offsetWidth/2))+'px)';}
  }
  /* 안쪽에서 스크롤되는 상자를 전부 펼친다 */
  document.querySelectorAll('*').forEach(function(el){var cs=getComputedStyle(el);
