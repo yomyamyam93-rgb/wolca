@@ -82,6 +82,9 @@ html,body{height:auto!important; max-height:none!important; overflow:visible!imp
 .figma-strip .atrack{width:max-content!important;}
 /* 목록 행: 아이콘과 글자 사이 간격을 gap 대신 margin 으로 (피그마 가져오기에서 gap 이 빠지던 문제) */
 .gbtn.grow{gap:0!important;} .gbtn.grow > .ic{margin-right:12px!important;}
+/* ?only=1: 시트만 남긴 화면 */
+.figma-only body, .figma-only .apphull{background:transparent!important; box-shadow:none!important; min-height:0!important; padding:0!important; margin:0!important; width:360px!important; max-width:none!important;}
+.figma-only .atab{display:none!important;}
 </style>
 </head>
 <body>
@@ -143,7 +146,24 @@ function goBack(){
      if(kind==='click') el=document.querySelector(arg);
      else if(kind==='text'){el=Array.prototype.find.call(document.querySelectorAll('button,a,div,span,label,li'), function(e){return e.children.length<3 && e.textContent.trim()===arg;});}
      if(el){el.click();}});}
- else{document.querySelectorAll('.docdim,.docsheet,.ask-layer,.pkdim,.pksheet,.ddim,.dsheet,.gdim,.gsheet').forEach(function(e){e.remove();});}
+ /* 열려 있지 않은 시트·서랍·어둠막은 전부 지운다 (화면 밖 아래에 숨어 있다가 긴 프레임에 찍히던 문제) */
+ var OVL='.docdim,.docsheet,.ask-layer,.pkdim,.pksheet,.ddim,.dsheet,.gdim,.gsheet,.drawer,.dim';
+ function isOn(e){ if(e.classList.contains('pksheet')||e.classList.contains('pkdim')) return true; return e.classList.contains('on'); }
+ document.querySelectorAll(OVL).forEach(function(e){ if(!isOn(e)) e.remove(); });
+ /* ?only=1 → 열린 시트(또는 서랍)만 남기고 페이지는 전부 숨겨, 시트 하나가 곧 프레임이 되게 */
+ if(q.get('only')==='1'){
+   var panels=Array.prototype.filter.call(document.querySelectorAll(OVL), function(e){ return isOn(e) && !/dim|ask-layer/.test(e.className); });
+   panels.sort(function(a,b){ return b.getBoundingClientRect().height - a.getBoundingClientRect().height; });
+   var panel=panels[0];
+   if(panel){
+     document.querySelectorAll('.docdim,.pkdim,.ddim,.gdim,.dim').forEach(function(e){e.remove();});
+     var node=panel; while(node && node!==document.body){ var par=node.parentElement;
+       Array.prototype.forEach.call(par.children, function(c){ if(c!==node) c.style.setProperty('display','none','important'); }); node=par; }
+     ['position','transform','left','right','top','bottom','margin','max-height','height'].forEach(function(k){ panel.style.setProperty(k, k==='position'?'static':(k==='transform'?'none':(k==='margin'?'0':'auto')),'important'); });
+     panel.style.setProperty('width','360px','important'); panel.style.setProperty('max-width','none','important');
+     document.documentElement.classList.add('figma-only');
+   }
+ }
  /* 롤링 배너: 자동 넘김을 멈추고 1번 장에 고정 · ?slides=all 이면 7장(중복 제거) 전부 세로로 */
  for(var t=1;t<50000;t++){clearInterval(t);}
  var band=document.querySelector('.uspband'), tk=document.getElementById('usptrack');
