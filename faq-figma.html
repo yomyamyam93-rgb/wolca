@@ -66,6 +66,32 @@
 *,*::before,*::after{animation:none!important;transition:none!important}
 .fab{display:none!important}
 </style>
+<style id="figma-fix">/* 피그마 가져오기용: 화면 높이(svh)에 따라 변하는 값을 PC 1080 · 폰 780 기준 고정값으로 */
+@media(min-width:768px){
+  .hero{min-height:1016px!important; padding-top:50px!important;}
+  .hero > .hero2{margin-bottom:52px!important;}
+  .hmodel{width:600px!important; min-height:300px!important;}
+  .hero .h-hero{font-size:36px!important;}
+  .main{--acen:86px!important;}
+}
+@media(max-width:767px){
+  .hero{padding-top:37px!important;}
+  .hero > .hero2{margin-bottom:50px!important;}
+  .hbadge{font-size:14.6px!important;}
+  .hero .hero2 .hbtns{margin-top:21px!important;}
+  .hero .hsns{margin-top:21px!important;}
+  .hero .sdown{margin-top:35px!important;}
+  .hstats{padding:18.5px 4px!important;}
+  .hstats b{font-size:20.7px!important;}
+  .hmodel{width:338px!important; min-height:218px!important;}
+  .hero .h-hero{font-size:30px!important;}
+  .main{--acen:62px!important;}
+}
+/* 버튼 두 개는 반드시 가로 한 줄 */
+.hbtns{display:flex!important; flex-direction:row!important; flex-wrap:nowrap!important; gap:10px!important;}
+.hbtns .btn{width:auto!important; max-width:none!important; flex:0 0 auto!important;}
+body{min-height:0!important;}
+</style>
 </head>
 <body>
 
