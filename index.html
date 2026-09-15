@@ -631,9 +631,8 @@
   .hero .sdown{position:static; transform:none; margin:-40px auto 2px; display:flex; bottom:auto;}
   #itemsec{background:#fff;}
   /* 단락을 잇는 점선 ⋮ */
-  .vdots{width:5px; height:32px;
-    background-image:radial-gradient(circle, var(--primary-600) 1.7px, transparent 2.1px);
-    background-size:5px 11px; background-repeat:repeat-y; background-position:center top;}
+  .vdots{display:flex; flex-direction:column; align-items:center; gap:6px; width:5px; height:32px;}
+  .vdots i{display:block; width:5px; height:5px; border-radius:50%; background:var(--primary-600);}
   /* 위 단락 끝과 아래 제목 사이 정중앙 */
   #whysec .head{position:relative;}
   #whysec .vdots{position:absolute; left:50%; transform:translateX(-50%);
@@ -1645,7 +1644,7 @@
         <h2 class="h-band"><span class="soft">현금이 없어도</span><br><span class="hl">랜선페이</span>에서 해결하세요</h2>
       </div>
     </div>
-    <div class="banddots" aria-hidden="true"><span class="vdots"></span></div>
+    <div class="banddots" aria-hidden="true"><span class="vdots"><i></i><i></i><i></i></span></div>
   </div>
   <section class="sec tight" id="whysec">
     <div class="wrap">
