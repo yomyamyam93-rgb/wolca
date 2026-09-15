@@ -7,7 +7,6 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
 <link rel="stylesheet" href="style.css?v=34">
 <link rel="icon" type="image/png" href="img/logo3.png">
-<script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 <script src="app.js?v=15"></script>
 <style>
   .tt-tabs{display:flex; justify-content:center; gap:8px; flex-wrap:wrap; margin-bottom:40px;}
@@ -27,6 +26,7 @@
   .tdoc p{font-size:14.5px; line-height:1.85; color:var(--sub);}
   .tdoc .tdate{margin-top:30px; color:var(--placeholder); font-size:13px;}
 </style>
+<style id="figma-icons">iconify-icon{display:inline-block;width:1em;height:1em;line-height:0;vertical-align:-0.125em}iconify-icon>svg{display:block;width:1em;height:1em}</style>
 <style id="figma-fix">/* 피그마 가져오기용 */
 *,*::before,*::after{animation:none!important;transition:none!important}
 .fab{display:none!important}
@@ -80,7 +80,7 @@ body{min-height:0!important;}
       <a href="faq.html">자주 묻는 질문</a>
       <a href="cs.html">고객센터</a>
     </nav>
-    <button class="burger" onclick="drawer(true)" aria-label="전체메뉴"><iconify-icon icon="mingcute:menu-fill"></iconify-icon></button>
+    <button class="burger" onclick="drawer(true)" aria-label="전체메뉴"><iconify-icon icon="mingcute:menu-fill"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="3" d="M4 6h16M4 12h16M4 18h16"/></svg></iconify-icon></button>
   </div>
 </header>
 
@@ -184,12 +184,12 @@ body{min-height:0!important;}
 <aside class="drawer" id="drawer">
   <div class="drawer-top"><b>메뉴</b><button class="x" onclick="drawer(false)" aria-label="닫기">✕</button></div>
   <div class="drawer-body">
-    <a class="row" href="index.html"><span class="tx"><b>홈</b></span><iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon></a>
-    <a class="row" href="about.html"><span class="tx"><b>회사소개</b></span><iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon></a>
-    <a class="row" href="guide.html"><span class="tx"><b>이용가이드</b></span><iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon></a>
-    <a class="row" href="notice.html"><span class="tx"><b>공지사항</b></span><iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon></a>
-    <a class="row" href="faq.html"><span class="tx"><b>자주 묻는 질문</b></span><iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon></a>
-    <a class="row" href="cs.html"><span class="tx"><b>고객센터</b></span><iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon></a>
+    <a class="row" href="index.html"><span class="tx"><b>홈</b></span><iconify-icon class="gv" icon="mingcute:right-line"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.343 6.343L15 12l-5.657 5.657"/></svg></iconify-icon></a>
+    <a class="row" href="about.html"><span class="tx"><b>회사소개</b></span><iconify-icon class="gv" icon="mingcute:right-line"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.343 6.343L15 12l-5.657 5.657"/></svg></iconify-icon></a>
+    <a class="row" href="guide.html"><span class="tx"><b>이용가이드</b></span><iconify-icon class="gv" icon="mingcute:right-line"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.343 6.343L15 12l-5.657 5.657"/></svg></iconify-icon></a>
+    <a class="row" href="notice.html"><span class="tx"><b>공지사항</b></span><iconify-icon class="gv" icon="mingcute:right-line"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.343 6.343L15 12l-5.657 5.657"/></svg></iconify-icon></a>
+    <a class="row" href="faq.html"><span class="tx"><b>자주 묻는 질문</b></span><iconify-icon class="gv" icon="mingcute:right-line"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.343 6.343L15 12l-5.657 5.657"/></svg></iconify-icon></a>
+    <a class="row" href="cs.html"><span class="tx"><b>고객센터</b></span><iconify-icon class="gv" icon="mingcute:right-line"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.343 6.343L15 12l-5.657 5.657"/></svg></iconify-icon></a>
   </div>
 </aside>
 
