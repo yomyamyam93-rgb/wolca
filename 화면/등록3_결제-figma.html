@@ -486,7 +486,8 @@ html,body{height:auto!important; max-height:none!important; overflow:visible!imp
      if(el){el.click();}});}
  /* 열려 있지 않은 시트·서랍·어둠막은 전부 지운다 (화면 밖 아래에 숨어 있다가 긴 프레임에 찍히던 문제) */
  var OVL='.docdim,.docsheet,.ask-layer,.pkdim,.pksheet,.ddim,.dsheet,.gdim,.gsheet,.drawer,.dim';
- function isOn(e){ if(e.classList.contains('pksheet')||e.classList.contains('pkdim')) return true; return e.classList.contains('on'); }
+ function isOn(e){ var cs=getComputedStyle(e); if(cs.display==='none'||cs.visibility==='hidden'||cs.opacity==='0') return false;
+   var r=e.getBoundingClientRect(); return r.height>0 && r.top<innerHeight-1 && r.bottom>1; }   /* 지금 화면 안에 실제로 보이는 것만 */
  document.querySelectorAll(OVL).forEach(function(e){ if(!isOn(e)) e.remove(); });
  /* ?only=1 → 열린 시트(또는 서랍)만 남기고 페이지는 전부 숨겨, 시트 하나가 곧 프레임이 되게 */
  if(q.get('only')==='1'){
