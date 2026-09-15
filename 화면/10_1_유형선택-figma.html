@@ -147,6 +147,7 @@ function goBack(){
  else if(doList){document.documentElement.classList.add('figma-sheet');
    doList.split(';').forEach(function(step){var i=step.indexOf(':'), kind=step.slice(0,i), arg=step.slice(i+1), el=null;
      if(kind==='click') el=document.querySelector(arg);
+     else if(kind==='clickn'){var pp=arg.split('|'); el=document.querySelectorAll(pp[0])[+pp[1]||0];}
      else if(kind==='text'){el=Array.prototype.find.call(document.querySelectorAll('button,a,div,span,label,li'), function(e){return e.children.length<3 && e.textContent.trim()===arg;});}
      if(el){el.click();}});}
  /* 열려 있지 않은 시트·서랍·어둠막은 전부 지운다 (화면 밖 아래에 숨어 있다가 긴 프레임에 찍히던 문제) */
@@ -157,7 +158,8 @@ function goBack(){
  /* ?only=1 → 열린 시트(또는 서랍)만 남기고 페이지는 전부 숨겨, 시트 하나가 곧 프레임이 되게 */
  if(q.get('only')==='1'){
    var panels=Array.prototype.filter.call(document.querySelectorAll(OVL), function(e){ return isOn(e) && !/dim|ask-layer/.test(e.className); });
-   panels.sort(function(a,b){ return b.getBoundingClientRect().height - a.getBoundingClientRect().height; });
+   /* 여러 개가 겹쳐 열려 있으면 맨 위(z-index 큰 것)를, 같으면 큰 것을 고른다 */
+   panels.sort(function(a,b){ var za=+getComputedStyle(a).zIndex||0, zb=+getComputedStyle(b).zIndex||0; return (zb-za) || (b.getBoundingClientRect().height - a.getBoundingClientRect().height); });
    var panel=panels[0];
    if(panel){
      document.querySelectorAll('.docdim,.pkdim,.ddim,.gdim,.dim').forEach(function(e){e.remove();});
