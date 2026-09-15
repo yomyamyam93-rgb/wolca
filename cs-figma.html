@@ -185,5 +185,8 @@ body{min-height:0!important;}
 <!-- 늘 따라다니는 시작 버튼 -->
 <a class="fab" href="app.html" target="_blank" rel="noopener"><img class="btn-logo" src="img/logo3-white.png" alt="">바로 송금하기</a>
 
+<script>/* 피그마 가져오기용: 숫자 카운트 애니메이션 없이 최종 숫자를 바로 표시 */
+(function(){document.querySelectorAll('[data-to]').forEach(function(el){var to=parseFloat(el.dataset.to),dec=+(el.dataset.dec||0);var v=to.toFixed(dec);el.textContent=el.dataset.comma?Number(v).toLocaleString('ko-KR'):v;el.dataset.done='1';});})();
+</script>
 </body>
 </html>
