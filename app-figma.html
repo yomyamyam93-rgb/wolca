@@ -455,6 +455,12 @@ html,body{height:auto!important; max-height:none!important; overflow:visible!imp
 .figma-slides .atrack{flex-direction:column!important; width:100%!important; transform:none!important;}
 .figma-slides .aup{flex:none!important; width:100%!important; margin:0 0 12px!important;}
 .figma-slides #uspdots{display:none!important;}
+/* ?slides=row → 롤링 배너 7장만 가로 한 줄(장당 360px)로 */
+.figma-row body{width:2520px!important; margin:0!important; padding:0!important; background:#fff!important; display:block!important;}
+.figma-row .aband{overflow:visible!important; margin:0!important; padding:0!important; width:2520px!important;}
+.figma-row .atrack{display:flex!important; flex-direction:row!important; transform:none!important; width:2520px!important;}
+.figma-row .aup{flex:0 0 360px!important; width:360px!important; margin:0!important;}
+.figma-row #uspdots{display:none!important;}
 </style>
 </head>
 <body>
@@ -847,7 +853,9 @@ if (location.hash === '#menu') { drawer(true); history.replaceState(null, '', lo
  var band=document.querySelector('.uspband'), tk=document.getElementById('usptrack');
  if(band&&tk){var ups=Array.prototype.slice.call(tk.querySelectorAll('.aup')), seen={}, uniq=[];
    ups.forEach(function(u){var im=u.querySelector('img'); var k=im?im.getAttribute('src'):u.textContent.trim(); if(!seen[k]){seen[k]=1; uniq.push(u);}});
-   if(q.get('slides')==='all'){document.documentElement.classList.add('figma-slides'); ups.forEach(function(u){if(uniq.indexOf(u)<0) u.remove();}); tk.style.setProperty('transform','none','important');}
+   if(q.get('slides')==='row'){document.documentElement.classList.add('figma-row'); ups.forEach(function(u){if(uniq.indexOf(u)<0) u.remove();});
+     document.body.innerHTML=''; document.body.appendChild(band); tk.style.setProperty('transform','none','important');}
+   else if(q.get('slides')==='all'){document.documentElement.classList.add('figma-slides'); ups.forEach(function(u){if(uniq.indexOf(u)<0) u.remove();}); tk.style.setProperty('transform','none','important');}
    else{var f=uniq[0]; tk.style.transition='none'; tk.style.transform='translateX('+(band.clientWidth/2-(f.offsetLeft+f.offsetWidth/2))+'px)';}
  }
  /* 안쪽에서 스크롤되는 상자를 전부 펼친다 */
