@@ -831,6 +831,7 @@ if (location.hash === '#menu') { drawer(true); history.replaceState(null, '', lo
  document.querySelectorAll('img').forEach(function(im){var f=getComputedStyle(im).filter||''; if(f.indexOf('invert')<0) return;
    var src=im.getAttribute('src')||''; if(src.indexOf('logo-text')>=0) im.src=src.replace(/logo-text[^/]*\.png/,'logo-text-white.png');
    else if(src.indexOf('logo3.png')>=0) im.src=src.replace('logo3.png','logo3-white.png');
+   else if(/item3d\/(\d+)\.png/.test(src)) im.src=src.replace(/item3d\/(\d+)\.png/,'item3d/w$1.png');
    im.style.setProperty('filter','none','important');});
 (function(){var q=new URLSearchParams(location.search);
  if(q.get('drawer')==='open'){document.documentElement.classList.add('figma-drawer'); if(typeof drawer==='function') drawer(true);}
