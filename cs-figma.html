@@ -56,6 +56,9 @@
   .hero .h-hero{font-size:30px!important;}
   .main{--acen:62px!important;}
 }
+/* 회사소개 헤더 사진: vh 대신 고정값 (PC 1080 · 폰 780 기준) */
+@media(min-width:768px){ .ahd{min-height:780px!important;} }
+@media(max-width:767px){ .ahd{min-height:560px!important;} .ahd-img{height:717px!important;} }
 .hbtns{display:flex!important; flex-direction:row!important; flex-wrap:nowrap!important; gap:10px!important;}
 .hbtns .btn{width:auto!important; max-width:none!important; flex:0 0 auto!important;}
 body{min-height:0!important;}
