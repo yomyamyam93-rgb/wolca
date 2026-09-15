@@ -1530,6 +1530,9 @@ body{min-height:0!important;}
 /* ?all=1 → 숨은 글·탭을 전부 펼쳐 한 페이지에 */
 .figma-all .tdoc{display:block!important; margin-bottom:64px!important;}
 .figma-all .npost{margin-bottom:48px;}
+/* ?drawer=open → 전체메뉴 서랍 열린 상태 (폰 화면 높이 780 기준) */
+.figma-drawer .drawer{height:780px!important; top:0!important; bottom:auto!important;}
+.figma-drawer .dim{height:780px!important; top:0!important; bottom:auto!important;}
 </style>
 </head>
 <body>
@@ -2405,6 +2408,9 @@ body{min-height:0!important;}
  if(q.get('all')==='1'){document.documentElement.classList.add('figma-all');
    document.querySelectorAll('.npost').forEach(function(el){el.style.display='block';});
    var l=document.getElementById('nlist'); if(l) l.style.display='';}
+ /* 전체메뉴 서랍: ?drawer=open 일 때만 열어서 남기고, 그 외에는 요소 자체를 뺀다 */
+ if(q.get('drawer')==='open'){document.documentElement.classList.add('figma-drawer'); if(typeof drawer==='function') drawer(true);}
+ else{['drawer','dim'].forEach(function(id){var e=document.getElementById(id); if(e) e.remove();});}
 })();
 </script>
 </body>
