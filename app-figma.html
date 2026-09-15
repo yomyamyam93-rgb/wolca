@@ -448,6 +448,9 @@
 .figma-drawer .drawer{height:780px!important; top:0!important; bottom:auto!important;}
 .figma-drawer .dim{height:780px!important; top:0!important; bottom:auto!important;}
 .figma-sheet .sheet, .figma-sheet .dsheet{max-height:none!important;}
+/* figma-app-scroll: 안쪽 스크롤 틀을 펼쳐 페이지가 내용 길이만큼 길어지게 (가져오기는 화면 높이만큼만 담기 때문) */
+html,body{height:auto!important; max-height:none!important; overflow:visible!important;}
+.apphull{height:auto!important; max-height:none!important; overflow:visible!important;}
 </style>
 </head>
 <body>
@@ -829,6 +832,9 @@ if (location.hash === '#menu') { drawer(true); history.replaceState(null, '', lo
  else{['drawer','dim'].forEach(function(id){var e=document.getElementById(id); if(e) e.remove();});}
  if(q.get('sheet')==='1'){document.documentElement.classList.add('figma-sheet'); var b=document.getElementById('ap-doclink')||document.querySelector('.pickbtn'); if(b) b.click();}
  else{document.querySelectorAll('.sheet,.ask-layer,.pkdim,.pksheet,.ddim,.dsheet,.gdim,.gsheet').forEach(function(e){e.remove();});}
+ /* 안쪽에서 스크롤되는 상자를 전부 펼친다 */
+ document.querySelectorAll('*').forEach(function(el){var cs=getComputedStyle(el);
+   if(/(auto|scroll)/.test(cs.overflowY) && el.scrollHeight>el.clientHeight+4){el.style.setProperty('overflow','visible','important'); el.style.setProperty('height','auto','important'); el.style.setProperty('max-height','none','important');}});
 })();
 </script>
 </body>
