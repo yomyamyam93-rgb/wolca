@@ -76,6 +76,9 @@
 .hbtns{display:flex!important; flex-direction:row!important; flex-wrap:nowrap!important; gap:10px!important;}
 .hbtns .btn{width:auto!important; max-width:none!important; flex:0 0 auto!important;}
 body{min-height:0!important;}
+/* 모델 사진: clip-path(피그마가 상자 크기로 잘라버림) 대신 사진 자체를 상자 높이에 맞춰 자름 → 말풍선이 안 잘림 */
+.hmodel{clip-path:none!important; overflow:visible!important;}
+.hmodel img{height:100%!important; object-fit:cover!important; object-position:top center!important;}
 </style>
 </head>
 <body>
