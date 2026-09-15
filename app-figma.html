@@ -441,6 +441,9 @@
   .sheet .grow .ic .s-mint{color:#0FC0A6;}
 </style>
 <style id="figma-icons">iconify-icon{display:inline-block;width:1em;height:1em;line-height:0;vertical-align:-0.125em}iconify-icon>svg{display:block;width:1em;height:1em}</style>
+<script>/* 피그마 가져오기용: ?type=관리비 → 이 화면이 그 유형으로 열리게 (페이지 스크립트보다 먼저) */
+(function(){try{var q=new URLSearchParams(location.search), t=q.get('type'); if(t){var r=JSON.parse(sessionStorage.getItem('lp_reg')||'{}'); r.유형=t; sessionStorage.setItem('lp_reg', JSON.stringify(r));}}catch(e){}})();
+</script>
 <style id="figma-fix-app">/* 피그마 가져오기용(앱) */
 *,*::before,*::after{animation:none!important;transition:none!important}
 .apphull{min-height:0!important; position:relative!important;}
