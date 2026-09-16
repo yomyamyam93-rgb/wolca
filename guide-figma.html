@@ -492,6 +492,10 @@ body{min-height:0!important;}
 /* ?drawer=open → 전체메뉴 서랍 열린 상태 (폰 화면 높이 780 기준) */
 .figma-drawer .drawer{height:780px!important; top:0!important; bottom:auto!important;}
 .figma-drawer .dim{height:780px!important; top:0!important; bottom:auto!important;}
+/* ?drawer=open&only=1 → 서랍(+어둠막)만 남긴 360×780 화면 */
+.figma-only body>*:not(#dim):not(#drawer){display:none!important;}
+.figma-only html, .figma-only body{height:780px!important; min-height:0!important; overflow:hidden!important; background:#fff!important;}
+.figma-only .dim, .figma-only .drawer{position:absolute!important; display:block!important; opacity:1!important; visibility:visible!important; transform:none!important;}
 </style>
 </head>
 <body>
@@ -755,7 +759,7 @@ body{min-height:0!important;}
    document.querySelectorAll('.npost').forEach(function(el){el.style.display='block';});
    var l=document.getElementById('nlist'); if(l) l.style.display='';}
  /* 전체메뉴 서랍: ?drawer=open 일 때만 열어서 남기고, 그 외에는 요소 자체를 뺀다 */
- if(q.get('drawer')==='open'){document.documentElement.classList.add('figma-drawer'); if(typeof drawer==='function') drawer(true);}
+ if(q.get('drawer')==='open'){document.documentElement.classList.add('figma-drawer'); if(typeof drawer==='function') drawer(true); if(q.get('only')==='1'){document.documentElement.classList.add('figma-only'); window.scrollTo(0,0);}}
  else{['drawer','dim'].forEach(function(id){var e=document.getElementById(id); if(e) e.remove();});}
  /* 그림 크기 고정: 그려진 크기를 px 로 못 박아 피그마에서 찌그러지지 않게 (지연 로딩도 즉시) */
  document.querySelectorAll('img').forEach(function(im){im.loading='eager';});
