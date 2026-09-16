@@ -373,6 +373,12 @@
   @media(min-width:740px){
     .steps2 .sdx:not(:last-child)::after{grid-row:5; grid-column:1/3; justify-self:stretch;}
   }
+  /* 구분선을 실제 요소로 (피그마 가져오기에서 가상요소는 두꺼운 띠로 들어감): 다음 단계 맨 위에 두고 위로 12px 올려 선 한가운데가 단락 경계에 오게 */
+  .steps2 .sd:not(:last-child)::after{content:none !important; display:none !important;}
+  .steps2 .sd > .sdiv{display:block; position:relative; z-index:2; width:100%; max-width:560px; height:34px; margin:0 auto -34px; top:-12px; order:-1;}
+  .sdiv .ln{position:absolute; left:0; right:0; top:50%; height:1px; background:var(--line);}
+  .sdiv .ck{position:absolute; left:50%; top:0; width:34px; height:34px; margin-left:-17px;}
+  .sdiv .ck svg{display:block; width:34px; height:34px;}
   /* 이용안내 본문은 어절 단위 줄바꿈 (한 글자만 다음 줄로 떨어지지 않게) — style.css 의 글자 단위 규칙보다 우선 */
   @media(max-width:900px){ html body p, html body li, html body dd{word-break:keep-all !important;} }
 </style>
@@ -582,6 +588,17 @@ html,body{height:auto!important; max-height:none!important; overflow:visible!imp
     ol.querySelectorAll(':scope > li').forEach(function (li) {
       n++; var i = document.createElement('i'); i.className = 'n'; i.textContent = n; li.insertBefore(i, li.firstChild);
     });
+  });
+})();
+</script>
+<script>
+/* 단계 사이 구분선 + 화살표를 실제 요소로 (피그마 가져오기용) */
+(function () {
+  var svg = '<svg viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="16" fill="#fff" stroke="#E4E8EF"/><path d="M11.5 14.5 17 20l5.5-5.5" fill="none" stroke="#156FF9" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  document.querySelectorAll('.steps2 > .sd').forEach(function (sd, i) {
+    if (i === 0) return;
+    var d = document.createElement('div'); d.className = 'sdiv'; d.setAttribute('aria-hidden', 'true');
+    d.innerHTML = '<b class="ln"></b><span class="ck">' + svg + '</span>'; sd.insertBefore(d, sd.firstChild);
   });
 })();
 </script>
