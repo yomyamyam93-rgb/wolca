@@ -376,11 +376,7 @@ html,body{height:auto!important; max-height:none!important; overflow:visible!imp
             </div>
 
             <div class="dhr"><span class="gno">6</span><b class="dh">자주 하는 질문</b></div>
-            <ul>
-              <li><b>Q. 세금계산서를 결제총액으로 발행해 줄 수 없나요?</b><br>없습니다. 송금요청액은 거래처와 회원 사이의 거래라 랜선페이가 발행하면 거래처 증빙과 중복됩니다.</li>
-              <li><b>Q. 개인사업자인데 인건비를 랜선페이로 냈어요. 경비 인정되나요?</b><br>됩니다. 다만 원천세(3.3% 또는 근로소득) 신고가 되어 있어야 경비로 인정받습니다. 랜선페이 입금확인서는 지급 사실을 보조하는 자료입니다.</li>
-              <li><b>Q. 간이과세자예요.</b><br>매입세액 공제는 없고, 이용료 공급가액과 거래처 지급액을 경비로만 처리합니다.</li>
-            </ul>
+            <b class="ds">Q. 세금계산서를 결제총액으로 발행해 줄 수 없나요?</b><p>없습니다. 송금요청액은 거래처와 회원 사이의 거래라 랜선페이가 발행하면 거래처 증빙과 중복됩니다.</p><b class="ds">Q. 개인사업자인데 인건비를 랜선페이로 냈어요. 경비 인정되나요?</b><p>됩니다. 다만 원천세(3.3% 또는 근로소득) 신고가 되어 있어야 경비로 인정받습니다. 랜선페이 입금확인서는 지급 사실을 보조하는 자료입니다.</p><b class="ds">Q. 간이과세자예요.</b><p>매입세액 공제는 없고, 이용료 공급가액과 거래처 지급액을 경비로만 처리합니다.</p>
 
             세무 처리는 사업자 유형과 상황에 따라 달라질 수 있으니, 신고 전에 담당 세무대리인과 한 번 확인하시길 권합니다.</div>
           <div class="nback"><a class="btn btn-line" href="#">목록으로</a></div>
@@ -561,10 +557,11 @@ function figmaFlow(){
   /* 태그 없이 바로 놓인 글 덩어리(예: div 안의 맨글)는 block span 으로 감싼다 — 배치는 그대로, 상자만 생김 */
   document.querySelectorAll('div,article,section,li,td,dd').forEach(function(box){
     if(box.closest('svg,script,style')) return; if(!box.children.length) return;
-    /* 형제 요소가 전부 블록일 때만 (문장 속 b·span 같은 인라인이 섞여 있으면 문단이 끊기므로 건드리지 않음) */
-    var allBlock=Array.prototype.every.call(box.children, function(c){ var d=getComputedStyle(c).display; return d!=='inline' && d!=='inline-block' && d!=='inline-flex'; });
-    if(!allBlock) return;
-    Array.prototype.slice.call(box.childNodes).forEach(function(n){ if(n.nodeType===3 && n.nodeValue.trim()){ var sp=document.createElement('span'); sp.className='figma-txt'; sp.style.display='block'; box.insertBefore(sp,n); sp.appendChild(n); } });
+    /* 블록 형제 사이에 놓인 인라인 묶음(맨글 + b·a 같은 인라인)을 통째로 block span 으로 감싼다 — 브라우저의 익명 블록과 같은 배치 */
+    var isInline=function(n){ if(n.nodeType===3) return true; if(n.nodeType!==1) return false; var d=getComputedStyle(n).display; return d==='inline'||d==='inline-block'||d==='inline-flex'; };
+    var hasBlock=Array.prototype.some.call(box.children, function(c){ return !isInline(c); }); if(!hasBlock) return;
+    var run=[]; var flush=function(){ if(run.some(function(n){ return n.nodeType===3 ? !!n.nodeValue.trim() : !!n.textContent.trim(); })){ var sp=document.createElement('span'); sp.className='figma-txt'; sp.style.display='block'; box.insertBefore(sp, run[0]); run.forEach(function(n){ sp.appendChild(n); }); } run=[]; };
+    Array.prototype.slice.call(box.childNodes).forEach(function(n){ if(isInline(n)) run.push(n); else flush(); }); flush();
   });
   var sel='p,li,h1,h2,h3,h4,dd,dt,summary,label,b,strong,em,span,div,.tx,.gtx,.dbody,.dh,.sub,.lead,.q,.a,td,th';
   document.querySelectorAll(sel).forEach(function(el){

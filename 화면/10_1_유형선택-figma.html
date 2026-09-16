@@ -203,10 +203,11 @@ function figmaFlow(){
   /* 태그 없이 바로 놓인 글 덩어리(예: div 안의 맨글)는 block span 으로 감싼다 — 배치는 그대로, 상자만 생김 */
   document.querySelectorAll('div,article,section,li,td,dd').forEach(function(box){
     if(box.closest('svg,script,style')) return; if(!box.children.length) return;
-    /* 형제 요소가 전부 블록일 때만 (문장 속 b·span 같은 인라인이 섞여 있으면 문단이 끊기므로 건드리지 않음) */
-    var allBlock=Array.prototype.every.call(box.children, function(c){ var d=getComputedStyle(c).display; return d!=='inline' && d!=='inline-block' && d!=='inline-flex'; });
-    if(!allBlock) return;
-    Array.prototype.slice.call(box.childNodes).forEach(function(n){ if(n.nodeType===3 && n.nodeValue.trim()){ var sp=document.createElement('span'); sp.className='figma-txt'; sp.style.display='block'; box.insertBefore(sp,n); sp.appendChild(n); } });
+    /* 블록 형제 사이에 놓인 인라인 묶음(맨글 + b·a 같은 인라인)을 통째로 block span 으로 감싼다 — 브라우저의 익명 블록과 같은 배치 */
+    var isInline=function(n){ if(n.nodeType===3) return true; if(n.nodeType!==1) return false; var d=getComputedStyle(n).display; return d==='inline'||d==='inline-block'||d==='inline-flex'; };
+    var hasBlock=Array.prototype.some.call(box.children, function(c){ return !isInline(c); }); if(!hasBlock) return;
+    var run=[]; var flush=function(){ if(run.some(function(n){ return n.nodeType===3 ? !!n.nodeValue.trim() : !!n.textContent.trim(); })){ var sp=document.createElement('span'); sp.className='figma-txt'; sp.style.display='block'; box.insertBefore(sp, run[0]); run.forEach(function(n){ sp.appendChild(n); }); } run=[]; };
+    Array.prototype.slice.call(box.childNodes).forEach(function(n){ if(isInline(n)) run.push(n); else flush(); }); flush();
   });
   var sel='p,li,h1,h2,h3,h4,dd,dt,summary,label,b,strong,em,span,div,.tx,.gtx,.dbody,.dh,.sub,.lead,.q,.a,td,th';
   document.querySelectorAll(sel).forEach(function(el){
