@@ -555,10 +555,12 @@ function figmaFlow(){
     if(el.querySelector('br,img,svg,ul,ol,div,p,table,button')) return;
     if(Array.prototype.some.call(el.children, function(c){ var d=getComputedStyle(c).display; return d!=='inline'; })) return;   /* 블록 자식(줄 단위 span 등)이 있으면 자식이 각자 처리 */
     if(!el.textContent.trim()) return;
-    var r=el.getBoundingClientRect(); var lh=parseFloat(cs.lineHeight)||parseFloat(cs.fontSize)*1.5; if(r.height<lh*1.6) return;
+    /* 실제로 두 줄 이상 감긴 글만 (상자가 flex 로 늘어난 한 줄 라벨은 제외) */
+    var rg=document.createRange(); rg.selectNodeContents(el); var rects=rg.getClientRects(), tops={}; for(var i=0;i<rects.length;i++){ if(rects[i].width>0&&rects[i].height>0) tops[Math.round(rects[i].top/4)]=1; }
+    if(Object.keys(tops).length<2) return;
+    var r=el.getBoundingClientRect();
     el.style.setProperty('white-space','nowrap','important'); el.style.setProperty('height',r.height+'px','important');
-    /* 폭은 지정하지 않는다(지정하면 html.to.design 이 자동 폭 글 상자로 만들어 넘침). flex 자식이면 남는 폭을 차지하게만 한다 */
-    if(/flex/.test(getComputedStyle(el.parentElement).display)){ el.style.setProperty('flex','1 1 0%','important'); el.style.setProperty('min-width','0','important'); }
+    /* 폭·flex 는 건드리지 않는다(폭을 지정하면 html.to.design 이 자동 폭 글 상자로 만들어 넘침) */
     el.style.setProperty('overflow','visible','important'); el.style.setProperty('text-overflow','clip','important'); el.setAttribute('data-flow', String(Math.round(r.width)));
   });
 }
