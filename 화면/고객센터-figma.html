@@ -190,7 +190,7 @@ html,body{height:auto!important; max-height:none!important; overflow:visible!imp
 function figmaFlow(){
   /* 태그 없이 바로 놓인 글 덩어리(예: div 안의 맨글)는 block span 으로 감싼다 — 배치는 그대로, 상자만 생김 */
   document.querySelectorAll('div,article,section,li,td,dd').forEach(function(box){
-    if(box.closest('svg,script,style')) return; if(!box.children.length) return;
+    if(box.closest('svg,script,style')) return; if(!box.children.length && box.tagName!=='LI') return;   /* 글만 있는 li 도 감싼다 */
     /* 블록 형제 사이에 놓인 인라인 묶음(맨글 + b·a 같은 인라인)을 통째로 block span 으로 감싼다 — 브라우저의 익명 블록과 같은 배치 */
     var isInline=function(n){ if(n.nodeType===3) return true; if(n.nodeType!==1) return false; var d=getComputedStyle(n).display; return d==='inline'||d==='inline-block'||d==='inline-flex'; };
     var hasBlock=Array.prototype.some.call(box.children, function(c){ return !isInline(c); }); if(!hasBlock && box.tagName!=='LI') return;   /* li 는 점(::before)이 있어 글을 따로 감싸야 폭 고정 상자가 된다 */
@@ -210,7 +210,8 @@ function figmaFlow(){
     if(Object.keys(tops).length<2) return;
     var r=el.getBoundingClientRect();
     el.style.setProperty('white-space','nowrap','important'); el.style.setProperty('height',r.height+'px','important');
-    /* 폭·flex 는 건드리지 않는다(폭을 지정하면 html.to.design 이 자동 폭 글 상자로 만들어 넘침) */
+    /* 폭·flex 는 건드리지 않는다(폭을 지정하면 html.to.design 이 자동 폭 글 상자로 만들어 넘침). flex 자식은 min-width:0 만 — 한 줄 글 때문에 칸이 늘어나지 않게 */
+    if(/flex/.test(getComputedStyle(el.parentElement).display)) el.style.setProperty('min-width','0','important');
     el.style.setProperty('overflow','visible','important'); el.style.setProperty('text-overflow','clip','important'); el.setAttribute('data-flow', String(Math.round(r.width)));
   });
 }
