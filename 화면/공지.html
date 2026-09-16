@@ -54,7 +54,13 @@
   .nbody .dcard.wide .dr span{flex-basis:150px;}
   .nbody .dcard .dr em{flex:1; font-style:normal; font-weight:700; color:var(--ink);}
   .nbody .dcard .dn{margin-top:9px; font-size:12.5px; color:var(--sub); line-height:1.7;}
-  @media(max-width:599px){ .nbody .dcard .dr span{flex:0 0 88px; font-size:13px;} .nbody .dcard.wide .dr span{flex-basis:130px;} }
+  .nbody .dcard .dr span{flex-basis:130px;}   /* 넓은 화면: 라벨 칸을 넓혀 두 줄로 안 접히게 */
+  /* 휴대폰 · 앱: 라벨 위, 내용 아래로 쌓아 칸이 좁아 글자가 깨지지 않게 */
+  @media(max-width:599px){
+    .nbody .dcard .dr{display:block; padding:10px 0;}
+    .nbody .dcard .dr span{display:block; flex:none; font-size:12.5px; margin-bottom:2px;}
+    .nbody .dcard .dr em{display:block;}
+  }
   .nbody .ds{display:block; font-size:15px; font-weight:700; color:var(--ink); margin:16px 0 4px; line-height:1.5;}
   .warn .ds{margin:10px 0 2px; font-size:13.5px; display:block;} .dacc .dbody .warn p{margin:0 0 4px; font-size:12.8px; color:var(--sub);} .warn .ds:first-child{margin-top:0;} .warn p{margin:0 0 4px;}
   .nbody .dhr{display:flex; align-items:center; gap:8px; margin:28px 0 6px;}
