@@ -225,7 +225,13 @@
   .sd ol li{font-size:14.5px !important;}
   .sdx{display:flex !important; flex-direction:column !important; align-items:center !important;}
   .sdx .phone.pa, .sdx .phone.pb{margin:22px 0 0 !important;}
-  .sd .phone{margin-top:22px;}
+  /* 휴대폰 목업은 웹 모바일과 같은 80% 크기(258×558) */
+  .sd .phone{margin-top:22px; width:258px; min-height:558px;}
+  .sd .phone:not(.shot){padding:20px 16px 22px;}
+  .sd .phone.pb .mk-btn, .sd .phone.pb .mk-kakao, .sd .phone.pb .mk-naver{height:40px; font-size:13.5px;}
+  .phone.shot{overflow:visible; height:auto; min-height:0;}
+  .phone.shot .mk-shot{border-radius:26px;}
+  .phone:not(.shot){height:auto; overflow:visible;}
   .sdx ol.oa li:last-child{margin-bottom:0 !important;}
   .sdx ol.ob{margin-top:56px !important;}
   .pnx{display:none !important;}
