@@ -623,6 +623,7 @@ function figmaFlow(){
     var cs=getComputedStyle(el); if(cs.display==='none'||cs.whiteSpace==='nowrap'||cs.whiteSpace==='pre') return;
     if(/^(B|STRONG|EM|SPAN)$/.test(el.tagName) && cs.display==='inline') return;   /* 문장 속 강조는 부모 문단이 처리 */
     if(el.querySelector('br,img,svg,ul,ol,div,p,table,button')) return;
+    if(Array.prototype.some.call(el.children, function(c){ var d=getComputedStyle(c).display; return d!=='inline'; })) return;   /* 블록 자식(줄 단위 span 등)이 있으면 자식이 각자 처리 */
     if(!el.textContent.trim()) return;
     var r=el.getBoundingClientRect(); var lh=parseFloat(cs.lineHeight)||parseFloat(cs.fontSize)*1.5; if(r.height<lh*1.6) return;
     el.style.setProperty('white-space','nowrap','important'); el.style.setProperty('height',r.height+'px','important');
