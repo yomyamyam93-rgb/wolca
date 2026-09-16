@@ -247,6 +247,15 @@ body{min-height:0!important;}
    var sp=document.createElement('div'); sp.className='figma-gap'; sp.style.cssText='display:block;height:'+mt+'px;background:#fff;'; el.style.marginTop='0'; el.parentNode.insertBefore(sp, el); });
  /* ?part=SEL → 그 구역만 남기고 나머지는 숨겨, 구역 하나가 곧 프레임이 되게 */
  var part=q.get('part');
+ /* ?tiles=1 (회사소개) → 항목 타일 12개를 기본 상태 한 벌 + 선택(파란) 상태 한 벌로 정리해 그 구역만 남긴다 */
+ if(q.get('tiles')==='1'){ for(var ti=1;ti<5000;ti++){ clearInterval(ti); }
+   var g=document.getElementById('aitems');
+   if(g){ var gw=g.getBoundingClientRect().width; var g2=g.cloneNode(true);
+     Array.prototype.forEach.call(g.children,function(e){ e.classList.remove('on'); });
+     Array.prototype.forEach.call(g2.children,function(e){ e.classList.add('on'); });
+     g2.id='aitems2'; g.style.width=gw+'px'; g2.style.width=gw+'px'; g2.style.marginTop='48px';
+     var wrap=document.createElement('div'); wrap.id='tiles'; wrap.style.cssText='display:inline-block;padding:40px;background:#fff;';
+     g.parentNode.insertBefore(wrap,g); wrap.appendChild(g); wrap.appendChild(g2); part='#tiles'; } }
  if(part){var el=document.querySelector(part);
    if(el){var node=el; while(node && node!==document.body){var par=node.parentElement;
        Array.prototype.forEach.call(par.children, function(c){ if(c!==node) c.style.setProperty('display','none','important'); }); node=par; }
