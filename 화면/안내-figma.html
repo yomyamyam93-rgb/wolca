@@ -687,6 +687,9 @@ function figmaFlow(){
     if(!el.textContent.trim()) return;
     var r=el.getBoundingClientRect(); var lh=parseFloat(cs.lineHeight)||parseFloat(cs.fontSize)*1.5; if(r.height<lh*1.6) return;
     el.style.setProperty('white-space','nowrap','important'); el.style.setProperty('height',r.height+'px','important');
+    /* 폭도 원래 상자 폭으로 못 박는다 → html.to.design 이 '폭 고정 · 높이 자동' 글 상자로 만들고, 피그마가 가져오는 순간 그 폭 안에서 줄을 감는다 */
+    el.style.setProperty('width',r.width+'px','important'); el.style.setProperty('max-width',r.width+'px','important'); el.style.setProperty('min-width','0','important');
+    el.style.setProperty('box-sizing','border-box','important'); if(cs.display==='inline-block'||/flex/.test(getComputedStyle(el.parentElement).display)) el.style.setProperty('flex','0 0 '+r.width+'px','important');
     el.style.setProperty('overflow','visible','important'); el.style.setProperty('text-overflow','clip','important'); el.setAttribute('data-flow', String(Math.round(r.width)));
   });
 }
