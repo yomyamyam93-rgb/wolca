@@ -238,6 +238,25 @@ html,body{height:auto!important; max-height:none!important; overflow:visible!imp
  document.querySelectorAll('img').forEach(function(im){im.loading='eager';});
  setTimeout(function(){document.querySelectorAll('img').forEach(function(im){var r=im.getBoundingClientRect(); if(r.width>0&&r.height>0){im.style.setProperty('width',r.width+'px','important'); im.style.setProperty('height',r.height+'px','important'); im.style.setProperty('max-width','none','important'); im.style.setProperty('max-height','none','important');}});},250);
 })();
+/* 글줄: 크롬이 실제로 줄을 끊은 자리에 <br> 을 넣는다 (피그마는 한글을 글자 단위로 끊어 '누르세/요'가 됨) */
+function figmaPrebreak(){
+  var sel='p,li,h1,h2,h3,h4,dd,dt,summary,label,.head-sub,.tx,.tt,.lm,small,b,em,strong,.cd,.cn,.sub';
+  document.querySelectorAll(sel).forEach(function(bl){
+    if(bl.closest('svg,iconify-icon,script,style,textarea,input')) return;
+    var cs=getComputedStyle(bl); if(cs.display==='none'||cs.whiteSpace==='nowrap'||cs.whiteSpace==='pre') return;
+    var lh=parseFloat(cs.lineHeight)||parseFloat(cs.fontSize)*1.5; if(bl.getBoundingClientRect().height<lh*1.6) return;
+    var w=document.createTreeWalker(bl,NodeFilter.SHOW_TEXT), nodes=[]; while(w.nextNode()) nodes.push(w.currentNode);
+    nodes.forEach(function(tn){ var t=tn.nodeValue; if(!t||!t.trim()) return; if(tn.parentNode.closest('svg,iconify-icon')) return;
+      var r=document.createRange(), lastTop=null, breaks=[];
+      for(var i=0;i<t.length;i++){ if(/\s/.test(t[i])) continue; r.setStart(tn,i); r.setEnd(tn,i+1); var rc=r.getClientRects()[0]; if(!rc||!rc.height) continue;
+        if(lastTop!==null && rc.top-lastTop>rc.height*0.5) breaks.push(i); lastTop=rc.top; }
+      if(!breaks.length) return;
+      var pos=0, frag=document.createDocumentFragment();
+      breaks.forEach(function(bi){ frag.appendChild(document.createTextNode(t.slice(pos,bi).replace(/\s+$/,''))); frag.appendChild(document.createElement('br')); pos=bi; });
+      frag.appendChild(document.createTextNode(t.slice(pos).replace(/^\s+/,''))); tn.parentNode.replaceChild(frag,tn); });
+  });
+}
+if(document.fonts&&document.fonts.ready){document.fonts.ready.then(function(){setTimeout(figmaPrebreak,120);});} else {setTimeout(figmaPrebreak,400);}
 </script>
 </body>
 </html>
