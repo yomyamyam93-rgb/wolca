@@ -335,12 +335,11 @@ main{flex:1 0 auto;}
 .more-b li:before{content:'·'; position:absolute; left:3px; color:var(--icon-off);}
 
 /* ===== 휴대폰 글줄 정리 — 앱 화면 공통 =====
-   본문은 줄 끝이 비지 않게 글자 단위 줄바꿈까지 허용하고
-   제목과 강조한 말은 어절을 지킨다 */
+   본문도 제목도 어절 단위로 줄을 바꾼다 (글자 단위 줄바꿈은 2026-09-16 폐지) */
 @media(max-width:900px){
   /* 페이지마다 따로 준 keep-all(.tbd p · .pcard p 등)보다 우선하도록 !important */
   body p, body li, body dd, body td, body .a, body .dr, body .tx{
-    word-break:normal !important; overflow-wrap:anywhere; text-wrap:wrap !important; letter-spacing:-.2px;}   /* pretty/balance 는 사파리에서 줄을 일찍 끊어 들쑥날쑥해진다 */
+    word-break:keep-all !important; overflow-wrap:anywhere; text-wrap:wrap !important; letter-spacing:-.2px;}   /* 2026-09-16 어절 단위로 통일: 한 글자만 다음 줄로 떨어지지 않게 (피그마에서도 글이 자연스럽게 흐르게) */   /* pretty/balance 는 사파리에서 줄을 일찍 끊어 들쑥날쑥해진다 */
   body p b, body li b, body strong, body h1, body h2, body h3, body h4,
   body .h-sec, body .h-hero, body b, body .lead, body dt, body summary, body label{word-break:keep-all !important;}
 }
