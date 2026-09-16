@@ -2460,6 +2460,7 @@ function figmaGlyphs(){
   var re=new RegExp('['+chars.map(function(c){return '\\u'+c.charCodeAt(0).toString(16).padStart(4,'0');}).join('')+']');
   var w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT), nodes=[]; while(w.nextNode()){ var n=w.currentNode; if(re.test(n.nodeValue)) nodes.push(n); }
   nodes.forEach(function(tn){ var par=tn.parentNode; if(!par||par.closest('svg,script,style,textarea,iconify-icon')) return; if(par.querySelector&&par.querySelector('svg.glyph')) return;
+    var core=tn.nodeValue.replace(/\s+/g,''); if(!core||core.split('').some(function(c){return !G[c];})) return;
     var cs=getComputedStyle(par), fw=+cs.fontWeight||400, ws=['400','500','600','700','800'], wk=ws.reduce(function(a,b){return Math.abs(+b-fw)<Math.abs(+a-fw)?b:a;});
     var frag=document.createDocumentFragment(), t=tn.nodeValue, buf='';
     for(var i=0;i<t.length;i++){ var c=t[i]; if(G[c]){ if(buf){frag.appendChild(document.createTextNode(buf)); buf='';}
@@ -2468,6 +2469,12 @@ function figmaGlyphs(){
         svg.innerHTML='<g transform="scale(1,-1)"><path fill="currentColor" d="'+g.d+'"/></g>'; frag.appendChild(svg); }
       else buf+=c; }
     if(buf) frag.appendChild(document.createTextNode(buf)); par.replaceChild(frag,tn); });
+  /* 굵은 글자(b·strong 등)로 시작하는 문장은 html.to.design 이 층을 쪼개므로 앞에 폭 0 글자를 둔다 */
+  document.querySelectorAll('p,li,dd,dt,td,th,h1,h2,h3,h4,summary,label,.a,.dr,.tx').forEach(function(el){
+    var kids=Array.prototype.slice.call(el.childNodes).filter(function(n){ return !(n.nodeType===3&&!n.nodeValue.trim()) && !(n.nodeType===1&&(getComputedStyle(n).position==='absolute'||n.tagName==='BR')); });
+    var f=kids[0]; if(!f||f.nodeType!==1||!/^(B|STRONG|EM|SPAN|MARK|SMALL|A|I)$/.test(f.tagName)) return;
+    if(getComputedStyle(f).display!=='inline') return; var nx=kids[1]; if(!nx||nx.nodeType!==3) return;
+    el.insertBefore(document.createTextNode('​'),f); });
   /* 이용가이드 5단계: 연결선 실제 요소 */
   document.querySelectorAll('.flow .fs:not(:last-child)').forEach(function(fs){ if(!fs.querySelector('.ln')){var i=document.createElement('i'); i.className='ln'; fs.appendChild(i);} });
 }
