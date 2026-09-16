@@ -60,6 +60,12 @@
     .nbody .dcard .dr span{display:block; flex:none; font-size:12.5px; margin-bottom:2px;}
     .nbody .dcard .dr em{display:block;}
   }
+  /* 내용이 짧은 표(카드사 → 개월 수)는 휴대폰에서도 좌우 두 칸 유지 */
+  @media(max-width:599px){
+    .nbody .dcard.short .dr{display:flex; gap:14px; padding:9px 0;}
+    .nbody .dcard.short .dr span{display:block; flex:0 0 96px; margin:0; font-size:13px;}
+    .nbody .dcard.short .dr em{display:block; flex:1;}
+  }
   .nbody .ds{display:block; font-size:15px; font-weight:700; color:var(--ink); margin:16px 0 4px; line-height:1.5;}
   .warn .ds{margin:10px 0 2px; font-size:13.5px; display:block;} .dacc .dbody .warn p{margin:0 0 4px; font-size:12.8px; color:var(--sub);} .warn .ds:first-child{margin-top:0;} .warn p{margin:0 0 4px;}
   .nbody .dhr{display:flex; align-items:center; gap:8px; margin:28px 0 6px;}
@@ -294,7 +300,7 @@
           <p class="nmeta">관리자</p>
           <div class="nbody">대상: <b>5만원 이상 결제</b>부터 적용됩니다.
             <div class="dhr"><span class="gno">1</span><b class="dh">무이자 행사</b></div>
-            <div class="dcard">
+            <div class="dcard short">
               <div class="dr"><span>신한카드</span><em>2~6개월</em></div>
               <div class="dr"><span>KB국민카드</span><em>2~3개월</em></div>
               <div class="dr"><span>삼성카드</span><em>2~6개월</em></div>
