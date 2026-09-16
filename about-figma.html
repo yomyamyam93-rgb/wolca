@@ -695,6 +695,20 @@ body{min-height:0!important;}
    im.style.setProperty('filter','none','important');});
  var q=new URLSearchParams(location.search);
  if(q.get('open')==='all'){document.querySelectorAll('details').forEach(function(d){d.open=true;});}
+ /* ?do=click:SEL;text:LABEL → 항목 버튼 등을 눌러 상태를 바꾼 뒤 가져오기 */
+ var doList=q.get('do');
+ if(doList){doList.split(';').forEach(function(step){var i=step.indexOf(':'), kind=step.slice(0,i), arg=step.slice(i+1), el=null;
+   if(kind==='click') el=document.querySelector(arg);
+   else if(kind==='text'){el=Array.prototype.find.call(document.querySelectorAll('button,a,div,span,label,li'), function(e){return e.children.length<3 && e.textContent.trim()===arg;});}
+   if(el){el.click();}});}
+ /* ?part=SEL → 그 구역만 남기고 나머지는 숨겨, 구역 하나가 곧 프레임이 되게 */
+ var part=q.get('part');
+ if(part){var el=document.querySelector(part);
+   if(el){var node=el; while(node && node!==document.body){var par=node.parentElement;
+       Array.prototype.forEach.call(par.children, function(c){ if(c!==node) c.style.setProperty('display','none','important'); }); node=par; }
+     ['margin-top','margin-bottom'].forEach(function(k){el.style.setProperty(k,'0','important');});
+     document.documentElement.style.setProperty('height','auto','important'); document.body.style.setProperty('height','auto','important'); document.body.style.setProperty('min-height','0','important');
+     window.scrollTo(0,0); document.documentElement.classList.add('figma-part');}}
  if(q.get('all')==='1'){document.documentElement.classList.add('figma-all');
    document.querySelectorAll('.npost').forEach(function(el){el.style.display='block';});
    var l=document.getElementById('nlist'); if(l) l.style.display='';}
