@@ -26,6 +26,9 @@
   .nrow:hover{background:#FAFBFD;}
   .c1{display:none;}
   .c2{flex:1; min-width:0; display:flex; align-items:center; gap:10px;}
+  /* 목록 제목은 한 줄로(넘치면 …), 배지는 작게 */
+  .nrow .badge{font-size:11px; padding:2px 8px; line-height:1.6; min-width:0; flex:0 0 auto;}
+  .c2 .tt{white-space:nowrap; overflow:hidden; text-overflow:ellipsis; font-size:14px;}
   .c2 .tt{font-weight:600; line-height:1.5; word-break:keep-all;}
   .c3{display:none;}
   .c4{flex:0 0 auto; text-align:right; font-size:12.5px; color:var(--placeholder);}
