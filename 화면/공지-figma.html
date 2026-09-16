@@ -565,6 +565,7 @@ function figmaPrebreak(){
   document.querySelectorAll(sel).forEach(function(bl){
     if(bl.closest('svg,iconify-icon,script,style,textarea,input')) return;
     var cs=getComputedStyle(bl); if(cs.display==='none'||cs.whiteSpace==='nowrap'||cs.whiteSpace==='pre') return;
+    if(cs.wordBreak!=='keep-all') return;   /* 본문(글자 단위 줄바꿈)은 고정 폭 상자로 자연스럽게 흐르게 두고, 어절을 지키는 제목·강조만 줄을 미리 끊는다 */
     var lh=parseFloat(cs.lineHeight)||parseFloat(cs.fontSize)*1.5; if(bl.getBoundingClientRect().height<lh*1.6) return;
     var w=document.createTreeWalker(bl,NodeFilter.SHOW_TEXT), nodes=[]; while(w.nextNode()) nodes.push(w.currentNode);
     nodes.forEach(function(tn){ var t=tn.nodeValue; if(!t||!t.trim()) return; if(tn.parentNode.closest('svg,iconify-icon')) return;
