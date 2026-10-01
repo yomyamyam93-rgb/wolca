@@ -246,11 +246,11 @@
   .itgrid{display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:6px;}
   /* 항목 딱지: BEST(빨강) · 자주 이용(노랑) — 칸 오른쪽 위 모서리에 걸침 */
   .it{position:relative;}
-  .bdg{display:inline-block; margin-top:5px; font-style:normal; font-size:8.5px; font-weight:800; line-height:1;
+  .bdg{position:absolute; left:50%; bottom:5px; transform:translateX(-50%); font-style:normal; font-size:8.5px; font-weight:800; line-height:1;
     padding:3px 6px; border-radius:999px; letter-spacing:0; white-space:nowrap; color:#fff;
     background:linear-gradient(135deg,#FF5A5F,#FF2D55); box-shadow:0 2px 6px rgba(255,45,85,.35);}
   .bdg.hot{color:#1D2023; background:linear-gradient(135deg,#FFD84D,#FFB800); box-shadow:0 2px 6px rgba(255,184,0,.35);}
-  @media(min-width:768px){ .bdg{margin-top:6px; font-size:10px; padding:4px 7px;} }
+  @media(min-width:768px){ .bdg{bottom:8px; font-size:10px; padding:4px 7px;} }
   @media(min-width:768px){ .itgrid{grid-template-columns:repeat(5,minmax(0,1fr)); gap:20px;} }
   .it{display:block; width:100%; background:#fff; border-radius:18px; padding:16px 4px 13px;
     text-align:center; color:inherit; box-shadow:0 2px 8px rgba(0,0,0,.05);
@@ -262,7 +262,7 @@
   .it.on .tile img + img{display:inline-block;}
   .it.on .tile img:only-child{display:inline-block; filter:brightness(0) invert(1);}
   .it.on b{color:#fff;}
-  @media(min-width:768px){ .it{border-radius:18px; padding:14px 6px 12px; display:flex; flex-direction:column; align-items:center; justify-content:center;} .itgrid{grid-auto-rows:1fr;} }
+  @media(min-width:768px){ .it{border-radius:18px; padding:10px 6px 28px; display:flex; flex-direction:column; align-items:center; justify-content:center;} .itgrid{grid-auto-rows:1fr;} }
   .it:hover{transform:translateY(-4px); box-shadow:0 10px 22px rgba(15,23,42,.10);}
   .it .tile{display:block; line-height:1;}
   .it .tile img{max-width:40px; max-height:40px; width:auto; height:auto;}
@@ -276,7 +276,7 @@
   /* 모바일 : 항목도 6개 × 2줄 (컴팩트) + 설명 박스와 간격 좁게 */
   @media(max-width:767px){
     .itgrid{grid-template-columns:repeat(5,minmax(0,1fr)); gap:5px;}
-    .it{padding:6px 2px; border-radius:14px; aspect-ratio:1/1.15; max-height:96px; display:flex; flex-direction:column; align-items:center; justify-content:center;}
+    .it{padding:4px 2px 18px; border-radius:14px; aspect-ratio:1/1.2; max-height:100px; display:flex; flex-direction:column; align-items:center; justify-content:center;}
     .it .tile img{max-width:28px; max-height:28px;}
     .it .tile iconify-icon{font-size:29px;}
     .it b{margin-top:5px; font-size:13.5px; line-height:1.2; letter-spacing:-.5px; white-space:normal; word-break:keep-all;}
@@ -609,7 +609,7 @@
   /* 타일 정사각형 · 패널 세로 구성(글 위 · 카드 아래 · 바로가기는 글 밑) */
   @media(min-width:1000px){
     #itemsec .it{aspect-ratio:1/1; display:flex; flex-direction:column;
-      align-items:center; justify-content:center; gap:10px; padding:10px;
+      align-items:center; justify-content:center; gap:8px; padding:8px 8px 30px;   /* 아래 30px 는 딱지 자리(모든 칸 공통) */
       width:100%; max-width:100%; min-width:0; min-height:0; align-self:start;}
     #itemsec .it b{margin-top:0;}
     /* 패널: 카드 왼쪽 · 텍스트 오른쪽 */
