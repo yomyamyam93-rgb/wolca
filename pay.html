@@ -17,15 +17,15 @@
   @media(min-width:1024px){ .pay{max-width:720px;} }
 
   /* 항목 고르기: 사장님페이처럼 격자로 */
-  .cats{display:grid; grid-template-columns:repeat(5,1fr); gap:6px;}
+  .cats{display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:6px;}
   .cat{background:var(--card); border:1px solid var(--line); border-radius:14px;
-    padding:12px 2px 10px; text-align:center; transition:border-color .15s, background .15s;}
-  .cat iconify-icon{font-size:22px; color:var(--primary);}
-  .cat span{display:block; margin-top:6px; font-size:10.5px; font-weight:700; line-height:1.3; letter-spacing:-.5px; white-space:nowrap;}
-  @media(min-width:640px){ .cat{padding:14px 6px 12px;} .cat iconify-icon{font-size:26px;} .cat span{margin-top:8px; font-size:13px; letter-spacing:0;} }
-  .cat.on{border:2px solid var(--primary); background:var(--primary-50); padding:11px 1px 9px;}
+    padding:10px 2px; text-align:center; transition:border-color .15s, background .15s; aspect-ratio:1/1.22; display:flex; flex-direction:column; align-items:center; justify-content:center;}
+  .cat iconify-icon{font-size:26px; color:var(--primary);}
+  .cat span{display:block; margin-top:6px; font-size:12px; font-weight:700; line-height:1.2; letter-spacing:-.5px; white-space:normal; word-break:keep-all;}
+  @media(min-width:640px){ .cat{padding:14px 6px 12px; aspect-ratio:auto;} .cat iconify-icon{font-size:26px;} .cat span{margin-top:8px; font-size:13px; letter-spacing:0;} }
+  .cat.on{border:2px solid var(--primary); background:var(--primary-50); padding:9px 1px;}
   @media(min-width:640px){ .cat.on{padding:13px 5px 11px;} }
-  @media(min-width:640px){ .cats{grid-template-columns:repeat(5,1fr); gap:10px;} }
+  @media(min-width:640px){ .cats{grid-template-columns:repeat(5,minmax(0,1fr)); gap:10px;} }
 
   /* 금액: 이 화면에서 제일 큰 글자 */
   .amt{position:relative;}
@@ -74,17 +74,17 @@
         <button class="cat on" data-n="월세"><iconify-icon icon="mingcute:home-4-fill"></iconify-icon><span>월세</span></button>
         <button class="cat" data-n="관리비"><iconify-icon icon="mingcute:building-2-fill"></iconify-icon><span>관리비</span></button>
         <button class="cat" data-n="보증금"><iconify-icon icon="mingcute:certificate-fill"></iconify-icon><span>보증금</span></button>
-        <button class="cat" data-n="중개수수료"><iconify-icon icon="mingcute:key-2-fill"></iconify-icon><span>중개수수료</span></button>
+        <button class="cat" data-n="중개수수료"><iconify-icon icon="mingcute:key-2-fill"></iconify-icon><span>중개<wbr>수수료</span></button>
         <button class="cat" data-n="인건비"><iconify-icon icon="mingcute:group-2-fill"></iconify-icon><span>인건비</span></button>
         <button class="cat" data-n="매입대금"><iconify-icon icon="mingcute:store-fill"></iconify-icon><span>매입대금</span></button>
         <button class="cat" data-n="식자재"><iconify-icon icon="mingcute:bowl-fill"></iconify-icon><span>식자재</span></button>
-        <button class="cat" data-n="학원·과외비"><iconify-icon icon="mingcute:school-fill"></iconify-icon><span>학원·과외비</span></button>
-        <button class="cat" data-n="학교공과금"><iconify-icon icon="mingcute:mortarboard-fill"></iconify-icon><span>학교공과금</span></button>
-        <button class="cat" data-n="인테리어·수리"><iconify-icon icon="mingcute:brush-fill"></iconify-icon><span>인테리어·수리</span></button>
+        <button class="cat" data-n="학원·과외비"><iconify-icon icon="mingcute:school-fill"></iconify-icon><span>학원·<wbr>과외비</span></button>
+        <button class="cat" data-n="학교공과금"><iconify-icon icon="mingcute:mortarboard-fill"></iconify-icon><span>학교<wbr>공과금</span></button>
+        <button class="cat" data-n="인테리어·수리"><iconify-icon icon="mingcute:brush-fill"></iconify-icon><span>인테리어·<wbr>수리</span></button>
         <button class="cat" data-n="이사"><iconify-icon icon="mingcute:truck-fill"></iconify-icon><span>이사</span></button>
         <button class="cat" data-n="청소비"><iconify-icon icon="mingcute:broom-fill"></iconify-icon><span>청소비</span></button>
-        <button class="cat" data-n="외주·제작비"><iconify-icon icon="mingcute:briefcase-fill"></iconify-icon><span>외주·제작비</span></button>
-        <button class="cat" data-n="장비·보관료"><iconify-icon icon="mingcute:box-2-fill"></iconify-icon><span>장비·보관료</span></button>
+        <button class="cat" data-n="외주·제작비"><iconify-icon icon="mingcute:briefcase-fill"></iconify-icon><span>외주·<wbr>제작비</span></button>
+        <button class="cat" data-n="장비·보관료"><iconify-icon icon="mingcute:box-2-fill"></iconify-icon><span>장비·<wbr>보관료</span></button>
         <button class="cat" data-n="기타"><iconify-icon icon="mingcute:grid-fill"></iconify-icon><span>기타</span></button>
       </div>
 

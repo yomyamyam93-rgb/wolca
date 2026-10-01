@@ -161,10 +161,10 @@
   /* PC: 좌측 항목 타일 · 우측 설명 패널 */
   .itarw{display:none;}
   @media(min-width:1000px){
-    #itemsec .wrap{display:grid; grid-template-columns:1fr 72px 1fr; gap:0; align-items:stretch;}
+    #itemsec .wrap{display:grid; grid-template-columns:1.3fr 56px 1fr; gap:0; align-items:stretch;}
     #itemsec .wrap > *{min-width:0;}
     #itemsec .head{grid-column:1/-1;}
-    #itemsec .itgrid{grid-column:1; grid-row:2; grid-template-columns:repeat(5,1fr); gap:12px;
+    #itemsec .itgrid{grid-column:1; grid-row:2; grid-template-columns:repeat(5,minmax(0,1fr)); gap:10px;
       align-content:stretch; margin-top:52px;}
     .itarw{display:flex; grid-column:2; grid-row:2; align-self:center; justify-self:center;
       margin-top:52px; color:var(--primary); opacity:.65;}
@@ -243,8 +243,8 @@
   .cosec .cocap{margin-top:0;}
   .cosec .cobelt{margin-top:0;}
   
-  .itgrid{display:grid; grid-template-columns:repeat(5,1fr); gap:6px;}
-  @media(min-width:768px){ .itgrid{grid-template-columns:repeat(5,1fr); gap:20px;} }
+  .itgrid{display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:6px;}
+  @media(min-width:768px){ .itgrid{grid-template-columns:repeat(5,minmax(0,1fr)); gap:20px;} }
   .it{display:block; width:100%; background:#fff; border-radius:18px; padding:16px 4px 13px;
     text-align:center; color:inherit; box-shadow:0 2px 8px rgba(0,0,0,.05);
     border:2px solid transparent; cursor:pointer; font:inherit; appearance:none;
@@ -255,7 +255,7 @@
   .it.on .tile img + img{display:inline-block;}
   .it.on .tile img:only-child{display:inline-block; filter:brightness(0) invert(1);}
   .it.on b{color:#fff;}
-  @media(min-width:768px){ .it{border-radius:18px; padding:20px 8px 16px;} }
+  @media(min-width:768px){ .it{border-radius:18px; padding:18px 6px 15px;} }
   .it:hover{transform:translateY(-4px); box-shadow:0 10px 22px rgba(15,23,42,.10);}
   .it .tile{display:block; line-height:1;}
   .it .tile img{max-width:40px; max-height:40px; width:auto; height:auto;}
@@ -263,16 +263,16 @@
   .it.on .tile iconify-icon{color:#fff;}
   @media(max-width:767px){ .it .tile iconify-icon{font-size:29px;} }
   @media(min-width:768px){ .it .tile img{max-width:46px; max-height:46px;} }
-  @media(min-width:768px){ .it .tile iconify-icon{font-size:44px;} }
+  @media(min-width:768px){ .it .tile iconify-icon{font-size:38px;} }
   .it b{display:block; margin-top:9px; font-size:13px; font-weight:700; letter-spacing:-.3px; white-space:nowrap;}
-  @media(min-width:768px){ .it b{margin-top:10px; font-size:15px;} }
+  @media(min-width:768px){ .it b{margin-top:9px; font-size:15px;} }
   /* 모바일 : 항목도 6개 × 2줄 (컴팩트) + 설명 박스와 간격 좁게 */
   @media(max-width:767px){
-    .itgrid{grid-template-columns:repeat(5,1fr); gap:6px;}
-    .it{padding:12px 1px 10px; border-radius:14px;}
-    .it .tile img{max-width:24px; max-height:24px;}
-    .it .tile iconify-icon{font-size:24px;}
-    .it b{margin-top:6px; font-size:10px; letter-spacing:-.5px;}
+    .itgrid{grid-template-columns:repeat(5,minmax(0,1fr)); gap:6px;}
+    .it{padding:8px 2px; border-radius:14px; aspect-ratio:1/1.22; display:flex; flex-direction:column; align-items:center; justify-content:center;}
+    .it .tile img{max-width:26px; max-height:26px;}
+    .it .tile iconify-icon{font-size:27px;}
+    .it b{margin-top:7px; font-size:12px; line-height:1.2; letter-spacing:-.5px; white-space:normal; word-break:keep-all;}
     .itpanel{margin-top:16px; padding:24px 20px;}
     #itemsec .head + *{margin-top:28px;}
   }
@@ -1109,7 +1109,7 @@
   #itemsec .itpanel{display:flex !important; flex-direction:row; align-items:center;
     gap:16px !important; padding:16px; background:#fff; border:1px solid #EEF0F4;}
   /* PC 에서는 왼쪽 타일 격자 높이에 맞춰 늘어나던 걸 내용 높이로 (위아래 여백 축소) */
-  @media(min-width:1000px){ #itemsec .itpanel{gap:22px !important; padding:22px; align-self:center;} }
+  @media(min-width:1000px){ #itemsec .itpanel{gap:22px !important; padding:22px; align-self:stretch;} }
   /* 왼쪽 속칸 · 오른쪽 내용 = 반반 */
   #itemsec .itin{order:0; flex:0 0 39%; max-width:153px; min-width:0;
     /* 상자 없이 신용카드만: 세로 신용카드 비율 고정 */
@@ -1141,20 +1141,20 @@
   @media(min-width:1000px){
     /* 타일 왼쪽 · 상세 패널 오른쪽: 좌우 허전함 없이 */
     /* 타일 · 화살표 · 상세 패널 세 칸: 높이를 맞춘다 */
-    #itemsec .wrap{display:grid; grid-template-columns:540px 1fr;
+    #itemsec .wrap{display:grid; grid-template-columns:1.45fr 1fr;
       column-gap:12px; row-gap:56px;
       max-width:1100px; margin-left:auto; margin-right:auto; align-items:stretch;}
     /* 격자에만 margin-top 이 붙어 제목 간격이 두 번 더해지고 중심이 어긋나던 문제 */
     #itemsec .head + *{margin-top:0;}
     #itemsec .head{grid-column:1/-1; width:100%; max-width:none;}
     #itemsec .itgrid{grid-column:1; grid-row:2;
-      grid-template-columns:repeat(5,minmax(0,1fr)); justify-content:stretch;
-      gap:12px; margin-top:0; align-self:start;}
+      grid-template-columns:repeat(5,minmax(0,1fr)); justify-content:stretch; align-content:stretch;
+      gap:12px; margin-top:0; align-self:stretch;}
     #itemsec .itarw{display:none !important;}
     #itemsec .itpanel{grid-column:2; grid-row:2;
       margin-top:0; align-self:stretch; max-width:none; width:100%;}
     /* 위아래로 쌓이면 속칸이 너무 커지지 않게: 폭 고정 */
-    #itemsec .itin{flex:0 0 auto; width:170px; max-width:170px;}
+    #itemsec .itin{flex:0 0 auto; width:150px; max-width:150px;}
     #itemsec .itl{padding:0;}
     #itemsec .itl .btn{width:auto; min-width:200px; align-self:flex-start; margin-top:16px;}
   }
@@ -1390,7 +1390,7 @@
   #itemsec .itl .itr{margin-top:0;}
   #itemsec .itl .btn{margin-top:16px; width:100%; height:48px; font-size:14.5px; padding:0 20px;}
   @media(min-width:1000px){ #itemsec .itl .btn{height:54px; font-size:16px;} }
-  @media(min-width:1000px){ #itemsec .itin{flex:0 0 auto; width:170px; max-width:170px;} #itemsec .itl{padding:0;} }
+  @media(min-width:1000px){ #itemsec .itin{flex:0 0 auto; width:150px; max-width:150px;} #itemsec .itl{padding:0;} }
 
   /* ===== 모바일 기능 카드: 가로 스와이프 대신 세로로 쌓고 얇게 ===== */
   @media(max-width:899px){
@@ -1571,17 +1571,17 @@
       <button class="it" type="button" data-n="월세" data-d3="01"><span class="tile"><iconify-icon icon="mingcute:home-4-fill" aria-hidden="true"></iconify-icon></span><b>월세</b></button>
       <button class="it" type="button" data-n="관리비" data-d3="02"><span class="tile"><iconify-icon icon="mingcute:building-2-fill" aria-hidden="true"></iconify-icon></span><b>관리비</b></button>
       <button class="it" type="button" data-n="보증금" data-d3="11"><span class="tile"><iconify-icon icon="mingcute:certificate-fill" aria-hidden="true"></iconify-icon></span><b>보증금</b></button>
-      <button class="it" type="button" data-n="중개수수료" data-d3="04"><span class="tile"><iconify-icon icon="mingcute:key-2-fill" aria-hidden="true"></iconify-icon></span><b>중개수수료</b></button>
+      <button class="it" type="button" data-n="중개수수료" data-d3="04"><span class="tile"><iconify-icon icon="mingcute:key-2-fill" aria-hidden="true"></iconify-icon></span><b>중개<wbr>수수료</b></button>
       <button class="it" type="button" data-n="인건비" data-d3="03"><span class="tile"><iconify-icon icon="mingcute:group-2-fill" aria-hidden="true"></iconify-icon></span><b>인건비</b></button>
       <button class="it" type="button" data-n="매입대금" data-d3="05"><span class="tile"><iconify-icon icon="mingcute:store-fill" aria-hidden="true"></iconify-icon></span><b>매입대금</b></button>
       <button class="it" type="button" data-n="식자재" data-d3="05"><span class="tile"><iconify-icon icon="mingcute:bowl-fill" aria-hidden="true"></iconify-icon></span><b>식자재</b></button>
-      <button class="it" type="button" data-n="학원·과외비" data-d3="07"><span class="tile"><iconify-icon icon="mingcute:school-fill" aria-hidden="true"></iconify-icon></span><b>학원·과외비</b></button>
-      <button class="it" type="button" data-n="학교공과금" data-d3="06"><span class="tile"><iconify-icon icon="mingcute:mortarboard-fill" aria-hidden="true"></iconify-icon></span><b>학교공과금</b></button>
-      <button class="it" type="button" data-n="인테리어·수리" data-d3="08"><span class="tile"><iconify-icon icon="mingcute:brush-fill" aria-hidden="true"></iconify-icon></span><b>인테리어·수리</b></button>
+      <button class="it" type="button" data-n="학원·과외비" data-d3="07"><span class="tile"><iconify-icon icon="mingcute:school-fill" aria-hidden="true"></iconify-icon></span><b>학원·<wbr>과외비</b></button>
+      <button class="it" type="button" data-n="학교공과금" data-d3="06"><span class="tile"><iconify-icon icon="mingcute:mortarboard-fill" aria-hidden="true"></iconify-icon></span><b>학교<wbr>공과금</b></button>
+      <button class="it" type="button" data-n="인테리어·수리" data-d3="08"><span class="tile"><iconify-icon icon="mingcute:brush-fill" aria-hidden="true"></iconify-icon></span><b>인테리어·<wbr>수리</b></button>
       <button class="it" type="button" data-n="이사" data-d3="09"><span class="tile"><iconify-icon icon="mingcute:truck-fill" aria-hidden="true"></iconify-icon></span><b>이사</b></button>
       <button class="it" type="button" data-n="청소비" data-d3="10"><span class="tile"><iconify-icon icon="mingcute:broom-fill" aria-hidden="true"></iconify-icon></span><b>청소비</b></button>
-      <button class="it" type="button" data-n="외주·제작비" data-d3="11"><span class="tile"><iconify-icon icon="mingcute:briefcase-fill" aria-hidden="true"></iconify-icon></span><b>외주·제작비</b></button>
-      <button class="it" type="button" data-n="장비·보관료" data-d3="02"><span class="tile"><iconify-icon icon="mingcute:box-2-fill" aria-hidden="true"></iconify-icon></span><b>장비·보관료</b></button>
+      <button class="it" type="button" data-n="외주·제작비" data-d3="11"><span class="tile"><iconify-icon icon="mingcute:briefcase-fill" aria-hidden="true"></iconify-icon></span><b>외주·<wbr>제작비</b></button>
+      <button class="it" type="button" data-n="장비·보관료" data-d3="02"><span class="tile"><iconify-icon icon="mingcute:box-2-fill" aria-hidden="true"></iconify-icon></span><b>장비·<wbr>보관료</b></button>
       <button class="it" type="button" data-n="기타" data-d3="12"><span class="tile"><iconify-icon icon="mingcute:grid-fill" aria-hidden="true"></iconify-icon></span><b>기타</b></button>
       </div>
 
