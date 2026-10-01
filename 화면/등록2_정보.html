@@ -57,7 +57,7 @@
 </head>
 <body>
 <div class="phone">
-  <div class="topbar"><div class="back" onclick="goBack()">‹</div><div class="ttl">결제 등록</div></div>
+  <div class="topbar"><div class="back" onclick="location.href='10_1_유형선택.html'">‹</div><div class="ttl">결제 등록</div></div>
   <div class="prog4"><i class="on"></i><i class="on"></i><i></i><i></i></div>
   <div class="stepcap">STEP 2 / 4</div>
 
@@ -104,19 +104,13 @@
     <div class="hint err" id="오류" style="display:none"></div>
 
     <div class="navs">
-      <button class="prev" type="button" onclick="goBack()">이전</button>
+      <button class="prev" type="button" onclick="location.href='10_1_유형선택.html'">이전</button>
       <button class="next" type="button" id="다음">다음</button>
     </div>
   </div>
 </div>
 
 <script>
-/* 뒤로: 월세 · 관리비 · 보증금은 임대차 비용 세부 선택 화면으로 · 그 외는 유형선택으로 */
-function goBack(){
-  var t = '';
-  try { t = (JSON.parse(sessionStorage.getItem('lp_reg') || '{}').유형) || ''; } catch (e) {}
-  location.href = (t === '월세' || t === '관리비' || t === '보증금') ? '10_1_1_임대차.html' : '10_1_유형선택.html';
-}
 (function () {
   var $ = function (id) { return document.getElementById(id); };
   var 저장 = {};

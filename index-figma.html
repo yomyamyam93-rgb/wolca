@@ -227,16 +227,6 @@
   .itl .btn{margin-top:26px; height:48px; width:216px; padding:0; font-size:15.5px;}
   @media(min-width:900px){ .itl .btn{margin-top:auto;} }
   .itr{display:flex; flex-direction:column; gap:12px; justify-content:center;}
-  /* 임대차 비용: 월세 · 관리비 · 보증금 중 고르는 작은 버튼 */
-  .itsub{display:flex; gap:8px; margin-top:14px;}
-  .itsub:empty{display:none;}
-  .itsub button{font:inherit; font-size:13.5px; font-weight:700; padding:8px 14px; border-radius:999px;
-    border:1.5px solid var(--line); background:#fff; color:var(--sub); cursor:pointer;}
-  .itsub button.on{border-color:var(--primary); background:var(--primary-100); color:var(--primary-600);}
-  @media(max-width:767px){
-    .itsub{flex-wrap:wrap; justify-content:center; gap:6px; margin-top:10px;}
-    .itsub button{font-size:12px; padding:6px 10px;}
-  }
   .doc{display:flex; gap:12px; align-items:flex-start; border:1px solid var(--line);
     border-radius:18px; padding:15px 16px;}
   @media(min-width:900px){ .doc{padding:18px 20px;} }
@@ -1634,7 +1624,9 @@ body{min-height:0!important;}
       </div>
 
       <div class="itgrid">
-      <button class="it" type="button" data-n="임대차 비용" data-d3="01"><span class="tile"><iconify-icon icon="mingcute:home-4-fill" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M13.2 2.65a2 2 0 0 0-2.4 0l-7 5.25A2 2 0 0 0 3 9.5V19a2 2 0 0 0 2 2h3.9a1.1 1.1 0 0 0 1.1-1.1V15a2 2 0 1 1 4 0v4.9a1.1 1.1 0 0 0 1.1 1.1H19a2 2 0 0 0 2-2V9.5a2 2 0 0 0-.8-1.6z"/></svg></iconify-icon></span><b>임대차 비용</b></button>
+      <button class="it" type="button" data-n="월세" data-d3="01"><span class="tile"><iconify-icon icon="mingcute:home-4-fill" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M13.2 2.65a2 2 0 0 0-2.4 0l-7 5.25A2 2 0 0 0 3 9.5V19a2 2 0 0 0 2 2h3.9a1.1 1.1 0 0 0 1.1-1.1V15a2 2 0 1 1 4 0v4.9a1.1 1.1 0 0 0 1.1 1.1H19a2 2 0 0 0 2-2V9.5a2 2 0 0 0-.8-1.6z"/></svg></iconify-icon></span><b>월세</b></button>
+      <button class="it" type="button" data-n="관리비" data-d3="02"><span class="tile"><iconify-icon icon="mingcute:building-2-fill" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M15 9.18V3.694a1.5 1.5 0 0 0-1.974-1.423l-8 2.666A1.5 1.5 0 0 0 4 6.36V19H3a1 1 0 1 0 0 2h18a1 1 0 1 0 0-2h-1v-7.59a1.5 1.5 0 0 0-1.206-1.471zm0 0V19h1V9.38z" clip-rule="evenodd"/></svg></iconify-icon></span><b>관리비</b></button>
+      <button class="it" type="button" data-n="보증금" data-d3="11"><span class="tile"><iconify-icon icon="mingcute:certificate-fill" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M10.586 2.101a2 2 0 0 1 2.828 0l1.9 1.9H18a2 2 0 0 1 2 2v2.686l1.9 1.9a2 2 0 0 1 0 2.828l-1.9 1.9V18a2 2 0 0 1-2 2h-2.687l-1.9 1.9a2 2 0 0 1-2.827 0l-1.9-1.9H6a2 2 0 0 1-2-2v-2.687l-1.9-1.9a2 2 0 0 1 0-2.827l1.9-1.9V6.001a2 2 0 0 1 2-2h2.686zm5.907 6.882a1 1 0 0 0-1.414 0l-4.244 4.245l-1.769-1.768a1 1 0 0 0-1.414 1.415l2.476 2.474a1 1 0 0 0 1.414 0l4.951-4.952a1 1 0 0 0 0-1.414"/></svg></iconify-icon></span><b>보증금</b></button>
       <button class="it" type="button" data-n="중개수수료" data-d3="04"><span class="tile"><iconify-icon icon="mingcute:key-2-fill" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M10.438 4.367a6.5 6.5 0 1 1 1.975 10.546h-.622v1.828a1 1 0 0 1-1 1H8.963v1.829a1 1 0 0 1-1 1H3.72a1 1 0 0 1-1-1v-2.83a1 1 0 0 1 .293-.707l5.673-5.672a6.5 6.5 0 0 1 1.752-5.995M14.24 8.26a1.5 1.5 0 1 1 3 0a1.5 1.5 0 0 1-3 0" clip-rule="evenodd"/></svg></iconify-icon></span><b>중개수수료</b></button>
       <button class="it" type="button" data-n="인건비" data-d3="03"><span class="tile"><iconify-icon icon="mingcute:group-2-fill" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M9.5 13c1.993 0 3.805.609 5.138 1.467c.666.429 1.238.936 1.652 1.49c.408.544.71 1.199.71 1.9c0 .755-.349 1.36-.864 1.797c-.485.41-1.117.676-1.77.859c-1.313.366-3.05.487-4.866.487s-3.553-.12-4.865-.487c-.654-.183-1.286-.448-1.77-.859C2.348 19.218 2 18.612 2 17.857c0-.701.302-1.356.71-1.9c.414-.554.986-1.061 1.652-1.49C5.695 13.609 7.507 13 9.5 13m8.5 0c1.32 0 2.518.436 3.4 1.05c.822.574 1.6 1.478 1.6 2.521c0 .587-.253 1.072-.639 1.426c-.357.328-.808.529-1.243.66c-.65.197-1.44.29-2.268.325c.095-.35.15-.726.15-1.125c0-1.276-.544-2.344-1.11-3.1a8 8 0 0 0-1.538-1.528A6 6 0 0 1 18 13M9.5 3a4.5 4.5 0 1 1 0 9a4.5 4.5 0 0 1 0-9M18 6a3 3 0 1 1 0 6a3 3 0 0 1 0-6"/></svg></iconify-icon></span><b>인건비</b></button>
       <button class="it" type="button" data-n="매입대금" data-d3="05"><span class="tile"><iconify-icon icon="mingcute:store-fill" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M4.9 3.8A2 2 0 0 1 6.5 3h11a2 2 0 0 1 1.6.8l2.688 3.584a1 1 0 0 1 .204.616H22v1a4 4 0 0 1-1 2.646V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7.354A4 4 0 0 1 2 9V8h.008a1 1 0 0 1 .204-.616zM18 11a2 2 0 0 1-2-2h4a2 2 0 0 1-2 2m-6 0a2 2 0 0 1-2-2h4a2 2 0 0 1-2 2m-6 0a2 2 0 0 1-2-2h4a2 2 0 0 1-2 2" clip-rule="evenodd"/></svg></iconify-icon></span><b>매입대금</b></button>
@@ -1656,7 +1648,6 @@ body{min-height:0!important;}
         </div>
         <div class="itl">
           <h3 id="itp-h"></h3>
-          <div class="itsub" id="itp-sub"></div>
           <div class="itr" id="itp-docs"></div>
           <a class="btn btn-primary" id="itgo" href="화면/10_1_유형선택.html"><img class="btn-logo" src="img/logo3-white.png" alt=""><span id="itgo-t">즉시 결제하기</span></a>
         </div>
@@ -2037,7 +2028,6 @@ body{min-height:0!important;}
   if (!큰제목) return;
   var 서류칸 = document.getElementById('itp-docs');
   var 자료 = {
-    '임대차 비용': { sub: ['월세', '관리비', '보증금'] },
     '월세': { t: '월세 카드로 결제',
       d: '계약 형태에 따라 필요한 증빙이 달라요<br>내 상황에 맞는 서류만 준비하고<br>계좌 예금주가 임대인인지 확인해주세요',
       docs: ['<b>정식 임대차계약서</b>',
@@ -2111,16 +2101,9 @@ body{min-height:0!important;}
   };
   var 들 = document.querySelectorAll('.itgrid .it');
   var 패널 = document.querySelector('.itpanel');
-  var 하위칸 = document.getElementById('itp-sub');
-  function 채우기(b, 세부) {
+  function 채우기(b) {
     var n = b.dataset.n, 정보 = 자료[n];
     큰제목.textContent = n + ' 카드 결제';
-    /* 임대차 비용은 월세 · 관리비 · 보증금 중 하나를 더 고른다 */
-    if (정보.sub) {
-      세부 = 세부 || 정보.sub[0];
-      하위칸.innerHTML = 정보.sub.map(function (x) { return '<button type="button"' + (x === 세부 ? ' class="on"' : '') + ' data-s="' + x + '">' + x + '</button>'; }).join('');
-      정보 = 자료[세부];
-    } else { 하위칸.innerHTML = ''; }
     var 아이콘 = document.getElementById('itp-ico');
     var 이름 = document.getElementById('itp-name');
     var 원본 = b.querySelector('iconify-icon');
@@ -2141,10 +2124,6 @@ body{min-height:0!important;}
   }
   들.forEach(function (b) {
     b.addEventListener('click', function () { 선택(b); });
-  });
-  하위칸.addEventListener('click', function (e) {
-    var t = e.target.closest('button'); if (!t) return;
-    채우기(document.querySelector('.itgrid .it.on'), t.dataset.s);
   });
   들[0].classList.add('on');
   채우기(들[0]);
