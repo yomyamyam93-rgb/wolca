@@ -38,6 +38,11 @@ html::-webkit-scrollbar,body::-webkit-scrollbar{width:0; height:0; display:none;
   .catrow .ct .cd{font-size:12.5px; color:var(--placeholder); min-width:0;
     overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
   .catrow .gv{color:var(--icon-off); font-size:20px;}
+  /* 항목 딱지: 이름 옆 작은 알약 */
+  .bdg{display:inline-block; vertical-align:2px; margin-left:6px; font-style:normal; font-size:10px; font-weight:800; line-height:1;
+    padding:4px 6px; border-radius:999px; letter-spacing:0; white-space:nowrap; color:#fff;
+    background:linear-gradient(135deg,#FF5A5F,#FF2D55);}
+  .bdg.hot{color:#1D2023; background:linear-gradient(135deg,#FFD84D,#FFB800);}
 </style>
 <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 <style>
@@ -69,14 +74,14 @@ body{display:block !important; padding:0 !important; background:#EDF0F4 !importa
 
   <div class="body">
     <div class="q">무엇을 결제할까요?</div>
-    <div class="catrow" onclick="go('월세')"><div class="ct"><div class="cn">월세</div><div class="cd">부동산 임대차 월세</div></div><iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon></div>
+    <div class="catrow" onclick="go('월세')"><div class="ct"><div class="cn">월세<i class="bdg best">BEST</i></div><div class="cd">부동산 임대차 월세</div></div><iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon></div>
     <div class="catrow" onclick="go('관리비')"><div class="ct"><div class="cn">관리비</div><div class="cd">아파트 · 상가 관리비</div></div><iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon></div>
     <div class="catrow" onclick="go('보증금')"><div class="ct"><div class="cn">보증금</div><div class="cd">계약금 · 보증금</div></div><iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon></div>
     <div class="catrow" onclick="go('중개수수료')"><div class="ct"><div class="cn">중개수수료</div><div class="cd">부동산 중개보수</div></div><iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon></div>
-    <div class="catrow" onclick="go('인건비')"><div class="ct"><div class="cn">인건비</div><div class="cd">급여 · 알바비</div></div><iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon></div>
+    <div class="catrow" onclick="go('인건비')"><div class="ct"><div class="cn">인건비<i class="bdg hot">자주 이용</i></div><div class="cd">급여 · 알바비</div></div><iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon></div>
     <div class="catrow" onclick="go('매입대금')"><div class="ct"><div class="cn">매입대금</div><div class="cd">거래처 · 물품 사입</div></div><iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon></div>
-    <div class="catrow" onclick="go('식자재')"><div class="ct"><div class="cn">식자재</div><div class="cd">음식점 식자재 · 농수산물 매입</div></div><iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon></div>
-    <div class="catrow" onclick="go('학원·과외비')"><div class="ct"><div class="cn">학원·과외비</div><div class="cd">학원 · 수강료 · 과외 · 레슨</div></div><iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon></div>
+    <div class="catrow" onclick="go('식자재')"><div class="ct"><div class="cn">식자재<i class="bdg hot">자주 이용</i></div><div class="cd">음식점 식자재 · 농수산물 매입</div></div><iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon></div>
+    <div class="catrow" onclick="go('학원·과외비')"><div class="ct"><div class="cn">학원·과외비<i class="bdg hot">자주 이용</i></div><div class="cd">학원 · 수강료 · 과외 · 레슨</div></div><iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon></div>
     <div class="catrow" onclick="go('학교공과금')"><div class="ct"><div class="cn">학교공과금</div><div class="cd">등록금 · 기숙사비</div></div><iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon></div>
     <div class="catrow" onclick="go('인테리어·수리')"><div class="ct"><div class="cn">인테리어·수리</div><div class="cd">공사 · 수리 · 설치 · 철거</div></div><iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon></div>
     <div class="catrow" onclick="go('이사')"><div class="ct"><div class="cn">이사</div><div class="cd">용달 · 포장이사</div></div><iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon></div>

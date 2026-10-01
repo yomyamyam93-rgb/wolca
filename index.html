@@ -244,6 +244,13 @@
   .cosec .cobelt{margin-top:0;}
   
   .itgrid{display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:6px;}
+  /* 항목 딱지: BEST(빨강) · 자주 이용(노랑) — 칸 오른쪽 위 모서리에 걸침 */
+  .it{position:relative;}
+  .bdg{position:absolute; top:-7px; right:-4px; z-index:2; font-style:normal; font-size:9.5px; font-weight:800; line-height:1;
+    padding:4px 6px; border-radius:999px; letter-spacing:0; white-space:nowrap; color:#fff;
+    background:linear-gradient(135deg,#FF5A5F,#FF2D55); box-shadow:0 2px 6px rgba(255,45,85,.35);}
+  .bdg.hot{color:#1D2023; background:linear-gradient(135deg,#FFD84D,#FFB800); box-shadow:0 2px 6px rgba(255,184,0,.35);}
+  @media(min-width:768px){ .bdg{top:-9px; right:-6px; font-size:11px; padding:5px 8px;} }
   @media(min-width:768px){ .itgrid{grid-template-columns:repeat(5,minmax(0,1fr)); gap:20px;} }
   .it{display:block; width:100%; background:#fff; border-radius:18px; padding:16px 4px 13px;
     text-align:center; color:inherit; box-shadow:0 2px 8px rgba(0,0,0,.05);
@@ -1568,14 +1575,14 @@
       </div>
 
       <div class="itgrid">
-      <button class="it" type="button" data-n="월세" data-d3="01"><span class="tile"><iconify-icon icon="mingcute:home-4-fill" aria-hidden="true"></iconify-icon></span><b>월세</b></button>
+      <button class="it" type="button" data-n="월세" data-d3="01"><span class="tile"><iconify-icon icon="mingcute:home-4-fill" aria-hidden="true"></iconify-icon></span><b>월세</b><i class="bdg best">BEST</i></button>
       <button class="it" type="button" data-n="관리비" data-d3="02"><span class="tile"><iconify-icon icon="mingcute:building-2-fill" aria-hidden="true"></iconify-icon></span><b>관리비</b></button>
       <button class="it" type="button" data-n="보증금" data-d3="11"><span class="tile"><iconify-icon icon="mingcute:certificate-fill" aria-hidden="true"></iconify-icon></span><b>보증금</b></button>
       <button class="it" type="button" data-n="중개수수료" data-d3="04"><span class="tile"><iconify-icon icon="mingcute:key-2-fill" aria-hidden="true"></iconify-icon></span><b>중개<wbr>수수료</b></button>
-      <button class="it" type="button" data-n="인건비" data-d3="03"><span class="tile"><iconify-icon icon="mingcute:group-2-fill" aria-hidden="true"></iconify-icon></span><b>인건비</b></button>
+      <button class="it" type="button" data-n="인건비" data-d3="03"><span class="tile"><iconify-icon icon="mingcute:group-2-fill" aria-hidden="true"></iconify-icon></span><b>인건비</b><i class="bdg hot">자주 이용</i></button>
       <button class="it" type="button" data-n="매입대금" data-d3="05"><span class="tile"><iconify-icon icon="mingcute:store-fill" aria-hidden="true"></iconify-icon></span><b>매입대금</b></button>
-      <button class="it" type="button" data-n="식자재" data-d3="05"><span class="tile"><iconify-icon icon="mingcute:bowl-fill" aria-hidden="true"></iconify-icon></span><b>식자재</b></button>
-      <button class="it" type="button" data-n="학원·과외비" data-d3="07"><span class="tile"><iconify-icon icon="mingcute:school-fill" aria-hidden="true"></iconify-icon></span><b>학원·<wbr>과외비</b></button>
+      <button class="it" type="button" data-n="식자재" data-d3="05"><span class="tile"><iconify-icon icon="mingcute:bowl-fill" aria-hidden="true"></iconify-icon></span><b>식자재</b><i class="bdg hot">자주 이용</i></button>
+      <button class="it" type="button" data-n="학원·과외비" data-d3="07"><span class="tile"><iconify-icon icon="mingcute:school-fill" aria-hidden="true"></iconify-icon></span><b>학원·<wbr>과외비</b><i class="bdg hot">자주 이용</i></button>
       <button class="it" type="button" data-n="학교공과금" data-d3="06"><span class="tile"><iconify-icon icon="mingcute:mortarboard-fill" aria-hidden="true"></iconify-icon></span><b>학교<wbr>공과금</b></button>
       <button class="it" type="button" data-n="인테리어·수리" data-d3="08"><span class="tile"><iconify-icon icon="mingcute:brush-fill" aria-hidden="true"></iconify-icon></span><b>인테리어·<wbr>수리</b></button>
       <button class="it" type="button" data-n="이사" data-d3="09"><span class="tile"><iconify-icon icon="mingcute:truck-fill" aria-hidden="true"></iconify-icon></span><b>이사</b></button>
