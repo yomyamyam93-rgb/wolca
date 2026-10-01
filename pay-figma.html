@@ -18,9 +18,9 @@
   /* 항목 고르기: 사장님페이처럼 격자로 */
   .cats{display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:6px;}
   .cat{background:var(--card); border:1px solid var(--line); border-radius:14px;
-    padding:10px 2px; text-align:center; transition:border-color .15s, background .15s; aspect-ratio:1/1.32; display:flex; flex-direction:column; align-items:center; justify-content:center;}
-  .cat iconify-icon{font-size:30px; color:var(--primary);}
-  .cat span{display:block; margin-top:6px; font-size:13.5px; font-weight:700; line-height:1.2; letter-spacing:-.5px; white-space:normal; word-break:keep-all;}
+    padding:10px 2px; text-align:center; transition:border-color .15s, background .15s; aspect-ratio:1/1.15; max-height:96px; display:flex; flex-direction:column; align-items:center; justify-content:center;}
+  .cat iconify-icon{font-size:28px; color:var(--primary);}
+  .cat span{display:block; margin-top:5px; font-size:13.5px; font-weight:700; line-height:1.2; letter-spacing:-.5px; white-space:normal; word-break:keep-all;}
   @media(min-width:640px){ .cat{padding:14px 6px 12px; aspect-ratio:auto;} .cat iconify-icon{font-size:26px;} .cat span{margin-top:8px; font-size:13px; letter-spacing:0;} }
   .cat.on{border:2px solid var(--primary); background:var(--primary-50); padding:9px 1px;}
   @media(min-width:640px){ .cat.on{padding:13px 5px 11px;} }
