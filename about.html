@@ -203,21 +203,21 @@
   .item-tx p{margin-top:20px; font-size:16.5px; line-height:1.85; color:var(--ink); opacity:.78;
     max-width:38ch;}
 
-  .aitems{display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-top:0;}
+  .aitems{display:grid; grid-template-columns:repeat(5,1fr); gap:6px; margin-top:0;}
   @media(min-width:560px){ .aitems{grid-template-columns:repeat(5,1fr); gap:12px;} }
   @media(min-width:1000px){ .aitems{gap:16px;} }
-  .ai{position:relative; overflow:hidden; background:#fff; border-radius:10px; padding:0 4px;
+  .ai{position:relative; overflow:hidden; background:#fff; border-radius:10px; padding:0 2px;
     aspect-ratio:1/1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px;
     text-align:center; box-shadow:0 2px 8px rgba(15,23,42,.06);}
   @media(min-width:768px){ .ai{border-radius:14px; padding:0 8px; gap:12px;} }
   .ai:before{content:''; position:absolute; inset:0; border-radius:14px;
     background:var(--primary); background:var(--grad); opacity:0; transition:opacity .5s ease;}
-  .ai img{position:relative; z-index:1; width:34px; height:34px; object-fit:contain; transition:opacity .5s ease;}
+  .ai img{position:relative; z-index:1; width:28px; height:28px; object-fit:contain; transition:opacity .5s ease;}
   @media(min-width:768px){ .ai img{width:58px; height:58px;} }
   .ai .w{position:absolute; z-index:1; left:50%; top:50%; transform:translate(-50%,-50%) translateY(-10px); opacity:0;}
   @media(min-width:768px){ .ai .w{transform:translate(-50%,-50%) translateY(-16px);} }
-  .ai b{position:relative; z-index:1; display:block; margin:0; font-size:11px; font-weight:700;
-    letter-spacing:-.4px; transition:color .5s ease; word-break:keep-all;}
+  .ai b{position:relative; z-index:1; display:block; margin:0; font-size:10px; font-weight:700;
+    letter-spacing:-.5px; transition:color .5s ease; word-break:keep-all; white-space:nowrap;}
   @media(min-width:768px){ .ai b{font-size:14px; letter-spacing:-.3px;} }
   .ai.on:before{opacity:1;}
   .ai.on img:not(.w){opacity:0;}
@@ -284,7 +284,7 @@
   @media(min-width:768px){ .head .eyebrow{font-size:14px; margin-bottom:14px;} }
 
   .svc b, .split-r .row b{font-size:17px; letter-spacing:-.4px;}
-  .ai b{font-size:15px;}
+  @media(min-width:768px){ .ai b{font-size:15px;} }
 
   .prose{font-size:16px; line-height:1.9;}
   @media(min-width:768px){ .prose{font-size:16.5px;} }
