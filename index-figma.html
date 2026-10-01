@@ -245,11 +245,12 @@
   .itgrid{display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:6px;}
   /* 항목 딱지: BEST(빨강) · 자주 이용(노랑) — 칸 오른쪽 위 모서리에 걸침 */
   .it{position:relative;}
-  .bdg{position:absolute; top:-7px; right:-4px; z-index:2; font-style:normal; font-size:9.5px; font-weight:800; line-height:1;
-    padding:4px 6px; border-radius:999px; letter-spacing:0; white-space:nowrap; color:#fff;
+  .bdg{position:absolute; top:4px; right:4px; z-index:2; font-style:normal; font-size:8.5px; font-weight:800; line-height:1;
+    padding:3px 5px; border-radius:999px; letter-spacing:0; white-space:nowrap; color:#fff;
     background:linear-gradient(135deg,#FF5A5F,#FF2D55); box-shadow:0 2px 6px rgba(255,45,85,.35);}
   .bdg.hot{color:#1D2023; background:linear-gradient(135deg,#FFD84D,#FFB800); box-shadow:0 2px 6px rgba(255,184,0,.35);}
-  @media(min-width:768px){ .bdg{top:-9px; right:-6px; font-size:11px; padding:5px 8px;} }
+  @media(min-width:768px){ .bdg{top:7px; right:7px; font-size:10px; padding:4px 6px;} }
+  @media(max-width:767px){ .it:has(.bdg){padding-top:16px;} }   /* 딱지와 아이콘이 닿지 않게 */
   @media(min-width:768px){ .itgrid{grid-template-columns:repeat(5,minmax(0,1fr)); gap:20px;} }
   .it{display:block; width:100%; background:#fff; border-radius:18px; padding:16px 4px 13px;
     text-align:center; color:inherit; box-shadow:0 2px 8px rgba(0,0,0,.05);
