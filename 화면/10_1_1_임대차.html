@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>결제 등록 1 · 유형</title>
+<title>결제 등록 1 · 임대차 비용</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
 <style>
 /* 스크롤바를 보이지 않게 (스크롤은 그대로 됨) */
@@ -68,19 +68,10 @@ body{display:block !important; padding:0 !important; background:#EDF0F4 !importa
   <div class="stepcap">STEP 1 / 4</div>
 
   <div class="body">
-    <div class="q">무엇을 결제할까요?</div>
-    <div class="catrow" onclick="location.href='10_1_1_임대차.html'"><div class="ct"><div class="cn">임대차 비용</div><div class="cd">월세 · 관리비 · 보증금</div></div><iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon></div>
-    <div class="catrow" onclick="go('중개수수료')"><div class="ct"><div class="cn">중개수수료</div><div class="cd">부동산 중개보수</div></div><iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon></div>
-    <div class="catrow" onclick="go('인건비')"><div class="ct"><div class="cn">인건비</div><div class="cd">급여 · 알바비</div></div><iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon></div>
-    <div class="catrow" onclick="go('매입대금')"><div class="ct"><div class="cn">매입대금</div><div class="cd">거래처 · 식자재 · 물품 사입</div></div><iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon></div>
-    <div class="catrow" onclick="go('학원·과외비')"><div class="ct"><div class="cn">학원·과외비</div><div class="cd">학원 · 수강료 · 과외 · 레슨</div></div><iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon></div>
-    <div class="catrow" onclick="go('학교공과금')"><div class="ct"><div class="cn">학교공과금</div><div class="cd">등록금 · 기숙사비</div></div><iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon></div>
-    <div class="catrow" onclick="go('인테리어·수리')"><div class="ct"><div class="cn">인테리어·수리</div><div class="cd">공사 · 수리 · 설치 · 철거</div></div><iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon></div>
-    <div class="catrow" onclick="go('이사')"><div class="ct"><div class="cn">이사</div><div class="cd">용달 · 포장이사</div></div><iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon></div>
-    <div class="catrow" onclick="go('외주·제작비')"><div class="ct"><div class="cn">외주·제작비</div><div class="cd">기업 외주 · 프리랜서 · 촬영 · 디자인 · 광고</div></div><iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon></div>
-    <div class="catrow" onclick="go('장비·보관료')"><div class="ct"><div class="cn">장비·보관료</div><div class="cd">장비 임대 · 창고 임대 · 물품 보관</div></div><iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon></div>
-    <div class="catrow" onclick="go('청소비')"><div class="ct"><div class="cn">청소비</div><div class="cd">입주 · 정기 청소</div></div><iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon></div>
-    <div class="catrow" onclick="go('기타')"><div class="ct"><div class="cn">기타</div><div class="cd">자동차 정비 · 웨딩 · 폐기물 · 물류 등</div></div><iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon></div>
+    <div class="q">어떤 임대차 비용인가요?</div>
+    <div class="catrow" onclick="go('월세')"><div class="ct"><div class="cn">월세</div><div class="cd">부동산 임대차 월세</div></div><iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon></div>
+    <div class="catrow" onclick="go('관리비')"><div class="ct"><div class="cn">관리비</div><div class="cd">아파트 · 상가 관리비</div></div><iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon></div>
+    <div class="catrow" onclick="go('보증금')"><div class="ct"><div class="cn">보증금</div><div class="cd">계약금 · 보증금</div></div><iconify-icon class="gv" icon="mingcute:right-line"></iconify-icon></div>
   </div>
 </div>
 <script>
@@ -88,13 +79,8 @@ function go(t){
   try{ var r=JSON.parse(sessionStorage.getItem('lp_reg')||'{}'); r.유형=t; sessionStorage.setItem('lp_reg',JSON.stringify(r)); }catch(e){}
   location.href='등록2_정보.html';
 }
-/* 탭바에서 바로 들어온 경우엔 되돌아갈 기록이 없으므로 홈으로 */
-function goBack(){
-  /* 첫 단계라 항상 홈으로 (개인·사업자 자동 구분) */
-  var biz=false;
-  try{ biz = sessionStorage.getItem('lp_type')==='biz'; }catch(e){}
-  location.href = biz ? '../app.html' : '../app.html';
-}
+/* 유형선택으로 되돌아간다 */
+function goBack(){ location.href='10_1_유형선택.html'; }
 </script>
 <script src="app.js?v=20260812c"></script>
 </body>
