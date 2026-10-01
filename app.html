@@ -759,7 +759,6 @@ window.서류시트 = function(on){
   들.forEach(function (b) {
     b.addEventListener('click', function (e) {
       e.preventDefault();
-      if (b.dataset.n === '임대차 비용') { location.href = 세부화면; return; }
       선택(b);
       if (scrollY > 0) scrollTo({ top: 0, behavior: 'smooth' });
     });
