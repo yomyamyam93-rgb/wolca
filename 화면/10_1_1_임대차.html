@@ -79,8 +79,8 @@ function go(t){
   try{ var r=JSON.parse(sessionStorage.getItem('lp_reg')||'{}'); r.유형=t; sessionStorage.setItem('lp_reg',JSON.stringify(r)); }catch(e){}
   location.href='등록2_정보.html';
 }
-/* 유형선택으로 되돌아간다 */
-function goBack(){ location.href='10_1_유형선택.html'; }
+/* 앱 홈에서 바로 왔으면 앱 홈으로 · 유형선택에서 왔으면 유형선택으로 */
+function goBack(){ location.href = /app\.html/.test(document.referrer) ? '../app.html' : '10_1_유형선택.html'; }
 </script>
 <script src="app.js?v=20260812c"></script>
 </body>
