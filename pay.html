@@ -17,13 +17,13 @@
   @media(min-width:1024px){ .pay{max-width:720px;} }
 
   /* 항목 고르기: 사장님페이처럼 격자로 */
-  .cats{display:grid; grid-template-columns:repeat(4,1fr); gap:8px;}
+  .cats{display:grid; grid-template-columns:repeat(3,1fr); gap:8px;}
   .cat{background:var(--card); border:1px solid var(--line); border-radius:14px;
     padding:14px 6px 12px; text-align:center; transition:border-color .15s, background .15s;}
   .cat iconify-icon{font-size:26px; color:var(--primary);}
   .cat span{display:block; margin-top:8px; font-size:13px; font-weight:700; line-height:1.3;}
   .cat.on{border:2px solid var(--primary); background:var(--primary-50); padding:13px 5px 11px;}
-  @media(min-width:640px){ .cats{grid-template-columns:repeat(6,1fr); gap:10px;} }
+  @media(min-width:640px){ .cats{grid-template-columns:repeat(5,1fr); gap:10px;} }
 
   /* 금액: 이 화면에서 제일 큰 글자 */
   .amt{position:relative;}
@@ -75,6 +75,7 @@
         <button class="cat" data-n="중개수수료"><iconify-icon icon="mingcute:key-2-fill"></iconify-icon><span>중개수수료</span></button>
         <button class="cat" data-n="인건비"><iconify-icon icon="mingcute:group-2-fill"></iconify-icon><span>인건비</span></button>
         <button class="cat" data-n="매입대금"><iconify-icon icon="mingcute:store-fill"></iconify-icon><span>매입대금</span></button>
+        <button class="cat" data-n="식자재"><iconify-icon icon="mingcute:bowl-fill"></iconify-icon><span>식자재</span></button>
         <button class="cat" data-n="학원·과외비"><iconify-icon icon="mingcute:school-fill"></iconify-icon><span>학원·과외비</span></button>
         <button class="cat" data-n="학교공과금"><iconify-icon icon="mingcute:mortarboard-fill"></iconify-icon><span>학교공과금</span></button>
         <button class="cat" data-n="인테리어·수리"><iconify-icon icon="mingcute:brush-fill"></iconify-icon><span>인테리어·수리</span></button>

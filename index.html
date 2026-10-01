@@ -164,7 +164,7 @@
     #itemsec .wrap{display:grid; grid-template-columns:1fr 72px 1fr; gap:0; align-items:stretch;}
     #itemsec .wrap > *{min-width:0;}
     #itemsec .head{grid-column:1/-1;}
-    #itemsec .itgrid{grid-column:1; grid-row:2; grid-template-columns:repeat(4,1fr); gap:12px;
+    #itemsec .itgrid{grid-column:1; grid-row:2; grid-template-columns:repeat(5,1fr); gap:12px;
       align-content:stretch; margin-top:52px;}
     .itarw{display:flex; grid-column:2; grid-row:2; align-self:center; justify-self:center;
       margin-top:52px; color:var(--primary); opacity:.65;}
@@ -243,8 +243,8 @@
   .cosec .cocap{margin-top:0;}
   .cosec .cobelt{margin-top:0;}
   
-  .itgrid{display:grid; grid-template-columns:repeat(4,1fr); gap:10px;}
-  @media(min-width:768px){ .itgrid{grid-template-columns:repeat(6,1fr); gap:20px;} }
+  .itgrid{display:grid; grid-template-columns:repeat(3,1fr); gap:10px;}
+  @media(min-width:768px){ .itgrid{grid-template-columns:repeat(5,1fr); gap:20px;} }
   .it{display:block; width:100%; background:#fff; border-radius:18px; padding:16px 4px 13px;
     text-align:center; color:inherit; box-shadow:0 2px 8px rgba(0,0,0,.05);
     border:2px solid transparent; cursor:pointer; font:inherit; appearance:none;
@@ -265,10 +265,10 @@
   @media(min-width:768px){ .it .tile img{max-width:46px; max-height:46px;} }
   @media(min-width:768px){ .it .tile iconify-icon{font-size:44px;} }
   .it b{display:block; margin-top:9px; font-size:13px; font-weight:700; letter-spacing:-.3px; white-space:nowrap;}
-  @media(min-width:768px){ .it b{margin-top:10px; font-size:16px;} }
+  @media(min-width:768px){ .it b{margin-top:10px; font-size:15px;} }
   /* 모바일 : 항목도 6개 × 2줄 (컴팩트) + 설명 박스와 간격 좁게 */
   @media(max-width:767px){
-    .itgrid{grid-template-columns:repeat(4,1fr); gap:8px;}
+    .itgrid{grid-template-columns:repeat(3,1fr); gap:8px;}
     .it{padding:13px 2px 11px;}
     .it .tile img{max-width:26px; max-height:26px;}
     .it b{margin-top:7px; font-size:11.5px; letter-spacing:-.3px;}
@@ -1147,7 +1147,7 @@
     #itemsec .head + *{margin-top:0;}
     #itemsec .head{grid-column:1/-1; width:100%; max-width:none;}
     #itemsec .itgrid{grid-column:1; grid-row:2;
-      grid-template-columns:repeat(4,126px); justify-content:center;
+      grid-template-columns:repeat(5,minmax(0,1fr)); justify-content:stretch;
       gap:12px; margin-top:0; align-self:start;}
     #itemsec .itarw{display:none !important;}
     #itemsec .itpanel{grid-column:2; grid-row:2;
@@ -1573,6 +1573,7 @@
       <button class="it" type="button" data-n="중개수수료" data-d3="04"><span class="tile"><iconify-icon icon="mingcute:key-2-fill" aria-hidden="true"></iconify-icon></span><b>중개수수료</b></button>
       <button class="it" type="button" data-n="인건비" data-d3="03"><span class="tile"><iconify-icon icon="mingcute:group-2-fill" aria-hidden="true"></iconify-icon></span><b>인건비</b></button>
       <button class="it" type="button" data-n="매입대금" data-d3="05"><span class="tile"><iconify-icon icon="mingcute:store-fill" aria-hidden="true"></iconify-icon></span><b>매입대금</b></button>
+      <button class="it" type="button" data-n="식자재" data-d3="05"><span class="tile"><iconify-icon icon="mingcute:bowl-fill" aria-hidden="true"></iconify-icon></span><b>식자재</b></button>
       <button class="it" type="button" data-n="학원·과외비" data-d3="07"><span class="tile"><iconify-icon icon="mingcute:school-fill" aria-hidden="true"></iconify-icon></span><b>학원·과외비</b></button>
       <button class="it" type="button" data-n="학교공과금" data-d3="06"><span class="tile"><iconify-icon icon="mingcute:mortarboard-fill" aria-hidden="true"></iconify-icon></span><b>학교공과금</b></button>
       <button class="it" type="button" data-n="인테리어·수리" data-d3="08"><span class="tile"><iconify-icon icon="mingcute:brush-fill" aria-hidden="true"></iconify-icon></span><b>인테리어·수리</b></button>
@@ -1997,9 +1998,14 @@
              '<b>4대보험 가입자 명부</b>',
              '<b>알바 지급명세서</b>'] },
     '매입대금': { t: '매입대금 카드로 결제',
-      d: '식자재 · 농수산물 · 물품 사입 대금을<br>카드로 결제하고 현금 흐름을 지키세요<br>송금은 세금계산서의 공급자 계좌로 돼요',
+      d: '거래처 물품 사입 대금을<br>카드로 결제하고 현금 흐름을 지키세요<br>송금은 세금계산서의 공급자 계좌로 돼요',
       docs: ['<b>전자세금계산서</b>',
              '<b>거래명세서 + 발주서</b>',
+             '<b>납품 계약서 + 거래 내역</b>'] },
+    '식자재': { t: '식자재 대금 카드로 결제',
+      d: '음식점 식자재 · 농수산물 매입 대금을<br>카드로 결제하고 현금 흐름을 지키세요<br>송금은 납품업체 명의 계좌로만 돼요',
+      docs: ['<b>전자세금계산서</b>',
+             '<b>거래명세서 · 납품서</b>',
              '<b>납품 계약서 + 거래 내역</b>'] },
     '학원·과외비': { t: '학원 · 과외비 카드로 결제',
       d: '계좌이체만 받는 학원 · 과외도 괜찮아요<br>영수증 처리까지 깔끔하고<br>학원 · 강사 명의 계좌인지만 확인해주세요',

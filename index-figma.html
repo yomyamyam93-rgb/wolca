@@ -163,7 +163,7 @@
     #itemsec .wrap{display:grid; grid-template-columns:1fr 72px 1fr; gap:0; align-items:stretch;}
     #itemsec .wrap > *{min-width:0;}
     #itemsec .head{grid-column:1/-1;}
-    #itemsec .itgrid{grid-column:1; grid-row:2; grid-template-columns:repeat(4,1fr); gap:12px;
+    #itemsec .itgrid{grid-column:1; grid-row:2; grid-template-columns:repeat(5,1fr); gap:12px;
       align-content:stretch; margin-top:52px;}
     .itarw{display:flex; grid-column:2; grid-row:2; align-self:center; justify-self:center;
       margin-top:52px; color:var(--primary); opacity:.65;}
@@ -242,8 +242,8 @@
   .cosec .cocap{margin-top:0;}
   .cosec .cobelt{margin-top:0;}
   
-  .itgrid{display:grid; grid-template-columns:repeat(4,1fr); gap:10px;}
-  @media(min-width:768px){ .itgrid{grid-template-columns:repeat(6,1fr); gap:20px;} }
+  .itgrid{display:grid; grid-template-columns:repeat(3,1fr); gap:10px;}
+  @media(min-width:768px){ .itgrid{grid-template-columns:repeat(5,1fr); gap:20px;} }
   .it{display:block; width:100%; background:#fff; border-radius:18px; padding:16px 4px 13px;
     text-align:center; color:inherit; box-shadow:0 2px 8px rgba(0,0,0,.05);
     border:2px solid transparent; cursor:pointer; font:inherit; appearance:none;
@@ -264,10 +264,10 @@
   @media(min-width:768px){ .it .tile img{max-width:46px; max-height:46px;} }
   @media(min-width:768px){ .it .tile iconify-icon{font-size:44px;} }
   .it b{display:block; margin-top:9px; font-size:13px; font-weight:700; letter-spacing:-.3px; white-space:nowrap;}
-  @media(min-width:768px){ .it b{margin-top:10px; font-size:16px;} }
+  @media(min-width:768px){ .it b{margin-top:10px; font-size:15px;} }
   /* 모바일 : 항목도 6개 × 2줄 (컴팩트) + 설명 박스와 간격 좁게 */
   @media(max-width:767px){
-    .itgrid{grid-template-columns:repeat(4,1fr); gap:8px;}
+    .itgrid{grid-template-columns:repeat(3,1fr); gap:8px;}
     .it{padding:13px 2px 11px;}
     .it .tile img{max-width:26px; max-height:26px;}
     .it b{margin-top:7px; font-size:11.5px; letter-spacing:-.3px;}
@@ -1146,7 +1146,7 @@
     #itemsec .head + *{margin-top:0;}
     #itemsec .head{grid-column:1/-1; width:100%; max-width:none;}
     #itemsec .itgrid{grid-column:1; grid-row:2;
-      grid-template-columns:repeat(4,126px); justify-content:center;
+      grid-template-columns:repeat(5,minmax(0,1fr)); justify-content:stretch;
       gap:12px; margin-top:0; align-self:start;}
     #itemsec .itarw{display:none !important;}
     #itemsec .itpanel{grid-column:2; grid-row:2;
@@ -1630,6 +1630,7 @@ body{min-height:0!important;}
       <button class="it" type="button" data-n="중개수수료" data-d3="04"><span class="tile"><iconify-icon icon="mingcute:key-2-fill" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M10.438 4.367a6.5 6.5 0 1 1 1.975 10.546h-.622v1.828a1 1 0 0 1-1 1H8.963v1.829a1 1 0 0 1-1 1H3.72a1 1 0 0 1-1-1v-2.83a1 1 0 0 1 .293-.707l5.673-5.672a6.5 6.5 0 0 1 1.752-5.995M14.24 8.26a1.5 1.5 0 1 1 3 0a1.5 1.5 0 0 1-3 0" clip-rule="evenodd"/></svg></iconify-icon></span><b>중개수수료</b></button>
       <button class="it" type="button" data-n="인건비" data-d3="03"><span class="tile"><iconify-icon icon="mingcute:group-2-fill" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M9.5 13c1.993 0 3.805.609 5.138 1.467c.666.429 1.238.936 1.652 1.49c.408.544.71 1.199.71 1.9c0 .755-.349 1.36-.864 1.797c-.485.41-1.117.676-1.77.859c-1.313.366-3.05.487-4.866.487s-3.553-.12-4.865-.487c-.654-.183-1.286-.448-1.77-.859C2.348 19.218 2 18.612 2 17.857c0-.701.302-1.356.71-1.9c.414-.554.986-1.061 1.652-1.49C5.695 13.609 7.507 13 9.5 13m8.5 0c1.32 0 2.518.436 3.4 1.05c.822.574 1.6 1.478 1.6 2.521c0 .587-.253 1.072-.639 1.426c-.357.328-.808.529-1.243.66c-.65.197-1.44.29-2.268.325c.095-.35.15-.726.15-1.125c0-1.276-.544-2.344-1.11-3.1a8 8 0 0 0-1.538-1.528A6 6 0 0 1 18 13M9.5 3a4.5 4.5 0 1 1 0 9a4.5 4.5 0 0 1 0-9M18 6a3 3 0 1 1 0 6a3 3 0 0 1 0-6"/></svg></iconify-icon></span><b>인건비</b></button>
       <button class="it" type="button" data-n="매입대금" data-d3="05"><span class="tile"><iconify-icon icon="mingcute:store-fill" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M4.9 3.8A2 2 0 0 1 6.5 3h11a2 2 0 0 1 1.6.8l2.688 3.584a1 1 0 0 1 .204.616H22v1a4 4 0 0 1-1 2.646V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7.354A4 4 0 0 1 2 9V8h.008a1 1 0 0 1 .204-.616zM18 11a2 2 0 0 1-2-2h4a2 2 0 0 1-2 2m-6 0a2 2 0 0 1-2-2h4a2 2 0 0 1-2 2m-6 0a2 2 0 0 1-2-2h4a2 2 0 0 1-2 2" clip-rule="evenodd"/></svg></iconify-icon></span><b>매입대금</b></button>
+      <button class="it" type="button" data-n="식자재" data-d3="05"><span class="tile"><iconify-icon icon="mingcute:bowl-fill" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M20.154 5C21.174 5 22 5.827 22 6.846V9a9 9 0 0 1-6 8.488V18.5a1.5 1.5 0 0 1-1.5 1.5h-5A1.5 1.5 0 0 1 8 18.5v-1.012A9 9 0 0 1 2 9V6.846C2 5.826 2.827 5 3.846 5z"/></svg></iconify-icon></span><b>식자재</b></button>
       <button class="it" type="button" data-n="학원·과외비" data-d3="07"><span class="tile"><iconify-icon icon="mingcute:school-fill" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M12.937 2.469a1.5 1.5 0 0 0-1.874 0l-4.312 3.45A2 2 0 0 0 6 7.48V19H5v-8.5a.5.5 0 0 0-.5-.5H4a2 2 0 0 0-2 2v7.9A1.1 1.1 0 0 0 3.1 21h17.8a1.1 1.1 0 0 0 1.1-1.1V12a2 2 0 0 0-2-2h-.5a.5.5 0 0 0-.5.5V19h-1V7.48a2 2 0 0 0-.75-1.561zM12 12.999a2 2 0 1 0 0-4a2 2 0 0 0 0 4" clip-rule="evenodd"/></svg></iconify-icon></span><b>학원·과외비</b></button>
       <button class="it" type="button" data-n="학교공과금" data-d3="06"><span class="tile"><iconify-icon icon="mingcute:mortarboard-fill" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M19 14a7 7 0 0 1-14 0v-1.72l6.358 3.008a1.51 1.51 0 0 0 1.284 0L19 12.28zM11.358 2.71a1.5 1.5 0 0 1 1.284 0l9.271 4.384A.998.998 0 0 1 22 8.853v4.146a1 1 0 1 1-2 0V9.807l-7.358 3.48a1.5 1.5 0 0 1-1.284 0L2.087 8.903a1 1 0 0 1 0-1.809z"/></svg></iconify-icon></span><b>학교공과금</b></button>
       <button class="it" type="button" data-n="인테리어·수리" data-d3="08"><span class="tile"><iconify-icon icon="mingcute:brush-fill" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M11 2a2 2 0 0 0-2 2v4H5a2 2 0 0 0-2 2v2h18v-2a2 2 0 0 0-2-2h-4V4a2 2 0 0 0-2-2zm10 12H3v6a2 2 0 0 0 2 2h1v-5a1 1 0 1 1 2 0v5h3v-5a1 1 0 1 1 2 0v5h3v-5a1 1 0 1 1 2 0v5h1a2 2 0 0 0 2-2z"/></svg></iconify-icon></span><b>인테리어·수리</b></button>
@@ -2054,9 +2055,14 @@ body{min-height:0!important;}
              '<b>4대보험 가입자 명부</b>',
              '<b>알바 지급명세서</b>'] },
     '매입대금': { t: '매입대금 카드로 결제',
-      d: '식자재 · 농수산물 · 물품 사입 대금을<br>카드로 결제하고 현금 흐름을 지키세요<br>송금은 세금계산서의 공급자 계좌로 돼요',
+      d: '거래처 물품 사입 대금을<br>카드로 결제하고 현금 흐름을 지키세요<br>송금은 세금계산서의 공급자 계좌로 돼요',
       docs: ['<b>전자세금계산서</b>',
              '<b>거래명세서 + 발주서</b>',
+             '<b>납품 계약서 + 거래 내역</b>'] },
+    '식자재': { t: '식자재 대금 카드로 결제',
+      d: '음식점 식자재 · 농수산물 매입 대금을<br>카드로 결제하고 현금 흐름을 지키세요<br>송금은 납품업체 명의 계좌로만 돼요',
+      docs: ['<b>전자세금계산서</b>',
+             '<b>거래명세서 · 납품서</b>',
              '<b>납품 계약서 + 거래 내역</b>'] },
     '학원·과외비': { t: '학원 · 과외비 카드로 결제',
       d: '계좌이체만 받는 학원 · 과외도 괜찮아요<br>영수증 처리까지 깔끔하고<br>학원 · 강사 명의 계좌인지만 확인해주세요',
