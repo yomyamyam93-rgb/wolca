@@ -206,16 +206,16 @@
   @media(min-width:560px){ .aitems{grid-template-columns:repeat(5,minmax(0,1fr)); gap:12px;} }
   @media(min-width:1000px){ .aitems{gap:16px;} }
   .ai{position:relative; overflow:hidden; background:#fff; border-radius:10px; padding:0 2px;
-    aspect-ratio:1/1.22; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px;
+    aspect-ratio:1/1.32; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px;
     text-align:center; box-shadow:0 2px 8px rgba(15,23,42,.06);}
   @media(min-width:768px){ .ai{border-radius:14px; padding:0 8px; gap:12px; aspect-ratio:1/1;} }
   .ai:before{content:''; position:absolute; inset:0; border-radius:14px;
     background:var(--primary); background:var(--grad); opacity:0; transition:opacity .5s ease;}
-  .ai img{position:relative; z-index:1; width:32px; height:32px; object-fit:contain; transition:opacity .5s ease;}
+  .ai img{position:relative; z-index:1; width:36px; height:36px; object-fit:contain; transition:opacity .5s ease;}
   @media(min-width:768px){ .ai img{width:58px; height:58px;} }
   .ai .w{position:absolute; z-index:1; left:50%; top:50%; transform:translate(-50%,-50%) translateY(-10px); opacity:0;}
   @media(min-width:768px){ .ai .w{transform:translate(-50%,-50%) translateY(-16px);} }
-  .ai b{position:relative; z-index:1; display:block; margin:0; font-size:12px; font-weight:700; line-height:1.2;
+  .ai b{position:relative; z-index:1; display:block; margin:0; font-size:13px; font-weight:700; line-height:1.2;
     letter-spacing:-.5px; transition:color .5s ease; word-break:keep-all; white-space:normal;}
   @media(min-width:768px){ .ai b{font-size:14px; letter-spacing:-.3px;} }
   .ai.on:before{opacity:1;}
