@@ -55,7 +55,7 @@
   .agrid{display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:6px; margin-top:16px;}
   /* 항목 딱지: BEST(빨강) · 자주 이용(노랑) — 칸 오른쪽 위 모서리에 걸침 */
   .ait{position:relative;}
-  .bdg{position:absolute; left:50%; bottom:3px; transform:translateX(-50%); font-style:normal; font-size:8px; font-weight:800; line-height:1;
+  .bdg{position:absolute; top:3px; right:3px; font-style:normal; font-size:8px; font-weight:800; line-height:1;
     padding:2.5px 5px; border-radius:999px; letter-spacing:0; white-space:nowrap; color:#fff;
     background:linear-gradient(135deg,#FF5A5F,#FF2D55); box-shadow:0 2px 6px rgba(0,0,0,.22);}
   .bdg.hot{color:#1D2023; background:linear-gradient(135deg,#FFD84D,#FFB800);}
@@ -231,8 +231,8 @@
   /* 타일: 반투명 · 모서리 20 */
   .bluetop .agrid{gap:5px; margin-top:14px;}
   .bluetop .ait{background:rgba(255,255,255,.22); border:none; box-shadow:none;
-    border-radius:14px; aspect-ratio:1/1.18; max-height:100px; min-height:0; padding:4px 2px 12px;   /* 아래쪽에 딱지가 들어갈 틈 (4px 차이라 티 안 남) */
-    flex-direction:column; align-items:center; justify-content:center; gap:4px; text-align:center;}
+    border-radius:14px; aspect-ratio:1/1.18; max-height:100px; min-height:0; padding:8px 2px 2px;   /* 위를 조금 더 비워 귀퉁이 딱지와 아이콘이 안 닿게 */
+    flex-direction:column; align-items:center; justify-content:center; gap:3px; text-align:center;}
   .bluetop .ait iconify-icon{font-size:28px; color:#fff;}
   .bluetop .ait b{color:#fff; font-size:14px; font-weight:500; letter-spacing:-.4px; line-height:1.2; white-space:normal; word-break:keep-all;}
   .bluetop .ait.on{background:#fff;}
